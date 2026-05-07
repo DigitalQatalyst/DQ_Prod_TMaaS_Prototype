@@ -1,161 +1,492 @@
-# Customer Service Orders Implementation
+# Customer-Side Service Orders Implementation Summary
 
 ## Overview
-Implemented a customer-focused Service Orders list page that filters orders by organization, following SaaS industry best practices.
+The customer-side Service Orders feature provides a comprehensive interface for clients to track, manage, and interact with their service engagements with DQ. The implementation is designed around a stage-based workflow that guides customers through the entire service delivery lifecycle.
 
-## What Was Implemented
+## Architecture
 
-### 1. Customer Service Orders List Page
-**File**: `src/pages/dashboard/customer/ServiceOrders.tsx`
+### Components
+1. **CustomerServiceOrders.tsx** - List view of all service orders
+2. **CustomerServiceOrderDetail.tsx** - Detailed view of individual service orders
+3. **OrderStepper.tsx** - Visual progress indicator component
+4. **mockOrders.ts** - Data model and mock data
+
+### Data Model
+
+#### ServiceOrder Interface
+```typescript
+{
+  id: string
+  serviceOrderNumber: string  // e.g., "DEWA-SO-003"
+  serviceName: string
+  serviceCode: string
+  serviceType: "Design" | "Deploy" | "Drive"
+  clientOrganisation: string
+  startDate: string
+  endDate: string
+  price: number
+  currency: string
+  duration: string
+  stage: "Payment Pending" | "Client Input Pending" | "Input in Review" | "In Delivery" | "Closed"
+  deliveryLead: string
+  inputs: ServiceInput[]
+  deliverables: ServiceDeliverable[]
+  sessions?: ServiceSession[]
+  auditLog?: AuditLogEntry[]
+  permissions?: {
+    canAcceptDeliverables: boolean
+    canSubmitInputs: boolean
+    canRequestSessions: boolean
+    canViewCommercials: boolean
+  }
+}
+```
+
+## Service Order Stages
+
+### 1. Payment Pending
+**Purpose**: Awaiting payment confirmation to begin service delivery
+
+**Customer Actions**:
+- Download invoice
+- Mark payment as completed
+- View order summary and pricing breakdown
+- Understand next steps
 
 **Features**:
-- **Organization Filtering**: Automatically filters orders to show only the logged-in customer's organization
-- **Summary Stats Cards**: 
-  - Total Orders
-  - Active Orders (excluding Payment Pending and Closed)
-  - Pending Action (Client Input Pending + Deliverables Pending Review)
-  - Completed Orders
-- **Search & Filters**: 
-  - Search by service name or order number
-  - Filter by stage
-  - Active filter badges with clear functionality
-- **Stage-Based Visual Indicators**:
-  - Color-coded badges for each stage
-  - Stage-specific icons (AlertCircle, Clock, FileText, CheckCircle2)
-- **Smart CTAs**: Context-aware action buttons based on order stage:
-  - "Complete Payment" (Payment Pending)
-  - "Submit Inputs" (Client Input Pending)
-  - "View Status" (Input in Review)
-  - "View Progress" (In Delivery)
-  - "Review Deliverables" (Deliverables Pending Review)
-  - "View Summary" (Closed)
-- **Order Cards**: Display key information:
-  - Service name and order number
-  - Stage badge with icon
-  - Price and duration
+- Order summary card with service details
+- Payment instructions with invoice details
+- "What Happens Next" timeline
+- Help/support contact option
+
+**UI Elements**:
+- Yellow status banner with payment alert
+- Invoice download button
+- Payment confirmation button
+- Timeline of post-payment steps
+
+---
+
+### 2. Client Input Pending
+**Purpose**: Customer needs to submit required inputs for service delivery to begin
+
+**Customer Actions**:
+- Upload required documents/files
+- Add links to shared resources
+- Submit inputs for review
+- Track submission progress
+
+**Features**:
+- Input requirements overview with progress metrics
+- Individual input cards with upload areas
+- File upload (PDF, DOC, DOCX, XLS, XLSX - max 10MB)
+- Link submission option
+- Submitted inputs tracking
+- Help resources section
+
+**UI Elements**:
+- Orange status banner with action required alert
+- Progress indicators (X of Y inputs submitted)
+- Drag-and-drop file upload areas
+- Submitted inputs list with green checkmarks
+- Minimum 75% completion requirement indicator
+
+---
+
+### 3. Input in Review
+**Purpose**: DQ team is reviewing submitted inputs for completeness and quality
+
+**Customer Actions**:
+- View review status
+- See submitted inputs
+- Understand review criteria
+- Wait for review completion
+
+**Features**:
+- Review status card with timeline
+- All submitted inputs display
+- Review criteria explanation
+- "What's Being Reviewed" section
+- "What Happens Next" guidance
+
+**UI Elements**:
+- Blue status banner indicating review in progress
+- Review timeline with estimated completion
+- Quality criteria checklist
+- Submitted inputs archive
+
+---
+
+### 4. In Delivery
+**Purpose**: Active service delivery with deliverables being produced
+
+**Customer Actions**:
+- Review submitted deliverables
+- Accept deliverables
+- Request revisions
+- Track progress
+- Communicate with delivery team
+- Request sessions
+
+**Features**:
+- Deliverables progress tracking
+- Individual deliverable review with 5-day deadline
+- Bulk accept functionality
+- Revision request capability
+- Timeline and milestones view
+- Delivery team information
+- Recent updates feed
+- Upcoming activities calendar
+
+**UI Elements**:
+- Purple status banner
+- Deliverable cards with status badges
+- Accept/Request Revision buttons
+- Bulk selection checkboxes
+- Progress bars and metrics
+- Team member avatars
+- Activity timeline
+
+**Deliverable Statuses**:
+- Not Started (gray)
+- In Progress (blue)
+- Submitted (yellow) - awaiting customer review
+- Under Review (orange) - customer reviewing
+- Accepted (green) - customer approved
+
+---
+
+### 5. Closed
+**Purpose**: Service engagement completed successfully
+
+**Customer Actions**:
+- View engagement summary
+- Access deliverables archive
+- Download documentation
+- Review invoices
+- Provide feedback
+
+**Features**:
+- Engagement summary with key metrics
+- Complete deliverables archive
+- Documentation and invoices repository
+- Success metrics display
+- Feedback/testimonial option
+
+**UI Elements**:
+- Green status banner indicating completion
+- Archive cards with download links
+- Summary statistics
+- Final documentation access
+
+---
+
+## Key Features Across All Stages
+
+### 1. Service Orders List Page
+**Features**:
+- Summary statistics cards (Total, Active, Pending Action, Completed)
+- Search functionality
+- Multi-filter system (Stage, Service Type)
+- Active filters display with clear options
+- Sorted by stage priority and date
+- Card-based layout with key information
+- Click-through to detail view
+
+**Displayed Information**:
+- Service name and order number
+- Stage badge with icon
+- Price and duration
+- Start/end dates
+- Delivery lead
+- Progress (deliverables completed)
+
+---
+
+### 2. Order Detail Header
+**Consistent Elements**:
+- Service name and order number
+- Stage badge
+- Service type badge (NEW)
+- Key metadata grid:
   - Start date
-  - Delivery lead
-  - Progress (deliverables completed/total)
+  - End date
+  - Duration
+  - Price
+  - Delivery lead avatar
+- Order stepper showing progress through stages
 
-### 2. Organization Support
-**File**: `src/contexts/AuthContext.tsx`
+---
 
-**Changes**:
-- Added DEWA user profile: Ahmed Al Tayer (Chief Digital & Innovation Officer)
-- Added `setUserOrganization` function to switch between organizations
-- Default organization set to DEWA for testing
-- Maintains STC Bank user profile unchanged
+### 3. Tabbed Navigation
+Available tabs (post-payment):
+- **Overview**: Stage-specific content and key actions
+- **Delivery**: Deliverables tracking and management
+- **Inbox**: Messaging with delivery team (badge shows unread count)
+- **Sessions**: Working sessions scheduling and history
+- **Activity**: Audit log of all order activities
+- **Commercials**: Financial information and invoices
 
-**Organizations**:
-- STC Bank (Sarah Mitchell)
-- Dubai Electricity & Water Authority (Ahmed Al Tayer)
+---
 
-### 3. Dashboard Layout Updates
-**File**: `src/components/DashboardLayout.tsx`
+### 4. Messaging & Communication
+**Features**:
+- Direct messaging with delivery lead
+- Prominent messaging card on overview tab
+- Quick access to send message
+- Unread message badge on Inbox tab
+- Session request capability
 
-**Changes**:
-- Updated organization selector to include DEWA
-- Changed "Service Orders" to "My Service Orders" in client navigation
-- Updated route to point to `/dashboard/customer/orders`
-- Connected organization selector to `setUserOrganization` function
-- Organization selector now dynamically updates user context
+---
 
-### 4. Routing
-**File**: `src/App.tsx`
+### 5. Deliverables Management
+**Customer Capabilities**:
+- View deliverable details and attachments
+- Download files
+- Access shared links
+- Accept deliverables individually
+- Bulk accept multiple deliverables
+- Request revisions with feedback
+- Track review deadlines (5 days from submission)
 
-**Changes**:
-- Added route: `/dashboard/customer/orders` → `CustomerServiceOrders` component
-- Imported and registered the new customer service orders page
+**Deliverable Information**:
+- Name and description
+- Status badge
+- Attachments (files and links)
+- Submission date
+- Review deadline
+- File sizes and types
 
-## Data Structure
+---
 
-### Mock Orders
-All 6 DEWA service orders are available in `src/data/mockOrders.ts`:
-1. **SO-2026-001**: Enterprise Architecture Strategy (Input in Review)
-2. **SO-2026-002**: Target Business Capabilities Canvas (In Delivery)
-3. **SO-2026-003**: Enterprise Architecture Operating Model (Client Input Pending)
-4. **SO-2026-004**: Current Assets Portfolio - Baseline (Deliverables Pending Review)
-5. **SO-2026-005**: Current Assets Portfolio - Assessment (Closed)
-6. **SO-2026-006**: Initiatives Backlog & Roadmap Design (Payment Pending)
+### 6. Sessions Management
+**Features**:
+- View scheduled sessions
+- See completed sessions with notes
+- Request new sessions
+- Access meeting links
+- View attendee lists
+- Review session recordings (completed sessions)
 
-## SaaS Best Practices Implemented
+---
 
-1. **Progressive Disclosure**: Summary stats at top, detailed cards below
-2. **Clear Visual Hierarchy**: Color-coded stages, prominent CTAs
-3. **Action-Oriented Design**: CTAs tell users exactly what to do next
-4. **Status Transparency**: Always clear where customer is in the process
-5. **Efficient Filtering**: Quick access to relevant orders
-6. **Responsive Design**: Mobile-friendly card layout
-7. **Empty States**: Helpful messaging when no orders found
-8. **Performance**: Memoized stats calculations
-9. **Accessibility**: Semantic HTML, proper ARIA labels
-10. **User Context**: Organization-specific filtering
+### 7. Activity Tracking
+**Audit Log Includes**:
+- Timestamp
+- User who performed action
+- Action type (input, deliverable, payment, session, message)
+- Action details
+- Chronological display
 
-## Navigation
+---
 
-### For Customers:
-1. Sign in as customer (default: DEWA)
-2. Navigate to "My Service Orders" in sidebar
-3. View all orders for your organization
-4. Use organization selector to switch between STC Bank and DEWA
-5. Click on any order card to view details (detail page to be implemented)
+### 8. Permissions System
+**Configurable Permissions**:
+- `canAcceptDeliverables`: Control deliverable acceptance
+- `canSubmitInputs`: Control input submission
+- `canRequestSessions`: Control session requests
+- `canViewCommercials`: Control financial information access
 
-### For DQ Leads:
-- Existing "Service Orders" link remains unchanged
-- Shows all orders across all clients
-- Full DQ Lead functionality preserved
+---
 
-## Next Steps
+## UI/UX Design Patterns
 
-### High Priority:
-1. **Customer Service Order Detail Page** with stage-specific views:
-   - Payment Pending View
-   - Input Pending View (upload interface)
-   - Input in Review View
-   - In Delivery View (progress tracking)
-   - Deliverables Review View (accept/reject)
-   - Closed View (summary & archive)
+### Color Coding by Stage
+- **Payment Pending**: Yellow (warning/action needed)
+- **Client Input Pending**: Orange (urgent action required)
+- **Input in Review**: Blue (in progress)
+- **In Delivery**: Purple (active work)
+- **Closed**: Green (completed)
 
-2. **Input Upload Interface**:
-   - File upload component
-   - Link attachment support
-   - Multiple attachments per input
-   - Progress tracking
+### Status Badges
+- Consistent badge styling across all statuses
+- Icons paired with text for clarity
+- Color-coded for quick recognition
+- Small size (text-xs) for compact display
 
-3. **Deliverable Review Interface**:
-   - Download/preview deliverables
-   - Accept/Request Revision actions
-   - Feedback form
-   - 5-day auto-accept countdown
+### Progress Indicators
+- Percentage-based progress bars
+- Fraction displays (X of Y)
+- Visual stepper component
+- Completion checkmarks
 
-### Medium Priority:
-4. Notifications system
-5. Email alerts for stage changes
-6. Mobile optimization
-7. Advanced search/filtering
+### Responsive Design
+- Grid layouts that adapt to screen size
+- Mobile-friendly card designs
+- Collapsible sections for mobile
+- Touch-friendly button sizes
 
-### Low Priority:
-8. Analytics dashboard
-9. Export functionality
-10. Bulk actions
+### Motion & Animation
+- Framer Motion for smooth transitions
+- Staggered list animations
+- Fade-in effects for content
+- Hover states for interactive elements
 
-## Testing
+---
 
-To test the implementation:
-1. Navigate to `/dashboard/customer/orders`
-2. Verify DEWA orders are displayed (6 orders)
-3. Switch organization selector to "STC Bank" - should show 0 orders
-4. Switch back to "Dubai Electricity & Water Authority" - should show 6 orders
-5. Test search functionality
-6. Test stage filtering
-7. Verify stats cards update correctly
-8. Test responsive design on mobile
+## User Workflows
 
-## Technical Notes
+### Workflow 1: New Order to Delivery
+1. Order created → **Payment Pending** stage
+2. Customer downloads invoice and completes payment
+3. Payment confirmed → **Client Input Pending** stage
+4. Customer uploads required documents/files
+5. Inputs submitted → **Input in Review** stage
+6. DQ team reviews inputs (2 business days)
+7. Inputs approved → **In Delivery** stage
+8. DQ team produces deliverables
+9. Customer reviews and accepts deliverables
+10. All deliverables accepted → **Closed** stage
 
-- Uses React Router for navigation
-- Framer Motion for animations
-- Shadcn UI components for consistency
-- TypeScript for type safety
-- Follows existing codebase patterns
-- No breaking changes to existing functionality
+### Workflow 2: Deliverable Review
+1. DQ team submits deliverable
+2. Customer receives notification
+3. Customer views deliverable in Delivery tab
+4. Customer has 5 days to review
+5. Customer either:
+   - Accepts deliverable → Status: Accepted
+   - Requests revision with feedback → Back to In Progress
+6. If revision requested, DQ team updates and resubmits
+
+### Workflow 3: Input Submission
+1. Customer navigates to order in Client Input Pending stage
+2. Views list of required inputs
+3. For each pending input:
+   - Uploads files via drag-and-drop or browse
+   - OR adds links to shared resources
+   - Submits input
+4. Input moves to Submitted status
+5. Once 75%+ inputs submitted, DQ team begins review
+6. Customer can track review progress
+
+---
+
+## Technical Implementation Details
+
+### State Management
+- React hooks (useState) for local state
+- URL parameters for routing (useParams)
+- Auth context for user/organization filtering
+- Mock data filtering by organization
+
+### Filtering & Search
+- Client-side filtering for performance
+- Multiple filter criteria (search, stage, type)
+- Active filters display with individual clear options
+- "Clear All" functionality
+- Real-time filter updates
+
+### Sorting
+- Primary sort: Stage order (defined priority)
+- Secondary sort: Start date (newest first)
+- Maintains consistent ordering across views
+
+### Confirmation Dialogs
+- AlertDialog for destructive actions
+- Separate dialogs for accept vs. revision
+- Bulk accept confirmation
+- Toast notifications for success/error feedback
+
+### File Handling
+- Drag-and-drop upload areas
+- File type validation (PDF, DOC, DOCX, XLS, XLSX)
+- File size limits (10MB per file)
+- Support for both file uploads and link sharing
+- Attachment display with file metadata
+
+---
+
+## Integration Points
+
+### Authentication
+- Uses AuthContext for user information
+- Organization-based filtering
+- Permission-based feature access
+
+### Data Source
+- Currently uses mockOrders from mockOrders.ts
+- Designed for easy API integration
+- Filters by user.organization
+
+### Routing
+- List view: `/dashboard/customer/orders`
+- Detail view: `/dashboard/customer/orders/:id`
+- Tab navigation via URL hash (future enhancement)
+
+---
+
+## Future Enhancements
+
+### Potential Additions
+1. Real-time notifications for deliverable submissions
+2. In-app messaging system
+3. File preview capabilities
+4. Advanced search with filters
+5. Export functionality for reports
+6. Calendar integration for sessions
+7. Mobile app support
+8. Email notifications
+9. Collaborative commenting on deliverables
+10. Custom dashboard widgets
+
+### API Integration Needs
+- Order CRUD operations
+- Input submission endpoints
+- Deliverable acceptance/revision endpoints
+- File upload/download services
+- Session scheduling API
+- Messaging API
+- Audit log streaming
+- Notification service
+
+---
+
+## Accessibility Considerations
+
+- Semantic HTML structure
+- ARIA labels for interactive elements
+- Keyboard navigation support
+- Screen reader friendly
+- Color contrast compliance
+- Focus indicators
+- Alternative text for icons
+
+---
+
+## Performance Optimizations
+
+- Lazy loading for large file lists
+- Pagination for orders list (future)
+- Optimistic UI updates
+- Debounced search input
+- Memoized filter calculations
+- Code splitting by route
+- Image optimization for attachments
+
+---
+
+## Security Considerations
+
+- Organization-based access control
+- Permission system for actions
+- File type validation
+- File size limits
+- Secure file upload/download
+- Audit logging for all actions
+- Session timeout handling
+
+---
+
+## Summary
+
+The customer-side Service Orders implementation provides a complete, stage-based workflow for managing service engagements. It emphasizes:
+
+1. **Clarity**: Clear stage indicators and next steps
+2. **Action-oriented**: Prominent CTAs for required actions
+3. **Transparency**: Full visibility into progress and status
+4. **Communication**: Easy access to delivery team
+5. **Efficiency**: Bulk operations and quick actions
+6. **Flexibility**: Permissions-based feature access
+7. **Completeness**: Comprehensive tracking from payment to closure
+
+The implementation is production-ready with mock data and designed for straightforward API integration.
