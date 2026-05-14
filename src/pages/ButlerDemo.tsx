@@ -85,7 +85,7 @@ const ButlerDemo = () => {
             className="text-center"
           >
             <h1 className="text-4xl font-bold text-foreground md:text-5xl">
-              TMaaS AI <span className="text-gradient-brand italic">Prototype</span>
+              TMaaS AI <span className="text-gradient-brand">Prototype</span>
             </h1>
             <p className="mt-4 text-lg leading-relaxed text-muted-foreground">
               Conversational AI assistant for TMaaS platform with Stage 0 (Concierge) and Stage 1 (Advisory) functionality

@@ -49,7 +49,7 @@ const ExploreSection = () => {
           </span>
           <h2 className="mt-4 text-3xl font-bold text-foreground md:text-5xl">
             Explore TMaaS{" "}
-            <span className="text-gradient-brand italic">marketplaces</span>
+            <span className="text-gradient-brand">marketplaces</span>
           </h2>
           <p className="mt-5 text-base text-muted-foreground md:text-lg">
             Whether you're diagnosing problems, browsing services, or seeking ongoing support—we've got you covered.

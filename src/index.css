@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -57,6 +57,67 @@
     --sidebar-accent-foreground: 240 5.9% 10%;
     --sidebar-border: 220 13% 91%;
     --sidebar-ring: 11 96% 60%;
+
+    /* ── DQ Design System palette (subset for TMaaS landing) ─────────────── */
+    /* OKLCH values ported from dq_corp_web reference */
+    --navy-950: oklch(0.12 0.082 264);
+    --navy-900: oklch(0.14 0.100 264);
+    --navy-800: oklch(0.18 0.120 264);
+    --navy-700: oklch(0.22 0.140 264);
+    --navy-600: oklch(0.28 0.155 264);
+    --navy-500: oklch(0.35 0.160 264);
+    --navy-400: oklch(0.48 0.130 264);
+    --navy-300: oklch(0.63 0.090 264);
+    --navy-200: oklch(0.78 0.055 264);
+    --navy-100: oklch(0.92 0.025 264);
+    --navy-50: oklch(0.96 0.012 264);
+
+    --orange-950: oklch(0.30 0.140 29);
+    --orange-900: oklch(0.40 0.165 29);
+    --orange-800: oklch(0.48 0.190 29);
+    --orange-700: oklch(0.56 0.208 29);
+    --orange-600: oklch(0.62 0.208 29);
+    /* TMaaS accent */
+    --dq-orange-500: #FB5535;
+    --orange-500: var(--dq-orange-500);
+    --orange-400: oklch(0.70 0.190 29);
+    --orange-300: oklch(0.80 0.135 29);
+    --orange-200: oklch(0.88 0.080 29);
+    --orange-100: oklch(0.94 0.040 29);
+    --orange-50: oklch(0.97 0.020 29);
+
+    --gray-950: oklch(0.18 0.01 264);
+    --gray-900: oklch(0.24 0.01 264);
+    --gray-800: oklch(0.34 0.01 264);
+    --gray-700: oklch(0.44 0.01 264);
+    --gray-600: oklch(0.54 0.01 264);
+    --gray-500: oklch(0.62 0.01 264);
+    --gray-400: oklch(0.72 0.01 264);
+    --gray-300: oklch(0.82 0.01 264);
+    --gray-200: oklch(0.90 0.01 264);
+    --gray-100: oklch(0.95 0.01 264);
+    --gray-50: oklch(0.98 0.005 264);
+
+    /* Mesh / glow tokens (subset) */
+    --mesh-hero-light:
+      radial-gradient(60% 80% at 70% 30%, oklch(0.92 0.06 29 / 0.55), transparent 60%),
+      radial-gradient(45% 60% at 20% 80%, oklch(0.96 0.012 264 / 0.85), transparent 60%);
+    --mesh-hero-dark:
+      radial-gradient(60% 80% at 70% 50%, oklch(0.65 0.208 29 / 0.10), transparent 60%),
+      radial-gradient(45% 60% at 20% 80%, oklch(0.35 0.16 264 / 0.18), transparent 50%);
+    --mesh-cta-orange:
+      radial-gradient(80% 80% at 50% 30%, oklch(0.65 0.208 29 / 0.18), transparent 70%),
+      radial-gradient(60% 60% at 80% 80%, oklch(0.12 0.082 264 / 0.10), transparent 60%);
+
+    --glow-orange-md: 0 0 0 1px oklch(0.65 0.208 29 / 0.25), 0 12px 28px oklch(0.65 0.208 29 / 0.28);
+    --glow-navy-md: 0 0 0 1px oklch(0.12 0.082 264 / 0.25), 0 14px 30px oklch(0.12 0.082 264 / 0.18);
+    --marquee-mid: 35s;
+
+    --surface-glass-light: oklch(1 0 0 / 0.65);
+    --surface-glass-dark: oklch(1 0 0 / 0.06);
+    --surface-glass-border-light: oklch(0.86 0.010 264 / 0.55);
+    --surface-glass-border-dark: oklch(1 0 0 / 0.10);
+    --blur-md: 16px;
   }
 }
 
@@ -66,12 +127,15 @@
   }
 
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground font-sans;
     font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-feature-settings: "kern" 1, "liga" 1, "calt" 1;
+    -webkit-font-smoothing: antialiased;
   }
 
   h1, h2, h3, h4, h5, h6 {
-    font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    @apply font-heading;
+    font-family: 'Plus Jakarta Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   }
 }
 
@@ -102,4 +166,44 @@
   .shadow-elevated {
     box-shadow: var(--shadow-elevated);
   }
+
+  /* Design-system marquee utilities (subset) */
+  .marquee-track {
+    display: flex;
+    width: max-content;
+    animation: dq-marquee var(--marquee-mid) linear infinite;
+  }
+
+  .marquee-track-reverse {
+    display: flex;
+    width: max-content;
+    animation: dq-marquee var(--marquee-mid) linear infinite reverse;
+  }
+
+  .marquee-mask {
+    -webkit-mask-image: linear-gradient(90deg, transparent, black 10%, black 90%, transparent);
+            mask-image: linear-gradient(90deg, transparent, black 10%, black 90%, transparent);
+  }
+
+  .surface-glass-light {
+    background-color: var(--surface-glass-light);
+    border: 1px solid var(--surface-glass-border-light);
+    backdrop-filter: blur(var(--blur-md)) saturate(140%);
+    -webkit-backdrop-filter: blur(var(--blur-md)) saturate(140%);
+  }
+
+  .surface-glass-dark {
+    background-color: var(--surface-glass-dark);
+    border: 1px solid var(--surface-glass-border-dark);
+    backdrop-filter: blur(var(--blur-md)) saturate(140%);
+    -webkit-backdrop-filter: blur(var(--blur-md)) saturate(140%);
+  }
+
+  .glow-orange { box-shadow: var(--glow-orange-md); }
+  .glow-navy { box-shadow: var(--glow-navy-md); }
+}
+
+@keyframes dq-marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
 }

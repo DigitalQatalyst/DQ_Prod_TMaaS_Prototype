@@ -1,8 +1,23 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import DiagnoseDialog from "./DiagnoseDialog";
+
+function HeroSpotlight() {
+  return (
+    <div className="pointer-events-none absolute inset-0 overflow-hidden">
+      <div
+        aria-hidden
+        className="absolute left-1/2 top-24 h-[520px] w-[520px] -translate-x-1/2 rounded-full blur-[24px]"
+        style={{
+          background:
+            "radial-gradient(closest-side, oklch(0.65 0.208 29 / 0.26), oklch(0.65 0.208 29 / 0.06) 55%, transparent 75%)",
+        }}
+      />
+    </div>
+  );
+}
 
 const HeroSection = () => {
   const [problem, setProblem] = useState("");
@@ -22,72 +37,87 @@ const HeroSection = () => {
   };
 
   return (
-    <section id="hero" className="relative bg-gradient-to-br from-accent/60 to-accent/40 pb-20 pt-32 md:pb-28 md:pt-40 overflow-hidden">
-      {/* Mesh Gradient Background */}
-      <div className="absolute inset-0 opacity-60">
-        <div className="absolute bottom-0 left-1/4 h-[500px] w-[500px] rounded-full bg-gradient-to-br from-brand/30 via-brand-glow/20 to-transparent blur-[120px]"></div>
-        <div className="absolute bottom-0 right-1/4 h-[400px] w-[400px] rounded-full bg-gradient-to-bl from-orange-400/25 via-brand/15 to-transparent blur-[100px]"></div>
-        <div className="absolute bottom-1/4 left-1/2 h-[350px] w-[350px] -translate-x-1/2 rounded-full bg-gradient-to-t from-brand-glow/20 to-transparent blur-[90px]"></div>
-      </div>
+    <section
+      id="hero"
+      className="relative isolate overflow-hidden pb-20 pt-32 md:pb-28 md:pt-44"
+    >
+      <div
+        aria-hidden
+        className="absolute inset-0 -z-10"
+        style={{ background: "var(--mesh-hero-light)" }}
+      />
+      <div
+        aria-hidden
+        className="absolute inset-0 -z-10 opacity-[0.35]"
+        style={{
+          backgroundImage:
+            "linear-gradient(to right, oklch(0.86 0.010 264 / 0.5) 1px, transparent 1px), linear-gradient(to bottom, oklch(0.86 0.010 264 / 0.5) 1px, transparent 1px)",
+          backgroundSize: "56px 56px",
+          maskImage:
+            "radial-gradient(ellipse 70% 50% at 50% 30%, black 40%, transparent 80%)",
+        }}
+      />
+      <HeroSpotlight />
 
-      <div className="relative z-10 mx-auto max-w-3xl px-6 text-center">
+      <div className="relative z-10 mx-auto max-w-7xl px-6 text-center">
         <motion.h1
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          className="text-4xl font-bold leading-[1.15] text-foreground md:text-6xl"
+          className="mx-auto max-w-4xl font-heading text-balance text-4xl font-bold leading-[1.1] tracking-tight text-navy-950 md:text-6xl"
         >
           Digital Transformation,
           <br />
-          <span className="text-gradient-brand italic">simplified.</span>
+          <span className="bg-gradient-to-r from-navy-950 via-orange-600 to-orange-500 bg-clip-text text-transparent">
+            simplified.
+          </span>
         </motion.h1>
 
         <motion.p
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.15 }}
-          className="mx-auto mt-6 max-w-xl text-base leading-relaxed text-muted-foreground md:text-lg"
+          className="mx-auto mt-6 max-w-2xl text-base leading-relaxed text-gray-600 md:text-lg"
         >
           Turn your real business problems into architecture-backed,
           <br className="hidden md:block" />
           ready-to-launch transformation blueprints.
         </motion.p>
 
-        {/* Butler Embedded Chat Box */}
+        {/* Butler prompt (input-first, no faux-chat UI) */}
         <motion.div
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.3 }}
-          className="mx-auto mt-10 max-w-2xl"
+          className="mx-auto mt-10 max-w-3xl"
         >
-          <div className="rounded-2xl border border-border bg-card overflow-hidden shadow-card">
-            {/* Butler Greeting */}
-            <div className="flex items-start gap-3 border-b border-border/50 px-5 py-4">
-              <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-gradient-brand text-white text-sm font-medium mt-0.5">
-                B
+          <div className="mt-6 rounded-[1.75rem] border border-navy-100 bg-white/70 p-3 shadow-2xl backdrop-blur-xl transition-all focus-within:shadow-[var(--glow-navy-md)]">
+            <div className="flex items-end gap-2 relative">
+              <div className="absolute left-4 top-4 text-orange-500">
+                <Sparkles size={20} />
               </div>
-              <div className="text-sm text-foreground leading-relaxed text-left">
-                Hi, I'm Butler, your guide to achieving seamless digital transformation. Whether you're exploring, designing, or deploying your strategy, I'm here to make it easier.
+              <div className="flex-1">
+                <label htmlFor="butler-prompt" className="sr-only">
+                  Ask Butler anything
+                </label>
+                <textarea
+                  id="butler-prompt"
+                  value={problem}
+                  onChange={(e) => setProblem(e.target.value)}
+                  onKeyPress={handleKeyPress}
+                  placeholder="Hi, I'm Butler. Describe what you're trying to improve..."
+                  rows={2}
+                  className="block w-full resize-none bg-transparent pl-12 pr-3 py-3 text-base leading-relaxed text-navy-950 placeholder:text-gray-500 focus:outline-none md:text-lg"
+                />
               </div>
-            </div>
 
-            {/* Input Row */}
-            <div className="flex items-center gap-2 px-4 py-3">
-              <textarea
-                value={problem}
-                onChange={(e) => setProblem(e.target.value)}
-                onKeyPress={handleKeyPress}
-                placeholder="How can I assist you today?"
-                rows={1}
-                className="flex-1 resize-none bg-transparent text-sm text-foreground placeholder:text-muted-foreground/60 focus:outline-none"
-              />
               <Button
                 onClick={handleSubmit}
                 disabled={!problem.trim()}
-                size="sm"
-                className="h-8 w-8 shrink-0 rounded-full bg-gradient-brand p-0 text-white shadow-brand hover:opacity-90 disabled:opacity-50"
+                className="h-12 w-12 shrink-0 rounded-2xl bg-orange-500 p-0 text-white shadow-[var(--glow-orange-md)] hover:bg-orange-400 disabled:opacity-50"
+                aria-label="Send to Butler"
               >
-                <ArrowRight size={16} />
+                <ArrowRight size={18} />
               </Button>
             </div>
           </div>
@@ -110,9 +140,8 @@ const HeroSection = () => {
               key={item.text}
               onClick={() => {
                 setProblem(item.action);
-                setIsDialogOpen(true);
               }}
-              className="rounded-full border border-border bg-card px-4 py-2 text-xs text-muted-foreground transition-colors hover:border-primary/40 hover:bg-primary/5 hover:text-foreground"
+              className="rounded-full border border-navy-100 bg-white/60 px-4 py-2 text-xs text-gray-700 backdrop-blur transition hover:border-navy-200 hover:bg-white hover:text-navy-950"
             >
               {item.text}
             </button>

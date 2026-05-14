@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { AlertCircle, Clock, DollarSign } from "lucide-react";
+import SectionHeading from "@/components/site/SectionHeading";
 
 const problems = [
   {
@@ -21,21 +22,24 @@ const problems = [
 
 const ProblemSection = () => {
   return (
-    <section className="bg-background py-16 lg:py-24">
-      <div className="mx-auto max-w-6xl px-6">
+    <section className="border-y border-navy-100 bg-white py-20 md:py-24">
+      <div className="mx-auto max-w-7xl px-6">
         <motion.div
           initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="mx-auto max-w-2xl text-center"
         >
-          <span className="mb-4 inline-block rounded-full border border-border px-4 py-1.5 text-xs font-medium uppercase tracking-wide text-muted-foreground">
-            The Challenge
-          </span>
-          <h2 className="mt-4 text-3xl font-bold text-foreground md:text-4xl">
-            Traditional transformation is{" "}
-            <span className="text-gradient-brand italic">broken</span>
-          </h2>
+          <SectionHeading
+            kicker="The Challenge"
+            title={
+              <>
+                Traditional transformation is{" "}
+                <span className="bg-gradient-to-r from-navy-950 via-orange-600 to-orange-500 bg-clip-text text-transparent">
+                  broken
+                </span>
+              </>
+            }
+          />
         </motion.div>
 
         <div className="mt-12 grid gap-6 md:grid-cols-3">
@@ -46,13 +50,17 @@ const ProblemSection = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.1 }}
-              className="rounded-2xl border border-border bg-card p-6"
+              className="group relative overflow-hidden rounded-3xl border border-navy-100 bg-white p-7 shadow-card transition hover:border-navy-200 hover:shadow-elevated"
             >
-              <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-red-500/10">
-                <problem.icon size={20} className="text-red-600" />
+              <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-2xl bg-orange-500/10">
+                <problem.icon size={20} className="text-orange-600" />
               </div>
-              <h3 className="mb-2 font-semibold text-foreground">{problem.title}</h3>
-              <p className="text-sm leading-relaxed text-muted-foreground">{problem.description}</p>
+              <h3 className="mb-2 font-semibold tracking-tight text-navy-950">
+                {problem.title}
+              </h3>
+              <p className="text-sm leading-relaxed text-gray-600">
+                {problem.description}
+              </p>
             </motion.div>
           ))}
         </div>

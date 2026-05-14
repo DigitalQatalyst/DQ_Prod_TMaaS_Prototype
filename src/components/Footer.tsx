@@ -3,30 +3,34 @@ import { Linkedin, Instagram, Youtube } from "lucide-react";
 
 const Footer = () => {
   return (
-    <footer className="border-t border-border bg-background py-12">
+    <footer className="border-t border-navy-100 bg-white py-12">
       <div className="mx-auto max-w-7xl px-6">
         <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-4">
           {/* Column 1: Brand */}
           <div className="flex flex-col gap-4">
             <Link to="/" className="flex items-center gap-2">
-              <span className="text-xl font-bold text-brand">DQ</span>
-              <span className="text-sm font-semibold text-muted-foreground">TMaaS</span>
+              <span className="grid h-7 w-7 place-items-center rounded-md bg-navy-950 text-white">
+                <span className="font-mono text-[11px] font-bold">DQ</span>
+              </span>
+              <span className="text-sm font-semibold text-navy-950">
+                DigitalQatalyst <span className="text-gray-400">TMaaS</span>
+              </span>
             </Link>
-            <p className="text-sm text-muted-foreground">
+            <p className="text-sm text-gray-600">
               Transformation Management as a Service
             </p>
           </div>
 
           {/* Column 2: Explore DigitalQatalyst */}
           <div className="flex flex-col gap-4">
-            <h3 className="text-sm font-semibold text-foreground">Explore DigitalQatalyst</h3>
+            <h3 className="text-sm font-semibold text-navy-950">Explore DigitalQatalyst</h3>
             <ul className="space-y-3">
               <li>
                 <a
                   href="https://digitalqatalyst.com"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+                  className="text-sm text-gray-600 transition-colors hover:text-navy-950"
                 >
                   Visit DigitalQatalyst.com
                 </a>
@@ -36,7 +40,7 @@ const Footer = () => {
                   href="https://digitalqatalyst.com/products"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+                  className="text-sm text-gray-600 transition-colors hover:text-navy-950"
                 >
                   Our Products
                 </a>
@@ -44,7 +48,7 @@ const Footer = () => {
               <li>
                 <Link
                   to="/legal/terms"
-                  className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+                  className="text-sm text-gray-600 transition-colors hover:text-navy-950"
                 >
                   Terms & Conditions
                 </Link>
@@ -52,7 +56,7 @@ const Footer = () => {
               <li>
                 <Link
                   to="/legal/privacy"
-                  className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+                  className="text-sm text-gray-600 transition-colors hover:text-navy-950"
                 >
                   Privacy Policy
                 </Link>
@@ -62,12 +66,12 @@ const Footer = () => {
 
           {/* Column 3: Explore TMaaS */}
           <div className="flex flex-col gap-4">
-            <h3 className="text-sm font-semibold text-foreground">Explore TMaaS</h3>
+            <h3 className="text-sm font-semibold text-navy-950">Explore TMaaS</h3>
             <ul className="space-y-3">
               <li>
                 <Link
                   to="/explore"
-                  className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+                  className="text-sm text-gray-600 transition-colors hover:text-navy-950"
                 >
                   About TMaaS
                 </Link>
@@ -75,7 +79,7 @@ const Footer = () => {
               <li>
                 <Link
                   to="/#hero"
-                  className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+                  className="text-sm text-gray-600 transition-colors hover:text-navy-950"
                 >
                   Start with AI
                 </Link>
@@ -83,7 +87,7 @@ const Footer = () => {
               <li>
                 <Link
                   to="/marketplace"
-                  className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+                  className="text-sm text-gray-600 transition-colors hover:text-navy-950"
                 >
                   Design & Deploy Services
                 </Link>
@@ -93,14 +97,14 @@ const Footer = () => {
 
           {/* Column 4: Follow Us */}
           <div className="flex flex-col gap-4">
-            <h3 className="text-sm font-semibold text-foreground">Follow Us</h3>
+            <h3 className="text-sm font-semibold text-navy-950">Follow Us</h3>
             <ul className="space-y-3">
               <li>
                 <a
                   href="https://linkedin.com/company/digitalqatalyst"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors"
+                  className="flex items-center gap-2 text-sm text-gray-600 transition-colors hover:text-navy-950"
                 >
                   <Linkedin size={16} />
                   LinkedIn
@@ -111,7 +115,7 @@ const Footer = () => {
                   href="https://instagram.com/digitalqatalyst"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors"
+                  className="flex items-center gap-2 text-sm text-gray-600 transition-colors hover:text-navy-950"
                 >
                   <Instagram size={16} />
                   Instagram
@@ -122,7 +126,7 @@ const Footer = () => {
                   href="https://youtube.com/@digitalqatalyst"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors"
+                  className="flex items-center gap-2 text-sm text-gray-600 transition-colors hover:text-navy-950"
                 >
                   <Youtube size={16} />
                   YouTube
@@ -133,8 +137,8 @@ const Footer = () => {
         </div>
 
         {/* Bottom Bar */}
-        <div className="mt-12 pt-8 border-t border-border">
-          <p className="text-center text-xs text-muted-foreground">
+        <div className="mt-12 border-t border-navy-100 pt-8">
+          <p className="text-center text-xs text-gray-500">
             © 2026 DigitalQatalyst. All rights reserved.
           </p>
         </div>

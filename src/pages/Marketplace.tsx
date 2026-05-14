@@ -7,6 +7,8 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import MeshSection from "@/components/site/MeshSection";
+import SectionHeading from "@/components/site/SectionHeading";
 import {
   Select,
   SelectContent,
@@ -16,10 +18,10 @@ import {
 } from "@/components/ui/select";
 
 const towers = [
-  { id: "dxp", name: "Digital Experience", icon: Globe, color: "text-blue-500" },
-  { id: "dws", name: "Digital Workspace", icon: Users, color: "text-purple-500" },
-  { id: "dia", name: "Data & Intelligence", icon: Database, color: "text-green-500" },
-  { id: "sdo", name: "SecDevOps", icon: ShieldCheck, color: "text-orange-500" },
+  { id: "dxp", name: "Digital Experience", icon: Globe, color: "text-orange-600" },
+  { id: "dws", name: "Digital Workspace", icon: Users, color: "text-orange-600" },
+  { id: "dia", name: "Data & Intelligence", icon: Database, color: "text-orange-600" },
+  { id: "sdo", name: "SecDevOps", icon: ShieldCheck, color: "text-orange-600" },
 ];
 
 const priceRanges = [
@@ -450,59 +452,77 @@ const Marketplace = () => {
       <Navbar />
       
       {/* Hero Header */}
-      <section className="bg-gradient-to-br from-accent/60 to-accent/40 pb-12 pt-32">
+      <MeshSection variant="heroLight" grid className="pt-32 pb-12">
         <div className="mx-auto max-w-7xl px-6">
           <motion.div
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
-            className="max-w-3xl"
           >
-            <h1 className="text-4xl font-bold text-foreground md:text-5xl">
-              Design & Deploy <span className="text-gradient-brand italic">Services</span>
-            </h1>
-            <p className="mt-4 text-base text-muted-foreground md:text-lg">
-              Architecture-backed transformation services across all four towers.
-              From strategic design to ready-to-deploy implementations.
-            </p>
+            <SectionHeading
+              kicker="Marketplace"
+              align="left"
+              className="mx-0 max-w-3xl"
+              title={
+                <>
+                  Design &amp; Deploy{" "}
+                  <span className="bg-gradient-to-r from-navy-950 via-orange-600 to-orange-500 bg-clip-text text-transparent">
+                    Services
+                  </span>
+                </>
+              }
+              description={
+                <>
+                  Architecture-backed transformation services across all four
+                  towers. From strategic design to ready-to-deploy
+                  implementations.
+                </>
+              }
+            />
           </motion.div>
         </div>
-      </section>
+      </MeshSection>
 
       {/* Main Content */}
       <div className="mx-auto max-w-7xl px-6 py-12">
         {/* Tabs for Service Types */}
         <Tabs value={activeTab} onValueChange={setActiveTab} className="mb-8">
-          <TabsList className="grid w-full max-w-2xl grid-cols-3">
-            <TabsTrigger value="design">Design Services</TabsTrigger>
-            <TabsTrigger value="deploy-saas">Deploy Services (SaaS)</TabsTrigger>
-            <TabsTrigger value="deploy-onprem">Deploy Services (On-Prem)</TabsTrigger>
+          <TabsList className="grid w-full max-w-3xl grid-cols-3 border border-navy-100 bg-white/70 p-1 backdrop-blur">
+            <TabsTrigger value="design" className="data-[state=active]:bg-white data-[state=active]:text-navy-950">
+              Design Services
+            </TabsTrigger>
+            <TabsTrigger value="deploy-saas" className="data-[state=active]:bg-white data-[state=active]:text-navy-950">
+              Deploy Services (SaaS)
+            </TabsTrigger>
+            <TabsTrigger value="deploy-onprem" className="data-[state=active]:bg-white data-[state=active]:text-navy-950">
+              Deploy Services (On-Prem)
+            </TabsTrigger>
           </TabsList>
         </Tabs>
 
         <div className="flex gap-8">
           {/* Sidebar Filters */}
           <aside className={`w-64 shrink-0 ${sidebarOpen ? "block" : "hidden"} lg:block`}>
-            <div className="sticky top-24 space-y-6">
+            <div className="sticky top-24 space-y-6 rounded-3xl border border-navy-100 bg-white/70 p-5 shadow-card backdrop-blur">
               {/* Search */}
               <div>
-                <label className="mb-2 block text-sm font-medium text-foreground">Search</label>
+                <label className="mb-2 block text-sm font-semibold text-navy-950">Search</label>
                 <div className="relative">
-                  <Search size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground" />
+                  <Search size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500" />
                   <Input
                     type="text"
                     placeholder="Search services..."
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
-                    className="pl-9"
+                    className="pl-9 border-navy-100 bg-white/60 text-navy-950 placeholder:text-gray-500"
                   />
                 </div>
               </div>
 
               {/* Sort By */}
               <div>
-                <label className="mb-2 block text-sm font-medium text-foreground">Sort By</label>
+                <label className="mb-2 block text-sm font-semibold text-navy-950">Sort By</label>
                 <Select value={sortBy} onValueChange={setSortBy}>
-                  <SelectTrigger>
+                  <SelectTrigger className="border-navy-100 bg-white/60 text-navy-950">
                     <SelectValue placeholder="Default" />
                   </SelectTrigger>
                   <SelectContent>
@@ -518,7 +538,7 @@ const Marketplace = () => {
 
               {/* Tower Filter */}
               <div>
-                <label className="mb-3 block text-sm font-medium text-foreground">Category</label>
+                <label className="mb-3 block text-sm font-semibold text-navy-950">Category</label>
                 <div className="space-y-2">
                   {towers.map((tower) => (
                     <label key={tower.id} className="flex cursor-pointer items-center gap-3">
@@ -526,10 +546,10 @@ const Marketplace = () => {
                         type="checkbox"
                         checked={selectedTowers.includes(tower.id)}
                         onChange={() => toggleTower(tower.id)}
-                        className="h-4 w-4 rounded border-border text-primary focus:ring-primary"
+                        className="h-4 w-4 rounded border-navy-200 text-orange-600 focus:ring-orange-500"
                       />
                       <tower.icon size={16} className={tower.color} />
-                      <span className="text-sm text-foreground">{tower.name}</span>
+                      <span className="text-sm text-navy-950">{tower.name}</span>
                     </label>
                   ))}
                 </div>
@@ -537,7 +557,7 @@ const Marketplace = () => {
 
               {/* Price Range Filter */}
               <div>
-                <label className="mb-3 block text-sm font-medium text-foreground">Price Range</label>
+                <label className="mb-3 block text-sm font-semibold text-navy-950">Price Range</label>
                 <div className="space-y-2">
                   {priceRanges.map((range) => (
                     <label key={range.id} className="flex cursor-pointer items-center gap-3">
@@ -545,9 +565,9 @@ const Marketplace = () => {
                         type="checkbox"
                         checked={selectedPriceRanges.includes(range.id)}
                         onChange={() => togglePriceRange(range.id)}
-                        className="h-4 w-4 rounded border-border text-primary focus:ring-primary"
+                        className="h-4 w-4 rounded border-navy-200 text-orange-600 focus:ring-orange-500"
                       />
-                      <span className="text-sm text-foreground">{range.label}</span>
+                      <span className="text-sm text-navy-950">{range.label}</span>
                     </label>
                   ))}
                 </div>
@@ -555,7 +575,7 @@ const Marketplace = () => {
 
               {/* Duration Filter */}
               <div>
-                <label className="mb-3 block text-sm font-medium text-foreground">Duration</label>
+                <label className="mb-3 block text-sm font-semibold text-navy-950">Duration</label>
                 <div className="space-y-2">
                   {durations.map((duration) => (
                     <label key={duration.id} className="flex cursor-pointer items-center gap-3">
@@ -563,9 +583,9 @@ const Marketplace = () => {
                         type="checkbox"
                         checked={selectedDurations.includes(duration.id)}
                         onChange={() => toggleDuration(duration.id)}
-                        className="h-4 w-4 rounded border-border text-primary focus:ring-primary"
+                        className="h-4 w-4 rounded border-navy-200 text-orange-600 focus:ring-orange-500"
                       />
-                      <span className="text-sm text-foreground">{duration.label}</span>
+                      <span className="text-sm text-navy-950">{duration.label}</span>
                     </label>
                   ))}
                 </div>
@@ -574,7 +594,7 @@ const Marketplace = () => {
               {/* Capability Area Filter */}
               {availableCapabilities.length > 0 && (
                 <div>
-                  <label className="mb-3 block text-sm font-medium text-foreground">Capability Area</label>
+                  <label className="mb-3 block text-sm font-semibold text-navy-950">Capability Area</label>
                   <div className="space-y-2">
                     {[...new Set(availableCapabilities)].map((capability) => (
                       <label key={capability} className="flex cursor-pointer items-center gap-3">
@@ -582,9 +602,9 @@ const Marketplace = () => {
                           type="checkbox"
                           checked={selectedCapabilities.includes(capability)}
                           onChange={() => toggleCapability(capability)}
-                          className="h-4 w-4 rounded border-border text-primary focus:ring-primary"
+                          className="h-4 w-4 rounded border-navy-200 text-orange-600 focus:ring-orange-500"
                         />
-                        <span className="text-sm text-foreground">{capability}</span>
+                        <span className="text-sm text-navy-950">{capability}</span>
                       </label>
                     ))}
                   </div>
@@ -604,7 +624,7 @@ const Marketplace = () => {
                     setSearchQuery("");
                     setSortBy("default");
                   }}
-                  className="w-full"
+                  className="w-full rounded-full border-navy-200 bg-white/60 text-navy-950 backdrop-blur hover:bg-white"
                 >
                   Clear All Filters
                 </Button>
@@ -615,14 +635,14 @@ const Marketplace = () => {
           {/* Services Grid */}
           <main className="flex-1">
             <div className="mb-6 flex items-center justify-between">
-              <p className="text-sm text-muted-foreground">
+              <p className="text-sm text-gray-600">
                 {filteredAndSortedServices.length} {filteredAndSortedServices.length === 1 ? "service" : "services"} found
               </p>
               <Button
                 variant="outline"
                 size="sm"
                 onClick={() => setSidebarOpen(!sidebarOpen)}
-                className="gap-2 lg:hidden"
+                className="gap-2 lg:hidden rounded-full border-navy-200 bg-white/60 text-navy-950 backdrop-blur hover:bg-white"
               >
                 <Filter size={16} />
                 Filters
@@ -630,10 +650,10 @@ const Marketplace = () => {
             </div>
 
             {activeTab === "deploy-onprem" && filteredAndSortedServices.length === 0 ? (
-              <div className="rounded-2xl border border-dashed border-border bg-accent/30 p-12 text-center">
-                <ShieldCheck size={48} className="mx-auto mb-4 text-muted-foreground opacity-50" />
-                <h3 className="mb-2 text-lg font-semibold text-foreground">Coming Soon</h3>
-                <p className="text-muted-foreground">
+              <div className="rounded-3xl border border-dashed border-navy-100 bg-white/70 p-12 text-center shadow-card backdrop-blur">
+                <ShieldCheck size={48} className="mx-auto mb-4 text-gray-500 opacity-60" />
+                <h3 className="mb-2 text-lg font-semibold text-navy-950">Coming Soon</h3>
+                <p className="text-gray-600">
                   On-premise deployment services are currently in development.
                   <br />
                   Check back soon or explore our SaaS deployment options.
@@ -642,7 +662,7 @@ const Marketplace = () => {
                   variant="outline"
                   size="sm"
                   onClick={() => setActiveTab("deploy-saas")}
-                  className="mt-6"
+                  className="mt-6 rounded-full border-navy-200 bg-white/60 text-navy-950 backdrop-blur hover:bg-white"
                 >
                   View SaaS Services
                 </Button>
@@ -659,22 +679,22 @@ const Marketplace = () => {
                     initial={{ opacity: 0, y: 16 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.3, delay: i * 0.05 }}
-                    className="group flex flex-col rounded-2xl border border-border bg-card p-6 shadow-card transition-all hover:shadow-elevated"
+                    className="group flex flex-col rounded-3xl border border-navy-100 bg-white/70 p-6 shadow-card backdrop-blur transition-all hover:border-navy-200 hover:shadow-elevated"
                   >
                     <div className="mb-4 flex items-start justify-between">
                       <div className="flex items-center gap-2">
-                        <div className={`rounded-lg border border-border bg-accent p-2 ${colorClass}`}>
+                        <div className={`rounded-2xl border border-navy-100 bg-white/60 p-2 ${colorClass} backdrop-blur`}>
                           <Icon size={18} />
                         </div>
                         <Badge variant="secondary" className="text-xs">
                           {service.type === "design" ? "Design" : service.type === "deploy-saas" ? "Deploy (SaaS)" : "Deploy (On-Prem)"}
                         </Badge>
                       </div>
-                      <span className="text-sm font-medium text-foreground">{service.price}</span>
+                      <span className="text-sm font-semibold text-navy-950">{service.price}</span>
                     </div>
 
-                    <h3 className="text-lg font-semibold text-foreground">{service.name}</h3>
-                    <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+                    <h3 className="text-lg font-semibold tracking-tight text-navy-950">{service.name}</h3>
+                    <p className="mt-2 text-sm leading-relaxed text-gray-600">
                       {service.description}
                     </p>
 
@@ -683,25 +703,25 @@ const Marketplace = () => {
                       {service.tags.map((tag) => (
                         <span
                           key={tag}
-                          className="rounded-full bg-accent px-2.5 py-1 text-xs text-muted-foreground"
+                          className="rounded-full border border-navy-100 bg-white/60 px-2.5 py-1 text-xs font-medium text-gray-700 backdrop-blur"
                         >
                           {tag}
                         </span>
                       ))}
                     </div>
 
-                    <div className="mt-auto space-y-2 border-t border-border pt-4">
+                    <div className="mt-auto space-y-2 border-t border-navy-100 pt-4">
                       <div className="flex items-center justify-between text-xs">
-                        <span className="text-muted-foreground">Duration</span>
-                        <span className="text-foreground">{service.duration}</span>
+                        <span className="text-gray-600">Duration</span>
+                        <span className="text-navy-950">{service.duration}</span>
                       </div>
                       <div className="text-xs">
-                        <span className="text-muted-foreground">Deliverables: </span>
-                        <span className="text-foreground">{service.deliverables.join(", ")}</span>
+                        <span className="text-gray-600">Deliverables: </span>
+                        <span className="text-navy-950">{service.deliverables.join(", ")}</span>
                       </div>
                     </div>
 
-                    <Button className="mt-6 w-full rounded-full bg-gradient-brand text-primary-foreground shadow-brand hover:opacity-90">
+                    <Button className="mt-6 w-full rounded-full bg-orange-500 text-white shadow-[var(--glow-orange-md)] hover:bg-orange-400">
                       <a href="/service/digital-experience-strategy" className="block w-full">
                         View Details
                       </a>
@@ -713,8 +733,8 @@ const Marketplace = () => {
             )}
 
             {filteredAndSortedServices.length === 0 && activeTab !== "deploy-onprem" && (
-              <div className="rounded-2xl border border-dashed border-border bg-accent/30 p-12 text-center">
-                <p className="text-muted-foreground">No services match your current filters.</p>
+              <div className="rounded-3xl border border-dashed border-navy-100 bg-white/70 p-12 text-center shadow-card backdrop-blur">
+                <p className="text-gray-600">No services match your current filters.</p>
                 <Button
                   variant="outline"
                   size="sm"
@@ -726,7 +746,7 @@ const Marketplace = () => {
                     setSearchQuery("");
                     setSortBy("default");
                   }}
-                  className="mt-4"
+                  className="mt-4 rounded-full border-navy-200 bg-white/60 text-navy-950 backdrop-blur hover:bg-white"
                 >
                   Clear Filters
                 </Button>

@@ -37,7 +37,7 @@ const DT2Section = () => {
           </span>
           <h2 className="mt-4 text-3xl font-bold text-foreground md:text-4xl">
             Transformation{" "}
-            <span className="text-gradient-brand italic">re-invented</span>
+            <span className="text-gradient-brand">re-invented</span>
           </h2>
           <p className="mt-4 text-base leading-relaxed text-muted-foreground">
             We've re-invented the technology acquisition lifecycle for the Digital and AI era. No more slideware—just

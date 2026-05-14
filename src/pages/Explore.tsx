@@ -2,15 +2,14 @@ import { motion } from "framer-motion";
 import { Search, PenTool, Rocket, TrendingUp, Brain, BookOpen, HelpCircle, Layers, Cloud, Server, Cog, Briefcase, Sparkles, ArrowRight } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import MeshSection from "@/components/site/MeshSection";
+import SectionHeading from "@/components/site/SectionHeading";
 
 const marketplaces = [
   {
     phase: "Discern",
     icon: Search,
     description: "Identify context, assess capabilities, and translate problems into transformation signals.",
-    color: "bg-blue-500/10",
-    iconColor: "text-blue-600",
-    hoverColor: "group-hover:bg-blue-500/5",
     items: [
       {
         icon: Brain,
@@ -42,9 +41,6 @@ const marketplaces = [
     phase: "Design",
     icon: PenTool,
     description: "Convert insights into structured strategies, architectures, and actionable blueprints.",
-    color: "bg-purple-500/10",
-    iconColor: "text-purple-600",
-    hoverColor: "group-hover:bg-purple-500/5",
     items: [
       {
         icon: Layers,
@@ -60,9 +56,6 @@ const marketplaces = [
     phase: "Deploy",
     icon: Rocket,
     description: "Execute initiatives using predefined blueprints with built-in tracking and governance.",
-    color: "bg-primary/10",
-    iconColor: "text-primary",
-    hoverColor: "group-hover:bg-primary/5",
     items: [
       {
         icon: Cloud,
@@ -86,9 +79,6 @@ const marketplaces = [
     phase: "Drive",
     icon: TrendingUp,
     description: "Enable adoption, optimize outcomes, and support continuous improvement.",
-    color: "bg-green-500/10",
-    iconColor: "text-green-600",
-    hoverColor: "group-hover:bg-green-500/5",
     items: [
       {
         icon: Cog,
@@ -130,26 +120,38 @@ const Explore = () => {
       <Navbar />
 
       {/* Hero Section */}
-      <section className="bg-gradient-to-br from-accent/60 to-accent/40 pb-16 pt-32">
+      <MeshSection variant="heroLight" grid className="pt-32 pb-16">
         <div className="mx-auto max-w-7xl px-6">
           <motion.div
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
-            className="max-w-3xl"
           >
-            <h1 className="text-4xl font-bold text-foreground md:text-5xl">
-              Explore TMaaS <span className="text-gradient-brand italic">Marketplaces</span>
-            </h1>
-            <p className="mt-4 text-lg leading-relaxed text-muted-foreground">
-              Access our full range of transformation services, resources, and AI-powered tools organized across
-              the 4D Framework. From problem diagnosis to continuous optimization.
-            </p>
+            <SectionHeading
+              kicker="Explore"
+              align="left"
+              className="mx-0 max-w-3xl"
+              title={
+                <>
+                  Explore TMaaS{" "}
+                  <span className="bg-gradient-to-r from-navy-950 via-orange-600 to-orange-500 bg-clip-text text-transparent">
+                    Marketplaces
+                  </span>
+                </>
+              }
+              description={
+                <>
+                  Access our full range of transformation services, resources,
+                  and AI-powered tools organized across the 4D Framework. From
+                  problem diagnosis to continuous optimization.
+                </>
+              }
+            />
           </motion.div>
         </div>
-      </section>
+      </MeshSection>
 
       {/* Marketplaces Grid */}
-      <section className="py-16">
+      <section className="py-20">
         <div className="mx-auto max-w-7xl px-6">
           <div className="space-y-16">
             {marketplaces.map((phase, phaseIndex) => (
@@ -162,14 +164,14 @@ const Explore = () => {
               >
                 {/* Phase Header */}
                 <div className="mb-8 flex items-start gap-4">
-                  <div className={`flex h-14 w-14 shrink-0 items-center justify-center rounded-xl ${phase.color}`}>
-                    <phase.icon size={24} className={phase.iconColor} />
+                  <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-orange-500/10">
+                    <phase.icon size={24} className="text-orange-600" />
                   </div>
                   <div className="flex-1">
-                    <h2 className="text-2xl font-bold text-foreground md:text-3xl">
+                    <h2 className="text-2xl font-bold tracking-tight text-navy-950 md:text-3xl">
                       {phaseIndex + 1}. {phase.phase}
                     </h2>
-                    <p className="mt-2 text-base leading-relaxed text-muted-foreground">
+                    <p className="mt-2 text-base leading-relaxed text-gray-600">
                       {phase.description}
                     </p>
                   </div>
@@ -184,32 +186,35 @@ const Explore = () => {
                       whileInView={{ opacity: 1, y: 0 }}
                       viewport={{ once: true }}
                       transition={{ delay: phaseIndex * 0.1 + itemIndex * 0.05 }}
-                      className={`group relative overflow-hidden rounded-2xl border border-border bg-card p-6 shadow-card ${
-                        item.comingSoon ? "opacity-75" : "transition-all hover:shadow-elevated"
-                      }`}
+                      className={[
+                        "group relative overflow-hidden rounded-3xl border border-navy-100 bg-white/70 p-6 shadow-card backdrop-blur",
+                        item.comingSoon
+                          ? "opacity-75"
+                          : "transition-all hover:border-navy-200 hover:shadow-elevated",
+                      ].join(" ")}
                     >
                       {item.comingSoon ? (
                         <>
                           {/* Badge */}
                           <div className="mb-4 flex items-center justify-between">
-                            <div className={`flex h-12 w-12 items-center justify-center rounded-xl ${phase.color}`}>
-                              <item.icon size={20} className={phase.iconColor} />
+                            <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-orange-500/10">
+                              <item.icon size={20} className="text-orange-600" />
                             </div>
-                            <span className="rounded-full bg-accent px-3 py-1 text-xs font-medium text-muted-foreground">
+                            <span className="rounded-full border border-navy-100 bg-white/60 px-3 py-1 text-xs font-semibold text-gray-700 backdrop-blur">
                               {item.badge}
                             </span>
                           </div>
 
                           {/* Content */}
-                          <h3 className="mb-2 text-lg font-semibold text-foreground">
+                          <h3 className="mb-2 text-lg font-semibold tracking-tight text-navy-950">
                             {item.name}
                           </h3>
-                          <p className="mb-4 text-sm leading-relaxed text-muted-foreground">
+                          <p className="mb-4 text-sm leading-relaxed text-gray-600">
                             {item.description}
                           </p>
 
                           {/* Coming Soon Badge */}
-                          <div className="inline-flex items-center gap-2 rounded-full bg-muted px-4 py-2 text-xs font-medium text-muted-foreground">
+                          <div className="inline-flex items-center gap-2 rounded-full border border-navy-100 bg-white/60 px-4 py-2 text-xs font-semibold text-gray-700 backdrop-blur">
                             Coming Soon
                           </div>
                         </>
@@ -226,30 +231,30 @@ const Explore = () => {
                         >
                           {/* Badge */}
                           <div className="mb-4 flex items-center justify-between">
-                            <div className={`flex h-12 w-12 items-center justify-center rounded-xl ${phase.color}`}>
-                              <item.icon size={20} className={phase.iconColor} />
+                            <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-orange-500/10">
+                              <item.icon size={20} className="text-orange-600" />
                             </div>
-                            <span className="rounded-full bg-accent px-3 py-1 text-xs font-medium text-muted-foreground">
+                            <span className="rounded-full border border-navy-100 bg-white/60 px-3 py-1 text-xs font-semibold text-gray-700 backdrop-blur">
                               {item.badge}
                             </span>
                           </div>
 
                           {/* Content */}
-                          <h3 className="mb-2 text-lg font-semibold text-foreground group-hover:text-primary transition-colors">
+                          <h3 className="mb-2 text-lg font-semibold tracking-tight text-navy-950 transition-colors group-hover:text-orange-600">
                             {item.name}
                           </h3>
-                          <p className="mb-4 text-sm leading-relaxed text-muted-foreground">
+                          <p className="mb-4 text-sm leading-relaxed text-gray-600">
                             {item.description}
                           </p>
 
                           {/* Arrow */}
-                          <div className="flex items-center gap-2 text-sm font-medium text-primary">
+                          <div className="flex items-center gap-2 text-sm font-semibold text-orange-600">
                             <span>Explore</span>
                             <ArrowRight size={16} className="transition-transform group-hover:translate-x-1" />
                           </div>
 
                           {/* Hover Effect */}
-                          <div className={`absolute inset-0 -z-10 rounded-2xl transition-all ${phase.hoverColor}`}></div>
+                          <div className="absolute inset-0 -z-10 rounded-3xl transition-all group-hover:bg-orange-500/5"></div>
                         </a>
                       )}
                     </motion.div>
@@ -262,23 +267,24 @@ const Explore = () => {
       </section>
 
       {/* CTA Section */}
-      <section className="bg-gradient-to-br from-accent/60 to-accent/40 py-16">
+      <MeshSection variant="ctaOrange" className="py-16">
         <div className="mx-auto max-w-4xl px-6 text-center">
-          <h2 className="text-2xl font-bold text-foreground md:text-3xl">
+          <h2 className="text-2xl font-bold tracking-tight text-navy-950 md:text-3xl">
             Not sure where to start?
           </h2>
-          <p className="mt-4 text-base leading-relaxed text-muted-foreground">
-            Use our AI-powered Diagnose tool to identify the right services for your transformation needs.
+          <p className="mt-4 text-base leading-relaxed text-gray-600">
+            Use our AI-powered Diagnose tool to identify the right services for
+            your transformation needs.
           </p>
           <button
             onClick={handleDiagnoseClick}
-            className="mt-6 inline-flex items-center gap-2 rounded-full bg-gradient-brand px-8 py-3 text-base font-medium text-primary-foreground shadow-brand transition-opacity hover:opacity-90"
+            className="mt-6 inline-flex items-center gap-2 rounded-full bg-orange-500 px-8 py-3 text-base font-semibold text-white shadow-[var(--glow-orange-md)] transition hover:bg-orange-400"
           >
             <Brain size={20} />
             Start with TMaaS AI
           </button>
         </div>
-      </section>
+      </MeshSection>
 
       <Footer />
     </div>

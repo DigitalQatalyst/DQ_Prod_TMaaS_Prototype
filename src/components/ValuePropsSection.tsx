@@ -45,7 +45,7 @@ const ValuePropsSection = () => {
           className="mx-auto max-w-2xl text-center"
         >
           <h2 className="text-3xl font-bold text-foreground md:text-5xl">
-            Why <span className="text-gradient-brand italic">TMaaS</span>
+            Why <span className="text-gradient-brand">TMaaS</span>
           </h2>
           <p className="mt-5 text-base text-muted-foreground md:text-lg">
             A fundamentally different approach to digital transformation.
@@ -66,7 +66,7 @@ const ValuePropsSection = () => {
                 <div className="mx-auto mb-4 flex h-10 w-10 items-center justify-center rounded-lg border border-border bg-accent">
                   <prop.icon size={18} className="text-primary" />
                 </div>
-                <h3 className="text-lg font-semibold italic text-foreground">{prop.title}</h3>
+                <h3 className="text-lg font-semibold text-foreground">{prop.title}</h3>
                 <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{prop.description}</p>
               </div>
             ))}

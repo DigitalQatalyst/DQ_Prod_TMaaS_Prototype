@@ -5,6 +5,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import SectionHeading from "@/components/site/SectionHeading";
 
 const faqs = [
   {
@@ -43,20 +44,30 @@ const faqs = [
 
 const FAQSection = () => {
   return (
-    <section className="bg-accent/30 py-16 lg:py-24">
-      <div className="mx-auto max-w-4xl px-6">
+    <section className="border-t border-navy-100 bg-white py-20 md:py-24">
+      <div className="mx-auto max-w-5xl px-6">
         <motion.div
           initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="mb-12 text-center"
+          className="mb-12"
         >
-          <h2 className="text-3xl font-bold text-foreground md:text-4xl">
-            Frequently Asked <span className="text-gradient-brand italic">Questions</span>
-          </h2>
-          <p className="mt-4 text-base leading-relaxed text-muted-foreground">
-            Everything you need to know about TMaaS and digital transformation
-          </p>
+          <SectionHeading
+            title={
+              <>
+                Frequently Asked{" "}
+                <span className="bg-gradient-to-r from-navy-950 via-orange-600 to-orange-500 bg-clip-text text-transparent">
+                  Questions
+                </span>
+              </>
+            }
+            description={
+              <>
+                Everything you need to know about TMaaS and digital
+                transformation
+              </>
+            }
+          />
         </motion.div>
 
         <motion.div
@@ -70,12 +81,12 @@ const FAQSection = () => {
               <AccordionItem
                 key={i}
                 value={`item-${i}`}
-                className="rounded-xl border border-border bg-card px-6 shadow-card"
+                className="rounded-2xl border border-navy-100 bg-white/70 px-6 shadow-card backdrop-blur"
               >
-                <AccordionTrigger className="text-left font-semibold text-foreground hover:no-underline">
+                <AccordionTrigger className="text-left font-semibold text-navy-950 hover:no-underline">
                   {faq.question}
                 </AccordionTrigger>
-                <AccordionContent className="text-sm leading-relaxed text-muted-foreground">
+                <AccordionContent className="text-sm leading-relaxed text-gray-600">
                   {faq.answer}
                 </AccordionContent>
               </AccordionItem>
@@ -90,9 +101,9 @@ const FAQSection = () => {
           transition={{ delay: 0.2 }}
           className="mt-12 text-center"
         >
-          <p className="text-sm text-muted-foreground">
+          <p className="text-sm text-gray-600">
             Still have questions?{" "}
-            <a href="#" className="font-medium text-primary hover:underline">
+            <a href="#" className="font-semibold text-orange-600 hover:underline">
               Contact our team
             </a>
           </p>

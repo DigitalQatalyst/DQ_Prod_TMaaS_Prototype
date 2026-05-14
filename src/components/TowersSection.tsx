@@ -46,7 +46,7 @@ const TowersSection = () => {
             Transformation Coverage
           </span>
           <h2 className="mt-4 text-3xl font-bold text-foreground md:text-5xl">
-            Four execution <span className="text-gradient-brand italic">streams</span>
+            Four execution <span className="text-gradient-brand">streams</span>
           </h2>
           <p className="mt-5 text-base text-muted-foreground md:text-lg">
             Comprehensive coverage across every dimension of your organisation's digital landscape.

@@ -19,7 +19,7 @@ const CTASection = () => {
           className="text-3xl font-bold text-navy-foreground md:text-5xl"
         >
           Ready to transform{" "}
-          <span className="text-gradient-brand italic">differently?</span>
+          <span className="text-gradient-brand">differently?</span>
         </motion.h2>
         <motion.p
           initial={{ opacity: 0, y: 16 }}

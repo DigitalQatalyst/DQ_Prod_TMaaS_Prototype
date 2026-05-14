@@ -1,17 +1,47 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
 
 const Navbar = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 12);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 bg-background/90 backdrop-blur-md">
-      <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-6">
+    <nav className="fixed inset-x-0 top-0 z-50 transition-all duration-300">
+      <div
+        className={[
+          "mx-auto flex max-w-7xl items-center justify-between px-6 transition-all duration-300",
+          scrolled
+            ? "mt-3 h-12 rounded-full border border-navy-100 bg-white/70 px-4 shadow-sm backdrop-blur-xl backdrop-saturate-150"
+            : "h-16",
+        ].join(" ")}
+        style={
+          scrolled
+            ? {
+                boxShadow:
+                  "0 1px 0 rgba(3,15,53,0.04), 0 8px 24px rgba(3,15,53,0.06)",
+              }
+            : undefined
+        }
+      >
         <div className="flex items-center gap-8">
-          <a href="/" className="flex items-center gap-1.5 transition-opacity hover:opacity-80">
-            <span className="text-2xl font-bold text-foreground">DQ</span>
-            <span className="text-sm font-semibold tracking-wide text-muted-foreground">TMaaS</span>
+          <a
+            href="/"
+            className="flex items-center gap-2 font-semibold tracking-tight transition-opacity hover:opacity-80"
+          >
+            <span className="grid h-7 w-7 place-items-center rounded-md bg-orange-500 text-white">
+              <span className="font-mono text-[11px] font-bold">DQ</span>
+            </span>
+            <span className="text-orange-500 font-heading text-lg">
+              TMaaS
+            </span>
           </a>
           
           <a href="/explore" className="hidden text-sm text-muted-foreground transition-colors hover:text-foreground md:block">
@@ -22,7 +52,7 @@ const Navbar = () => {
         <div className="hidden items-center gap-4 md:flex">
           <a href="/sign-in" className="text-sm text-muted-foreground transition-colors hover:text-foreground">Login</a>
           <a href="/sign-in">
-            <Button size="sm" className="rounded-full bg-secondary text-secondary-foreground hover:bg-secondary/90 px-5">
+            <Button size="sm" className="rounded-full bg-orange-500 px-5 text-white shadow-[var(--glow-orange-sm)] hover:bg-orange-400 transition-all">
               Get Started
             </Button>
           </a>
@@ -34,11 +64,11 @@ const Navbar = () => {
       </div>
 
       {mobileOpen && (
-        <div className="border-t border-border bg-background p-6 md:hidden">
+        <div className="mt-2 border-t border-border bg-background/95 p-6 backdrop-blur-xl md:hidden">
           <div className="flex flex-col gap-4">
             <a href="/explore" className="text-sm text-muted-foreground">Explore</a>
             <a href="/sign-in">
-              <Button size="sm" className="w-full rounded-full bg-secondary text-secondary-foreground mt-2">Get Started</Button>
+              <Button size="sm" className="mt-2 w-full rounded-full bg-orange-500 text-white shadow-[var(--glow-orange-sm)] hover:bg-orange-400">Get Started</Button>
             </a>
           </div>
         </div>
