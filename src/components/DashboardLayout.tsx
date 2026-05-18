@@ -66,6 +66,7 @@ const clientNavigationItems = [
     group: "ORGANISATION",
     items: [
       { name: "Organisation Profile", icon: Building2, path: "/dashboard/profile", badge: null },
+      { name: "Members & Roles", icon: Users, path: "/dashboard/org-admin", badge: null },
       { name: "Documents", icon: FileText, path: "/dashboard/documents", badge: null },
     ],
   },
@@ -118,6 +119,72 @@ const dqNavigationItems = [
   },
 ];
 
+const dqPortfolioNavigationItems = [
+  {
+    group: "",
+    items: [{ name: "Portfolio", icon: BarChart3, path: "/dashboard/dq/portfolio", badge: null }],
+  },
+  {
+    group: "OVERSIGHT",
+    items: [
+      { name: "Engagements", icon: Package, path: "/dashboard/services", badge: 3 },
+      { name: "Workflow Queue", icon: Bell, path: "/dashboard/dq/queue", badge: 8 },
+      { name: "Inbox", icon: MessageSquare, path: "/dashboard/inbox", badge: 2 },
+    ],
+  },
+  {
+    group: "PLATFORM",
+    items: [
+      { name: "Organisations", icon: Building2, path: "/dashboard/organisations", badge: null },
+      { name: "Settings", icon: Settings, path: "/dashboard/settings", badge: null },
+    ],
+  },
+];
+
+const dqFinanceNavigationItems = [
+  {
+    group: "",
+    items: [{ name: "Finance", icon: CreditCard, path: "/dashboard/dq/finance", badge: null }],
+  },
+  {
+    group: "COMMERCIAL",
+    items: [
+      { name: "Service Orders", icon: ShoppingCart, path: "/dashboard/orders", badge: 6 },
+      { name: "Invoices", icon: FileText, path: "/dashboard/dq/invoices", badge: 4 },
+      { name: "Inbox", icon: MessageSquare, path: "/dashboard/inbox", badge: 1 },
+    ],
+  },
+  {
+    group: "PLATFORM",
+    items: [
+      { name: "Settings", icon: Settings, path: "/dashboard/settings", badge: null },
+      { name: "Support", icon: Headphones, path: "/dashboard/support", badge: null },
+    ],
+  },
+];
+
+const dqSupportNavigationItems = [
+  {
+    group: "",
+    items: [{ name: "Support Ops", icon: Headphones, path: "/dashboard/dq/support", badge: null }],
+  },
+  {
+    group: "OPERATIONS",
+    items: [
+      { name: "Workflow Queue", icon: Bell, path: "/dashboard/dq/queue", badge: 12 },
+      { name: "Onboarding", icon: Users, path: "/dashboard/dq/onboarding", badge: 3 },
+      { name: "Inbox", icon: MessageSquare, path: "/dashboard/inbox", badge: 4 },
+    ],
+  },
+  {
+    group: "PLATFORM",
+    items: [
+      { name: "Service Catalogue", icon: BookOpen, path: "/dashboard/catalogue", badge: null },
+      { name: "Settings", icon: Settings, path: "/dashboard/settings", badge: null },
+    ],
+  },
+];
+
 const mockOrganizations = [
   { id: "stc-bank", name: "STC Bank" },
   { id: "dewa", name: "Dubai Electricity & Water Authority" },
@@ -137,7 +204,16 @@ const DashboardLayout = ({ children }: DashboardLayoutProps) => {
   const [transactAIOpen, setTransactAIOpen] = useState(false);
   const [showTooltip, setShowTooltip] = useState(true);
 
-  const navigationItems = user.role === 'dq_delivery_lead' ? dqNavigationItems : clientNavigationItems;
+  const navigationItems =
+    user.role === "dq_delivery_lead"
+      ? dqNavigationItems
+      : user.role === "dq_portfolio_oversight"
+        ? dqPortfolioNavigationItems
+        : user.role === "dq_finance"
+          ? dqFinanceNavigationItems
+          : user.role === "dq_support"
+            ? dqSupportNavigationItems
+            : clientNavigationItems;
   const location = useLocation();
 
   const isActive = (path: string) => location.pathname === path;
@@ -292,9 +368,25 @@ const DashboardLayout = ({ children }: DashboardLayoutProps) => {
                     </div>
                   </DropdownMenuLabel>
                   <DropdownMenuSeparator />
-                  <DropdownMenuItem onClick={() => setUserRole(user.role === 'client' ? 'dq_delivery_lead' : 'client')}>
+                  <DropdownMenuItem onClick={() => setUserRole("client")}>
                     <User size={16} className="mr-2" />
-                    Switch to {user.role === 'client' ? 'DQ Lead' : 'Client'}
+                    Switch to Client
+                  </DropdownMenuItem>
+                  <DropdownMenuItem onClick={() => setUserRole("dq_delivery_lead")}>
+                    <User size={16} className="mr-2" />
+                    Switch to DQ Delivery
+                  </DropdownMenuItem>
+                  <DropdownMenuItem onClick={() => setUserRole("dq_portfolio_oversight")}>
+                    <User size={16} className="mr-2" />
+                    Switch to Oversight
+                  </DropdownMenuItem>
+                  <DropdownMenuItem onClick={() => setUserRole("dq_finance")}>
+                    <User size={16} className="mr-2" />
+                    Switch to Finance
+                  </DropdownMenuItem>
+                  <DropdownMenuItem onClick={() => setUserRole("dq_support")}>
+                    <User size={16} className="mr-2" />
+                    Switch to Support
                   </DropdownMenuItem>
                   <DropdownMenuItem>
                     <User size={16} className="mr-2" />
@@ -334,9 +426,25 @@ const DashboardLayout = ({ children }: DashboardLayoutProps) => {
                     </div>
                   </DropdownMenuLabel>
                   <DropdownMenuSeparator />
-                  <DropdownMenuItem onClick={() => setUserRole(user.role === 'client' ? 'dq_delivery_lead' : 'client')}>
+                  <DropdownMenuItem onClick={() => setUserRole("client")}>
                     <User size={16} className="mr-2" />
-                    Switch to {user.role === 'client' ? 'DQ Lead' : 'Client'}
+                    Switch to Client
+                  </DropdownMenuItem>
+                  <DropdownMenuItem onClick={() => setUserRole("dq_delivery_lead")}>
+                    <User size={16} className="mr-2" />
+                    Switch to DQ Delivery
+                  </DropdownMenuItem>
+                  <DropdownMenuItem onClick={() => setUserRole("dq_portfolio_oversight")}>
+                    <User size={16} className="mr-2" />
+                    Switch to Oversight
+                  </DropdownMenuItem>
+                  <DropdownMenuItem onClick={() => setUserRole("dq_finance")}>
+                    <User size={16} className="mr-2" />
+                    Switch to Finance
+                  </DropdownMenuItem>
+                  <DropdownMenuItem onClick={() => setUserRole("dq_support")}>
+                    <User size={16} className="mr-2" />
+                    Switch to Support
                   </DropdownMenuItem>
                   <DropdownMenuItem>
                     <User size={16} className="mr-2" />

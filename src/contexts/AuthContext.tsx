@@ -1,6 +1,11 @@
 import React, { createContext, useContext, useState, ReactNode } from 'react';
 
-export type UserRole = 'client' | 'dq_delivery_lead';
+export type UserRole =
+  | 'client'
+  | 'dq_delivery_lead'
+  | 'dq_portfolio_oversight'
+  | 'dq_finance'
+  | 'dq_support';
 
 interface User {
   name: string;
@@ -38,6 +43,33 @@ const mockDQDeliveryLead: User = {
   role: 'dq_delivery_lead',
 };
 
+const mockDQPortfolioOversight: User = {
+  name: "Nadia Al Farsi",
+  email: "nadia.alfarsi@dataquest.com",
+  roleTitle: "Portfolio Oversight",
+  organization: "DataQuest",
+  avatar: "NF",
+  role: "dq_portfolio_oversight",
+};
+
+const mockDQFinance: User = {
+  name: "Joseph Kimani",
+  email: "joseph.kimani@dataquest.com",
+  roleTitle: "Finance Operations",
+  organization: "DataQuest",
+  avatar: "JK",
+  role: "dq_finance",
+};
+
+const mockDQSupport: User = {
+  name: "Aisha Hassan",
+  email: "aisha.hassan@dataquest.com",
+  roleTitle: "Support Operations",
+  organization: "DataQuest",
+  avatar: "AH",
+  role: "dq_support",
+};
+
 interface AuthContextType {
   user: User;
   setUserRole: (role: UserRole) => void;
@@ -54,6 +86,12 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       setUser(mockClientUserDEWA);
     } else if (role === 'dq_delivery_lead') {
       setUser(mockDQDeliveryLead);
+    } else if (role === "dq_portfolio_oversight") {
+      setUser(mockDQPortfolioOversight);
+    } else if (role === "dq_finance") {
+      setUser(mockDQFinance);
+    } else if (role === "dq_support") {
+      setUser(mockDQSupport);
     }
   };
 

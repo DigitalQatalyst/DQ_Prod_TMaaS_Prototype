@@ -18,6 +18,23 @@ import ServiceOrders from "./pages/dashboard/ServiceOrders";
 import ServiceOrderDetail from "./pages/dashboard/ServiceOrderDetail";
 import CustomerServiceOrders from "./pages/dashboard/customer/ServiceOrders";
 import CustomerServiceOrderDetail from "./pages/dashboard/customer/ServiceOrderDetail";
+import Inbox from "./pages/dashboard/Inbox";
+import OrganisationAdmin from "./pages/dashboard/OrganisationAdmin";
+import Calendar from "./pages/dashboard/Calendar";
+import Documents from "./pages/dashboard/Documents";
+import Settings from "./pages/dashboard/Settings";
+import Support from "./pages/dashboard/Support";
+import HelpCentre from "./pages/dashboard/HelpCentre";
+import Organisations from "./pages/dashboard/Organisations";
+import Users from "./pages/dashboard/Users";
+import Catalogue from "./pages/dashboard/Catalogue";
+import HelpContent from "./pages/dashboard/HelpContent";
+import DqPortfolio from "./pages/dashboard/dq/Portfolio";
+import DqFinance from "./pages/dashboard/dq/Finance";
+import DqSupportOps from "./pages/dashboard/dq/SupportOps";
+import DqQueue from "./pages/dashboard/dq/Queue";
+import DqInvoices from "./pages/dashboard/dq/Invoices";
+import DqOnboarding from "./pages/dashboard/dq/Onboarding";
 import SignIn from "./pages/auth/SignIn";
 import ProfileSetup from "./pages/onboarding/ProfileSetup";
 import OrganisationAccess from "./pages/onboarding/OrganisationAccess";
@@ -73,6 +90,25 @@ const App = () => (
           <Route path="/dashboard/orders" element={<ServiceOrders />} />
           <Route path="/dashboard/orders/:id" element={<ServiceOrderDetail />} />
           <Route path="/dashboard/profile" element={<OrganisationProfile />} />
+          <Route path="/dashboard/org-admin" element={<OrganisationAdmin />} />
+          <Route path="/dashboard/inbox" element={<Inbox />} />
+          <Route path="/dashboard/calendar" element={<Calendar />} />
+          <Route path="/dashboard/documents" element={<Documents />} />
+          <Route path="/dashboard/settings" element={<Settings />} />
+          <Route path="/dashboard/support" element={<Support />} />
+          <Route path="/dashboard/help" element={<HelpCentre />} />
+          <Route path="/dashboard/organisations" element={<Organisations />} />
+          <Route path="/dashboard/users" element={<Users />} />
+          <Route path="/dashboard/catalogue" element={<Catalogue />} />
+          <Route path="/dashboard/help-content" element={<HelpContent />} />
+
+          {/* DQ Role-led Views (Stage 3 shells) */}
+          <Route path="/dashboard/dq/portfolio" element={<DqPortfolio />} />
+          <Route path="/dashboard/dq/finance" element={<DqFinance />} />
+          <Route path="/dashboard/dq/support" element={<DqSupportOps />} />
+          <Route path="/dashboard/dq/queue" element={<DqQueue />} />
+          <Route path="/dashboard/dq/invoices" element={<DqInvoices />} />
+          <Route path="/dashboard/dq/onboarding" element={<DqOnboarding />} />
           
           {/* Customer Dashboard Routes */}
           <Route path="/dashboard/customer/orders" element={<CustomerServiceOrders />} />
