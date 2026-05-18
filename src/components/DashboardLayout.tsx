@@ -29,6 +29,7 @@ import {
 import TransactAIMode01 from "@/components/TransactAIMode01";
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
+import ContextSwitcher from "@/components/ContextSwitcher";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -488,6 +489,7 @@ const DashboardLayout = ({ children }: DashboardLayoutProps) => {
           </Button>
 
           <div className="flex items-center gap-4">
+            <ContextSwitcher stage="dashboard" className="hidden md:inline-flex" />
             <Button variant="ghost" size="icon" className="relative">
               <Bell size={20} />
               <span className="absolute right-1.5 top-1.5 h-2 w-2 rounded-full bg-destructive" />

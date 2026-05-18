@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
+import ContextSwitcher from "@/components/ContextSwitcher";
 
 const Navbar = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -50,6 +51,7 @@ const Navbar = () => {
         </div>
 
         <div className="hidden items-center gap-4 md:flex">
+          <ContextSwitcher stage="marketing" scrolled={scrolled} />
           <a href="/sign-in" className="text-sm text-muted-foreground transition-colors hover:text-foreground">Login</a>
           <a href="/sign-in">
             <Button size="sm" className="rounded-full bg-orange-500 px-5 text-white shadow-[var(--glow-orange-sm)] hover:bg-orange-400 transition-all">
@@ -66,6 +68,9 @@ const Navbar = () => {
       {mobileOpen && (
         <div className="mt-2 border-t border-border bg-background/95 p-6 backdrop-blur-xl md:hidden">
           <div className="flex flex-col gap-4">
+            <div className="pt-1">
+              <ContextSwitcher stage="marketing" scrolled />
+            </div>
             <a href="/explore" className="text-sm text-muted-foreground">Explore</a>
             <a href="/sign-in">
               <Button size="sm" className="mt-2 w-full rounded-full bg-orange-500 text-white shadow-[var(--glow-orange-sm)] hover:bg-orange-400">Get Started</Button>
