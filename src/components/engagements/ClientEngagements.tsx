@@ -102,7 +102,7 @@ const ClientEngagements = () => {
     <DashboardLayout>
       <div className="space-y-6">
         <div>
-          <h1 className="text-3xl font-bold text-foreground">Active Engagements</h1>
+          <h1 className="text-3xl font-bold text-foreground">Active Projects</h1>
           <p className="mt-1 text-muted-foreground">
             Track and manage your requested services and delivery progress.
           </p>
@@ -154,17 +154,17 @@ const ClientEngagements = () => {
           </div>
         </div>
 
-        {/* Engagements List */}
+        {/* Projects List */}
         <div className="space-y-4">
           {organizationServices.length === 0 ? (
-            // Empty state for organizations with no active engagements (e.g., DEWA)
+            // Empty state for organizations with no active projects (e.g., DEWA)
             <div className="flex flex-col items-center justify-center rounded-2xl border border-dashed border-border py-16 text-center">
               <div className="mb-4 flex h-14 w-14 items-center justify-center rounded-full bg-accent text-muted-foreground">
                 <Package size={24} />
               </div>
-              <h3 className="mb-1 text-lg font-semibold text-foreground">No active engagements</h3>
+              <h3 className="mb-1 text-lg font-semibold text-foreground">No active projects</h3>
               <p className="text-sm text-muted-foreground max-w-md">
-                You don't have any active engagements at the moment. Check Service Orders for your current projects.
+                You don't have any active projects at the moment. Check Service Orders for your current projects.
               </p>
               <Link to="/dashboard/customer/orders">
                 <Button className="mt-6 gap-2">
@@ -179,7 +179,7 @@ const ClientEngagements = () => {
               <div className="mb-4 flex h-14 w-14 items-center justify-center rounded-full bg-accent text-muted-foreground">
                 <SearchX size={24} />
               </div>
-              <h3 className="mb-1 text-lg font-semibold text-foreground">No engagements found</h3>
+              <h3 className="mb-1 text-lg font-semibold text-foreground">No projects found</h3>
               <p className="text-sm text-muted-foreground">
                 We couldn't find any services matching your current filters.
               </p>

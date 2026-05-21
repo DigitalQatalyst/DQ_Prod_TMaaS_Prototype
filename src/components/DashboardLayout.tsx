@@ -25,6 +25,7 @@ import {
   Brain,
   X,
   ShoppingCart,
+  Search,
 } from "lucide-react";
 import TransactAIMode01 from "@/components/TransactAIMode01";
 import { Button } from "@/components/ui/button";
@@ -57,7 +58,7 @@ const clientNavigationItems = [
   {
     group: "WORKSPACE",
     items: [
-      { name: "Active Engagements", icon: Package, path: "/dashboard/services", badge: 3 },
+      { name: "Active Projects", icon: Package, path: "/dashboard/services", badge: 3 },
       { name: "Service Orders", icon: ShoppingCart, path: "/dashboard/customer/orders", badge: 6 },
       { name: "Calendar", icon: Calendar, path: "/dashboard/calendar", badge: null },
       { name: "Inbox", icon: MessageSquare, path: "/dashboard/inbox", badge: 5 },
@@ -91,7 +92,7 @@ const dqNavigationItems = [
   {
     group: "DELIVERY",
     items: [
-      { name: "Engagements", icon: Package, path: "/dashboard/services", badge: 3 },
+      { name: "Projects", icon: Package, path: "/dashboard/services", badge: 3 },
       { name: "Service Orders", icon: ShoppingCart, path: "/dashboard/orders", badge: 6 },
       { name: "Calendar", icon: Calendar, path: "/dashboard/calendar", badge: null },
       { name: "Inbox", icon: MessageSquare, path: "/dashboard/inbox", badge: 2 },
@@ -128,7 +129,7 @@ const dqPortfolioNavigationItems = [
   {
     group: "OVERSIGHT",
     items: [
-      { name: "Engagements", icon: Package, path: "/dashboard/services", badge: 3 },
+      { name: "Projects", icon: Package, path: "/dashboard/services", badge: 3 },
       { name: "Workflow Queue", icon: Bell, path: "/dashboard/dq/queue", badge: 8 },
       { name: "Inbox", icon: MessageSquare, path: "/dashboard/inbox", badge: 2 },
     ],
@@ -251,47 +252,79 @@ const DashboardLayout = ({ children }: DashboardLayoutProps) => {
     <div className="flex h-screen bg-background">
       {/* Sidebar */}
       <aside
-        className={`fixed left-0 top-0 z-40 h-full border-r border-border bg-card transition-all duration-300 ${
+        className={`fixed left-0 top-0 z-40 h-full border-r border-navy-100/60 bg-white/75 backdrop-blur-xl saturate-150 transition-all duration-300 shadow-[2px_0_12px_rgba(3,15,53,0.01)] ${
           sidebarCollapsed ? "w-20" : "w-72"
         } ${mobileMenuOpen ? "translate-x-0" : "-translate-x-full"} lg:translate-x-0`}
       >
+        {/* Floating border collapse button */}
+        <Button
+          variant="outline"
+          size="icon"
+          onClick={() => setSidebarCollapsed(!sidebarCollapsed)}
+          className="absolute -right-3 top-5 z-50 h-6 w-6 rounded-full border border-navy-100/80 bg-white p-0 text-navy-950/70 shadow-[0_2px_8px_-1px_rgba(3,15,53,0.08)] hover:bg-[#FB5535]/5 hover:text-[#FB5535] hidden lg:flex items-center justify-center transition-all duration-200"
+        >
+          {sidebarCollapsed ? <ChevronRight size={12} /> : <ChevronLeft size={12} />}
+        </Button>
+
         <div className="flex h-full flex-col">
-          {/* Logo & Collapse Button */}
-          <div className="flex h-16 items-center justify-between border-b border-border px-4">
-            {!sidebarCollapsed && (
-              <Link to="/" className="flex items-center gap-2">
-                <span className="text-xl font-bold text-gradient-brand">TMaaS</span>
+          {/* Logo Container */}
+          <div className={`flex h-16 items-center border-b border-navy-100/60 px-6 ${
+            sidebarCollapsed ? "justify-center" : "justify-between"
+          }`}>
+            {sidebarCollapsed ? (
+              <Link
+                to="/"
+                className="flex items-center justify-center transition-opacity hover:opacity-80"
+              >
+                <span className="grid h-7 w-7 place-items-center rounded-md bg-orange-500 text-white shadow-[var(--glow-orange-sm)]">
+                  <span className="font-mono text-[11px] font-bold">DQ</span>
+                </span>
+              </Link>
+            ) : (
+              <Link
+                to="/"
+                className="flex items-center gap-2 font-semibold tracking-tight transition-opacity hover:opacity-80"
+              >
+                <span className="grid h-7 w-7 place-items-center rounded-md bg-orange-500 text-white shadow-[var(--glow-orange-sm)]">
+                  <span className="font-mono text-[11px] font-bold">DQ</span>
+                </span>
+                <span className="text-orange-500 font-heading text-lg">
+                  TMaaS
+                </span>
               </Link>
             )}
-            <Button
-              variant="ghost"
-              size="icon"
-              onClick={() => setSidebarCollapsed(!sidebarCollapsed)}
-              className="hidden lg:flex"
-            >
-              {sidebarCollapsed ? <ChevronRight size={18} /> : <ChevronLeft size={18} />}
-            </Button>
           </div>
 
           {/* Organization Selector - Only for Client Role */}
           {user.role === 'client' && (
-            <div className="border-b border-border p-4">
+            <div className="border-b border-navy-100/60 p-4">
               {sidebarCollapsed ? (
-                <div className="flex justify-center">
-                  <Building2 size={20} className="text-muted-foreground" />
+                <div className="flex justify-center py-1">
+                  <Select value={selectedOrg} onValueChange={handleOrgChange}>
+                    <SelectTrigger className="border border-navy-100/50 bg-white/40 hover:bg-white text-navy-950 focus:ring-[#FB5535] rounded-xl hover:border-navy-200/50 transition-all shadow-sm h-9 w-9 p-0 flex items-center justify-center">
+                      <Building2 size={16} className="text-[#030F35]/50 hover:text-[#FB5535] transition-colors" />
+                    </SelectTrigger>
+                    <SelectContent side="right" sideOffset={12} className="border-navy-100 bg-white/95 backdrop-blur-xl">
+                      {mockOrganizations.map((org) => (
+                        <SelectItem key={org.id} value={org.id} className="focus:bg-[#FB5535]/5 focus:text-[#FB5535]">
+                          {org.name}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
                 </div>
               ) : (
                 <div>
-                  <label className="mb-2 block text-xs font-medium text-muted-foreground">
+                  <label className="mb-1.5 block text-[10px] font-bold uppercase tracking-widest text-[#030F35]/40">
                     Organization
                   </label>
                   <Select value={selectedOrg} onValueChange={handleOrgChange}>
-                    <SelectTrigger>
+                    <SelectTrigger className="border-navy-100/80 bg-white/50 hover:bg-white text-navy-950 focus:ring-[#FB5535] rounded-xl hover:border-navy-200 transition-all shadow-sm h-9">
                       <SelectValue />
                     </SelectTrigger>
-                    <SelectContent>
+                    <SelectContent className="border-navy-100 bg-white/95 backdrop-blur-xl">
                       {mockOrganizations.map((org) => (
-                        <SelectItem key={org.id} value={org.id}>
+                        <SelectItem key={org.id} value={org.id} className="focus:bg-[#FB5535]/5 focus:text-[#FB5535]">
                           {org.name}
                         </SelectItem>
                       ))}
@@ -303,12 +336,12 @@ const DashboardLayout = ({ children }: DashboardLayoutProps) => {
           )}
 
           {/* Navigation */}
-          <nav className="flex-1 overflow-y-auto p-4">
+          <nav className="flex-1 overflow-y-auto py-6 px-4">
             <div className="space-y-6">
               {navigationItems.map((group, index) => (
                 <div key={group.group || index}>
                   {!sidebarCollapsed && group.group && (
-                    <h3 className="mb-2 px-2 text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+                    <h3 className="mb-2 px-3 text-[10px] font-bold uppercase tracking-widest text-[#030F35]/40">
                       {group.group}
                     </h3>
                   )}
@@ -318,23 +351,33 @@ const DashboardLayout = ({ children }: DashboardLayoutProps) => {
                       const active = isActive(item.path);
                       
                       return (
-                        <Link key={item.path} to={item.path}>
+                        <Link key={item.path} to={item.path} className="group block">
                           <motion.div
-                            whileHover={{ x: 2 }}
-                            className={`flex items-center gap-3 rounded-lg px-3 py-2 transition-colors ${
-                              active
-                                ? "bg-primary/10 text-primary"
-                                : "text-muted-foreground hover:bg-accent hover:text-foreground"
-                            } ${sidebarCollapsed ? "justify-center" : ""}`}
+                            whileHover={{ scale: sidebarCollapsed ? 1.05 : 1, x: sidebarCollapsed ? 0 : 2 }}
+                            className={`flex items-center transition-all duration-200 ${
+                              sidebarCollapsed
+                                ? `mx-auto flex h-10 w-10 items-center justify-center rounded-xl transition-all duration-200 ${
+                                    active
+                                      ? "bg-[#FB5535]/10 text-[#FB5535]"
+                                      : "text-navy-950/70 hover:bg-[#FB5535]/5 hover:text-[#FB5535]"
+                                  }`
+                                : `gap-3 px-3 py-2.5 rounded-xl ${
+                                    active
+                                      ? "bg-[#FB5535]/10 text-[#FB5535] font-semibold"
+                                      : "text-navy-950/70 hover:bg-[#FB5535]/5 hover:text-[#FB5535]"
+                                  }`
+                            }`}
                           >
-                            <Icon size={20} />
+                            <Icon size={18} className={`transition-colors duration-200 ${
+                              active ? "text-[#FB5535]" : "text-navy-950/60 group-hover:text-[#FB5535]"
+                            }`} />
                             {!sidebarCollapsed && (
                               <>
-                                <span className="flex-1 text-sm font-medium">{item.name}</span>
+                                <span className="flex-1 text-sm">{item.name}</span>
                                 {item.badge && (
-                                  <Badge variant="secondary" className="h-5 min-w-5 px-1.5 text-xs">
+                                  <span className="ml-auto mr-2 flex h-4 min-w-4 items-center justify-center rounded-full bg-[#FB5535]/12 px-1.5 text-[10px] font-semibold text-[#FB5535]">
                                     {item.badge}
-                                  </Badge>
+                                  </span>
                                 )}
                               </>
                             )}
@@ -349,56 +392,59 @@ const DashboardLayout = ({ children }: DashboardLayoutProps) => {
           </nav>
 
           {/* User Profile */}
-          <div className="border-t border-border p-4">
+          <div className="border-t border-navy-100/60 p-4">
             {sidebarCollapsed ? (
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
-                  <Button variant="ghost" size="icon" className="w-full">
+                  <button
+                    type="button"
+                    className="mx-auto flex h-10 w-10 items-center justify-center rounded-xl text-navy-950/70 outline-none transition-colors hover:bg-[#FB5535]/5 hover:text-[#FB5535] focus-visible:ring-2 focus-visible:ring-[#FB5535]/30"
+                  >
                     <Avatar className="h-8 w-8">
-                      <AvatarFallback className="bg-primary text-primary-foreground text-xs">
+                      <AvatarFallback className="bg-orange-500 text-white font-semibold text-xs">
                         {user.avatar}
                       </AvatarFallback>
                     </Avatar>
-                  </Button>
+                  </button>
                 </DropdownMenuTrigger>
-                <DropdownMenuContent align="end" className="w-56">
+                <DropdownMenuContent side="right" sideOffset={12} className="w-56 border-navy-100 bg-white/95 backdrop-blur-xl">
                   <DropdownMenuLabel>
                     <div className="flex flex-col">
-                      <span className="text-sm font-medium">{user.name}</span>
-                      <span className="text-xs text-muted-foreground">{user.email}</span>
+                      <span className="text-sm font-semibold text-[#030F35]">{user.name}</span>
+                      <span className="text-xs text-[#030F35]/50">{user.email}</span>
                     </div>
                   </DropdownMenuLabel>
-                  <DropdownMenuSeparator />
-                  <DropdownMenuItem onClick={() => setUserRole("client")}>
+                  <DropdownMenuSeparator className="bg-navy-100/60" />
+                  <DropdownMenuItem onClick={() => setUserRole("client")} className="focus:bg-[#FB5535]/5 focus:text-[#FB5535]">
                     <User size={16} className="mr-2" />
                     Switch to Client
                   </DropdownMenuItem>
-                  <DropdownMenuItem onClick={() => setUserRole("dq_delivery_lead")}>
+                  <DropdownMenuItem onClick={() => setUserRole("dq_delivery_lead")} className="focus:bg-[#FB5535]/5 focus:text-[#FB5535]">
                     <User size={16} className="mr-2" />
                     Switch to DQ Delivery
                   </DropdownMenuItem>
-                  <DropdownMenuItem onClick={() => setUserRole("dq_portfolio_oversight")}>
+                  <DropdownMenuItem onClick={() => setUserRole("dq_portfolio_oversight")} className="focus:bg-[#FB5535]/5 focus:text-[#FB5535]">
                     <User size={16} className="mr-2" />
                     Switch to Oversight
                   </DropdownMenuItem>
-                  <DropdownMenuItem onClick={() => setUserRole("dq_finance")}>
+                  <DropdownMenuItem onClick={() => setUserRole("dq_finance")} className="focus:bg-[#FB5535]/5 focus:text-[#FB5535]">
                     <User size={16} className="mr-2" />
                     Switch to Finance
                   </DropdownMenuItem>
-                  <DropdownMenuItem onClick={() => setUserRole("dq_support")}>
+                  <DropdownMenuItem onClick={() => setUserRole("dq_support")} className="focus:bg-[#FB5535]/5 focus:text-[#FB5535]">
                     <User size={16} className="mr-2" />
                     Switch to Support
                   </DropdownMenuItem>
-                  <DropdownMenuItem>
+                  <DropdownMenuItem className="focus:bg-[#FB5535]/5 focus:text-[#FB5535]">
                     <User size={16} className="mr-2" />
                     Profile
                   </DropdownMenuItem>
-                  <DropdownMenuItem>
+                  <DropdownMenuItem className="focus:bg-[#FB5535]/5 focus:text-[#FB5535]">
                     <Settings size={16} className="mr-2" />
                     Settings
                   </DropdownMenuItem>
-                  <DropdownMenuSeparator />
-                  <DropdownMenuItem className="text-destructive">
+                  <DropdownMenuSeparator className="bg-navy-100/60" />
+                  <DropdownMenuItem className="text-destructive focus:bg-destructive/5 focus:text-destructive">
                     <LogOut size={16} className="mr-2" />
                     Sign Out
                   </DropdownMenuItem>
@@ -407,56 +453,59 @@ const DashboardLayout = ({ children }: DashboardLayoutProps) => {
             ) : (
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
-                  <Button variant="ghost" className="w-full justify-start gap-3 px-3">
+                  <button
+                    type="button"
+                    className="flex w-full items-center gap-3 rounded-xl px-3 py-2.5 text-left text-navy-950/70 outline-none transition-colors hover:bg-[#FB5535]/5 hover:text-[#FB5535] focus-visible:ring-2 focus-visible:ring-[#FB5535]/30"
+                  >
                     <Avatar className="h-8 w-8">
-                      <AvatarFallback className="bg-primary text-primary-foreground text-xs">
+                      <AvatarFallback className="bg-orange-500 text-white font-semibold text-xs">
                         {user.avatar}
                       </AvatarFallback>
                     </Avatar>
-                    <div className="flex flex-1 flex-col items-start text-left">
-                      <span className="text-sm font-medium">{user.name}</span>
-                      <span className="text-xs text-muted-foreground">{user.roleTitle}</span>
+                    <div className="flex min-w-0 flex-1 flex-col items-start">
+                      <span className="truncate text-sm font-semibold text-[#030F35]">{user.name}</span>
+                      <span className="truncate text-[10px] font-medium uppercase tracking-wider text-navy-950/50">{user.roleTitle}</span>
                     </div>
-                  </Button>
+                  </button>
                 </DropdownMenuTrigger>
-                <DropdownMenuContent align="end" className="w-56">
+                <DropdownMenuContent align="end" className="w-56 border-navy-100 bg-white/95 backdrop-blur-xl">
                   <DropdownMenuLabel>
                     <div className="flex flex-col">
-                      <span className="text-sm font-medium">{user.name}</span>
-                      <span className="text-xs text-muted-foreground">{user.email}</span>
+                      <span className="text-sm font-semibold text-[#030F35]">{user.name}</span>
+                      <span className="text-xs text-[#030F35]/50">{user.email}</span>
                     </div>
                   </DropdownMenuLabel>
-                  <DropdownMenuSeparator />
-                  <DropdownMenuItem onClick={() => setUserRole("client")}>
+                  <DropdownMenuSeparator className="bg-navy-100/60" />
+                  <DropdownMenuItem onClick={() => setUserRole("client")} className="focus:bg-[#FB5535]/5 focus:text-[#FB5535]">
                     <User size={16} className="mr-2" />
                     Switch to Client
                   </DropdownMenuItem>
-                  <DropdownMenuItem onClick={() => setUserRole("dq_delivery_lead")}>
+                  <DropdownMenuItem onClick={() => setUserRole("dq_delivery_lead")} className="focus:bg-[#FB5535]/5 focus:text-[#FB5535]">
                     <User size={16} className="mr-2" />
                     Switch to DQ Delivery
                   </DropdownMenuItem>
-                  <DropdownMenuItem onClick={() => setUserRole("dq_portfolio_oversight")}>
+                  <DropdownMenuItem onClick={() => setUserRole("dq_portfolio_oversight")} className="focus:bg-[#FB5535]/5 focus:text-[#FB5535]">
                     <User size={16} className="mr-2" />
                     Switch to Oversight
                   </DropdownMenuItem>
-                  <DropdownMenuItem onClick={() => setUserRole("dq_finance")}>
+                  <DropdownMenuItem onClick={() => setUserRole("dq_finance")} className="focus:bg-[#FB5535]/5 focus:text-[#FB5535]">
                     <User size={16} className="mr-2" />
                     Switch to Finance
                   </DropdownMenuItem>
-                  <DropdownMenuItem onClick={() => setUserRole("dq_support")}>
+                  <DropdownMenuItem onClick={() => setUserRole("dq_support")} className="focus:bg-[#FB5535]/5 focus:text-[#FB5535]">
                     <User size={16} className="mr-2" />
                     Switch to Support
                   </DropdownMenuItem>
-                  <DropdownMenuItem>
+                  <DropdownMenuItem className="focus:bg-[#FB5535]/5 focus:text-[#FB5535]">
                     <User size={16} className="mr-2" />
                     Profile
                   </DropdownMenuItem>
-                  <DropdownMenuItem>
+                  <DropdownMenuItem className="focus:bg-[#FB5535]/5 focus:text-[#FB5535]">
                     <Settings size={16} className="mr-2" />
                     Settings
                   </DropdownMenuItem>
-                  <DropdownMenuSeparator />
-                  <DropdownMenuItem className="text-destructive">
+                  <DropdownMenuSeparator className="bg-navy-100/60" />
+                  <DropdownMenuItem className="text-destructive focus:bg-destructive/5 focus:text-destructive">
                     <LogOut size={16} className="mr-2" />
                     Sign Out
                   </DropdownMenuItem>
@@ -478,22 +527,41 @@ const DashboardLayout = ({ children }: DashboardLayoutProps) => {
       {/* Main Content */}
       <div className={`flex-1 transition-all duration-300 ${sidebarCollapsed ? "lg:ml-20" : "lg:ml-72"}`}>
         {/* Top Bar */}
-        <header className="sticky top-0 z-20 flex h-16 items-center justify-between border-b border-border bg-card px-6">
+        <header className="sticky top-0 z-20 flex h-16 items-center gap-3 border-b border-navy-100/60 bg-white/80 px-4 backdrop-blur-xl backdrop-saturate-150 lg:gap-4 lg:px-6">
           <Button
             variant="ghost"
             size="icon"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="lg:hidden"
+            className="shrink-0 text-navy-950/70 hover:bg-[#FB5535]/5 hover:text-[#FB5535] lg:hidden"
           >
             <Menu size={20} />
           </Button>
 
-          <div className="flex items-center gap-4">
-            <ContextSwitcher stage="dashboard" className="hidden md:inline-flex" />
-            <Button variant="ghost" size="icon" className="relative">
-              <Bell size={20} />
-              <span className="absolute right-1.5 top-1.5 h-2 w-2 rounded-full bg-destructive" />
-            </Button>
+          <div className="relative min-w-0 flex-1">
+            <Search
+              size={16}
+              className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-navy-950/40"
+            />
+            <input
+              type="search"
+              placeholder="Search anything..."
+              className="h-10 w-full rounded-full border border-navy-100/80 bg-navy-50/30 pl-11 pr-16 text-sm text-navy-950 placeholder:text-navy-950/40 outline-none transition-colors focus:border-orange-500/40 focus:bg-white focus:ring-2 focus:ring-orange-500/20"
+            />
+            <kbd className="pointer-events-none absolute right-3 top-1/2 hidden -translate-y-1/2 items-center rounded-md border border-navy-100/80 bg-white px-1.5 py-0.5 font-mono text-[10px] font-medium text-navy-950/50 sm:inline-flex">
+              ⌘K
+            </kbd>
+          </div>
+
+          <div className="flex shrink-0 items-center gap-2 sm:gap-3">
+            <button
+              type="button"
+              className="relative flex h-10 w-10 items-center justify-center rounded-full text-navy-950/60 outline-none transition-colors hover:bg-navy-50/80 hover:text-navy-950 focus-visible:ring-2 focus-visible:ring-orange-500/30"
+              aria-label="Notifications"
+            >
+              <Bell size={20} strokeWidth={1.75} />
+              <span className="absolute right-2 top-2 h-2 w-2 rounded-full bg-[#FB5535]" />
+            </button>
+            <ContextSwitcher stage="dashboard" variant="pill" />
           </div>
         </header>
 
@@ -524,7 +592,7 @@ const DashboardLayout = ({ children }: DashboardLayoutProps) => {
                     <Brain size={14} className="text-white" />
                   </div>
                   <div>
-                    <p className="text-sm font-medium text-foreground">Need help with your engagements?</p>
+                    <p className="text-sm font-medium text-foreground">Need help with your projects?</p>
                     <p className="mt-1 text-xs text-muted-foreground">
                       Chat with Transact.AI for personalized guidance on your transformation journey
                     </p>

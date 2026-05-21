@@ -1220,7 +1220,7 @@ const EngagementDetail = () => {
         <Link to="/dashboard/services">
           <Button variant="ghost" className="gap-2">
             <ArrowLeft size={16} />
-            Back to Engagements
+            Back to Projects
           </Button>
         </Link>
 
@@ -1250,7 +1250,7 @@ const EngagementDetail = () => {
                 </div>
               </div>
               <p className="text-sm text-muted-foreground mb-4">
-                Engagement ID: {mockEngagement.id}
+                Project ID: {mockEngagement.id}
               </p>
 
               {/* Metadata Grid */}
@@ -2656,7 +2656,7 @@ const EngagementDetail = () => {
               <div>
                 <h2 className="text-xl font-semibold text-foreground">Stakeholder Management</h2>
                 <p className="text-sm text-muted-foreground">
-                  Identify and manage key stakeholders for this engagement
+                  Identify and manage key stakeholders for this project
                 </p>
               </div>
               <Button onClick={() => setShowAddStakeholder(true)} className="gap-2">
@@ -2675,7 +2675,7 @@ const EngagementDetail = () => {
                       <TableHead>Position</TableHead>
                       <TableHead>Influence</TableHead>
                       <TableHead>Interest</TableHead>
-                      <TableHead>Engagement Strategy</TableHead>
+                      <TableHead>Project Strategy</TableHead>
                       <TableHead>Last Interaction</TableHead>
                       <TableHead className="text-right">Actions</TableHead>
                     </TableRow>
@@ -3472,7 +3472,7 @@ const EngagementDetail = () => {
             <Card>
               <CardHeader>
                 <CardTitle>Reports</CardTitle>
-                <CardDescription>Generate and view engagement reports</CardDescription>
+                <CardDescription>Generate and view project reports</CardDescription>
               </CardHeader>
               <CardContent>
                 <p className="text-muted-foreground">Reports view coming soon...</p>
@@ -3805,7 +3805,7 @@ const EngagementDetail = () => {
               <DialogDescription>
                 {editingMilestone
                   ? "Update milestone details and timeline"
-                  : "Create a new milestone for this engagement"}
+                  : "Create a new milestone for this project"}
               </DialogDescription>
             </DialogHeader>
             <div className="space-y-4 py-4">
@@ -4555,8 +4555,8 @@ const EngagementDetail = () => {
               </DialogTitle>
               <DialogDescription>
                 {editingStakeholder
-                  ? "Update stakeholder information and engagement strategy"
-                  : "Add a new stakeholder to this engagement"}
+                  ? "Update stakeholder information and project strategy"
+                  : "Add a new stakeholder to this project"}
               </DialogDescription>
             </DialogHeader>
             <div className="space-y-4 py-4">
@@ -4636,13 +4636,13 @@ const EngagementDetail = () => {
                       <SelectItem value="Low">Low</SelectItem>
                     </SelectContent>
                   </Select>
-                  <p className="text-xs text-muted-foreground">How invested they are in the engagement</p>
+                  <p className="text-xs text-muted-foreground">How invested they are in the project</p>
                 </div>
               </div>
 
               <div className="space-y-2">
                 <div className="flex items-center justify-between">
-                  <Label>Recommended Engagement Strategy</Label>
+                  <Label>Recommended Project Strategy</Label>
                   <Badge variant="outline" className="text-xs">
                     {stakeholderForm.influence === "High" && stakeholderForm.interest === "High" && "Manage Closely"}
                     {stakeholderForm.influence === "High" && stakeholderForm.interest !== "High" && "Keep Satisfied"}

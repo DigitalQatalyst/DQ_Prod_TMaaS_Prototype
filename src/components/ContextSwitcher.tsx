@@ -1,6 +1,15 @@
 import { useMemo } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { ArrowRightLeft, Compass, LayoutDashboard, Landmark, Shield, CreditCard, Headphones } from "lucide-react";
+import {
+  ArrowRightLeft,
+  ChevronDown,
+  Compass,
+  LayoutDashboard,
+  Landmark,
+  Shield,
+  CreditCard,
+  Headphones,
+} from "lucide-react";
 import { useAuth, type UserRole } from "@/contexts/AuthContext";
 import { Button } from "@/components/ui/button";
 import {
@@ -33,10 +42,12 @@ const roleMeta: Record<UserRole, { label: string; icon: typeof LayoutDashboard }
 
 const ContextSwitcher = ({
   stage = "auto",
+  variant = "default",
   scrolled = false,
   className,
 }: {
   stage?: "auto" | "marketing" | "dashboard";
+  variant?: "default" | "pill";
   scrolled?: boolean;
   className?: string;
 }) => {
@@ -114,20 +125,55 @@ const ContextSwitcher = ({
         ].join(" ")
       : "rounded-full";
 
+  const usePillTrigger = variant === "pill" || effectiveStage === "dashboard";
+
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button
-          variant={effectiveStage === "marketing" ? "ghost" : "outline"}
-          size="sm"
-          className={[triggerClassName, "gap-2", className].filter(Boolean).join(" ")}
-        >
-          <ArrowRightLeft size={16} />
-          <span className="hidden sm:inline">Context:</span>
-          <span className="font-medium">{currentLabel}</span>
-        </Button>
+        {usePillTrigger ? (
+          <button
+            type="button"
+            className={[
+              "flex max-w-[min(100%,20rem)] items-center gap-2 rounded-full border border-navy-100/80 bg-navy-50/40 py-1 pl-1 pr-3 outline-none transition-colors hover:bg-navy-50/70 focus-visible:ring-2 focus-visible:ring-orange-500/30 sm:max-w-xs md:max-w-sm lg:max-w-md",
+              className,
+            ]
+              .filter(Boolean)
+              .join(" ")}
+          >
+            <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-orange-500 text-xs font-semibold text-white">
+              {user.avatar}
+            </span>
+            <span className="hidden min-w-0 truncate text-sm text-navy-950/60 sm:inline">
+              Viewing as:{" "}
+              <span className="font-semibold text-navy-950">{user.name}</span>
+              <span className="text-navy-950/50"> — {user.roleTitle}</span>
+            </span>
+            <ChevronDown size={16} className="shrink-0 text-navy-950/40" />
+          </button>
+        ) : (
+          <Button
+            variant={effectiveStage === "marketing" ? "ghost" : "outline"}
+            size="sm"
+            className={[triggerClassName, "gap-2", className].filter(Boolean).join(" ")}
+          >
+            <ArrowRightLeft size={16} />
+            <span className="hidden sm:inline">Context:</span>
+            <span className="font-medium">{currentLabel}</span>
+          </Button>
+        )}
       </DropdownMenuTrigger>
-      <DropdownMenuContent align="end" className="w-[280px]">
+      <DropdownMenuContent align="end" className="w-[280px] border-navy-100 bg-white/95 backdrop-blur-xl">
+        {usePillTrigger && (
+          <>
+            <DropdownMenuLabel>
+              <div className="flex flex-col">
+                <span className="text-sm font-semibold text-navy-950">{user.name}</span>
+                <span className="text-xs text-navy-950/50">{user.email}</span>
+              </div>
+            </DropdownMenuLabel>
+            <DropdownMenuSeparator className="bg-navy-100/60" />
+          </>
+        )}
         <DropdownMenuLabel>Mock journey switcher</DropdownMenuLabel>
         <DropdownMenuSeparator />
         {targets.map((t) => {

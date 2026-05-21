@@ -26,7 +26,7 @@ import { useAuth } from "@/contexts/AuthContext";
 // Mock data
 const stats = [
   {
-    label: "Active Engagements",
+    label: "Active Projects",
     value: "3",
     description: "Currently active",
     icon: Package,
@@ -96,7 +96,7 @@ const notifications = [
   {
     id: 4,
     type: "milestone",
-    title: "Engagement milestone completed",
+    title: "Project milestone completed",
     engagement: "Data Governance Platform",
     time: "2 days ago",
     icon: CheckCircle2,
@@ -269,7 +269,7 @@ const Overview = () => {
               <CardHeader>
                 <div className="flex items-center justify-between">
                   <div>
-                    <CardTitle>Active Engagements</CardTitle>
+                    <CardTitle>Active Projects</CardTitle>
                     <CardDescription>Ongoing transformation initiatives</CardDescription>
                   </div>
                   <Link to="/dashboard/services">
