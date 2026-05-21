@@ -19,6 +19,7 @@ import ServiceOrderDetail from "./pages/dashboard/ServiceOrderDetail";
 import CustomerServiceOrders from "./pages/dashboard/customer/ServiceOrders";
 import CustomerServiceOrderDetail from "./pages/dashboard/customer/ServiceOrderDetail";
 import Inbox from "./pages/dashboard/Inbox";
+import Notifications from "./pages/dashboard/Notifications";
 import OrganisationAdmin from "./pages/dashboard/OrganisationAdmin";
 import Calendar from "./pages/dashboard/Calendar";
 import Documents from "./pages/dashboard/Documents";
@@ -92,6 +93,7 @@ const App = () => (
           <Route path="/dashboard/profile" element={<OrganisationProfile />} />
           <Route path="/dashboard/org-admin" element={<OrganisationAdmin />} />
           <Route path="/dashboard/inbox" element={<Inbox />} />
+          <Route path="/dashboard/notifications" element={<Notifications />} />
           <Route path="/dashboard/calendar" element={<Calendar />} />
           <Route path="/dashboard/documents" element={<Documents />} />
           <Route path="/dashboard/settings" element={<Settings />} />

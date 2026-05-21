@@ -14,8 +14,7 @@ import {
   ChevronRight,
   Building2,
   Bell,
-  User,
-  LogOut,
+  BellRing,
   Menu,
   Calendar,
   FileText,
@@ -29,16 +28,7 @@ import {
 } from "lucide-react";
 import TransactAIMode01 from "@/components/TransactAIMode01";
 import { Button } from "@/components/ui/button";
-import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import ContextSwitcher from "@/components/ContextSwitcher";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
 import {
   Select,
   SelectContent,
@@ -61,6 +51,7 @@ const clientNavigationItems = [
       { name: "Active Projects", icon: Package, path: "/dashboard/services", badge: 3 },
       { name: "Service Orders", icon: ShoppingCart, path: "/dashboard/customer/orders", badge: 6 },
       { name: "Calendar", icon: Calendar, path: "/dashboard/calendar", badge: null },
+      { name: "Notifications", icon: BellRing, path: "/dashboard/notifications", badge: 2 },
       { name: "Inbox", icon: MessageSquare, path: "/dashboard/inbox", badge: 5 },
     ],
   },
@@ -95,6 +86,7 @@ const dqNavigationItems = [
       { name: "Projects", icon: Package, path: "/dashboard/services", badge: 3 },
       { name: "Service Orders", icon: ShoppingCart, path: "/dashboard/orders", badge: 6 },
       { name: "Calendar", icon: Calendar, path: "/dashboard/calendar", badge: null },
+      { name: "Notifications", icon: BellRing, path: "/dashboard/notifications", badge: 2 },
       { name: "Inbox", icon: MessageSquare, path: "/dashboard/inbox", badge: 2 },
     ],
   },
@@ -131,6 +123,7 @@ const dqPortfolioNavigationItems = [
     items: [
       { name: "Projects", icon: Package, path: "/dashboard/services", badge: 3 },
       { name: "Workflow Queue", icon: Bell, path: "/dashboard/dq/queue", badge: 8 },
+      { name: "Notifications", icon: BellRing, path: "/dashboard/notifications", badge: 2 },
       { name: "Inbox", icon: MessageSquare, path: "/dashboard/inbox", badge: 2 },
     ],
   },
@@ -153,6 +146,7 @@ const dqFinanceNavigationItems = [
     items: [
       { name: "Service Orders", icon: ShoppingCart, path: "/dashboard/orders", badge: 6 },
       { name: "Invoices", icon: FileText, path: "/dashboard/dq/invoices", badge: 4 },
+      { name: "Notifications", icon: BellRing, path: "/dashboard/notifications", badge: 1 },
       { name: "Inbox", icon: MessageSquare, path: "/dashboard/inbox", badge: 1 },
     ],
   },
@@ -175,6 +169,7 @@ const dqSupportNavigationItems = [
     items: [
       { name: "Workflow Queue", icon: Bell, path: "/dashboard/dq/queue", badge: 12 },
       { name: "Onboarding", icon: Users, path: "/dashboard/dq/onboarding", badge: 3 },
+      { name: "Notifications", icon: BellRing, path: "/dashboard/notifications", badge: 2 },
       { name: "Inbox", icon: MessageSquare, path: "/dashboard/inbox", badge: 4 },
     ],
   },
@@ -197,7 +192,7 @@ interface DashboardLayoutProps {
 }
 
 const DashboardLayout = ({ children }: DashboardLayoutProps) => {
-  const { user, setUserRole, setUserOrganization } = useAuth();
+  const { user, setUserOrganization } = useAuth();
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [selectedOrg, setSelectedOrg] = useState(
@@ -390,129 +385,6 @@ const DashboardLayout = ({ children }: DashboardLayoutProps) => {
               ))}
             </div>
           </nav>
-
-          {/* User Profile */}
-          <div className="border-t border-navy-100/60 p-4">
-            {sidebarCollapsed ? (
-              <DropdownMenu>
-                <DropdownMenuTrigger asChild>
-                  <button
-                    type="button"
-                    className="mx-auto flex h-10 w-10 items-center justify-center rounded-xl text-navy-950/70 outline-none transition-colors hover:bg-[#FB5535]/5 hover:text-[#FB5535] focus-visible:ring-2 focus-visible:ring-[#FB5535]/30"
-                  >
-                    <Avatar className="h-8 w-8">
-                      <AvatarFallback className="bg-orange-500 text-white font-semibold text-xs">
-                        {user.avatar}
-                      </AvatarFallback>
-                    </Avatar>
-                  </button>
-                </DropdownMenuTrigger>
-                <DropdownMenuContent side="right" sideOffset={12} className="w-56 border-navy-100 bg-white/95 backdrop-blur-xl">
-                  <DropdownMenuLabel>
-                    <div className="flex flex-col">
-                      <span className="text-sm font-semibold text-[#030F35]">{user.name}</span>
-                      <span className="text-xs text-[#030F35]/50">{user.email}</span>
-                    </div>
-                  </DropdownMenuLabel>
-                  <DropdownMenuSeparator className="bg-navy-100/60" />
-                  <DropdownMenuItem onClick={() => setUserRole("client")} className="focus:bg-[#FB5535]/5 focus:text-[#FB5535]">
-                    <User size={16} className="mr-2" />
-                    Switch to Client
-                  </DropdownMenuItem>
-                  <DropdownMenuItem onClick={() => setUserRole("dq_delivery_lead")} className="focus:bg-[#FB5535]/5 focus:text-[#FB5535]">
-                    <User size={16} className="mr-2" />
-                    Switch to DQ Delivery
-                  </DropdownMenuItem>
-                  <DropdownMenuItem onClick={() => setUserRole("dq_portfolio_oversight")} className="focus:bg-[#FB5535]/5 focus:text-[#FB5535]">
-                    <User size={16} className="mr-2" />
-                    Switch to Oversight
-                  </DropdownMenuItem>
-                  <DropdownMenuItem onClick={() => setUserRole("dq_finance")} className="focus:bg-[#FB5535]/5 focus:text-[#FB5535]">
-                    <User size={16} className="mr-2" />
-                    Switch to Finance
-                  </DropdownMenuItem>
-                  <DropdownMenuItem onClick={() => setUserRole("dq_support")} className="focus:bg-[#FB5535]/5 focus:text-[#FB5535]">
-                    <User size={16} className="mr-2" />
-                    Switch to Support
-                  </DropdownMenuItem>
-                  <DropdownMenuItem className="focus:bg-[#FB5535]/5 focus:text-[#FB5535]">
-                    <User size={16} className="mr-2" />
-                    Profile
-                  </DropdownMenuItem>
-                  <DropdownMenuItem className="focus:bg-[#FB5535]/5 focus:text-[#FB5535]">
-                    <Settings size={16} className="mr-2" />
-                    Settings
-                  </DropdownMenuItem>
-                  <DropdownMenuSeparator className="bg-navy-100/60" />
-                  <DropdownMenuItem className="text-destructive focus:bg-destructive/5 focus:text-destructive">
-                    <LogOut size={16} className="mr-2" />
-                    Sign Out
-                  </DropdownMenuItem>
-                </DropdownMenuContent>
-              </DropdownMenu>
-            ) : (
-              <DropdownMenu>
-                <DropdownMenuTrigger asChild>
-                  <button
-                    type="button"
-                    className="flex w-full items-center gap-3 rounded-xl px-3 py-2.5 text-left text-navy-950/70 outline-none transition-colors hover:bg-[#FB5535]/5 hover:text-[#FB5535] focus-visible:ring-2 focus-visible:ring-[#FB5535]/30"
-                  >
-                    <Avatar className="h-8 w-8">
-                      <AvatarFallback className="bg-orange-500 text-white font-semibold text-xs">
-                        {user.avatar}
-                      </AvatarFallback>
-                    </Avatar>
-                    <div className="flex min-w-0 flex-1 flex-col items-start">
-                      <span className="truncate text-sm font-semibold text-[#030F35]">{user.name}</span>
-                      <span className="truncate text-[10px] font-medium uppercase tracking-wider text-navy-950/50">{user.roleTitle}</span>
-                    </div>
-                  </button>
-                </DropdownMenuTrigger>
-                <DropdownMenuContent align="end" className="w-56 border-navy-100 bg-white/95 backdrop-blur-xl">
-                  <DropdownMenuLabel>
-                    <div className="flex flex-col">
-                      <span className="text-sm font-semibold text-[#030F35]">{user.name}</span>
-                      <span className="text-xs text-[#030F35]/50">{user.email}</span>
-                    </div>
-                  </DropdownMenuLabel>
-                  <DropdownMenuSeparator className="bg-navy-100/60" />
-                  <DropdownMenuItem onClick={() => setUserRole("client")} className="focus:bg-[#FB5535]/5 focus:text-[#FB5535]">
-                    <User size={16} className="mr-2" />
-                    Switch to Client
-                  </DropdownMenuItem>
-                  <DropdownMenuItem onClick={() => setUserRole("dq_delivery_lead")} className="focus:bg-[#FB5535]/5 focus:text-[#FB5535]">
-                    <User size={16} className="mr-2" />
-                    Switch to DQ Delivery
-                  </DropdownMenuItem>
-                  <DropdownMenuItem onClick={() => setUserRole("dq_portfolio_oversight")} className="focus:bg-[#FB5535]/5 focus:text-[#FB5535]">
-                    <User size={16} className="mr-2" />
-                    Switch to Oversight
-                  </DropdownMenuItem>
-                  <DropdownMenuItem onClick={() => setUserRole("dq_finance")} className="focus:bg-[#FB5535]/5 focus:text-[#FB5535]">
-                    <User size={16} className="mr-2" />
-                    Switch to Finance
-                  </DropdownMenuItem>
-                  <DropdownMenuItem onClick={() => setUserRole("dq_support")} className="focus:bg-[#FB5535]/5 focus:text-[#FB5535]">
-                    <User size={16} className="mr-2" />
-                    Switch to Support
-                  </DropdownMenuItem>
-                  <DropdownMenuItem className="focus:bg-[#FB5535]/5 focus:text-[#FB5535]">
-                    <User size={16} className="mr-2" />
-                    Profile
-                  </DropdownMenuItem>
-                  <DropdownMenuItem className="focus:bg-[#FB5535]/5 focus:text-[#FB5535]">
-                    <Settings size={16} className="mr-2" />
-                    Settings
-                  </DropdownMenuItem>
-                  <DropdownMenuSeparator className="bg-navy-100/60" />
-                  <DropdownMenuItem className="text-destructive focus:bg-destructive/5 focus:text-destructive">
-                    <LogOut size={16} className="mr-2" />
-                    Sign Out
-                  </DropdownMenuItem>
-                </DropdownMenuContent>
-              </DropdownMenu>
-            )}
-          </div>
         </div>
       </aside>
 
@@ -553,14 +425,14 @@ const DashboardLayout = ({ children }: DashboardLayoutProps) => {
           </div>
 
           <div className="flex shrink-0 items-center gap-2 sm:gap-3">
-            <button
-              type="button"
+            <Link
+              to="/dashboard/notifications"
               className="relative flex h-10 w-10 items-center justify-center rounded-full text-navy-950/60 outline-none transition-colors hover:bg-navy-50/80 hover:text-navy-950 focus-visible:ring-2 focus-visible:ring-orange-500/30"
               aria-label="Notifications"
             >
               <Bell size={20} strokeWidth={1.75} />
               <span className="absolute right-2 top-2 h-2 w-2 rounded-full bg-[#FB5535]" />
-            </button>
+            </Link>
             <ContextSwitcher stage="dashboard" variant="pill" />
           </div>
         </header>
