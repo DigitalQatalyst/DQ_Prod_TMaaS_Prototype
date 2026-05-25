@@ -25,6 +25,7 @@ import {
   X,
   ShoppingCart,
   Search,
+  ShoppingBag,
 } from "lucide-react";
 import TransactAIMode01 from "@/components/TransactAIMode01";
 import { Button } from "@/components/ui/button";
@@ -43,24 +44,22 @@ const clientNavigationItems = [
     group: "",
     items: [
       { name: "Overview", icon: LayoutDashboard, path: "/dashboard/overview", badge: null },
+      { name: "Marketplace", icon: ShoppingBag, path: "/marketplace", badge: null },
     ],
   },
   {
     group: "WORKSPACE",
     items: [
-      { name: "Active Projects", icon: Package, path: "/dashboard/services", badge: 3 },
-      { name: "Service Orders", icon: ShoppingCart, path: "/dashboard/customer/orders", badge: 6 },
-      { name: "Calendar", icon: Calendar, path: "/dashboard/calendar", badge: null },
+      { name: "Engagements", icon: Package, path: "/dashboard/customer/orders", badge: 6 },
       { name: "Notifications", icon: BellRing, path: "/dashboard/notifications", badge: 2 },
       { name: "Inbox", icon: MessageSquare, path: "/dashboard/inbox", badge: 5 },
     ],
   },
   {
-    group: "ORGANISATION",
+    group: "ORGANIZATION",
     items: [
-      { name: "Organisation Profile", icon: Building2, path: "/dashboard/profile", badge: null },
-      { name: "Members & Roles", icon: Users, path: "/dashboard/org-admin", badge: null },
-      { name: "Documents", icon: FileText, path: "/dashboard/documents", badge: null },
+      { name: "Organization Profile", icon: Building2, path: "/dashboard/profile", badge: null },
+      { name: "Team", icon: Users, path: "/dashboard/org-admin", badge: null },
     ],
   },
   {
@@ -68,7 +67,6 @@ const clientNavigationItems = [
     items: [
       { name: "Settings", icon: Settings, path: "/dashboard/settings", badge: null },
       { name: "Support", icon: Headphones, path: "/dashboard/support", badge: null },
-      { name: "Help Centre", icon: HelpCircle, path: "/dashboard/help", badge: null },
     ],
   },
 ];
@@ -78,36 +76,16 @@ const dqNavigationItems = [
     group: "",
     items: [
       { name: "Dashboard", icon: LayoutDashboard, path: "/dashboard/overview", badge: null },
-    ],
-  },
-  {
-    group: "DELIVERY",
-    items: [
-      { name: "Projects", icon: Package, path: "/dashboard/services", badge: 3 },
-      { name: "Service Orders", icon: ShoppingCart, path: "/dashboard/orders", badge: 6 },
-      { name: "Calendar", icon: Calendar, path: "/dashboard/calendar", badge: null },
+      { name: "Delivery", icon: Package, path: "/dashboard/services", badge: 3 },
       { name: "Notifications", icon: BellRing, path: "/dashboard/notifications", badge: 2 },
       { name: "Inbox", icon: MessageSquare, path: "/dashboard/inbox", badge: 2 },
     ],
   },
   {
-    group: "CLIENTS",
+    group: "",
     items: [
       { name: "Organisations", icon: Building2, path: "/dashboard/organisations", badge: null },
-      { name: "Customer Users", icon: Users, path: "/dashboard/users", badge: null },
-    ],
-  },
-  {
-    group: "PLATFORM",
-    items: [
-      { name: "Service Catalogue", icon: BookOpen, path: "/dashboard/catalogue", badge: null },
-      { name: "Help Centre Content", icon: FileText, path: "/dashboard/help-content", badge: null },
       { name: "Settings", icon: Settings, path: "/dashboard/settings", badge: null },
-    ],
-  },
-  {
-    group: "SUPPORT",
-    items: [
       { name: "Support", icon: Headphones, path: "/dashboard/support", badge: null },
     ],
   },
@@ -213,7 +191,17 @@ const DashboardLayout = ({ children }: DashboardLayoutProps) => {
             : clientNavigationItems;
   const location = useLocation();
 
-  const isActive = (path: string) => location.pathname === path;
+  const isActive = (path: string) => {
+    const { pathname } = location;
+    if (path === "/dashboard/services") {
+      return (
+        pathname === path ||
+        pathname.startsWith("/dashboard/engagement") ||
+        pathname.startsWith("/dashboard/services/")
+      );
+    }
+    return pathname === path;
+  };
 
   // Handle organization change
   const handleOrgChange = (orgId: string) => {

@@ -60,16 +60,26 @@ const HeroSection = () => {
       <HeroSpotlight />
 
       <div className="relative z-10 mx-auto max-w-7xl px-6 text-center">
+        <motion.div
+          initial={{ opacity: 0, y: -8 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+          className="mb-6 inline-flex items-center gap-2 rounded-full border border-orange-500/20 bg-orange-500/10 px-4 py-1.5 text-xs font-semibold text-orange-700 backdrop-blur"
+        >
+          <Sparkles size={12} className="text-orange-500 animate-pulse" />
+          <span>Living AI-guided Transformation Marketplace</span>
+        </motion.div>
+
         <motion.h1
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
           className="mx-auto max-w-4xl font-heading text-balance text-4xl font-bold leading-[1.1] tracking-tight text-navy-950 md:text-6xl"
         >
-          Digital Transformation,
+          Launch your next growth phase
           <br />
           <span className="bg-gradient-to-r from-navy-950 via-orange-600 to-orange-500 bg-clip-text text-transparent">
-            simplified.
+            in weeks, not years.
           </span>
         </motion.h1>
 
@@ -79,9 +89,9 @@ const HeroSection = () => {
           transition={{ duration: 0.6, delay: 0.15 }}
           className="mx-auto mt-6 max-w-2xl text-base leading-relaxed text-gray-600 md:text-lg"
         >
-          Turn your real business problems into architecture-backed,
+          Browse, explore, and activate pre-scoped transformation roadmaps.
           <br className="hidden md:block" />
-          ready-to-launch transformation blueprints.
+          Powered by active marketplace intelligence and delivered by certified specialists.
         </motion.p>
 
         {/* Butler prompt (input-first, no faux-chat UI) */}
@@ -94,7 +104,7 @@ const HeroSection = () => {
           <div className="mt-6 rounded-[1.75rem] border border-navy-100 bg-white/70 p-3 shadow-2xl backdrop-blur-xl transition-all focus-within:shadow-[var(--glow-navy-md)]">
             <div className="flex items-end gap-2 relative">
               <div className="absolute left-4 top-4 text-orange-500">
-                <Sparkles size={20} />
+                <Sparkles size={20} className="animate-pulse" />
               </div>
               <div className="flex-1">
                 <label htmlFor="butler-prompt" className="sr-only">
@@ -105,7 +115,7 @@ const HeroSection = () => {
                   value={problem}
                   onChange={(e) => setProblem(e.target.value)}
                   onKeyPress={handleKeyPress}
-                  placeholder="Hi, I'm Butler. Describe what you're trying to improve..."
+                  placeholder="What business goal can we help you solve today? (e.g., 'Optimize digital sales' or 'Launch AI capabilities')..."
                   rows={2}
                   className="block w-full resize-none bg-transparent pl-12 pr-3 py-3 text-base leading-relaxed text-navy-950 placeholder:text-gray-500 focus:outline-none md:text-lg"
                 />
@@ -123,30 +133,36 @@ const HeroSection = () => {
           </div>
         </motion.div>
 
-        {/* Breadcrumbs - Butler's 4 transformation goals */}
+        {/* Breadcrumbs - Butler's 4 transformation goals with instant-trigger */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.6, delay: 0.45 }}
-          className="mt-6 flex flex-wrap items-center justify-center gap-2"
+          className="mt-8 flex flex-col items-center justify-center gap-3"
         >
-          {[
-            { text: "Improve customer experience", action: "Improve customer experience" },
-            { text: "Improve internal operations", action: "Improve internal operations" },
-            { text: "Unlock value from data", action: "Unlock value from data" },
-            { text: "Improve delivery speed / DevOps", action: "Improve delivery speed / DevOps" }
-          ].map((item) => (
-            <button
-              key={item.text}
-              onClick={() => {
-                setProblem(item.action);
-              }}
-              className="rounded-full border border-navy-100 bg-white/60 px-4 py-2 text-xs text-gray-700 backdrop-blur transition hover:border-navy-200 hover:bg-white hover:text-navy-950"
-            >
-              {item.text}
-            </button>
-          ))}
+          <span className="text-xs font-semibold text-gray-500 tracking-wider uppercase">Not sure where to start? Try one of our outcome goals:</span>
+          <div className="flex flex-wrap items-center justify-center gap-2">
+            {[
+              { text: "Launch AI Capabilities", action: "Launch AI Capabilities" },
+              { text: "Build Transformation Roadmap", action: "Build Transformation Roadmap" },
+              { text: "Optimize Customer Experience", action: "I want to improve customer experience" },
+              { text: "Deploy with Certified Specialists", action: "Deploy with Certified Specialists" }
+            ].map((item) => (
+              <button
+                key={item.text}
+                onClick={() => {
+                  setProblem(item.action);
+                  setIsDialogOpen(true);
+                }}
+                className="rounded-full border border-navy-100 bg-white/60 px-4 py-2.5 text-xs font-semibold text-gray-700 backdrop-blur transition hover:border-orange-500 hover:bg-orange-500/5 hover:text-orange-600 shadow-sm"
+              >
+                {item.text}
+              </button>
+            ))}
+          </div>
         </motion.div>
+
+
       </div>
 
       <DiagnoseDialog

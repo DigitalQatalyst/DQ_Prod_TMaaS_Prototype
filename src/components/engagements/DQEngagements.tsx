@@ -107,9 +107,9 @@ const DQEngagements = () => {
         {/* Header */}
         <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
           <div>
-            <h1 className="text-3xl font-bold text-foreground">Projects</h1>
+            <h1 className="text-3xl font-bold text-foreground">Delivery</h1>
             <p className="mt-1 text-muted-foreground">
-              Manage all client transformation projects across TMaaS
+              Manage active engagements and delivery governance across TMaaS
             </p>
           </div>
           <Button className="shrink-0 gap-2">
@@ -121,7 +121,7 @@ const DQEngagements = () => {
         <div className="w-full space-y-4">
           {/* Search bar and section header */}
           <div className="flex flex-col gap-4 border-b border-border pb-4 md:flex-row md:items-center md:justify-between">
-            <div className="text-lg font-semibold text-foreground">Active Projects</div>
+            <div className="text-lg font-semibold text-foreground">Active Engagements</div>
             
             {/* Global Search */}
             <div className="relative w-full md:max-w-md">

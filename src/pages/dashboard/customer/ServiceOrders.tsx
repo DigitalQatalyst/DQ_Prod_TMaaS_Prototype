@@ -39,7 +39,7 @@ const CustomerServiceOrders = () => {
 
   // Define stage order for sorting
   const stageOrder = {
-    "Payment Pending": 1,
+    "Awaiting Commercial Confirmation": 1,
     "Client Input Pending": 2,
     "Input in Review": 3,
     "In Delivery": 4,
@@ -71,7 +71,7 @@ const CustomerServiceOrders = () => {
 
   const getStageColor = (stage: string) => {
     switch (stage) {
-      case "Payment Pending":
+      case "Awaiting Commercial Confirmation":
         return "bg-yellow-100 text-yellow-800 border-yellow-200";
       case "Client Input Pending":
         return "bg-orange-100 text-orange-800 border-orange-200";
@@ -90,7 +90,7 @@ const CustomerServiceOrders = () => {
 
   const getStageIcon = (stage: string) => {
     switch (stage) {
-      case "Payment Pending":
+      case "Awaiting Commercial Confirmation":
         return <AlertCircle size={16} className="text-yellow-600" />;
       case "Client Input Pending":
         return <Clock size={16} className="text-orange-600" />;
@@ -108,7 +108,7 @@ const CustomerServiceOrders = () => {
   };
 
   const stages = [
-    "Payment Pending",
+    "Awaiting Commercial Confirmation",
     "Client Input Pending",
     "Input in Review",
     "In Delivery",
@@ -129,7 +129,7 @@ const CustomerServiceOrders = () => {
     return {
       total: customerOrders.length,
       active: customerOrders.filter(
-        (o) => !["Closed", "Payment Pending"].includes(o.stage)
+        (o) => !["Closed", "Awaiting Commercial Confirmation"].includes(o.stage)
       ).length,
       pendingAction: customerOrders.filter((o) =>
         ["Client Input Pending", "Deliverables Pending Review"].includes(o.stage)
@@ -143,7 +143,7 @@ const CustomerServiceOrders = () => {
       <div className="space-y-6">
         {/* Header */}
         <div>
-          <h1 className="text-3xl font-bold text-foreground">Service Orders</h1>
+          <h1 className="text-3xl font-bold text-foreground">Engagements</h1>
           <p className="text-muted-foreground mt-2">
             Track and manage your service engagements with DQ
           </p>
@@ -155,7 +155,7 @@ const CustomerServiceOrders = () => {
             <CardContent className="p-4">
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-sm text-muted-foreground">Total Orders</p>
+                  <p className="text-sm text-muted-foreground">Total Engagements</p>
                   <p className="text-2xl font-bold text-foreground">{stats.total}</p>
                 </div>
                 <div className="h-12 w-12 rounded-full bg-blue-100 flex items-center justify-center">
@@ -215,7 +215,7 @@ const CustomerServiceOrders = () => {
               <Search size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground" />
               <Input
                 type="text"
-                placeholder="Search orders..."
+                placeholder="Search engagements..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 className="pl-9"
@@ -295,11 +295,11 @@ const CustomerServiceOrders = () => {
             <Card>
               <CardContent className="flex flex-col items-center justify-center py-16">
                 <FileText size={48} className="text-muted-foreground/20 mb-4" />
-                <h3 className="text-lg font-semibold text-foreground mb-2">No orders found</h3>
+                <h3 className="text-lg font-semibold text-foreground mb-2">No engagements found</h3>
                 <p className="text-sm text-muted-foreground text-center max-w-md">
                   {hasActiveFilters
                     ? "Try adjusting your filters"
-                    : "You don't have any service orders yet"}
+                    : "You don't have any active engagements yet"}
                 </p>
                 {hasActiveFilters && (
                   <Button variant="outline" className="mt-4" onClick={clearAllFilters}>
@@ -388,8 +388,9 @@ const CustomerServiceOrders = () => {
                           <div>
                             <p className="text-xs text-muted-foreground">Progress</p>
                             <p className="font-medium text-foreground">
-                              {order.deliverables.filter((d) => d.status === "Accepted").length} /{" "}
-                              {order.deliverables.length} deliverables
+                              {order.deliverables.filter((d) => d.status === "Accepted").length === 0 
+                                ? `${order.deliverables.length} Deliverables Planned`
+                                : `${order.deliverables.filter((d) => d.status === "Accepted").length} of ${order.deliverables.length} Delivered`}
                             </p>
                           </div>
                         </div>
