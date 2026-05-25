@@ -45,8 +45,8 @@ const Navbar = () => {
             </span>
           </a>
           
-          <a href="/explore" className="hidden text-sm text-muted-foreground transition-colors hover:text-foreground md:block">
-            Explore
+          <a href="/marketplace" className="hidden text-sm text-muted-foreground transition-colors hover:text-foreground md:block">
+            Marketplace
           </a>
         </div>
 
@@ -71,7 +71,7 @@ const Navbar = () => {
             <div className="pt-1">
               <ContextSwitcher stage="marketing" scrolled />
             </div>
-            <a href="/explore" className="text-sm text-muted-foreground">Explore</a>
+            <a href="/marketplace" className="text-sm text-muted-foreground">Marketplace</a>
             <a href="/sign-in">
               <Button size="sm" className="mt-2 w-full rounded-full bg-orange-500 text-white shadow-[var(--glow-orange-sm)] hover:bg-orange-400">Get Started</Button>
             </a>

@@ -127,10 +127,11 @@ const DiagnoseDialog = ({ isOpen, onClose, initialProblem = "" }: DiagnoseDialog
   };
 
   const getGoalKey = (goal: string): string => {
-    if (goal === "Improve customer experience") return "customer-experience";
-    if (goal === "Improve internal operations") return "internal-operations";
-    if (goal === "Unlock value from data") return "data-value";
-    if (goal === "Improve delivery speed / DevOps") return "devops";
+    const g = goal.toLowerCase();
+    if (g.includes("customer experience") || g.includes("customer-experience")) return "customer-experience";
+    if (g.includes("operations") || g.includes("internal operations") || g.includes("modernize operations")) return "internal-operations";
+    if (g.includes("data") || g.includes("adopt ai") || g.includes("ai capabilities") || g.includes("ai transformation")) return "data-value";
+    if (g.includes("devops") || g.includes("delivery speed") || g.includes("delivery governance") || g.includes("accelerate transformation")) return "devops";
     return "";
   };
 
@@ -252,74 +253,79 @@ const DiagnoseDialog = ({ isOpen, onClose, initialProblem = "" }: DiagnoseDialog
   };
 
   const handleOptionClick = (option: string) => {
-    // STEP 1: Handle initial goal selection - EXACT STRING MATCHES FIRST
-    if (option === "Improve customer experience") {
+    // STEP 1: Handle initial goal selection - EXACT STRING MATCHES AND SUBSTRINGS
+    const optLower = option.toLowerCase();
+    if (option === "Improve customer experience" || optLower.includes("customer experience")) {
       addUserMessage(option);
-      setSelectedGoal(option);
+      setSelectedGoal("Improve customer experience");
       setConversationStep(1);
       setUnresolvedCount(0);
       
       addAIMessage(
-        "Customer experience — great focus. Where are you in that journey right now?",
+        "Customer experience transformation often stalls not because of poor design, but because of backend system disconnection. When customer touchpoints don't sync, clients feel the friction.\n\n**AI-Generated Transformation Path**:\n1. **Customer Experience Strategy** (Unified experience roadmap & design)\n2. **Digital Experience Commerce Kit** (Scale global checkouts and self-service portals)\n\n**AI Active Recommendation**: I highly recommend starting with the *Customer Experience Strategy* roadmap. Combining this with our *Commerce Kit* package shaves 4 weeks off your launch timeline!\n\n**AI Experience Maturity Score**: **58/100** (Requires channel consolidation).\n\nWhere are you in that journey right now?",
         ["Exploring / defining the problem", "Designing a solution", "Ready to implement", "Already running, need optimisation"]
       );
       return;
     }
     
-    if (option === "Improve internal operations") {
+    if (option === "Improve internal operations" || optLower.includes("operations") || optLower.includes("modernize operations")) {
       addUserMessage(option);
-      setSelectedGoal(option);
+      setSelectedGoal("Improve internal operations");
       setConversationStep(1);
       setUnresolvedCount(0);
       
       addAIMessage(
-        "Internal operations — understood. Where are you in that journey right now?",
+        "Operational efficiency breaks down when core platforms operate in silos. HR, finance, and backoffice support systems have separate data, generating manual overhead.\n\n**AI-Generated Transformation Path**:\n1. **Digital Core & Platform Strategy** (Map backoffice compliance and system layout)\n2. **Digital Core Operations Pack** (Automate core approvals and workflow integrations)\n\n**AI Active Recommendation**: I recommend starting with the *Digital Core Strategy*. Combining it with our *Operations Pack* reduces manual workflow overhead by 30%!\n\n**AI Operational Maturity Score**: **62/100** (Requires automated approval flows).\n\nWhere are you in that journey right now?",
         ["Exploring / defining the problem", "Designing a solution", "Ready to implement", "Already running, need optimisation"]
       );
       return;
     }
     
-    if (option === "Unlock value from data") {
+    if (option === "Unlock value from data" || optLower.includes("adopt ai") || optLower.includes("ai capabilities") || optLower.includes("data silos")) {
       addUserMessage(option);
-      setSelectedGoal(option);
+      setSelectedGoal("Unlock value from data");
       setConversationStep(1);
       setUnresolvedCount(0);
       
       addAIMessage(
-        "Data transformation is one of the highest-impact areas — but also where most organizations get stuck. The challenge isn't usually the analytics tools themselves. It's the underlying data architecture.\n\nMost legacy systems were built for transactions, not insights. That creates three core problems: siloed data across systems, inconsistent data quality, and no unified view of your business.\n\nTell me — which of these resonates most with your situation right now?",
+        "Data and AI transformation is one of the highest-impact areas — but also where most firms get stuck. The challenge isn't usually the AI models themselves, but the underlying data pipelines.\n\n**AI-Generated Transformation Path**:\n1. **AI Readiness Assessment** (Baseline current datasets and platform constraints)\n2. **AI Strategy & Substrate Design** (Architect model integration APIs and telemetry)\n\n**AI Active Recommendation**: I recommend starting with the *AI Readiness Assessment*. Combining it with our *AI Strategy* package shaves 3 weeks off your development timeline and ensures safe model governance!\n\n**AI Data Maturity Score**: **65/100** (Needs stronger data aggregation pipelines).\n\nTell me — which of these data challenges resonates most with your situation right now?",
         ["We have data silos across systems", "Our data quality is inconsistent", "We can't get a unified business view", "All of the above"]
       );
       return;
     }
     
-    if (option === "Improve delivery speed / DevOps") {
+    if (option === "Improve delivery speed / DevOps" || optLower.includes("devops") || optLower.includes("delivery speed") || optLower.includes("delivery governance")) {
       addUserMessage(option);
-      setSelectedGoal(option);
+      setSelectedGoal("Improve delivery speed / DevOps");
       setConversationStep(1);
       setUnresolvedCount(0);
       
       addAIMessage(
-        "Delivery speed and DevOps — critical area. Where are you in that journey right now?",
+        "Delivery speed and engineering efficiency break down when security, manual audits, and compliance checks are bolted on as blockers at the very end of development.\n\n**AI-Generated Transformation Path**:\n1. **SecDevOps Automation** (Automate compliance validation in CI/CD pipeline)\n2. **Delivery Governance Program** (Establish clear delivery plan roadmaps)\n\n**AI Active Recommendation**: Combine our *SecDevOps Automation* with a tailored *Delivery Governance Program* to increase release frequency by 45% with automated validation guardrails!\n\n**AI DevOps Maturity Score**: **48/100** (Requires automated compliance gates).\n\nWhere are you in that journey right now?",
         ["Exploring / defining the problem", "Designing a solution", "Ready to implement", "Already running, need optimisation"]
       );
       return;
     }
     
-    // STEP 3: Handle follow-up questions about the blueprint
+    // STEP 3: Handle follow-up questions about the roadmap
     if (conversationStep === 2 && (
         option === "Tell me more about the blueprint" ||
         option === "Show me the blueprint" ||
         option === "Explore the blueprint" ||
-        option === "View the blueprint")) {
+        option === "View the blueprint" ||
+        option === "Tell me more about the roadmap" ||
+        option === "Show me the roadmap" ||
+        option === "Explore the roadmap" ||
+        option === "View the roadmap")) {
       
       addUserMessage(option);
       setConversationStep(3);
       
       addAIMessage(
-        "The Digital Intelligence & Analytics Blueprint is a comprehensive, architecture-backed transformation package. It includes:\n\n• Unified data platform architecture\n• CDC streaming implementation guide\n• Analytics & BI integration patterns\n• Data governance framework\n• Security & compliance guidelines\n\nReady to take a look?",
+        "The AI Strategy & Roadmap is a comprehensive, structured transformation package. It includes:\n\n• Unified business data optimization\n• Real-time data aggregation pipelines\n• Performance analytics dashboards\n• Core master data guidelines\n• Security & compliance frameworks\n\nReady to take a look?",
         ["Yes, show me the service", "What's the investment?", "How do I get started?"],
         [
-          { text: "DI&A Strategy Service", url: "/service/3", icon: ArrowRight },
+          { text: "AI Strategy & Roadmap", url: "/service/3", icon: ArrowRight },
           { text: "Browse All Services", url: "/marketplace", icon: ExternalLink }
         ]
       );
@@ -328,8 +334,8 @@ const DiagnoseDialog = ({ isOpen, onClose, initialProblem = "" }: DiagnoseDialog
     
     // STEP 3: Handle technical questions
     if (conversationStep === 2 && (
-        option === "How does CDC streaming work?" ||
-        option === "What does the architecture include?" ||
+        option === "How does the real-time data integration work?" ||
+        option === "What does the roadmap include?" ||
         option === "How do you handle data governance?" ||
         option === "What analytics capabilities are included?")) {
       
@@ -337,8 +343,8 @@ const DiagnoseDialog = ({ isOpen, onClose, initialProblem = "" }: DiagnoseDialog
       setConversationStep(3);
       
       addAIMessage(
-        "That's a great technical question. To ensure you get the most detailed and accurate answer, would you like me to connect you with one of our TMaaS Solutions Architects? They can walk you through the specific implementation details.",
-        ["Yes, connect me with an architect", "No, just show me the blueprint", "Contact the team"]
+        "That's an excellent question. To ensure you get the most detailed and accurate answer, would you like me to connect you with one of our Digital Transformation Specialists? They can walk you through the specific activation details.",
+        ["Yes, connect me with a specialist", "No, just show me the roadmap", "Contact the team"]
       );
       return;
     }
@@ -353,7 +359,7 @@ const DiagnoseDialog = ({ isOpen, onClose, initialProblem = "" }: DiagnoseDialog
       setConversationStep(3);
       
       addAIMessage(
-        "The Digital Intelligence & Analytics Strategy service is typically scoped at $25-30k for a 4-6 week engagement. This includes the complete blueprint, architecture documentation, and implementation roadmap.\n\nWould you like to explore the service details or speak with our team about your specific requirements?",
+        "The AI Strategy & Roadmap is typically scoped at $15k for a 2 week engagement. This includes the complete roadmap, delivery planning details, and activation schedule.\n\nWould you like to explore the service details or speak with our team about your specific requirements?",
         ["Explore the service", "Contact the team", "What's included in the engagement?"]
       );
       return;
@@ -369,20 +375,20 @@ const DiagnoseDialog = ({ isOpen, onClose, initialProblem = "" }: DiagnoseDialog
       setConversationStep(3);
       
       addAIMessage(
-        "The Design phase (blueprint creation) typically takes 4-6 weeks. Implementation timelines vary based on your current infrastructure, but most organizations see initial value within 8-12 weeks.\n\nWant to see the detailed service breakdown?",
-        ["Yes, show me the service", "Contact the team", "What happens after the blueprint?"]
+        "The discovery phase (roadmap creation) typically takes 2 weeks. Value realization timelines vary based on your current systems, but most organizations see initial value within 4-6 weeks.\n\nWant to see the detailed service breakdown?",
+        ["Yes, show me the service", "Contact the team", "What happens after the roadmap?"]
       );
       return;
     }
     
-    // STEP 4: Handle architect connection
-    if (option === "Yes, connect me with an architect" || option === "No, just show me the blueprint") {
+    // STEP 4: Handle specialist connection
+    if (option === "Yes, connect me with a specialist" || option === "Yes, connect me with an architect" || option === "No, just show me the roadmap" || option === "No, just show me the blueprint") {
       addUserMessage(option);
       
-      if (option === "Yes, connect me with an architect") {
+      if (option.includes("connect me")) {
         setShowContactForm(true);
         setContactFormStep(1);
-        addAIMessage("Perfect! I'll connect you with our Solutions Architecture team. What's your name?");
+        addAIMessage("Perfect! I'll connect you with our Digital Transformation Specialist team. What's your name?");
       } else {
         onClose();
         setTimeout(() => {
@@ -393,11 +399,11 @@ const DiagnoseDialog = ({ isOpen, onClose, initialProblem = "" }: DiagnoseDialog
     }
     
     // STEP 4: Handle engagement details
-    if (option === "What's included in the engagement?" || option === "What happens after the blueprint?") {
+    if (option === "What's included in the engagement?" || option === "What happens after the blueprint?" || option === "What happens after the roadmap?") {
       addUserMessage(option);
       
       addAIMessage(
-        "Great question! The engagement includes:\n\n• Discovery & assessment workshops\n• Current state architecture analysis\n• Future state blueprint design\n• Implementation roadmap\n• Technical documentation\n• Knowledge transfer sessions\n\nAfter the blueprint, you can either implement internally or engage our Deploy services (coming soon).",
+        "Great question! The engagement includes:\n\n• Discovery & readiness workshops\n• Current platform performance analysis\n• Future transformation roadmap design\n• Concrete delivery planning\n• Technical documentation\n• Enablement and knowledge transfer\n\nAfter the roadmap, you can either deploy internally or engage our certified specialists (coming soon).",
         ["Explore the service", "Contact the team"]
       );
       return;

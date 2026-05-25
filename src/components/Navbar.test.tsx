@@ -15,7 +15,7 @@ describe("Navbar", () => {
       </AuthProvider>
     );
 
-    expect(screen.getByText("Explore")).toBeInTheDocument();
+    expect(screen.getByText("Marketplace")).toBeInTheDocument();
     expect(screen.queryByText("TMaaS AI Demo")).not.toBeInTheDocument();
   });
 });
