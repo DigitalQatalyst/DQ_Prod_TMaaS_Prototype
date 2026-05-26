@@ -45,8 +45,11 @@ import Legal from "./pages/legal/Legal";
 import Terms from "./pages/legal/Terms";
 import Privacy from "./pages/legal/Privacy";
 import FAQ from "./pages/legal/FAQ";
+import Cart from "./pages/Cart";
 
 import { AuthProvider } from "@/contexts/AuthContext";
+import { CartProvider } from "@/contexts/CartContext";
+import CartDrawer from "@/components/cart/CartDrawer";
 
 const queryClient = new QueryClient();
 
@@ -64,6 +67,7 @@ const ConditionalChatButton = () => {
 const App = () => (
   <QueryClientProvider client={queryClient}>
     <AuthProvider>
+      <CartProvider>
       <TooltipProvider>
         <Toaster />
         <Sonner />
@@ -72,6 +76,7 @@ const App = () => (
           <Route path="/" element={<Index />} />
           <Route path="/explore" element={<Explore />} />
           <Route path="/marketplace" element={<Marketplace />} />
+          <Route path="/cart" element={<Cart />} />
           <Route path="/service/:id" element={<ServiceDetail />} />
           <Route path="/butler-demo" element={<ButlerDemo />} />
           
@@ -126,8 +131,10 @@ const App = () => (
           <Route path="*" element={<NotFound />} />
         </Routes>
         <ConditionalChatButton />
+        <CartDrawer />
       </BrowserRouter>
       </TooltipProvider>
+      </CartProvider>
     </AuthProvider>
   </QueryClientProvider>
 );

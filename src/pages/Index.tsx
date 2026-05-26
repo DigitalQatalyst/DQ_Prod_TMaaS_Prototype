@@ -1,10 +1,8 @@
 import Navbar from "@/components/Navbar";
 import HeroSection from "@/components/HeroSection";
-import ProblemSection from "@/components/ProblemSection";
-import DBPSection from "@/components/DBPSection";
-import FrameworkSection from "@/components/FrameworkSection";
-import OutcomesSection from "@/components/OutcomesSection";
-import GetStartedSection from "@/components/GetStartedSection";
+import ShopByGoalSection from "@/components/ShopByGoalSection";
+import FeaturedPackagesSection from "@/components/FeaturedPackagesSection";
+import HowItWorksSection from "@/components/HowItWorksSection";
 import FAQSection from "@/components/FAQSection";
 import Footer from "@/components/Footer";
 
@@ -13,11 +11,9 @@ const Index = () => {
     <div className="min-h-screen bg-background">
       <Navbar />
       <HeroSection />
-      <ProblemSection />
-      <DBPSection />
-      <FrameworkSection />
-      <OutcomesSection />
-      <GetStartedSection />
+      <ShopByGoalSection />
+      <FeaturedPackagesSection />
+      <HowItWorksSection />
       <FAQSection />
       <Footer />
     </div>

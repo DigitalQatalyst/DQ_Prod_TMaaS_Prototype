@@ -1,549 +1,1684 @@
 export const initialServices = [
-  // AI & Automation (ai)
   {
-    id: 3,
-    collection: "ai",
-    standardName: "AI Strategy & Roadmap",
-    remixName: {
-      retail: "Retail AI Growth Service",
-      banking: "Banking AI Customer Experience Accelerator",
-      healthcare: "Healthcare Decision Intelligence Roadmap",
-      logistics: "Supply Chain Predictive AI Strategy",
-      government: "Public Service Automation Roadmap",
-      education: "Personalized Learning Platform Plan",
-      general: "AI Strategy & Roadmap"
+    "id": 1,
+    "collection": "strategy",
+    "serviceType": "advisory",
+    "standardName": "Digital Strategy Blueprint",
+    "remixName": {
+      "banking": "Banking Digital Strategy Blueprint",
+      "government": "Government Digital Strategy Blueprint",
+      "healthcare": "Healthcare Digital Strategy Blueprint",
+      "retail": "Retail Digital Strategy Blueprint",
+      "education": "Education Digital Strategy Blueprint",
+      "manufacturing": "Manufacturing Digital Strategy Blueprint",
+      "logistics": "Logistics Digital Strategy Blueprint",
+      "general": "Digital Strategy Blueprint"
     },
-    description: "Establish your operational AI roadmap, safety guidelines, and high-ROI use cases tailored to your organization's growth goals.",
-    positioning: "Establish AI priorities, governance structures, and adoption pathways aligned to your business goals.",
-    price: "$1,500",
-    duration: "2 Weeks",
-    popularityRank: 10,
-    deliveryComplexity: "low",
-    badge: "Recommended",
-    audience: "Mid-Market & Enterprise",
-    industryRelevance: "Finance • Retail • Government",
-    features: [
-      "AI opportunity scoping & priority mapping",
-      "Operational safety & risk guardrails",
-      "Business system compatibility audit",
-      "Executive activation roadmap"
+    "description": "Expert digital strategy blueprint tailored to your business needs to drive growth and efficiency.",
+    "positioning": "Accelerate your transformation with our specialized advisory services.",
+    "price": "$2,500",
+    "duration": "4 Weeks",
+    "popularityRank": 100,
+    "deliveryComplexity": "medium",
+    "badge": "Popular",
+    "audience": "Enterprise",
+    "industryRelevance": "All Industries",
+    "features": [
+      "Initial assessment and scoping",
+      "Customized implementation roadmap",
+      "Executive alignment workshops",
+      "Final delivery and handover"
     ],
-    tags: ["AI Strategy", "AI Adoption", "Business Insights", "Workforce Automation"],
-    outcomes: ["Launch AI Capabilities", "Grow Revenue"],
-    department: "IT & Product Engineering",
-    businessImpact: "+25% Strategic Scoping Accuracy",
-    implementationModel: "Specialist-Led Co-Delivery Sprint",
-    timelineMilestones: [
-      "Day 1-3: Core Stakeholder Interviews",
-      "Day 4-6: System Readiness Assessment",
-      "Day 7-9: ROI Use Case Mapping",
-      "Day 10: Deliverable Handover"
+    "tags": [
+      "strategy",
+      "advisory",
+      "transformation"
     ],
-    relatedServices: [101, 102]
+    "outcomes": [
+      "grow-business",
+      "modernise-technology"
+    ],
+    "department": "IT & Strategy",
+    "businessImpact": "Significant operational improvements",
+    "implementationModel": "Consulting Sprint",
+    "timelineMilestones": [
+      "Week 1: Discovery",
+      "Week 2: Design & Planning",
+      "Week 3: Execution",
+      "Week 4: Review & Handover"
+    ],
+    "relatedServices": []
   },
   {
-    id: 101,
-    collection: "ai",
-    standardName: "Enterprise AI Launch Service",
-    remixName: {
-      retail: "Retail Omnichannel Recommendation Engine",
-      banking: "Banking AI Customer Service Agent",
-      healthcare: "Clinical Research Data Orchestrator",
-      logistics: "Predictive Warehouse Dispatcher",
-      government: "Federal AI Operations Assistant",
-      education: "Smart Curriculum Copilot Setup",
-      general: "Enterprise AI Launch Service"
+    "id": 2,
+    "collection": "ai",
+    "serviceType": "advisory",
+    "standardName": "AI Strategy & Readiness",
+    "remixName": {
+      "banking": "Banking AI Strategy & Readiness",
+      "government": "Government AI Strategy & Readiness",
+      "healthcare": "Healthcare AI Strategy & Readiness",
+      "retail": "Retail AI Strategy & Readiness",
+      "education": "Education AI Strategy & Readiness",
+      "manufacturing": "Manufacturing AI Strategy & Readiness",
+      "logistics": "Logistics AI Strategy & Readiness",
+      "general": "AI Strategy & Readiness"
     },
-    description: "Deploy pre-scoped AI capabilities, automated workflows, and operational intelligence solutions safely across your daily business processes.",
-    positioning: "Move AI out of experimentation and deploy intelligent workflows securely.",
-    price: "$2,500",
-    duration: "4 Weeks",
-    popularityRank: 8,
-    deliveryComplexity: "medium",
-    badge: "Enterprise Ready",
-    audience: "Enterprise Target",
-    industryRelevance: "Finance • Healthcare • Logistics",
-    features: [
-      "AI model operational playbooks",
-      "Performance tracking dashboards",
-      "Staff AI enablement training workshops",
-      "Transformation specialist audit reviews"
+    "description": "Expert ai strategy & readiness tailored to your business needs to drive growth and efficiency.",
+    "positioning": "Accelerate your transformation with our specialized advisory services.",
+    "price": "$1,800",
+    "duration": "4 Weeks",
+    "popularityRank": 99,
+    "deliveryComplexity": "medium",
+    "badge": "Top Pick",
+    "audience": "Enterprise",
+    "industryRelevance": "All Industries",
+    "features": [
+      "Initial assessment and scoping",
+      "Customized implementation roadmap",
+      "Executive alignment workshops",
+      "Final delivery and handover"
     ],
-    tags: ["AI Launch", "AI Automation", "Workforce Enablement"],
-    outcomes: ["Launch AI Capabilities", "Grow Revenue"],
-    department: "IT & Product Engineering",
-    businessImpact: "3.2x ROI on custom models",
-    implementationModel: "Platform Engineering Co-Design",
-    timelineMilestones: [
-      "Week 1: API Scopes & Specs",
-      "Week 2: Model Tuning & Integrations",
-      "Week 3: Telemetry & Monitoring Setup",
-      "Week 4: Handover & Core Training"
+    "tags": [
+      "ai",
+      "advisory",
+      "transformation"
     ],
-    relatedServices: [3, 102]
+    "outcomes": [
+      "launch-ai"
+    ],
+    "department": "IT & Strategy",
+    "businessImpact": "Significant operational improvements",
+    "implementationModel": "Consulting Sprint",
+    "timelineMilestones": [
+      "Week 1: Discovery",
+      "Week 2: Design & Planning",
+      "Week 3: Execution",
+      "Week 4: Review & Handover"
+    ],
+    "relatedServices": []
   },
   {
-    id: 102,
-    collection: "ai",
-    standardName: "AI Workforce Enablement Sprint",
-    remixName: {
-      retail: "Retail Clienteling AI Enablement",
-      banking: "Financial Advisor AI Copilot Setup",
-      healthcare: "HIPAA Compliant AI Training Sprint",
-      logistics: "Dispatch Coordinator AI Enablement",
-      government: "Public Service AI Training Sprint",
-      education: "Teacher AI Co-Designer Workshop",
-      general: "AI Workforce Enablement Sprint"
+    "id": 3,
+    "collection": "marketing",
+    "serviceType": "advisory",
+    "standardName": "Marketing Strategy Transformation",
+    "remixName": {
+      "banking": "Banking Marketing Strategy Transformation",
+      "government": "Government Marketing Strategy Transformation",
+      "healthcare": "Healthcare Marketing Strategy Transformation",
+      "retail": "Retail Marketing Strategy Transformation",
+      "education": "Education Marketing Strategy Transformation",
+      "manufacturing": "Manufacturing Marketing Strategy Transformation",
+      "logistics": "Logistics Marketing Strategy Transformation",
+      "general": "Marketing Strategy Transformation"
     },
-    description: "Accelerate staff adoption of artificial intelligence utilities through ready-to-use prompt libraries, customized templates, and compliance training.",
-    positioning: "Accelerate staff productivity by enabling safe, compliant daily AI usage.",
-    price: "$1,200",
-    duration: "2 Weeks",
-    popularityRank: 9,
-    deliveryComplexity: "low",
-    badge: "Fast Deployment",
-    audience: "High Adoption Firms",
-    industryRelevance: "Retail • Education • Logistics",
-    features: [
-      "Custom prompt libraries & templates",
-      "Team productivity benchmarks",
-      "Compliance & safety workshops",
-      "Staff adoption scorecards"
+    "description": "Expert marketing strategy transformation tailored to your business needs to drive growth and efficiency.",
+    "positioning": "Accelerate your transformation with our specialized advisory services.",
+    "price": "$2,200",
+    "duration": "4 Weeks",
+    "popularityRank": 98,
+    "deliveryComplexity": "medium",
+    "badge": null,
+    "audience": "Enterprise",
+    "industryRelevance": "All Industries",
+    "features": [
+      "Initial assessment and scoping",
+      "Customized implementation roadmap",
+      "Executive alignment workshops",
+      "Final delivery and handover"
     ],
-    tags: ["AI Adoption", "Workforce Enablement", "Training"],
-    outcomes: ["Launch AI Capabilities", "Improve Customer Experience"],
-    department: "Operations & HR",
-    businessImpact: "+45% Staff Prompt Efficiency",
-    implementationModel: "Specialist-Led Collaborative Workshop",
-    timelineMilestones: [
-      "Day 1-2: Baseline Productivity Scan",
-      "Day 3-5: Custom Prompts Library Setup",
-      "Day 6-8: Hands-On Enablement Workshop",
-      "Day 10: Adoption Dashboard Delivery"
+    "tags": [
+      "marketing",
+      "advisory",
+      "transformation"
     ],
-    relatedServices: [3, 101]
-  },
-
-  // Customer Experience (cx)
-  {
-    id: 1,
-    collection: "cx",
-    standardName: "Customer Experience Transformation",
-    remixName: {
-      retail: "Retail CX Omnichannel Optimization",
-      banking: "Banking Unified Customer Portal",
-      healthcare: "Secure Patient Experience Hub",
-      logistics: "Real-Time Client Delivery Portal",
-      government: "Citizen Direct Support Terminal",
-      education: "Unified Student Onboarding Hub",
-      general: "Customer Experience Transformation"
-    },
-    description: "Unify digital customer touchpoints, shopping experiences, and client self-service hubs to increase brand loyalty and conversions.",
-    positioning: "Design scalable, high-converting digital customer experiences across all channels.",
-    price: "$3,000",
-    duration: "6 Weeks",
-    popularityRank: 7,
-    deliveryComplexity: "medium",
-    badge: null,
-    audience: "Retail & Consumer Goods",
-    industryRelevance: "Retail • Banking • Healthcare",
-    features: [
-      "High-conversion customer checkout pathways",
-      "Self-service support portals",
-      "Unified customer experience roadmap",
-      "Customer growth attribution dashboards"
+    "outcomes": [
+      "grow-business",
+      "improve-cx"
     ],
-    tags: ["Customer Experience", "Omnichannel", "Client Portals"],
-    outcomes: ["Improve Customer Experience", "Grow Revenue"],
-    department: "Customer Service",
-    businessImpact: "+18% Customer Satisfaction Score",
-    implementationModel: "Specialist-Led Custom Engineering Sprint",
-    timelineMilestones: [
-      "Week 1-2: Customer Journey Mapping",
-      "Week 3-4: Portal UI/UX Engineering",
-      "Week 5: Backend Integrations & Testing",
-      "Week 6: Deployment & Analytics Handover"
+    "department": "IT & Strategy",
+    "businessImpact": "Significant operational improvements",
+    "implementationModel": "Consulting Sprint",
+    "timelineMilestones": [
+      "Week 1: Discovery",
+      "Week 2: Design & Planning",
+      "Week 3: Execution",
+      "Week 4: Review & Handover"
     ],
-    relatedServices: [103, 104]
+    "relatedServices": []
   },
   {
-    id: 103,
-    collection: "cx",
-    standardName: "CRM Modernization Service",
-    remixName: {
-      retail: "Retail Client Profile Consolidation",
-      banking: "Wealth CRM Pipeline Consolidation",
-      healthcare: "Patient Record CRM Synchronization",
-      logistics: "Account Manager Sales Pipeline",
-      government: "Constituent CRM Modernization",
-      education: "Student Lifecycle CRM Integration",
-      general: "CRM Modernization Service"
+    "id": 4,
+    "collection": "data",
+    "serviceType": "advisory",
+    "standardName": "Data & Analytics Strategy",
+    "remixName": {
+      "banking": "Banking Data & Analytics Strategy",
+      "government": "Government Data & Analytics Strategy",
+      "healthcare": "Healthcare Data & Analytics Strategy",
+      "retail": "Retail Data & Analytics Strategy",
+      "education": "Education Data & Analytics Strategy",
+      "manufacturing": "Manufacturing Data & Analytics Strategy",
+      "logistics": "Logistics Data & Analytics Strategy",
+      "general": "Data & Analytics Strategy"
     },
-    description: "Consolidate duplicate customer records, synchronize communication pipelines, and optimize team access across sales pipelines.",
-    positioning: "Eliminate disjointed customer data and unify your core CRM strategy.",
-    price: "$2,400",
-    duration: "4 Weeks",
-    popularityRank: 6,
-    deliveryComplexity: "medium",
-    badge: "Recommended",
-    audience: "High Growth Firms",
-    industryRelevance: "Finance • Logistics • Retail",
-    features: [
-      "Customer workflow consolidation",
-      "Automated contact synchronization",
-      "Sales pipeline scorecards",
-      "Custom team performance dashboards"
+    "description": "Expert data & analytics strategy tailored to your business needs to drive growth and efficiency.",
+    "positioning": "Accelerate your transformation with our specialized advisory services.",
+    "price": "$2,400",
+    "duration": "4 Weeks",
+    "popularityRank": 97,
+    "deliveryComplexity": "medium",
+    "badge": null,
+    "audience": "Enterprise",
+    "industryRelevance": "All Industries",
+    "features": [
+      "Initial assessment and scoping",
+      "Customized implementation roadmap",
+      "Executive alignment workshops",
+      "Final delivery and handover"
     ],
-    tags: ["CRM", "Sales Pipeline", "Consolidation"],
-    outcomes: ["Improve Customer Experience", "Modernize Operations"],
-    department: "Marketing & Sales",
-    businessImpact: "+35% Lead Conversion Velocity",
-    implementationModel: "Co-Delivery Setup Sprint",
-    timelineMilestones: [
-      "Week 1: Sync Audit & Field Mapping",
-      "Week 2: Automated Sync Pipeline Build",
-      "Week 3: Dashboard & Analytics Setup",
-      "Week 4: Team Onboarding & Deployment"
+    "tags": [
+      "data",
+      "advisory",
+      "transformation"
     ],
-    relatedServices: [1, 104]
+    "outcomes": [
+      "modernise-technology",
+      "improve-operations"
+    ],
+    "department": "IT & Strategy",
+    "businessImpact": "Significant operational improvements",
+    "implementationModel": "Consulting Sprint",
+    "timelineMilestones": [
+      "Week 1: Discovery",
+      "Week 2: Design & Planning",
+      "Week 3: Execution",
+      "Week 4: Review & Handover"
+    ],
+    "relatedServices": []
   },
   {
-    id: 104,
-    collection: "cx",
-    standardName: "Digital Sales Acceleration",
-    remixName: {
-      retail: "Retail Commerce Funnel Optimization",
-      banking: "Loan Application Funnel Acceleration",
-      healthcare: "Patient Intake Funnel Optimization",
-      logistics: "Freight Quote Booking Funnel",
-      government: "Agency Service Discovery Optimizer",
-      education: "Admissions Funnel Optimization Kit",
-      general: "Digital Sales Acceleration"
+    "id": 5,
+    "collection": "experience",
+    "serviceType": "advisory",
+    "standardName": "Customer Experience (CX) Strategy",
+    "remixName": {
+      "banking": "Banking Customer Experience (CX) Strategy",
+      "government": "Government Customer Experience (CX) Strategy",
+      "healthcare": "Healthcare Customer Experience (CX) Strategy",
+      "retail": "Retail Customer Experience (CX) Strategy",
+      "education": "Education Customer Experience (CX) Strategy",
+      "manufacturing": "Manufacturing Customer Experience (CX) Strategy",
+      "logistics": "Logistics Customer Experience (CX) Strategy",
+      "general": "Customer Experience (CX) Strategy"
     },
-    description: "Supercharge sales pipelines, marketing automation tools, and customer acquisition campaigns for fast conversion gains.",
-    positioning: "Accelerate revenue pipelines by removing digital friction and improving capture points.",
-    price: "$1,800",
-    duration: "3 Weeks",
-    popularityRank: 5,
-    deliveryComplexity: "low",
-    badge: "Fast Deployment",
-    audience: "B2B & E-commerce",
-    industryRelevance: "E-Commerce • B2B Tech • Banking",
-    features: [
-      "Sales lead capture setups",
-      "Marketing automation workflows",
-      "Customer growth attribution dashboards",
-      "Conversion rate optimization audits"
+    "description": "Expert customer experience (cx) strategy tailored to your business needs to drive growth and efficiency.",
+    "positioning": "Accelerate your transformation with our specialized advisory services.",
+    "price": "$2,000",
+    "duration": "4 Weeks",
+    "popularityRank": 96,
+    "deliveryComplexity": "medium",
+    "badge": null,
+    "audience": "Enterprise",
+    "industryRelevance": "All Industries",
+    "features": [
+      "Initial assessment and scoping",
+      "Customized implementation roadmap",
+      "Executive alignment workshops",
+      "Final delivery and handover"
     ],
-    tags: ["Digital Sales", "Campaign Automation", "Conversion Optimization"],
-    outcomes: ["Improve Customer Experience", "Grow Revenue"],
-    department: "Marketing & Sales",
-    businessImpact: "+22% Sales Pipeline Velocity",
-    implementationModel: "Specialist-Led Co-Delivery Sprint",
-    timelineMilestones: [
-      "Week 1: Capture Funnel Scoping",
-      "Week 2: Marketing Automation Setup",
-      "Week 3: Analytics Dashboards & Handover"
+    "tags": [
+      "experience",
+      "advisory",
+      "transformation"
     ],
-    relatedServices: [1, 103]
-  },
-
-  // Operations Modernization (ops)
-  {
-    id: 2,
-    collection: "ops",
-    standardName: "Operations Modernization",
-    remixName: {
-      retail: "Retail Supply Chain Digitization",
-      banking: "Banking Backoffice Approval Automation",
-      healthcare: "Clinical Workflow Digitization",
-      logistics: "Dispatch Operations Modernization",
-      government: "Inter-Agency Document Router",
-      education: "Academic Records Digitization Kit",
-      general: "Operations Modernization"
-    },
-    description: "Automate core business approvals, digitize manual backoffice paperwork, and synchronize siloed software applications to reduce friction.",
-    positioning: "Eradicate manual bottlenecks and orchestrate seamless digital operations.",
-    price: "$2,000",
-    duration: "4 Weeks",
-    popularityRank: 9,
-    deliveryComplexity: "medium",
-    badge: "Recommended",
-    audience: "Supply Chain & Healthcare",
-    industryRelevance: "Logistics • Government • Healthcare",
-    features: [
-      "Approval workflow automation",
-      "Backoffice system synchronization",
-      "Process efficiency analytics dashboards",
-      "Staff workflow enablement training"
+    "outcomes": [
+      "improve-cx"
     ],
-    tags: ["Operations", "Workflow Automation", "Approve flows"],
-    outcomes: ["Modernize Operations", "Accelerate Delivery"],
-    department: "Operations & HR",
-    businessImpact: "-40% Operational Approval Overhead",
-    implementationModel: "Workflow Engineering Sprint",
-    timelineMilestones: [
-      "Week 1: Process Bottleneck Analysis",
-      "Week 2: Automated Approvals Logic",
-      "Week 3: Integrations & Telemetry",
-      "Week 4: Staff Training & Handoff"
+    "department": "IT & Strategy",
+    "businessImpact": "Significant operational improvements",
+    "implementationModel": "Consulting Sprint",
+    "timelineMilestones": [
+      "Week 1: Discovery",
+      "Week 2: Design & Planning",
+      "Week 3: Execution",
+      "Week 4: Review & Handover"
     ],
-    relatedServices: [201, 202]
+    "relatedServices": []
   },
   {
-    id: 201,
-    collection: "ops",
-    standardName: "Workflow Automation Accelerator",
-    remixName: {
-      retail: "Retail Order Processing Automator",
-      banking: "Credit Approval Automated Workflow",
-      healthcare: "Patient Referral Automated Routing",
-      logistics: "Waybill Parsing Automated Pipeline",
-      government: "License Approval Automated System",
-      education: "Course Registration Automated Routing",
-      general: "Workflow Automation Accelerator"
+    "id": 6,
+    "collection": "strategy",
+    "serviceType": "advisory",
+    "standardName": "Innovation & Emerging Technology Strategy",
+    "remixName": {
+      "banking": "Banking Innovation & Emerging Technology Strategy",
+      "government": "Government Innovation & Emerging Technology Strategy",
+      "healthcare": "Healthcare Innovation & Emerging Technology Strategy",
+      "retail": "Retail Innovation & Emerging Technology Strategy",
+      "education": "Education Innovation & Emerging Technology Strategy",
+      "manufacturing": "Manufacturing Innovation & Emerging Technology Strategy",
+      "logistics": "Logistics Innovation & Emerging Technology Strategy",
+      "general": "Innovation & Emerging Technology Strategy"
     },
-    description: "Eliminate manual handoffs by integrating custom automated processes and intelligent workflows into your daily operations.",
-    positioning: "Automate repetitive tasks to empower your teams to focus on high-value work.",
-    price: "$1,600",
-    duration: "3 Weeks",
-    popularityRank: 4,
-    deliveryComplexity: "low",
-    badge: "Fast Deployment",
-    audience: "Operations Teams",
-    industryRelevance: "Logistics • Finance • Government",
-    features: [
-      "Repetitive task automation",
-      "Data synchronization networks",
-      "Custom trigger workflow setups",
-      "Exception handling alerts"
+    "description": "Expert innovation & emerging technology strategy tailored to your business needs to drive growth and efficiency.",
+    "positioning": "Accelerate your transformation with our specialized advisory services.",
+    "price": "$2,600",
+    "duration": "4 Weeks",
+    "popularityRank": 95,
+    "deliveryComplexity": "medium",
+    "badge": "Popular",
+    "audience": "Enterprise",
+    "industryRelevance": "All Industries",
+    "features": [
+      "Initial assessment and scoping",
+      "Customized implementation roadmap",
+      "Executive alignment workshops",
+      "Final delivery and handover"
     ],
-    tags: ["Automation", "RPA", "Workflow optimization"],
-    outcomes: ["Modernize Operations", "Accelerate Delivery"],
-    department: "Operations & HR",
-    businessImpact: "-30% Manual Task Time",
-    implementationModel: "Specialist-Led Custom Sprint",
-    timelineMilestones: [
-      "Week 1: RPA Scoping & Triggers",
-      "Week 2: Automation Pipelines Construction",
-      "Week 3: Integration Checks & Handoff"
+    "tags": [
+      "strategy",
+      "advisory",
+      "transformation"
     ],
-    relatedServices: [2, 202]
+    "outcomes": [
+      "modernise-technology",
+      "grow-business"
+    ],
+    "department": "IT & Strategy",
+    "businessImpact": "Significant operational improvements",
+    "implementationModel": "Consulting Sprint",
+    "timelineMilestones": [
+      "Week 1: Discovery",
+      "Week 2: Design & Planning",
+      "Week 3: Execution",
+      "Week 4: Review & Handover"
+    ],
+    "relatedServices": []
   },
   {
-    id: 202,
-    collection: "ops",
-    standardName: "Delivery Governance Service",
-    remixName: {
-      retail: "Retail Fulfillment Governance Setup",
-      banking: "Financial SLA Governance Setup",
-      healthcare: "Clinical Compliance Tracking Setup",
-      logistics: "Carrier SLA Performance Tracking",
-      government: "Agency Service Compliance Stepper",
-      education: "EdTech SLA Delivery Governance",
-      general: "Delivery Governance Service"
+    "id": 7,
+    "collection": "operations",
+    "serviceType": "design",
+    "standardName": "Digital Operating Model Design",
+    "remixName": {
+      "banking": "Banking Digital Operating Model Design",
+      "government": "Government Digital Operating Model Design",
+      "healthcare": "Healthcare Digital Operating Model Design",
+      "retail": "Retail Digital Operating Model Design",
+      "education": "Education Digital Operating Model Design",
+      "manufacturing": "Manufacturing Digital Operating Model Design",
+      "logistics": "Logistics Digital Operating Model Design",
+      "general": "Digital Operating Model Design"
     },
-    description: "Establish transparent scorecards, automated compliance checkpoints, and clear delivery plans across engineering teams.",
-    positioning: "Introduce enterprise-grade delivery governance and milestone tracking for total visibility.",
-    price: "$2,200",
-    duration: "5 Weeks",
-    popularityRank: 3,
-    deliveryComplexity: "medium",
-    badge: "Enterprise Ready",
-    audience: "Regulated Industries",
-    industryRelevance: "Healthcare • Finance • Government",
-    features: [
-      "SLA compliance tracking dashboards",
-      "Automated milestone logging",
-      "Transparent performance scorecards",
-      "Compliance tracking templates"
+    "description": "Expert digital operating model design tailored to your business needs to drive growth and efficiency.",
+    "positioning": "Accelerate your transformation with our specialized design services.",
+    "price": "$2,800",
+    "duration": "4 Weeks",
+    "popularityRank": 94,
+    "deliveryComplexity": "medium",
+    "badge": null,
+    "audience": "Enterprise",
+    "industryRelevance": "All Industries",
+    "features": [
+      "Initial assessment and scoping",
+      "Customized implementation roadmap",
+      "Executive alignment workshops",
+      "Final delivery and handover"
     ],
-    tags: ["DevOps Governance", "SLA tracking", "Compliance auditing"],
-    outcomes: ["Accelerate Delivery", "Improve Compliance"],
-    department: "IT & Product Engineering",
-    businessImpact: "100% Release Compliance Verification",
-    implementationModel: "DevOps Platforms Engineering Sprint",
-    timelineMilestones: [
-      "Week 1: SLA Parameter Scoping",
-      "Week 2: Compliance Pipeline Logging",
-      "Week 3: Visual Analytics Setups",
-      "Week 4-5: Compliance Auditing Handover"
+    "tags": [
+      "operations",
+      "design",
+      "transformation"
     ],
-    relatedServices: [2, 201]
-  },
-
-  // Growth & Commerce (growth)
-  {
-    id: 301,
-    collection: "growth",
-    standardName: "Omnichannel Customer Portal",
-    remixName: {
-      retail: "Retail Omnichannel Commerce Hub",
-      banking: "Wealth Portfolio Digital Advisor",
-      healthcare: "Unified Patient Intake & Care Portal",
-      logistics: "Client Freight Tracking Portal",
-      government: "Citizen Portal & Account Manager",
-      education: "Student Portal & Academy Manager",
-      general: "Omnichannel Customer Portal"
-    },
-    description: "Launch highly connected, mobile-optimized customer self-service suites that unify purchasing histories and portal interactions.",
-    positioning: "Design scalable unified customer hubs that drive retention and repeat business.",
-    price: "$3,500",
-    duration: "8 Weeks",
-    popularityRank: 7,
-    deliveryComplexity: "high",
-    badge: "Enterprise Ready",
-    audience: "Enterprise & High Growth",
-    industryRelevance: "Retail • Healthcare • Finance",
-    features: [
-      "Unified customer profile dashboards",
-      "Self-service service modules",
-      "Multilingual customer notifications",
-      "Workflow sync connections"
+    "outcomes": [
+      "improve-operations"
     ],
-    tags: ["Growth", "Customer Portal", "Omnichannel"],
-    outcomes: ["Grow Revenue", "Improve Customer Experience"],
-    department: "Customer Service",
-    businessImpact: "+28% User Active Engagement",
-    implementationModel: "Product Engineering Co-Design Sprint",
-    timelineMilestones: [
-      "Week 1-2: Integration Audits & UX Mockups",
-      "Week 3-4: Portal Frontend Assembly",
-      "Week 5-6: System API Integration Sprints",
-      "Week 7-8: Testing, Security Scans & Launch"
+    "department": "IT & Strategy",
+    "businessImpact": "Significant operational improvements",
+    "implementationModel": "Engineering Sprint",
+    "timelineMilestones": [
+      "Week 1: Discovery",
+      "Week 2: Design & Planning",
+      "Week 3: Execution",
+      "Week 4: Review & Handover"
     ],
-    relatedServices: [1, 103]
+    "relatedServices": []
   },
   {
-    id: 302,
-    collection: "growth",
-    standardName: "Rapid Market Expansion Kit",
-    remixName: {
-      retail: "Global Digital Storefront Launch",
-      banking: "Digital Branch Expansion Blueprint",
-      healthcare: "Telehealth Operations Deployment",
-      logistics: "Multi-Region Carrier Onboarding Kit",
-      government: "Multi-Agency Digital Workspace Setup",
-      education: "Global Virtual Academy Launch Kit",
-      general: "Rapid Market Expansion Kit"
+    "id": 8,
+    "collection": "strategy",
+    "serviceType": "advisory",
+    "standardName": "Product & Platform Strategy",
+    "remixName": {
+      "banking": "Banking Product & Platform Strategy",
+      "government": "Government Product & Platform Strategy",
+      "healthcare": "Healthcare Product & Platform Strategy",
+      "retail": "Retail Product & Platform Strategy",
+      "education": "Education Product & Platform Strategy",
+      "manufacturing": "Manufacturing Product & Platform Strategy",
+      "logistics": "Logistics Product & Platform Strategy",
+      "general": "Product & Platform Strategy"
     },
-    description: "Supercharge your geographic and segment reach through pre-scoped global transaction systems and content localization networks.",
-    positioning: "Unlock new market channels quickly through standardized deployment architectures.",
-    price: "$2,800",
-    duration: "6 Weeks",
-    popularityRank: 2,
-    deliveryComplexity: "medium",
-    badge: null,
-    audience: "Mid-Market & Enterprise",
-    industryRelevance: "E-commerce • Tech • Education",
-    features: [
-      "Global payment gateways",
-      "Localized search visibility plans",
-      "Dynamic multi-currency setups",
-      "High-speed content delivery networks"
+    "description": "Expert product & platform strategy tailored to your business needs to drive growth and efficiency.",
+    "positioning": "Accelerate your transformation with our specialized advisory services.",
+    "price": "$2,500",
+    "duration": "4 Weeks",
+    "popularityRank": 93,
+    "deliveryComplexity": "medium",
+    "badge": null,
+    "audience": "Enterprise",
+    "industryRelevance": "All Industries",
+    "features": [
+      "Initial assessment and scoping",
+      "Customized implementation roadmap",
+      "Executive alignment workshops",
+      "Final delivery and handover"
     ],
-    tags: ["Growth", "Global Store", "Expansion"],
-    outcomes: ["Grow Revenue", "Accelerate Delivery"],
-    department: "Marketing & Sales",
-    businessImpact: "+15% Direct Multi-Region Revenue",
-    implementationModel: "Co-Delivery Setup Sprint",
-    timelineMilestones: [
-      "Week 1: Market Expansion Scoping",
-      "Week 2: Localized Gateway Integration",
-      "Week 3-4: Content Hub Construction",
-      "Week 5-6: Load Testing, Validation & Launch"
+    "tags": [
+      "strategy",
+      "advisory",
+      "transformation"
     ],
-    relatedServices: [104, 301]
-  },
-
-  // Governance & Compliance (gov)
-  {
-    id: 401,
-    collection: "gov",
-    standardName: "HIPAA & Data Compliance Shield",
-    remixName: {
-      retail: "Retail GDPR & Payment Compliance Kit",
-      banking: "Financial Audit & Regulatory Shield",
-      healthcare: "HIPAA Patient Privacy & Audit Shield",
-      logistics: "Supply Chain Risk & Compliance System",
-      government: "FedRAMP Security & Governance Shield",
-      education: "FERPA Student Privacy Shield",
-      general: "HIPAA & Data Compliance Shield"
-    },
-    description: "Install airtight data logging, secure encrypted document hubs, continuous scanning safeguards, and risk dashboards.",
-    positioning: "Protect enterprise data and guarantee compliance across all digital operations.",
-    price: "$4,000",
-    duration: "8 Weeks",
-    popularityRank: 1,
-    deliveryComplexity: "high",
-    badge: "Enterprise Ready",
-    audience: "Enterprise & Regulated Firms",
-    industryRelevance: "Healthcare • Finance • Government",
-    features: [
-      "Airtight system audit logging",
-      "Secure encrypted document hubs",
-      "Automated security scanning guardrails",
-      "Third-party vendor risk dashboards"
+    "outcomes": [
+      "grow-business",
+      "modernise-technology"
     ],
-    tags: ["Governance", "Compliance", "Security"],
-    outcomes: ["Improve Compliance", "Modernize Operations"],
-    department: "IT & Product Engineering",
-    businessImpact: "100% HIPAA/GDPR Compliance Readiness",
-    implementationModel: "Airtight Security & Platforms Sprint",
-    timelineMilestones: [
-      "Week 1-2: Security Gaps Scans",
-      "Week 3-4: Secure Storage Vault Build",
-      "Week 5-6: Encrypted Pipeline Rigging",
-      "Week 7-8: Stress Auditing & Officer Handover"
+    "department": "IT & Strategy",
+    "businessImpact": "Significant operational improvements",
+    "implementationModel": "Consulting Sprint",
+    "timelineMilestones": [
+      "Week 1: Discovery",
+      "Week 2: Design & Planning",
+      "Week 3: Execution",
+      "Week 4: Review & Handover"
     ],
-    relatedServices: [202, 402]
+    "relatedServices": []
   },
   {
-    id: 402,
-    collection: "gov",
-    standardName: "Security Audit & Compliance Service",
-    remixName: {
-      retail: "E-commerce Fraud Prevention Audit",
-      banking: "Securities Compliance & Security Audit",
-      healthcare: "Clinical Device Cyber-Security Review",
-      logistics: "Customs Operations Risk Audit",
-      government: "Agency-Wide Access & Security Audit",
-      education: "District-Wide Data Security Review",
-      general: "Security Audit & Compliance Service"
+    "id": 9,
+    "collection": "marketing",
+    "serviceType": "advisory",
+    "standardName": "Omnichannel Commerce Strategy",
+    "remixName": {
+      "banking": "Banking Omnichannel Commerce Strategy",
+      "government": "Government Omnichannel Commerce Strategy",
+      "healthcare": "Healthcare Omnichannel Commerce Strategy",
+      "retail": "Retail Omnichannel Commerce Strategy",
+      "education": "Education Omnichannel Commerce Strategy",
+      "manufacturing": "Manufacturing Omnichannel Commerce Strategy",
+      "logistics": "Logistics Omnichannel Commerce Strategy",
+      "general": "Omnichannel Commerce Strategy"
     },
-    description: "Conduct continuous vulnerability reviews, role-based platform security structures, disaster recovery plans, and cybersecurity scorecards.",
-    positioning: "Ensure digital systems remain secure through robust auditing and identity controls.",
-    price: "$2,700",
-    duration: "4 Weeks",
-    popularityRank: 5,
-    deliveryComplexity: "medium",
-    badge: "Recommended",
-    audience: "Mid-Market & Enterprise",
-    industryRelevance: "Finance • Government • Education",
-    features: [
-      "Digital core security vulnerability audits",
-      "Role-based platform security structures",
-      "Continuous compliance monitoring dashboard",
-      "Airtight backup & recovery blueprints"
+    "description": "Expert omnichannel commerce strategy tailored to your business needs to drive growth and efficiency.",
+    "positioning": "Accelerate your transformation with our specialized advisory services.",
+    "price": "$2,100",
+    "duration": "4 Weeks",
+    "popularityRank": 92,
+    "deliveryComplexity": "medium",
+    "badge": null,
+    "audience": "Enterprise",
+    "industryRelevance": "All Industries",
+    "features": [
+      "Initial assessment and scoping",
+      "Customized implementation roadmap",
+      "Executive alignment workshops",
+      "Final delivery and handover"
     ],
-    tags: ["Security", "Identity Access", "Vulnerability"],
-    outcomes: ["Improve Compliance", "Accelerate Delivery"],
-    department: "IT & Product Engineering",
-    businessImpact: "-50% Security Vulnerability Risk",
-    implementationModel: "Platform Engineering Co-Design",
-    timelineMilestones: [
-      "Week 1: Vulnerability Scans & IAM Audit",
-      "Week 2: Identity Controls Configuration",
-      "Week 3: Continuous Monitoring Setup",
-      "Week 4: Security Plan Handover"
+    "tags": [
+      "marketing",
+      "advisory",
+      "transformation"
     ],
-    relatedServices: [202, 401]
+    "outcomes": [
+      "grow-business",
+      "improve-cx"
+    ],
+    "department": "IT & Strategy",
+    "businessImpact": "Significant operational improvements",
+    "implementationModel": "Consulting Sprint",
+    "timelineMilestones": [
+      "Week 1: Discovery",
+      "Week 2: Design & Planning",
+      "Week 3: Execution",
+      "Week 4: Review & Handover"
+    ],
+    "relatedServices": []
+  },
+  {
+    "id": 10,
+    "collection": "engineering",
+    "serviceType": "advisory",
+    "standardName": "Enterprise Architecture Strategy",
+    "remixName": {
+      "banking": "Banking Enterprise Architecture Strategy",
+      "government": "Government Enterprise Architecture Strategy",
+      "healthcare": "Healthcare Enterprise Architecture Strategy",
+      "retail": "Retail Enterprise Architecture Strategy",
+      "education": "Education Enterprise Architecture Strategy",
+      "manufacturing": "Manufacturing Enterprise Architecture Strategy",
+      "logistics": "Logistics Enterprise Architecture Strategy",
+      "general": "Enterprise Architecture Strategy"
+    },
+    "description": "Expert enterprise architecture strategy tailored to your business needs to drive growth and efficiency.",
+    "positioning": "Accelerate your transformation with our specialized advisory services.",
+    "price": "$2,700",
+    "duration": "4 Weeks",
+    "popularityRank": 91,
+    "deliveryComplexity": "medium",
+    "badge": null,
+    "audience": "Enterprise",
+    "industryRelevance": "All Industries",
+    "features": [
+      "Initial assessment and scoping",
+      "Customized implementation roadmap",
+      "Executive alignment workshops",
+      "Final delivery and handover"
+    ],
+    "tags": [
+      "engineering",
+      "advisory",
+      "transformation"
+    ],
+    "outcomes": [
+      "modernise-technology",
+      "strengthen-governance"
+    ],
+    "department": "IT & Strategy",
+    "businessImpact": "Significant operational improvements",
+    "implementationModel": "Consulting Sprint",
+    "timelineMilestones": [
+      "Week 1: Discovery",
+      "Week 2: Design & Planning",
+      "Week 3: Execution",
+      "Week 4: Review & Handover"
+    ],
+    "relatedServices": []
+  },
+  {
+    "id": 11,
+    "collection": "experience",
+    "serviceType": "design",
+    "standardName": "Website Experience Modernisation",
+    "remixName": {
+      "banking": "Banking Website Experience Modernisation",
+      "government": "Government Website Experience Modernisation",
+      "healthcare": "Healthcare Website Experience Modernisation",
+      "retail": "Retail Website Experience Modernisation",
+      "education": "Education Website Experience Modernisation",
+      "manufacturing": "Manufacturing Website Experience Modernisation",
+      "logistics": "Logistics Website Experience Modernisation",
+      "general": "Website Experience Modernisation"
+    },
+    "description": "Expert website experience modernisation tailored to your business needs to drive growth and efficiency.",
+    "positioning": "Accelerate your transformation with our specialized design services.",
+    "price": "$1,800",
+    "duration": "4 Weeks",
+    "popularityRank": 90,
+    "deliveryComplexity": "medium",
+    "badge": "Popular",
+    "audience": "Enterprise",
+    "industryRelevance": "All Industries",
+    "features": [
+      "Initial assessment and scoping",
+      "Customized implementation roadmap",
+      "Executive alignment workshops",
+      "Final delivery and handover"
+    ],
+    "tags": [
+      "experience",
+      "design",
+      "transformation"
+    ],
+    "outcomes": [
+      "improve-cx",
+      "grow-business"
+    ],
+    "department": "IT & Strategy",
+    "businessImpact": "Significant operational improvements",
+    "implementationModel": "Engineering Sprint",
+    "timelineMilestones": [
+      "Week 1: Discovery",
+      "Week 2: Design & Planning",
+      "Week 3: Execution",
+      "Week 4: Review & Handover"
+    ],
+    "relatedServices": []
+  },
+  {
+    "id": 12,
+    "collection": "engineering",
+    "serviceType": "build",
+    "standardName": "Customer Portal Development",
+    "remixName": {
+      "banking": "Banking Customer Portal Development",
+      "government": "Government Customer Portal Development",
+      "healthcare": "Healthcare Customer Portal Development",
+      "retail": "Retail Customer Portal Development",
+      "education": "Education Customer Portal Development",
+      "manufacturing": "Manufacturing Customer Portal Development",
+      "logistics": "Logistics Customer Portal Development",
+      "general": "Customer Portal Development"
+    },
+    "description": "Expert customer portal development tailored to your business needs to drive growth and efficiency.",
+    "positioning": "Accelerate your transformation with our specialized build services.",
+    "price": "$3,200",
+    "duration": "4 Weeks",
+    "popularityRank": 89,
+    "deliveryComplexity": "medium",
+    "badge": null,
+    "audience": "Enterprise",
+    "industryRelevance": "All Industries",
+    "features": [
+      "Initial assessment and scoping",
+      "Customized implementation roadmap",
+      "Executive alignment workshops",
+      "Final delivery and handover"
+    ],
+    "tags": [
+      "engineering",
+      "build",
+      "transformation"
+    ],
+    "outcomes": [
+      "improve-cx",
+      "automate-workflows"
+    ],
+    "department": "IT & Strategy",
+    "businessImpact": "Significant operational improvements",
+    "implementationModel": "Engineering Sprint",
+    "timelineMilestones": [
+      "Week 1: Discovery",
+      "Week 2: Design & Planning",
+      "Week 3: Execution",
+      "Week 4: Review & Handover"
+    ],
+    "relatedServices": []
+  },
+  {
+    "id": 13,
+    "collection": "experience",
+    "serviceType": "design",
+    "standardName": "Mobile App Experience Design",
+    "remixName": {
+      "banking": "Banking Mobile App Experience Design",
+      "government": "Government Mobile App Experience Design",
+      "healthcare": "Healthcare Mobile App Experience Design",
+      "retail": "Retail Mobile App Experience Design",
+      "education": "Education Mobile App Experience Design",
+      "manufacturing": "Manufacturing Mobile App Experience Design",
+      "logistics": "Logistics Mobile App Experience Design",
+      "general": "Mobile App Experience Design"
+    },
+    "description": "Expert mobile app experience design tailored to your business needs to drive growth and efficiency.",
+    "positioning": "Accelerate your transformation with our specialized design services.",
+    "price": "$2,200",
+    "duration": "4 Weeks",
+    "popularityRank": 88,
+    "deliveryComplexity": "medium",
+    "badge": null,
+    "audience": "Enterprise",
+    "industryRelevance": "All Industries",
+    "features": [
+      "Initial assessment and scoping",
+      "Customized implementation roadmap",
+      "Executive alignment workshops",
+      "Final delivery and handover"
+    ],
+    "tags": [
+      "experience",
+      "design",
+      "transformation"
+    ],
+    "outcomes": [
+      "improve-cx",
+      "grow-business"
+    ],
+    "department": "IT & Strategy",
+    "businessImpact": "Significant operational improvements",
+    "implementationModel": "Engineering Sprint",
+    "timelineMilestones": [
+      "Week 1: Discovery",
+      "Week 2: Design & Planning",
+      "Week 3: Execution",
+      "Week 4: Review & Handover"
+    ],
+    "relatedServices": []
+  },
+  {
+    "id": 14,
+    "collection": "experience",
+    "serviceType": "build",
+    "standardName": "Employee Experience Platform",
+    "remixName": {
+      "banking": "Banking Employee Experience Platform",
+      "government": "Government Employee Experience Platform",
+      "healthcare": "Healthcare Employee Experience Platform",
+      "retail": "Retail Employee Experience Platform",
+      "education": "Education Employee Experience Platform",
+      "manufacturing": "Manufacturing Employee Experience Platform",
+      "logistics": "Logistics Employee Experience Platform",
+      "general": "Employee Experience Platform"
+    },
+    "description": "Expert employee experience platform tailored to your business needs to drive growth and efficiency.",
+    "positioning": "Accelerate your transformation with our specialized build services.",
+    "price": "$2,500",
+    "duration": "4 Weeks",
+    "popularityRank": 87,
+    "deliveryComplexity": "medium",
+    "badge": null,
+    "audience": "Enterprise",
+    "industryRelevance": "All Industries",
+    "features": [
+      "Initial assessment and scoping",
+      "Customized implementation roadmap",
+      "Executive alignment workshops",
+      "Final delivery and handover"
+    ],
+    "tags": [
+      "experience",
+      "build",
+      "transformation"
+    ],
+    "outcomes": [
+      "improve-operations"
+    ],
+    "department": "IT & Strategy",
+    "businessImpact": "Significant operational improvements",
+    "implementationModel": "Engineering Sprint",
+    "timelineMilestones": [
+      "Week 1: Discovery",
+      "Week 2: Design & Planning",
+      "Week 3: Execution",
+      "Week 4: Review & Handover"
+    ],
+    "relatedServices": []
+  },
+  {
+    "id": 15,
+    "collection": "engineering",
+    "serviceType": "build",
+    "standardName": "Self-Service Portal Setup",
+    "remixName": {
+      "banking": "Banking Self-Service Portal Setup",
+      "government": "Government Self-Service Portal Setup",
+      "healthcare": "Healthcare Self-Service Portal Setup",
+      "retail": "Retail Self-Service Portal Setup",
+      "education": "Education Self-Service Portal Setup",
+      "manufacturing": "Manufacturing Self-Service Portal Setup",
+      "logistics": "Logistics Self-Service Portal Setup",
+      "general": "Self-Service Portal Setup"
+    },
+    "description": "Expert self-service portal setup tailored to your business needs to drive growth and efficiency.",
+    "positioning": "Accelerate your transformation with our specialized build services.",
+    "price": "$2,000",
+    "duration": "4 Weeks",
+    "popularityRank": 86,
+    "deliveryComplexity": "medium",
+    "badge": null,
+    "audience": "Enterprise",
+    "industryRelevance": "All Industries",
+    "features": [
+      "Initial assessment and scoping",
+      "Customized implementation roadmap",
+      "Executive alignment workshops",
+      "Final delivery and handover"
+    ],
+    "tags": [
+      "engineering",
+      "build",
+      "transformation"
+    ],
+    "outcomes": [
+      "automate-workflows",
+      "improve-cx"
+    ],
+    "department": "IT & Strategy",
+    "businessImpact": "Significant operational improvements",
+    "implementationModel": "Engineering Sprint",
+    "timelineMilestones": [
+      "Week 1: Discovery",
+      "Week 2: Design & Planning",
+      "Week 3: Execution",
+      "Week 4: Review & Handover"
+    ],
+    "relatedServices": []
+  },
+  {
+    "id": 16,
+    "collection": "experience",
+    "serviceType": "design",
+    "standardName": "Omnichannel Experience Design",
+    "remixName": {
+      "banking": "Banking Omnichannel Experience Design",
+      "government": "Government Omnichannel Experience Design",
+      "healthcare": "Healthcare Omnichannel Experience Design",
+      "retail": "Retail Omnichannel Experience Design",
+      "education": "Education Omnichannel Experience Design",
+      "manufacturing": "Manufacturing Omnichannel Experience Design",
+      "logistics": "Logistics Omnichannel Experience Design",
+      "general": "Omnichannel Experience Design"
+    },
+    "description": "Expert omnichannel experience design tailored to your business needs to drive growth and efficiency.",
+    "positioning": "Accelerate your transformation with our specialized design services.",
+    "price": "$2,400",
+    "duration": "4 Weeks",
+    "popularityRank": 85,
+    "deliveryComplexity": "medium",
+    "badge": "Popular",
+    "audience": "Enterprise",
+    "industryRelevance": "All Industries",
+    "features": [
+      "Initial assessment and scoping",
+      "Customized implementation roadmap",
+      "Executive alignment workshops",
+      "Final delivery and handover"
+    ],
+    "tags": [
+      "experience",
+      "design",
+      "transformation"
+    ],
+    "outcomes": [
+      "improve-cx"
+    ],
+    "department": "IT & Strategy",
+    "businessImpact": "Significant operational improvements",
+    "implementationModel": "Engineering Sprint",
+    "timelineMilestones": [
+      "Week 1: Discovery",
+      "Week 2: Design & Planning",
+      "Week 3: Execution",
+      "Week 4: Review & Handover"
+    ],
+    "relatedServices": []
+  },
+  {
+    "id": 17,
+    "collection": "data",
+    "serviceType": "advisory",
+    "standardName": "Data Maturity Assessment",
+    "remixName": {
+      "banking": "Banking Data Maturity Assessment",
+      "government": "Government Data Maturity Assessment",
+      "healthcare": "Healthcare Data Maturity Assessment",
+      "retail": "Retail Data Maturity Assessment",
+      "education": "Education Data Maturity Assessment",
+      "manufacturing": "Manufacturing Data Maturity Assessment",
+      "logistics": "Logistics Data Maturity Assessment",
+      "general": "Data Maturity Assessment"
+    },
+    "description": "Expert data maturity assessment tailored to your business needs to drive growth and efficiency.",
+    "positioning": "Accelerate your transformation with our specialized advisory services.",
+    "price": "$1,500",
+    "duration": "4 Weeks",
+    "popularityRank": 84,
+    "deliveryComplexity": "medium",
+    "badge": null,
+    "audience": "Enterprise",
+    "industryRelevance": "All Industries",
+    "features": [
+      "Initial assessment and scoping",
+      "Customized implementation roadmap",
+      "Executive alignment workshops",
+      "Final delivery and handover"
+    ],
+    "tags": [
+      "data",
+      "advisory",
+      "transformation"
+    ],
+    "outcomes": [
+      "modernise-technology",
+      "strengthen-governance"
+    ],
+    "department": "IT & Strategy",
+    "businessImpact": "Significant operational improvements",
+    "implementationModel": "Consulting Sprint",
+    "timelineMilestones": [
+      "Week 1: Discovery",
+      "Week 2: Design & Planning",
+      "Week 3: Execution",
+      "Week 4: Review & Handover"
+    ],
+    "relatedServices": []
+  },
+  {
+    "id": 18,
+    "collection": "data",
+    "serviceType": "build",
+    "standardName": "Business Intelligence Dashboard Setup",
+    "remixName": {
+      "banking": "Banking Business Intelligence Dashboard Setup",
+      "government": "Government Business Intelligence Dashboard Setup",
+      "healthcare": "Healthcare Business Intelligence Dashboard Setup",
+      "retail": "Retail Business Intelligence Dashboard Setup",
+      "education": "Education Business Intelligence Dashboard Setup",
+      "manufacturing": "Manufacturing Business Intelligence Dashboard Setup",
+      "logistics": "Logistics Business Intelligence Dashboard Setup",
+      "general": "Business Intelligence Dashboard Setup"
+    },
+    "description": "Expert business intelligence dashboard setup tailored to your business needs to drive growth and efficiency.",
+    "positioning": "Accelerate your transformation with our specialized build services.",
+    "price": "$1,900",
+    "duration": "4 Weeks",
+    "popularityRank": 83,
+    "deliveryComplexity": "medium",
+    "badge": null,
+    "audience": "Enterprise",
+    "industryRelevance": "All Industries",
+    "features": [
+      "Initial assessment and scoping",
+      "Customized implementation roadmap",
+      "Executive alignment workshops",
+      "Final delivery and handover"
+    ],
+    "tags": [
+      "data",
+      "build",
+      "transformation"
+    ],
+    "outcomes": [
+      "improve-operations",
+      "grow-business"
+    ],
+    "department": "IT & Strategy",
+    "businessImpact": "Significant operational improvements",
+    "implementationModel": "Engineering Sprint",
+    "timelineMilestones": [
+      "Week 1: Discovery",
+      "Week 2: Design & Planning",
+      "Week 3: Execution",
+      "Week 4: Review & Handover"
+    ],
+    "relatedServices": []
+  },
+  {
+    "id": 19,
+    "collection": "data",
+    "serviceType": "build",
+    "standardName": "Executive Reporting Automation",
+    "remixName": {
+      "banking": "Banking Executive Reporting Automation",
+      "government": "Government Executive Reporting Automation",
+      "healthcare": "Healthcare Executive Reporting Automation",
+      "retail": "Retail Executive Reporting Automation",
+      "education": "Education Executive Reporting Automation",
+      "manufacturing": "Manufacturing Executive Reporting Automation",
+      "logistics": "Logistics Executive Reporting Automation",
+      "general": "Executive Reporting Automation"
+    },
+    "description": "Expert executive reporting automation tailored to your business needs to drive growth and efficiency.",
+    "positioning": "Accelerate your transformation with our specialized build services.",
+    "price": "$1,800",
+    "duration": "4 Weeks",
+    "popularityRank": 82,
+    "deliveryComplexity": "medium",
+    "badge": null,
+    "audience": "Enterprise",
+    "industryRelevance": "All Industries",
+    "features": [
+      "Initial assessment and scoping",
+      "Customized implementation roadmap",
+      "Executive alignment workshops",
+      "Final delivery and handover"
+    ],
+    "tags": [
+      "data",
+      "build",
+      "transformation"
+    ],
+    "outcomes": [
+      "automate-workflows",
+      "improve-operations"
+    ],
+    "department": "IT & Strategy",
+    "businessImpact": "Significant operational improvements",
+    "implementationModel": "Engineering Sprint",
+    "timelineMilestones": [
+      "Week 1: Discovery",
+      "Week 2: Design & Planning",
+      "Week 3: Execution",
+      "Week 4: Review & Handover"
+    ],
+    "relatedServices": []
+  },
+  {
+    "id": 20,
+    "collection": "data",
+    "serviceType": "build",
+    "standardName": "Data Warehouse Modernisation",
+    "remixName": {
+      "banking": "Banking Data Warehouse Modernisation",
+      "government": "Government Data Warehouse Modernisation",
+      "healthcare": "Healthcare Data Warehouse Modernisation",
+      "retail": "Retail Data Warehouse Modernisation",
+      "education": "Education Data Warehouse Modernisation",
+      "manufacturing": "Manufacturing Data Warehouse Modernisation",
+      "logistics": "Logistics Data Warehouse Modernisation",
+      "general": "Data Warehouse Modernisation"
+    },
+    "description": "Expert data warehouse modernisation tailored to your business needs to drive growth and efficiency.",
+    "positioning": "Accelerate your transformation with our specialized build services.",
+    "price": "$3,500",
+    "duration": "4 Weeks",
+    "popularityRank": 81,
+    "deliveryComplexity": "medium",
+    "badge": null,
+    "audience": "Enterprise",
+    "industryRelevance": "All Industries",
+    "features": [
+      "Initial assessment and scoping",
+      "Customized implementation roadmap",
+      "Executive alignment workshops",
+      "Final delivery and handover"
+    ],
+    "tags": [
+      "data",
+      "build",
+      "transformation"
+    ],
+    "outcomes": [
+      "modernise-technology"
+    ],
+    "department": "IT & Strategy",
+    "businessImpact": "Significant operational improvements",
+    "implementationModel": "Engineering Sprint",
+    "timelineMilestones": [
+      "Week 1: Discovery",
+      "Week 2: Design & Planning",
+      "Week 3: Execution",
+      "Week 4: Review & Handover"
+    ],
+    "relatedServices": []
+  },
+  {
+    "id": 21,
+    "collection": "data",
+    "serviceType": "design",
+    "standardName": "Data Governance Framework",
+    "remixName": {
+      "banking": "Banking Data Governance Framework",
+      "government": "Government Data Governance Framework",
+      "healthcare": "Healthcare Data Governance Framework",
+      "retail": "Retail Data Governance Framework",
+      "education": "Education Data Governance Framework",
+      "manufacturing": "Manufacturing Data Governance Framework",
+      "logistics": "Logistics Data Governance Framework",
+      "general": "Data Governance Framework"
+    },
+    "description": "Expert data governance framework tailored to your business needs to drive growth and efficiency.",
+    "positioning": "Accelerate your transformation with our specialized design services.",
+    "price": "$2,100",
+    "duration": "4 Weeks",
+    "popularityRank": 80,
+    "deliveryComplexity": "medium",
+    "badge": "Popular",
+    "audience": "Enterprise",
+    "industryRelevance": "All Industries",
+    "features": [
+      "Initial assessment and scoping",
+      "Customized implementation roadmap",
+      "Executive alignment workshops",
+      "Final delivery and handover"
+    ],
+    "tags": [
+      "data",
+      "design",
+      "transformation"
+    ],
+    "outcomes": [
+      "strengthen-governance"
+    ],
+    "department": "IT & Strategy",
+    "businessImpact": "Significant operational improvements",
+    "implementationModel": "Engineering Sprint",
+    "timelineMilestones": [
+      "Week 1: Discovery",
+      "Week 2: Design & Planning",
+      "Week 3: Execution",
+      "Week 4: Review & Handover"
+    ],
+    "relatedServices": []
+  },
+  {
+    "id": 22,
+    "collection": "data",
+    "serviceType": "build",
+    "standardName": "Master Data Management",
+    "remixName": {
+      "banking": "Banking Master Data Management",
+      "government": "Government Master Data Management",
+      "healthcare": "Healthcare Master Data Management",
+      "retail": "Retail Master Data Management",
+      "education": "Education Master Data Management",
+      "manufacturing": "Manufacturing Master Data Management",
+      "logistics": "Logistics Master Data Management",
+      "general": "Master Data Management"
+    },
+    "description": "Expert master data management tailored to your business needs to drive growth and efficiency.",
+    "positioning": "Accelerate your transformation with our specialized build services.",
+    "price": "$2,800",
+    "duration": "4 Weeks",
+    "popularityRank": 79,
+    "deliveryComplexity": "medium",
+    "badge": null,
+    "audience": "Enterprise",
+    "industryRelevance": "All Industries",
+    "features": [
+      "Initial assessment and scoping",
+      "Customized implementation roadmap",
+      "Executive alignment workshops",
+      "Final delivery and handover"
+    ],
+    "tags": [
+      "data",
+      "build",
+      "transformation"
+    ],
+    "outcomes": [
+      "strengthen-governance",
+      "improve-operations"
+    ],
+    "department": "IT & Strategy",
+    "businessImpact": "Significant operational improvements",
+    "implementationModel": "Engineering Sprint",
+    "timelineMilestones": [
+      "Week 1: Discovery",
+      "Week 2: Design & Planning",
+      "Week 3: Execution",
+      "Week 4: Review & Handover"
+    ],
+    "relatedServices": []
+  },
+  {
+    "id": 23,
+    "collection": "data",
+    "serviceType": "build",
+    "standardName": "Real-Time Analytics Enablement",
+    "remixName": {
+      "banking": "Banking Real-Time Analytics Enablement",
+      "government": "Government Real-Time Analytics Enablement",
+      "healthcare": "Healthcare Real-Time Analytics Enablement",
+      "retail": "Retail Real-Time Analytics Enablement",
+      "education": "Education Real-Time Analytics Enablement",
+      "manufacturing": "Manufacturing Real-Time Analytics Enablement",
+      "logistics": "Logistics Real-Time Analytics Enablement",
+      "general": "Real-Time Analytics Enablement"
+    },
+    "description": "Expert real-time analytics enablement tailored to your business needs to drive growth and efficiency.",
+    "positioning": "Accelerate your transformation with our specialized build services.",
+    "price": "$2,600",
+    "duration": "4 Weeks",
+    "popularityRank": 78,
+    "deliveryComplexity": "medium",
+    "badge": null,
+    "audience": "Enterprise",
+    "industryRelevance": "All Industries",
+    "features": [
+      "Initial assessment and scoping",
+      "Customized implementation roadmap",
+      "Executive alignment workshops",
+      "Final delivery and handover"
+    ],
+    "tags": [
+      "data",
+      "build",
+      "transformation"
+    ],
+    "outcomes": [
+      "modernise-technology",
+      "improve-operations"
+    ],
+    "department": "IT & Strategy",
+    "businessImpact": "Significant operational improvements",
+    "implementationModel": "Engineering Sprint",
+    "timelineMilestones": [
+      "Week 1: Discovery",
+      "Week 2: Design & Planning",
+      "Week 3: Execution",
+      "Week 4: Review & Handover"
+    ],
+    "relatedServices": []
+  },
+  {
+    "id": 24,
+    "collection": "ai",
+    "serviceType": "build",
+    "standardName": "Predictive Analytics Setup",
+    "remixName": {
+      "banking": "Banking Predictive Analytics Setup",
+      "government": "Government Predictive Analytics Setup",
+      "healthcare": "Healthcare Predictive Analytics Setup",
+      "retail": "Retail Predictive Analytics Setup",
+      "education": "Education Predictive Analytics Setup",
+      "manufacturing": "Manufacturing Predictive Analytics Setup",
+      "logistics": "Logistics Predictive Analytics Setup",
+      "general": "Predictive Analytics Setup"
+    },
+    "description": "Expert predictive analytics setup tailored to your business needs to drive growth and efficiency.",
+    "positioning": "Accelerate your transformation with our specialized build services.",
+    "price": "$2,700",
+    "duration": "4 Weeks",
+    "popularityRank": 77,
+    "deliveryComplexity": "medium",
+    "badge": null,
+    "audience": "Enterprise",
+    "industryRelevance": "All Industries",
+    "features": [
+      "Initial assessment and scoping",
+      "Customized implementation roadmap",
+      "Executive alignment workshops",
+      "Final delivery and handover"
+    ],
+    "tags": [
+      "ai",
+      "build",
+      "transformation"
+    ],
+    "outcomes": [
+      "launch-ai",
+      "grow-business"
+    ],
+    "department": "IT & Strategy",
+    "businessImpact": "Significant operational improvements",
+    "implementationModel": "Engineering Sprint",
+    "timelineMilestones": [
+      "Week 1: Discovery",
+      "Week 2: Design & Planning",
+      "Week 3: Execution",
+      "Week 4: Review & Handover"
+    ],
+    "relatedServices": []
+  },
+  {
+    "id": 25,
+    "collection": "marketing",
+    "serviceType": "build",
+    "standardName": "Customer Behaviour Analytics",
+    "remixName": {
+      "banking": "Banking Customer Behaviour Analytics",
+      "government": "Government Customer Behaviour Analytics",
+      "healthcare": "Healthcare Customer Behaviour Analytics",
+      "retail": "Retail Customer Behaviour Analytics",
+      "education": "Education Customer Behaviour Analytics",
+      "manufacturing": "Manufacturing Customer Behaviour Analytics",
+      "logistics": "Logistics Customer Behaviour Analytics",
+      "general": "Customer Behaviour Analytics"
+    },
+    "description": "Expert customer behaviour analytics tailored to your business needs to drive growth and efficiency.",
+    "positioning": "Accelerate your transformation with our specialized build services.",
+    "price": "$1,900",
+    "duration": "4 Weeks",
+    "popularityRank": 76,
+    "deliveryComplexity": "medium",
+    "badge": null,
+    "audience": "Enterprise",
+    "industryRelevance": "All Industries",
+    "features": [
+      "Initial assessment and scoping",
+      "Customized implementation roadmap",
+      "Executive alignment workshops",
+      "Final delivery and handover"
+    ],
+    "tags": [
+      "marketing",
+      "build",
+      "transformation"
+    ],
+    "outcomes": [
+      "improve-cx",
+      "grow-business"
+    ],
+    "department": "IT & Strategy",
+    "businessImpact": "Significant operational improvements",
+    "implementationModel": "Engineering Sprint",
+    "timelineMilestones": [
+      "Week 1: Discovery",
+      "Week 2: Design & Planning",
+      "Week 3: Execution",
+      "Week 4: Review & Handover"
+    ],
+    "relatedServices": []
+  },
+  {
+    "id": 26,
+    "collection": "operations",
+    "serviceType": "build",
+    "standardName": "Operational Intelligence Platform",
+    "remixName": {
+      "banking": "Banking Operational Intelligence Platform",
+      "government": "Government Operational Intelligence Platform",
+      "healthcare": "Healthcare Operational Intelligence Platform",
+      "retail": "Retail Operational Intelligence Platform",
+      "education": "Education Operational Intelligence Platform",
+      "manufacturing": "Manufacturing Operational Intelligence Platform",
+      "logistics": "Logistics Operational Intelligence Platform",
+      "general": "Operational Intelligence Platform"
+    },
+    "description": "Expert operational intelligence platform tailored to your business needs to drive growth and efficiency.",
+    "positioning": "Accelerate your transformation with our specialized build services.",
+    "price": "$3,000",
+    "duration": "4 Weeks",
+    "popularityRank": 75,
+    "deliveryComplexity": "medium",
+    "badge": "Popular",
+    "audience": "Enterprise",
+    "industryRelevance": "All Industries",
+    "features": [
+      "Initial assessment and scoping",
+      "Customized implementation roadmap",
+      "Executive alignment workshops",
+      "Final delivery and handover"
+    ],
+    "tags": [
+      "operations",
+      "build",
+      "transformation"
+    ],
+    "outcomes": [
+      "improve-operations",
+      "automate-workflows"
+    ],
+    "department": "IT & Strategy",
+    "businessImpact": "Significant operational improvements",
+    "implementationModel": "Engineering Sprint",
+    "timelineMilestones": [
+      "Week 1: Discovery",
+      "Week 2: Design & Planning",
+      "Week 3: Execution",
+      "Week 4: Review & Handover"
+    ],
+    "relatedServices": []
+  },
+  {
+    "id": 27,
+    "collection": "operations",
+    "serviceType": "manage",
+    "standardName": "Managed Digital Operations",
+    "remixName": {
+      "banking": "Banking Managed Digital Operations",
+      "government": "Government Managed Digital Operations",
+      "healthcare": "Healthcare Managed Digital Operations",
+      "retail": "Retail Managed Digital Operations",
+      "education": "Education Managed Digital Operations",
+      "manufacturing": "Manufacturing Managed Digital Operations",
+      "logistics": "Logistics Managed Digital Operations",
+      "general": "Managed Digital Operations"
+    },
+    "description": "Expert managed digital operations tailored to your business needs to drive growth and efficiency.",
+    "positioning": "Accelerate your transformation with our specialized manage services.",
+    "price": "$2,000",
+    "duration": "4 Weeks",
+    "popularityRank": 74,
+    "deliveryComplexity": "medium",
+    "badge": null,
+    "audience": "Enterprise",
+    "industryRelevance": "All Industries",
+    "features": [
+      "Initial assessment and scoping",
+      "Customized implementation roadmap",
+      "Executive alignment workshops",
+      "Final delivery and handover"
+    ],
+    "tags": [
+      "operations",
+      "manage",
+      "transformation"
+    ],
+    "outcomes": [
+      "improve-operations"
+    ],
+    "department": "IT & Strategy",
+    "businessImpact": "Significant operational improvements",
+    "implementationModel": "Engineering Sprint",
+    "timelineMilestones": [
+      "Week 1: Discovery",
+      "Week 2: Design & Planning",
+      "Week 3: Execution",
+      "Week 4: Review & Handover"
+    ],
+    "relatedServices": []
+  },
+  {
+    "id": 28,
+    "collection": "engineering",
+    "serviceType": "manage",
+    "standardName": "Managed Cloud Services",
+    "remixName": {
+      "banking": "Banking Managed Cloud Services",
+      "government": "Government Managed Cloud Services",
+      "healthcare": "Healthcare Managed Cloud Services",
+      "retail": "Retail Managed Cloud Services",
+      "education": "Education Managed Cloud Services",
+      "manufacturing": "Manufacturing Managed Cloud Services",
+      "logistics": "Logistics Managed Cloud Services",
+      "general": "Managed Cloud Services"
+    },
+    "description": "Expert managed cloud services tailored to your business needs to drive growth and efficiency.",
+    "positioning": "Accelerate your transformation with our specialized manage services.",
+    "price": "$2,200",
+    "duration": "4 Weeks",
+    "popularityRank": 73,
+    "deliveryComplexity": "medium",
+    "badge": null,
+    "audience": "Enterprise",
+    "industryRelevance": "All Industries",
+    "features": [
+      "Initial assessment and scoping",
+      "Customized implementation roadmap",
+      "Executive alignment workshops",
+      "Final delivery and handover"
+    ],
+    "tags": [
+      "engineering",
+      "manage",
+      "transformation"
+    ],
+    "outcomes": [
+      "modernise-technology",
+      "improve-operations"
+    ],
+    "department": "IT & Strategy",
+    "businessImpact": "Significant operational improvements",
+    "implementationModel": "Engineering Sprint",
+    "timelineMilestones": [
+      "Week 1: Discovery",
+      "Week 2: Design & Planning",
+      "Week 3: Execution",
+      "Week 4: Review & Handover"
+    ],
+    "relatedServices": []
+  },
+  {
+    "id": 29,
+    "collection": "ai",
+    "serviceType": "manage",
+    "standardName": "Managed AI Operations",
+    "remixName": {
+      "banking": "Banking Managed AI Operations",
+      "government": "Government Managed AI Operations",
+      "healthcare": "Healthcare Managed AI Operations",
+      "retail": "Retail Managed AI Operations",
+      "education": "Education Managed AI Operations",
+      "manufacturing": "Manufacturing Managed AI Operations",
+      "logistics": "Logistics Managed AI Operations",
+      "general": "Managed AI Operations"
+    },
+    "description": "Expert managed ai operations tailored to your business needs to drive growth and efficiency.",
+    "positioning": "Accelerate your transformation with our specialized manage services.",
+    "price": "$2,500",
+    "duration": "4 Weeks",
+    "popularityRank": 72,
+    "deliveryComplexity": "medium",
+    "badge": null,
+    "audience": "Enterprise",
+    "industryRelevance": "All Industries",
+    "features": [
+      "Initial assessment and scoping",
+      "Customized implementation roadmap",
+      "Executive alignment workshops",
+      "Final delivery and handover"
+    ],
+    "tags": [
+      "ai",
+      "manage",
+      "transformation"
+    ],
+    "outcomes": [
+      "launch-ai",
+      "improve-operations"
+    ],
+    "department": "IT & Strategy",
+    "businessImpact": "Significant operational improvements",
+    "implementationModel": "Engineering Sprint",
+    "timelineMilestones": [
+      "Week 1: Discovery",
+      "Week 2: Design & Planning",
+      "Week 3: Execution",
+      "Week 4: Review & Handover"
+    ],
+    "relatedServices": []
+  },
+  {
+    "id": 30,
+    "collection": "engineering",
+    "serviceType": "manage",
+    "standardName": "Managed DevOps Services",
+    "remixName": {
+      "banking": "Banking Managed DevOps Services",
+      "government": "Government Managed DevOps Services",
+      "healthcare": "Healthcare Managed DevOps Services",
+      "retail": "Retail Managed DevOps Services",
+      "education": "Education Managed DevOps Services",
+      "manufacturing": "Manufacturing Managed DevOps Services",
+      "logistics": "Logistics Managed DevOps Services",
+      "general": "Managed DevOps Services"
+    },
+    "description": "Expert managed devops services tailored to your business needs to drive growth and efficiency.",
+    "positioning": "Accelerate your transformation with our specialized manage services.",
+    "price": "$2,100",
+    "duration": "4 Weeks",
+    "popularityRank": 71,
+    "deliveryComplexity": "medium",
+    "badge": null,
+    "audience": "Enterprise",
+    "industryRelevance": "All Industries",
+    "features": [
+      "Initial assessment and scoping",
+      "Customized implementation roadmap",
+      "Executive alignment workshops",
+      "Final delivery and handover"
+    ],
+    "tags": [
+      "engineering",
+      "manage",
+      "transformation"
+    ],
+    "outcomes": [
+      "automate-workflows",
+      "modernise-technology"
+    ],
+    "department": "IT & Strategy",
+    "businessImpact": "Significant operational improvements",
+    "implementationModel": "Engineering Sprint",
+    "timelineMilestones": [
+      "Week 1: Discovery",
+      "Week 2: Design & Planning",
+      "Week 3: Execution",
+      "Week 4: Review & Handover"
+    ],
+    "relatedServices": []
+  },
+  {
+    "id": 31,
+    "collection": "data",
+    "serviceType": "manage",
+    "standardName": "Managed Analytics Services",
+    "remixName": {
+      "banking": "Banking Managed Analytics Services",
+      "government": "Government Managed Analytics Services",
+      "healthcare": "Healthcare Managed Analytics Services",
+      "retail": "Retail Managed Analytics Services",
+      "education": "Education Managed Analytics Services",
+      "manufacturing": "Manufacturing Managed Analytics Services",
+      "logistics": "Logistics Managed Analytics Services",
+      "general": "Managed Analytics Services"
+    },
+    "description": "Expert managed analytics services tailored to your business needs to drive growth and efficiency.",
+    "positioning": "Accelerate your transformation with our specialized manage services.",
+    "price": "$1,900",
+    "duration": "4 Weeks",
+    "popularityRank": 70,
+    "deliveryComplexity": "medium",
+    "badge": "Popular",
+    "audience": "Enterprise",
+    "industryRelevance": "All Industries",
+    "features": [
+      "Initial assessment and scoping",
+      "Customized implementation roadmap",
+      "Executive alignment workshops",
+      "Final delivery and handover"
+    ],
+    "tags": [
+      "data",
+      "manage",
+      "transformation"
+    ],
+    "outcomes": [
+      "improve-operations",
+      "grow-business"
+    ],
+    "department": "IT & Strategy",
+    "businessImpact": "Significant operational improvements",
+    "implementationModel": "Engineering Sprint",
+    "timelineMilestones": [
+      "Week 1: Discovery",
+      "Week 2: Design & Planning",
+      "Week 3: Execution",
+      "Week 4: Review & Handover"
+    ],
+    "relatedServices": []
+  },
+  {
+    "id": 32,
+    "collection": "security",
+    "serviceType": "manage",
+    "standardName": "Managed Security Monitoring",
+    "remixName": {
+      "banking": "Banking Managed Security Monitoring",
+      "government": "Government Managed Security Monitoring",
+      "healthcare": "Healthcare Managed Security Monitoring",
+      "retail": "Retail Managed Security Monitoring",
+      "education": "Education Managed Security Monitoring",
+      "manufacturing": "Manufacturing Managed Security Monitoring",
+      "logistics": "Logistics Managed Security Monitoring",
+      "general": "Managed Security Monitoring"
+    },
+    "description": "Expert managed security monitoring tailored to your business needs to drive growth and efficiency.",
+    "positioning": "Accelerate your transformation with our specialized manage services.",
+    "price": "$2,300",
+    "duration": "4 Weeks",
+    "popularityRank": 69,
+    "deliveryComplexity": "medium",
+    "badge": null,
+    "audience": "Enterprise",
+    "industryRelevance": "All Industries",
+    "features": [
+      "Initial assessment and scoping",
+      "Customized implementation roadmap",
+      "Executive alignment workshops",
+      "Final delivery and handover"
+    ],
+    "tags": [
+      "security",
+      "manage",
+      "transformation"
+    ],
+    "outcomes": [
+      "strengthen-governance"
+    ],
+    "department": "IT & Strategy",
+    "businessImpact": "Significant operational improvements",
+    "implementationModel": "Engineering Sprint",
+    "timelineMilestones": [
+      "Week 1: Discovery",
+      "Week 2: Design & Planning",
+      "Week 3: Execution",
+      "Week 4: Review & Handover"
+    ],
+    "relatedServices": []
+  },
+  {
+    "id": 33,
+    "collection": "engineering",
+    "serviceType": "manage",
+    "standardName": "Managed Application Support",
+    "remixName": {
+      "banking": "Banking Managed Application Support",
+      "government": "Government Managed Application Support",
+      "healthcare": "Healthcare Managed Application Support",
+      "retail": "Retail Managed Application Support",
+      "education": "Education Managed Application Support",
+      "manufacturing": "Manufacturing Managed Application Support",
+      "logistics": "Logistics Managed Application Support",
+      "general": "Managed Application Support"
+    },
+    "description": "Expert managed application support tailored to your business needs to drive growth and efficiency.",
+    "positioning": "Accelerate your transformation with our specialized manage services.",
+    "price": "$1,700",
+    "duration": "4 Weeks",
+    "popularityRank": 68,
+    "deliveryComplexity": "medium",
+    "badge": null,
+    "audience": "Enterprise",
+    "industryRelevance": "All Industries",
+    "features": [
+      "Initial assessment and scoping",
+      "Customized implementation roadmap",
+      "Executive alignment workshops",
+      "Final delivery and handover"
+    ],
+    "tags": [
+      "engineering",
+      "manage",
+      "transformation"
+    ],
+    "outcomes": [
+      "modernise-technology"
+    ],
+    "department": "IT & Strategy",
+    "businessImpact": "Significant operational improvements",
+    "implementationModel": "Engineering Sprint",
+    "timelineMilestones": [
+      "Week 1: Discovery",
+      "Week 2: Design & Planning",
+      "Week 3: Execution",
+      "Week 4: Review & Handover"
+    ],
+    "relatedServices": []
   }
 ];
 
 export const getRemixedName = (pkg: typeof initialServices[0], industry: string) => {
-  if (industry === "all" || !pkg.remixName || !pkg.remixName[industry as keyof typeof pkg.remixName]) {
+  if (industry === "all" || !pkg.remixName || !(industry in pkg.remixName)) {
     return pkg.standardName;
   }
   return pkg.remixName[industry as keyof typeof pkg.remixName];
 };
+
+type ServiceCollection = (typeof initialServices)[number]["collection"];
+
+/** Top services per collection (homepage featured + marketplace shelf) */
+export const getFeaturedByCollection = (
+  collection: ServiceCollection,
+  limit = 3
+) =>
+  initialServices
+    .filter((s) => s.collection === collection)
+    .sort((a, b) => b.popularityRank - a.popularityRank)
+    .slice(0, limit);
+
+/** Best sellers for marketplace — all categories or one collection */
+export const getBestSellers = (
+  collection: "all" | ServiceCollection = "all",
+  limit = 4
+) => {
+  const pool =
+    collection === "all"
+      ? initialServices
+      : initialServices.filter((s) => s.collection === collection);
+  return [...pool]
+    .sort((a, b) => b.popularityRank - a.popularityRank)
+    .slice(0, limit);
+};
+
+export const getServiceById = (id: number) =>
+  initialServices.find((s) => s.id === id);
+
+export const parseServicePrice = (price: string): number =>
+  Number(price.replace(/[^0-9]/g, "")) || 0;
+
+export const formatServicePrice = (amount: number): string =>
+  `$${amount.toLocaleString("en-US")}`;

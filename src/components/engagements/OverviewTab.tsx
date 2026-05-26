@@ -2,20 +2,14 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { mockDeliverables, mockRisks, mockIssues, mockDependencies, mockAssumptions, mockMilestones } from "@/data/mockEngagementDetails";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
-import { CheckCircle2, AlertCircle, XCircle } from "lucide-react";
-import {
-  engagementHealthIndicators,
-  getHealthStatusBadgeClass,
-} from "@/data/engagementHealthIndicators";
+import { HealthIndicatorsList } from "@/components/engagements/HealthIndicatorsList";
+import type { IndicatorNavigationTarget } from "@/data/engagementHealthIndicators";
 
-const getStatusIcon = (status: string) => {
-  if (status === "green") return <CheckCircle2 size={16} className="text-green-600" />;
-  if (status === "amber") return <AlertCircle size={16} className="text-amber-600" />;
-  if (status === "red") return <XCircle size={16} className="text-red-600" />;
-  return null;
-};
+interface OverviewTabProps {
+  onNavigateToIndicator?: (target: IndicatorNavigationTarget) => void;
+}
 
-export const OverviewTab = () => {
+export const OverviewTab = ({ onNavigateToIndicator }: OverviewTabProps) => {
   const totalDeliverables = mockDeliverables.length;
   const completedDeliverables = mockDeliverables.filter(d => d.status === "Closed").length;
   const inProgressDeliverables = mockDeliverables.filter(d => d.status === "In Progress" || d.status === "Pending Acceptance").length;
@@ -61,22 +55,11 @@ export const OverviewTab = () => {
       <div className="grid md:grid-cols-2 gap-8">
         {/* 7 KEY GOVERNANCE INDICATORS */}
         <section className="space-y-4">
-          <h3 className="text-lg font-bold text-navy-950">7 Key Governance Indicators</h3>
-          <Card className="shadow-sm">
-            <div className="divide-y divide-border">
-              {engagementHealthIndicators.map((ind) => (
-                <div key={ind.id} className="p-4 flex items-start justify-between bg-white hover:bg-slate-50 transition-colors">
-                  <div>
-                    <p className="text-sm font-semibold text-navy-950 mb-1">{ind.name}</p>
-                    <p className="text-xs text-gray-500">{ind.currentReason}</p>
-                  </div>
-                  <Badge variant="outline" className={`ml-4 shrink-0 capitalize ${getHealthStatusBadgeClass(ind.status)} flex items-center gap-1`}>
-                    {getStatusIcon(ind.status)}
-                    {ind.status}
-                  </Badge>
-                </div>
-              ))}
-            </div>
+          <div>
+            <h3 className="text-lg font-bold text-navy-950">7 Key Governance Indicators</h3>
+          </div>
+          <Card className="shadow-sm overflow-hidden">
+            <HealthIndicatorsList variant="overview" onNavigate={onNavigateToIndicator} />
           </Card>
         </section>
 

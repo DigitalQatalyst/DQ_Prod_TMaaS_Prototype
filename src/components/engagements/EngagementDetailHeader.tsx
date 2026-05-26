@@ -3,7 +3,6 @@ import { Button } from "@/components/ui/button";
 import {
   engagementHealthIndicators,
   computeOverallHealth,
-  getHealthStatusColor,
   getHealthStatusBadgeClass,
 } from "@/data/engagementHealthIndicators";
 import { ChevronRight } from "lucide-react";
@@ -16,8 +15,6 @@ interface EngagementDetailHeaderProps {
   clientLogo?: string;
   onViewStatusDetails: () => void;
 }
-
-const segmentTitles = engagementHealthIndicators.map((i) => `${i.name}: ${i.status}`);
 
 export const EngagementDetailHeader = ({
   name,
@@ -64,39 +61,22 @@ export const EngagementDetailHeader = ({
           </div>
         </div>
 
-        <div className="lg:min-w-[280px] lg:text-right shrink-0">
-          <p className="text-[10px] font-bold text-gray-400 uppercase tracking-wider mb-2">
-            Overall Status
-          </p>
-          <Badge variant="outline" className={`text-sm font-semibold ${getHealthStatusBadgeClass(overall.status)}`}>
-            {overall.label}
-          </Badge>
-
-          <button
-            type="button"
-            onClick={onViewStatusDetails}
-            className="mt-4 w-full lg:max-w-[240px] lg:ml-auto group cursor-pointer rounded-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-navy-900 focus-visible:ring-offset-2"
-            aria-label="View automated project status details for 7 key indicators"
-          >
-            <div className="flex gap-1">
-              {engagementHealthIndicators.map((ind, index) => (
-                <div
-                  key={ind.id}
-                  title={segmentTitles[index]}
-                  className={`h-2 flex-1 rounded-full transition-opacity group-hover:opacity-80 ${getHealthStatusColor(ind.status)}`}
-                />
-              ))}
-            </div>
-            <p className="text-[10px] text-gray-400 mt-1.5 text-left lg:text-right">
-              7 key indicators
+        <div className="flex flex-col items-start lg:items-end gap-3 shrink-0">
+          <div className="text-left lg:text-right">
+            <p className="text-[10px] font-bold text-gray-400 uppercase tracking-wider mb-2">
+              Overall Status
             </p>
-          </button>
+            <Badge variant="outline" className={`text-sm font-semibold ${getHealthStatusBadgeClass(overall.status)}`}>
+              {overall.label}
+            </Badge>
+            <p className="text-[10px] text-gray-400 mt-1.5">Based on 7 key indicators</p>
+          </div>
 
           <Button
             variant="ghost"
             size="sm"
             onClick={onViewStatusDetails}
-            className="mt-2 gap-1 text-navy-950 hover:text-navy-950 lg:ml-auto h-8 px-2"
+            className="gap-1 text-navy-950 hover:text-navy-950 hover:bg-slate-50 h-8 px-2 lg:ml-auto"
           >
             View details
             <ChevronRight size={14} />

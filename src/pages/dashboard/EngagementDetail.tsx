@@ -15,10 +15,21 @@ import { CommercialsTab } from "@/components/engagements/CommercialsTab";
 import { SessionsTab } from "@/components/engagements/SessionsTab";
 import { TeamTab } from "@/components/engagements/TeamTab";
 import { HealthIndicatorModal } from "@/components/engagements/HealthIndicatorModal";
+import type { IndicatorNavigationTarget, RaidSubTab } from "@/data/engagementHealthIndicators";
 
 const EngagementDetail = () => {
   const [healthModalOpen, setHealthModalOpen] = useState(false);
+  const [activeTab, setActiveTab] = useState("overview");
+  const [raidSubTab, setRaidSubTab] = useState<RaidSubTab>("risks");
   const { user } = useAuth();
+
+  const handleNavigateToIndicator = (target: IndicatorNavigationTarget) => {
+    setActiveTab(target.tab);
+    if (target.raidSubTab) {
+      setRaidSubTab(target.raidSubTab);
+    }
+    setHealthModalOpen(false);
+  };
   const backPath =
     user.role === "dq_portfolio_oversight" ? "/dashboard/dq/portfolio" : "/dashboard/services";
   const backLabel = user.role === "dq_portfolio_oversight" ? "Portfolio" : "Delivery";
@@ -43,7 +54,7 @@ const EngagementDetail = () => {
         />
 
         {/* 2. Tabbed Workspace */}
-        <Tabs defaultValue="overview" className="w-full">
+        <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
           <TabsList className="w-full justify-start bg-transparent border-b border-border h-auto p-0 rounded-none overflow-x-auto overflow-y-hidden flex-nowrap">
             <TabsTrigger value="overview" className="rounded-none border-b-2 border-transparent data-[state=active]:border-navy-900 data-[state=active]:bg-transparent data-[state=active]:shadow-none px-6 pb-3 text-sm font-semibold">Overview</TabsTrigger>
             <TabsTrigger value="delivery" className="rounded-none border-b-2 border-transparent data-[state=active]:border-navy-900 data-[state=active]:bg-transparent data-[state=active]:shadow-none px-6 pb-3 text-sm font-semibold">Delivery</TabsTrigger>
@@ -56,9 +67,13 @@ const EngagementDetail = () => {
           </TabsList>
 
           <div className="mt-8">
-            <TabsContent value="overview" className="m-0"><OverviewTab /></TabsContent>
+            <TabsContent value="overview" className="m-0">
+              <OverviewTab onNavigateToIndicator={handleNavigateToIndicator} />
+            </TabsContent>
             <TabsContent value="delivery" className="m-0"><DeliveryTab /></TabsContent>
-            <TabsContent value="raid" className="m-0"><RaidTab /></TabsContent>
+            <TabsContent value="raid" className="m-0">
+              <RaidTab activeSubTab={raidSubTab} onSubTabChange={setRaidSubTab} />
+            </TabsContent>
             <TabsContent value="stakeholders" className="m-0"><StakeholdersTab /></TabsContent>
             <TabsContent value="commercials" className="m-0"><CommercialsTab /></TabsContent>
             <TabsContent value="sessions" className="m-0"><SessionsTab /></TabsContent>
@@ -73,7 +88,11 @@ const EngagementDetail = () => {
         </Tabs>
 
         {/* Modal */}
-        <HealthIndicatorModal open={healthModalOpen} onOpenChange={setHealthModalOpen} />
+        <HealthIndicatorModal
+          open={healthModalOpen}
+          onOpenChange={setHealthModalOpen}
+          onNavigateToIndicator={handleNavigateToIndicator}
+        />
       </div>
     </DashboardLayout>
   );

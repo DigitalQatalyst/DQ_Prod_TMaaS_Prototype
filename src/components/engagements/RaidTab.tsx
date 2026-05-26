@@ -4,8 +4,14 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { mockRisks, mockIssues, mockDependencies, mockAssumptions } from "@/data/mockEngagementDetails";
 import { AlertCircle, Shield } from "lucide-react";
+import type { RaidSubTab } from "@/data/engagementHealthIndicators";
 
-export const RaidTab = () => {
+interface RaidTabProps {
+  activeSubTab?: RaidSubTab;
+  onSubTabChange?: (tab: RaidSubTab) => void;
+}
+
+export const RaidTab = ({ activeSubTab = "risks", onSubTabChange }: RaidTabProps) => {
   const getSeverityBadge = (severity: string) => {
     switch (severity) {
       case "Critical": return <Badge variant="outline" className="text-red-600 border-red-200 bg-red-50">{severity}</Badge>;
@@ -41,7 +47,11 @@ export const RaidTab = () => {
 
         <Card className="border-navy-100 shadow-sm overflow-hidden">
           <CardContent className="p-0">
-            <Tabs defaultValue="risks" className="w-full">
+            <Tabs
+              value={activeSubTab}
+              onValueChange={(value) => onSubTabChange?.(value as RaidSubTab)}
+              className="w-full"
+            >
               <div className="px-6 pt-4 border-b border-border bg-slate-50/50">
                 <TabsList className="bg-transparent h-auto p-0 flex justify-start gap-8 overflow-x-auto">
                   <TabsTrigger value="risks" className="rounded-none border-b-2 border-transparent data-[state=active]:border-purple-600 data-[state=active]:bg-transparent px-0 pb-3 text-sm font-semibold">

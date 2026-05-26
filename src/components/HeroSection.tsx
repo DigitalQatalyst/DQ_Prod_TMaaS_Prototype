@@ -1,35 +1,34 @@
 import { useState } from "react";
-import { motion } from "framer-motion";
-import { ArrowRight, Sparkles } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { Link } from "react-router-dom";
+import { ArrowUp, Sparkles } from "lucide-react";
 import DiagnoseDialog from "./DiagnoseDialog";
 
-function HeroSpotlight() {
-  return (
-    <div className="pointer-events-none absolute inset-0 overflow-hidden">
-      <div
-        aria-hidden
-        className="absolute left-1/2 top-24 h-[520px] w-[520px] -translate-x-1/2 rounded-full blur-[24px]"
-        style={{
-          background:
-            "radial-gradient(closest-side, oklch(0.65 0.208 29 / 0.26), oklch(0.65 0.208 29 / 0.06) 55%, transparent 75%)",
-        }}
-      />
-    </div>
-  );
-}
+const MAX_PROMPT_LENGTH = 4000;
+
+const suggestions = [
+  { label: "Launch AI capabilities", prompt: "Launch AI Capabilities" },
+  { label: "Improve customer experience", prompt: "I want to improve customer experience" },
+  { label: "Modernize operations", prompt: "Modernize our digital operations" },
+  { label: "Build transformation roadmap", prompt: "Build Transformation Roadmap" },
+  { label: "Accelerate digital delivery", prompt: "Accelerate digital delivery across the organization" },
+  { label: "Deploy with specialists", prompt: "Deploy with Certified Specialists" },
+];
 
 const HeroSection = () => {
   const [problem, setProblem] = useState("");
   const [isDialogOpen, setIsDialogOpen] = useState(false);
 
-  const handleSubmit = () => {
-    if (problem.trim()) {
-      setIsDialogOpen(true);
-    }
+  const openWithPrompt = (prompt: string) => {
+    setProblem(prompt);
+    setIsDialogOpen(true);
   };
 
-  const handleKeyPress = (e: React.KeyboardEvent) => {
+  const handleSubmit = () => {
+    const trimmed = problem.trim();
+    if (trimmed) setIsDialogOpen(true);
+  };
+
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
     if (e.key === "Enter" && !e.shiftKey) {
       e.preventDefault();
       handleSubmit();
@@ -39,130 +38,101 @@ const HeroSection = () => {
   return (
     <section
       id="hero"
-      className="relative isolate overflow-hidden pb-20 pt-32 md:pb-28 md:pt-44"
+      className="relative isolate overflow-hidden border-b border-navy-100/80 bg-gradient-to-b from-sky-50/90 via-white to-white pb-16 pt-28 md:pb-20 md:pt-36"
     >
       <div
         aria-hidden
-        className="absolute inset-0 -z-10"
-        style={{ background: "var(--mesh-hero-light)" }}
-      />
-      <div
-        aria-hidden
-        className="absolute inset-0 -z-10 opacity-[0.35]"
+        className="pointer-events-none absolute inset-0 -z-10"
         style={{
-          backgroundImage:
-            "linear-gradient(to right, oklch(0.86 0.010 264 / 0.5) 1px, transparent 1px), linear-gradient(to bottom, oklch(0.86 0.010 264 / 0.5) 1px, transparent 1px)",
-          backgroundSize: "56px 56px",
-          maskImage:
-            "radial-gradient(ellipse 70% 50% at 50% 30%, black 40%, transparent 80%)",
+          background:
+            "radial-gradient(ellipse 80% 50% at 50% -10%, oklch(0.75 0.12 250 / 0.15), transparent 70%)",
         }}
       />
-      <HeroSpotlight />
 
-      <div className="relative z-10 mx-auto max-w-7xl px-6 text-center">
-        <motion.div
-          initial={{ opacity: 0, y: -8 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-          className="mb-6 inline-flex items-center gap-2 rounded-full border border-orange-500/20 bg-orange-500/10 px-4 py-1.5 text-xs font-semibold text-orange-700 backdrop-blur"
-        >
-          <Sparkles size={12} className="text-orange-500 animate-pulse" />
-          <span>Living AI-guided Transformation Marketplace</span>
-        </motion.div>
+      <div className="relative z-10 mx-auto max-w-3xl px-6 text-center">
+        <p className="inline-flex items-center gap-1.5 text-sm font-medium text-navy-800">
+          <Sparkles size={15} className="text-orange-500" strokeWidth={2} />
+          Butler mode
+        </p>
 
-        <motion.h1
-          initial={{ opacity: 0, y: 16 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          className="mx-auto max-w-4xl font-heading text-balance text-4xl font-bold leading-[1.1] tracking-tight text-navy-950 md:text-6xl"
-        >
-          Launch your next growth phase
-          <br />
-          <span className="bg-gradient-to-r from-navy-950 via-orange-600 to-orange-500 bg-clip-text text-transparent">
-            in weeks, not years.
-          </span>
-        </motion.h1>
+        <h1 className="mt-4 font-heading text-balance text-3xl font-bold leading-tight tracking-tight text-navy-950 sm:text-4xl md:text-[2.75rem] md:leading-[1.15]">
+          Find the right{" "}
+          <span className="text-orange-600">transformation package</span>
+          <br className="hidden sm:block" />
+          <span className="sm:whitespace-nowrap"> for your business</span>
+        </h1>
 
-        <motion.p
-          initial={{ opacity: 0, y: 16 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.15 }}
-          className="mx-auto mt-6 max-w-2xl text-base leading-relaxed text-gray-600 md:text-lg"
-        >
-          Browse, explore, and activate pre-scoped transformation roadmaps.
-          <br className="hidden md:block" />
-          Powered by active marketplace intelligence and delivered by certified specialists.
-        </motion.p>
+        {/* Agent prompt — AWS-style card */}
+        <div className="mt-10 text-left">
+          <div className="overflow-hidden rounded-xl border border-navy-200/80 bg-white shadow-sm transition-shadow focus-within:border-orange-300 focus-within:shadow-md focus-within:ring-2 focus-within:ring-orange-500/15">
+            <label htmlFor="butler-prompt" className="sr-only">
+              Describe your business need
+            </label>
+            <textarea
+              id="butler-prompt"
+              value={problem}
+              onChange={(e) =>
+                setProblem(e.target.value.slice(0, MAX_PROMPT_LENGTH))
+              }
+              onKeyDown={handleKeyDown}
+              placeholder="Let's guide you to the right solution. What's your business need?"
+              rows={4}
+              className="block w-full min-h-[7.5rem] resize-none border-0 bg-transparent px-4 pt-4 pb-2 text-base leading-relaxed text-navy-950 placeholder:text-gray-400 focus:outline-none focus:ring-0 md:text-[17px]"
+            />
 
-        {/* Butler prompt (input-first, no faux-chat UI) */}
-        <motion.div
-          initial={{ opacity: 0, y: 16 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.3 }}
-          className="mx-auto mt-10 max-w-3xl"
-        >
-          <div className="mt-6 rounded-[1.75rem] border border-navy-100 bg-white/70 p-3 shadow-2xl backdrop-blur-xl transition-all focus-within:shadow-[var(--glow-navy-md)]">
-            <div className="flex items-end gap-2 relative">
-              <div className="absolute left-4 top-4 text-orange-500">
-                <Sparkles size={20} className="animate-pulse" />
-              </div>
-              <div className="flex-1">
-                <label htmlFor="butler-prompt" className="sr-only">
-                  Ask Butler anything
-                </label>
-                <textarea
-                  id="butler-prompt"
-                  value={problem}
-                  onChange={(e) => setProblem(e.target.value)}
-                  onKeyPress={handleKeyPress}
-                  placeholder="What business goal can we help you solve today? (e.g., 'Optimize digital sales' or 'Launch AI capabilities')..."
-                  rows={2}
-                  className="block w-full resize-none bg-transparent pl-12 pr-3 py-3 text-base leading-relaxed text-navy-950 placeholder:text-gray-500 focus:outline-none md:text-lg"
-                />
-              </div>
-
-              <Button
-                onClick={handleSubmit}
-                disabled={!problem.trim()}
-                className="h-12 w-12 shrink-0 rounded-2xl bg-orange-500 p-0 text-white shadow-[var(--glow-orange-md)] hover:bg-orange-400 disabled:opacity-50"
-                aria-label="Send to Butler"
+            <div className="flex items-center justify-between gap-3 border-t border-navy-100/80 px-3 py-2.5">
+              <Link
+                to="/marketplace"
+                className="text-xs font-medium text-gray-500 transition-colors hover:text-orange-600"
               >
-                <ArrowRight size={18} />
-              </Button>
+                Browse marketplace
+              </Link>
+              <div className="flex items-center gap-2.5">
+                <span
+                  className="text-xs tabular-nums text-gray-400"
+                  aria-live="polite"
+                >
+                  {problem.length} / {MAX_PROMPT_LENGTH}
+                </span>
+                <button
+                  type="button"
+                  onClick={handleSubmit}
+                  disabled={!problem.trim()}
+                  className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-orange-500 text-white transition hover:bg-orange-600 disabled:cursor-not-allowed disabled:bg-gray-200 disabled:text-gray-400"
+                  aria-label="Send to Butler"
+                >
+                  <ArrowUp size={18} strokeWidth={2.25} />
+                </button>
+              </div>
             </div>
           </div>
-        </motion.div>
 
-        {/* Breadcrumbs - Butler's 4 transformation goals with instant-trigger */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.6, delay: 0.45 }}
-          className="mt-8 flex flex-col items-center justify-center gap-3"
-        >
-          <span className="text-xs font-semibold text-gray-500 tracking-wider uppercase">Not sure where to start? Try one of our outcome goals:</span>
+          <p className="mt-3 text-center text-[11px] leading-relaxed text-gray-400">
+            By using Butler, you agree that your prompt may be processed to recommend
+            TMaaS services. Do not submit confidential data.
+          </p>
+        </div>
+
+        {/* Quick prompts */}
+        <div className="mt-8">
           <div className="flex flex-wrap items-center justify-center gap-2">
-            {[
-              { text: "Launch AI Capabilities", action: "Launch AI Capabilities" },
-              { text: "Build Transformation Roadmap", action: "Build Transformation Roadmap" },
-              { text: "Optimize Customer Experience", action: "I want to improve customer experience" },
-              { text: "Deploy with Certified Specialists", action: "Deploy with Certified Specialists" }
-            ].map((item) => (
+            {suggestions.map((item) => (
               <button
-                key={item.text}
-                onClick={() => {
-                  setProblem(item.action);
-                  setIsDialogOpen(true);
-                }}
-                className="rounded-full border border-navy-100 bg-white/60 px-4 py-2.5 text-xs font-semibold text-gray-700 backdrop-blur transition hover:border-orange-500 hover:bg-orange-500/5 hover:text-orange-600 shadow-sm"
+                key={item.label}
+                type="button"
+                onClick={() => openWithPrompt(item.prompt)}
+                className="inline-flex items-center gap-1.5 rounded-full border border-navy-100 bg-white px-3.5 py-2 text-xs font-medium text-navy-800 shadow-sm transition hover:border-orange-200 hover:bg-orange-50/50 hover:text-orange-700"
               >
-                {item.text}
+                <Sparkles
+                  size={12}
+                  className="shrink-0 text-orange-500"
+                  strokeWidth={2}
+                />
+                {item.label}
               </button>
             ))}
           </div>
-        </motion.div>
-
-
+        </div>
       </div>
 
       <DiagnoseDialog
