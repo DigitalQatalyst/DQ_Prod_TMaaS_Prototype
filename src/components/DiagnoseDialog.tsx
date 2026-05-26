@@ -51,6 +51,20 @@ const DiagnoseDialog = ({ isOpen, onClose, initialProblem = "" }: DiagnoseDialog
   }, [messages, isTyping]);
 
   useEffect(() => {
+    if (!isOpen) {
+      setMessages([]);
+      setInput("");
+      setIsTyping(false);
+      setConversationStep(0);
+      setSelectedGoal("");
+      setUnresolvedCount(0);
+      setShowContactForm(false);
+      setContactFormStep(0);
+      setContactFormData({ name: "", email: "", reason: "" });
+    }
+  }, [isOpen]);
+
+  useEffect(() => {
     if (isOpen && messages.length === 0) {
       // Initial greeting - no chips inside dialog
       setTimeout(() => {

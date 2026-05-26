@@ -14,8 +14,12 @@ import {
   Layers,
   ChevronRight,
   Shield,
-  Zap
+  Zap,
+  ShoppingCart,
+  Check,
 } from "lucide-react";
+import { toast } from "sonner";
+import { useCart } from "@/contexts/CartContext";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
@@ -28,6 +32,7 @@ const ServiceDetail = () => {
   const navigate = useNavigate();
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [dialogPrompt, setDialogPrompt] = useState("");
+  const { addItem, hasItem, openCart } = useCart();
 
   const service = initialServices.find(s => s.id === parseInt(id || "0"));
 
@@ -146,18 +151,45 @@ const ServiceDetail = () => {
                 </div>
 
                 <div className="space-y-3">
-                  <Button 
+                  <Button
+                    className={`w-full h-12 font-bold rounded-xl text-sm flex items-center justify-center gap-2 ${
+                      hasItem(service.id)
+                        ? "bg-orange-50 border border-orange-200 text-orange-700 hover:bg-orange-100"
+                        : "bg-orange-500 hover:bg-orange-400 text-white"
+                    }`}
+                    onClick={() => {
+                      addItem(service.id);
+                      toast.success("Added to cart", {
+                        description: service.standardName,
+                        action: { label: "View cart", onClick: openCart },
+                      });
+                    }}
+                  >
+                    {hasItem(service.id) ? (
+                      <>
+                        <Check size={16} />
+                        In cart — add another
+                      </>
+                    ) : (
+                      <>
+                        <ShoppingCart size={16} />
+                        Add to cart
+                      </>
+                    )}
+                  </Button>
+                  <Button
                     className="w-full h-12 bg-navy-950 hover:bg-navy-900 text-white font-bold rounded-xl text-sm flex items-center justify-center gap-2 group"
                     onClick={() => handleStartOnboarding(service.standardName)}
                   >
-                    Get Started 
+                    Ask Butler
                     <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
                   </Button>
-                  <Button 
+                  <Button
                     variant="outline"
                     className="w-full h-12 border-navy-200 bg-white text-navy-950 hover:bg-slate-50 font-bold rounded-xl text-sm"
+                    onClick={() => navigate("/cart")}
                   >
-                    Book Consultation
+                    View cart
                   </Button>
                 </div>
               </div>

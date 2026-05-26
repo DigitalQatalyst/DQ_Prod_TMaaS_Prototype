@@ -72,10 +72,10 @@ export const portfolioHealthMetrics = {
 
 export const governanceAlerts = {
   criticalSummary:
-    "IT GPRC is Critical: Dependencies Met is red (blocked task T-104 and Issue I001). Progress vs Schedule is amber due to an overdue deliverable.",
+    "IT GPRC is Critical: Dependencies Met is red (blocked task T-104 and open RAID dependency D001 past due). Progress vs Schedule is amber due to an overdue deliverable.",
   blocked: [
-    { id: "T-104", label: "Security Architecture Review", engagement: "IT GPRC", type: "Task" },
-    { id: "I001", label: "Missing security clearance for production APIs", engagement: "IT GPRC", type: "Issue" },
+    { id: "T-104", label: "Security Architecture Review", engagement: "IT GPRC", type: "Blocked task" },
+    { id: "D001", label: "Enterprise architecture standards", engagement: "IT GPRC", type: "RAID dependency" },
   ],
   overdue: [
     { id: "D2", label: "Target Architecture Blueprint", engagement: "IT GPRC", dueDate: "2026-03-01" },

@@ -1,7 +1,9 @@
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
 import ContextSwitcher from "@/components/ContextSwitcher";
+import CartNavButton from "@/components/cart/CartNavButton";
 
 const Navbar = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -50,9 +52,12 @@ const Navbar = () => {
           </a>
         </div>
 
-        <div className="hidden items-center gap-4 md:flex">
+        <div className="hidden items-center gap-2 md:flex">
           <ContextSwitcher stage="marketing" scrolled={scrolled} />
-          <a href="/sign-in" className="text-sm text-muted-foreground transition-colors hover:text-foreground">Login</a>
+          <CartNavButton className="h-9 w-9 shrink-0" />
+          <Link to="/sign-in" className="px-2 text-sm text-muted-foreground transition-colors hover:text-foreground">
+            Login
+          </Link>
           <a href="/sign-in">
             <Button size="sm" className="rounded-full bg-orange-500 px-5 text-white shadow-[var(--glow-orange-sm)] hover:bg-orange-400 transition-all">
               Get Started
@@ -72,6 +77,10 @@ const Navbar = () => {
               <ContextSwitcher stage="marketing" scrolled />
             </div>
             <a href="/marketplace" className="text-sm text-muted-foreground">Marketplace</a>
+            <div className="flex items-center gap-2">
+              <CartNavButton className="h-9 w-9" />
+              <span className="text-sm text-muted-foreground">Cart</span>
+            </div>
             <a href="/sign-in">
               <Button size="sm" className="mt-2 w-full rounded-full bg-orange-500 text-white shadow-[var(--glow-orange-sm)] hover:bg-orange-400">Get Started</Button>
             </a>
