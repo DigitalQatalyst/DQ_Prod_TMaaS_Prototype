@@ -1,5 +1,13 @@
 import { useNavigate } from "react-router-dom";
 import { marketplaceEconomySectors } from "@/data/marketplaceNavigation";
+import { ArrowRight } from "lucide-react";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@/components/ui/carousel";
 
 const IndustrySolutionsSection = () => {
   const navigate = useNavigate();
@@ -30,39 +38,58 @@ const IndustrySolutionsSection = () => {
   };
 
   return (
-    <section className="bg-white py-20 border-t border-navy-50">
-      <div className="mx-auto max-w-7xl px-6">
-        <h2 className="text-2xl font-bold tracking-tight text-navy-950 sm:text-3xl font-heading mb-3 text-center md:text-left">
-          Industry Solutions
-        </h2>
-        <p className="mb-10 text-base text-gray-600 text-center md:text-left max-w-2xl">
-          Discover tailored services aligned to the specific requirements and workflows of your industry.
-        </p>
-        
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-          {marketplaceEconomySectors.map((sector) => (
-            <button
-              key={sector.id}
-              onClick={() => {
-                navigate(`/marketplace?sector=${sector.id}`);
-                window.scrollTo(0, 0);
-              }}
-              className="group relative h-48 w-full overflow-hidden rounded-2xl bg-navy-900 text-left transition-all hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2"
-            >
-              <img
-                src={getIndustryImage(sector.id)}
-                alt={sector.label}
-                className="absolute inset-0 h-full w-full object-cover opacity-60 transition-transform duration-500 group-hover:scale-105 group-hover:opacity-50"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-navy-950/80 to-transparent" />
-              <div className="absolute inset-0 p-6 flex flex-col justify-end">
-                <h3 className="text-xl font-bold text-white mb-1 group-hover:text-orange-400 transition-colors">
-                  {sector.label}
-                </h3>
-              </div>
-            </button>
-          ))}
+    <section className="bg-slate-50 py-20 border-t border-navy-50">
+      <div className="mx-auto max-w-7xl px-6 relative">
+        <div className="pr-24">
+          <h2 className="text-2xl font-bold tracking-tight text-navy-950 sm:text-3xl font-heading mb-3">
+            Industry Solutions
+          </h2>
+          <p className="mb-10 text-base text-gray-600 max-w-2xl">
+            Discover tailored services aligned to the specific requirements and workflows of your industry.
+          </p>
         </div>
+        
+        <Carousel
+          opts={{
+            align: "start",
+            loop: false,
+          }}
+          className="w-full"
+        >
+          <div className="absolute top-0 right-6 flex items-center gap-2">
+            <CarouselPrevious className="static translate-y-0 h-8 w-8" />
+            <CarouselNext className="static translate-y-0 h-8 w-8" />
+          </div>
+          <CarouselContent className="-ml-4 pb-4">
+            {marketplaceEconomySectors.map((sector) => (
+              <CarouselItem key={sector.id} className="pl-4 basis-[85%] sm:basis-1/2 md:basis-1/3 lg:basis-1/4">
+                <button
+                  onClick={() => {
+                    navigate(`/marketplace?sector=${sector.id}`);
+                    window.scrollTo(0, 0);
+                  }}
+                  className="group flex flex-col h-full w-full overflow-hidden rounded-2xl border border-navy-100 bg-white text-left shadow-sm transition-all hover:shadow-md hover:border-navy-200 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2"
+                >
+                  <div className="relative h-48 w-full overflow-hidden">
+                    <img
+                      src={getIndustryImage(sector.id)}
+                      alt={sector.label}
+                      className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                    />
+                  </div>
+                  <div className="flex flex-1 flex-col p-5">
+                    <h3 className="text-lg font-bold text-navy-950 mb-4 group-hover:text-orange-600 transition-colors">
+                      {sector.label}
+                    </h3>
+                    <div className="mt-auto flex items-center text-sm font-bold text-navy-950 group-hover:text-orange-600 transition-colors gap-1">
+                      Explore services <ArrowRight size={16} />
+                    </div>
+                  </div>
+                </button>
+              </CarouselItem>
+            ))}
+          </CarouselContent>
+        </Carousel>
       </div>
     </section>
   );
