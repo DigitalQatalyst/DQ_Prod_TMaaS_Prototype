@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { ArrowUp, Sparkles } from "lucide-react";
 import DiagnoseDialog from "./DiagnoseDialog";
+import MeshSection from "./site/MeshSection";
 
 const MAX_PROMPT_LENGTH = 4000;
 
@@ -36,28 +37,21 @@ const HeroSection = () => {
   };
 
   return (
-    <section
-      id="hero"
-      className="relative isolate overflow-hidden border-b border-navy-100/80 bg-gradient-to-b from-sky-50/90 via-white to-white pb-16 pt-28 md:pb-20 md:pt-36"
+    <MeshSection
+      variant="heroLight"
+      grid
+      className="border-b border-navy-100/80 pb-16 pt-28 md:pb-20 md:pt-36"
     >
-      <div
-        aria-hidden
-        className="pointer-events-none absolute inset-0 -z-10"
-        style={{
-          background:
-            "radial-gradient(ellipse 80% 50% at 50% -10%, oklch(0.75 0.12 250 / 0.15), transparent 70%)",
-        }}
-      />
 
       <div className="relative z-10 mx-auto max-w-3xl px-6 text-center">
         <p className="inline-flex items-center gap-1.5 text-sm font-medium text-navy-800">
           <Sparkles size={15} className="text-orange-500" strokeWidth={2} />
-          Butler mode
+          AI Mode
         </p>
 
         <h1 className="mt-4 font-heading text-balance text-3xl font-bold leading-tight tracking-tight text-navy-950 sm:text-4xl md:text-[2.75rem] md:leading-[1.15]">
           Find the right{" "}
-          <span className="text-orange-600">transformation package</span>
+          <span className="text-orange-600">transformation services</span>
           <br className="hidden sm:block" />
           <span className="sm:whitespace-nowrap"> for your business</span>
         </h1>
@@ -75,7 +69,7 @@ const HeroSection = () => {
                 setProblem(e.target.value.slice(0, MAX_PROMPT_LENGTH))
               }
               onKeyDown={handleKeyDown}
-              placeholder="Let's guide you to the right solution. What's your business need?"
+              placeholder="Describe your business challenge and Butler will guide you to the right services."
               rows={4}
               className="block w-full min-h-[7.5rem] resize-none border-0 bg-transparent px-4 pt-4 pb-2 text-base leading-relaxed text-navy-950 placeholder:text-gray-400 focus:outline-none focus:ring-0 md:text-[17px]"
             />
@@ -140,7 +134,7 @@ const HeroSection = () => {
         onClose={() => setIsDialogOpen(false)}
         initialProblem={problem}
       />
-    </section>
+    </MeshSection>
   );
 };
 

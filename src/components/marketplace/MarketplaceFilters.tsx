@@ -2,22 +2,25 @@ import type { ReactNode } from "react";
 import { Button } from "@/components/ui/button";
 import {
   marketplaceGoals,
-  marketplaceIndustries,
   marketplaceServiceTypes,
+  marketplaceEconomySectors,
 } from "@/data/marketplaceNavigation";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Label } from "@/components/ui/label";
+import { Layers } from "lucide-react";
 
-type MarketplaceFiltersProps = {
-  selectedGoals: string[];
-  onGoalChange: (value: string) => void;
-  selectedIndustries: string[];
-  onIndustryChange: (value: string) => void;
+interface MarketplaceFiltersProps {
+  selectedSectors: string[];
+  onSectorChange: (value: string) => void;
+  selectedCategories: string[];
+  onCategoryChange: (value: string) => void;
+  selectedIncluded: string[];
+  onIncludedChange: (value: string) => void;
   selectedServiceTypes: string[];
   onServiceTypeChange: (value: string) => void;
   onClearAll: () => void;
   showClearAll: boolean;
-};
+}
 
 function FilterField({
   label,
@@ -68,10 +71,12 @@ function CheckboxGroup({
 }
 
 const MarketplaceFilters = ({
-  selectedGoals,
-  onGoalChange,
-  selectedIndustries,
-  onIndustryChange,
+  selectedSectors,
+  onSectorChange,
+  selectedCategories,
+  onCategoryChange,
+  selectedIncluded,
+  onIncludedChange,
   selectedServiceTypes,
   onServiceTypeChange,
   onClearAll,
@@ -93,21 +98,37 @@ const MarketplaceFilters = ({
       </div>
 
       <div className="space-y-8">
-        <FilterField label="Business goal">
+        <FilterField label="Category">
           <CheckboxGroup
-            options={marketplaceGoals}
-            selectedValues={selectedGoals}
-            onChange={onGoalChange}
+            options={[
+              { id: "experience", label: "Digital Experience" },
+              { id: "operations", label: "Digital Work System" },
+              { id: "security", label: "SecDevOps" },
+              { id: "ai", label: "Digital Intelligence & Analytics" },
+            ]}
+            selectedValues={selectedCategories}
+            onChange={onCategoryChange}
           />
         </FilterField>
 
-        <FilterField label="Industry">
+        <FilterField label="Services Included">
           <CheckboxGroup
-            options={marketplaceIndustries}
-            selectedValues={selectedIndustries}
-            onChange={onIndustryChange}
+            options={[
+              { id: "single", label: "Single-service" },
+              { id: "multi", label: "Multi-service (Bundles)" },
+            ]}
+            selectedValues={selectedIncluded}
+            onChange={onIncludedChange}
           />
-          {selectedIndustries.length > 0 && (
+        </FilterField>
+
+        <FilterField label="Economy 4.0 Sector">
+          <CheckboxGroup
+            options={marketplaceEconomySectors}
+            selectedValues={selectedSectors}
+            onChange={onSectorChange}
+          />
+          {selectedSectors.length > 0 && (
             <p className="mt-2 text-[11px] text-gray-400 leading-snug">
               Updates service titles for your sector.
             </p>

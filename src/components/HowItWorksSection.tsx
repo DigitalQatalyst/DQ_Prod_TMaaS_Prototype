@@ -12,17 +12,17 @@ const steps = [
   {
     icon: MessageSquareCode,
     title: "Describe your goal",
-    desc: "Use Butler or pick a business goal to narrow what you need.",
+    desc: "Use Butler or browse strategic outcomes.",
   },
   {
     icon: Settings2,
-    title: "Choose a package",
-    desc: "Compare fixed-price services with clear scope, timeline, and deliverables.",
+    title: "Choose your services",
+    desc: "Explore services and recommended bundles.",
   },
   {
     icon: Workflow,
-    title: "Activate delivery",
-    desc: "Launch with certified specialists and tracked milestones.",
+    title: "Launch structured delivery",
+    desc: "Activate implementation with guided delivery and tracked milestones.",
   },
 ];
 

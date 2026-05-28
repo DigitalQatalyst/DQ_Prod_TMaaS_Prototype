@@ -7,12 +7,13 @@ import { getFeaturedByCollection } from "@/data/services";
 
 const collectionTabs = [
   { id: "ai" as const, label: "AI & Automation" },
-  { id: "cx" as const, label: "Customer Experience" },
-  { id: "ops" as const, label: "Operations" },
+  { id: "experience" as const, label: "Customer Experience" },
+  { id: "operations" as const, label: "Operations" },
+  { id: "security" as const, label: "Security & Delivery" },
 ];
 
 const FeaturedPackagesSection = () => {
-  const [activeTab, setActiveTab] = useState<"ai" | "cx" | "ops">("ai");
+  const [activeTab, setActiveTab] = useState<"ai" | "experience" | "operations" | "security">("ai");
 
   const featuredProducts = useMemo(
     () => getFeaturedByCollection(activeTab, 3),
@@ -35,7 +36,7 @@ const FeaturedPackagesSection = () => {
               id="featured-packages-heading"
               className="text-2xl font-bold tracking-tight text-navy-950 md:text-3xl"
             >
-              Featured transformation packages
+              Featured transformation services
             </h2>
             <p className="mt-2 max-w-xl text-sm leading-relaxed text-gray-600">
               Fixed scope, price, and timeline — add packages to your cart or view
