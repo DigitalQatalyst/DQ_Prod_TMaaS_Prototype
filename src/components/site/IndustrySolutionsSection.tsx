@@ -19,7 +19,7 @@ const IndustrySolutionsSection = () => {
       case "plant-4-0":
         return "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?q=80&w=800&auto=format&fit=crop";
       case "infrastructure-4-0":
-        return "https://images.unsplash.com/photo-1541888087425-ce81dfc46928?q=80&w=800&auto=format&fit=crop";
+        return "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=800&auto=format&fit=crop";
       case "government-4-0":
         return "https://images.unsplash.com/photo-1523292562811-8fa7962a78c8?q=80&w=800&auto=format&fit=crop";
       case "hospitality-4-0":
@@ -56,7 +56,7 @@ const IndustrySolutionsSection = () => {
           }}
           className="w-full"
         >
-          <div className="absolute top-0 right-6 flex items-center gap-2">
+          <div className="absolute -top-14 right-0 flex items-center gap-2">
             <CarouselPrevious className="static translate-y-0 h-8 w-8" />
             <CarouselNext className="static translate-y-0 h-8 w-8" />
           </div>
