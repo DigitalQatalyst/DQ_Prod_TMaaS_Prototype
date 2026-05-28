@@ -30,7 +30,7 @@ const MarketplaceBestSellers = ({
     <section aria-labelledby="marketplace-bestsellers-heading" className="mb-2">
       <h2
         id="marketplace-bestsellers-heading"
-        className="text-sm font-semibold text-navy-950"
+        className="text-lg font-bold tracking-tight text-navy-950"
       >
         {heading}
       </h2>

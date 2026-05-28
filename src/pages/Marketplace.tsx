@@ -319,7 +319,7 @@ const Marketplace = () => {
           )}
 
           {showBestSellers && (
-            <h3 className="text-sm font-semibold text-navy-950">
+            <h3 className="text-lg font-bold tracking-tight text-navy-950">
               All services
             </h3>
           )}
