@@ -318,6 +318,12 @@ const Marketplace = () => {
             />
           )}
 
+          {showBestSellers && (
+            <h3 className="text-sm font-semibold text-navy-950">
+              All services
+            </h3>
+          )}
+
           <MarketplaceCategoryNav
             activeTab={activeTab}
             onTabChange={applyCollectionFilter}
@@ -346,11 +352,6 @@ const Marketplace = () => {
             </aside>
 
             <main className="min-w-0 flex-1">
-              {showBestSellers && (
-                <p className="mb-3 text-sm font-semibold text-navy-950">
-                  All services
-                </p>
-              )}
               <div className="mb-4 flex flex-wrap items-center justify-between gap-3">
                 <div className="flex items-center gap-2">
                   <Button
