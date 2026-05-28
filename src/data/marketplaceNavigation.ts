@@ -9,32 +9,32 @@ export const marketplaceGoals = [
 ] as const;
 
 export const marketplaceCapabilities = [
-  { id: "strategy", label: "Strategy" },
-  { id: "ai", label: "AI" },
-  { id: "marketing", label: "Marketing" },
-  { id: "data", label: "Data" },
-  { id: "experience", label: "Experience" },
-  { id: "engineering", label: "Engineering" },
-  { id: "security", label: "Security" },
-  { id: "operations", label: "Operations" },
+  { id: "experience", label: "Digital Experience" },
+  { id: "operations", label: "Digital Work System" },
+  { id: "security", label: "SecDevOps" },
+  { id: "ai", label: "Digital Intelligence & Analytics" },
+  { id: "bundles", label: "Bundles" },
 ] as const;
 
-export const marketplaceIndustries = [
-  { id: "banking", label: "Banking" },
-  { id: "government", label: "Government" },
-  { id: "healthcare", label: "Healthcare" },
-  { id: "retail", label: "Retail" },
-  { id: "education", label: "Education" },
-  { id: "manufacturing", label: "Manufacturing" },
-  { id: "logistics", label: "Logistics" },
+export const marketplaceEconomySectors = [
+  { id: "farming-4-0", label: "Farming 4.0" },
+  { id: "plant-4-0", label: "Plant 4.0" },
+  { id: "infrastructure-4-0", label: "Infrastructure 4.0" },
+  { id: "government-4-0", label: "Government 4.0" },
+  { id: "hospitality-4-0", label: "Hospitality 4.0" },
+  { id: "retail-4-0", label: "Retail 4.0" },
+  { id: "service-4-0", label: "Service 4.0" },
+  { id: "logistics-4-0", label: "Logistics 4.0" },
+  { id: "wellness-4-0", label: "Wellness 4.0" },
 ] as const;
 
 export const marketplaceServiceTypes = [
   { id: "advisory", label: "Advisory" },
   { id: "design", label: "Design" },
-  { id: "build", label: "Build" },
+  { id: "ai_design", label: "AI Design" },
   { id: "deploy", label: "Deploy" },
-  { id: "manage", label: "Manage" },
+  { id: "ai_deploy", label: "AI Deploy" },
+  { id: "manage", label: "Managed" },
 ] as const;
 
 export type MarketplaceCollectionId =
@@ -48,4 +48,8 @@ export const marketplaceCollectionIds = [
 export const marketplaceCategoryLabels: Record<string, string> = {
   all: "All categories",
   ...Object.fromEntries(marketplaceCapabilities.map(c => [c.id, c.label]))
+};
+
+export const marketplaceServiceTypeLabels: Record<string, string> = {
+  ...Object.fromEntries(marketplaceServiceTypes.map(t => [t.id, t.label]))
 };
