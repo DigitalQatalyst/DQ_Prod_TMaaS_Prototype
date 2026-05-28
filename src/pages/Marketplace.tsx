@@ -296,9 +296,9 @@ const Marketplace = () => {
                 type="button" 
                 size="sm"
                 onClick={handleAskAI}
-                className="h-10 bg-navy-950 hover:bg-navy-900 text-white rounded-xl text-xs font-bold px-4 flex items-center gap-1.5"
+                className="h-10 bg-orange-500 hover:bg-orange-400 text-white rounded-xl text-xs font-bold px-4 flex items-center gap-1.5"
               >
-                <Sparkles size={14} className="text-orange-400" />
+                <Sparkles size={14} className="fill-white" />
                 Or Ask AI
               </Button>
             </div>
