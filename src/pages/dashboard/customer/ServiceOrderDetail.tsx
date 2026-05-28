@@ -166,9 +166,7 @@ const CustomerServiceOrderDetail = () => {
                   {order.serviceType}
                 </Badge>
               </div>
-              <p className="text-sm text-muted-foreground mb-4">{order.serviceOrderNumber}</p>
-              
-              <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
+              <div className="grid grid-cols-2 md:grid-cols-5 gap-4 mt-4">
                 <div className="flex items-center gap-2 text-sm">
                   <Calendar size={16} className="text-muted-foreground" />
                   <div>
@@ -240,22 +238,22 @@ const CustomerServiceOrderDetail = () => {
         </div>
 
         {/* Tabs Navigation */}
-        <Tabs value={activeTab} onValueChange={setActiveTab} className="space-y-4">
-          <TabsList>
-            <TabsTrigger value="overview">Overview</TabsTrigger>
+        <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
+          <TabsList className="w-full justify-start bg-transparent border-b border-border h-auto p-0 rounded-none overflow-x-auto overflow-y-hidden flex-nowrap mb-8">
+            <TabsTrigger value="overview" className="rounded-none border-b-2 border-transparent data-[state=active]:border-navy-900 data-[state=active]:bg-transparent data-[state=active]:shadow-none px-6 pb-3 text-sm font-semibold">Overview</TabsTrigger>
             {order.stage !== "Payment Pending" && (
               <>
-                <TabsTrigger value="delivery">Delivery</TabsTrigger>
-                <TabsTrigger value="inbox">
+                <TabsTrigger value="delivery" className="rounded-none border-b-2 border-transparent data-[state=active]:border-navy-900 data-[state=active]:bg-transparent data-[state=active]:shadow-none px-6 pb-3 text-sm font-semibold">Delivery</TabsTrigger>
+                <TabsTrigger value="inbox" className="rounded-none border-b-2 border-transparent data-[state=active]:border-navy-900 data-[state=active]:bg-transparent data-[state=active]:shadow-none px-6 pb-3 text-sm font-semibold">
                   Inbox
                   <Badge variant="secondary" className="ml-2 h-5 px-1.5 text-xs">3</Badge>
                 </TabsTrigger>
-                <TabsTrigger value="sessions">Sessions</TabsTrigger>
-                <TabsTrigger value="raid">RAID</TabsTrigger>
-                <TabsTrigger value="activity">Activity</TabsTrigger>
+                <TabsTrigger value="sessions" className="rounded-none border-b-2 border-transparent data-[state=active]:border-navy-900 data-[state=active]:bg-transparent data-[state=active]:shadow-none px-6 pb-3 text-sm font-semibold">Sessions</TabsTrigger>
+                <TabsTrigger value="raid" className="rounded-none border-b-2 border-transparent data-[state=active]:border-navy-900 data-[state=active]:bg-transparent data-[state=active]:shadow-none px-6 pb-3 text-sm font-semibold">RAID</TabsTrigger>
+                <TabsTrigger value="activity" className="rounded-none border-b-2 border-transparent data-[state=active]:border-navy-900 data-[state=active]:bg-transparent data-[state=active]:shadow-none px-6 pb-3 text-sm font-semibold">Activity</TabsTrigger>
               </>
             )}
-            <TabsTrigger value="commercials">Commercials</TabsTrigger>
+            <TabsTrigger value="commercials" className="rounded-none border-b-2 border-transparent data-[state=active]:border-navy-900 data-[state=active]:bg-transparent data-[state=active]:shadow-none px-6 pb-3 text-sm font-semibold">Commercials</TabsTrigger>
           </TabsList>
 
           {/* Overview Tab */}
@@ -400,7 +398,7 @@ const CustomerServiceOrderDetail = () => {
                       <div>
                         <p className="text-sm font-medium text-foreground">Invoice Details</p>
                         <p className="text-xs text-muted-foreground mt-1">
-                          Invoice Number: INV-{order.serviceOrderNumber}
+                          Invoice Number: INV-001
                         </p>
                       </div>
                     </div>
@@ -1285,7 +1283,7 @@ const CustomerServiceOrderDetail = () => {
                           Final Invoice
                         </p>
                         <p className="text-xs text-muted-foreground">
-                          INV-{order.serviceOrderNumber}
+                          INV-001
                         </p>
                       </div>
                     </div>
@@ -2438,7 +2436,7 @@ const CustomerServiceOrderDetail = () => {
                       </div>
                       <div className="flex justify-between text-sm">
                         <span className="text-muted-foreground">Order Number</span>
-                        <span className="font-medium text-foreground">{order.serviceOrderNumber}</span>
+                        <span className="font-medium text-foreground">CTR-001</span>
                       </div>
                       <div className="flex justify-between text-sm">
                         <span className="text-muted-foreground">Duration</span>
@@ -2503,7 +2501,7 @@ const CustomerServiceOrderDetail = () => {
                           <FileText size={20} className="text-muted-foreground" />
                           <div>
                             <p className="text-sm font-medium text-foreground">
-                              Invoice INV-{order.serviceOrderNumber}
+                              Invoice INV-001
                             </p>
                             <p className="text-xs text-muted-foreground">
                               Issued {new Date(order.startDate).toLocaleDateString("en-US", {

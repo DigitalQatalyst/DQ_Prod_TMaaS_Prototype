@@ -1,5 +1,7 @@
 import DashboardLayout from "@/components/DashboardLayout";
 import { useState } from "react";
+import { Card, CardContent } from "@/components/ui/card";
+import { portfolioHealthMetrics, mockPortfolioEngagements, PortfolioHealth } from "@/data/mockPortfolioEngagements";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
@@ -27,45 +29,10 @@ import {
 } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
-const mockLegacyProjects = [
-  {
-    id: "L-2025-081",
-    projectName: "IT.GPRC",
-    organization: "STC Bank",
-    country: "Saudi Arabia",
-    status: "Paused",
-    assignedLead: "Rayyan Basha",
-    startDate: "Oct 1, 2025",
-    endDate: "Jun 30, 2026",
-    lastUpdated: "Mar 15, 2026"
-  },
-  {
-    id: "L-2025-092",
-    projectName: "EJP Enterprise Hub Deploy",
-    organization: "Khalifa Fund",
-    country: "UAE",
-    status: "Paused",
-    assignedLead: "Kenzie Sharon",
-    startDate: "Aug 15, 2025",
-    endDate: "Feb 28, 2026",
-    lastUpdated: "Mar 1, 2026"
-  }
-];
-
-const getStatusVariant = (status: string) => {
-  switch(status) {
-    case "In Delivery":
-    case "Active": return "default";
-    case "Awaiting Client Input":
-    case "Inputs Under Review":
-    case "Awaiting Payment":
-    case "Paused": return "secondary";
-    case "Ready for Delivery": return "default";
-    case "Delivered":
-    case "Completed": return "outline";
-    case "Cancelled": return "destructive";
-    default: return "default";
-  }
+const healthBadgeClass = (health: PortfolioHealth) => {
+  if (health === "green") return "bg-green-50 text-green-700 border-green-200";
+  if (health === "amber") return "bg-amber-50 text-amber-700 border-amber-200";
+  return "bg-red-50 text-red-700 border-red-200";
 };
 
 const DQEngagements = () => {
@@ -74,32 +41,29 @@ const DQEngagements = () => {
   const [orgFilter, setOrgFilter] = useState("All");
   const [leadFilter, setLeadFilter] = useState("All");
   const [statusFilter, setStatusFilter] = useState("All");
-  const [countryFilter, setCountryFilter] = useState("All");
 
   const handleRowClick = (id: string) => {
     navigate(`/dashboard/engagement/${id}`);
   };
 
-  const filteredProjects = mockLegacyProjects.filter(project => {
+  const filteredProjects = mockPortfolioEngagements.filter(project => {
     const searchMatch = 
-      project.projectName.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      project.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
       project.organization.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      project.assignedLead.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      project.lead.toLowerCase().includes(searchQuery.toLowerCase()) ||
       project.id.toLowerCase().includes(searchQuery.toLowerCase());
 
     const orgMatch = orgFilter === "All" || project.organization === orgFilter;
-    const leadMatch = leadFilter === "All" || project.assignedLead === leadFilter;
+    const leadMatch = leadFilter === "All" || project.lead === leadFilter;
     const statusMatch = statusFilter === "All" || project.status === statusFilter;
-    const countryMatch = countryFilter === "All" || project.country === countryFilter;
 
-    return searchMatch && orgMatch && leadMatch && statusMatch && countryMatch;
+    return searchMatch && orgMatch && leadMatch && statusMatch;
   });
 
   // Extract unique filter options
-  const allOrgs = Array.from(new Set(mockLegacyProjects.map(item => item.organization)));
-  const allLeads = Array.from(new Set(mockLegacyProjects.map(item => item.assignedLead)));
-  const allStatuses = Array.from(new Set(mockLegacyProjects.map(i => i.status)));
-  const allCountries = Array.from(new Set(mockLegacyProjects.map(i => i.country)));
+  const allOrgs = Array.from(new Set(mockPortfolioEngagements.map(item => item.organization)));
+  const allLeads = Array.from(new Set(mockPortfolioEngagements.map(item => item.lead)));
+  const allStatuses = Array.from(new Set(mockPortfolioEngagements.map(i => i.status)));
 
   return (
     <DashboardLayout>
@@ -118,10 +82,30 @@ const DQEngagements = () => {
           </Button>
         </div>
 
+        {/* Metric Cards */}
+        <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
+          {[
+            { key: "total", label: "Total", value: portfolioHealthMetrics.total, accent: "text-navy-950" },
+            { key: "onTrack", label: "(Green)", value: portfolioHealthMetrics.onTrack, accent: "text-green-600" },
+            { key: "atRisk", label: "(Amber)", value: portfolioHealthMetrics.atRisk, accent: "text-amber-600" },
+            { key: "critical", label: "(Red)", value: portfolioHealthMetrics.critical, accent: "text-red-600" },
+            { key: "completed", label: "Completed", value: portfolioHealthMetrics.completed, accent: "text-slate-600" },
+          ].map((metric) => (
+            <Card key={metric.key} className="rounded-2xl border-navy-100 shadow-sm">
+              <CardContent className="p-5">
+                <p className="text-[10px] font-bold text-gray-400 uppercase tracking-wider mb-1">
+                  {metric.label}
+                </p>
+                <p className={`text-3xl font-bold ${metric.accent}`}>{metric.value}</p>
+              </CardContent>
+            </Card>
+          ))}
+        </div>
+
         <div className="w-full space-y-4">
           {/* Search bar and section header */}
           <div className="flex flex-col gap-4 border-b border-border pb-4 md:flex-row md:items-center md:justify-between">
-            <div className="text-lg font-semibold text-foreground">Active Engagements</div>
+            <div className="text-lg font-semibold text-foreground">Delivery</div>
             
             {/* Global Search */}
             <div className="relative w-full md:max-w-md">
@@ -173,20 +157,8 @@ const DQEngagements = () => {
                 {allStatuses.map(status => <option key={status} value={status}>{status}</option>)}
               </select>
             </div>
-
-            <div className="flex items-center gap-2 rounded-md border border-input bg-background/50 px-3 py-1 shadow-sm">
-              <Globe className="h-4 w-4 text-muted-foreground" />
-              <select 
-                value={countryFilter} 
-                onChange={(e) => setCountryFilter(e.target.value)}
-                className="bg-transparent text-sm font-medium outline-none text-foreground font-sans cursor-pointer"
-              >
-                <option value="All">All Countries</option>
-                {allCountries.map(country => <option key={country} value={country}>{country}</option>)}
-              </select>
-            </div>
             
-            {(orgFilter !== "All" || leadFilter !== "All" || statusFilter !== "All" || countryFilter !== "All") && (
+            {(orgFilter !== "All" || leadFilter !== "All" || statusFilter !== "All") && (
               <Button 
                 variant="ghost" 
                 size="sm" 
@@ -194,7 +166,6 @@ const DQEngagements = () => {
                   setOrgFilter("All");
                   setLeadFilter("All");
                   setStatusFilter("All");
-                  setCountryFilter("All");
                 }}
                 className="text-xs h-8 text-muted-foreground hover:text-foreground"
               >
@@ -210,18 +181,16 @@ const DQEngagements = () => {
                 <TableRow className="hover:bg-transparent">
                   <TableHead className="min-w-[250px]">Project Name</TableHead>
                   <TableHead>Organization</TableHead>
-                  <TableHead>Status</TableHead>
-                  <TableHead>Assigned Lead</TableHead>
-                  <TableHead className="hidden md:table-cell">Start Date</TableHead>
-                  <TableHead className="hidden md:table-cell">Forecast End Date</TableHead>
-                  <TableHead className="hidden lg:table-cell">Last Updated</TableHead>
+                  <TableHead>Overall Health</TableHead>
+                  <TableHead className="text-center">Blocked Items</TableHead>
+                  <TableHead>Lead</TableHead>
                   <TableHead className="text-right">Actions</TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>
                 {filteredProjects.length === 0 ? (
                   <TableRow>
-                    <TableCell colSpan={8} className="h-32 text-center text-muted-foreground">
+                    <TableCell colSpan={6} className="h-32 text-center text-muted-foreground">
                       No projects found.
                     </TableCell>
                   </TableRow>
@@ -234,18 +203,22 @@ const DQEngagements = () => {
                     >
                       <TableCell>
                         <div className="flex flex-col">
-                          <span className="font-medium text-foreground">{project.projectName}</span>
+                          <span className="font-medium text-foreground">{project.name}</span>
                           <span className="text-xs text-muted-foreground">{project.id}</span>
                         </div>
                       </TableCell>
                       <TableCell>{project.organization}</TableCell>
                       <TableCell>
-                        <Badge variant={getStatusVariant(project.status) as any} className="whitespace-nowrap">{project.status}</Badge>
+                        <Badge variant="outline" className={healthBadgeClass(project.health)}>
+                          {project.healthLabel}
+                        </Badge>
                       </TableCell>
-                      <TableCell className="text-muted-foreground">{project.assignedLead}</TableCell>
-                      <TableCell className="hidden md:table-cell text-muted-foreground">{project.startDate}</TableCell>
-                      <TableCell className="hidden md:table-cell text-muted-foreground">{project.endDate}</TableCell>
-                      <TableCell className="hidden lg:table-cell text-muted-foreground">{project.lastUpdated}</TableCell>
+                      <TableCell className="text-center">
+                        <span className={project.blockedItems > 0 ? "font-bold text-red-600" : "text-muted-foreground"}>
+                          {project.blockedItems}
+                        </span>
+                      </TableCell>
+                      <TableCell className="text-muted-foreground">{project.lead}</TableCell>
                       <TableCell className="text-right" onClick={(e) => e.stopPropagation()}>
                         <DropdownMenu>
                           <DropdownMenuTrigger asChild>
