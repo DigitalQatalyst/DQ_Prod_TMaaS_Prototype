@@ -2,7 +2,7 @@ import { useState, useMemo, useEffect, useCallback } from "react";
 import { useSearchParams } from "react-router-dom";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import { Filter, Search, X } from "lucide-react";
+import { Filter, Search, X, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import DiagnoseDialog from "@/components/DiagnoseDialog";
@@ -11,6 +11,7 @@ import MarketplaceFilters from "@/components/marketplace/MarketplaceFilters";
 import MarketplaceBestSellers from "@/components/marketplace/MarketplaceBestSellers";
 import ServiceProductCard from "@/components/marketplace/ServiceProductCard";
 import { getBestSellers } from "@/data/services";
+import MeshSection from "@/components/site/MeshSection";
 import {
   marketplaceCategoryLabels,
   marketplaceCollectionIds,
@@ -31,8 +32,9 @@ const Marketplace = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const [activeTab, setActiveTab] = useState<string>("all");
   const [searchQuery, setSearchQuery] = useState("");
-  const [selectedGoals, setSelectedGoals] = useState<string[]>([]);
-  const [selectedIndustries, setSelectedIndustries] = useState<string[]>([]);
+  const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
+  const [selectedIncluded, setSelectedIncluded] = useState<string[]>([]);
+  const [selectedSectors, setSelectedIndustries] = useState<string[]>([]);
   const [selectedServiceTypes, setSelectedServiceTypes] = useState<string[]>([]);
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
@@ -46,10 +48,6 @@ const Marketplace = () => {
   }, []);
 
   useEffect(() => {
-    const goals = searchParams.getAll("goal").filter((g) =>
-      marketplaceGoals.some((o) => o.id === g)
-    );
-    setSelectedGoals(goals);
 
     const collection = searchParams.get("collection");
     if (
@@ -65,8 +63,7 @@ const Marketplace = () => {
 
     const q = searchParams.get("q");
     if (q !== null) setSearchQuery(q);
-
-    if (goals.length > 0 || collection) {
+    if (collection) {
       scrollToCatalog();
     }
   }, [searchParams, scrollToCatalog]);
@@ -83,23 +80,19 @@ const Marketplace = () => {
     [searchParams, setSearchParams, scrollToCatalog]
   );
 
-  const handleGoalChange = useCallback(
-    (value: string) => {
-      const next = selectedGoals.includes(value)
-        ? selectedGoals.filter((g) => g !== value)
-        : [...selectedGoals, value];
+  const handleCategoryChange = useCallback((value: string) => {
+    setSelectedCategories((prev) =>
+      prev.includes(value) ? prev.filter((i) => i !== value) : [...prev, value]
+    );
+  }, []);
 
-      setSelectedGoals(next);
+  const handleIncludedChange = useCallback((value: string) => {
+    setSelectedIncluded((prev) =>
+      prev.includes(value) ? prev.filter((i) => i !== value) : [...prev, value]
+    );
+  }, []);
 
-      const nextParams = new URLSearchParams(searchParams);
-      nextParams.delete("goal");
-      next.forEach((g) => nextParams.append("goal", g));
-      setSearchParams(nextParams, { replace: true });
-    },
-    [searchParams, setSearchParams, selectedGoals]
-  );
-
-  const handleIndustryChange = useCallback((value: string) => {
+  const handleSectorChange = useCallback((value: string) => {
     setSelectedIndustries((prev) =>
       prev.includes(value) ? prev.filter((i) => i !== value) : [...prev, value]
     );
@@ -112,8 +105,9 @@ const Marketplace = () => {
   }, []);
 
   const clearAllFilters = useCallback(() => {
-    setSelectedIndustries([]);
-    setSelectedGoals([]);
+    setSelectedSectors([]);
+    setSelectedCategories([]);
+    setSelectedIncluded([]);
     setSelectedServiceTypes([]);
     setSearchQuery("");
     setSortBy("popular");
@@ -122,14 +116,15 @@ const Marketplace = () => {
   }, [setSearchParams]);
 
   const hasRefinementFilters =
-    selectedGoals.length > 0 ||
-    selectedIndustries.length > 0 ||
+    selectedCategories.length > 0 ||
+    selectedIncluded.length > 0 ||
+    selectedSectors.length > 0 ||
     selectedServiceTypes.length > 0 ||
     searchQuery !== "";
 
   const hasActiveFilters = hasRefinementFilters || activeTab !== "all";
 
-  const showBestSellers = !hasRefinementFilters;
+  const showBestSellers = !hasRefinementFilters && activeTab !== "bundles";
 
   const bestSellerIds = useMemo(() => {
     if (!showBestSellers) return new Set<number>();
@@ -144,14 +139,32 @@ const Marketplace = () => {
 
   const filteredServices = useMemo(() => {
     return initialServices.filter((pkg) => {
-      const matchesCollection = activeTab === "all" || pkg.collection === activeTab;
-      const matchesGoal =
-        selectedGoals.length === 0 || pkg.outcomes.some((o) => selectedGoals.includes(o));
+      const isBundle = (pkg as any).serviceType === "bundle";
+      
+      if (activeTab === "bundles") {
+        if (!isBundle) return false;
+      } else {
+        if (isBundle) return false;
+      }
+
+      const matchesCollection = activeTab === "all" || activeTab === "bundles" || pkg.collection === activeTab;
+      
+      const matchesCategory = selectedCategories.length === 0 || selectedCategories.includes(pkg.collection);
+
+      let matchesIncluded = true;
+      if (selectedIncluded.length > 0) {
+        if (selectedIncluded.includes("multi") && !selectedIncluded.includes("single")) {
+          matchesIncluded = isBundle;
+        } else if (selectedIncluded.includes("single") && !selectedIncluded.includes("multi")) {
+          matchesIncluded = !isBundle;
+        }
+      }
+
       const matchesServiceType =
         selectedServiceTypes.length === 0 || selectedServiceTypes.includes((pkg as any).serviceType);
 
       // Extract the first active industry for remixing name, fallback to 'general'
-      const activeIndustry = selectedIndustries.length > 0 ? selectedIndustries[0] : "all";
+      const activeIndustry = selectedSectors.length > 0 ? selectedSectors[0] : "all";
 
       const matchesSearch = searchQuery === "" || 
         pkg.standardName.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -160,14 +173,14 @@ const Marketplace = () => {
         pkg.tags.some(tag => tag.toLowerCase().includes(searchQuery.toLowerCase())) ||
         pkg.features.some(feat => feat.toLowerCase().includes(searchQuery.toLowerCase()));
 
-      return matchesCollection && matchesGoal && matchesServiceType && matchesSearch;
+      return matchesCollection && matchesCategory && matchesIncluded && matchesServiceType && matchesSearch;
     }).sort((a, b) => {
       if (sortBy === "popular") return b.popularityRank - a.popularityRank;
       if (sortBy === "price-low") return parseInt(a.price.replace(/[$,]/g, "")) - parseInt(b.price.replace(/[$,]/g, ""));
       if (sortBy === "fastest") return parseInt(a.duration) - parseInt(b.duration);
       return 0;
     });
-  }, [activeTab, searchQuery, selectedGoals, selectedServiceTypes, selectedIndustries, sortBy]);
+  }, [activeTab, searchQuery, selectedCategories, selectedIncluded, selectedServiceTypes, selectedSectors, sortBy]);
 
   const catalogServices = useMemo(() => {
     if (!showBestSellers) return filteredServices;
@@ -184,20 +197,28 @@ const Marketplace = () => {
         onRemove: () => applyCollectionFilter("all"),
       });
     }
-    selectedGoals.forEach((goalId) => {
-      const o = marketplaceGoals.find((x) => x.id === goalId);
+    selectedCategories.forEach((cat) => {
+      const label = cat === "experience" ? "Digital Experience" : cat === "operations" ? "Digital Work System" : cat === "security" ? "SecDevOps" : cat === "ai" ? "Digital Intelligence & Analytics" : cat;
       chips.push({
-        key: `goal-${goalId}`,
-        label: o?.label ?? goalId,
-        onRemove: () => handleGoalChange(goalId),
+        key: `cat-${cat}`,
+        label: `Category: ${label}`,
+        onRemove: () => handleCategoryChange(cat),
       });
     });
 
-    selectedIndustries.forEach((industry) => {
+    selectedIncluded.forEach((inc) => {
       chips.push({
-        key: `industry-${industry}`,
-        label: `Industry: ${industry}`,
-        onRemove: () => handleIndustryChange(industry),
+        key: `inc-${inc}`,
+        label: `Included: ${inc === "multi" ? "Multi-service" : "Single-service"}`,
+        onRemove: () => handleIncludedChange(inc),
+      });
+    });
+
+    selectedSectors.forEach((sector) => {
+      chips.push({
+        key: `sector-${sector}`,
+        label: `Sector: ${sector}`,
+        onRemove: () => handleSectorChange(sector),
       });
     });
 
@@ -219,13 +240,15 @@ const Marketplace = () => {
     return chips;
   }, [
     activeTab,
-    selectedGoals,
-    selectedIndustries,
+    selectedCategories,
+    selectedIncluded,
+    selectedSectors,
     selectedServiceTypes,
     searchQuery,
     applyCollectionFilter,
-    handleGoalChange,
-    handleIndustryChange,
+    handleCategoryChange,
+    handleIncludedChange,
+    handleSectorChange,
     handleServiceTypeChange,
   ]);
 
@@ -240,56 +263,65 @@ const Marketplace = () => {
     <div className="min-h-screen bg-background">
       <Navbar />
 
-      <header className="border-b border-navy-100 bg-white pt-24 pb-6">
-        <div className="mx-auto max-w-7xl px-6">
-          <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
-            <div>
-              <h1 className="font-heading text-2xl font-bold tracking-tight text-navy-950 md:text-3xl">
-                Marketplace
-              </h1>
-              <p className="mt-1 text-sm text-gray-600">
-                Pre-scoped transformation services with fixed price and timeline.
-              </p>
-            </div>
-            <button
-              type="button"
-              onClick={handleAskAI}
-              className="shrink-0 text-sm font-medium text-orange-600 hover:text-orange-500"
-            >
-              Need help choosing? Ask Butler
-            </button>
-          </div>
+      <MeshSection variant="heroLight" grid className="border-b border-navy-100 pt-20 pb-6">
+        <div className="mx-auto max-w-3xl px-6 flex flex-col items-center text-center">
+          <h1 className="font-heading text-3xl font-bold tracking-tight text-navy-950 md:text-4xl">
+            Transformation Services Marketplace
+          </h1>
+          <p className="mt-3 text-base text-gray-600 max-w-xl">
+            Discover architecture-led transformation services across digital experience, digital operations, AI enablement, and enterprise modernization.
+          </p>
 
-          <div className="relative mt-5 max-w-xl">
-            <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-400" />
+          <div className="relative mt-8 w-full flex items-center">
+            <Search className="absolute left-4 top-1/2 h-5 w-5 -translate-y-1/2 text-gray-400" />
             <Input
               type="search"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              placeholder="Search services..."
-              className="h-10 rounded-lg border-navy-200 bg-white pl-10 pr-9 text-sm"
+              placeholder="Search services or describe your transformation goals…"
+              className="h-14 rounded-2xl border-navy-200 bg-white pl-12 pr-44 text-base shadow-sm focus-visible:ring-orange-500 w-full"
             />
-            {searchQuery && (
-              <button
-                type="button"
-                onClick={() => setSearchQuery("")}
-                className="absolute right-2.5 top-1/2 -translate-y-1/2 text-gray-400 hover:text-navy-950"
-                aria-label="Clear search"
+            <div className="absolute right-2 top-1/2 -translate-y-1/2 flex items-center gap-3">
+              {searchQuery && (
+                <button
+                  type="button"
+                  onClick={() => setSearchQuery("")}
+                  className="text-gray-400 hover:text-navy-950 flex items-center justify-center h-full"
+                  aria-label="Clear search"
+                >
+                  <X size={16} />
+                </button>
+              )}
+              <Button 
+                type="button" 
+                size="sm"
+                onClick={handleAskAI}
+                className="h-10 bg-orange-500 hover:bg-orange-400 text-white rounded-xl text-xs font-bold px-4 flex items-center gap-1.5"
               >
-                <X size={15} />
-              </button>
-            )}
+                <Sparkles size={14} className="fill-white" />
+                Or Ask AI
+              </Button>
+            </div>
           </div>
+          <p className="mt-3 text-[10px] text-gray-400 max-w-lg leading-relaxed">
+            By using Butler, you agree that your prompt may be processed to recommend TMaaS services. Do not submit confidential data.
+          </p>
         </div>
-      </header>
+      </MeshSection>
 
       <div className="mx-auto max-w-7xl px-6 py-6">
         <div id="catalog-grid" className="scroll-mt-20 space-y-5">
           {showBestSellers && (
             <MarketplaceBestSellers
               activeTab="all"
-              selectedIndustry={selectedIndustries.length > 0 ? selectedIndustries[0] : "all"}
+              selectedIndustry={selectedSectors.length > 0 ? selectedSectors[0] : "all"}
             />
+          )}
+
+          {showBestSellers && (
+            <h3 className="text-lg font-bold tracking-tight text-navy-950">
+              All services
+            </h3>
           )}
 
           <MarketplaceCategoryNav
@@ -305,10 +337,12 @@ const Marketplace = () => {
             >
               <div className="lg:sticky lg:top-24">
                 <MarketplaceFilters
-                  selectedIndustries={selectedIndustries}
-                  onIndustryChange={handleIndustryChange}
-                  selectedGoals={selectedGoals}
-                  onGoalChange={handleGoalChange}
+                  selectedSectors={selectedSectors}
+                  onSectorChange={handleSectorChange}
+                  selectedCategories={selectedCategories}
+                  onCategoryChange={handleCategoryChange}
+                  selectedIncluded={selectedIncluded}
+                  onIncludedChange={handleIncludedChange}
                   selectedServiceTypes={selectedServiceTypes}
                   onServiceTypeChange={handleServiceTypeChange}
                   onClearAll={clearAllFilters}
@@ -318,11 +352,6 @@ const Marketplace = () => {
             </aside>
 
             <main className="min-w-0 flex-1">
-              {showBestSellers && (
-                <p className="mb-3 text-sm font-semibold text-navy-950">
-                  All services
-                </p>
-              )}
               <div className="mb-4 flex flex-wrap items-center justify-between gap-3">
                 <div className="flex items-center gap-2">
                   <Button
@@ -388,12 +417,20 @@ const Marketplace = () => {
                     No services match
                   </h3>
                   <p className="mt-2 text-sm text-gray-500">
-                    Try fewer filters or a different category.
+                    Try fewer filters or a different category. Not sure where to start?
                   </p>
                   <Button
                     type="button"
+                    onClick={handleAskAI}
+                    variant="outline"
+                    className="mt-6 mx-2 h-9 rounded-lg border-navy-100 text-sm text-navy-950 font-semibold"
+                  >
+                    Use AI Guidance
+                  </Button>
+                  <Button
+                    type="button"
                     onClick={clearAllFilters}
-                    className="mt-6 h-9 rounded-lg bg-navy-950 px-5 text-sm text-white hover:bg-navy-900"
+                    className="mt-6 mx-2 h-9 rounded-lg bg-navy-950 px-5 text-sm text-white hover:bg-navy-900"
                   >
                     Reset filters
                   </Button>
@@ -405,7 +442,7 @@ const Marketplace = () => {
                       key={pkg.id}
                       service={pkg}
                       variant="grid"
-                      displayName={getRemixedName(pkg, selectedIndustries.length > 0 ? selectedIndustries[0] : "all")}
+                      displayName={getRemixedName(pkg, selectedSectors.length > 0 ? selectedSectors[0] : "all")}
                     />
                   ))}
                 </div>

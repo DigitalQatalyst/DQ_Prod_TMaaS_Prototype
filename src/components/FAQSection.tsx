@@ -26,11 +26,11 @@ const faqs = [
   },
   {
     question: "What types of services are available?",
-    answer: "We offer Design Services (strategic architecture and blueprints), Deploy Services for both SaaS and On-Premise implementations, and Drive Services including managed platforms, BPaaS, and AI agents. Services span all four transformation towers: Digital Experience, Digital Workspace, Data & Intelligence, and SecDevOps.",
+    answer: "We offer Design Services (strategic architecture), Deploy Services (implementations), and Drive Services (managed platforms). You can purchase individual services or select curated Transformation Bundles that combine multiple services for a complete strategic outcome.",
   },
   {
     question: "How do I get started?",
-    answer: "Start with our AI-powered Diagnose tool to identify the right services for your needs, or browse our marketplaces directly if you know what you're looking for. Each service includes clear deliverables, timelines, and pricing to help you make informed decisions.",
+    answer: "Start with our AI-powered Butler to identify the right services for your needs, or browse our marketplace and recommended bundles directly. Each offering includes clear deliverables, timelines, and pricing to help you make informed decisions.",
   },
   {
     question: "What is the typical timeline for transformation?",
