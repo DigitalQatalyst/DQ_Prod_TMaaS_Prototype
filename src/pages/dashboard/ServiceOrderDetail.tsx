@@ -164,13 +164,7 @@ const ServiceOrderDetail = () => {
                 </Badge>
               </div>
               <div className="grid grid-cols-2 md:grid-cols-5 gap-4 mt-4">
-                <div className="flex items-center gap-2 text-sm">
-                  <FileText size={16} className="text-muted-foreground" />
-                  <div>
-                    <p className="text-xs text-muted-foreground">Order Number</p>
-                    <p className="font-medium text-foreground">{order.serviceOrderNumber}</p>
-                  </div>
-                </div>
+
                 <div className="flex items-center gap-2 text-sm">
                   <Building2 size={16} className="text-muted-foreground" />
                   <div>
@@ -222,24 +216,24 @@ const ServiceOrderDetail = () => {
         </div>
 
         {/* Tabs */}
-        <Tabs value={activeTab} onValueChange={setActiveTab} className="space-y-4">
-          <TabsList className="bg-muted p-1 h-auto gap-0.5">
-            <TabsTrigger value="overview" className="px-4 py-1.5 text-sm">
+        <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
+          <TabsList className="w-full justify-start bg-transparent border-b border-border h-auto p-0 rounded-none overflow-x-auto overflow-y-hidden flex-nowrap mb-8">
+            <TabsTrigger value="overview" className="rounded-none border-b-2 border-transparent data-[state=active]:border-navy-900 data-[state=active]:bg-transparent data-[state=active]:shadow-none px-6 pb-3 text-sm font-semibold">
               Overview
             </TabsTrigger>
-            <TabsTrigger value="delivery" className="px-4 py-1.5 text-sm">
+            <TabsTrigger value="delivery" className="rounded-none border-b-2 border-transparent data-[state=active]:border-navy-900 data-[state=active]:bg-transparent data-[state=active]:shadow-none px-6 pb-3 text-sm font-semibold">
               Delivery
             </TabsTrigger>
-            <TabsTrigger value="raid" className="px-4 py-1.5 text-sm">
+            <TabsTrigger value="raid" className="rounded-none border-b-2 border-transparent data-[state=active]:border-navy-900 data-[state=active]:bg-transparent data-[state=active]:shadow-none px-6 pb-3 text-sm font-semibold">
               RAID
             </TabsTrigger>
-            <TabsTrigger value="sessions" className="px-4 py-1.5 text-sm">
+            <TabsTrigger value="sessions" className="rounded-none border-b-2 border-transparent data-[state=active]:border-navy-900 data-[state=active]:bg-transparent data-[state=active]:shadow-none px-6 pb-3 text-sm font-semibold">
               Sessions
             </TabsTrigger>
-            <TabsTrigger value="inbox" className="px-4 py-1.5 text-sm">
+            <TabsTrigger value="inbox" className="rounded-none border-b-2 border-transparent data-[state=active]:border-navy-900 data-[state=active]:bg-transparent data-[state=active]:shadow-none px-6 pb-3 text-sm font-semibold">
               Inbox
             </TabsTrigger>
-            <TabsTrigger value="commercial" className="px-4 py-1.5 text-sm">
+            <TabsTrigger value="commercial" className="rounded-none border-b-2 border-transparent data-[state=active]:border-navy-900 data-[state=active]:bg-transparent data-[state=active]:shadow-none px-6 pb-3 text-sm font-semibold">
               Commercial & Terms
             </TabsTrigger>
           </TabsList>
@@ -3053,7 +3047,7 @@ const ServiceOrderDetail = () => {
                   </div>
                   <div>
                     <p className="text-sm text-muted-foreground">Order Number</p>
-                    <p className="font-medium text-foreground">{order.serviceOrderNumber}</p>
+                    <span className="font-medium text-foreground">CTR-001</span>
                   </div>
                   <div>
                     <p className="text-sm text-muted-foreground">Service Type</p>

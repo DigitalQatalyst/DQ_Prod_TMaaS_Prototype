@@ -12,9 +12,9 @@ const milestoneStatusBadgeClass = (status: string) => {
     case "Completed":
       return "bg-green-50 text-green-700 border-green-200";
     case "In Progress":
-      return "bg-blue-50 text-blue-700 border-blue-200";
+      return "bg-slate-50 text-slate-700 border-slate-200";
     default:
-      return "bg-slate-100 text-slate-700 border-slate-200";
+      return "bg-slate-100 text-slate-500 border-slate-200";
   }
 };
 
@@ -23,7 +23,7 @@ const deliverableStatusBadgeClass = (status: string) => {
     case "Closed":
       return "bg-green-50 text-green-700 border-green-200";
     case "In Progress":
-      return "bg-blue-50 text-blue-700 border-blue-200";
+      return "bg-slate-50 text-slate-700 border-slate-200";
     case "New":
       return "bg-amber-50 text-amber-700 border-amber-200";
     default:
@@ -217,21 +217,20 @@ export const DeliveryTab = () => {
                     }>{kri.status}</Badge>
                   </div>
                   <h4 className="text-sm font-semibold text-navy-950 mb-3 pr-6">{kri.title}</h4>
-                  {kri.outcomeEvidence && (
-                    <div className="flex items-center gap-1.5 text-xs text-blue-600 bg-blue-50/50 p-2 rounded-md mb-2 mr-2">
-                      <Link2 size={12} className="shrink-0" />
-                      <span className="truncate font-semibold" title={kri.outcomeEvidence}>{kri.outcomeEvidence}</span>
-                    </div>
-                  )}
                 </div>
                 <div className="mt-2 pt-4 border-t border-border">
-                  <div className="flex justify-between text-xs mb-2">
-                    <span className="text-gray-500">Current</span>
-                    <span className="font-bold text-navy-950">{kri.current}</span>
-                  </div>
-                  <div className="flex justify-between text-xs">
-                    <span className="text-gray-500">Target</span>
-                    <span className="font-bold text-navy-950">{kri.target}</span>
+                  <span className="text-[10px] font-bold text-gray-400 uppercase tracking-wider mb-2 block">Contributing Milestones</span>
+                  <div className="flex flex-wrap gap-1.5">
+                    {calculatedMilestones
+                      .filter(m => (m.outcomeMapping || []).includes(kri.id))
+                      .map((m, idx) => (
+                        <Badge key={idx} variant="outline" className="text-[10px] font-medium bg-slate-50 text-slate-700 border-slate-200">
+                          MS0{m.id}: {m.name}
+                        </Badge>
+                      ))}
+                    {calculatedMilestones.filter(m => (m.outcomeMapping || []).includes(kri.id)).length === 0 && (
+                      <span className="text-xs text-gray-400 italic">No linked milestones</span>
+                    )}
                   </div>
                 </div>
               </div>
@@ -245,12 +244,12 @@ export const DeliveryTab = () => {
         <div className="flex flex-col sm:flex-row justify-between items-start sm:items-end gap-4">
           <div>
             <h3 className="text-lg font-bold text-navy-950 flex items-center gap-2">
-              <Flag size={20} className="text-blue-500" />
+              <Flag size={20} className="text-navy-950" />
               Milestones
             </h3>
             <p className="text-sm text-gray-500">High-level operational schedule mapped to strategic outcomes.</p>
           </div>
-          <Button size="sm" onClick={handleAddMilestone} className="gap-2 bg-blue-600 hover:bg-blue-700 text-white rounded-xl shadow-sm">
+          <Button size="sm" onClick={handleAddMilestone} className="gap-2 bg-navy-950 hover:bg-navy-900 text-white rounded-xl shadow-sm">
             <Plus size={14} /> Add Milestone
           </Button>
         </div>
@@ -259,11 +258,11 @@ export const DeliveryTab = () => {
           <Table>
             <TableHeader className="bg-slate-50/50">
               <TableRow>
-                <TableHead className="w-[35%]">Milestone</TableHead>
-                <TableHead>Linked KRI</TableHead>
-                <TableHead>Contract Date</TableHead>
-                <TableHead>Progress</TableHead>
-                <TableHead>Status</TableHead>
+                <TableHead className="w-[25%]">Milestone</TableHead>
+                <TableHead>Linked KRIs</TableHead>
+                <TableHead>Contractual Status</TableHead>
+                <TableHead>Delivery Progress</TableHead>
+                <TableHead>Timeline</TableHead>
                 <TableHead className="w-10"></TableHead>
               </TableRow>
             </TableHeader>
@@ -310,20 +309,34 @@ export const DeliveryTab = () => {
                       </div>
                     </TableCell>
                     <TableCell>
-                      <span className="text-xs font-medium text-navy-950 whitespace-nowrap">
-                        {milestone.adjustedContractDate ?? milestone.originalContractDate}
-                      </span>
+                      <Badge variant="outline" className="bg-slate-50 text-slate-700 border-slate-200">
+                        {milestone.contractualStatus || 'Pending'}
+                      </Badge>
                     </TableCell>
                     <TableCell>
-                      <div className="flex items-center gap-2 w-full max-w-[120px]">
-                        <Progress value={milestone.calculatedProgress} className="h-1.5 bg-gray-100" indicatorClassName={milestone.status === 'Completed' ? 'bg-green-500' : 'bg-blue-600'} />
-                        <span className="text-[10px] font-semibold text-gray-600 w-8 text-right">{milestone.calculatedProgress}%</span>
+                      <div className="flex flex-col gap-1.5 w-full max-w-[140px]">
+                        <div className="flex justify-between items-center text-[10px] font-semibold text-gray-500">
+                          <span className={milestone.status === 'Completed' ? 'text-green-600' : 'text-navy-950'}>{milestone.status}</span>
+                          <span>{milestone.calculatedProgress}%</span>
+                        </div>
+                        <Progress value={milestone.calculatedProgress} className="h-1.5 bg-gray-100" indicatorClassName={milestone.status === 'Completed' ? 'bg-green-500' : 'bg-navy-950'} />
                       </div>
                     </TableCell>
                     <TableCell>
-                      <Badge variant="outline" className={milestoneStatusBadgeClass(milestone.status)}>
-                        {milestone.status}
-                      </Badge>
+                      <div className="flex flex-col gap-1 text-[11px]">
+                        <div className="flex justify-between gap-4">
+                          <span className="text-gray-400">Start:</span>
+                          <span className="font-medium text-navy-950">{milestone.startDate}</span>
+                        </div>
+                        <div className="flex justify-between gap-4">
+                          <span className="text-gray-400">Contracted:</span>
+                          <span className="font-medium text-navy-950">{milestone.originalContractDate}</span>
+                        </div>
+                        <div className="flex justify-between gap-4">
+                          <span className="text-gray-400">Forecast:</span>
+                          <span className="font-medium text-navy-950">{milestone.forecastDate}</span>
+                        </div>
+                      </div>
                     </TableCell>
                     <TableCell>
                       <Button variant="ghost" size="icon" onClick={() => handleDeleteMilestone(milestone.id)} className="h-8 w-8 text-gray-400 hover:text-red-500 hover:bg-red-50 opacity-0 group-hover/milestone:opacity-100 transition-opacity">
@@ -343,12 +356,12 @@ export const DeliveryTab = () => {
         <div className="flex flex-col sm:flex-row justify-between items-start sm:items-end gap-4">
           <div>
             <h3 className="text-lg font-bold text-navy-950 flex items-center gap-2">
-              <Package size={20} className="text-indigo-500" />
+              <Package size={20} className="text-navy-950" />
               Deliverables & External Tasks
             </h3>
             <p className="text-sm text-gray-500">Execution artifacts and their associated external task dependencies.</p>
           </div>
-          <Button size="sm" onClick={handleAddDeliverable} className="gap-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl shadow-sm">
+          <Button size="sm" onClick={handleAddDeliverable} className="gap-2 bg-navy-950 hover:bg-navy-900 text-white rounded-xl shadow-sm">
             <Plus size={14} /> Add Deliverable
           </Button>
         </div>
@@ -393,7 +406,7 @@ export const DeliveryTab = () => {
                       <div className="bg-slate-50 rounded-xl p-4 border border-slate-100 relative">
                         <div className="flex justify-between items-center mb-3">
                           <p className="text-[10px] font-bold text-gray-400 uppercase tracking-wider">Mapped External Tasks</p>
-                          <Button variant="ghost" size="sm" onClick={() => handleAddTask(del.id)} className="h-6 text-[10px] px-2 text-indigo-600 hover:text-indigo-700 hover:bg-indigo-50">
+                          <Button variant="ghost" size="sm" onClick={() => handleAddTask(del.id)} className="h-6 text-[10px] px-2 text-navy-600 hover:text-navy-950 hover:bg-navy-50">
                             <Plus size={12} className="mr-1" /> Add Task
                           </Button>
                         </div>
@@ -412,17 +425,17 @@ export const DeliveryTab = () => {
                                   <span className="truncate text-xs">{task.owner}</span>
                                 </div>
                                 <div className="flex items-center gap-2 w-24">
-                                  <Progress value={task.progress} className="h-2 w-16 bg-gray-200" indicatorClassName={task.status === 'Done' ? 'bg-green-500' : 'bg-blue-600'} />
+                                  <Progress value={task.progress} className="h-2 w-16 bg-gray-200" indicatorClassName={task.status === 'Done' ? 'bg-green-500' : 'bg-navy-950'} />
                                   <span className="text-[10px] font-semibold text-gray-600">{task.progress}%</span>
                                 </div>
                                 <div className="w-20 text-right">
                                   <span className={`text-[10px] font-bold ${
                                     task.status === 'Blocked' ? 'text-red-500' :
-                                    task.status === 'Done' ? 'text-green-600' : 'text-blue-600'
+                                    task.status === 'Done' ? 'text-green-600' : 'text-navy-950'
                                   }`}>{task.status}</span>
                                 </div>
                                 <div className="flex items-center gap-1 shrink-0">
-                                  <a href={task.externalLink} target="_blank" rel="noreferrer" className="text-gray-400 hover:text-blue-600 h-6 w-6 flex items-center justify-center rounded hover:bg-blue-50">
+                                  <a href={task.externalLink} target="_blank" rel="noreferrer" className="text-gray-400 hover:text-navy-950 h-6 w-6 flex items-center justify-center rounded hover:bg-navy-50">
                                     <ExternalLink size={14} />
                                   </a>
                                   <button onClick={() => handleDeleteTask(del.id, task.id)} className="text-gray-400 hover:text-red-500 h-6 w-6 flex items-center justify-center rounded hover:bg-red-50 opacity-0 group-hover/task:opacity-100 transition-opacity">

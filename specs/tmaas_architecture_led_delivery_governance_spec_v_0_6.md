@@ -50,14 +50,13 @@ The Project Delivery feature provides:
 - A **project details workspace** featuring a persistent header showing the automated RAG status across 7 key indicators.
 - A dedicated **Seven Keys Governance Workspace** exposing governance evidence, trend intelligence, and recovery tracking.
 - A **tabbed workspace** structured to reflect the optimized delivery hierarchy:
-  1. **Overview Dashboard** (operational control center)
-  2. **Seven Keys** (Dedicated governance health workspace)
-  3. **Delivery** (Milestones & Deliverables mapped to outcomes)
-  4. **Governance** (RAID & Stakeholders)
-  5. **Commercials** (Contract, Payments & Changes)
-  6. **Sessions** (Collaboration governance)
-  7. **Messages** (Communication)
-  8. **Team** (Project roster)
+  1. **Overview**
+  2. **Seven Keys**
+  3. **Delivery**
+  4. **RAID**
+  5. **Stakeholders**
+  6. **Commercials**
+  7. **Team**
 
 ---
 
@@ -66,7 +65,7 @@ The Project Delivery feature provides:
 The starting point for portfolio governance. Displays all project engagements with automated health visibility.
 
 ### 1.1 Page Header
-- Title: **Active Engagements**
+- Title: **Delivery**
 - Subtitle: "Manage portfolio delivery and governance"
 - **Refresh** button: Always visible
 - **Add Project** button: Opens the Add Project modal
@@ -74,9 +73,9 @@ The starting point for portfolio governance. Displays all project engagements wi
 ### 1.2 Metrics Cards
 A dashboard summary showing delivery distribution:
 - **Total**: Total count of all engagements.
-- **On Track (Green)**: Count of healthy engagements.
-- **At Risk (Amber)**: Count of engagements with warning indicators.
-- **Critical (Red)**: Count of engagements with active blockers or overdue milestones.
+- **(Green)**: Count of healthy engagements.
+- **(Amber)**: Count of engagements with warning indicators.
+- **(Red)**: Count of engagements with active blockers or overdue milestones.
 - **Completed**: Closed engagements.
 
 ### 1.3 Filters & Search
@@ -92,7 +91,6 @@ A dashboard summary showing delivery distribution:
 - **Project Name**: Click to navigate to details.
 - **Organisation**: Client organization name.
 - **Overall Health**: Aggregated RAG status based on the 7 indicators.
-- **KRIs at Risk**: Count of executive indicators currently flagging warnings.
 - **Blocked Items**: Count of currently blocked tasks/RAID items.
 - **Lead**: Assigned delivery lead (assigned/unassigned indicator).
 - **Actions**: Assign Lead, Delete.
@@ -105,16 +103,17 @@ Every project detail page includes a persistent, context-retaining header.
 
 ### 2.1 Header Components
 - Client organisation logo or avatar.
-- Project name (display only).
-- Service Type (inline editable: Design / Deploy / Design & Deploy).
-- Project Status Indicators: Displays a visual RAG status bar showing the 7 indicators.
-- Clicking any indicator opens the dedicated **Seven Keys Governance Workspace** focused on:
-  - contributing governance evidence
-  - historical trend
-  - impacted delivery elements
-  - mitigation actions
-  - health trajectory over time.
+- Project name
+- Organisation name
+- Chip: Service Type (Design / Deploy / Design & Deploy).
+- Status chip: Active / Paused / Closed / Cancelled
 
+Summary Tags (editable)
+- Start date
+- Forecasted end date
+- Project Status: Displays Aggregated RAG status showing an average status of the 7 indicators.
+- Clicking the status badge opens the dedicated **Seven Keys** tab.
+- Assigned Delivery Lead
 ---
 
 ### Governance Principle — Objective Delivery Governance
@@ -147,7 +146,6 @@ Each indicator functions as:
 Each Seven Key includes:
 - Current RAG state
 - Contributing governance criteria
-- Linked evidence sources
 - Historical trend
 - Time spent in current state
 - Linked mitigation and recovery actions.
@@ -200,53 +198,54 @@ Status is never set manually. The platform calculates each indicator using objec
 
 ### Updated Tab Structure
 
-1. **Overview Dashboard** (Operational control center)
+1. **Overview** (Operational control center)
 2. **Seven Keys** (Dedicated governance health workspace)
-3. **Delivery** (Milestones & Deliverables mapped to outcomes)
-4. **Governance** (RAID & Stakeholders)
-5. **Commercials** (Contract, Payments & Changes)
-6. **Sessions** (Collaboration governance)
-7. **Messages** (Communication)
-8. **Team** (Project roster)
+3. **Delivery** (Project Vision, KRIs, Milestones contributing to KRIs, Deliverables mapped to Milestones, Tasks mapped to Deliverables)
+4. **RAID** (Risks, Issues, Dependencies, Assumptions)
+5. **Commercials** (Contract Status, Payment Milestones & Changes, Commercial Documents)
+6. **Messages** (Inbox)
+7. **Team** (Delivery team)
+8. **Stakeholders** (Stakeholders)
 
 ---
 
-### 3.1 Overview Dashboard (Operational Control Center)
+### 3.1 Overview (Operational Control Center)
 
 A high-density dashboard that answers operational questions immediately.
 
-#### Immediate Answers Block:
-- **Why is the project red?**
-  - Synthesized governance explanation highlighting:
-    - failing indicators
-    - impacted milestones
-    - overdue deliverables
-    - blocked dependencies
-    - affected KRIs
-    - and active escalations.
-- **What is blocked?**
-  - List of blocked tasks and unresolved dependency RAID items.
-- **What is overdue?**
-  - List of milestones and deliverables that have passed their target dates without completion.
-- **Which KRIs are at risk?**
-  - Highlights specific Key Result Indicators failing to meet target realization thresholds.
-- **What are the highest-impact escalations?**
-  - Surfaces active issues flagged as High Severity or marked for escalation in the RAID register.
+#### Metric Cards:
+- **Milestones In Progress**
+- **Deliverables In Progress**
+- **Open RAID Items**
+- **Items Requiring Attention**
 
-#### Weekly Governance Focus:
-A curated governance widget dedicated to weekly status reviews, restricting the view only to:
-- High-Impact RAID items
-- Active Blockers
-- Governance deteriorations
-- Action Items planned for the current week
-- Milestone Activities scheduled for the next 7 days
-- Seven Key indicators trending negatively.
+---
+
+#### Payment Milestones Table:
+- **Milestone Name**
+- **Completion %**
+- **Status**
+- **Contracted Date**
+
+---
+
+#### High Impact RAID Items:
+- High Severity RAID items
+- Blocked dependencies
+- Escalated delivery concerns
+
+---
+
+#### This Week’s Items:
+- Current week delivery activities
+- Upcoming deliverables
+- Active milestone activities
 
 ---
 
 ### 3.2 Seven Keys
 
-Dedicated governance workspace focused on objective project health analysis.
+Dedicated tab focused on objective project health analysis.
 
 The Seven Keys workspace serves as the authoritative governance layer for the engagement.
 
@@ -255,33 +254,20 @@ Displays all Seven Keys indicators with:
 - Current RAG state
 - Trend direction
 - Time in current state
-- Severity ranking
 - Last status transition timestamp.
 
 #### B. Governance Evidence Breakdown
 For every indicator, the platform exposes:
 - Contributing governance rules
-- Triggering operational evidence
-- Impacted milestones and deliverables
-- Related RAID items
-- Related KRIs
-- Linked stakeholder or contractual dependencies.
+- Triggers
+- Impacted milestones and deliverables (where applicable)
+- Related RAID items (where applicable)
+- Related KRIs (where applicable)
+- Linked stakeholder or contractual dependencies (where applicable).
 
 #### C. Trend & Recovery Analysis
 Displays:
-- Historical health timeline
-- Governance trajectory
-- Recovery velocity
-- Deterioration acceleration
-- Historical governance snapshots.
-
-#### D. Mitigation & Recovery Actions
-For every non-green indicator:
-- linked mitigation actions
-- escalation activities
-- owners
-- target recovery dates
-- recovery progress.
+- Historical RAGhealth timeline
 
 ---
 
@@ -293,74 +279,133 @@ This tab manages the core execution and maps it directly to strategic goals.
 - **Vision Statement**: DQ's internal strategic vision for the engagement.
 - **Measurable KRIs**:
   - List of Key Result Indicators.
-  - **Outcome Evidence**: Stored metric or evidence proof (e.g., document link, analytics query result) showing value realization.
-  - **Status**: Visual indicator showing if the KRI is on track.
+  - **Status**: Visual indicator showing if the KRI is on track (based on status of linked Milestones).
 
 #### B. Milestones
 - List of milestones representing the operational schedule.
-- **Outcome Mapping**: Every milestone displays a list of the specific KRIs/outcomes it directly supports.
-- **Contractual Status**: Not Started / Pending / In Negotiation / In Place.
-- **Timeline**: Start date, target due date, and actual completion date.
+- **Linked KRIs**: Every milestone displays a list of the specific KRIs/outcomes it directly supports.
+- **Contractual Status**: Not Started / Pending / In Negotiation / In Delivery / Delivered / Accepted / Invoiced / Partially Paid / Paid.
+- **Delivery Progress**: Based on linked deliverable progress
+- **Timeline**: Start date, contracted due date, and forecasted date or actual completion date.
 
 #### C. Deliverables & Tasks
 - Lists all deliverables nested under their respective milestone.
-- **Deliverable details**: Description, owner, status.
+- **Deliverable details**: Description, owner, progress, status.
 - **Execution Task Board (The Task Modeling Layer)**:
   - Formally models external tasks for each deliverable:
     - **Task Name**
-    - **Status** (To Do / In Progress / Blocked / Done)
+    - **Status** (New / In Progress / Blocked / Done)
     - **% Progress**
     - **Owner**
-    - **External Link**: Deep-link to the task in JIRA, Linear, or other external execution tools.
+    - **External Link**: Deep-link to the task in Planner.
 
 ---
 
-### 3.4 Governance
+### 3.4 RAID
 
-Consolidates RAID management and stakeholder tracking.
-
-#### A. RAID Register
+#### RAID Items
 Tracks Risks, Issues, Dependencies, and Assumptions (RAID).
 - **Sub-tabs**: Risks, Issues, Dependencies, Assumptions (each with a count badge).
-- **Properties**: Title, description, severity, status, owner, due date, mitigation notes, and an **Escalated** flag.
-- **Escalation Visibility**: Setting the Escalated flag automatically bubbles the item up to the Overview Dashboard and Seven Keys governance analysis.
+- **Properties**: Title, description, severity, status, owner, due date, mitigation notes.
 
-#### B. Stakeholder Catalogue
-- Registry of key client and internal stakeholders.
+### 3.5 Stakeholders
+
+#### Stakeholder Catalogue
+- Registry of key client stakeholders.
 - **Role/Influence**: Map stakeholder influence (High/Medium/Low) and commitment level.
 - **Engagement History**: Track contact logs and regular touchpoints.
 - **Catalogue Activity Log**: Shows the timestamp of the last catalogue update (used to drive the "Stakeholders Committed" green health rule).
 
 ---
 
-### 3.5 Commercials
+### 3.6 Commercials
 
-Manages the financial and legal health of the project, feeding the automated status.
-
-- **Contract Status**: Total contract value, currency, and general commercial terms.
-- **Payment Milestones + Status**:
-  - Maps milestones to payment amounts and statuses (Pending / Invoiced / Partially Paid / Paid).
-- **Commercial Documents**: Repository for signed statements of work, addenda, and terms.
-- **Contract Changes**:
-  - Track change orders (New, In Negotiation, In Specification, Approved).
-  - Shows value changes, timeline impacts, and links to affected deliverables (for automated "Scope Confirmed" calculation).
+Manages the commercial, contractual, and financial tracking of the project.
 
 ---
 
-### 3.6 Sessions
-- **Upcoming & Past Sessions**: Structure meetings, steering committees, and reviews.
-- **Action items**: Record actions, owners, and due dates directly generated during sessions (linked to Weekly Governance).
+#### Contract Status Card:
+
+Editable commercial summary values for the project contract.
+
+* **Contract Currency**
+* **Total Contract Value**
+* **Contract Signed Date**
+* **No. of Contract Changes**
+* **Invoiced Amount**
+* **Received Amount**
 
 ---
 
-### 3.7 Messages
-- Channels for messaging and exchanging documentation with active client contacts.
+#### Payment Milestones:
+
+Tracks payment-linked project milestones and their commercial status.
+
+Users can add and edit payment milestones.
+
+For each payment milestone:
+
+* **Status**
+* **Milestone Value**
+* **Paid Amount**
+* **Outstanding Amount**
+* **Contracted Date**
 
 ---
 
-### 3.8 Team
+#### Contract Changes:
+
+Tracks commercial and scope-related contract changes raised during project execution.
+
+Users can add contract changes.
+
+For each contract change:
+
+* **Subject**
+* **Description**
+* **Status**
+
+  * New
+  * In Negotiation
+  * In Specification
+  * Agreed
+  * Signed
+* **Milestones Affected**
+
+  * Selectable from the project payment milestones
+* **Requested By**
+
+  * DQ
+  * Client
+* **Relevant Attachments**
+
+  * Links
+
+---
+
+#### Commercial Documents:
+
+Repository for project commercial and contractual documents.
+
+Users can add commercial documents.
+
+For each document:
+
+* **Title**
+* **Description**
+* **Link**
+* **Document Type**
+
+  * Contract
+  * Contract Change
+  * Invoice
+  * Other
+
+---
+
+### 3.7 Team
 - Roster of delivery professionals assigned to the engagement (e.g., Delivery Lead, Business Analyst, Architect), managing assignment fields to drive the "Plan Confirmed" metric.
-
+- A team member can be assigned as the owner of a Deliverable or Task or RAID item.
 ---
 
 ## 4. Roles & Responsibilities

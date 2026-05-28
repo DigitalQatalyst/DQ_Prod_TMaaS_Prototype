@@ -17,7 +17,7 @@ export const mockPortfolioEngagements: PortfolioEngagement[] = [
   {
     id: "ENG-2024-001",
     name: "IT GPRC",
-    organization: "Dubai Electricity & Water Authority",
+    organization: "STC Bank",
     health: "red",
     healthLabel: "Critical",
     krisAtRisk: 1,

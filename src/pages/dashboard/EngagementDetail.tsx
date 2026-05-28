@@ -14,11 +14,10 @@ import { StakeholdersTab } from "@/components/engagements/StakeholdersTab";
 import { CommercialsTab } from "@/components/engagements/CommercialsTab";
 import { SessionsTab } from "@/components/engagements/SessionsTab";
 import { TeamTab } from "@/components/engagements/TeamTab";
-import { HealthIndicatorModal } from "@/components/engagements/HealthIndicatorModal";
+import { SevenKeysTab } from "@/components/engagements/SevenKeysTab";
 import type { IndicatorNavigationTarget, RaidSubTab } from "@/data/engagementHealthIndicators";
 
 const EngagementDetail = () => {
-  const [healthModalOpen, setHealthModalOpen] = useState(false);
   const [activeTab, setActiveTab] = useState("overview");
   const [raidSubTab, setRaidSubTab] = useState<RaidSubTab>("risks");
   const { user } = useAuth();
@@ -28,7 +27,6 @@ const EngagementDetail = () => {
     if (target.raidSubTab) {
       setRaidSubTab(target.raidSubTab);
     }
-    setHealthModalOpen(false);
   };
   const backPath =
     user.role === "dq_portfolio_oversight" ? "/dashboard/dq/portfolio" : "/dashboard/services";
@@ -50,49 +48,43 @@ const EngagementDetail = () => {
           engagementId={mockEngagement.id}
           deliveryLead={mockEngagement.deliveryLead}
           clientLogo={mockEngagement.clientLogo}
-          onViewStatusDetails={() => setHealthModalOpen(true)}
+          type={mockEngagement.type}
+          status={mockEngagement.status}
+          startDate={mockEngagement.startDate}
+          forecastEndDate={mockEngagement.forecastEndDate}
+          onNavigateToSevenKeys={() => setActiveTab("seven_keys")}
         />
 
         {/* 2. Tabbed Workspace */}
         <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
           <TabsList className="w-full justify-start bg-transparent border-b border-border h-auto p-0 rounded-none overflow-x-auto overflow-y-hidden flex-nowrap">
             <TabsTrigger value="overview" className="rounded-none border-b-2 border-transparent data-[state=active]:border-navy-900 data-[state=active]:bg-transparent data-[state=active]:shadow-none px-6 pb-3 text-sm font-semibold">Overview</TabsTrigger>
+            <TabsTrigger value="seven_keys" className="rounded-none border-b-2 border-transparent data-[state=active]:border-navy-900 data-[state=active]:bg-transparent data-[state=active]:shadow-none px-6 pb-3 text-sm font-semibold">Seven Keys</TabsTrigger>
             <TabsTrigger value="delivery" className="rounded-none border-b-2 border-transparent data-[state=active]:border-navy-900 data-[state=active]:bg-transparent data-[state=active]:shadow-none px-6 pb-3 text-sm font-semibold">Delivery</TabsTrigger>
             <TabsTrigger value="raid" className="rounded-none border-b-2 border-transparent data-[state=active]:border-navy-900 data-[state=active]:bg-transparent data-[state=active]:shadow-none px-6 pb-3 text-sm font-semibold">RAID</TabsTrigger>
-            <TabsTrigger value="stakeholders" className="rounded-none border-b-2 border-transparent data-[state=active]:border-navy-900 data-[state=active]:bg-transparent data-[state=active]:shadow-none px-6 pb-3 text-sm font-semibold">Stakeholders</TabsTrigger>
             <TabsTrigger value="commercials" className="rounded-none border-b-2 border-transparent data-[state=active]:border-navy-900 data-[state=active]:bg-transparent data-[state=active]:shadow-none px-6 pb-3 text-sm font-semibold">Commercials</TabsTrigger>
-            <TabsTrigger value="sessions" className="rounded-none border-b-2 border-transparent data-[state=active]:border-navy-900 data-[state=active]:bg-transparent data-[state=active]:shadow-none px-6 pb-3 text-sm font-semibold">Sessions</TabsTrigger>
-            <TabsTrigger value="messages" className="rounded-none border-b-2 border-transparent data-[state=active]:border-navy-900 data-[state=active]:bg-transparent data-[state=active]:shadow-none px-6 pb-3 text-sm font-semibold">Messages</TabsTrigger>
             <TabsTrigger value="team" className="rounded-none border-b-2 border-transparent data-[state=active]:border-navy-900 data-[state=active]:bg-transparent data-[state=active]:shadow-none px-6 pb-3 text-sm font-semibold">Team</TabsTrigger>
+            <TabsTrigger value="stakeholders" className="rounded-none border-b-2 border-transparent data-[state=active]:border-navy-900 data-[state=active]:bg-transparent data-[state=active]:shadow-none px-6 pb-3 text-sm font-semibold">Stakeholders</TabsTrigger>
           </TabsList>
 
           <div className="mt-8">
             <TabsContent value="overview" className="m-0">
-              <OverviewTab onNavigateToIndicator={handleNavigateToIndicator} />
+              <OverviewTab onNavigateToIndicator={handleNavigateToIndicator} onNavigateToTab={setActiveTab} />
+            </TabsContent>
+            <TabsContent value="seven_keys" className="m-0">
+              <SevenKeysTab onNavigateToIndicator={handleNavigateToIndicator} />
             </TabsContent>
             <TabsContent value="delivery" className="m-0"><DeliveryTab /></TabsContent>
             <TabsContent value="raid" className="m-0">
               <RaidTab activeSubTab={raidSubTab} onSubTabChange={setRaidSubTab} />
             </TabsContent>
-            <TabsContent value="stakeholders" className="m-0"><StakeholdersTab /></TabsContent>
             <TabsContent value="commercials" className="m-0"><CommercialsTab /></TabsContent>
-            <TabsContent value="sessions" className="m-0"><SessionsTab /></TabsContent>
-            <TabsContent value="messages" className="m-0">
-              <div className="flex flex-col items-center justify-center py-20 text-center">
-                <h3 className="text-lg font-bold text-navy-950 mb-2">Message Center</h3>
-                <p className="text-sm text-gray-500 max-w-md">The communications hub is connected directly to the client's Inbox workspace.</p>
-              </div>
-            </TabsContent>
             <TabsContent value="team" className="m-0"><TeamTab /></TabsContent>
+            <TabsContent value="stakeholders" className="m-0"><StakeholdersTab /></TabsContent>
           </div>
         </Tabs>
 
-        {/* Modal */}
-        <HealthIndicatorModal
-          open={healthModalOpen}
-          onOpenChange={setHealthModalOpen}
-          onNavigateToIndicator={handleNavigateToIndicator}
-        />
+
       </div>
     </DashboardLayout>
   );

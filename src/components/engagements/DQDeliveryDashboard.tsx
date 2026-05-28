@@ -35,10 +35,10 @@ const healthBadgeClass = (health: PortfolioHealth) => {
 };
 
 const metricCards = [
-  { key: "total", label: "Total Engagements", value: portfolioHealthMetrics.total, accent: "text-navy-950" },
-  { key: "onTrack", label: "On Track", value: portfolioHealthMetrics.onTrack, accent: "text-green-600" },
-  { key: "atRisk", label: "At Risk", value: portfolioHealthMetrics.atRisk, accent: "text-amber-600" },
-  { key: "critical", label: "Critical", value: portfolioHealthMetrics.critical, accent: "text-red-600" },
+  { key: "total", label: "Total", value: portfolioHealthMetrics.total, accent: "text-navy-950" },
+  { key: "onTrack", label: "(Green)", value: portfolioHealthMetrics.onTrack, accent: "text-green-600" },
+  { key: "atRisk", label: "(Amber)", value: portfolioHealthMetrics.atRisk, accent: "text-amber-600" },
+  { key: "critical", label: "(Red)", value: portfolioHealthMetrics.critical, accent: "text-red-600" },
   { key: "completed", label: "Completed", value: portfolioHealthMetrics.completed, accent: "text-slate-600" },
 ] as const;
 
@@ -52,7 +52,7 @@ export const DQDeliveryDashboard = () => {
     <div className="space-y-6 max-w-7xl mx-auto">
       <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4">
         <div>
-          <h1 className="text-3xl font-bold tracking-tight text-navy-950">Delivery Governance</h1>
+          <h1 className="text-3xl font-bold tracking-tight text-navy-950">Delivery</h1>
           <p className="mt-1 text-sm text-gray-500">
             Portfolio health, escalations, and operational focus for {user.name}
           </p>
@@ -123,7 +123,6 @@ export const DQDeliveryDashboard = () => {
                   <TableHead>Engagement</TableHead>
                   <TableHead>Organisation</TableHead>
                   <TableHead>Health</TableHead>
-                  <TableHead className="text-center">KRIs at Risk</TableHead>
                   <TableHead className="text-center">Blocked</TableHead>
                   <TableHead>Lead</TableHead>
                 </TableRow>
@@ -145,11 +144,6 @@ export const DQDeliveryDashboard = () => {
                       <Badge variant="outline" className={healthBadgeClass(engagement.health)}>
                         {engagement.healthLabel}
                       </Badge>
-                    </TableCell>
-                    <TableCell className="text-center">
-                      <span className={engagement.krisAtRisk > 0 ? "font-bold text-amber-600" : "text-gray-400"}>
-                        {engagement.krisAtRisk}
-                      </span>
                     </TableCell>
                     <TableCell className="text-center">
                       <span className={engagement.blockedItems > 0 ? "font-bold text-red-600" : "text-gray-400"}>

@@ -1,8 +1,8 @@
 export const mockEngagement = {
   id: "ENG-2024-001",
   name: "IT GPRC",
-  client: "Dubai Electricity & Water Authority",
-  clientLogo: "DEWA",
+  client: "STC Bank",
+  clientLogo: "STC",
   type: "Design",
   status: "In Delivery",
   deliveryLead: "Rayyan Basha",
@@ -156,7 +156,6 @@ export const mockRisks = [
     owner: "James Chen",
     identifiedDate: "2026-02-01",
     dueDate: "2026-02-28",
-    escalated: true,
   }
 ];
 
@@ -170,7 +169,6 @@ export const mockIssues = [
     owner: "Alex Johnson",
     identifiedDate: "2026-02-20",
     dueDate: "2026-02-25",
-    escalated: true,
   }
 ];
 
@@ -183,7 +181,6 @@ export const mockDependencies = [
     status: "Pending",
     owner: "James Chen",
     dueDate: "2026-02-28",
-    escalated: false,
   }
 ];
 
@@ -195,7 +192,6 @@ export const mockAssumptions = [
     status: "Valid",
     owner: "Rayyan Basha",
     dueDate: "2026-03-15",
-    escalated: false,
   }
 ];
 
@@ -227,10 +223,23 @@ export const mockStakeholders = [
 export const mockContractChanges = [
   {
     id: "CR-001",
-    title: "Additional Cloud Assessment",
-    status: "Approved",
-    impact: "No schedule impact",
+    subject: "Additional Cloud Assessment",
+    description: "Expansion of scope to include assessing the hybrid cloud environment.",
+    status: "Agreed",
+    milestonesAffected: ["MS02"],
+    requestedBy: "Client",
     value: 45000,
+    attachments: 2,
+  },
+  {
+    id: "CR-002",
+    subject: "Timeline Extension",
+    description: "Extending MS03 by two weeks due to pending dependency resolution.",
+    status: "In Negotiation",
+    milestonesAffected: ["MS03", "MS04"],
+    requestedBy: "DQ",
+    value: 0,
+    attachments: 1,
   }
 ];
 
@@ -239,16 +248,20 @@ export const mockContractData = {
   contractValue: 155100.0,
   currency: "AED",
   contractType: "Fixed Price",
+  signedDate: "2026-01-15",
+  numberOfChanges: 2,
+  invoicedAmount: 38775.0,
+  receivedAmount: 38775.0,
 };
 
 const milestonePaymentById: Record<
   number,
-  { value: number; status: "Paid" | "Pending" | "Invoiced" | "Partially Paid" }
+  { value: number; status: "Paid" | "Pending" | "Invoiced" | "Partially Paid"; paidAmount: number; outstandingAmount: number }
 > = {
-  1: { value: 38775, status: "Paid" },
-  2: { value: 38775, status: "Pending" },
-  3: { value: 38775, status: "Pending" },
-  4: { value: 38775, status: "Pending" },
+  1: { value: 38775, status: "Paid", paidAmount: 38775, outstandingAmount: 0 },
+  2: { value: 38775, status: "Invoiced", paidAmount: 0, outstandingAmount: 38775 },
+  3: { value: 38775, status: "Pending", paidAmount: 0, outstandingAmount: 38775 },
+  4: { value: 38775, status: "Pending", paidAmount: 0, outstandingAmount: 38775 },
 };
 
 /** Payment milestones aligned 1:1 with delivery milestones (mockMilestones). */
@@ -261,14 +274,40 @@ export const mockPaymentMilestones = mockMilestones.map((m) => {
     value: payment.value,
     status: payment.status,
     contractDate: m.adjustedContractDate,
+    paidAmount: payment.paidAmount,
+    outstandingAmount: payment.outstandingAmount,
   };
 });
 
+export const mockCommercialDocuments = [
+  {
+    id: "DOC-001",
+    title: "DEWA-SO-001 Master Agreement",
+    description: "Fully executed Statement of Work",
+    documentType: "Contract",
+    link: "#",
+  },
+  {
+    id: "DOC-002",
+    title: "Invoice INV-2026-001",
+    description: "Milestone 1 Payment",
+    documentType: "Invoice",
+    link: "#",
+  },
+  {
+    id: "DOC-003",
+    title: "CR-001 Form",
+    description: "Signed Change Request for Cloud Assessment",
+    documentType: "Change",
+    link: "#",
+  }
+];
+
 export const mockTeamMembers = [
-  { id: "TM001", name: "Rayyan Basha", role: "Delivery Lead", avatar: "RB", allocation: 100 },
-  { id: "TM002", name: "James Chen", role: "Solution Architect", avatar: "JC", allocation: 80 },
-  { id: "TM003", name: "Maria Santos", role: "Technical Lead", avatar: "MS", allocation: 100 },
-  { id: "TM004", name: "Alex Johnson", role: "Security SME", avatar: "AJ", allocation: 50 },
+  { id: "TM001", name: "Rayyan Basha", role: "Delivery Lead", avatar: "RB", allocation: 100, assignments: { deliverables: 0, tasks: 2, raid: 1 } },
+  { id: "TM002", name: "James Chen", role: "Solution Architect", avatar: "JC", allocation: 80, assignments: { deliverables: 2, tasks: 5, raid: 2 } },
+  { id: "TM003", name: "Maria Santos", role: "Technical Lead", avatar: "MS", allocation: 100, assignments: { deliverables: 1, tasks: 3, raid: 0 } },
+  { id: "TM004", name: "Alex Johnson", role: "Security SME", avatar: "AJ", allocation: 50, assignments: { deliverables: 0, tasks: 1, raid: 1 } },
 ];
 
 export const mockSessions = [
