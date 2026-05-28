@@ -278,7 +278,7 @@ const Marketplace = () => {
               type="search"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              placeholder="Search for a service"
+              placeholder="Search services or describe your transformation goals…"
               className="h-14 rounded-2xl border-navy-200 bg-white pl-12 pr-44 text-base shadow-sm focus-visible:ring-orange-500 w-full"
             />
             <div className="absolute right-2 top-1/2 -translate-y-1/2 flex items-center gap-3">
