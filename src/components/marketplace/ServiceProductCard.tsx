@@ -70,7 +70,7 @@ const ServiceProductCard = ({
 
   if (variant === "shelf") {
     return (
-      <article className="relative flex h-full w-[min(260px,85vw)] shrink-0 flex-col rounded-xl border border-navy-100 bg-white p-4 shadow-sm transition hover:border-navy-200 hover:shadow-md sm:w-full sm:shrink">
+      <article className="relative flex h-full w-full flex-col rounded-xl border border-navy-100 bg-white p-4 shadow-sm transition hover:border-navy-200 hover:shadow-md">
         {featured && (
           <span className="absolute -top-2 left-3 inline-flex items-center gap-0.5 rounded bg-orange-500 px-1.5 py-0.5 text-[9px] font-bold uppercase tracking-wide text-white">
             <TrendingUp size={9} />
