@@ -1,11 +1,11 @@
 import type { MouseEvent } from "react";
 import { Link } from "react-router-dom";
-import { Check, ShoppingCart, TrendingUp } from "lucide-react";
+import { Check, ShoppingCart, TrendingUp, Zap } from "lucide-react";
 import { toast } from "sonner";
 import { useCart } from "@/contexts/CartContext";
 import { initialServices } from "@/data/services";
 
-import { marketplaceCategoryLabels } from "@/data/marketplaceNavigation";
+import { marketplaceCategoryLabels, marketplaceServiceTypeLabels } from "@/data/marketplaceNavigation";
 
 export type ServiceProduct = (typeof initialServices)[number];
 
@@ -29,9 +29,19 @@ const ServiceProductCard = ({
 }: ServiceProductCardProps) => {
   const { addItem, hasItem, openCart } = useCart();
   const inCart = hasItem(service.id);
-  const title = displayName ?? service.standardName;
+  const rawTitle = displayName ?? service.standardName;
+  const isHighImpact = rawTitle.includes("(High-Impact)");
+  const title = rawTitle.replace(" (High-Impact)", "");
   const categoryLabel = marketplaceCategoryLabels[service.collection] ?? service.collection;
+  const typeLabel = marketplaceServiceTypeLabels[service.serviceType] ?? service.serviceType;
   const detailUrl = `/service/${service.id}`;
+
+  let relatedServiceName = "";
+  if (variant === "full" && service.relatedServices && service.relatedServices.length > 0) {
+    const relatedId = service.relatedServices[0];
+    const relatedSvc = initialServices.find((s) => s.id === relatedId);
+    if (relatedSvc) relatedServiceName = relatedSvc.standardName;
+  }
 
   const handleAddToCart = (e: MouseEvent) => {
     e.preventDefault();
@@ -67,14 +77,22 @@ const ServiceProductCard = ({
             Top pick
           </span>
         )}
-        <div className="flex items-start justify-between gap-2">
-          <span className="text-[10px] font-medium uppercase tracking-wide text-gray-400">
-            {categoryLabel}
-          </span>
+        <div className="flex flex-wrap items-center justify-between gap-2">
+          <div className="flex flex-wrap items-center gap-1.5">
+            <span className="text-[10px] font-medium uppercase tracking-wide text-gray-400">
+              {categoryLabel}
+            </span>
+            {isHighImpact && (
+              <span className="inline-flex items-center gap-0.5 rounded bg-navy-950 px-1 py-0.5 text-[8px] font-bold uppercase tracking-wider text-white">
+                <Zap size={8} className="fill-white" />
+                High-Impact
+              </span>
+            )}
+          </div>
           {cartButton}
         </div>
         <Link to={detailUrl} className="mt-2 block min-w-0 flex-1 group/title">
-          <h3 className="text-sm font-semibold leading-snug text-navy-950 group-hover/title:text-orange-600 line-clamp-2">
+          <h3 className="text-sm font-semibold leading-snug text-navy-950 group-hover/title:text-orange-600 line-clamp-3">
             {title}
           </h3>
           <p className="mt-2 text-sm text-navy-950">
@@ -106,6 +124,12 @@ const ServiceProductCard = ({
             <span className="rounded bg-slate-100 px-2 py-0.5 text-[9px] font-semibold uppercase tracking-wide text-slate-600">
               {categoryLabel}
             </span>
+            {isHighImpact && (
+              <span className="inline-flex items-center gap-1 rounded bg-navy-950 px-1.5 py-0.5 text-[9px] font-bold uppercase tracking-wider text-white">
+                <Zap size={9} className="fill-white" />
+                High-Impact
+              </span>
+            )}
             {service.badge && (
               <span className="rounded border border-orange-100 bg-orange-50 px-2 py-0.5 text-[9px] font-semibold uppercase tracking-wide text-orange-700">
                 {service.badge}
@@ -138,6 +162,13 @@ const ServiceProductCard = ({
               View details
             </span>
           </p>
+          {relatedServiceName && (
+            <div className="mt-3 border-t border-slate-100 pt-3">
+              <p className="text-[10px] text-gray-500">
+                <span className="font-semibold text-navy-950">Often paired with:</span> {relatedServiceName}
+              </p>
+            </div>
+          )}
         </Link>
       </article>
     );
@@ -164,8 +195,14 @@ const ServiceProductCard = ({
           <span className="text-[10px] font-medium uppercase tracking-wide text-gray-400">
             {categoryLabel}
           </span>
-          {!service.badge && (
-            <span className="text-[10px] text-gray-400">· {service.serviceType}</span>
+          {isHighImpact && (
+            <span className="inline-flex items-center gap-0.5 rounded bg-navy-950 px-1.5 py-0.5 text-[8px] font-bold uppercase tracking-wider text-white">
+              <Zap size={8} className="fill-white" />
+              High-Impact
+            </span>
+          )}
+          {!service.badge && !isHighImpact && (
+            <span className="text-[10px] text-gray-400">· {typeLabel}</span>
           )}
           {service.badge && (
             <span className="rounded border border-orange-100 bg-orange-50 px-1.5 py-0.5 text-[9px] font-semibold text-orange-700">

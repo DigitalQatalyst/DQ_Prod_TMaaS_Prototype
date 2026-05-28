@@ -15,7 +15,7 @@ const MarketplaceBestSellers = ({
 }: MarketplaceBestSellersProps) => {
   const collection = activeTab === "all" ? "all" : activeTab;
   const bestSellers = useMemo(
-    () => getBestSellers(collection as any, 4),
+    () => getBestSellers(collection as any, 3),
     [collection]
   );
 
@@ -38,7 +38,7 @@ const MarketplaceBestSellers = ({
         Popular packages — fixed scope and pricing.
       </p>
 
-      <div className="mt-3 flex gap-3 overflow-x-auto pb-1 sm:grid sm:grid-cols-2 sm:overflow-visible sm:pb-0 lg:grid-cols-4">
+      <div className="mt-3 flex gap-3 overflow-x-auto pb-1 sm:grid sm:grid-cols-3 sm:overflow-visible sm:pb-0">
         {bestSellers.map((service, index) => (
           <ServiceProductCard
             key={service.id}
