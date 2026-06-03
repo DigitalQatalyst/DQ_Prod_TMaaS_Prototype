@@ -39,7 +39,7 @@ const CustomerServiceOrders = () => {
 
   // Define stage order for sorting
   const stageOrder = {
-    "Awaiting Commercial Confirmation": 1,
+    "Payment Confirmation Pending": 1,
     "Client Input Pending": 2,
     "Input in Review": 3,
     "In Delivery": 4,
@@ -71,7 +71,7 @@ const CustomerServiceOrders = () => {
 
   const getStageColor = (stage: string) => {
     switch (stage) {
-      case "Awaiting Commercial Confirmation":
+      case "Payment Confirmation Pending":
         return "bg-yellow-100 text-yellow-800 border-yellow-200";
       case "Client Input Pending":
         return "bg-orange-100 text-orange-800 border-orange-200";
@@ -90,7 +90,7 @@ const CustomerServiceOrders = () => {
 
   const getStageIcon = (stage: string) => {
     switch (stage) {
-      case "Awaiting Commercial Confirmation":
+      case "Payment Confirmation Pending":
         return <AlertCircle size={16} className="text-yellow-600" />;
       case "Client Input Pending":
         return <Clock size={16} className="text-orange-600" />;
@@ -108,7 +108,7 @@ const CustomerServiceOrders = () => {
   };
 
   const stages = [
-    "Awaiting Commercial Confirmation",
+    "Payment Confirmation Pending",
     "Client Input Pending",
     "Input in Review",
     "In Delivery",
@@ -129,7 +129,7 @@ const CustomerServiceOrders = () => {
     return {
       total: customerOrders.length,
       active: customerOrders.filter(
-        (o) => !["Closed", "Awaiting Commercial Confirmation"].includes(o.stage)
+        (o) => !["Closed", "Payment Confirmation Pending"].includes(o.stage)
       ).length,
       pendingAction: customerOrders.filter((o) =>
         ["Client Input Pending", "Deliverables Pending Review"].includes(o.stage)

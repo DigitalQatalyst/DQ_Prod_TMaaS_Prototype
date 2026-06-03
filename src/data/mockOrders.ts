@@ -71,7 +71,7 @@ export interface ServiceOrder {
   price: number;
   currency: string;
   duration: string;
-  stage: "Awaiting Commercial Confirmation" | "Client Input Pending" | "Input in Review" | "In Delivery" | "Deliverables Pending Review" | "Closed";
+  stage: "Payment Confirmation Pending" | "Client Input Pending" | "Input in Review" | "In Delivery" | "Deliverables Pending Review" | "Closed";
   deliveryLead: string;
   inputs: ServiceInput[];
   deliverables: ServiceDeliverable[];
@@ -1023,7 +1023,7 @@ export const mockOrders: ServiceOrder[] = [
     price: 1000.0,
     currency: "USD",
     duration: "12 Weeks",
-    stage: "Awaiting Commercial Confirmation",
+    stage: "Payment Confirmation Pending",
     deliveryLead: "Rayyan Basha",
     inputs: [
       {
