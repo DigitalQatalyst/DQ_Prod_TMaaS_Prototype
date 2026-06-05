@@ -40,7 +40,7 @@ import {
 } from "@/components/ui/select";
 import { Badge } from "@/components/ui/badge";
 
-const clientNavigationItems = [
+const getClientNavigationItems = (organization: string) => [
   {
     group: "",
     items: [
@@ -51,7 +51,8 @@ const clientNavigationItems = [
   {
     group: "WORKSPACE",
     items: [
-      { name: "Engagements", icon: Package, path: "/dashboard/customer/orders", badge: 6 },
+      { name: "Projects", icon: Package, path: "/dashboard/services", badge: 3 },
+      { name: "Orders", icon: Package, path: "/dashboard/customer/orders", badge: 6 },
       { name: "Notifications", icon: BellRing, path: "/dashboard/notifications", badge: 2 },
       { name: "Inbox", icon: MessageSquare, path: "/dashboard/inbox", badge: 5 },
     ],
@@ -75,7 +76,6 @@ const dqNavigationItems = [
   {
     group: "",
     items: [
-      { name: "Dashboard", icon: LayoutDashboard, path: "/dashboard/overview", badge: null },
       { name: "Delivery", icon: Package, path: "/dashboard/services", badge: 3 },
       { name: "Notifications", icon: BellRing, path: "/dashboard/notifications", badge: 2 },
       { name: "Inbox", icon: MessageSquare, path: "/dashboard/inbox", badge: 2 },
@@ -188,7 +188,7 @@ const DashboardLayout = ({ children }: DashboardLayoutProps) => {
           ? dqFinanceNavigationItems
           : user.role === "dq_support"
             ? dqSupportNavigationItems
-            : clientNavigationItems;
+            : getClientNavigationItems(user.organization);
   const location = useLocation();
 
   const isActive = (path: string) => {

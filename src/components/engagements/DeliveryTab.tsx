@@ -104,7 +104,9 @@ export const DeliveryTab = () => {
       originalContractDate: "2026-09-01",
       adjustedContractDate: "2026-09-01",
       forecastDate: "2026-09-01",
+      status: "Not Started",
       contractualStatus: "Pending",
+      health: "On Track",
       outcomeMapping: ["KRI-01"]
     }]);
   };
@@ -261,6 +263,7 @@ export const DeliveryTab = () => {
                 <TableHead className="w-[25%]">Milestone</TableHead>
                 <TableHead>Linked KRIs</TableHead>
                 <TableHead>Contractual Status</TableHead>
+                <TableHead>Health</TableHead>
                 <TableHead>Delivery Progress</TableHead>
                 <TableHead>Timeline</TableHead>
                 <TableHead className="w-10"></TableHead>
@@ -269,7 +272,7 @@ export const DeliveryTab = () => {
             <TableBody>
               {calculatedMilestones.length === 0 ? (
                 <TableRow>
-                  <TableCell colSpan={6} className="text-center py-10 text-gray-400">No milestones created.</TableCell>
+                  <TableCell colSpan={7} className="text-center py-10 text-gray-400">No milestones created.</TableCell>
                 </TableRow>
               ) : calculatedMilestones.map((milestone, index) => {
                 const colors = [
@@ -311,6 +314,16 @@ export const DeliveryTab = () => {
                     <TableCell>
                       <Badge variant="outline" className="bg-slate-50 text-slate-700 border-slate-200">
                         {milestone.contractualStatus || 'Pending'}
+                      </Badge>
+                    </TableCell>
+                    <TableCell>
+                      <Badge variant="outline" className={
+                        milestone.health === "On Track" ? "bg-green-50 text-green-700 border-green-200" :
+                        milestone.health === "At Risk" ? "bg-amber-50 text-amber-700 border-amber-200" :
+                        milestone.health === "Delayed" ? "bg-red-50 text-red-700 border-red-200" :
+                        "bg-slate-50 text-slate-700 border-slate-200"
+                      }>
+                        {milestone.health || 'On Track'}
                       </Badge>
                     </TableCell>
                     <TableCell>

@@ -24,8 +24,9 @@ import {
   PaginationNext,
   PaginationPrevious,
 } from "@/components/ui/pagination";
+import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { 
-  Search, Globe, Activity, Building2, User, MoreHorizontal, Plus 
+  Search, Globe, Activity, Building2, User, MoreHorizontal, Plus, Clock, ShieldAlert, CheckCircle2, AlertTriangle 
 } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
@@ -177,72 +178,78 @@ const DQEngagements = () => {
           {/* Table Container */}
           <div className="rounded-md border border-border bg-card mt-4">
             <Table>
-              <TableHeader>
-                <TableRow className="hover:bg-transparent">
-                  <TableHead className="min-w-[250px]">Project Name</TableHead>
-                  <TableHead>Organization</TableHead>
-                  <TableHead>Overall Health</TableHead>
-                  <TableHead className="text-center">Blocked Items</TableHead>
+              <TableHeader className="bg-slate-50/50">
+                <TableRow>
+                  <TableHead>Project Name</TableHead>
+                  <TableHead>Type</TableHead>
+                  <TableHead>Health</TableHead>
+                  <TableHead>Upcoming Milestone</TableHead>
+                  <TableHead>Key Risk</TableHead>
                   <TableHead>Lead</TableHead>
-                  <TableHead className="text-right">Actions</TableHead>
+                  <TableHead>Last Update</TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>
                 {filteredProjects.length === 0 ? (
                   <TableRow>
-                    <TableCell colSpan={6} className="h-32 text-center text-muted-foreground">
+                    <TableCell colSpan={7} className="h-32 text-center text-muted-foreground">
                       No projects found.
                     </TableCell>
                   </TableRow>
                 ) : (
                   filteredProjects.map((project) => (
-                    <TableRow 
-                      key={project.id} 
-                      className="cursor-pointer transition-colors hover:bg-muted/50"
-                      onClick={() => handleRowClick(project.id)}
-                    >
-                      <TableCell>
-                        <div className="flex flex-col">
-                          <span className="font-medium text-foreground">{project.name}</span>
-                          <span className="text-xs text-muted-foreground">{project.id}</span>
-                        </div>
-                      </TableCell>
-                      <TableCell>{project.organization}</TableCell>
-                      <TableCell>
-                        <Badge variant="outline" className={healthBadgeClass(project.health)}>
-                          {project.healthLabel}
-                        </Badge>
-                      </TableCell>
-                      <TableCell className="text-center">
-                        <span className={project.blockedItems > 0 ? "font-bold text-red-600" : "text-muted-foreground"}>
-                          {project.blockedItems}
+                  <TableRow 
+                    key={project.id} 
+                    className="hover:bg-slate-50/50 cursor-pointer transition-colors"
+                    onClick={() => handleRowClick(project.id)}
+                  >
+                    <TableCell>
+                      <span className="font-semibold text-sm text-navy-950">
+                        {project.name}
+                      </span>
+                      <p className="text-[10px] text-gray-500 mt-0.5">{project.organization}</p>
+                    </TableCell>
+                    <TableCell>
+                      <Badge variant={project.type === "Contracted" ? "outline" : "secondary"} className="text-[10px]">
+                        {project.type || "Contracted"}
+                      </Badge>
+                    </TableCell>
+                    <TableCell>
+                      <div className="flex items-center gap-2">
+                        {project.health === "red" && <ShieldAlert className="h-4 w-4 text-[var(--dq-red-500)]" />}
+                        {project.health === "amber" && <AlertTriangle className="h-4 w-4 text-[var(--dq-orange-500)]" />}
+                        {project.health === "green" && <CheckCircle2 className="h-4 w-4 text-emerald-500" />}
+                        <span className="font-medium text-xs capitalize">{project.health}</span>
+                      </div>
+                    </TableCell>
+                    <TableCell className="max-w-[150px] truncate text-xs" title={project.upcomingMilestone}>
+                      {project.upcomingMilestone || "Not set"}
+                    </TableCell>
+                    <TableCell className="max-w-[150px] truncate text-xs" title={project.keyRisk}>
+                      {project.keyRisk || "None"}
+                    </TableCell>
+                    <TableCell>
+                      <div className="flex items-center gap-2">
+                        <Avatar className="h-6 w-6">
+                          <AvatarFallback className="text-[10px]">
+                            {project.lead.split(" ").map((n) => n[0]).join("")}
+                          </AvatarFallback>
+                        </Avatar>
+                        <span className="text-xs font-medium text-navy-950">
+                          {(() => {
+                            const parts = project.lead.split(" ");
+                            return parts.length > 1 ? `${parts[0]} ${parts[parts.length - 1][0]}.` : project.lead;
+                          })()}
                         </span>
-                      </TableCell>
-                      <TableCell className="text-muted-foreground">{project.lead}</TableCell>
-                      <TableCell className="text-right" onClick={(e) => e.stopPropagation()}>
-                        <DropdownMenu>
-                          <DropdownMenuTrigger asChild>
-                            <Button variant="ghost" size="icon" className="h-8 w-8">
-                              <MoreHorizontal className="h-4 w-4" />
-                              <span className="sr-only">Open menu</span>
-                            </Button>
-                          </DropdownMenuTrigger>
-                          <DropdownMenuContent align="end">
-                            <DropdownMenuLabel>Actions</DropdownMenuLabel>
-                            <DropdownMenuSeparator />
-                            <DropdownMenuItem onClick={() => handleRowClick(project.id)}>
-                              View Project
-                            </DropdownMenuItem>
-                            <DropdownMenuItem>Assign Delivery Lead</DropdownMenuItem>
-                            <DropdownMenuItem>Update Status</DropdownMenuItem>
-                            <DropdownMenuSeparator />
-                            <DropdownMenuItem className="text-destructive focus:bg-destructive/10">
-                              Archive
-                            </DropdownMenuItem>
-                          </DropdownMenuContent>
-                        </DropdownMenu>
-                      </TableCell>
-                    </TableRow>
+                      </div>
+                    </TableCell>
+                    <TableCell>
+                      <div className="flex items-center gap-1 text-[10px] text-muted-foreground">
+                        <Clock className="h-3 w-3" />
+                        {project.lastUpdate || "Recently"}
+                      </div>
+                    </TableCell>
+                  </TableRow>
                   ))
                 )}
               </TableBody>

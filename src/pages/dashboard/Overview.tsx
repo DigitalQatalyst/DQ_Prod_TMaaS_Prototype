@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import {
   Package,
   MessageSquare,
@@ -304,9 +304,13 @@ const ClientOverview = () => {
 const Overview = () => {
   const { user } = useAuth();
 
+  if (user.role === "dq_delivery_lead") {
+    return <Navigate to="/dashboard/services" replace />;
+  }
+
   return (
     <DashboardLayout>
-      {user.role === "dq_delivery_lead" ? <DQDeliveryDashboard /> : <ClientOverview />}
+      <ClientOverview />
     </DashboardLayout>
   );
 };

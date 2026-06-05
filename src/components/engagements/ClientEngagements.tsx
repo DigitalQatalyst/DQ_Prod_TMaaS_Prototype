@@ -14,69 +14,28 @@ import {
 import { Link } from "react-router-dom";
 import { Input } from "@/components/ui/input";
 import { useAuth } from "@/contexts/AuthContext";
-
-// Active services are only for STC Bank (legacy projects)
-const activeServices = [
-  {
-    id: 1,
-    reference: "SR-2026-0041",
-    name: "Digital Workspace Strategy",
-    type: "Design",
-    tower: "Digital Workspace",
-    towerColor: "text-purple-500",
-    status: "In Delivery",
-    health: "On Track",
-    requestedDate: "Jan 15, 2026",
-    organization: "STC Bank",
-  },
-  {
-    id: 2,
-    reference: "SR-2026-0052",
-    name: "CRM & Service Platform",
-    type: "Deploy (SaaS)",
-    tower: "Digital Experience",
-    towerColor: "text-blue-500",
-    status: "Awaiting Payment",
-    health: "Pending",
-    requestedDate: "Jan 22, 2026",
-    organization: "STC Bank",
-  },
-  {
-    id: 3,
-    reference: "SR-2026-0063",
-    name: "Data Governance Platform",
-    type: "Deploy (SaaS)",
-    tower: "Data & Intelligence",
-    towerColor: "text-green-500",
-    status: "In Delivery",
-    health: "On Track",
-    requestedDate: "Feb 1, 2026",
-    organization: "STC Bank",
-  },
-];
+import { mockPortfolioEngagements } from "@/data/mockPortfolioEngagements";
 
 const ClientEngagements = () => {
   const { user } = useAuth();
   const [searchQuery, setSearchQuery] = useState("");
-  const [typeFilter, setTypeFilter] = useState("All Types");
   const [statusFilter, setStatusFilter] = useState("All Statuses");
 
   // Filter services by organization first
-  const organizationServices = activeServices.filter(
+  const organizationServices = mockPortfolioEngagements.filter(
     (service) => service.organization === user.organization
   );
 
   const filteredServices = organizationServices.filter((service) => {
     const matchesSearch = 
       service.name.toLowerCase().includes(searchQuery.toLowerCase()) || 
-      service.reference.toLowerCase().includes(searchQuery.toLowerCase());
-    const matchesType = typeFilter === "All Types" || service.type === typeFilter;
+      service.id.toLowerCase().includes(searchQuery.toLowerCase());
     const matchesStatus = statusFilter === "All Statuses" || service.status === statusFilter;
     
-    return matchesSearch && matchesType && matchesStatus;
+    return matchesSearch && matchesStatus;
   });
 
-  const hasFilters = searchQuery !== "" || typeFilter !== "All Types" || statusFilter !== "All Statuses";
+  const hasFilters = searchQuery !== "" || statusFilter !== "All Statuses";
 
   const getStatusColor = (status: string) => {
     switch(status) {
@@ -88,8 +47,8 @@ const ClientEngagements = () => {
     }
   };
 
-  const getHealthColor = (health: string) => {
-    switch(health) {
+  const getHealthColor = (healthLabel: string) => {
+    switch(healthLabel) {
       case "On Track": return "bg-green-500";
       case "At Risk": return "bg-orange-500";
       case "Critical": return "bg-red-500";
@@ -122,19 +81,6 @@ const ClientEngagements = () => {
           </div>
           
           <div className="flex items-center gap-3">
-            <div className="flex items-center gap-2 rounded-md border border-input bg-transparent px-3 py-1 shadow-sm">
-              <Filter className="h-4 w-4 text-muted-foreground" />
-              <select 
-                value={typeFilter} 
-                onChange={(e) => setTypeFilter(e.target.value)}
-                className="bg-transparent text-sm font-medium outline-none text-foreground"
-              >
-                <option value="All Types">All Types</option>
-                <option value="Design">Design</option>
-                <option value="Deploy (SaaS)">Deploy (SaaS)</option>
-              </select>
-            </div>
-            
             <div className="flex items-center gap-2 rounded-md border border-input bg-transparent px-3 py-1 shadow-sm">
               <Activity className="h-4 w-4 text-muted-foreground" />
               <select 
@@ -188,7 +134,6 @@ const ClientEngagements = () => {
                 className="mt-6"
                 onClick={() => {
                   setSearchQuery("");
-                  setTypeFilter("All Types");
                   setStatusFilter("All Statuses");
                 }}
               >
@@ -198,7 +143,7 @@ const ClientEngagements = () => {
           ) : (
             filteredServices.map((service) => {
               return (
-                <Link key={service.id} to={`/dashboard/services/${service.id}`} className="block">
+                <Link key={service.id} to={`/dashboard/engagement/${service.id}`} className="block">
                   <Card className="transition-all hover:border-primary/50 hover:shadow-md cursor-pointer">
                     <CardContent className="p-5">
                       <div className="flex flex-col flex-wrap gap-4 sm:flex-row sm:items-center sm:justify-between">
@@ -210,15 +155,15 @@ const ClientEngagements = () => {
                                 {service.name}
                               </h3>
                               <span className="text-xs font-mono text-muted-foreground bg-accent px-2 py-0.5 rounded-full">
-                                {service.reference}
+                                {service.id}
                               </span>
                             </div>
                             <div className="mt-1.5 flex items-center gap-2 text-sm text-muted-foreground">
-                              <span>{service.type}</span>
+                              <span>Lead: {service.lead}</span>
                               <span className="h-1 w-1 rounded-full bg-border" />
-                              <span>{service.tower}</span>
-                              <span className="h-1 w-1 rounded-full bg-border" />
-                              <span>Requested {service.requestedDate}</span>
+                              <span className={service.blockedItems > 0 ? "text-red-500 font-medium" : ""}>
+                                Blocked Items: {service.blockedItems}
+                              </span>
                             </div>
                           </div>
                         </div>
@@ -228,8 +173,8 @@ const ClientEngagements = () => {
                           <div className="flex items-center gap-3">
                             <span className="flex items-center gap-1.5 text-xs font-medium">
                               Health:
-                              <div className={`h-2 w-2 rounded-full ${getHealthColor(service.health)}`} />
-                              <span className="text-muted-foreground">{service.health}</span>
+                              <div className={`h-2 w-2 rounded-full ${getHealthColor(service.healthLabel)}`} />
+                              <span className="text-muted-foreground">{service.healthLabel}</span>
                             </span>
                             <Badge variant={getStatusColor(service.status)}>
                               {service.status}
