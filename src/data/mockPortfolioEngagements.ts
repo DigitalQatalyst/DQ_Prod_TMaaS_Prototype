@@ -11,6 +11,10 @@ export interface PortfolioEngagement {
   lead: string;
   status: string;
   failingIndicators?: string[];
+  type?: "Contracted" | "Skunk";
+  upcomingMilestone?: string;
+  keyRisk?: string;
+  lastUpdate?: string;
 }
 
 export const mockPortfolioEngagements: PortfolioEngagement[] = [
@@ -25,6 +29,10 @@ export const mockPortfolioEngagements: PortfolioEngagement[] = [
     lead: "Rayyan Basha",
     status: "In Delivery",
     failingIndicators: ["Dependencies Met", "Progress vs Schedule"],
+    type: "Contracted",
+    upcomingMilestone: "Digital GRC Design Summary",
+    keyRisk: "Delayed stakeholder approvals",
+    lastUpdate: "3h ago by Rayyan B.",
   },
   {
     id: "L-2025-081",
@@ -37,6 +45,10 @@ export const mockPortfolioEngagements: PortfolioEngagement[] = [
     lead: "Rayyan Basha",
     status: "Paused",
     failingIndicators: ["Stakeholders Committed"],
+    type: "Skunk",
+    upcomingMilestone: "Phase 1 Review",
+    keyRisk: "Resource allocation constraints",
+    lastUpdate: "1d ago by Rayyan B.",
   },
   {
     id: "L-2025-092",
@@ -48,6 +60,10 @@ export const mockPortfolioEngagements: PortfolioEngagement[] = [
     blockedItems: 0,
     lead: "Kenzie Sharon",
     status: "Paused",
+    type: "Contracted",
+    upcomingMilestone: "Enterprise Hub V1 Deployment",
+    keyRisk: "Minor scope creep on auth flow",
+    lastUpdate: "2d ago by Kenzie S.",
   },
   {
     id: "L-2024-110",
@@ -59,6 +75,10 @@ export const mockPortfolioEngagements: PortfolioEngagement[] = [
     blockedItems: 0,
     lead: "James Chen",
     status: "Completed",
+    type: "Contracted",
+    upcomingMilestone: "Final Handover Sign-off",
+    keyRisk: "None",
+    lastUpdate: "1w ago by James C.",
   },
 ];
 

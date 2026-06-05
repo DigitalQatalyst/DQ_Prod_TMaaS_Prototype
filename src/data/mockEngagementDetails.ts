@@ -53,6 +53,7 @@ export const mockMilestones = [
     status: "Completed",
     contractualStatus: "In Place",
     progress: 100,
+    health: "On Track",
     outcomeMapping: ["KRI-01"],
   },
   {
@@ -67,6 +68,7 @@ export const mockMilestones = [
     status: "In Progress",
     contractualStatus: "In Place",
     progress: 60,
+    health: "At Risk",
     outcomeMapping: ["KRI-01", "KRI-02"],
   },
   {
@@ -81,6 +83,7 @@ export const mockMilestones = [
     status: "Not Started",
     contractualStatus: "In Place",
     progress: 0,
+    health: "Delayed",
     outcomeMapping: ["KRI-03"],
   },
   {
@@ -95,6 +98,7 @@ export const mockMilestones = [
     status: "Not Started",
     contractualStatus: "In Place",
     progress: 0,
+    health: "On Track",
     outcomeMapping: ["KRI-02", "KRI-03"],
   }
 ];
@@ -201,9 +205,10 @@ export const mockStakeholders = [
     name: "Ahmed Al Tayer",
     position: "Chief Digital Officer",
     organisation: "DEWA",
+    type: "Project Sponsor",
     influence: "High",
     commitment: "High",
-    lastInteraction: "2026-02-24", // Within 7 days
+    lastInteraction: "2026-02-24",
     email: "ahmed@dewa.gov.ae",
     engagementStatus: "Confirmed",
   },
@@ -212,12 +217,25 @@ export const mockStakeholders = [
     name: "Sarah Johnson",
     position: "Head of Infrastructure",
     organisation: "DEWA",
+    type: "Project Owner",
     influence: "High",
     commitment: "Medium",
     lastInteraction: "2026-02-15",
     email: "sarah@dewa.gov.ae",
     engagementStatus: "Pending",
-  }
+  },
+  {
+    id: "SH003",
+    name: "Khalid Mansouri",
+    position: "IT Programme Manager",
+    organisation: "DEWA",
+    type: "Project Manager",
+    influence: "Medium",
+    commitment: "High",
+    lastInteraction: "2026-02-22",
+    email: "khalid@dewa.gov.ae",
+    engagementStatus: "Confirmed",
+  },
 ];
 
 export const mockContractChanges = [
