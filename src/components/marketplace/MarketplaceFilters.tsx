@@ -31,7 +31,7 @@ function FilterField({
 }) {
   return (
     <div className="space-y-3">
-      <label className="text-sm font-semibold text-navy-950">{label}</label>
+      <label className="font-mono text-[10px] uppercase tracking-[0.18em] text-gray-400">{label}</label>
       {children}
     </div>
   );

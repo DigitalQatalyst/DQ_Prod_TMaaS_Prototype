@@ -263,54 +263,57 @@ const Marketplace = () => {
     <div className="min-h-screen bg-background">
       <Navbar />
 
-      <MeshSection variant="heroLight" grid className="border-b border-navy-100 pt-20 pb-6">
-        <div className="mx-auto max-w-3xl px-6 flex flex-col items-center text-center">
-          <h1 className="font-heading text-3xl font-bold tracking-tight text-navy-950 md:text-4xl">
+      <MeshSection variant="heroLight" grid className="px-5 pb-16 pt-28 md:px-8 md:pt-36 lg:px-10">
+        <div className="mx-auto flex max-w-3xl flex-col items-center text-center">
+          <p className="animate-fade-in-up font-mono text-[11px] uppercase tracking-[0.2em] text-dq-orange">
+            Marketplace
+          </p>
+          <h1 className="animate-fade-in-up animation-delay-200 mt-4 text-4xl font-semibold tracking-tight text-dq-navy md:text-5xl">
             Transformation Services Marketplace
           </h1>
-          <p className="mt-3 text-base text-gray-600 max-w-xl">
+          <p className="animate-fade-in-up animation-delay-300 mt-4 max-w-xl text-base leading-relaxed text-gray-600">
             Discover architecture-led transformation services across digital experience, digital operations, AI enablement, and enterprise modernization.
           </p>
 
-          <div className="relative mt-8 w-full flex items-center">
+          <div className="animate-fade-in-up animation-delay-300 relative mt-8 flex w-full items-center">
             <Search className="absolute left-4 top-1/2 h-5 w-5 -translate-y-1/2 text-gray-400" />
             <Input
               type="search"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder="Search services or describe your transformation goals…"
-              className="h-14 rounded-2xl border-navy-200 bg-white pl-12 pr-44 text-base shadow-sm focus-visible:ring-orange-500 w-full"
+              className="h-14 w-full rounded-2xl border-gray-200 bg-white pl-12 pr-44 text-base shadow-sm transition-all duration-300 focus-visible:border-dq-orange focus-visible:ring-dq-orange"
             />
-            <div className="absolute right-2 top-1/2 -translate-y-1/2 flex items-center gap-3">
+            <div className="absolute right-2 top-1/2 flex -translate-y-1/2 items-center gap-3">
               {searchQuery && (
                 <button
                   type="button"
                   onClick={() => setSearchQuery("")}
-                  className="text-gray-400 hover:text-navy-950 flex items-center justify-center h-full"
+                  className="flex h-full items-center justify-center text-gray-400 hover:text-dq-navy"
                   aria-label="Clear search"
                 >
                   <X size={16} />
                 </button>
               )}
-              <Button 
-                type="button" 
+              <Button
+                type="button"
                 size="sm"
                 onClick={handleAskAI}
-                className="h-10 bg-orange-500 hover:bg-orange-400 text-white rounded-xl text-xs font-bold px-4 flex items-center gap-1.5"
+                className="flex h-10 items-center gap-1.5 rounded-full bg-dq-orange px-4 text-xs font-semibold text-white hover:bg-[#E04020]"
               >
                 <Sparkles size={14} className="fill-white" />
                 Or Ask AI
               </Button>
             </div>
           </div>
-          <p className="mt-3 text-[10px] text-gray-400 max-w-lg leading-relaxed">
+          <p className="mt-3 max-w-lg text-[10px] leading-relaxed text-gray-400">
             By using Butler, you agree that your prompt may be processed to recommend TMaaS services. Do not submit confidential data.
           </p>
         </div>
       </MeshSection>
 
-      <div className="mx-auto max-w-7xl px-6 py-6">
-        <div id="catalog-grid" className="scroll-mt-20 space-y-5">
+      <div className="mx-auto max-w-[1200px] px-5 py-6 md:px-8 lg:px-10">
+        <div id="catalog-grid" className="scroll-mt-32 space-y-5">
           {showBestSellers && (
             <MarketplaceBestSellers
               activeTab="all"
@@ -319,7 +322,7 @@ const Marketplace = () => {
           )}
 
           {showBestSellers && (
-            <h3 className="text-lg font-bold tracking-tight text-navy-950">
+            <h3 className="text-2xl font-semibold tracking-tight text-dq-navy">
               All services
             </h3>
           )}
@@ -335,7 +338,7 @@ const Marketplace = () => {
                 sidebarOpen ? "block" : "hidden lg:block"
               }`}
             >
-              <div className="lg:sticky lg:top-24">
+              <div className="lg:sticky lg:top-32">
                 <MarketplaceFilters
                   selectedSectors={selectedSectors}
                   onSectorChange={handleSectorChange}
@@ -359,20 +362,20 @@ const Marketplace = () => {
                     variant="outline"
                     size="sm"
                     onClick={() => setSidebarOpen(!sidebarOpen)}
-                    className="h-9 gap-1.5 rounded-lg border-navy-100 lg:hidden"
+                    className="h-9 gap-1.5 rounded-full border-gray-200 lg:hidden"
                   >
                     <Filter size={14} />
                     Filters
                   </Button>
                   <p className="text-sm text-gray-600">
-                    <span className="font-semibold text-navy-950">
+                    <span className="font-semibold text-dq-navy">
                       {catalogServices.length}
                     </span>
                     {catalogServices.length === 1 ? " service" : " services"}
                   </p>
                 </div>
                 <Select value={sortBy} onValueChange={setSortBy}>
-                  <SelectTrigger className="h-9 w-[10.5rem] border-navy-100 bg-white text-sm rounded-lg">
+                  <SelectTrigger className="h-9 w-[10.5rem] rounded-lg border-gray-200 bg-white text-sm">
                     <SelectValue placeholder="Sort by" />
                   </SelectTrigger>
                   <SelectContent>
@@ -390,7 +393,7 @@ const Marketplace = () => {
                       key={chip.key}
                       type="button"
                       onClick={chip.onRemove}
-                      className="inline-flex items-center gap-1 rounded-full border border-navy-100 bg-slate-50 py-1 pl-2.5 pr-1.5 text-xs font-medium text-navy-950 hover:bg-slate-100"
+                      className="inline-flex items-center gap-1 rounded-full border border-gray-200 bg-gray-50 py-1 pl-2.5 pr-1.5 text-xs font-medium text-dq-navy hover:bg-gray-100"
                     >
                       {chip.label}
                       <X size={12} className="text-gray-400" />
@@ -399,7 +402,7 @@ const Marketplace = () => {
                   <button
                     type="button"
                     onClick={clearAllFilters}
-                    className="text-xs font-medium text-orange-600 hover:text-orange-500"
+                    className="text-xs font-medium text-dq-orange hover:text-[#E04020]"
                   >
                     Clear all
                   </button>
@@ -407,13 +410,13 @@ const Marketplace = () => {
               )}
 
               {catalogServices.length === 0 ? (
-                <div className="rounded-xl border border-navy-100 bg-white p-12 text-center">
+                <div className="rounded-2xl border border-gray-200 bg-white p-12 text-center">
                   <Search
                     size={32}
                     className="mx-auto mb-4 text-gray-300"
                     strokeWidth={1.5}
                   />
-                  <h3 className="text-sm font-semibold text-navy-950">
+                  <h3 className="text-sm font-semibold text-dq-navy">
                     No services match
                   </h3>
                   <p className="mt-2 text-sm text-gray-500">
@@ -423,14 +426,14 @@ const Marketplace = () => {
                     type="button"
                     onClick={handleAskAI}
                     variant="outline"
-                    className="mt-6 mx-2 h-9 rounded-lg border-navy-100 text-sm text-navy-950 font-semibold"
+                    className="mx-2 mt-6 h-9 rounded-full border-gray-200 text-sm font-semibold text-dq-navy"
                   >
                     Use AI Guidance
                   </Button>
                   <Button
                     type="button"
                     onClick={clearAllFilters}
-                    className="mt-6 mx-2 h-9 rounded-lg bg-navy-950 px-5 text-sm text-white hover:bg-navy-900"
+                    className="mx-2 mt-6 h-9 rounded-full bg-dq-navy px-5 text-sm text-white hover:bg-dq-navy/90"
                   >
                     Reset filters
                   </Button>

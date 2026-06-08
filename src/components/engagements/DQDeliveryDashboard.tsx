@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import {
   ArrowRight,
   AlertTriangle,
@@ -8,18 +8,15 @@ import {
   RefreshCw,
   Target,
   XCircle,
+  Clock,
+  ShieldAlert,
+  CheckCircle2,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@/components/ui/table";
+
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {
   mockPortfolioEngagements,
   portfolioHealthMetrics,
@@ -44,6 +41,7 @@ const metricCards = [
 
 export const DQDeliveryDashboard = () => {
   const { user } = useAuth();
+  const navigate = useNavigate();
   const attentionEngagements = mockPortfolioEngagements.filter(
     (e) => e.health !== "green" || e.blockedItems > 0 || e.krisAtRisk > 0
   );
@@ -84,100 +82,73 @@ export const DQDeliveryDashboard = () => {
         ))}
       </div>
 
-      {portfolioHealthMetrics.critical > 0 && (
-        <Card className="rounded-2xl border-red-200 bg-red-50/40 shadow-sm">
-          <CardContent className="p-5 flex gap-4">
-            <div className="h-10 w-10 shrink-0 rounded-xl bg-red-100 flex items-center justify-center">
-              <AlertTriangle size={20} className="text-red-600" />
-            </div>
-            <div>
-              <p className="text-sm font-bold text-red-900 mb-1">Why is attention required?</p>
-              <p className="text-sm text-red-800/90 leading-relaxed">{governanceAlerts.criticalSummary}</p>
-            </div>
-          </CardContent>
-        </Card>
-      )}
-
       <div className="grid gap-6 lg:grid-cols-3">
         <div className="lg:col-span-2 space-y-6">
-          <Card className="rounded-2xl border-navy-100 shadow-sm overflow-hidden">
-            <CardHeader className="pb-4 border-b border-navy-50">
+          {portfolioHealthMetrics.critical > 0 && (
+            <Card className="rounded-2xl border-red-200 bg-red-50/40 shadow-sm">
+              <CardContent className="p-5 flex gap-4">
+                <div className="h-10 w-10 shrink-0 rounded-xl bg-red-100 flex items-center justify-center">
+                  <AlertTriangle size={20} className="text-red-600" />
+                </div>
+                <div>
+                  <p className="text-sm font-bold text-red-900 mb-1">Why is attention required?</p>
+                  <p className="text-sm text-red-800/90 leading-relaxed">{governanceAlerts.criticalSummary}</p>
+                </div>
+              </CardContent>
+            </Card>
+          )}
+
+          <Card className="rounded-2xl border-amber-200 bg-amber-50/10 shadow-sm overflow-hidden">
+            <CardHeader className="pb-4 border-b border-amber-100 bg-amber-50/50">
               <div className="flex items-center justify-between">
                 <div>
-                  <CardTitle className="text-lg font-bold text-navy-950">Engagements</CardTitle>
-                  <CardDescription className="text-xs">
-                    Overall health from 7 key governance indicators
+                  <CardTitle className="text-lg font-bold text-amber-950 flex items-center gap-2">
+                    <ShieldAlert size={18} className="text-amber-600" />
+                    Requires Attention
+                  </CardTitle>
+                  <CardDescription className="text-xs text-amber-800/70 mt-1">
+                    Projects marked as Amber or Red, or with active blocks.
                   </CardDescription>
                 </div>
-                <Link to="/dashboard/services">
-                  <Button variant="ghost" size="sm" className="gap-1 text-xs font-semibold text-orange-600 hover:text-orange-700 hover:bg-orange-50">
-                    View all
-                    <ArrowRight size={14} />
-                  </Button>
-                </Link>
               </div>
             </CardHeader>
-            <Table>
-              <TableHeader className="bg-slate-50/50">
-                <TableRow>
-                  <TableHead>Engagement</TableHead>
-                  <TableHead>Organisation</TableHead>
-                  <TableHead>Health</TableHead>
-                  <TableHead className="text-center">Blocked</TableHead>
-                  <TableHead>Lead</TableHead>
-                </TableRow>
-              </TableHeader>
-              <TableBody>
-                {mockPortfolioEngagements.map((engagement) => (
-                  <TableRow key={engagement.id} className="hover:bg-slate-50/50">
-                    <TableCell>
-                      <Link
-                        to={`/dashboard/engagement/${engagement.id}`}
-                        className="font-semibold text-sm text-navy-950 hover:text-orange-600 transition-colors"
-                      >
-                        {engagement.name}
-                      </Link>
-                      <p className="text-[10px] text-gray-400 font-mono mt-0.5">{engagement.id}</p>
-                    </TableCell>
-                    <TableCell className="text-xs text-gray-600 max-w-[140px]">{engagement.organization}</TableCell>
-                    <TableCell>
-                      <Badge variant="outline" className={healthBadgeClass(engagement.health)}>
-                        {engagement.healthLabel}
-                      </Badge>
-                    </TableCell>
-                    <TableCell className="text-center">
-                      <span className={engagement.blockedItems > 0 ? "font-bold text-red-600" : "text-gray-400"}>
-                        {engagement.blockedItems}
-                      </span>
-                    </TableCell>
-                    <TableCell className="text-xs font-medium text-navy-950">{engagement.lead}</TableCell>
-                  </TableRow>
-                ))}
-              </TableBody>
-            </Table>
-          </Card>
-
-          <Card className="rounded-2xl border-navy-100 shadow-sm">
-            <CardHeader className="pb-3">
-              <CardTitle className="text-sm font-bold text-navy-950 flex items-center gap-2">
-                <Flag size={16} className="text-blue-500" />
-                This Week&apos;s Governance Focus
-              </CardTitle>
-            </CardHeader>
-            <CardContent className="pt-0 space-y-3">
-              {governanceAlerts.weeklyFocus.map((item, i) => (
-                <div key={i} className="flex items-start justify-between gap-3 p-3 rounded-xl border border-navy-50 bg-slate-50/50">
-                  <div>
-                    <p className="text-sm font-semibold text-navy-950">{item.label}</p>
-                    <p className="text-xs text-gray-500">{item.engagement}</p>
-                  </div>
-                  <span className="text-[10px] font-bold text-gray-400 whitespace-nowrap flex items-center gap-1">
-                    <Calendar size={12} />
-                    {item.date}
-                  </span>
+            <div className="divide-y divide-amber-100/50">
+              {attentionEngagements.length === 0 ? (
+                <div className="p-8 text-center text-sm text-gray-500">
+                  No projects currently require attention.
                 </div>
-              ))}
-            </CardContent>
+              ) : (
+                attentionEngagements.map((project) => (
+                  <div 
+                    key={project.id} 
+                    className="p-4 hover:bg-amber-50/30 cursor-pointer transition-colors flex items-center justify-between gap-4"
+                    onClick={() => navigate(`/dashboard/engagement/${project.id}`)}
+                  >
+                    <div>
+                      <div className="flex items-center gap-2 mb-1">
+                        {project.health === "red" ? (
+                          <ShieldAlert size={14} className="text-red-600" />
+                        ) : (
+                          <AlertTriangle size={14} className="text-amber-600" />
+                        )}
+                        <p className="font-semibold text-sm text-navy-950">{project.name}</p>
+                      </div>
+                      <p className="text-[10px] text-gray-500">{project.organization} · Lead: {project.lead}</p>
+                    </div>
+                    <div className="text-right flex flex-col items-end gap-2">
+                      <Badge variant="outline" className={project.health === "red" ? "border-red-200 bg-red-50 text-red-700 text-[10px]" : "border-amber-200 bg-amber-50 text-amber-700 text-[10px]"}>
+                        {project.healthLabel}
+                      </Badge>
+                      {project.blockedItems > 0 && (
+                        <span className="text-[10px] font-bold text-red-600 flex items-center gap-1">
+                          <Ban size={10} /> {project.blockedItems} blocked
+                        </span>
+                      )}
+                    </div>
+                  </div>
+                ))
+              )}
+            </div>
           </Card>
         </div>
 
@@ -242,43 +213,27 @@ export const DQDeliveryDashboard = () => {
           <Card className="rounded-2xl border-navy-100 shadow-sm">
             <CardHeader className="pb-3 border-b border-navy-50">
               <CardTitle className="text-sm font-bold text-navy-950 flex items-center gap-2">
-                <Target size={14} className="text-orange-500" />
-                KRIs at Risk
+                <Flag size={16} className="text-blue-500" />
+                This Week&apos;s Governance Focus
               </CardTitle>
             </CardHeader>
-            <CardContent className="p-0 divide-y divide-navy-50">
-              {governanceAlerts.krisAtRisk.map((kri) => (
-                <div key={kri.id} className="p-4">
-                  <div className="flex items-center justify-between mb-1">
-                    <Badge variant="outline" className="text-[10px] font-bold border-orange-200 text-orange-700 bg-orange-50">
-                      {kri.id}
-                    </Badge>
-                    <span className="text-[10px] font-bold text-amber-600">{kri.current} / {kri.target}</span>
+            <CardContent className="pt-0 space-y-3">
+              <div className="p-4">
+                {governanceAlerts.weeklyFocus.map((item, i) => (
+                  <div key={i} className="flex items-start justify-between gap-3 p-3 mt-2 rounded-xl border border-navy-50 bg-slate-50/50">
+                    <div>
+                      <p className="text-sm font-semibold text-navy-950">{item.label}</p>
+                      <p className="text-xs text-gray-500">{item.engagement}</p>
+                    </div>
+                    <span className="text-[10px] font-bold text-gray-400 whitespace-nowrap flex items-center gap-1">
+                      <Calendar size={12} />
+                      {item.date}
+                    </span>
                   </div>
-                  <p className="text-xs font-semibold text-navy-950">{kri.label}</p>
-                  <p className="text-[10px] text-gray-500 mt-0.5">{kri.engagement}</p>
-                </div>
-              ))}
+                ))}
+              </div>
             </CardContent>
           </Card>
-
-          {attentionEngagements.length > 0 && (
-            <Card className="rounded-2xl border-amber-200 bg-amber-50/30 shadow-sm">
-              <CardContent className="p-4">
-                <p className="text-xs font-bold text-amber-800 uppercase tracking-wider mb-2">
-                  Needs review
-                </p>
-                <p className="text-sm text-amber-900/90">
-                  {attentionEngagements.length} engagement{attentionEngagements.length !== 1 ? "s" : ""} require
-                  governance attention this week.
-                </p>
-                <Link to="/dashboard/services" className="inline-flex items-center gap-1 mt-3 text-xs font-semibold text-orange-600 hover:text-orange-700">
-                  Open Delivery workspace
-                  <ArrowRight size={12} />
-                </Link>
-              </CardContent>
-            </Card>
-          )}
         </div>
       </div>
     </div>

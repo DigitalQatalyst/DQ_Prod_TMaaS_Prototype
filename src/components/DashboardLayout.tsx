@@ -26,6 +26,7 @@ import {
   ShoppingCart,
   Search,
   ShoppingBag,
+  ExternalLink,
 } from "lucide-react";
 import TransactAIMode01 from "@/components/TransactAIMode01";
 import { Button } from "@/components/ui/button";
@@ -39,18 +40,19 @@ import {
 } from "@/components/ui/select";
 import { Badge } from "@/components/ui/badge";
 
-const clientNavigationItems = [
+const getClientNavigationItems = (organization: string) => [
   {
     group: "",
     items: [
       { name: "Overview", icon: LayoutDashboard, path: "/dashboard/overview", badge: null },
-      { name: "Marketplace", icon: ShoppingBag, path: "/marketplace", badge: null },
+      { name: "Marketplace", icon: ShoppingBag, path: "/marketplace", badge: null, external: true },
     ],
   },
   {
     group: "WORKSPACE",
     items: [
-      { name: "Engagements", icon: Package, path: "/dashboard/customer/orders", badge: 6 },
+      { name: "Projects", icon: Package, path: "/dashboard/services", badge: 3 },
+      { name: "Orders", icon: Package, path: "/dashboard/customer/orders", badge: 6 },
       { name: "Notifications", icon: BellRing, path: "/dashboard/notifications", badge: 2 },
       { name: "Inbox", icon: MessageSquare, path: "/dashboard/inbox", badge: 5 },
     ],
@@ -58,7 +60,6 @@ const clientNavigationItems = [
   {
     group: "ORGANIZATION",
     items: [
-      { name: "Organization Profile", icon: Building2, path: "/dashboard/profile", badge: null },
       { name: "Team", icon: Users, path: "/dashboard/org-admin", badge: null },
     ],
   },
@@ -75,7 +76,6 @@ const dqNavigationItems = [
   {
     group: "",
     items: [
-      { name: "Dashboard", icon: LayoutDashboard, path: "/dashboard/overview", badge: null },
       { name: "Delivery", icon: Package, path: "/dashboard/services", badge: 3 },
       { name: "Notifications", icon: BellRing, path: "/dashboard/notifications", badge: 2 },
       { name: "Inbox", icon: MessageSquare, path: "/dashboard/inbox", badge: 2 },
@@ -188,7 +188,7 @@ const DashboardLayout = ({ children }: DashboardLayoutProps) => {
           ? dqFinanceNavigationItems
           : user.role === "dq_support"
             ? dqSupportNavigationItems
-            : clientNavigationItems;
+            : getClientNavigationItems(user.organization);
   const location = useLocation();
 
   const isActive = (path: string) => {
@@ -332,9 +332,16 @@ const DashboardLayout = ({ children }: DashboardLayoutProps) => {
                     {group.items.map((item) => {
                       const Icon = item.icon;
                       const active = isActive(item.path);
-                      
+                      const isExternal = (item as any).external;
+
                       return (
-                        <Link key={item.path} to={item.path} className="group block">
+                        <Link 
+                          key={item.path} 
+                          to={item.path} 
+                          target={isExternal ? "_blank" : undefined}
+                          rel={isExternal ? "noopener noreferrer" : undefined}
+                          className="group block"
+                        >
                           <motion.div
                             whileHover={{ scale: sidebarCollapsed ? 1.05 : 1, x: sidebarCollapsed ? 0 : 2 }}
                             className={`flex items-center transition-all duration-200 ${
@@ -357,6 +364,9 @@ const DashboardLayout = ({ children }: DashboardLayoutProps) => {
                             {!sidebarCollapsed && (
                               <>
                                 <span className="flex-1 text-sm">{item.name}</span>
+                                {isExternal && (
+                                  <ExternalLink size={12} className="text-navy-950/40" />
+                                )}
                                 {item.badge && (
                                   <span className="ml-auto mr-2 flex h-4 min-w-4 items-center justify-center rounded-full bg-[#FB5535]/12 px-1.5 text-[10px] font-semibold text-[#FB5535]">
                                     {item.badge}

@@ -6,30 +6,30 @@ const ExploreByCategorySection = () => {
   const navigate = useNavigate();
 
   const getCategoryDetails = (id: string) => {
-    switch(id) {
+    switch (id) {
       case "experience":
         return {
-          icon: <Layout className="text-orange-500 h-8 w-8 mb-4" strokeWidth={1.5} />,
+          icon: <Layout className="mb-4 h-8 w-8 text-dq-orange" strokeWidth={1.5} />,
           title: "Digital Experience",
-          desc: "Transform customer journeys, web presence, and mobile engagement."
+          desc: "Transform customer journeys, web presence, and mobile engagement.",
         };
       case "operations":
         return {
-          icon: <Settings className="text-orange-500 h-8 w-8 mb-4" strokeWidth={1.5} />,
+          icon: <Settings className="mb-4 h-8 w-8 text-dq-orange" strokeWidth={1.5} />,
           title: "Digital Work System",
-          desc: "Optimise workflows, cloud infrastructure, and internal operations."
+          desc: "Optimise workflows, cloud infrastructure, and internal operations.",
         };
       case "security":
         return {
-          icon: <Shield className="text-orange-500 h-8 w-8 mb-4" strokeWidth={1.5} />,
+          icon: <Shield className="mb-4 h-8 w-8 text-dq-orange" strokeWidth={1.5} />,
           title: "SecDevOps",
-          desc: "Strengthen security posture, compliance, and secure delivery."
+          desc: "Strengthen security posture, compliance, and secure delivery.",
         };
       case "ai":
         return {
-          icon: <Cpu className="text-orange-500 h-8 w-8 mb-4" strokeWidth={1.5} />,
+          icon: <Cpu className="mb-4 h-8 w-8 text-dq-orange" strokeWidth={1.5} />,
           title: "Digital Intelligence & Analytics",
-          desc: "Leverage AI, machine learning, and advanced analytics for insights."
+          desc: "Leverage AI, machine learning, and advanced analytics for insights.",
         };
       default:
         return null;
@@ -37,13 +37,16 @@ const ExploreByCategorySection = () => {
   };
 
   return (
-    <section className="bg-white py-20 border-t border-navy-50">
-      <div className="mx-auto max-w-7xl px-6">
-        <h2 className="text-2xl font-bold tracking-tight text-navy-950 sm:text-3xl font-heading mb-10 text-center md:text-left">
+    <section className="border-t border-gray-100 bg-white px-5 py-24 md:px-8 lg:px-10">
+      <div className="mx-auto max-w-[1200px]">
+        <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-dq-orange">
+          Categories
+        </p>
+        <h2 className="mt-4 text-center text-4xl font-semibold tracking-tight text-dq-navy md:text-left md:text-5xl">
           Explore by Category
         </h2>
-        
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+
+        <div className="mt-10 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
           {marketplaceCapabilities.map((cat) => {
             if (cat.id === "bundles") return null;
             const details = getCategoryDetails(cat.id);
@@ -52,20 +55,19 @@ const ExploreByCategorySection = () => {
             return (
               <button
                 key={cat.id}
+                type="button"
                 onClick={() => {
                   navigate(`/marketplace?collection=${cat.id}`);
                   window.scrollTo(0, 0);
                 }}
-                className="flex flex-col items-start text-left bg-white border border-navy-100 rounded-2xl p-6 shadow-sm hover:shadow-md hover:border-navy-200 transition-all group"
+                className="group flex flex-col items-start rounded-2xl border border-gray-200 bg-white p-6 text-left transition-all duration-300 hover:border-dq-orange hover:shadow-xl"
               >
                 {details.icon}
-                <h3 className="text-lg font-bold text-navy-950 mb-2 group-hover:text-orange-600 transition-colors">
+                <h3 className="mb-2 text-lg font-semibold text-dq-navy transition-colors group-hover:text-dq-orange">
                   {details.title}
                 </h3>
-                <p className="text-sm text-gray-600 mb-6 flex-1">
-                  {details.desc}
-                </p>
-                <div className="mt-auto flex items-center text-sm font-bold text-navy-950 group-hover:text-orange-600 transition-colors gap-1">
+                <p className="mb-6 flex-1 text-sm text-gray-600">{details.desc}</p>
+                <div className="mt-auto flex items-center gap-1 text-sm font-semibold text-dq-navy transition-colors group-hover:text-dq-orange">
                   View Services <ArrowRight size={16} />
                 </div>
               </button>

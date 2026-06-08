@@ -241,7 +241,7 @@ const CustomerServiceOrderDetail = () => {
         <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
           <TabsList className="w-full justify-start bg-transparent border-b border-border h-auto p-0 rounded-none overflow-x-auto overflow-y-hidden flex-nowrap mb-8">
             <TabsTrigger value="overview" className="rounded-none border-b-2 border-transparent data-[state=active]:border-navy-900 data-[state=active]:bg-transparent data-[state=active]:shadow-none px-6 pb-3 text-sm font-semibold">Overview</TabsTrigger>
-            {order.stage !== "Payment Pending" && (
+            {order.stage !== "Payment Pending" && order.stage !== "Payment Confirmation Pending" && (
               <>
                 <TabsTrigger value="delivery" className="rounded-none border-b-2 border-transparent data-[state=active]:border-navy-900 data-[state=active]:bg-transparent data-[state=active]:shadow-none px-6 pb-3 text-sm font-semibold">Delivery</TabsTrigger>
                 <TabsTrigger value="inbox" className="rounded-none border-b-2 border-transparent data-[state=active]:border-navy-900 data-[state=active]:bg-transparent data-[state=active]:shadow-none px-6 pb-3 text-sm font-semibold">
@@ -1367,8 +1367,242 @@ const CustomerServiceOrderDetail = () => {
           </motion.div>
         )}
 
+        {order.stage === "Payment Confirmation Pending" && (
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="space-y-4"
+          >
+            {/* Status Banner */}
+            <div className="rounded-lg border-2 border-yellow-200 bg-yellow-50 p-6">
+              <div className="flex items-start gap-4">
+                <div className="w-12 h-12 rounded-full bg-yellow-100 flex items-center justify-center flex-shrink-0">
+                  <AlertCircle size={24} className="text-yellow-600" />
+                </div>
+                <div className="flex-1">
+                  <h3 className="text-lg font-semibold text-yellow-900 mb-1">
+                    Action Required: Confirm Invoice Payment
+                  </h3>
+                  <p className="text-sm text-yellow-800">
+                    Please review the invoice below and confirm payment to proceed with your engagement
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            {/* Invoice Card */}
+            <Card>
+              <CardHeader>
+                <CardTitle className="text-base">Invoice INV-001</CardTitle>
+                <CardDescription>Review and confirm payment details</CardDescription>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <div className="rounded-lg border border-border bg-accent/30 p-4">
+                  <div className="space-y-2 text-sm">
+                    <div className="flex justify-between">
+                      <span className="text-muted-foreground">Invoice Number</span>
+                      <span className="font-medium text-foreground">INV-001</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span className="text-muted-foreground">Invoice Date</span>
+                      <span className="font-medium text-foreground">
+                        {new Date(order.startDate).toLocaleDateString("en-US", {
+                          month: "short",
+                          day: "numeric",
+                          year: "numeric",
+                        })}
+                      </span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span className="text-muted-foreground">Due Date</span>
+                      <span className="font-medium text-foreground">
+                        {new Date(new Date(order.startDate).getTime() + 30 * 24 * 60 * 60 * 1000).toLocaleDateString("en-US", {
+                          month: "short",
+                          day: "numeric",
+                          year: "numeric",
+                        })}
+                      </span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span className="text-muted-foreground">Payment Terms</span>
+                      <span className="font-medium text-foreground">Net 30</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="space-y-2 text-sm">
+                  <div className="flex justify-between">
+                    <span className="text-muted-foreground">Service</span>
+                    <span className="font-medium text-foreground">{order.serviceName}</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span className="text-muted-foreground">Service Type</span>
+                    <span className="font-medium text-foreground">{order.serviceType}</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span className="text-muted-foreground">Duration</span>
+                    <span className="font-medium text-foreground">{order.duration}</span>
+                  </div>
+                </div>
+
+                <div className="border-t border-border pt-4">
+                  <h4 className="text-sm font-semibold text-foreground mb-2">Invoice Amount</h4>
+                  <div className="space-y-2 text-sm">
+                    <div className="flex justify-between">
+                      <span className="text-muted-foreground">Service Fee</span>
+                      <span className="font-medium text-foreground">
+                        {order.currency} {(order.price / 1.1).toFixed(2).toLocaleString()}
+                      </span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span className="text-muted-foreground">Tax (10%)</span>
+                      <span className="font-medium text-foreground">
+                        {order.currency} {(order.price * 0.1 / 1.1).toFixed(2).toLocaleString()}
+                      </span>
+                    </div>
+                    <div className="flex justify-between border-t border-border pt-2 text-base">
+                      <span className="font-semibold text-foreground">Total Due</span>
+                      <span className="font-bold text-foreground">
+                        {order.currency} {order.price.toLocaleString()}
+                      </span>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="flex gap-2">
+                  <Button variant="outline" className="flex-1 gap-2">
+                    <Download size={16} />
+                    Download Invoice PDF
+                  </Button>
+                </div>
+              </CardContent>
+            </Card>
+
+            {/* Payment Instructions */}
+            <Card>
+              <CardHeader>
+                <CardTitle className="text-base">Payment Instructions</CardTitle>
+                <CardDescription>How to complete your payment</CardDescription>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <div className="rounded-lg bg-blue-50 border border-blue-200 p-4">
+                  <p className="text-sm text-blue-900">
+                    <strong>Bank Transfer Details:</strong>
+                  </p>
+                  <div className="mt-2 space-y-1 text-sm text-blue-800">
+                    <p>Bank: Example Bank</p>
+                    <p>Account Name: Digital Qatalyst</p>
+                    <p>Account Number: 1234567890</p>
+                    <p>Routing Number: 987654321</p>
+                    <p>Reference: INV-001</p>
+                  </div>
+                </div>
+
+                <div className="rounded-lg bg-orange-50 border border-orange-200 p-3">
+                  <p className="text-xs text-orange-900">
+                    <strong>Important:</strong> Please include the invoice number (INV-001) in your payment reference to ensure proper processing.
+                  </p>
+                </div>
+              </CardContent>
+            </Card>
+
+            {/* Action Buttons */}
+            <Card>
+              <CardContent className="p-6">
+                <div className="flex flex-col sm:flex-row gap-3">
+                  <Button className="flex-1 gap-2">
+                    <CheckCircle2 size={16} />
+                    Confirm Payment
+                  </Button>
+                  <Button variant="outline" className="flex-1 gap-2">
+                    <MessageSquare size={16} />
+                    Contact Support
+                  </Button>
+                </div>
+              </CardContent>
+            </Card>
+
+            {/* What Happens Next */}
+            <Card>
+              <CardHeader>
+                <CardTitle className="text-base">What Happens Next?</CardTitle>
+                <CardDescription>Timeline after payment confirmation</CardDescription>
+              </CardHeader>
+              <CardContent>
+                <div className="space-y-3">
+                  <div className="flex items-start gap-3">
+                    <div className="w-6 h-6 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0 mt-0.5">
+                      <CheckCircle2 size={14} className="text-primary" />
+                    </div>
+                    <div>
+                      <p className="text-sm font-medium text-foreground">Payment Confirmation</p>
+                      <p className="text-xs text-muted-foreground mt-1">
+                        Your payment confirmation will be recorded
+                      </p>
+                    </div>
+                  </div>
+                  
+                  <div className="flex items-start gap-3">
+                    <div className="w-6 h-6 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0 mt-0.5">
+                      <User size={14} className="text-primary" />
+                    </div>
+                    <div>
+                      <p className="text-sm font-medium text-foreground">Delivery Lead Assignment</p>
+                      <p className="text-xs text-muted-foreground mt-1">
+                        Your delivery lead will contact you within 24 hours
+                      </p>
+                    </div>
+                  </div>
+                  
+                  <div className="flex items-start gap-3">
+                    <div className="w-6 h-6 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0 mt-0.5">
+                      <FileText size={14} className="text-primary" />
+                    </div>
+                    <div>
+                      <p className="text-sm font-medium text-foreground">Input Requirements</p>
+                      <p className="text-xs text-muted-foreground mt-1">
+                        You'll receive a request to submit required inputs
+                      </p>
+                    </div>
+                  </div>
+                  
+                  <div className="flex items-start gap-3">
+                    <div className="w-6 h-6 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0 mt-0.5">
+                      <Activity size={14} className="text-primary" />
+                    </div>
+                    <div>
+                      <p className="text-sm font-medium text-foreground">Service Delivery Begins</p>
+                      <p className="text-xs text-muted-foreground mt-1">
+                        Delivery commences within 3-5 business days
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+
+            {/* Help Section */}
+            <Card>
+              <CardContent className="p-6">
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-3">
+                    <MessageSquare size={20} className="text-primary" />
+                    <div>
+                      <p className="text-sm font-medium text-foreground">Questions about payment?</p>
+                      <p className="text-xs text-muted-foreground">Our finance team is here to help</p>
+                    </div>
+                  </div>
+                  <Button variant="outline" size="sm" className="gap-2">
+                    Contact Finance
+                  </Button>
+                </div>
+              </CardContent>
+            </Card>
+          </motion.div>
+        )}
+
             {/* Placeholder for other stages */}
-            {!["Payment Pending", "Client Input Pending", "Input in Review", "In Delivery", "Closed"].includes(order.stage) && (
+            {!["Payment Pending", "Payment Confirmation Pending", "Client Input Pending", "Input in Review", "In Delivery", "Closed"].includes(order.stage) && (
               <Card>
                 <CardContent className="p-16 text-center">
                   <p className="text-muted-foreground">
@@ -2458,23 +2692,23 @@ const CustomerServiceOrderDetail = () => {
                       <div className="flex items-center justify-between">
                         <div className="flex items-center gap-3">
                           <div className={`w-10 h-10 rounded flex items-center justify-center ${
-                            order.stage === "Payment Pending" 
-                              ? "bg-yellow-100" 
+                            order.stage === "Payment Pending" || order.stage === "Payment Confirmation Pending"
+                              ? "bg-yellow-100"
                               : "bg-green-100"
                           }`}>
                             <DollarSign size={20} className={
-                              order.stage === "Payment Pending" 
-                                ? "text-yellow-600" 
+                              order.stage === "Payment Pending" || order.stage === "Payment Confirmation Pending"
+                                ? "text-yellow-600"
                                 : "text-green-600"
                             } />
                           </div>
                           <div>
                             <p className="text-sm font-medium text-foreground">
-                              {order.stage === "Payment Pending" ? "Payment Pending" : "Payment Received"}
+                              {order.stage === "Payment Pending" || order.stage === "Payment Confirmation Pending" ? "Payment Pending" : "Payment Received"}
                             </p>
                             <p className="text-xs text-muted-foreground">
-                              {order.stage === "Payment Pending" 
-                                ? "Awaiting payment confirmation" 
+                              {order.stage === "Payment Pending" || order.stage === "Payment Confirmation Pending"
+                                ? "Awaiting payment confirmation"
                                 : `Paid on ${new Date(order.startDate).toLocaleDateString("en-US", {
                                     month: "short",
                                     day: "numeric",
@@ -2484,9 +2718,9 @@ const CustomerServiceOrderDetail = () => {
                             </p>
                           </div>
                         </div>
-                        <Badge variant={order.stage === "Payment Pending" ? "secondary" : "outline"} 
-                          className={order.stage === "Payment Pending" ? "" : "bg-green-100 text-green-800 border-green-300"}>
-                          {order.stage === "Payment Pending" ? "Pending" : "Paid"}
+                        <Badge variant={order.stage === "Payment Pending" || order.stage === "Payment Confirmation Pending" ? "secondary" : "outline"}
+                          className={order.stage === "Payment Pending" || order.stage === "Payment Confirmation Pending" ? "" : "bg-green-100 text-green-800 border-green-300"}>
+                          {order.stage === "Payment Pending" || order.stage === "Payment Confirmation Pending" ? "Pending" : "Paid"}
                         </Badge>
                       </div>
                     </div>

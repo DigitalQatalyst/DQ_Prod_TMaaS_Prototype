@@ -3,34 +3,36 @@ import { Linkedin, Instagram, Youtube } from "lucide-react";
 
 const Footer = () => {
   return (
-    <footer className="border-t border-navy-100 bg-white py-12">
-      <div className="mx-auto max-w-7xl px-6">
-        <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-4">
-          {/* Column 1: Brand */}
-          <div className="flex flex-col gap-4">
+    <footer className="border-t border-gray-100 bg-white px-5 pb-8 pt-14 md:px-8 lg:px-10">
+      <div className="mx-auto max-w-[1200px]">
+        <div className="mb-12 grid grid-cols-1 gap-10 md:grid-cols-[1fr_auto_auto_auto] md:gap-16">
+          {/* Brand */}
+          <div className="space-y-4">
             <Link to="/" className="flex items-center gap-2">
-              <span className="grid h-7 w-7 place-items-center rounded-md bg-navy-950 text-white">
+              <span className="grid h-7 w-7 place-items-center rounded-md bg-dq-navy text-white">
                 <span className="font-mono text-[11px] font-bold">DQ</span>
               </span>
-              <span className="text-sm font-semibold text-navy-950">
+              <span className="text-sm font-semibold text-dq-navy">
                 DigitalQatalyst <span className="text-gray-400">TMaaS</span>
               </span>
             </Link>
-            <p className="text-sm text-gray-600">
+            <p className="max-w-[240px] text-[14px] leading-relaxed text-gray-500">
               Transformation Management as a Service
             </p>
           </div>
 
-          {/* Column 2: Explore DigitalQatalyst */}
-          <div className="flex flex-col gap-4">
-            <h3 className="text-sm font-semibold text-navy-950">Explore DigitalQatalyst</h3>
-            <ul className="space-y-3">
+          {/* Explore DigitalQatalyst */}
+          <div>
+            <p className="mb-4 font-mono text-[10px] uppercase tracking-[0.18em] text-gray-400">
+              Explore DigitalQatalyst
+            </p>
+            <ul className="space-y-2.5 text-[14px] text-gray-600">
               <li>
                 <a
                   href="https://digitalqatalyst.com"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-sm text-gray-600 transition-colors hover:text-navy-950"
+                  className="transition-colors hover:text-dq-orange"
                 >
                   Visit DigitalQatalyst.com
                 </a>
@@ -40,73 +42,62 @@ const Footer = () => {
                   href="https://digitalqatalyst.com/products"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-sm text-gray-600 transition-colors hover:text-navy-950"
+                  className="transition-colors hover:text-dq-orange"
                 >
                   Our Products
                 </a>
               </li>
               <li>
-                <Link
-                  to="/legal/terms"
-                  className="text-sm text-gray-600 transition-colors hover:text-navy-950"
-                >
+                <Link to="/legal/terms" className="transition-colors hover:text-dq-orange">
                   Terms & Conditions
                 </Link>
               </li>
               <li>
-                <Link
-                  to="/legal/privacy"
-                  className="text-sm text-gray-600 transition-colors hover:text-navy-950"
-                >
+                <Link to="/legal/privacy" className="transition-colors hover:text-dq-orange">
                   Privacy Policy
                 </Link>
               </li>
             </ul>
           </div>
 
-          {/* Column 3: Explore TMaaS */}
-          <div className="flex flex-col gap-4">
-            <h3 className="text-sm font-semibold text-navy-950">Explore TMaaS</h3>
-            <ul className="space-y-3">
+          {/* Explore TMaaS */}
+          <div>
+            <p className="mb-4 font-mono text-[10px] uppercase tracking-[0.18em] text-gray-400">
+              Explore TMaaS
+            </p>
+            <ul className="space-y-2.5 text-[14px] text-gray-600">
               <li>
-                <Link
-                  to="/explore"
-                  className="text-sm text-gray-600 transition-colors hover:text-navy-950"
-                >
+                <Link to="/explore" className="transition-colors hover:text-dq-orange">
                   About TMaaS
                 </Link>
               </li>
               <li>
-                <Link
-                  to="/#hero"
-                  className="text-sm text-gray-600 transition-colors hover:text-navy-950"
-                >
+                <Link to="/#hero" className="transition-colors hover:text-dq-orange">
                   Start with AI
                 </Link>
               </li>
               <li>
-                <Link
-                  to="/marketplace"
-                  className="text-sm text-gray-600 transition-colors hover:text-navy-950"
-                >
+                <Link to="/marketplace" className="transition-colors hover:text-dq-orange">
                   Design & Deploy Services
                 </Link>
               </li>
             </ul>
           </div>
 
-          {/* Column 4: Follow Us */}
-          <div className="flex flex-col gap-4">
-            <h3 className="text-sm font-semibold text-navy-950">Follow Us</h3>
-            <ul className="space-y-3">
+          {/* Follow Us */}
+          <div>
+            <p className="mb-4 font-mono text-[10px] uppercase tracking-[0.18em] text-gray-400">
+              Follow Us
+            </p>
+            <ul className="space-y-2.5">
               <li>
                 <a
                   href="https://linkedin.com/company/digitalqatalyst"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-2 text-sm text-gray-600 transition-colors hover:text-navy-950"
+                  className="inline-flex items-center gap-2 text-[14px] text-gray-600 transition-colors hover:text-dq-orange"
                 >
-                  <Linkedin size={16} />
+                  <Linkedin size={14} />
                   LinkedIn
                 </a>
               </li>
@@ -115,9 +106,9 @@ const Footer = () => {
                   href="https://instagram.com/digitalqatalyst"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-2 text-sm text-gray-600 transition-colors hover:text-navy-950"
+                  className="inline-flex items-center gap-2 text-[14px] text-gray-600 transition-colors hover:text-dq-orange"
                 >
-                  <Instagram size={16} />
+                  <Instagram size={14} />
                   Instagram
                 </a>
               </li>
@@ -126,9 +117,9 @@ const Footer = () => {
                   href="https://youtube.com/@digitalqatalyst"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-2 text-sm text-gray-600 transition-colors hover:text-navy-950"
+                  className="inline-flex items-center gap-2 text-[14px] text-gray-600 transition-colors hover:text-dq-orange"
                 >
-                  <Youtube size={16} />
+                  <Youtube size={14} />
                   YouTube
                 </a>
               </li>
@@ -136,11 +127,16 @@ const Footer = () => {
           </div>
         </div>
 
-        {/* Bottom Bar */}
-        <div className="mt-12 border-t border-navy-100 pt-8">
-          <p className="text-center text-xs text-gray-500">
-            © 2026 DigitalQatalyst. All rights reserved.
-          </p>
+        <div className="flex flex-col items-center justify-between gap-3 border-t border-gray-100 pt-6 text-[12px] text-gray-400 sm:flex-row">
+          <p>© 2026 DigitalQatalyst. All rights reserved.</p>
+          <div className="flex gap-5">
+            <Link to="/legal/privacy" className="transition-colors hover:text-gray-700">
+              Privacy
+            </Link>
+            <Link to="/legal/terms" className="transition-colors hover:text-gray-700">
+              Terms
+            </Link>
+          </div>
         </div>
       </div>
     </footer>

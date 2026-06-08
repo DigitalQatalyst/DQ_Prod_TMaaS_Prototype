@@ -19,31 +19,23 @@ export default function MeshSection({
   grid = false,
   className,
   children,
+  id,
 }: {
   variant?: MeshVariant;
   grid?: boolean;
   className?: string;
   children: React.ReactNode;
+  id?: string;
 }) {
   return (
-    <section className={cn("relative isolate overflow-hidden", className)}>
+    <section id={id} className={cn("relative isolate overflow-hidden", className)}>
       <div
         aria-hidden
         className="absolute inset-0 -z-10"
         style={{ background: meshVar(variant) }}
       />
       {grid ? (
-        <div
-          aria-hidden
-          className="absolute inset-0 -z-10 opacity-[0.35]"
-          style={{
-            backgroundImage:
-              "linear-gradient(to right, oklch(0.86 0.010 264 / 0.5) 1px, transparent 1px), linear-gradient(to bottom, oklch(0.86 0.010 264 / 0.5) 1px, transparent 1px)",
-            backgroundSize: "56px 56px",
-            maskImage:
-              "radial-gradient(ellipse 70% 50% at 50% 30%, black 40%, transparent 80%)",
-          }}
-        />
+        <div aria-hidden className="absolute inset-0 -z-10 hero-grid opacity-40" />
       ) : null}
       {children}
     </section>

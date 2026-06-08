@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { useParams, useNavigate, Link } from "react-router-dom";
-import { motion } from "framer-motion";
 import { 
   ArrowLeft, 
   CheckCircle2, 
@@ -78,7 +77,7 @@ const ServiceDetail = () => {
   if (!service) {
     return (
       <div className="min-h-screen bg-background flex flex-col items-center justify-center">
-        <h2 className="text-2xl font-bold text-navy-950 mb-4">Service Not Found</h2>
+        <h2 className="text-2xl font-bold text-dq-navy mb-4">Service Not Found</h2>
         <Button onClick={() => navigate("/marketplace")} className="bg-navy-950">
           Return to Marketplace
         </Button>
@@ -159,11 +158,11 @@ const ServiceDetail = () => {
       <Navbar />
 
       {/* 1. SERVICE HERO SECTION & ACTIVATION PANEL */}
-      <MeshSection variant="heroLight" grid className="pt-28 pb-16 border-b border-navy-50">
-        <div className="mx-auto max-w-7xl px-6">
+      <MeshSection variant="heroLight" grid className="px-5 pb-16 pt-28 md:px-8 md:pt-36 lg:px-10">
+        <div className="mx-auto max-w-[1200px]">
           <Link 
             to="/marketplace"
-            className="inline-flex items-center gap-1.5 text-xs font-semibold text-gray-500 transition-colors hover:text-navy-950 mb-8"
+            className="mb-8 inline-flex items-center gap-1.5 text-xs font-semibold text-gray-500 transition-colors hover:text-dq-navy"
           >
             <ArrowLeft size={14} />
             Back to Marketplace
@@ -184,7 +183,7 @@ const ServiceDetail = () => {
                 )}
               </div>
               
-              <h1 className="text-3xl md:text-5xl font-bold tracking-tight text-navy-950 mb-4 leading-tight">
+              <h1 className="mb-4 text-4xl font-semibold leading-tight tracking-tight text-dq-navy md:text-5xl">
                 {service.standardName.replace(" (High-Impact)", "")}
               </h1>
               
@@ -192,67 +191,67 @@ const ServiceDetail = () => {
                 {service.description}
               </p>
 
-              <div className="grid grid-cols-2 md:grid-cols-2 gap-6 border-t border-navy-50 pt-8">
+              <div className="grid grid-cols-2 gap-6 border-t border-gray-100 pt-8 md:grid-cols-2">
                 <div>
-                  <div className="text-[10px] font-bold text-gray-400 uppercase tracking-wider mb-1.5 flex items-center gap-1.5">
+                  <div className="mb-1.5 flex items-center gap-1.5 font-mono text-[10px] uppercase tracking-[0.18em] text-gray-400">
                     <Clock size={12} /> Timeline
                   </div>
-                  <div className="text-sm font-semibold text-navy-950">{service.duration}</div>
+                  <div className="text-sm font-semibold text-dq-navy">{service.duration}</div>
                 </div>
                 <div>
-                  <div className="text-[10px] font-bold text-gray-400 uppercase tracking-wider mb-1.5 flex items-center gap-1.5">
+                  <div className="mb-1.5 flex items-center gap-1.5 font-mono text-[10px] uppercase tracking-[0.18em] text-gray-400">
                     <Users size={12} /> Target Size
                   </div>
-                  <div className="text-sm font-semibold text-navy-950">{service.audience}</div>
+                  <div className="text-sm font-semibold text-dq-navy">{service.audience}</div>
                 </div>
                 <div>
-                  <div className="text-[10px] font-bold text-gray-400 uppercase tracking-wider mb-1.5 flex items-center gap-1.5">
+                  <div className="mb-1.5 flex items-center gap-1.5 font-mono text-[10px] uppercase tracking-[0.18em] text-gray-400">
                     <Layers size={12} /> Category
                   </div>
-                  <div className="text-sm font-semibold text-navy-950">{marketplaceCategoryLabels[service.collection] || service.collection}</div>
+                  <div className="text-sm font-semibold text-dq-navy">{marketplaceCategoryLabels[service.collection] || service.collection}</div>
                 </div>
                 <div>
-                  <div className="text-[10px] font-bold text-gray-400 uppercase tracking-wider mb-1.5 flex items-center gap-1.5">
+                  <div className="mb-1.5 flex items-center gap-1.5 font-mono text-[10px] uppercase tracking-[0.18em] text-gray-400">
                     <Building size={12} /> Industry Sector Relevance
                   </div>
-                  <div className="text-sm font-semibold text-navy-950">All</div>
+                  <div className="text-sm font-semibold text-dq-navy">All</div>
                 </div>
               </div>
             </div>
 
             {/* Right Side: Activation Panel */}
             <div className="relative">
-              <div className="sticky top-28 rounded-2xl border border-navy-100 bg-white p-6 shadow-elevated">
-                <div className="mb-6 flex items-baseline justify-between border-b border-navy-50 pb-6">
+              <div className="sticky top-28 rounded-2xl border border-gray-200 bg-white p-6 shadow-lg">
+                <div className="mb-6 flex items-baseline justify-between border-b border-gray-100 pb-6">
                   <div>
-                    <div className="text-[10px] font-bold text-gray-500 uppercase tracking-wider mb-1">Starting Investment</div>
-                    <div className="text-3xl font-bold text-navy-950">{service.price}</div>
+                    <div className="mb-1 font-mono text-[10px] uppercase tracking-[0.18em] text-gray-400">Starting Investment</div>
+                    <div className="text-3xl font-semibold text-dq-navy">{service.price}</div>
                   </div>
                   <div className="text-right">
-                    <div className="text-[10px] font-bold text-gray-500 uppercase tracking-wider mb-1">Est. Timeline</div>
-                    <div className="text-sm font-bold text-navy-950">{service.duration}</div>
+                    <div className="mb-1 font-mono text-[10px] uppercase tracking-[0.18em] text-gray-400">Est. Timeline</div>
+                    <div className="text-sm font-semibold text-dq-navy">{service.duration}</div>
                   </div>
                 </div>
 
                 <div className="space-y-4 mb-8">
                   <div className="flex items-start gap-3">
-                    <CheckCircle2 size={16} className="text-orange-500 mt-0.5" />
+                    <CheckCircle2 size={16} className="mt-0.5 text-dq-orange" />
                     <div>
-                      <div className="text-xs font-bold text-navy-950">SLA-backed Delivery</div>
+                      <div className="text-xs font-semibold text-dq-navy">SLA-backed Delivery</div>
                       <div className="text-[11px] text-gray-500">Guaranteed outcomes & timelines</div>
                     </div>
                   </div>
                   <div className="flex items-start gap-3">
-                    <CheckCircle2 size={16} className="text-orange-500 mt-0.5" />
+                    <CheckCircle2 size={16} className="mt-0.5 text-dq-orange" />
                     <div>
-                      <div className="text-xs font-bold text-navy-950">Included Specialists</div>
+                      <div className="text-xs font-semibold text-dq-navy">Included Specialists</div>
                       <div className="text-[11px] text-gray-500">Dedicated TMaaS transformation team</div>
                     </div>
                   </div>
                   <div className="flex items-start gap-3">
-                    <CheckCircle2 size={16} className="text-orange-500 mt-0.5" />
+                    <CheckCircle2 size={16} className="mt-0.5 text-dq-orange" />
                     <div>
-                      <div className="text-xs font-bold text-navy-950">Governance Assurance</div>
+                      <div className="text-xs font-semibold text-dq-navy">Governance Assurance</div>
                       <div className="text-[11px] text-gray-500">Architecture-led milestone tracking</div>
                     </div>
                   </div>
@@ -264,16 +263,16 @@ const ServiceDetail = () => {
                       <div className="flex items-start gap-3 bg-slate-50 p-4 rounded-xl border border-slate-200">
                         <Info className="text-blue-500 mt-0.5 shrink-0" size={18} />
                         <div>
-                          <h4 className="text-xs font-bold text-navy-950 mb-1">Prerequisite</h4>
+                          <h4 className="text-xs font-bold text-dq-navy mb-1">Prerequisite</h4>
                           <p className="text-[11px] text-gray-600 leading-relaxed">
-                            Requires the <span className="font-semibold text-navy-950">{baseSolutionName} Design</span> service to be completed prior to deployment.
+                            Requires the <span className="font-semibold text-dq-navy">{baseSolutionName} Design</span> service to be completed prior to deployment.
                           </p>
                         </div>
                       </div>
                       
                       <div className="space-y-2">
                         <Button
-                          className="w-full h-12 bg-orange-500 hover:bg-orange-400 text-white font-bold rounded-xl text-sm flex items-center justify-center gap-2 group"
+                          className="w-full h-12 bg-dq-orange hover:bg-[#E04020] text-white font-bold rounded-full text-sm flex items-center justify-center gap-2 group"
                           onClick={() => navigate(`/service/${designServiceObj.id}`)}
                         >
                           View Design Service
@@ -281,7 +280,7 @@ const ServiceDetail = () => {
                         </Button>
                         <Button 
                           variant="outline" 
-                          className="w-full h-10 bg-white border-slate-200 text-navy-950 hover:bg-slate-50 font-bold rounded-xl text-xs"
+                          className="w-full h-10 bg-white border-slate-200 text-dq-navy hover:bg-slate-50 font-bold rounded-full text-xs"
                           onClick={() => navigate(`/service/${bundleServiceObj.id}`)}
                         >
                           Or Get the Full Bundle
@@ -290,7 +289,7 @@ const ServiceDetail = () => {
                     </div>
                   ) : requiresQuoteCTA ? (
                     <Button
-                      className="w-full h-12 bg-orange-500 hover:bg-orange-400 text-white font-bold rounded-xl text-sm flex items-center justify-center gap-2 group"
+                      className="w-full h-12 bg-dq-orange hover:bg-[#E04020] text-white font-bold rounded-full text-sm flex items-center justify-center gap-2 group"
                       onClick={() => setIsOfferDialogOpen(true)}
                     >
                       Request Quote
@@ -299,10 +298,10 @@ const ServiceDetail = () => {
                   ) : (
                     <>
                       <Button
-                        className={`w-full h-12 font-bold rounded-xl text-sm flex items-center justify-center gap-2 ${
+                        className={`w-full h-12 font-bold rounded-full text-sm flex items-center justify-center gap-2 ${
                           hasItem(service.id)
                             ? "bg-orange-50 border border-orange-200 text-orange-700 hover:bg-orange-100"
-                            : "bg-orange-500 hover:bg-orange-400 text-white"
+                            : "bg-dq-orange hover:bg-[#E04020] text-white"
                         }`}
                         onClick={() => {
                           addItem(service.id);
@@ -325,7 +324,7 @@ const ServiceDetail = () => {
                         )}
                       </Button>
                       <Button
-                        className="w-full h-12 bg-navy-950 hover:bg-navy-900 text-white font-bold rounded-xl text-sm flex items-center justify-center gap-2 group"
+                        className="w-full h-12 bg-dq-navy hover:bg-dq-navy/90 text-white font-bold rounded-full text-sm flex items-center justify-center gap-2 group"
                         onClick={() => handleStartOnboarding(service.standardName)}
                       >
                         <Sparkles size={16} className="text-orange-400" />
@@ -334,7 +333,7 @@ const ServiceDetail = () => {
                       </Button>
                       <Button
                         variant="outline"
-                        className="w-full h-12 border-navy-200 bg-white text-navy-950 hover:bg-slate-50 font-bold rounded-xl text-sm"
+                        className="w-full h-12 border-navy-200 bg-white text-dq-navy hover:bg-slate-50 font-bold rounded-full text-sm"
                         onClick={() => navigate("/cart")}
                       >
                         View cart
@@ -348,7 +347,7 @@ const ServiceDetail = () => {
         </div>
       </MeshSection>
 
-      <div className="mx-auto max-w-7xl px-6 py-16 grid gap-20 lg:grid-cols-[1fr_380px]">
+      <div className="mx-auto grid max-w-[1200px] gap-20 px-5 py-24 md:px-8 lg:grid-cols-[1fr_380px] lg:px-10">
         
         {/* Main Content Flow */}
         <div className="space-y-20">
@@ -356,16 +355,17 @@ const ServiceDetail = () => {
           {/* 1.5 WHERE THIS FITS SECTION */}
           {service.serviceType !== "bundle" && currentStage && (
             <section>
-              <h2 className="text-2xl font-bold tracking-tight text-navy-950 mb-6">Where This Fits</h2>
+              <p className="mb-4 font-mono text-[11px] uppercase tracking-[0.2em] text-dq-orange">Lifecycle</p>
+              <h2 className="mb-6 text-4xl font-semibold tracking-tight text-dq-navy md:text-5xl">Where This Fits</h2>
               <div className="flex items-center gap-2 md:gap-4 flex-wrap">
                 {LIFECYCLE_STAGES.map((stage, idx) => {
                   const isActive = currentStage === stage;
                   return (
                     <div key={stage} className="flex items-center gap-2 md:gap-4">
-                      <div className={`px-4 py-2.5 rounded-xl text-sm font-bold flex items-center gap-2 transition-all ${
+                      <div className={`flex items-center gap-2 rounded-2xl px-4 py-2.5 text-sm font-semibold transition-all duration-300 ${
                         isActive 
-                          ? 'bg-orange-500 text-white shadow-md scale-105' 
-                          : 'bg-slate-100 text-slate-500 border border-slate-200'
+                          ? 'scale-105 bg-dq-orange text-white shadow-md' 
+                          : 'border border-gray-200 bg-white text-gray-500'
                       }`}>
                         {isActive && <CheckCircle2 size={16} />}
                         {stage}
@@ -383,27 +383,28 @@ const ServiceDetail = () => {
           {/* 2. BUSINESS OUTCOMES SECTION */}
           {service.serviceType !== "bundle" && (
             <section>
-              <h2 className="text-2xl font-bold tracking-tight text-navy-950 mb-6">What This Service Helps You Achieve</h2>
+              <p className="mb-4 font-mono text-[11px] uppercase tracking-[0.2em] text-dq-orange">Outcomes</p>
+              <h2 className="mb-6 text-4xl font-semibold tracking-tight text-dq-navy md:text-5xl">What This Service Helps You Achieve</h2>
               <div className="grid sm:grid-cols-2 gap-4">
                 {service.outcomes.map((outcome, idx) => (
-                  <div key={idx} className="flex items-center gap-3 rounded-xl border border-navy-100 bg-white p-4 shadow-sm">
-                    <div className="h-8 w-8 rounded-lg bg-orange-50 flex items-center justify-center text-orange-600 shrink-0">
+                  <div key={idx} className="flex items-center gap-3 rounded-2xl border border-gray-200 bg-white p-4 transition-all duration-300 hover:border-dq-orange hover:shadow-xl">
+                    <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-orange-50 text-dq-orange">
                       <Activity size={16} />
                     </div>
-                    <span className="text-sm font-semibold text-navy-950">{outcome}</span>
+                    <span className="text-sm font-semibold text-dq-navy">{outcome}</span>
                   </div>
                 ))}
-                <div className="flex items-center gap-3 rounded-xl border border-navy-100 bg-white p-4 shadow-sm">
-                  <div className="h-8 w-8 rounded-lg bg-orange-50 flex items-center justify-center text-orange-600 shrink-0">
+                <div className="flex items-center gap-3 rounded-2xl border border-gray-200 bg-white p-4 transition-all duration-300 hover:border-dq-orange hover:shadow-xl">
+                  <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-orange-50 text-dq-orange">
                     <Activity size={16} />
                   </div>
-                  <span className="text-sm font-semibold text-navy-950">Establish governance foundations</span>
+                  <span className="text-sm font-semibold text-dq-navy">Establish governance foundations</span>
                 </div>
-                <div className="flex items-center gap-3 rounded-xl border border-navy-100 bg-white p-4 shadow-sm">
-                  <div className="h-8 w-8 rounded-lg bg-orange-50 flex items-center justify-center text-orange-600 shrink-0">
+                <div className="flex items-center gap-3 rounded-2xl border border-gray-200 bg-white p-4 transition-all duration-300 hover:border-dq-orange hover:shadow-xl">
+                  <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-orange-50 text-dq-orange">
                     <Activity size={16} />
                   </div>
-                  <span className="text-sm font-semibold text-navy-950">Accelerate enterprise adoption</span>
+                  <span className="text-sm font-semibold text-dq-navy">Accelerate enterprise adoption</span>
                 </div>
               </div>
             </section>
@@ -412,7 +413,8 @@ const ServiceDetail = () => {
           {/* 2.5 BUNDLE INCLUDED SERVICES */}
           {service.serviceType === "bundle" && service.relatedServices && service.relatedServices.length > 0 && (
             <section>
-              <h2 className="text-2xl font-bold tracking-tight text-navy-950 mb-6">What's Included</h2>
+              <p className="mb-4 font-mono text-[11px] uppercase tracking-[0.2em] text-dq-orange">Bundle</p>
+              <h2 className="mb-6 text-4xl font-semibold tracking-tight text-dq-navy md:text-5xl">What's Included</h2>
               <p className="text-sm text-gray-600 mb-8 leading-relaxed max-w-2xl">
                 This transformation bundle includes the following comprehensive services to ensure end-to-end delivery of your solution.
               </p>
@@ -421,7 +423,7 @@ const ServiceDetail = () => {
                   .map((id: number) => initialServices.find(s => s.id === id))
                   .filter((s: any) => s && s.serviceType !== "advisory")
                   .map((s: any) => (
-                    <div key={s.id} className="rounded-xl border border-navy-100 bg-white p-5 flex flex-col hover:border-orange-500 transition-colors shadow-sm">
+                    <div key={s.id} className="flex flex-col rounded-2xl border border-gray-200 bg-white p-5 transition-all duration-300 hover:border-dq-orange hover:shadow-xl">
                       <div className="mb-3 flex items-center gap-2">
                         <span className="rounded bg-slate-100 px-2 py-0.5 text-[9px] font-semibold uppercase tracking-wide text-slate-600">
                           {marketplaceServiceTypeLabels[s.serviceType] || s.serviceType}
@@ -433,7 +435,7 @@ const ServiceDetail = () => {
                           </span>
                         )}
                       </div>
-                      <h3 className="text-sm font-bold leading-snug text-navy-950 mb-2">
+                      <h3 className="text-sm font-bold leading-snug text-dq-navy mb-2">
                         {s.standardName.replace(" (High-Impact)", "")}
                       </h3>
                       <p className="line-clamp-2 text-xs leading-relaxed text-gray-500 mb-4 flex-1">
@@ -441,7 +443,7 @@ const ServiceDetail = () => {
                       </p>
                       <button 
                         onClick={() => navigate(`/service/${s.id}`)}
-                        className="text-[11px] font-bold text-navy-950 flex items-center gap-1 hover:text-orange-600 transition-colors mt-auto"
+                        className="text-[11px] font-bold text-dq-navy flex items-center gap-1 hover:text-dq-orange transition-colors mt-auto"
                       >
                         View Details <ArrowRight size={12} />
                       </button>
@@ -454,7 +456,8 @@ const ServiceDetail = () => {
           {/* 3. WHAT'S INCLUDED */}
           {service.serviceType !== "bundle" && (
             <section>
-              <h2 className="text-2xl font-bold tracking-tight text-navy-950 mb-6">Included Deliverables</h2>
+              <p className="mb-4 font-mono text-[11px] uppercase tracking-[0.2em] text-dq-orange">Deliverables</p>
+              <h2 className="mb-6 text-4xl font-semibold tracking-tight text-dq-navy md:text-5xl">Included Deliverables</h2>
               <p className="text-sm text-gray-600 mb-8 leading-relaxed max-w-2xl">
                 This is a productized transformation service. You receive clear, scoped deliverables managed under strict SLA agreements to ensure predictable outcomes.
               </p>
@@ -463,11 +466,11 @@ const ServiceDetail = () => {
                   isDesignService ? DESIGN_DELIVERABLES :
                   isDeployService ? DEPLOY_DELIVERABLES :
                   service.features).map((feature, idx) => (
-                  <div key={idx} className="flex items-start gap-4 rounded-xl border border-navy-100 bg-slate-50 p-5">
+                  <div key={idx} className="flex items-start gap-4 rounded-2xl border border-gray-200 bg-gray-50 p-5 transition-all duration-300 hover:border-dq-orange hover:shadow-xl">
                     <div className="mt-0.5">
-                      <CheckCircle2 size={18} className="text-orange-500" />
+                      <CheckCircle2 size={18} className="text-dq-orange" />
                     </div>
-                    <span className="text-sm font-semibold text-navy-950 leading-relaxed">{feature}</span>
+                    <span className="text-sm font-semibold text-dq-navy leading-relaxed">{feature}</span>
                   </div>
                 ))}
               </div>
@@ -477,21 +480,22 @@ const ServiceDetail = () => {
           {/* 3.5 MODULES & APPLICATIONS (DEPLOY ONLY) */}
           {isDeployService && deployModules.length > 0 && (
             <section>
-              <h2 className="text-2xl font-bold tracking-tight text-navy-950 mb-6">Modules & Applications</h2>
+              <p className="mb-4 font-mono text-[11px] uppercase tracking-[0.2em] text-dq-orange">Architecture</p>
+              <h2 className="mb-6 text-4xl font-semibold tracking-tight text-dq-navy md:text-5xl">Modules & Applications</h2>
               <p className="text-sm text-gray-600 mb-8 leading-relaxed max-w-2xl">
                 The target architecture and functional components implemented during the build phase.
               </p>
               <Accordion type="single" collapsible className="w-full space-y-4">
                 {deployModules.map((module, idx) => (
-                  <AccordionItem key={idx} value={`item-${idx}`} className="border border-navy-100 rounded-xl bg-white px-5 shadow-sm">
-                    <AccordionTrigger className="text-sm font-bold text-navy-950 hover:no-underline hover:text-orange-600">
+                  <AccordionItem key={idx} value={`item-${idx}`} className="rounded-2xl border border-gray-200 bg-white px-5 transition-all duration-300 hover:border-dq-orange hover:shadow-xl">
+                    <AccordionTrigger className="text-sm font-bold text-dq-navy hover:no-underline hover:text-dq-orange">
                       {module.name}
                     </AccordionTrigger>
                     <AccordionContent className="pt-2 pb-5 border-t border-navy-50">
                       <ul className="grid sm:grid-cols-2 gap-y-3 gap-x-6 mt-4">
                         {module.features.map((feature, fIdx) => (
                           <li key={fIdx} className="flex items-start gap-2.5">
-                            <div className="mt-1.5 h-1.5 w-1.5 rounded-full bg-orange-500 shrink-0" />
+                            <div className="mt-1.5 h-1.5 w-1.5 rounded-full bg-dq-orange shrink-0" />
                             <span className="text-sm text-gray-600 leading-snug">{feature}</span>
                           </li>
                         ))}
@@ -505,13 +509,14 @@ const ServiceDetail = () => {
 
           {/* 4. DELIVERY APPROACH */}
           <section>
-            <h2 className="text-2xl font-bold tracking-tight text-navy-950 mb-6">How Delivery Works</h2>
-            <div className="relative border-l border-navy-100 ml-4 space-y-8 pb-4">
+            <p className="mb-4 font-mono text-[11px] uppercase tracking-[0.2em] text-dq-orange">Delivery</p>
+            <h2 className="mb-6 text-4xl font-semibold tracking-tight text-dq-navy md:text-5xl">How Delivery Works</h2>
+            <div className="relative ml-4 space-y-8 border-l border-gray-200 pb-4">
               
               {isAdvisoryService && (
                 <div className="relative pl-8">
-                  <div className="absolute -left-3.5 top-0 h-7 w-7 rounded-full bg-navy-950 flex items-center justify-center text-[10px] font-bold text-white border-4 border-white shadow-sm">1</div>
-                  <h3 className="text-base font-bold text-navy-950 mb-1">Assess <span className="text-gray-400 font-normal ml-2 text-sm">(1 Week)</span></h3>
+                  <div className="absolute -left-3.5 top-0 h-7 w-7 rounded-full bg-dq-orange flex items-center justify-center text-[10px] font-semibold text-white border-4 border-white shadow-sm">1</div>
+                  <h3 className="text-base font-bold text-dq-navy mb-1">Assess <span className="text-gray-400 font-normal ml-2 text-sm">(1 Week)</span></h3>
                   <p className="text-sm text-gray-600 leading-relaxed">
                     We begin by understanding your organisation, current challenges, workflows, systems, and transformation goals. This helps us identify the highest-value opportunities for digital and AI enablement.
                   </p>
@@ -521,29 +526,29 @@ const ServiceDetail = () => {
               {isDesignService && (
                 <>
                   <div className="relative pl-8">
-                    <div className="absolute -left-3.5 top-0 h-7 w-7 rounded-full bg-navy-950 flex items-center justify-center text-[10px] font-bold text-white border-4 border-white shadow-sm">1</div>
-                    <h3 className="text-base font-bold text-navy-950 mb-1">Discover <span className="text-gray-400 font-normal ml-2 text-sm">(1 Week)</span></h3>
+                    <div className="absolute -left-3.5 top-0 h-7 w-7 rounded-full bg-dq-orange flex items-center justify-center text-[10px] font-semibold text-white border-4 border-white shadow-sm">1</div>
+                    <h3 className="text-base font-bold text-dq-navy mb-1">Discover <span className="text-gray-400 font-normal ml-2 text-sm">(1 Week)</span></h3>
                     <p className="text-sm text-gray-600 leading-relaxed">
                       We begin by understanding your organisation, current challenges, workflows, systems, and transformation goals. This helps us identify the highest-value opportunities for digital and AI enablement.
                     </p>
                   </div>
                   <div className="relative pl-8">
-                    <div className="absolute -left-3.5 top-0 h-7 w-7 rounded-full bg-navy-950 flex items-center justify-center text-[10px] font-bold text-white border-4 border-white shadow-sm">2</div>
-                    <h3 className="text-base font-bold text-navy-950 mb-1">Design <span className="text-gray-400 font-normal ml-2 text-sm">(1 Week)</span></h3>
+                    <div className="absolute -left-3.5 top-0 h-7 w-7 rounded-full bg-dq-navy flex items-center justify-center text-[10px] font-semibold text-white border-4 border-white shadow-sm">2</div>
+                    <h3 className="text-base font-bold text-dq-navy mb-1">Design <span className="text-gray-400 font-normal ml-2 text-sm">(1 Week)</span></h3>
                     <p className="text-sm text-gray-600 leading-relaxed">
                       We design the target experience, workflows, operating model, and AI-supported processes required to deliver measurable business outcomes.
                     </p>
                   </div>
                   <div className="relative pl-8">
-                    <div className="absolute -left-3.5 top-0 h-7 w-7 rounded-full bg-navy-950 flex items-center justify-center text-[10px] font-bold text-white border-4 border-white shadow-sm">3</div>
-                    <h3 className="text-base font-bold text-navy-950 mb-1">Prototype <span className="text-gray-400 font-normal ml-2 text-sm">(1 Week)</span></h3>
+                    <div className="absolute -left-3.5 top-0 h-7 w-7 rounded-full bg-dq-navy flex items-center justify-center text-[10px] font-semibold text-white border-4 border-white shadow-sm">3</div>
+                    <h3 className="text-base font-bold text-dq-navy mb-1">Prototype <span className="text-gray-400 font-normal ml-2 text-sm">(1 Week)</span></h3>
                     <p className="text-sm text-gray-600 leading-relaxed">
                       We convert the approved direction into implementation-ready assets including prototypes, specifications, backlog items, and deployment requirements.
                     </p>
                   </div>
                   <div className="relative pl-8">
-                    <div className="absolute -left-3.5 top-0 h-7 w-7 rounded-full bg-navy-950 flex items-center justify-center text-[10px] font-bold text-white border-4 border-white shadow-sm">4</div>
-                    <h3 className="text-base font-bold text-navy-950 mb-1">Launch Plan <span className="text-gray-400 font-normal ml-2 text-sm">(1 Week)</span></h3>
+                    <div className="absolute -left-3.5 top-0 h-7 w-7 rounded-full bg-dq-navy flex items-center justify-center text-[10px] font-semibold text-white border-4 border-white shadow-sm">4</div>
+                    <h3 className="text-base font-bold text-dq-navy mb-1">Launch Plan <span className="text-gray-400 font-normal ml-2 text-sm">(1 Week)</span></h3>
                     <p className="text-sm text-gray-600 leading-relaxed">
                       We provide executive guidance, KPI recommendations, rollout planning, and deployment support to help your organisation move confidently into implementation.
                     </p>
@@ -554,22 +559,22 @@ const ServiceDetail = () => {
               {isDeployService && (
                 <>
                   <div className="relative pl-8">
-                    <div className="absolute -left-3.5 top-0 h-7 w-7 rounded-full bg-navy-950 flex items-center justify-center text-[10px] font-bold text-white border-4 border-white shadow-sm">1</div>
-                    <h3 className="text-base font-bold text-navy-950 mb-1">Discover & Validate <span className="text-gray-400 font-normal ml-2 text-sm">(1 Week)</span></h3>
+                    <div className="absolute -left-3.5 top-0 h-7 w-7 rounded-full bg-dq-orange flex items-center justify-center text-[10px] font-semibold text-white border-4 border-white shadow-sm">1</div>
+                    <h3 className="text-base font-bold text-dq-navy mb-1">Discover & Validate <span className="text-gray-400 font-normal ml-2 text-sm">(1 Week)</span></h3>
                     <p className="text-sm text-gray-600 leading-relaxed">
                       We validate the business problem, define the MVP scope, and align the solution direction before development begins.
                     </p>
                   </div>
                   <div className="relative pl-8">
-                    <div className="absolute -left-3.5 top-0 h-7 w-7 rounded-full bg-navy-950 flex items-center justify-center text-[10px] font-bold text-white border-4 border-white shadow-sm">2</div>
-                    <h3 className="text-base font-bold text-navy-950 mb-1">Solution Design <span className="text-gray-400 font-normal ml-2 text-sm">(1 Week)</span></h3>
+                    <div className="absolute -left-3.5 top-0 h-7 w-7 rounded-full bg-dq-navy flex items-center justify-center text-[10px] font-semibold text-white border-4 border-white shadow-sm">2</div>
+                    <h3 className="text-base font-bold text-dq-navy mb-1">Solution Design <span className="text-gray-400 font-normal ml-2 text-sm">(1 Week)</span></h3>
                     <p className="text-sm text-gray-600 leading-relaxed">
                       We translate the approved concept into implementation-ready specifications, architecture, and delivery planning.
                     </p>
                   </div>
                   <div className="relative pl-8">
-                    <div className="absolute -left-3.5 top-0 h-7 w-7 rounded-full bg-navy-950 flex items-center justify-center text-[10px] font-bold text-white border-4 border-white shadow-sm">3</div>
-                    <h3 className="text-base font-bold text-navy-950 mb-1">Build & Launch <span className="text-gray-400 font-normal ml-2 text-sm">(10 Weeks)</span></h3>
+                    <div className="absolute -left-3.5 top-0 h-7 w-7 rounded-full bg-dq-navy flex items-center justify-center text-[10px] font-semibold text-white border-4 border-white shadow-sm">3</div>
+                    <h3 className="text-base font-bold text-dq-navy mb-1">Build & Launch <span className="text-gray-400 font-normal ml-2 text-sm">(10 Weeks)</span></h3>
                     <p className="text-sm text-gray-600 leading-relaxed">
                       We develop, test, deploy, and activate the MVP in a production-ready environment.
                     </p>
@@ -580,29 +585,29 @@ const ServiceDetail = () => {
               {service.serviceType === "bundle" && (
                 <>
                   <div className="relative pl-8">
-                    <div className="absolute -left-3.5 top-0 h-7 w-7 rounded-full bg-navy-950 flex items-center justify-center text-[10px] font-bold text-white border-4 border-white shadow-sm">1</div>
-                    <h3 className="text-base font-bold text-navy-950 mb-1">Assess & Discover <span className="text-gray-400 font-normal ml-2 text-sm">(1 Week)</span></h3>
+                    <div className="absolute -left-3.5 top-0 h-7 w-7 rounded-full bg-dq-orange flex items-center justify-center text-[10px] font-semibold text-white border-4 border-white shadow-sm">1</div>
+                    <h3 className="text-base font-bold text-dq-navy mb-1">Assess & Discover <span className="text-gray-400 font-normal ml-2 text-sm">(1 Week)</span></h3>
                     <p className="text-sm text-gray-600 leading-relaxed">
                       We evaluate your organization's current workflows, identify opportunities for digital and AI enablement, and align on the overarching transformation strategy.
                     </p>
                   </div>
                   <div className="relative pl-8">
-                    <div className="absolute -left-3.5 top-0 h-7 w-7 rounded-full bg-navy-950 flex items-center justify-center text-[10px] font-bold text-white border-4 border-white shadow-sm">2</div>
-                    <h3 className="text-base font-bold text-navy-950 mb-1">Design & Prototype <span className="text-gray-400 font-normal ml-2 text-sm">(4 Weeks)</span></h3>
+                    <div className="absolute -left-3.5 top-0 h-7 w-7 rounded-full bg-dq-navy flex items-center justify-center text-[10px] font-semibold text-white border-4 border-white shadow-sm">2</div>
+                    <h3 className="text-base font-bold text-dq-navy mb-1">Design & Prototype <span className="text-gray-400 font-normal ml-2 text-sm">(4 Weeks)</span></h3>
                     <p className="text-sm text-gray-600 leading-relaxed">
                       We design the target experience, define architecture, establish governance, and create implementation-ready prototypes and specifications for the deployment phase.
                     </p>
                   </div>
                   <div className="relative pl-8">
-                    <div className="absolute -left-3.5 top-0 h-7 w-7 rounded-full bg-navy-950 flex items-center justify-center text-[10px] font-bold text-white border-4 border-white shadow-sm">3</div>
-                    <h3 className="text-base font-bold text-navy-950 mb-1">Build & Launch <span className="text-gray-400 font-normal ml-2 text-sm">(10 Weeks)</span></h3>
+                    <div className="absolute -left-3.5 top-0 h-7 w-7 rounded-full bg-dq-navy flex items-center justify-center text-[10px] font-semibold text-white border-4 border-white shadow-sm">3</div>
+                    <h3 className="text-base font-bold text-dq-navy mb-1">Build & Launch <span className="text-gray-400 font-normal ml-2 text-sm">(10 Weeks)</span></h3>
                     <p className="text-sm text-gray-600 leading-relaxed">
                       Our TMaaS specialists execute the solution build, integrating AI components, conducting rigorous testing, and launching the capability into your production environment.
                     </p>
                   </div>
                   <div className="relative pl-8">
-                    <div className="absolute -left-3.5 top-0 h-7 w-7 rounded-full bg-navy-950 flex items-center justify-center text-[10px] font-bold text-white border-4 border-white shadow-sm">4</div>
-                    <h3 className="text-base font-bold text-navy-950 mb-1">Managed Operations <span className="text-gray-400 font-normal ml-2 text-sm">(Ongoing)</span></h3>
+                    <div className="absolute -left-3.5 top-0 h-7 w-7 rounded-full bg-dq-navy flex items-center justify-center text-[10px] font-semibold text-white border-4 border-white shadow-sm">4</div>
+                    <h3 className="text-base font-bold text-dq-navy mb-1">Managed Operations <span className="text-gray-400 font-normal ml-2 text-sm">(Ongoing)</span></h3>
                     <p className="text-sm text-gray-600 leading-relaxed">
                       We provide continuous monitoring, incident resolution, performance optimization, and lifecycle governance to ensure sustained business value from your transformation.
                     </p>
@@ -613,22 +618,22 @@ const ServiceDetail = () => {
               {service.serviceType === "manage" && (
                 <>
                   <div className="relative pl-8">
-                    <div className="absolute -left-3.5 top-0 h-7 w-7 rounded-full bg-navy-950 flex items-center justify-center text-[10px] font-bold text-white border-4 border-white shadow-sm">1</div>
-                    <h3 className="text-base font-bold text-navy-950 mb-2">Discovery & Alignment</h3>
+                    <div className="absolute -left-3.5 top-0 h-7 w-7 rounded-full bg-dq-orange flex items-center justify-center text-[10px] font-semibold text-white border-4 border-white shadow-sm">1</div>
+                    <h3 className="text-base font-bold text-dq-navy mb-2">Discovery & Alignment</h3>
                     <p className="text-sm text-gray-600 leading-relaxed">
                       We assess operational priorities, organizational readiness, and strategic objectives before initiation.
                     </p>
                   </div>
                   <div className="relative pl-8">
-                    <div className="absolute -left-3.5 top-0 h-7 w-7 rounded-full bg-navy-950 flex items-center justify-center text-[10px] font-bold text-white border-4 border-white shadow-sm">2</div>
-                    <h3 className="text-base font-bold text-navy-950 mb-2">Service Delivery</h3>
+                    <div className="absolute -left-3.5 top-0 h-7 w-7 rounded-full bg-dq-navy flex items-center justify-center text-[10px] font-semibold text-white border-4 border-white shadow-sm">2</div>
+                    <h3 className="text-base font-bold text-dq-navy mb-2">Service Delivery</h3>
                     <p className="text-sm text-gray-600 leading-relaxed">
                       TMaaS specialists execute the scoped transformation activities using standardized governance controls.
                     </p>
                   </div>
                   <div className="relative pl-8">
-                    <div className="absolute -left-3.5 top-0 h-7 w-7 rounded-full bg-navy-950 flex items-center justify-center text-[10px] font-bold text-white border-4 border-white shadow-sm">3</div>
-                    <h3 className="text-base font-bold text-navy-950 mb-2">Governance & Oversight</h3>
+                    <div className="absolute -left-3.5 top-0 h-7 w-7 rounded-full bg-dq-navy flex items-center justify-center text-[10px] font-semibold text-white border-4 border-white shadow-sm">3</div>
+                    <h3 className="text-base font-bold text-dq-navy mb-2">Governance & Oversight</h3>
                     <p className="text-sm text-gray-600 leading-relaxed">
                       Progress, milestones, and delivery quality are tracked directly through TMaaS governance workflows.
                     </p>
@@ -642,18 +647,18 @@ const ServiceDetail = () => {
           {/* 7. RECOMMENDED BUNDLES (Desktop Bottom) */}
           {service.serviceType !== "bundle" && recommendedBundles.length > 0 && (
             <section className="pt-8 border-t border-navy-50 hidden lg:block">
-              <h2 className="text-lg font-bold tracking-tight text-navy-950 mb-6">Recommended Bundles</h2>
+              <h2 className="text-lg font-bold tracking-tight text-dq-navy mb-6">Recommended Bundles</h2>
               <div className="grid sm:grid-cols-2 gap-4">
                 {recommendedBundles.map(bundle => (
-                  <div key={bundle.id} className="rounded-xl border border-navy-100 bg-white p-5 shadow-sm group hover:border-orange-500 transition-colors flex flex-col">
-                    <h4 className="text-sm font-bold text-navy-950 mb-1 group-hover:text-orange-600 transition-colors">{bundle.standardName}</h4>
+                  <div key={bundle.id} className="group flex flex-col rounded-2xl border border-gray-200 bg-white p-5 transition-all duration-300 hover:border-dq-orange hover:shadow-xl">
+                    <h4 className="text-sm font-bold text-dq-navy mb-1 group-hover:text-dq-orange transition-colors">{bundle.standardName}</h4>
                     <p className="text-[11px] text-gray-500 mb-4 line-clamp-2">{bundle.description || bundle.positioning}</p>
                     <button 
                       onClick={() => {
                         navigate(`/service/${bundle.id}`);
                         window.scrollTo(0, 0);
                       }}
-                      className="text-[11px] font-bold text-navy-950 flex items-center gap-1 hover:text-orange-600 transition-colors mt-auto"
+                      className="text-[11px] font-bold text-dq-navy flex items-center gap-1 hover:text-dq-orange transition-colors mt-auto"
                     >
                       View Bundle <ArrowRight size={12} />
                     </button>
@@ -669,9 +674,9 @@ const ServiceDetail = () => {
         <div className="space-y-8">
           
           {/* 5. GOVERNANCE & TRUST SECTION */}
-          <div className="rounded-2xl border border-navy-100 bg-slate-50 p-6">
-            <h3 className="text-sm font-bold tracking-tight text-navy-950 mb-5 flex items-center gap-2">
-              <ShieldCheck size={18} className="text-orange-500" />
+          <div className="rounded-2xl border border-gray-200 bg-gray-50 p-6">
+            <h3 className="text-sm font-bold tracking-tight text-dq-navy mb-5 flex items-center gap-2">
+              <ShieldCheck size={18} className="text-dq-orange" />
               Delivery Confidence & Governance
             </h3>
             <ul className="space-y-4">
@@ -685,15 +690,15 @@ const ServiceDetail = () => {
               ].map((trust, idx) => (
                 <li key={idx} className="flex items-start gap-2.5">
                   <div className="mt-1 h-1 w-1 rounded-full bg-slate-400 shrink-0" />
-                  <span className="text-xs text-navy-950 font-medium leading-relaxed">{trust}</span>
+                  <span className="text-xs text-dq-navy font-medium leading-relaxed">{trust}</span>
                 </li>
               ))}
             </ul>
           </div>
 
           {/* 6. IDEAL FOR SECTION */}
-          <div className="rounded-2xl border border-navy-100 bg-white p-6 shadow-sm">
-            <h3 className="text-sm font-bold tracking-tight text-navy-950 mb-4 flex items-center gap-2">
+          <div className="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm">
+            <h3 className="text-sm font-bold tracking-tight text-dq-navy mb-4 flex items-center gap-2">
               <Briefcase size={18} className="text-gray-400" />
               Ideal For
             </h3>
@@ -715,11 +720,11 @@ const ServiceDetail = () => {
           {/* 7. RECOMMENDED BUNDLES (Mobile Fallback) */}
           {service.serviceType !== "bundle" && recommendedBundles.length > 0 && (
             <div className="lg:hidden mt-8">
-              <h3 className="text-sm font-bold tracking-tight text-navy-950 mb-4">Recommended Bundles</h3>
+              <h3 className="text-sm font-bold tracking-tight text-dq-navy mb-4">Recommended Bundles</h3>
               <div className="grid gap-4">
                 {recommendedBundles.map(bundle => (
-                  <div key={bundle.id} className="rounded-xl border border-navy-100 bg-white p-4 shadow-sm flex flex-col">
-                    <h4 className="text-xs font-bold text-navy-950 mb-1">{bundle.standardName}</h4>
+                  <div key={bundle.id} className="rounded-xl border border-gray-200 bg-white p-4 shadow-sm flex flex-col">
+                    <h4 className="text-xs font-bold text-dq-navy mb-1">{bundle.standardName}</h4>
                     <button 
                       onClick={() => {
                         navigate(`/service/${bundle.id}`);
@@ -739,38 +744,38 @@ const ServiceDetail = () => {
       </div>
 
       {/* 9. FINAL CTA SECTION */}
-      <MeshSection variant="heroDark" className="bg-navy-950 py-20 text-center">
-        <div className="mx-auto max-w-3xl px-6">
-          <h2 className="text-3xl font-bold tracking-tight text-white mb-6">
+      <MeshSection variant="ctaOrange" className="px-5 py-24 text-center md:px-8 lg:px-10">
+        <div className="mx-auto max-w-3xl">
+          <h2 className="mb-6 text-4xl font-semibold tracking-tight text-white md:text-5xl">
             Ready to Get Started?
           </h2>
-          <p className="text-lg text-slate-300 mb-10 leading-relaxed">
+          <p className="mb-10 text-lg leading-relaxed text-white/70">
             Launch your transformation initiative with structured delivery, governance oversight, and dedicated TMaaS specialists.
           </p>
-          <div className="flex gap-3 justify-center">
+          <div className="flex flex-col items-center justify-center gap-3 sm:flex-row">
             {requiresQuoteCTA ? (
-              <Button 
-                className="h-12 px-8 bg-orange-500 hover:bg-orange-400 text-white font-bold rounded-xl text-sm flex items-center justify-center gap-2 group"
+              <Button
+                className="group flex h-12 items-center justify-center gap-2 rounded-full bg-dq-orange px-8 text-sm font-semibold text-white hover:bg-[#E04020]"
                 onClick={() => setIsOfferDialogOpen(true)}
               >
-                Request Quote 
-                <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
+                Request Quote
+                <ArrowRight size={16} className="transition-transform group-hover:translate-x-1" />
               </Button>
             ) : (
               <>
-                <Button 
-                  className="h-12 px-8 bg-orange-500 hover:bg-orange-400 text-white font-bold rounded-xl text-sm flex items-center justify-center gap-2 group"
+                <Button
+                  className="group flex h-12 items-center justify-center gap-2 rounded-full bg-dq-orange px-8 text-sm font-semibold text-white hover:bg-[#E04020]"
                   onClick={() => handleStartOnboarding(service.standardName)}
                 >
-                  Get Started 
-                  <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
+                  Get Started
+                  <ArrowRight size={16} className="transition-transform group-hover:translate-x-1" />
                 </Button>
-                <Button 
+                <Button
                   variant="outline"
-                  className="h-12 px-8 border-slate-600 bg-transparent text-white hover:bg-slate-800 font-bold rounded-xl text-sm flex items-center justify-center gap-2"
+                  className="flex h-12 items-center justify-center gap-2 rounded-full border border-white/30 bg-white/10 px-8 text-sm font-semibold text-white backdrop-blur-sm hover:bg-white/20"
                   onClick={() => handleStartOnboarding(service.standardName)}
                 >
-                  <Sparkles size={16} className="text-orange-400" />
+                  <Sparkles size={16} className="text-dq-orange" />
                   Ask AI
                 </Button>
               </>

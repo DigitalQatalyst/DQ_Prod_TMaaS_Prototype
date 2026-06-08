@@ -38,37 +38,44 @@ const IndustrySolutionsSection = () => {
   };
 
   return (
-    <section className="bg-slate-50 py-20 border-t border-navy-50">
-      <div className="mx-auto max-w-7xl px-6 relative">
+    <section className="border-t border-gray-100 bg-gray-50 px-5 py-24 md:px-8 lg:px-10">
+      <div className="relative mx-auto max-w-[1200px]">
         <div className="pr-24">
-          <h2 className="text-2xl font-bold tracking-tight text-navy-950 sm:text-3xl font-heading mb-3">
+          <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-dq-orange">
+            Industries
+          </p>
+          <h2 className="mt-4 text-4xl font-semibold tracking-tight text-dq-navy md:text-5xl">
             Industry Solutions
           </h2>
-          <p className="mb-10 text-base text-gray-600 max-w-2xl">
+          <p className="mt-4 max-w-2xl text-base leading-relaxed text-gray-600">
             Discover tailored services aligned to the specific requirements and workflows of your industry.
           </p>
         </div>
-        
+
         <Carousel
           opts={{
             align: "start",
             loop: false,
           }}
-          className="w-full"
+          className="mt-10 w-full"
         >
           <div className="absolute -top-14 right-0 flex items-center gap-2">
-            <CarouselPrevious className="static translate-y-0 h-8 w-8" />
-            <CarouselNext className="static translate-y-0 h-8 w-8" />
+            <CarouselPrevious className="static h-8 w-8 translate-y-0" />
+            <CarouselNext className="static h-8 w-8 translate-y-0" />
           </div>
           <CarouselContent className="-ml-4 pb-4">
             {marketplaceEconomySectors.map((sector) => (
-              <CarouselItem key={sector.id} className="pl-4 basis-[85%] sm:basis-1/2 md:basis-1/3 lg:basis-1/4">
+              <CarouselItem
+                key={sector.id}
+                className="basis-[85%] pl-4 sm:basis-1/2 md:basis-1/3 lg:basis-1/4"
+              >
                 <button
+                  type="button"
                   onClick={() => {
                     navigate(`/marketplace?sector=${sector.id}`);
                     window.scrollTo(0, 0);
                   }}
-                  className="group flex flex-col h-full w-full overflow-hidden rounded-2xl border border-navy-100 bg-white text-left shadow-sm transition-all hover:shadow-md hover:border-navy-200 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2"
+                  className="group flex h-full w-full flex-col overflow-hidden rounded-2xl border border-gray-200 bg-white text-left transition-all duration-300 hover:border-dq-orange hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-dq-orange focus:ring-offset-2"
                 >
                   <div className="relative h-48 w-full overflow-hidden">
                     <img
@@ -78,10 +85,10 @@ const IndustrySolutionsSection = () => {
                     />
                   </div>
                   <div className="flex flex-1 flex-col p-5">
-                    <h3 className="text-lg font-bold text-navy-950 mb-4 group-hover:text-orange-600 transition-colors">
+                    <h3 className="mb-4 text-lg font-semibold text-dq-navy transition-colors group-hover:text-dq-orange">
                       {sector.label}
                     </h3>
-                    <div className="mt-auto flex items-center text-sm font-bold text-navy-950 group-hover:text-orange-600 transition-colors gap-1">
+                    <div className="mt-auto flex items-center gap-1 text-sm font-semibold text-dq-navy transition-colors group-hover:text-dq-orange">
                       Explore services <ArrowRight size={16} />
                     </div>
                   </div>
