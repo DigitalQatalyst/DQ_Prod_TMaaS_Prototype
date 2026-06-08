@@ -354,8 +354,8 @@ const Marketplace = () => {
         </div>
       </MeshSection>
 
-      <section className="bg-background">
-        <div className="mx-auto max-w-[1200px] px-5 pb-16 pt-2 md:px-8 lg:px-10">
+      <section className="bg-background px-5 pb-16 pt-2 md:px-8 lg:px-10">
+        <div className="mx-auto max-w-[1280px]">
           <div id="catalog-grid" className="scroll-mt-32">
             {showBestSellers && (
               <div className="mb-10">
@@ -377,9 +377,9 @@ const Marketplace = () => {
               onTabChange={applyCollectionFilter}
             />
 
-            <div className="mt-8 flex flex-col gap-8 lg:flex-row lg:items-start">
+            <div className="mt-8 flex flex-col gap-6 lg:flex-row lg:items-start">
               <aside
-                className={`lg:w-[280px] shrink-0 ${
+                className={`lg:w-[240px] shrink-0 ${
                   sidebarOpen ? "block" : "hidden lg:block"
                 }`}
               >
@@ -531,7 +531,7 @@ const Marketplace = () => {
                   <div
                     className={
                       viewMode === "grid"
-                        ? "grid gap-6 sm:grid-cols-2 md:gap-8 xl:grid-cols-3"
+                        ? "grid gap-5 sm:grid-cols-2 xl:grid-cols-3"
                         : "flex flex-col gap-4"
                     }
                   >

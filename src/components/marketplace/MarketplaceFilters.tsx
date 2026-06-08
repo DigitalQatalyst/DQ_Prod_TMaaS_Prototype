@@ -106,8 +106,8 @@ const MarketplaceFilters = ({
     : marketplaceEconomySectors.slice(0, SECTOR_PREVIEW_COUNT);
 
   return (
-    <div className="rounded-xl border border-gray-200 bg-white p-6 shadow-[var(--shadow-card)]">
-      <div className="mb-6 flex items-center justify-between">
+    <div className="rounded-xl border border-gray-200 bg-white p-5 shadow-[var(--shadow-card)]">
+      <div className="mb-5 flex items-center justify-between">
         <button
           type="button"
           onClick={onClearAll}
@@ -123,7 +123,7 @@ const MarketplaceFilters = ({
         <SlidersHorizontal size={16} className="text-gray-400" aria-hidden />
       </div>
 
-      <div className="space-y-8">
+      <div className="space-y-6">
         <FilterSection label="Category">
           <CheckboxGroup
             options={[

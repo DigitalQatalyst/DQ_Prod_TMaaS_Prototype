@@ -40,7 +40,7 @@ const ServiceProductCard = ({
   const ServiceIcon = getServiceIcon(service.collection, service.serviceType);
 
   const cardFooter = (
-    <div className="mt-auto flex items-center justify-between pt-6">
+    <div className="mt-auto flex items-center justify-between pt-5">
       <p className="text-sm text-dq-navy">
         <span className="font-semibold">{service.price}</span>
         <span className="text-gray-400"> · {service.duration}</span>
@@ -146,7 +146,7 @@ const ServiceProductCard = ({
   if (variant === "grid") {
     const gridInner = (
       <>
-        <div className="mb-5 flex h-11 w-11 items-center justify-center rounded-xl bg-navy-50 text-navy-500">
+        <div className="mb-4 flex h-10 w-10 items-center justify-center rounded-xl bg-navy-50 text-navy-500">
           <ServiceIcon size={20} strokeWidth={1.75} />
         </div>
         <div className={`flex flex-wrap items-center gap-2 ${featured ? "mt-1" : ""}`}>
@@ -172,12 +172,12 @@ const ServiceProductCard = ({
 
     return (
       <article
-        className={`group/card relative flex h-full min-h-[340px] flex-col rounded-xl bg-white p-7 text-left shadow-[var(--shadow-card)] transition-shadow duration-300 hover:shadow-[var(--shadow-elevated)] ${
-          featured ? "pt-9" : ""
+        className={`group/card relative flex h-full min-h-[320px] flex-col rounded-xl bg-white p-6 text-left shadow-[var(--shadow-card)] transition-shadow duration-300 hover:shadow-[var(--shadow-elevated)] ${
+          featured ? "pt-8" : ""
         }`}
       >
         {featured && (
-          <span className="absolute top-4 left-7 text-[9px] font-bold uppercase tracking-wide text-dq-orange">
+          <span className="absolute top-3.5 left-6 text-[9px] font-bold uppercase tracking-wide text-dq-orange">
             Best seller
           </span>
         )}
