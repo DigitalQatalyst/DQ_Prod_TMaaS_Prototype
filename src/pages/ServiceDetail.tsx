@@ -36,6 +36,7 @@ import {
 import { initialServices, getRemixedName } from "@/data/services";
 import { marketplaceServiceTypeLabels, marketplaceCategoryLabels } from "@/data/marketplaceNavigation";
 import { deployModulesData } from "@/data/deployModules";
+import { featureFlags } from "@/lib/featureFlags";
 
 const ADVISORY_DELIVERABLES = [
   "Opportunity Areas", "Transformation Vision", "Initial Recommendations"
@@ -287,7 +288,7 @@ const ServiceDetail = () => {
                         </Button>
                       </div>
                     </div>
-                  ) : requiresQuoteCTA ? (
+                  ) : requiresQuoteCTA || !featureFlags.isEnabled("cart") ? (
                     <Button
                       className="w-full h-12 bg-dq-orange hover:bg-[#E04020] text-white font-bold rounded-full text-sm flex items-center justify-center gap-2 group"
                       onClick={() => setIsOfferDialogOpen(true)}
@@ -323,14 +324,16 @@ const ServiceDetail = () => {
                           </>
                         )}
                       </Button>
-                      <Button
-                        className="w-full h-12 bg-dq-navy hover:bg-dq-navy/90 text-white font-bold rounded-full text-sm flex items-center justify-center gap-2 group"
-                        onClick={() => handleStartOnboarding(service.standardName)}
-                      >
-                        <Sparkles size={16} className="text-orange-400" />
-                        Ask AI
-                        <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
-                      </Button>
+                      {featureFlags.isEnabled("chatAssistant") && (
+                        <Button
+                          className="w-full h-12 bg-dq-navy hover:bg-dq-navy/90 text-white font-bold rounded-full text-sm flex items-center justify-center gap-2 group"
+                          onClick={() => handleStartOnboarding(service.standardName)}
+                        >
+                          <Sparkles size={16} className="text-orange-400" />
+                          Ask AI
+                          <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
+                        </Button>
+                      )}
                       <Button
                         variant="outline"
                         className="w-full h-12 border-navy-200 bg-white text-dq-navy hover:bg-slate-50 font-bold rounded-full text-sm"

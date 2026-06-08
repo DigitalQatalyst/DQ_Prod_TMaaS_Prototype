@@ -1,12 +1,12 @@
 import { Link } from "react-router-dom";
 import { Linkedin, Instagram, Youtube } from "lucide-react";
+import { featureFlags } from "@/lib/featureFlags";
 
 const Footer = () => {
   return (
     <footer className="border-t border-gray-100 bg-white px-5 pb-8 pt-14 md:px-8 lg:px-10">
       <div className="mx-auto max-w-[1200px]">
         <div className="mb-12 grid grid-cols-1 gap-10 md:grid-cols-[1fr_auto_auto_auto] md:gap-16">
-          {/* Brand */}
           <div className="space-y-4">
             <Link to="/" className="flex items-center gap-2">
               <span className="grid h-7 w-7 place-items-center rounded-md bg-dq-navy text-white">
@@ -21,7 +21,6 @@ const Footer = () => {
             </p>
           </div>
 
-          {/* Explore DigitalQatalyst */}
           <div>
             <p className="mb-4 font-mono text-[10px] uppercase tracking-[0.18em] text-gray-400">
               Explore DigitalQatalyst
@@ -47,44 +46,59 @@ const Footer = () => {
                   Our Products
                 </a>
               </li>
-              <li>
-                <Link to="/legal/terms" className="transition-colors hover:text-dq-orange">
-                  Terms & Conditions
-                </Link>
-              </li>
-              <li>
-                <Link to="/legal/privacy" className="transition-colors hover:text-dq-orange">
-                  Privacy Policy
-                </Link>
-              </li>
+              {featureFlags.isEnabled("legal") && (
+                <>
+                  <li>
+                    <Link to="/legal/terms" className="transition-colors hover:text-dq-orange">
+                      Terms & Conditions
+                    </Link>
+                  </li>
+                  <li>
+                    <Link to="/legal/privacy" className="transition-colors hover:text-dq-orange">
+                      Privacy Policy
+                    </Link>
+                  </li>
+                </>
+              )}
             </ul>
           </div>
 
-          {/* Explore TMaaS */}
           <div>
             <p className="mb-4 font-mono text-[10px] uppercase tracking-[0.18em] text-gray-400">
               Explore TMaaS
             </p>
             <ul className="space-y-2.5 text-[14px] text-gray-600">
-              <li>
-                <Link to="/explore" className="transition-colors hover:text-dq-orange">
-                  About TMaaS
-                </Link>
-              </li>
-              <li>
-                <Link to="/#hero" className="transition-colors hover:text-dq-orange">
-                  Start with AI
-                </Link>
-              </li>
-              <li>
-                <Link to="/marketplace" className="transition-colors hover:text-dq-orange">
-                  Design & Deploy Services
-                </Link>
-              </li>
+              {featureFlags.isEnabled("explore") && (
+                <li>
+                  <Link to="/explore" className="transition-colors hover:text-dq-orange">
+                    About TMaaS
+                  </Link>
+                </li>
+              )}
+              {featureFlags.isEnabled("chatAssistant") && (
+                <li>
+                  <Link to="/#hero" className="transition-colors hover:text-dq-orange">
+                    Start with AI
+                  </Link>
+                </li>
+              )}
+              {featureFlags.isEnabled("marketplace") && (
+                <li>
+                  <Link to="/marketplace" className="transition-colors hover:text-dq-orange">
+                    Design & Deploy Services
+                  </Link>
+                </li>
+              )}
+              {featureFlags.isEnabled("contactUs") && (
+                <li>
+                  <Link to="/contact" className="transition-colors hover:text-dq-orange">
+                    Contact Us
+                  </Link>
+                </li>
+              )}
             </ul>
           </div>
 
-          {/* Follow Us */}
           <div>
             <p className="mb-4 font-mono text-[10px] uppercase tracking-[0.18em] text-gray-400">
               Follow Us
@@ -129,14 +143,16 @@ const Footer = () => {
 
         <div className="flex flex-col items-center justify-between gap-3 border-t border-gray-100 pt-6 text-[12px] text-gray-400 sm:flex-row">
           <p>© 2026 DigitalQatalyst. All rights reserved.</p>
-          <div className="flex gap-5">
-            <Link to="/legal/privacy" className="transition-colors hover:text-gray-700">
-              Privacy
-            </Link>
-            <Link to="/legal/terms" className="transition-colors hover:text-gray-700">
-              Terms
-            </Link>
-          </div>
+          {featureFlags.isEnabled("legal") && (
+            <div className="flex gap-5">
+              <Link to="/legal/privacy" className="transition-colors hover:text-gray-700">
+                Privacy
+              </Link>
+              <Link to="/legal/terms" className="transition-colors hover:text-gray-700">
+                Terms
+              </Link>
+            </div>
+          )}
         </div>
       </div>
     </footer>

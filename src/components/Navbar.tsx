@@ -4,11 +4,13 @@ import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
 import ContextSwitcher from "@/components/ContextSwitcher";
 import CartNavButton from "@/components/cart/CartNavButton";
+import { featureFlags } from "@/lib/featureFlags";
 
 const Navbar = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
   const location = useLocation();
   const isOnMarketplace = location.pathname.startsWith("/marketplace");
+  const isOnContact = location.pathname.startsWith("/contact");
 
   const navLinkClass = (active: boolean) =>
     `text-[13px] font-medium transition-colors focus-visible:ring-2 focus-visible:ring-dq-orange focus-visible:ring-offset-2 rounded-sm outline-none ${
@@ -31,29 +33,44 @@ const Navbar = () => {
             </Link>
 
             <nav className="hidden items-center gap-6 lg:flex">
-              <Link to="/marketplace" className={navLinkClass(isOnMarketplace)}>
-                Marketplace
-              </Link>
+              {featureFlags.isEnabled("marketplace") && (
+                <Link to="/marketplace" className={navLinkClass(isOnMarketplace)}>
+                  Marketplace
+                </Link>
+              )}
+              {featureFlags.isEnabled("contactUs") && (
+                <Link to="/contact" className={navLinkClass(isOnContact)}>
+                  Contact
+                </Link>
+              )}
             </nav>
           </div>
 
           <div className="hidden items-center gap-3 md:flex">
-            <ContextSwitcher stage="marketing" scrolled={false} />
-            <CartNavButton className="h-9 w-9 shrink-0" />
-            <Link
-              to="/sign-in"
-              className="px-2 text-[13px] font-medium text-gray-600 transition-colors hover:text-dq-navy"
-            >
-              Login
-            </Link>
-            <Link to="/sign-in">
-              <Button
-                size="sm"
-                className="rounded-full bg-dq-orange px-5 text-[13px] font-semibold text-white hover:bg-[#E04020]"
-              >
-                Get Started
-              </Button>
-            </Link>
+            {featureFlags.isEnabled("contextSwitcher") && (
+              <ContextSwitcher stage="marketing" scrolled={false} />
+            )}
+            {featureFlags.isEnabled("cart") && (
+              <CartNavButton className="h-9 w-9 shrink-0" />
+            )}
+            {featureFlags.isEnabled("auth") && (
+              <>
+                <Link
+                  to="/sign-in"
+                  className="px-2 text-[13px] font-medium text-gray-600 transition-colors hover:text-dq-navy"
+                >
+                  Login
+                </Link>
+                <Link to="/sign-in">
+                  <Button
+                    size="sm"
+                    className="rounded-full bg-dq-orange px-5 text-[13px] font-semibold text-white hover:bg-[#E04020]"
+                  >
+                    Get Started
+                  </Button>
+                </Link>
+              </>
+            )}
           </div>
 
           <button
@@ -69,32 +86,51 @@ const Navbar = () => {
 
       {mobileOpen && (
         <div className="fixed inset-0 top-16 z-30 flex flex-col gap-1 overflow-y-auto bg-white p-4 lg:hidden">
-          <Link
-            to="/marketplace"
-            className="border-b border-gray-100 py-3 text-lg font-medium text-dq-navy"
-            onClick={() => setMobileOpen(false)}
-          >
-            Marketplace
-          </Link>
-          <div className="border-b border-gray-100 py-3">
-            <ContextSwitcher stage="marketing" scrolled={false} />
-          </div>
-          <div className="flex items-center gap-2 border-b border-gray-100 py-3">
-            <CartNavButton className="h-9 w-9" />
-            <span className="text-sm text-gray-600">Cart</span>
-          </div>
-          <Link
-            to="/sign-in"
-            className="border-b border-gray-100 py-3 text-lg font-medium text-dq-navy"
-            onClick={() => setMobileOpen(false)}
-          >
-            Login
-          </Link>
-          <Link to="/sign-in" onClick={() => setMobileOpen(false)} className="mt-4">
-            <Button className="w-full rounded-full bg-dq-orange py-3 text-center font-semibold text-white hover:bg-[#E04020]">
-              Get Started
-            </Button>
-          </Link>
+          {featureFlags.isEnabled("marketplace") && (
+            <Link
+              to="/marketplace"
+              className="border-b border-gray-100 py-3 text-lg font-medium text-dq-navy"
+              onClick={() => setMobileOpen(false)}
+            >
+              Marketplace
+            </Link>
+          )}
+          {featureFlags.isEnabled("contactUs") && (
+            <Link
+              to="/contact"
+              className="border-b border-gray-100 py-3 text-lg font-medium text-dq-navy"
+              onClick={() => setMobileOpen(false)}
+            >
+              Contact
+            </Link>
+          )}
+          {featureFlags.isEnabled("contextSwitcher") && (
+            <div className="border-b border-gray-100 py-3">
+              <ContextSwitcher stage="marketing" scrolled={false} />
+            </div>
+          )}
+          {featureFlags.isEnabled("cart") && (
+            <div className="flex items-center gap-2 border-b border-gray-100 py-3">
+              <CartNavButton className="h-9 w-9" />
+              <span className="text-sm text-gray-600">Cart</span>
+            </div>
+          )}
+          {featureFlags.isEnabled("auth") && (
+            <>
+              <Link
+                to="/sign-in"
+                className="border-b border-gray-100 py-3 text-lg font-medium text-dq-navy"
+                onClick={() => setMobileOpen(false)}
+              >
+                Login
+              </Link>
+              <Link to="/sign-in" onClick={() => setMobileOpen(false)} className="mt-4">
+                <Button className="w-full rounded-full bg-dq-orange py-3 text-center font-semibold text-white hover:bg-[#E04020]">
+                  Get Started
+                </Button>
+              </Link>
+            </>
+          )}
         </div>
       )}
     </>
