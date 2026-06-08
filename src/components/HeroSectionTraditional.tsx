@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { ArrowRight, Sparkles } from "lucide-react";
 import MeshSection from "./site/MeshSection";
+import { featureFlags } from "@/lib/featureFlags";
 
 const HeroSectionTraditional = () => {
   return (
@@ -40,12 +41,14 @@ const HeroSectionTraditional = () => {
             Browse the marketplace
             <ArrowRight size={16} strokeWidth={2.25} />
           </Link>
-          <Link
-            to="/explore"
-            className="inline-flex items-center gap-2 rounded-lg border border-navy-200 bg-white px-6 py-3 text-sm font-semibold text-navy-800 shadow-sm transition hover:border-orange-200 hover:bg-orange-50/50 hover:text-orange-700"
-          >
-            Explore services
-          </Link>
+          {featureFlags.isEnabled("explore") && (
+            <Link
+              to="/explore"
+              className="inline-flex items-center gap-2 rounded-lg border border-navy-200 bg-white px-6 py-3 text-sm font-semibold text-navy-800 shadow-sm transition hover:border-orange-200 hover:bg-orange-50/50 hover:text-orange-700"
+            >
+              Explore services
+            </Link>
+          )}
         </div>
 
         {/* Social proof / trust line */}

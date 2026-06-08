@@ -5,7 +5,9 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import { Link } from "react-router-dom";
 import SectionHeading from "@/components/site/SectionHeading";
+import { featureFlags } from "@/lib/featureFlags";
 
 const faqs = [
   {
@@ -93,9 +95,18 @@ const FAQSection = () => {
         >
           <p className="text-sm text-gray-600">
             Still have questions?{" "}
-            <a href="#" className="font-semibold text-dq-orange hover:underline">
-              Contact our team
-            </a>
+            {featureFlags.isEnabled("contactUs") ? (
+              <Link to="/contact" className="font-semibold text-dq-orange hover:underline">
+                Contact our team
+              </Link>
+            ) : (
+              <a
+                href="mailto:info@digitalqatalyst.com"
+                className="font-semibold text-dq-orange hover:underline"
+              >
+                Contact our team
+              </a>
+            )}
           </p>
         </motion.div>
       </div>
