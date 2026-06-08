@@ -39,20 +39,6 @@ const ServiceProductCard = ({
   const canUseCart = featureFlags.isEnabled("cart");
   const ServiceIcon = getServiceIcon(service.collection, service.serviceType);
 
-  const cardFooter = (
-    <div className="mt-auto flex items-center justify-between pt-5">
-      <p className="text-sm text-dq-navy">
-        <span className="font-semibold">{service.price}</span>
-        <span className="text-gray-400"> · {service.duration}</span>
-      </p>
-      {canViewDetail && (
-        <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-navy-50 text-navy-500 transition-colors group-hover/card:bg-navy-100">
-          <ArrowRight size={15} strokeWidth={2} />
-        </span>
-      )}
-    </div>
-  );
-
   if (variant === "list") {
     const inner = (
       <>
@@ -146,27 +132,35 @@ const ServiceProductCard = ({
   if (variant === "grid") {
     const gridInner = (
       <>
-        <div className="mb-4 flex h-10 w-10 items-center justify-center rounded-xl bg-navy-50 text-navy-500">
+        <div className="mb-4 flex h-10 w-10 items-center justify-center rounded-xl bg-orange-50 text-dq-orange">
           <ServiceIcon size={20} strokeWidth={1.75} />
         </div>
-        <div className={`flex flex-wrap items-center gap-2 ${featured ? "mt-1" : ""}`}>
-          <span className="font-mono text-[10px] uppercase tracking-[0.16em] text-navy-400">
-            {categoryLabel}
-          </span>
-          {isHighImpact && (
-            <span className="inline-flex items-center gap-0.5 rounded bg-navy-950 px-1.5 py-0.5 text-[8px] font-bold uppercase tracking-wider text-white">
-              <Zap size={8} className="fill-white" />
-              High-Impact
-            </span>
-          )}
-        </div>
-        <h3 className="mt-3 text-base font-semibold leading-snug text-dq-navy group-hover/card:text-dq-orange">
+        <h3
+          className={`text-base font-semibold leading-snug text-dq-navy group-hover/card:text-dq-orange ${
+            featured ? "mt-1" : ""
+          }`}
+        >
           {title}
         </h3>
         <p className="mt-3 line-clamp-3 flex-1 text-sm leading-relaxed text-gray-500">
           {service.description}
         </p>
-        {cardFooter}
+        <div className="mt-auto space-y-3 pt-5">
+          <span className="block font-mono text-[10px] uppercase tracking-[0.16em] text-gray-400">
+            {categoryLabel}
+          </span>
+          <div className="flex items-center justify-between">
+            <p className="text-sm text-dq-navy">
+              <span className="font-semibold">{service.price}</span>
+              <span className="text-gray-400"> · {service.duration}</span>
+            </p>
+            {canViewDetail && (
+              <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-orange-50 text-dq-orange transition-colors group-hover/card:bg-orange-100">
+                <ArrowRight size={15} strokeWidth={2} />
+              </span>
+            )}
+          </div>
+        </div>
       </>
     );
 
