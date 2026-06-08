@@ -1,29 +1,28 @@
-import Navbar from "@/components/Navbar";
-import HeroSectionTraditional from "@/components/HeroSectionTraditional";
-import MarketplaceBestSellers from "@/components/marketplace/MarketplaceBestSellers";
-import TransformationJourneysSection from "@/components/site/TransformationJourneysSection";
-import ExploreByCategorySection from "@/components/site/ExploreByCategorySection";
-import IndustrySolutionsSection from "@/components/site/IndustrySolutionsSection";
-import HowItWorksSection from "@/components/HowItWorksSection";
-import FAQSection from "@/components/FAQSection";
+import LandingNavbar from "@/components/site/landing/LandingNavbar";
+import LandingHeroSection from "@/components/site/landing/LandingHeroSection";
+import TrustedBySection from "@/components/site/landing/TrustedBySection";
+import ChallengeSection from "@/components/site/landing/ChallengeSection";
+import SolutionSection from "@/components/site/landing/SolutionSection";
+import OfferingsSection from "@/components/site/landing/OfferingsSection";
+import StatsSection from "@/components/site/landing/StatsSection";
+import LandingHowItWorksSection from "@/components/site/landing/LandingHowItWorksSection";
+import LandingCtaSection from "@/components/site/landing/LandingCtaSection";
 import Footer from "@/components/Footer";
 
 const IndexTraditional = () => {
   return (
-    <div className="min-h-screen bg-background">
-      <Navbar />
-      <HeroSectionTraditional />
-
-      <div className="mx-auto max-w-7xl px-6 py-12 md:py-16">
-        <MarketplaceBestSellers activeTab="all" selectedIndustry="all" />
-      </div>
-
-      <TransformationJourneysSection />
-      <ExploreByCategorySection />
-      <IndustrySolutionsSection />
-
-      <HowItWorksSection />
-      <FAQSection />
+    <div className="min-h-screen bg-white">
+      <LandingNavbar />
+      <main>
+        <LandingHeroSection />
+        <TrustedBySection />
+        <ChallengeSection />
+        <SolutionSection />
+        <OfferingsSection />
+        <StatsSection />
+        <LandingHowItWorksSection />
+        <LandingCtaSection />
+      </main>
       <Footer />
     </div>
   );
