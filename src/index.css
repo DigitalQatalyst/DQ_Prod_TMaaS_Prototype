@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800&family=JetBrains+Mono:wght@400;500;600&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -98,19 +98,43 @@
     --gray-100: oklch(0.95 0.01 264);
     --gray-50: oklch(0.98 0.005 264);
 
-    /* Mesh / glow tokens (subset) */
-    --mesh-hero-light:
-      radial-gradient(60% 80% at 70% 30%, oklch(0.92 0.06 29 / 0.55), transparent 60%),
-      radial-gradient(45% 60% at 20% 80%, oklch(0.96 0.012 264 / 0.85), transparent 60%);
-    --mesh-hero-dark:
-      radial-gradient(60% 80% at 70% 50%, oklch(0.65 0.208 29 / 0.10), transparent 60%),
-      radial-gradient(45% 60% at 20% 80%, oklch(0.35 0.16 264 / 0.18), transparent 50%);
-    --mesh-cta-orange:
-      radial-gradient(80% 80% at 50% 30%, oklch(0.65 0.208 29 / 0.18), transparent 70%),
-      radial-gradient(60% 60% at 80% 80%, oklch(0.12 0.082 264 / 0.10), transparent 60%);
+    /* Corp web brand tokens */
+    --dq-navy: #030F35;
+    --dq-orange: #FB5535;
 
-    --glow-orange-md: 0 0 0 1px oklch(0.65 0.208 29 / 0.25), 0 12px 28px oklch(0.65 0.208 29 / 0.28);
-    --glow-navy-md: 0 0 0 1px oklch(0.12 0.082 264 / 0.25), 0 14px 30px oklch(0.12 0.082 264 / 0.18);
+    /* Mesh / glow tokens (aligned with DQ_CORPWEB_PROTOTYPE) */
+    --mesh-hero-light: linear-gradient(
+      135deg,
+      oklch(0.98 0.006 264) 0%,
+      oklch(0.96 0.012 264 / 0.8) 35%,
+      oklch(0.97 0.010 30 / 0.35) 65%,
+      oklch(0.99 0.004 264) 100%
+    );
+    --mesh-hero-dark: radial-gradient(
+        ellipse 80% 60% at 20% 40%,
+        oklch(0.25 0.06 264 / 0.8),
+        transparent 70%
+      ),
+      radial-gradient(
+        ellipse 60% 50% at 80% 60%,
+        oklch(0.22 0.04 264 / 0.6),
+        transparent 70%
+      ),
+      oklch(0.12 0.045 264);
+    --mesh-cta-orange: radial-gradient(
+        ellipse 50% 40% at 30% 50%,
+        oklch(0.58 0.22 22 / 0.28),
+        transparent 55%
+      ),
+      radial-gradient(
+        ellipse 40% 50% at 75% 25%,
+        oklch(0.45 0.18 20 / 0.18),
+        transparent 55%
+      ),
+      oklch(0.10 0.040 264);
+
+    --glow-orange-md: 0 0 40px oklch(0.65 0.208 29 / 0.35), 0 0 80px oklch(0.65 0.208 29 / 0.15);
+    --glow-navy-md: 0 0 40px oklch(0.25 0.06 264 / 0.3), 0 8px 32px oklch(0.12 0.045 264 / 0.25);
     --marquee-mid: 35s;
 
     --surface-glass-light: oklch(1 0 0 / 0.65);
@@ -127,15 +151,12 @@
   }
 
   body {
-    @apply bg-background text-foreground font-sans;
-    font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    @apply bg-background text-foreground font-sans antialiased;
     font-feature-settings: "kern" 1, "liga" 1, "calt" 1;
-    -webkit-font-smoothing: antialiased;
   }
 
   h1, h2, h3, h4, h5, h6 {
-    @apply font-heading;
-    font-family: 'Plus Jakarta Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    @apply font-semibold text-dq-navy;
   }
 }
 
@@ -201,7 +222,34 @@
 
   .glow-orange { box-shadow: var(--glow-orange-md); }
   .glow-navy { box-shadow: var(--glow-navy-md); }
+
+  .text-balance {
+    text-wrap: balance;
+  }
 }
+
+/* Grid overlay (used on hero sections) */
+.hero-grid {
+  background-image:
+    linear-gradient(to right, rgba(3, 15, 53, 0.06) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(3, 15, 53, 0.06) 1px, transparent 1px);
+  background-size: 56px 56px;
+  -webkit-mask-image: radial-gradient(ellipse 70% 50% at 50% 30%, black 40%, transparent 80%);
+  mask-image: radial-gradient(ellipse 70% 50% at 50% 30%, black 40%, transparent 80%);
+}
+
+/* Fade-in-up entry animation */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.animate-fade-in-up {
+  animation: fadeInUp 0.7s ease-out both;
+}
+.animation-delay-100 { animation-delay: 0.1s; }
+.animation-delay-200 { animation-delay: 0.2s; }
+.animation-delay-300 { animation-delay: 0.3s; }
+.animation-delay-500 { animation-delay: 0.5s; }
 
 @keyframes dq-marquee {
   from { transform: translateX(0); }
