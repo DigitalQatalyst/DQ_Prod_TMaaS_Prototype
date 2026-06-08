@@ -19,14 +19,16 @@ export default function MeshSection({
   grid = false,
   className,
   children,
+  id,
 }: {
   variant?: MeshVariant;
   grid?: boolean;
   className?: string;
   children: React.ReactNode;
+  id?: string;
 }) {
   return (
-    <section className={cn("relative isolate overflow-hidden", className)}>
+    <section id={id} className={cn("relative isolate overflow-hidden", className)}>
       <div
         aria-hidden
         className="absolute inset-0 -z-10"

@@ -22,7 +22,7 @@ const MarketplaceBestSellers = ({
 }: MarketplaceBestSellersProps) => {
   const collection = activeTab === "all" ? "all" : activeTab;
   const bestSellers = useMemo(
-    () => getBestSellers(collection as any, 6),
+    () => getBestSellers(collection as "all" | "ai" | "cx" | "ops" | "growth" | "gov", 6),
     [collection]
   );
 
@@ -34,15 +34,18 @@ const MarketplaceBestSellers = ({
       : `Top ${marketplaceCategoryLabels[activeTab] ?? "picks"}`;
 
   return (
-    <section aria-labelledby="marketplace-bestsellers-heading" className="mb-6 relative">
+    <section aria-labelledby="marketplace-bestsellers-heading" className="relative">
       <div className="pr-24">
+        <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-dq-orange">
+          Popular
+        </p>
         <h2
           id="marketplace-bestsellers-heading"
-          className="text-lg font-bold tracking-tight text-navy-950"
+          className="mt-4 text-4xl font-semibold tracking-tight text-dq-navy md:text-5xl"
         >
           {heading}
         </h2>
-        <p className="mt-0.5 text-xs text-gray-500 mb-4">
+        <p className="mt-4 text-base text-gray-600">
           Popular packages — fixed scope and pricing.
         </p>
       </div>
@@ -52,15 +55,18 @@ const MarketplaceBestSellers = ({
           align: "start",
           loop: false,
         }}
-        className="w-full"
+        className="mt-10 w-full"
       >
-        <div className="absolute -top-12 right-0 flex items-center gap-2">
-          <CarouselPrevious className="static translate-y-0 h-8 w-8" />
-          <CarouselNext className="static translate-y-0 h-8 w-8" />
+        <div className="absolute -top-14 right-0 flex items-center gap-2">
+          <CarouselPrevious className="static h-8 w-8 translate-y-0" />
+          <CarouselNext className="static h-8 w-8 translate-y-0" />
         </div>
         <CarouselContent className="-ml-4 pt-2 pb-2">
           {bestSellers.map((service, index) => (
-            <CarouselItem key={service.id} className="pl-4 basis-[85%] sm:basis-1/2 md:basis-1/3">
+            <CarouselItem
+              key={service.id}
+              className="basis-[85%] pl-4 sm:basis-1/2 md:basis-1/3"
+            >
               <ServiceProductCard
                 service={service}
                 variant="shelf"

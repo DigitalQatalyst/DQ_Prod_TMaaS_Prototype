@@ -24,11 +24,11 @@ export default function SectionHeading({
       )}
     >
       {kicker ? (
-        <span className="mb-4 inline-block rounded-full border border-navy-100 bg-white/70 px-4 py-1.5 font-mono text-[11px] font-semibold uppercase tracking-[0.2em] text-orange-600 backdrop-blur">
+        <p className="mb-4 font-mono text-[11px] uppercase tracking-[0.2em] text-dq-orange">
           {kicker}
-        </span>
+        </p>
       ) : null}
-      <div className="mt-4 text-3xl font-bold tracking-tight text-navy-950 md:text-4xl">
+      <div className="text-4xl font-semibold tracking-tight text-dq-navy md:text-5xl">
         {title}
       </div>
       {description ? (
@@ -39,4 +39,3 @@ export default function SectionHeading({
     </div>
   );
 }
-
