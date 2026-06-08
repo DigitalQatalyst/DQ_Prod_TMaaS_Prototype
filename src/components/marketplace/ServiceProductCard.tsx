@@ -132,17 +132,15 @@ const ServiceProductCard = ({
   if (variant === "grid") {
     const gridInner = (
       <>
-        <div className="mb-4 flex h-10 w-10 items-center justify-center rounded-xl bg-orange-50 text-dq-orange">
-          <ServiceIcon size={20} strokeWidth={1.75} />
+        <div className={`mb-4 flex items-start gap-3 ${featured ? "mt-1" : ""}`}>
+          <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-orange-50 text-dq-orange">
+            <ServiceIcon size={20} strokeWidth={1.75} />
+          </div>
+          <h3 className="min-w-0 flex-1 text-base font-semibold leading-snug text-dq-navy group-hover/card:text-dq-orange">
+            {title}
+          </h3>
         </div>
-        <h3
-          className={`text-base font-semibold leading-snug text-dq-navy group-hover/card:text-dq-orange ${
-            featured ? "mt-1" : ""
-          }`}
-        >
-          {title}
-        </h3>
-        <p className="mt-3 line-clamp-3 flex-1 text-sm leading-relaxed text-gray-500">
+        <p className="line-clamp-3 flex-1 text-sm leading-snug text-gray-500">
           {service.description}
         </p>
         <div className="mt-auto space-y-3 pt-5">
