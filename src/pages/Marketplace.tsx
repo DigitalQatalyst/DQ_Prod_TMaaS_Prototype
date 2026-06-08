@@ -24,7 +24,17 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import {
+  Pagination,
+  PaginationContent,
+  PaginationItem,
+  PaginationLink,
+  PaginationNext,
+  PaginationPrevious,
+} from "@/components/ui/pagination";
 import { initialServices, getRemixedName } from "@/data/services";
+
+const PAGE_SIZE = 15;
 
 // Removed old labels
 
@@ -40,6 +50,7 @@ const Marketplace = () => {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [dialogPrompt, setDialogPrompt] = useState("");
   const [sortBy, setSortBy] = useState("popular");
+  const [currentPage, setCurrentPage] = useState(1);
 
   const scrollToCatalog = useCallback(() => {
     requestAnimationFrame(() => {
@@ -186,6 +197,42 @@ const Marketplace = () => {
     if (!showBestSellers) return filteredServices;
     return filteredServices.filter((s) => !bestSellerIds.has(s.id));
   }, [filteredServices, showBestSellers, bestSellerIds]);
+
+  const totalPages = Math.max(1, Math.ceil(catalogServices.length / PAGE_SIZE));
+
+  const paginatedServices = useMemo(() => {
+    const start = (currentPage - 1) * PAGE_SIZE;
+    return catalogServices.slice(start, start + PAGE_SIZE);
+  }, [catalogServices, currentPage]);
+
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [
+    activeTab,
+    searchQuery,
+    selectedCategories,
+    selectedIncluded,
+    selectedSectors,
+    selectedServiceTypes,
+    sortBy,
+  ]);
+
+  useEffect(() => {
+    if (currentPage > totalPages) {
+      setCurrentPage(totalPages);
+    }
+  }, [currentPage, totalPages]);
+
+  const showingFrom = catalogServices.length === 0 ? 0 : (currentPage - 1) * PAGE_SIZE + 1;
+  const showingTo = Math.min(currentPage * PAGE_SIZE, catalogServices.length);
+
+  const handlePageChange = useCallback(
+    (page: number) => {
+      setCurrentPage(page);
+      scrollToCatalog();
+    },
+    [scrollToCatalog]
+  );
 
   const activeFilterChips = useMemo(() => {
     const chips: { key: string; label: string; onRemove: () => void }[] = [];
@@ -368,10 +415,23 @@ const Marketplace = () => {
                     Filters
                   </Button>
                   <p className="text-sm text-gray-600">
-                    <span className="font-semibold text-dq-navy">
-                      {catalogServices.length}
-                    </span>
-                    {catalogServices.length === 1 ? " service" : " services"}
+                    {catalogServices.length === 0 ? (
+                      <>
+                        <span className="font-semibold text-dq-navy">0</span> services
+                      </>
+                    ) : (
+                      <>
+                        Showing{" "}
+                        <span className="font-semibold text-dq-navy">
+                          {showingFrom}–{showingTo}
+                        </span>{" "}
+                        of{" "}
+                        <span className="font-semibold text-dq-navy">
+                          {catalogServices.length}
+                        </span>
+                        {catalogServices.length === 1 ? " service" : " services"}
+                      </>
+                    )}
                   </p>
                 </div>
                 <Select value={sortBy} onValueChange={setSortBy}>
@@ -439,15 +499,67 @@ const Marketplace = () => {
                   </Button>
                 </div>
               ) : (
-                <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
-                  {catalogServices.map((pkg) => (
-                    <ServiceProductCard
-                      key={pkg.id}
-                      service={pkg}
-                      variant="grid"
-                      displayName={getRemixedName(pkg, selectedSectors.length > 0 ? selectedSectors[0] : "all")}
-                    />
-                  ))}
+                <div className="mt-2 pb-8">
+                  <div className="grid gap-6 sm:grid-cols-2 md:gap-8 xl:grid-cols-3">
+                    {paginatedServices.map((pkg) => (
+                      <ServiceProductCard
+                        key={pkg.id}
+                        service={pkg}
+                        variant="grid"
+                        displayName={getRemixedName(pkg, selectedSectors.length > 0 ? selectedSectors[0] : "all")}
+                      />
+                    ))}
+                  </div>
+
+                  {totalPages > 1 && (
+                    <Pagination className="mt-10">
+                      <PaginationContent>
+                        <PaginationItem>
+                          <PaginationPrevious
+                            onClick={(e) => {
+                              e.preventDefault();
+                              if (currentPage > 1) handlePageChange(currentPage - 1);
+                            }}
+                            href="#"
+                            className={
+                              currentPage <= 1
+                                ? "pointer-events-none opacity-50"
+                                : "cursor-pointer"
+                            }
+                          />
+                        </PaginationItem>
+                        {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
+                          <PaginationItem key={page}>
+                            <PaginationLink
+                              isActive={page === currentPage}
+                              href="#"
+                              onClick={(e) => {
+                                e.preventDefault();
+                                handlePageChange(page);
+                              }}
+                              className="cursor-pointer"
+                            >
+                              {page}
+                            </PaginationLink>
+                          </PaginationItem>
+                        ))}
+                        <PaginationItem>
+                          <PaginationNext
+                            onClick={(e) => {
+                              e.preventDefault();
+                              if (currentPage < totalPages) handlePageChange(currentPage + 1);
+                            }}
+                            href="#"
+                            className={
+                              currentPage >= totalPages
+                                ? "pointer-events-none opacity-50"
+                                : "cursor-pointer"
+                            }
+                          />
+                        </PaginationItem>
+                      </PaginationContent>
+                    </Pagination>
+                  )}
                 </div>
               )}
             </main>

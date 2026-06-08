@@ -17,7 +17,7 @@ const MarketplaceCategoryNav = ({
   onTabChange,
 }: MarketplaceCategoryNavProps) => {
   return (
-    <div className="sticky top-16 z-30 -mx-5 border-b border-gray-100 bg-white px-5 py-3 md:-mx-8 md:px-8 lg:-mx-10 lg:px-10">
+    <div className="sticky top-16 z-30 -mx-5 border-b border-gray-100/60 bg-background/80 px-5 py-3 backdrop-blur-sm md:-mx-8 md:px-8 lg:-mx-10 lg:px-10">
       <nav
         className="mx-auto flex max-w-[1200px] gap-1 overflow-x-auto pb-1"
         aria-label="Service categories"

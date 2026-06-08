@@ -47,7 +47,7 @@ function CheckboxGroup({
   onChange: (val: string) => void;
 }) {
   return (
-    <div className="space-y-2.5">
+    <div className="space-y-4">
       {options.map((opt) => (
         <div key={opt.id} className="flex items-start space-x-2.5">
           <Checkbox
