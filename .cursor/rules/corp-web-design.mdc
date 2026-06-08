@@ -1,0 +1,32 @@
+---
+description: TMaaS marketing pages must follow DQ_CORPWEB_PROTOTYPE design language
+globs: DQ_Prod_TMaaS_Prototype/src/{pages,components}/**/*
+alwaysApply: false
+---
+
+# Corp Web Design Alignment (TMaaS)
+
+Marketing pages (`/`, `/marketplace`, `/service/:id`) must match `DQ_CORPWEB_PROTOTYPE` design language.
+
+## Tokens & Typography
+- Body font: **Plus Jakarta Sans** (`font-sans`), not Inter
+- Brand colors: `text-dq-navy` (#030F35), `text-dq-orange` (#FB5535)
+- Headings: `font-semibold`, not `font-bold`; hero up to `lg:text-8xl`
+- Eyebrow labels: `font-mono text-[11px] uppercase tracking-[0.2em] text-dq-orange`
+
+## Layout Rhythm
+- Section padding: `py-24 px-5 md:px-8 lg:px-10`
+- Content max-width: `max-w-[1200px] mx-auto` (heroes may use `max-w-7xl`)
+- Alternate backgrounds: `white` / `bg-gray-50`
+
+## Components
+- Navbar: static `sticky top-0 h-16`, no scroll-morph pill effect
+- Cards: `rounded-2xl border border-gray-200 hover:border-dq-orange hover:shadow-xl transition-all duration-300`
+- CTAs: `rounded-full`; primary navy (`bg-dq-navy`) or orange (`bg-dq-orange`); secondary glass (`bg-white/60 backdrop-blur-sm border`)
+- Hero backgrounds: `MeshSection` with `hero-grid` overlay and mesh CSS vars from `index.css`
+- Footer section labels: `font-mono text-[10px] uppercase tracking-[0.18em] text-gray-400`
+
+## Do Not
+- Reintroduce morphing navbar or Inter as default body font
+- Use `rounded-xl` + `border-navy-100` for marketing cards when corp web pattern applies
+- Change page logic/routing when doing styling-only alignment work
