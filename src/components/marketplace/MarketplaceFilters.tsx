@@ -1,13 +1,17 @@
-import type { ReactNode } from "react";
+import { useState, type ReactNode } from "react";
 import { Button } from "@/components/ui/button";
 import {
-  marketplaceGoals,
   marketplaceServiceTypes,
   marketplaceEconomySectors,
 } from "@/data/marketplaceNavigation";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Label } from "@/components/ui/label";
-import { Layers } from "lucide-react";
+import {
+  Collapsible,
+  CollapsibleContent,
+  CollapsibleTrigger,
+} from "@/components/ui/collapsible";
+import { ChevronDown, SlidersHorizontal } from "lucide-react";
 
 interface MarketplaceFiltersProps {
   selectedSectors: string[];
@@ -22,18 +26,32 @@ interface MarketplaceFiltersProps {
   showClearAll: boolean;
 }
 
-function FilterField({
+function FilterSection({
   label,
+  defaultOpen = true,
   children,
 }: {
   label: string;
+  defaultOpen?: boolean;
   children: ReactNode;
 }) {
+  const [open, setOpen] = useState(defaultOpen);
+
   return (
-    <div className="space-y-3">
-      <label className="font-mono text-[10px] uppercase tracking-[0.18em] text-gray-400">{label}</label>
-      {children}
-    </div>
+    <Collapsible open={open} onOpenChange={setOpen}>
+      <CollapsibleTrigger className="flex w-full items-center justify-between py-1 text-left">
+        <span className="font-mono text-[10px] uppercase tracking-[0.18em] text-gray-400">
+          {label}
+        </span>
+        <ChevronDown
+          size={14}
+          className={`shrink-0 text-gray-400 transition-transform duration-200 ${
+            open ? "rotate-180" : ""
+          }`}
+        />
+      </CollapsibleTrigger>
+      <CollapsibleContent className="pt-4">{children}</CollapsibleContent>
+    </Collapsible>
   );
 }
 
@@ -49,18 +67,16 @@ function CheckboxGroup({
   return (
     <div className="space-y-4">
       {options.map((opt) => (
-        <div key={opt.id} className="flex items-start space-x-2.5">
+        <div key={opt.id} className="flex items-start gap-3">
           <Checkbox
             id={`filter-${opt.id}`}
             checked={selectedValues.includes(opt.id)}
-            onCheckedChange={() => {
-              onChange(opt.id);
-            }}
-            className="mt-0.5"
+            onCheckedChange={() => onChange(opt.id)}
+            className="mt-0.5 border-gray-300 data-[state=checked]:border-navy-500 data-[state=checked]:bg-navy-500"
           />
           <Label
             htmlFor={`filter-${opt.id}`}
-            className="text-sm font-normal text-slate-600 leading-tight peer-disabled:cursor-not-allowed peer-disabled:opacity-70 cursor-pointer"
+            className="cursor-pointer text-sm font-normal leading-snug text-gray-600"
           >
             {opt.label}
           </Label>
@@ -69,6 +85,8 @@ function CheckboxGroup({
     </div>
   );
 }
+
+const SECTOR_PREVIEW_COUNT = 4;
 
 const MarketplaceFilters = ({
   selectedSectors,
@@ -82,23 +100,31 @@ const MarketplaceFilters = ({
   onClearAll,
   showClearAll,
 }: MarketplaceFiltersProps) => {
+  const [sectorsExpanded, setSectorsExpanded] = useState(false);
+  const visibleSectors = sectorsExpanded
+    ? marketplaceEconomySectors
+    : marketplaceEconomySectors.slice(0, SECTOR_PREVIEW_COUNT);
+
   return (
-    <div className="rounded-xl border border-navy-100 bg-white p-5 shadow-sm">
-      <div className="mb-6 flex items-center justify-between border-b border-slate-100 pb-4">
-        <h2 className="text-base font-semibold text-navy-950">Filters</h2>
-        {showClearAll && (
-          <button
-            type="button"
-            onClick={onClearAll}
-            className="text-xs font-medium text-orange-600 hover:text-orange-500 transition"
-          >
-            Clear all
-          </button>
-        )}
+    <div className="rounded-xl border border-gray-200 bg-white p-6 shadow-[var(--shadow-card)]">
+      <div className="mb-6 flex items-center justify-between">
+        <button
+          type="button"
+          onClick={onClearAll}
+          disabled={!showClearAll}
+          className={`text-xs font-medium transition ${
+            showClearAll
+              ? "text-dq-orange hover:text-[#E04020]"
+              : "cursor-default text-gray-300"
+          }`}
+        >
+          Reset all
+        </button>
+        <SlidersHorizontal size={16} className="text-gray-400" aria-hidden />
       </div>
 
       <div className="space-y-8">
-        <FilterField label="Category">
+        <FilterSection label="Category">
           <CheckboxGroup
             options={[
               { id: "experience", label: "Digital Experience" },
@@ -109,9 +135,9 @@ const MarketplaceFilters = ({
             selectedValues={selectedCategories}
             onChange={onCategoryChange}
           />
-        </FilterField>
+        </FilterSection>
 
-        <FilterField label="Services Included">
+        <FilterSection label="Services Included">
           <CheckboxGroup
             options={[
               { id: "single", label: "Single-service" },
@@ -120,28 +146,41 @@ const MarketplaceFilters = ({
             selectedValues={selectedIncluded}
             onChange={onIncludedChange}
           />
-        </FilterField>
+        </FilterSection>
 
-        <FilterField label="Economy 4.0 Sector">
+        <FilterSection label="Economy 4.0 Sector">
           <CheckboxGroup
-            options={marketplaceEconomySectors}
+            options={visibleSectors}
             selectedValues={selectedSectors}
             onChange={onSectorChange}
           />
+          {marketplaceEconomySectors.length > SECTOR_PREVIEW_COUNT && (
+            <button
+              type="button"
+              onClick={() => setSectorsExpanded((prev) => !prev)}
+              className="mt-4 flex w-full items-center justify-between text-xs font-medium text-gray-500 hover:text-dq-navy"
+            >
+              {sectorsExpanded ? "Show less" : "Show more"}
+              <ChevronDown
+                size={14}
+                className={`transition-transform ${sectorsExpanded ? "rotate-180" : ""}`}
+              />
+            </button>
+          )}
           {selectedSectors.length > 0 && (
-            <p className="mt-2 text-[11px] text-gray-400 leading-snug">
+            <p className="mt-3 text-[11px] leading-snug text-gray-400">
               Updates service titles for your sector.
             </p>
           )}
-        </FilterField>
+        </FilterSection>
 
-        <FilterField label="Service Type">
+        <FilterSection label="Service Type" defaultOpen={false}>
           <CheckboxGroup
             options={marketplaceServiceTypes}
             selectedValues={selectedServiceTypes}
             onChange={onServiceTypeChange}
           />
-        </FilterField>
+        </FilterSection>
       </div>
 
       {showClearAll && (
@@ -150,9 +189,9 @@ const MarketplaceFilters = ({
           variant="outline"
           size="sm"
           onClick={onClearAll}
-          className="mt-6 w-full h-9 rounded-lg border-navy-100 text-xs font-medium lg:hidden"
+          className="mt-8 h-9 w-full rounded-lg border-gray-200 text-xs font-medium lg:hidden"
         >
-          Clear all filters
+          Reset all filters
         </Button>
       )}
     </div>
@@ -160,4 +199,3 @@ const MarketplaceFilters = ({
 };
 
 export default MarketplaceFilters;
-

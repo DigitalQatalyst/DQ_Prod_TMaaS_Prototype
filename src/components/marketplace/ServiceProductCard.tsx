@@ -1,12 +1,13 @@
 import type { MouseEvent } from "react";
 import { Link } from "react-router-dom";
-import { Check, ShoppingCart, TrendingUp, Zap } from "lucide-react";
+import { ArrowRight, Check, ShoppingCart, TrendingUp, Zap } from "lucide-react";
 import { toast } from "sonner";
 import { useCart } from "@/contexts/CartContext";
 import { initialServices } from "@/data/services";
 
 import { marketplaceCategoryLabels } from "@/data/marketplaceNavigation";
 import { featureFlags } from "@/lib/featureFlags";
+import { getServiceIcon } from "@/components/marketplace/marketplaceServiceIcons";
 
 export type ServiceProduct = (typeof initialServices)[number];
 
@@ -17,9 +18,10 @@ type ServiceProductCardProps = {
   /**
    * full — homepage featured (deliverables list)
    * grid — marketplace catalog (link-first)
+   * list — marketplace catalog horizontal row
    * shelf — compact horizontal best-seller tile
    */
-  variant?: "full" | "grid" | "shelf";
+  variant?: "full" | "grid" | "list" | "shelf";
 };
 
 const ServiceProductCard = ({
@@ -35,18 +37,78 @@ const ServiceProductCard = ({
   const detailUrl = `/service/${service.id}`;
   const canViewDetail = featureFlags.isEnabled("serviceDetail");
   const canUseCart = featureFlags.isEnabled("cart");
+  const ServiceIcon = getServiceIcon(service.collection, service.serviceType);
+
+  const cardFooter = (
+    <div className="mt-auto flex items-center justify-between pt-6">
+      <p className="text-sm text-dq-navy">
+        <span className="font-semibold">{service.price}</span>
+        <span className="text-gray-400"> · {service.duration}</span>
+      </p>
+      {canViewDetail && (
+        <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-navy-50 text-navy-500 transition-colors group-hover/card:bg-navy-100">
+          <ArrowRight size={15} strokeWidth={2} />
+        </span>
+      )}
+    </div>
+  );
+
+  if (variant === "list") {
+    const inner = (
+      <>
+        <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-navy-50 text-navy-500">
+          <ServiceIcon size={20} strokeWidth={1.75} />
+        </div>
+        <div className="min-w-0 flex-1">
+          <span className="font-mono text-[10px] uppercase tracking-[0.16em] text-navy-400">
+            {categoryLabel}
+          </span>
+          <h3 className="mt-1.5 text-[15px] font-semibold leading-snug text-dq-navy group-hover/card:text-dq-orange">
+            {title}
+          </h3>
+          <p className="mt-1.5 line-clamp-2 text-sm leading-relaxed text-gray-500">
+            {service.description}
+          </p>
+          <p className="mt-3 text-sm text-dq-navy">
+            <span className="font-semibold">{service.price}</span>
+            <span className="text-gray-400"> · {service.duration}</span>
+          </p>
+        </div>
+        {canViewDetail && (
+          <span className="flex h-8 w-8 shrink-0 items-center justify-center self-center rounded-full bg-navy-50 text-navy-500 transition-colors group-hover/card:bg-navy-100">
+            <ArrowRight size={15} strokeWidth={2} />
+          </span>
+        )}
+      </>
+    );
+
+    return (
+      <article className="group/card rounded-xl bg-white p-5 shadow-[var(--shadow-card)] transition-shadow duration-300 hover:shadow-[var(--shadow-elevated)]">
+        {canViewDetail ? (
+          <Link to={detailUrl} className="flex items-start gap-5">
+            {inner}
+          </Link>
+        ) : (
+          <div className="flex items-start gap-5">{inner}</div>
+        )}
+      </article>
+    );
+  }
 
   if (variant === "shelf") {
     return (
-      <article className="relative flex h-full w-full min-h-[200px] flex-col rounded-2xl border border-gray-100 bg-white p-6 transition-colors duration-300 hover:border-gray-200">
+      <article className="relative flex h-full w-full min-h-[220px] flex-col rounded-xl bg-white p-6 shadow-[var(--shadow-card)] transition-shadow duration-300 hover:shadow-[var(--shadow-elevated)]">
         {featured && (
-          <span className="absolute -top-2 left-3 inline-flex items-center gap-0.5 rounded bg-orange-500 px-1.5 py-0.5 text-[9px] font-bold uppercase tracking-wide text-white">
+          <span className="absolute -top-2 left-4 inline-flex items-center gap-0.5 rounded bg-dq-orange px-1.5 py-0.5 text-[9px] font-bold uppercase tracking-wide text-white">
             <TrendingUp size={9} />
             Top pick
           </span>
         )}
+        <div className="mb-4 flex h-10 w-10 items-center justify-center rounded-xl bg-navy-50 text-navy-500">
+          <ServiceIcon size={18} strokeWidth={1.75} />
+        </div>
         <div className="flex flex-wrap items-center gap-1.5">
-          <span className="text-[10px] font-medium uppercase tracking-wide text-gray-400">
+          <span className="font-mono text-[10px] uppercase tracking-[0.16em] text-navy-400">
             {categoryLabel}
           </span>
           {isHighImpact && (
@@ -57,22 +119,22 @@ const ServiceProductCard = ({
           )}
         </div>
         {canViewDetail ? (
-          <Link to={detailUrl} className="mt-4 block min-w-0 flex-1 group/title">
+          <Link to={detailUrl} className="mt-3 block min-w-0 flex-1 group/title">
             <h3 className="line-clamp-3 text-sm font-semibold leading-relaxed text-dq-navy group-hover/title:text-dq-orange">
               {title}
             </h3>
             <p className="mt-4 text-sm text-dq-navy">
-              <span className="font-bold">{service.price}</span>
+              <span className="font-semibold">{service.price}</span>
               <span className="text-gray-400"> · {service.duration}</span>
             </p>
           </Link>
         ) : (
-          <div className="mt-4 min-w-0 flex-1">
+          <div className="mt-3 min-w-0 flex-1">
             <h3 className="line-clamp-3 text-sm font-semibold leading-relaxed text-dq-navy">
               {title}
             </h3>
             <p className="mt-4 text-sm text-dq-navy">
-              <span className="font-bold">{service.price}</span>
+              <span className="font-semibold">{service.price}</span>
               <span className="text-gray-400"> · {service.duration}</span>
             </p>
           </div>
@@ -82,64 +144,50 @@ const ServiceProductCard = ({
   }
 
   if (variant === "grid") {
+    const gridInner = (
+      <>
+        <div className="mb-5 flex h-11 w-11 items-center justify-center rounded-xl bg-navy-50 text-navy-500">
+          <ServiceIcon size={20} strokeWidth={1.75} />
+        </div>
+        <div className={`flex flex-wrap items-center gap-2 ${featured ? "mt-1" : ""}`}>
+          <span className="font-mono text-[10px] uppercase tracking-[0.16em] text-navy-400">
+            {categoryLabel}
+          </span>
+          {isHighImpact && (
+            <span className="inline-flex items-center gap-0.5 rounded bg-navy-950 px-1.5 py-0.5 text-[8px] font-bold uppercase tracking-wider text-white">
+              <Zap size={8} className="fill-white" />
+              High-Impact
+            </span>
+          )}
+        </div>
+        <h3 className="mt-3 text-base font-semibold leading-snug text-dq-navy group-hover/card:text-dq-orange">
+          {title}
+        </h3>
+        <p className="mt-3 line-clamp-3 flex-1 text-sm leading-relaxed text-gray-500">
+          {service.description}
+        </p>
+        {cardFooter}
+      </>
+    );
+
     return (
       <article
-        className={`group/card relative flex h-full min-h-[320px] flex-col rounded-2xl border border-gray-100 bg-white p-7 text-left transition-colors duration-300 hover:border-gray-200 ${
+        className={`group/card relative flex h-full min-h-[340px] flex-col rounded-xl bg-white p-7 text-left shadow-[var(--shadow-card)] transition-shadow duration-300 hover:shadow-[var(--shadow-elevated)] ${
           featured ? "pt-9" : ""
         }`}
       >
         {featured && (
-          <span className="absolute top-3 left-7 text-[9px] font-bold uppercase tracking-wide text-orange-600">
+          <span className="absolute top-4 left-7 text-[9px] font-bold uppercase tracking-wide text-dq-orange">
             Best seller
           </span>
         )}
 
         {canViewDetail ? (
           <Link to={detailUrl} className="flex min-h-0 flex-1 flex-col">
-            <div className={`mb-4 flex flex-wrap items-center gap-1.5 ${featured ? "mt-4" : ""}`}>
-              <span className="text-[10px] font-medium uppercase tracking-wide text-gray-400">
-                {categoryLabel}
-              </span>
-              {isHighImpact && (
-                <span className="inline-flex items-center gap-0.5 rounded bg-navy-950 px-1.5 py-0.5 text-[8px] font-bold uppercase tracking-wider text-white">
-                  <Zap size={8} className="fill-white" />
-                  High-Impact
-                </span>
-              )}
-            </div>
-            <h3 className="text-[15px] font-semibold leading-relaxed text-dq-navy group-hover/card:text-dq-orange">
-              {title}
-            </h3>
-            <p className="mt-3 line-clamp-2 text-xs leading-relaxed text-gray-500">
-              {service.description}
-            </p>
-            <p className="mt-auto pt-6 text-sm text-dq-navy">
-              <span className="font-bold">{service.price}</span>
-              <span className="text-gray-400"> · {service.duration}</span>
-            </p>
+            {gridInner}
           </Link>
         ) : (
-          <div className="flex min-h-0 flex-1 flex-col">
-            <div className={`mb-4 flex flex-wrap items-center gap-1.5 ${featured ? "mt-4" : ""}`}>
-              <span className="text-[10px] font-medium uppercase tracking-wide text-gray-400">
-                {categoryLabel}
-              </span>
-              {isHighImpact && (
-                <span className="inline-flex items-center gap-0.5 rounded bg-navy-950 px-1.5 py-0.5 text-[8px] font-bold uppercase tracking-wider text-white">
-                  <Zap size={8} className="fill-white" />
-                  High-Impact
-                </span>
-              )}
-            </div>
-            <h3 className="text-[15px] font-semibold leading-relaxed text-dq-navy">{title}</h3>
-            <p className="mt-3 line-clamp-2 text-xs leading-relaxed text-gray-500">
-              {service.description}
-            </p>
-            <p className="mt-auto pt-6 text-sm text-dq-navy">
-              <span className="font-bold">{service.price}</span>
-              <span className="text-gray-400"> · {service.duration}</span>
-            </p>
-          </div>
+          <div className="flex min-h-0 flex-1 flex-col">{gridInner}</div>
         )}
       </article>
     );

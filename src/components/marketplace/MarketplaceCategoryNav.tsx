@@ -17,9 +17,9 @@ const MarketplaceCategoryNav = ({
   onTabChange,
 }: MarketplaceCategoryNavProps) => {
   return (
-    <div className="sticky top-16 z-30 -mx-5 border-b border-gray-100/60 bg-background/80 px-5 py-3 backdrop-blur-sm md:-mx-8 md:px-8 lg:-mx-10 lg:px-10">
+    <div className="sticky top-16 z-30 -mx-5 bg-background px-5 md:-mx-8 md:px-8 lg:-mx-10 lg:px-10">
       <nav
-        className="mx-auto flex max-w-[1200px] gap-1 overflow-x-auto pb-1"
+        className="mx-auto flex max-w-[1200px] gap-0 overflow-x-auto border-b border-gray-200/80"
         aria-label="Service categories"
       >
         {tabs.map((tab) => {
@@ -29,10 +29,10 @@ const MarketplaceCategoryNav = ({
               key={tab.id}
               type="button"
               onClick={() => onTabChange(tab.id)}
-              className={`shrink-0 border-b-2 px-4 py-2 text-[13px] font-medium transition-colors ${
+              className={`shrink-0 border-b-2 px-5 py-3.5 text-sm font-medium transition-colors ${
                 isActive
-                  ? "border-dq-orange text-dq-orange"
-                  : "border-transparent text-gray-600 hover:text-dq-navy"
+                  ? "-mb-px border-dq-orange text-dq-orange"
+                  : "border-transparent text-gray-500 hover:text-dq-navy"
               }`}
             >
               {tab.label}

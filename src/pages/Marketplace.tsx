@@ -2,13 +2,14 @@ import { useState, useMemo, useEffect, useCallback } from "react";
 import { useSearchParams } from "react-router-dom";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import { Filter, Search, X, Sparkles } from "lucide-react";
+import { Filter, LayoutGrid, List, Search, X, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import DiagnoseDialog from "@/components/DiagnoseDialog";
 import MarketplaceCategoryNav from "@/components/marketplace/MarketplaceCategoryNav";
 import MarketplaceFilters from "@/components/marketplace/MarketplaceFilters";
 import MarketplaceBestSellers from "@/components/marketplace/MarketplaceBestSellers";
+import MarketplacePagination from "@/components/marketplace/MarketplacePagination";
 import ServiceProductCard from "@/components/marketplace/ServiceProductCard";
 import { getBestSellers } from "@/data/services";
 import MeshSection from "@/components/site/MeshSection";
@@ -24,17 +25,10 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import {
-  Pagination,
-  PaginationContent,
-  PaginationItem,
-  PaginationLink,
-  PaginationNext,
-  PaginationPrevious,
-} from "@/components/ui/pagination";
 import { initialServices, getRemixedName } from "@/data/services";
 
 const PAGE_SIZE = 15;
+type ViewMode = "grid" | "list";
 
 // Removed old labels
 
@@ -51,6 +45,7 @@ const Marketplace = () => {
   const [dialogPrompt, setDialogPrompt] = useState("");
   const [sortBy, setSortBy] = useState("popular");
   const [currentPage, setCurrentPage] = useState(1);
+  const [viewMode, setViewMode] = useState<ViewMode>("grid");
 
   const scrollToCatalog = useCallback(() => {
     requestAnimationFrame(() => {
@@ -359,92 +354,125 @@ const Marketplace = () => {
         </div>
       </MeshSection>
 
-      <div className="mx-auto max-w-[1200px] px-5 py-6 md:px-8 lg:px-10">
-        <div id="catalog-grid" className="scroll-mt-32 space-y-5">
-          {showBestSellers && (
-            <MarketplaceBestSellers
-              activeTab="all"
-              selectedIndustry={selectedSectors.length > 0 ? selectedSectors[0] : "all"}
-            />
-          )}
-
-          {showBestSellers && (
-            <h3 className="text-2xl font-semibold tracking-tight text-dq-navy">
-              All services
-            </h3>
-          )}
-
-          <MarketplaceCategoryNav
-            activeTab={activeTab}
-            onTabChange={applyCollectionFilter}
-          />
-
-          <div className="flex flex-col lg:flex-row lg:items-start gap-6">
-            <aside
-              className={`lg:w-56 shrink-0 ${
-                sidebarOpen ? "block" : "hidden lg:block"
-              }`}
-            >
-              <div className="lg:sticky lg:top-32">
-                <MarketplaceFilters
-                  selectedSectors={selectedSectors}
-                  onSectorChange={handleSectorChange}
-                  selectedCategories={selectedCategories}
-                  onCategoryChange={handleCategoryChange}
-                  selectedIncluded={selectedIncluded}
-                  onIncludedChange={handleIncludedChange}
-                  selectedServiceTypes={selectedServiceTypes}
-                  onServiceTypeChange={handleServiceTypeChange}
-                  onClearAll={clearAllFilters}
-                  showClearAll={hasActiveFilters}
+      <section className="bg-background">
+        <div className="mx-auto max-w-[1200px] px-5 pb-16 pt-2 md:px-8 lg:px-10">
+          <div id="catalog-grid" className="scroll-mt-32">
+            {showBestSellers && (
+              <div className="mb-10">
+                <MarketplaceBestSellers
+                  activeTab="all"
+                  selectedIndustry={selectedSectors.length > 0 ? selectedSectors[0] : "all"}
                 />
               </div>
-            </aside>
+            )}
 
-            <main className="min-w-0 flex-1">
-              <div className="mb-4 flex flex-wrap items-center justify-between gap-3">
-                <div className="flex items-center gap-2">
-                  <Button
-                    type="button"
-                    variant="outline"
-                    size="sm"
-                    onClick={() => setSidebarOpen(!sidebarOpen)}
-                    className="h-9 gap-1.5 rounded-full border-gray-200 lg:hidden"
-                  >
-                    <Filter size={14} />
-                    Filters
-                  </Button>
-                  <p className="text-sm text-gray-600">
-                    {catalogServices.length === 0 ? (
-                      <>
-                        <span className="font-semibold text-dq-navy">0</span> services
-                      </>
-                    ) : (
-                      <>
-                        Showing{" "}
-                        <span className="font-semibold text-dq-navy">
-                          {showingFrom}–{showingTo}
-                        </span>{" "}
-                        of{" "}
-                        <span className="font-semibold text-dq-navy">
-                          {catalogServices.length}
-                        </span>
-                        {catalogServices.length === 1 ? " service" : " services"}
-                      </>
-                    )}
-                  </p>
+            {showBestSellers && (
+              <h3 className="mb-6 text-2xl font-semibold tracking-tight text-dq-navy">
+                All services
+              </h3>
+            )}
+
+            <MarketplaceCategoryNav
+              activeTab={activeTab}
+              onTabChange={applyCollectionFilter}
+            />
+
+            <div className="mt-8 flex flex-col gap-8 lg:flex-row lg:items-start">
+              <aside
+                className={`lg:w-[280px] shrink-0 ${
+                  sidebarOpen ? "block" : "hidden lg:block"
+                }`}
+              >
+                <div className="lg:sticky lg:top-32">
+                  <MarketplaceFilters
+                    selectedSectors={selectedSectors}
+                    onSectorChange={handleSectorChange}
+                    selectedCategories={selectedCategories}
+                    onCategoryChange={handleCategoryChange}
+                    selectedIncluded={selectedIncluded}
+                    onIncludedChange={handleIncludedChange}
+                    selectedServiceTypes={selectedServiceTypes}
+                    onServiceTypeChange={handleServiceTypeChange}
+                    onClearAll={clearAllFilters}
+                    showClearAll={hasActiveFilters}
+                  />
                 </div>
-                <Select value={sortBy} onValueChange={setSortBy}>
-                  <SelectTrigger className="h-9 w-[10.5rem] rounded-lg border-gray-200 bg-white text-sm">
-                    <SelectValue placeholder="Sort by" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="popular">Most popular</SelectItem>
-                    <SelectItem value="fastest">Fastest delivery</SelectItem>
-                    <SelectItem value="price-low">Lowest price</SelectItem>
-                  </SelectContent>
-                </Select>
-              </div>
+              </aside>
+
+              <main className="min-w-0 flex-1">
+                <div className="mb-6 flex flex-wrap items-center justify-between gap-4">
+                  <div className="flex items-center gap-3">
+                    <Button
+                      type="button"
+                      variant="outline"
+                      size="sm"
+                      onClick={() => setSidebarOpen(!sidebarOpen)}
+                      className="h-9 gap-1.5 rounded-lg border-gray-200 lg:hidden"
+                    >
+                      <Filter size={14} />
+                      Filters
+                    </Button>
+                    <p className="text-sm text-gray-600">
+                      {catalogServices.length === 0 ? (
+                        <>0 services</>
+                      ) : (
+                        <>
+                          Showing{" "}
+                          <span className="font-semibold text-dq-navy">
+                            {showingFrom}–{showingTo}
+                          </span>{" "}
+                          of{" "}
+                          <span className="font-semibold text-dq-navy">
+                            {catalogServices.length}
+                          </span>{" "}
+                          {catalogServices.length === 1 ? "service" : "services"}
+                        </>
+                      )}
+                    </p>
+                  </div>
+
+                  <div className="flex items-center gap-3">
+                    <Select value={sortBy} onValueChange={setSortBy}>
+                      <SelectTrigger className="h-9 w-[10.5rem] rounded-lg border-gray-200 bg-white text-sm shadow-none">
+                        <SelectValue placeholder="Sort by" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="popular">Most popular</SelectItem>
+                        <SelectItem value="fastest">Fastest delivery</SelectItem>
+                        <SelectItem value="price-low">Lowest price</SelectItem>
+                      </SelectContent>
+                    </Select>
+
+                    <div className="flex items-center rounded-lg border border-gray-200 bg-white p-0.5">
+                      <button
+                        type="button"
+                        onClick={() => setViewMode("grid")}
+                        aria-label="Grid view"
+                        aria-pressed={viewMode === "grid"}
+                        className={`flex h-8 w-8 items-center justify-center rounded-md transition-colors ${
+                          viewMode === "grid"
+                            ? "bg-navy-50 text-navy-600"
+                            : "text-gray-400 hover:text-gray-600"
+                        }`}
+                      >
+                        <LayoutGrid size={16} />
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => setViewMode("list")}
+                        aria-label="List view"
+                        aria-pressed={viewMode === "list"}
+                        className={`flex h-8 w-8 items-center justify-center rounded-md transition-colors ${
+                          viewMode === "list"
+                            ? "bg-navy-50 text-navy-600"
+                            : "text-gray-400 hover:text-gray-600"
+                        }`}
+                      >
+                        <List size={16} />
+                      </button>
+                    </div>
+                  </div>
+                </div>
 
               {activeFilterChips.length > 0 && (
                 <div className="mb-4 flex flex-wrap items-center gap-2">
@@ -499,73 +527,39 @@ const Marketplace = () => {
                   </Button>
                 </div>
               ) : (
-                <div className="mt-2 pb-8">
-                  <div className="grid gap-6 sm:grid-cols-2 md:gap-8 xl:grid-cols-3">
+                <div className="pb-4">
+                  <div
+                    className={
+                      viewMode === "grid"
+                        ? "grid gap-6 sm:grid-cols-2 md:gap-8 xl:grid-cols-3"
+                        : "flex flex-col gap-4"
+                    }
+                  >
                     {paginatedServices.map((pkg) => (
                       <ServiceProductCard
                         key={pkg.id}
                         service={pkg}
-                        variant="grid"
-                        displayName={getRemixedName(pkg, selectedSectors.length > 0 ? selectedSectors[0] : "all")}
+                        variant={viewMode}
+                        displayName={getRemixedName(
+                          pkg,
+                          selectedSectors.length > 0 ? selectedSectors[0] : "all"
+                        )}
                       />
                     ))}
                   </div>
 
-                  {totalPages > 1 && (
-                    <Pagination className="mt-10">
-                      <PaginationContent>
-                        <PaginationItem>
-                          <PaginationPrevious
-                            onClick={(e) => {
-                              e.preventDefault();
-                              if (currentPage > 1) handlePageChange(currentPage - 1);
-                            }}
-                            href="#"
-                            className={
-                              currentPage <= 1
-                                ? "pointer-events-none opacity-50"
-                                : "cursor-pointer"
-                            }
-                          />
-                        </PaginationItem>
-                        {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
-                          <PaginationItem key={page}>
-                            <PaginationLink
-                              isActive={page === currentPage}
-                              href="#"
-                              onClick={(e) => {
-                                e.preventDefault();
-                                handlePageChange(page);
-                              }}
-                              className="cursor-pointer"
-                            >
-                              {page}
-                            </PaginationLink>
-                          </PaginationItem>
-                        ))}
-                        <PaginationItem>
-                          <PaginationNext
-                            onClick={(e) => {
-                              e.preventDefault();
-                              if (currentPage < totalPages) handlePageChange(currentPage + 1);
-                            }}
-                            href="#"
-                            className={
-                              currentPage >= totalPages
-                                ? "pointer-events-none opacity-50"
-                                : "cursor-pointer"
-                            }
-                          />
-                        </PaginationItem>
-                      </PaginationContent>
-                    </Pagination>
-                  )}
+                  <MarketplacePagination
+                    currentPage={currentPage}
+                    totalPages={totalPages}
+                    onPageChange={handlePageChange}
+                  />
                 </div>
               )}
             </main>
           </div>
         </div>
-      </div>
+        </div>
+      </section>
 
       <Footer />
 
