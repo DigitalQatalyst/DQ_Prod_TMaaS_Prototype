@@ -13,15 +13,16 @@ const Index = () => {
     <div className="min-h-screen bg-background">
       <Navbar />
       <HeroSection />
-      
-      <div className="mx-auto max-w-7xl px-6 py-12 md:py-16">
-        <MarketplaceBestSellers activeTab="all" selectedIndustry="all" />
-      </div>
+
+      <section className="px-5 py-24 md:px-8 lg:px-10">
+        <div className="mx-auto max-w-[1200px]">
+          <MarketplaceBestSellers activeTab="all" selectedIndustry="all" />
+        </div>
+      </section>
 
       <TransformationJourneysSection />
       <ExploreByCategorySection />
       <IndustrySolutionsSection />
-      
       <HowItWorksSection />
       <FAQSection />
       <Footer />
