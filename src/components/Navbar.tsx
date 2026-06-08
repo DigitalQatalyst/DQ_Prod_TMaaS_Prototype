@@ -1,5 +1,5 @@
-import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { useState } from "react";
+import { Link, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
 import ContextSwitcher from "@/components/ContextSwitcher";
@@ -7,87 +7,97 @@ import CartNavButton from "@/components/cart/CartNavButton";
 
 const Navbar = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
+  const location = useLocation();
+  const isOnMarketplace = location.pathname.startsWith("/marketplace");
 
-  useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 12);
-    onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
+  const navLinkClass = (active: boolean) =>
+    `text-[13px] font-medium transition-colors focus-visible:ring-2 focus-visible:ring-dq-orange focus-visible:ring-offset-2 rounded-sm outline-none ${
+      active ? "text-dq-orange" : "text-gray-600 hover:text-dq-navy"
+    }`;
 
   return (
-    <nav className="fixed inset-x-0 top-0 z-50 transition-all duration-300">
-      <div
-        className={[
-          "mx-auto flex max-w-7xl items-center justify-between px-6 transition-all duration-300",
-          scrolled
-            ? "mt-3 h-12 rounded-full border border-navy-100 bg-white/70 px-4 shadow-sm backdrop-blur-xl backdrop-saturate-150"
-            : "h-16",
-        ].join(" ")}
-        style={
-          scrolled
-            ? {
-                boxShadow:
-                  "0 1px 0 rgba(3,15,53,0.04), 0 8px 24px rgba(3,15,53,0.06)",
-              }
-            : undefined
-        }
-      >
-        <div className="flex items-center gap-8">
-          <a
-            href="/"
-            className="flex items-center gap-2 font-semibold tracking-tight transition-opacity hover:opacity-80"
+    <>
+      <header className="sticky top-0 z-40 flex h-16 items-center border-b border-gray-100 bg-white px-5 md:px-8">
+        <div className="mx-auto flex w-full max-w-[1200px] items-center justify-between">
+          <div className="flex items-center gap-8">
+            <Link
+              to="/"
+              className="flex items-center gap-2 font-semibold tracking-tight transition-opacity hover:opacity-80"
+            >
+              <span className="grid h-7 w-7 place-items-center rounded-md bg-dq-orange text-white">
+                <span className="font-mono text-[11px] font-bold">DQ</span>
+              </span>
+              <span className="text-lg text-dq-orange">TMaaS</span>
+            </Link>
+
+            <nav className="hidden items-center gap-6 lg:flex">
+              <Link to="/marketplace" className={navLinkClass(isOnMarketplace)}>
+                Marketplace
+              </Link>
+            </nav>
+          </div>
+
+          <div className="hidden items-center gap-3 md:flex">
+            <ContextSwitcher stage="marketing" scrolled={false} />
+            <CartNavButton className="h-9 w-9 shrink-0" />
+            <Link
+              to="/sign-in"
+              className="px-2 text-[13px] font-medium text-gray-600 transition-colors hover:text-dq-navy"
+            >
+              Login
+            </Link>
+            <Link to="/sign-in">
+              <Button
+                size="sm"
+                className="rounded-full bg-dq-orange px-5 text-[13px] font-semibold text-white hover:bg-[#E04020]"
+              >
+                Get Started
+              </Button>
+            </Link>
+          </div>
+
+          <button
+            type="button"
+            aria-label={mobileOpen ? "Close menu" : "Open menu"}
+            className="rounded-md p-2 outline-none focus-visible:ring-2 focus-visible:ring-dq-orange focus-visible:ring-offset-2 lg:hidden"
+            onClick={() => setMobileOpen(!mobileOpen)}
           >
-            <span className="grid h-7 w-7 place-items-center rounded-md bg-orange-500 text-white">
-              <span className="font-mono text-[11px] font-bold">DQ</span>
-            </span>
-            <span className="text-orange-500 font-heading text-lg">
-              TMaaS
-            </span>
-          </a>
-          
-          <a href="/marketplace" className="hidden text-sm text-muted-foreground transition-colors hover:text-foreground md:block">
-            Marketplace
-          </a>
+            {mobileOpen ? <X size={24} /> : <Menu size={24} />}
+          </button>
         </div>
-
-        <div className="hidden items-center gap-2 md:flex">
-          <ContextSwitcher stage="marketing" scrolled={scrolled} />
-          <CartNavButton className="h-9 w-9 shrink-0" />
-          <Link to="/sign-in" className="px-2 text-sm text-muted-foreground transition-colors hover:text-foreground">
-            Login
-          </Link>
-          <a href="/sign-in">
-            <Button size="sm" className="rounded-full bg-orange-500 px-5 text-white shadow-[var(--glow-orange-sm)] hover:bg-orange-400 transition-all">
-              Get Started
-            </Button>
-          </a>
-        </div>
-
-        <button className="md:hidden text-foreground" onClick={() => setMobileOpen(!mobileOpen)}>
-          {mobileOpen ? <X size={22} /> : <Menu size={22} />}
-        </button>
-      </div>
+      </header>
 
       {mobileOpen && (
-        <div className="mt-2 border-t border-border bg-background/95 p-6 backdrop-blur-xl md:hidden">
-          <div className="flex flex-col gap-4">
-            <div className="pt-1">
-              <ContextSwitcher stage="marketing" scrolled />
-            </div>
-            <a href="/marketplace" className="text-sm text-muted-foreground">Marketplace</a>
-            <div className="flex items-center gap-2">
-              <CartNavButton className="h-9 w-9" />
-              <span className="text-sm text-muted-foreground">Cart</span>
-            </div>
-            <a href="/sign-in">
-              <Button size="sm" className="mt-2 w-full rounded-full bg-orange-500 text-white shadow-[var(--glow-orange-sm)] hover:bg-orange-400">Get Started</Button>
-            </a>
+        <div className="fixed inset-0 top-16 z-30 flex flex-col gap-1 overflow-y-auto bg-white p-4 lg:hidden">
+          <Link
+            to="/marketplace"
+            className="border-b border-gray-100 py-3 text-lg font-medium text-dq-navy"
+            onClick={() => setMobileOpen(false)}
+          >
+            Marketplace
+          </Link>
+          <div className="border-b border-gray-100 py-3">
+            <ContextSwitcher stage="marketing" scrolled={false} />
           </div>
+          <div className="flex items-center gap-2 border-b border-gray-100 py-3">
+            <CartNavButton className="h-9 w-9" />
+            <span className="text-sm text-gray-600">Cart</span>
+          </div>
+          <Link
+            to="/sign-in"
+            className="border-b border-gray-100 py-3 text-lg font-medium text-dq-navy"
+            onClick={() => setMobileOpen(false)}
+          >
+            Login
+          </Link>
+          <Link to="/sign-in" onClick={() => setMobileOpen(false)} className="mt-4">
+            <Button className="w-full rounded-full bg-dq-orange py-3 text-center font-semibold text-white hover:bg-[#E04020]">
+              Get Started
+            </Button>
+          </Link>
         </div>
       )}
-    </nav>
+    </>
   );
 };
 
