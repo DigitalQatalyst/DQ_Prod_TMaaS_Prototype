@@ -429,7 +429,7 @@ const Marketplace = () => {
                         aria-pressed={viewMode === "grid"}
                         className={`flex h-8 w-8 items-center justify-center rounded-md transition-colors ${
                           viewMode === "grid"
-                            ? "bg-navy-50 text-navy-600"
+                            ? "bg-orange-50 text-dq-orange"
                             : "text-gray-400 hover:text-gray-600"
                         }`}
                       >
@@ -442,7 +442,7 @@ const Marketplace = () => {
                         aria-pressed={viewMode === "list"}
                         className={`flex h-8 w-8 items-center justify-center rounded-md transition-colors ${
                           viewMode === "list"
-                            ? "bg-navy-50 text-navy-600"
+                            ? "bg-orange-50 text-dq-orange"
                             : "text-gray-400 hover:text-gray-600"
                         }`}
                       >

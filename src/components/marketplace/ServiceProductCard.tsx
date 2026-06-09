@@ -11,8 +11,13 @@ import { getServiceIcon } from "@/components/marketplace/marketplaceServiceIcons
 
 export type ServiceProduct = (typeof initialServices)[number];
 
-const DESCRIPTION_CLAMP =
-  "overflow-hidden text-gray-500 [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:3]";
+const DESCRIPTION_CLAMP = "line-clamp-3 overflow-hidden text-gray-500";
+
+const GRID_DESCRIPTION_CLASS =
+  "line-clamp-3 h-[calc(0.875rem*1.625*3)] shrink-0 overflow-hidden text-sm leading-relaxed text-gray-500";
+
+const CATEGORY_LABEL_CLASS =
+  "block truncate font-mono text-[10px] uppercase tracking-[0.16em] text-gray-400";
 
 type ServiceProductCardProps = {
   service: ServiceProduct;
@@ -45,11 +50,11 @@ const ServiceProductCard = ({
   if (variant === "list") {
     const inner = (
       <>
-        <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-navy-50 text-navy-500">
+        <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-orange-50 text-dq-orange">
           <ServiceIcon size={20} strokeWidth={1.75} />
         </div>
         <div className="min-w-0 flex-1">
-          <span className="font-mono text-[10px] uppercase tracking-[0.16em] text-navy-400">
+          <span className={CATEGORY_LABEL_CLASS} title={categoryLabel}>
             {categoryLabel}
           </span>
           <h3 className="mt-1.5 text-[15px] font-semibold leading-snug text-dq-navy group-hover/card:text-dq-orange">
@@ -64,7 +69,7 @@ const ServiceProductCard = ({
           </p>
         </div>
         {canViewDetail && (
-          <span className="flex h-8 w-8 shrink-0 items-center justify-center self-center rounded-full bg-navy-50 text-navy-500 transition-colors group-hover/card:bg-navy-100">
+          <span className="flex h-8 w-8 shrink-0 items-center justify-center self-center rounded-full bg-orange-50 text-dq-orange transition-colors group-hover/card:bg-orange-100">
             <ArrowRight size={15} strokeWidth={2} />
           </span>
         )}
@@ -143,11 +148,9 @@ const ServiceProductCard = ({
             {title}
           </h3>
         </div>
-        <p className={`flex-1 text-sm leading-relaxed ${DESCRIPTION_CLAMP}`}>
-          {service.description}
-        </p>
-        <div className="mt-12 space-y-3">
-          <span className="block font-mono text-[10px] uppercase tracking-[0.16em] text-gray-400">
+        <p className={GRID_DESCRIPTION_CLASS}>{service.description}</p>
+        <div className="mt-auto space-y-3 pt-6">
+          <span className={CATEGORY_LABEL_CLASS} title={categoryLabel}>
             {categoryLabel}
           </span>
           <div className="flex items-center justify-between">

@@ -68,16 +68,17 @@ function CheckboxGroup({
   return (
     <div className="space-y-4">
       {options.map((opt) => (
-        <div key={opt.id} className="flex items-start gap-3">
+        <div key={opt.id} className="flex min-w-0 items-start gap-3">
           <Checkbox
             id={`filter-${opt.id}`}
             checked={selectedValues.includes(opt.id)}
             onCheckedChange={() => onChange(opt.id)}
-            className="mt-0.5 border-gray-300 data-[state=checked]:border-navy-500 data-[state=checked]:bg-navy-500"
+            className="mt-0.5 shrink-0 border-gray-300 data-[state=checked]:border-navy-500 data-[state=checked]:bg-navy-500"
           />
           <Label
             htmlFor={`filter-${opt.id}`}
-            className="cursor-pointer text-sm font-normal leading-snug text-gray-600"
+            title={opt.label}
+            className="min-w-0 flex-1 cursor-pointer truncate text-sm font-normal leading-snug text-gray-600"
           >
             {opt.label}
           </Label>
@@ -147,6 +148,14 @@ const MarketplaceFilters = ({
           />
         </FilterSection>
 
+        <FilterSection label="Service Type" defaultOpen={false}>
+          <CheckboxGroup
+            options={marketplaceServiceTypes}
+            selectedValues={selectedServiceTypes}
+            onChange={onServiceTypeChange}
+          />
+        </FilterSection>
+
         <FilterSection label="Economy 4.0 Sector">
           <CheckboxGroup
             options={visibleSectors}
@@ -171,14 +180,6 @@ const MarketplaceFilters = ({
               Updates service titles for your sector.
             </p>
           )}
-        </FilterSection>
-
-        <FilterSection label="Service Type" defaultOpen={false}>
-          <CheckboxGroup
-            options={marketplaceServiceTypes}
-            selectedValues={selectedServiceTypes}
-            onChange={onServiceTypeChange}
-          />
         </FilterSection>
       </div>
 
