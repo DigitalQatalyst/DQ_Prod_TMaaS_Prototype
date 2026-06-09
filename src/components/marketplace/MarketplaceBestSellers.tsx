@@ -62,7 +62,7 @@ const MarketplaceBestSellers = ({
           <CarouselNext className="static h-8 w-8 translate-y-0" />
         </div>
         <CarouselContent className="-ml-4 pt-2 pb-2">
-          {bestSellers.map((service, index) => (
+          {bestSellers.map((service) => (
             <CarouselItem
               key={service.id}
               className="basis-[85%] pl-4 sm:basis-1/2 md:basis-1/3"
@@ -70,7 +70,7 @@ const MarketplaceBestSellers = ({
               <ServiceProductCard
                 service={service}
                 variant="grid"
-                featured={index === 0 || service.badge === "Top Pick"}
+                featured
                 displayName={getRemixedName(service, selectedIndustry)}
               />
             </CarouselItem>
