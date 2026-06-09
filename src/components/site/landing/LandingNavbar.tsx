@@ -4,7 +4,9 @@ import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import TMaaSLogo from "@/components/TMaaSLogo";
 import ExploreDigitalQatalystCta from "@/components/ExploreDigitalQatalystCta";
+import { btnPrimary, btnSecondary, navActive } from "@/lib/brandAccent";
 import { featureFlags } from "@/lib/featureFlags";
+import { cn } from "@/lib/utils";
 
 const NAV_LINKS = [
   { label: "Marketplace", href: "/marketplace", flag: "marketplace" as const },
@@ -13,7 +15,9 @@ const NAV_LINKS = [
 const LandingNavbar = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
   const location = useLocation();
-  const isOnMarketplace = location.pathname.startsWith("/marketplace");
+  const isOnMarketplace =
+    location.pathname.startsWith("/marketplace") ||
+    location.pathname.startsWith("/service");
   const isOnContact = location.pathname.startsWith("/contact");
 
   const visibleLinks = NAV_LINKS.filter(
@@ -21,9 +25,10 @@ const LandingNavbar = () => {
   );
 
   const navLinkClass = (active = false) =>
-    `text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-dq-orange focus-visible:ring-offset-2 rounded-sm ${
-      active ? "text-dq-orange" : "text-gray-600 hover:text-dq-navy"
-    }`;
+    cn(
+      "text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-dq-orange focus-visible:ring-offset-2 rounded-sm",
+      active ? navActive : `text-gray-600 hover:text-dq-navy`
+    );
 
   const renderLink = (link: (typeof NAV_LINKS)[number]) => {
     const active = link.href === "/marketplace" && isOnMarketplace;
@@ -55,10 +60,7 @@ const LandingNavbar = () => {
                 Log in
               </Link>
               <Link to="/sign-in">
-                <Button
-                  size="sm"
-                  className="rounded-full bg-dq-orange px-5 text-sm font-semibold text-white hover:bg-[#E04020]"
-                >
+                <Button size="sm" className={cn(btnPrimary, "px-5")}>
                   Get Started
                 </Button>
               </Link>
@@ -69,11 +71,11 @@ const LandingNavbar = () => {
           {featureFlags.isEnabled("contactUs") && (
             <Link
               to="/contact"
-              className={`hidden rounded-full px-4 py-2 text-sm font-semibold transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-dq-orange focus-visible:ring-offset-2 md:block ${
-                isOnContact
-                  ? "bg-[#E04020] text-white"
-                  : "bg-dq-orange text-white hover:bg-[#E04020]"
-              }`}
+              className={cn(
+                "hidden md:block",
+                isOnContact ? btnPrimary : btnSecondary,
+                "px-4 py-2"
+              )}
             >
               Contact Us
             </Link>
@@ -82,7 +84,7 @@ const LandingNavbar = () => {
           <button
             type="button"
             aria-label={mobileOpen ? "Close menu" : "Open menu"}
-            className="rounded-md p-2 outline-none focus-visible:ring-2 focus-visible:ring-dq-orange focus-visible:ring-offset-2 lg:hidden"
+            className="rounded-md p-2 outline-none focus-visible:ring-2 focus-visible:ring-dq-navy focus-visible:ring-offset-2 lg:hidden"
             onClick={() => setMobileOpen(!mobileOpen)}
           >
             {mobileOpen ? <X size={24} /> : <Menu size={24} />}
@@ -112,7 +114,7 @@ const LandingNavbar = () => {
                 Log in
               </Link>
               <Link to="/sign-in" onClick={() => setMobileOpen(false)} className="mt-4">
-                <Button className="w-full rounded-full bg-dq-orange py-3 text-center font-semibold text-white hover:bg-[#E04020]">
+                <Button className={cn(btnPrimary, "w-full py-3")}>
                   Get Started
                 </Button>
               </Link>
@@ -126,7 +128,7 @@ const LandingNavbar = () => {
             <Link
               to="/contact"
               onClick={() => setMobileOpen(false)}
-              className="mt-3 w-full rounded-full bg-dq-orange py-3 text-center font-semibold text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-dq-orange focus-visible:ring-offset-2"
+              className={cn(btnPrimary, "mt-3 w-full py-3 text-center")}
             >
               Contact Us
             </Link>

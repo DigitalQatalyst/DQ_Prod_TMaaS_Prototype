@@ -21,7 +21,7 @@ export default function SplitSectionHeader({
       )}
     >
       <div>
-        <p className="mb-4 font-mono text-[11px] uppercase tracking-[0.2em] text-dq-orange">
+        <p className="mb-4 dq-eyebrow">
           {kicker}
         </p>
         <h2

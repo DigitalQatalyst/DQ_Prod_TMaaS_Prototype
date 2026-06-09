@@ -116,7 +116,7 @@ const MarketplaceFilters = ({
           disabled={!showClearAll}
           className={`text-xs font-medium transition ${
             showClearAll
-              ? "text-dq-orange hover:text-[#E04020]"
+              ? "text-dq-navy hover:text-dq-navy/80"
               : "cursor-default text-gray-300"
           }`}
         >
@@ -148,7 +148,7 @@ const MarketplaceFilters = ({
           />
         </FilterSection>
 
-        <FilterSection label="Service Type" defaultOpen={false}>
+        <FilterSection label="Service Type">
           <CheckboxGroup
             options={marketplaceServiceTypes}
             selectedValues={selectedServiceTypes}
@@ -166,7 +166,7 @@ const MarketplaceFilters = ({
             <button
               type="button"
               onClick={() => setSectorsExpanded((prev) => !prev)}
-              className="mt-4 flex w-full items-center justify-between text-xs font-medium text-gray-500 hover:text-dq-navy"
+              className="mt-4 flex w-full items-center justify-between text-xs font-medium text-gray-500 hover:text-dq-orange"
             >
               {sectorsExpanded ? "Show less" : "Show more"}
               <ChevronDown

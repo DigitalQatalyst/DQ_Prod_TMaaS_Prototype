@@ -39,7 +39,7 @@ const ExploreByCategorySection = () => {
   return (
     <section className="border-t border-gray-100 bg-white px-5 py-24 md:px-8 lg:px-10">
       <div className="mx-auto max-w-[1200px]">
-        <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-dq-orange">
+        <p className="dq-eyebrow">
           Categories
         </p>
         <h2 className="mt-4 text-center text-4xl font-semibold tracking-tight text-dq-navy md:text-left md:text-5xl">

@@ -32,7 +32,7 @@ const SolutionSection = () => {
   return (
     <section className="bg-white px-5 py-24 md:px-8 lg:px-10">
       <div className="mx-auto max-w-[1200px]">
-        <p className="mb-4 font-mono text-[11px] uppercase tracking-[0.2em] text-dq-orange">
+        <p className="mb-4 dq-eyebrow">
           The Marketplace Model
         </p>
         <h2 className="mb-16 text-4xl font-semibold tracking-tight text-dq-navy md:text-5xl">
@@ -45,7 +45,7 @@ const SolutionSection = () => {
               <div className="mb-3 font-mono text-7xl font-bold leading-none text-dq-navy/[0.15]">
                 {num}
               </div>
-              <p className="mb-1.5 font-mono text-[10px] uppercase tracking-[0.18em] text-dq-orange">
+              <p className="dq-micro-label mb-1.5">
                 {suite}
               </p>
               <h3 className="mb-3 text-xl font-semibold tracking-tight text-dq-navy">
@@ -56,7 +56,7 @@ const SolutionSection = () => {
               </p>
               <Link
                 to={href}
-                className="mt-auto inline-flex items-center gap-1 text-sm font-semibold text-dq-orange transition-all hover:gap-2"
+                className="mt-auto inline-flex items-center gap-1 text-sm font-semibold text-dq-navy transition-all hover:gap-2"
               >
                 {linkLabel} <ArrowRight size={14} />
               </Link>

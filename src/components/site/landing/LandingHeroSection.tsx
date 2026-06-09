@@ -3,6 +3,8 @@ import { ArrowRight } from "lucide-react";
 import MeshSection from "@/components/site/MeshSection";
 import HeroDashboardMockup from "./HeroDashboardMockup";
 import { PLATFORM_NAME } from "@/lib/brandLinks";
+import { btnPrimary, btnSecondary } from "@/lib/brandAccent";
+import { cn } from "@/lib/utils";
 
 const LandingHeroSection = () => {
   return (
@@ -13,7 +15,7 @@ const LandingHeroSection = () => {
     >
       <div className="relative mx-auto grid max-w-7xl items-center gap-12 lg:grid-cols-2 lg:gap-16">
         <div>
-          <p className="animate-fade-in-up font-mono text-[11px] uppercase tracking-[0.2em] text-dq-orange">
+          <p className="animate-fade-in-up dq-eyebrow">
             {PLATFORM_NAME}
           </p>
 
@@ -31,8 +33,7 @@ const LandingHeroSection = () => {
           <div className="animate-fade-in-up animation-delay-300 mt-6 flex flex-col items-stretch gap-3 sm:flex-row sm:items-center">
             <Link
               to="/marketplace"
-              className="group inline-flex w-full items-center justify-center gap-2 rounded-full bg-dq-orange px-6 py-3.5 text-sm font-semibold text-white transition hover:bg-[#E04020] sm:w-auto"
-              style={{ boxShadow: "var(--glow-orange-md)" }}
+              className={cn(btnPrimary, "group w-full sm:w-auto")}
             >
               Explore Marketplace
               <ArrowRight
@@ -42,7 +43,7 @@ const LandingHeroSection = () => {
             </Link>
             <Link
               to="/contact"
-              className="inline-flex w-full items-center justify-center gap-2 rounded-full border border-[#c5cde8] bg-white/60 px-6 py-3.5 text-sm font-semibold text-dq-navy backdrop-blur-sm transition hover:border-[#a0aacc] hover:bg-white sm:w-auto"
+              className={cn(btnSecondary, "w-full sm:w-auto")}
             >
               Contact Us
             </Link>

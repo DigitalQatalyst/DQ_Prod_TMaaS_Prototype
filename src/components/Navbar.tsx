@@ -15,7 +15,7 @@ const Navbar = () => {
 
   const navLinkClass = (active: boolean) =>
     `text-[13px] font-medium transition-colors focus-visible:ring-2 focus-visible:ring-dq-orange focus-visible:ring-offset-2 rounded-sm outline-none ${
-      active ? "text-dq-orange" : "text-gray-600 hover:text-dq-navy"
+      active ? "font-semibold text-dq-orange" : "text-gray-600 hover:text-dq-navy"
     }`;
 
   return (
@@ -55,7 +55,7 @@ const Navbar = () => {
               <>
                 <Link
                   to="/sign-in"
-                  className="px-2 text-[13px] font-medium text-gray-600 transition-colors hover:text-dq-navy"
+                  className="px-2 text-[13px] font-medium text-gray-600 transition-colors hover:text-dq-orange"
                 >
                   Login
                 </Link>
@@ -73,7 +73,7 @@ const Navbar = () => {
             {featureFlags.isEnabled("contactUs") && (
               <Link
                 to="/contact"
-                className="rounded-full bg-dq-orange px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-[#E04020] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-dq-orange focus-visible:ring-offset-2"
+                className="rounded-full border border-[#c5cde8] bg-white px-4 py-2 text-sm font-semibold text-dq-navy transition-colors hover:border-[#a0aacc] hover:bg-gray-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-dq-orange focus-visible:ring-offset-2"
               >
                 Contact Us
               </Link>
@@ -123,7 +123,7 @@ const Navbar = () => {
                 Login
               </Link>
               <Link to="/sign-in" onClick={() => setMobileOpen(false)} className="mt-4">
-                <Button className="w-full rounded-full bg-dq-orange py-3 text-center font-semibold text-white hover:bg-[#E04020]">
+                <Button className="w-full rounded-full bg-dq-navy py-3 text-center font-semibold text-white hover:bg-dq-navy/90">
                   Get Started
                 </Button>
               </Link>
@@ -137,7 +137,7 @@ const Navbar = () => {
             <Link
               to="/contact"
               onClick={() => setMobileOpen(false)}
-              className="mt-3 w-full rounded-full bg-dq-orange py-3 text-center font-semibold text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-dq-orange focus-visible:ring-offset-2"
+              className="mt-3 w-full rounded-full bg-dq-navy py-3 text-center font-semibold text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-dq-orange focus-visible:ring-offset-2"
             >
               Contact Us
             </Link>

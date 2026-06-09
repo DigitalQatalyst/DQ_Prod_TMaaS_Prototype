@@ -14,7 +14,7 @@ const DqLineageStatsBand = () => {
       <div className="mx-auto grid max-w-[1200px] gap-12 lg:grid-cols-[1.4fr_1fr] lg:items-center">
         <div className="grid gap-8 sm:grid-cols-2">
           {STATS.map(({ value, label }) => (
-            <div key={label} className="border-l-4 border-dq-orange pl-6">
+            <div key={label} className="border-l-4 border-dq-navy pl-6">
               <div className="mb-2 text-5xl font-semibold tracking-tight text-dq-navy md:text-6xl">
                 {value}
               </div>
@@ -26,7 +26,7 @@ const DqLineageStatsBand = () => {
         </div>
 
         <div className="rounded-2xl border border-gray-200 bg-white p-8">
-          <p className="mb-3 font-mono text-[11px] uppercase tracking-[0.2em] text-dq-orange">
+          <p className="mb-3 dq-eyebrow">
             Part of DigitalQatalyst
           </p>
           <h3 className="mb-3 text-2xl font-semibold tracking-tight text-dq-navy">
@@ -41,7 +41,7 @@ const DqLineageStatsBand = () => {
             href={DQ_CORP_WEB_URL}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 text-sm font-semibold text-dq-orange transition-all hover:gap-3"
+            className="inline-flex items-center gap-2 text-sm font-semibold text-dq-navy transition-all hover:gap-3"
           >
             Explore DigitalQatalyst
             <ArrowRight size={16} />

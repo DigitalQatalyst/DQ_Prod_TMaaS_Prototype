@@ -1,6 +1,8 @@
 import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
 import MeshSection from "@/components/site/MeshSection";
+import { btnPrimaryOnDark, btnSecondaryOnDark } from "@/lib/brandAccent";
+import { cn } from "@/lib/utils";
 
 const LandingCtaSection = () => {
   return (
@@ -21,7 +23,7 @@ const LandingCtaSection = () => {
       />
 
       <div className="relative mx-auto max-w-[720px]">
-        <p className="mb-4 font-mono text-[11px] uppercase tracking-[0.2em] text-dq-orange">
+        <p className="dq-eyebrow-on-dark mb-4">
           Ready to Begin
         </p>
 
@@ -37,15 +39,14 @@ const LandingCtaSection = () => {
         <div className="mt-8 flex flex-wrap justify-center gap-3">
           <Link
             to="/marketplace"
-            className="inline-flex items-center gap-2 rounded-full bg-dq-orange px-7 py-3.5 text-sm font-semibold text-white outline-none transition hover:bg-[#E04020] focus-visible:ring-2 focus-visible:ring-dq-orange focus-visible:ring-offset-2 focus-visible:ring-offset-dq-navy"
-            style={{ boxShadow: "var(--glow-orange-md)" }}
+            className={cn(btnPrimaryOnDark, "px-7")}
           >
             Explore Marketplace
             <ArrowRight size={15} />
           </Link>
           <Link
             to="/contact"
-            className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/5 px-7 py-3.5 text-sm font-semibold text-white backdrop-blur-sm outline-none transition hover:bg-white/10 focus-visible:ring-2 focus-visible:ring-dq-orange focus-visible:ring-offset-2 focus-visible:ring-offset-dq-navy"
+            className={cn(btnSecondaryOnDark, "px-7")}
           >
             Contact Us
           </Link>

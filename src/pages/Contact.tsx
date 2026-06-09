@@ -109,7 +109,7 @@ const Contact = () => {
   };
 
   const privacyLink = featureFlags.isEnabled("legal") ? (
-    <Link to="/legal/privacy" className="underline transition-colors hover:text-dq-navy">
+    <Link to="/legal/privacy" className="underline transition-colors hover:text-dq-orange">
       Privacy Policy
     </Link>
   ) : (
@@ -117,7 +117,7 @@ const Contact = () => {
       href="https://digitalqatalyst.com/privacy"
       target="_blank"
       rel="noopener noreferrer"
-      className="underline transition-colors hover:text-dq-navy"
+      className="underline transition-colors hover:text-dq-orange"
     >
       Privacy Policy
     </a>
@@ -144,7 +144,7 @@ const Contact = () => {
                 <button
                   type="button"
                   onClick={resetForm}
-                  className="rounded-full border border-gray-200 px-6 py-2.5 text-[15px] font-semibold text-dq-navy outline-none transition-colors hover:border-dq-orange hover:text-dq-orange focus-visible:ring-2 focus-visible:ring-dq-orange focus-visible:ring-offset-2"
+                  className="rounded-full border border-gray-200 px-6 py-2.5 text-[15px] font-semibold text-dq-navy outline-none transition-colors hover:border-dq-navy hover:text-dq-navy focus-visible:ring-2 focus-visible:ring-dq-orange focus-visible:ring-offset-2"
                 >
                   Submit another request
                 </button>
@@ -317,7 +317,7 @@ const Contact = () => {
                           aria-invalid={!!errors.consent}
                           checked={form.consent}
                           onChange={(e) => setField("consent", e.target.checked)}
-                          className="mt-0.5 h-4 w-4 shrink-0 rounded border-gray-300 text-dq-orange focus:ring-dq-orange"
+                          className="mt-0.5 h-4 w-4 shrink-0 rounded border-gray-300 text-dq-navy focus:ring-dq-orange"
                         />
                         <span
                           className={`text-[13px] leading-relaxed transition-colors ${errors.consent ? "text-red-600" : "text-gray-500"}`}
@@ -343,7 +343,7 @@ const Contact = () => {
                       <button
                         type="submit"
                         disabled={status === "loading"}
-                        className="inline-flex items-center justify-center gap-2 rounded-full bg-dq-orange px-6 py-3 text-[15px] font-semibold text-white outline-none transition-colors hover:bg-[#E04020] focus-visible:ring-2 focus-visible:ring-dq-orange focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-80"
+                        className="inline-flex items-center justify-center gap-2 rounded-full bg-dq-orange px-6 py-3 text-[15px] font-semibold text-white outline-none transition-colors hover:bg-[#E04020] glow-orange focus-visible:ring-2 focus-visible:ring-dq-orange focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-80"
                       >
                         {status === "loading" ? (
                           <>
@@ -385,8 +385,8 @@ const Contact = () => {
                     rel="noopener noreferrer"
                     className="group mb-4 flex items-start gap-2.5"
                   >
-                    <MapPin size={13} className="mt-0.5 shrink-0 text-dq-orange" />
-                    <div className="border-l border-dq-orange/25 pl-2.5 transition-colors group-hover:border-dq-orange/60">
+                    <MapPin size={13} className="mt-0.5 shrink-0 text-dq-navy" />
+                    <div className="border-l border-dq-navy/25 pl-2.5 transition-colors group-hover:border-dq-navy/60">
                       <p className="text-[13px] font-medium leading-snug text-dq-navy transition-colors group-hover:text-dq-orange">
                         708, Opal Tower
                       </p>
@@ -399,8 +399,8 @@ const Contact = () => {
                     rel="noopener noreferrer"
                     className="group mb-4 flex items-start gap-2.5"
                   >
-                    <MapPin size={13} className="mt-0.5 shrink-0 text-dq-orange" />
-                    <div className="border-l border-dq-orange/25 pl-2.5 transition-colors group-hover:border-dq-orange/60">
+                    <MapPin size={13} className="mt-0.5 shrink-0 text-dq-navy" />
+                    <div className="border-l border-dq-navy/25 pl-2.5 transition-colors group-hover:border-dq-navy/60">
                       <p className="text-[13px] font-medium leading-snug text-dq-navy transition-colors group-hover:text-dq-orange">
                         Kenafric Business Park
                       </p>
@@ -412,7 +412,7 @@ const Contact = () => {
                       size={13}
                       className="shrink-0 text-gray-400 transition-colors group-hover:text-dq-orange"
                     />
-                    <span className="text-[13px] text-gray-600 transition-colors group-hover:text-dq-navy">
+                    <span className="text-[13px] text-gray-600 transition-colors group-hover:text-dq-orange">
                       +971 4 266 6169
                     </span>
                   </a>
@@ -424,7 +424,7 @@ const Contact = () => {
                       size={13}
                       className="shrink-0 text-gray-400 transition-colors group-hover:text-dq-orange"
                     />
-                    <span className="text-[13px] text-gray-600 transition-colors group-hover:text-dq-navy">
+                    <span className="text-[13px] text-gray-600 transition-colors group-hover:text-dq-orange">
                       info@digitalqatalyst.com
                     </span>
                   </a>
@@ -434,7 +434,7 @@ const Contact = () => {
                   <div className="mt-6">
                     <Link
                       to="/marketplace"
-                      className="inline-flex items-center gap-1 rounded-sm text-[13px] font-semibold text-dq-orange outline-none transition-colors hover:text-[#E04020] focus-visible:ring-2 focus-visible:ring-dq-orange focus-visible:ring-offset-2"
+                      className="inline-flex items-center gap-1 rounded-sm text-[13px] font-semibold text-dq-navy outline-none transition-colors hover:text-[#E04020] focus-visible:ring-2 focus-visible:ring-dq-orange focus-visible:ring-offset-2"
                     >
                       Not sure where to start? Browse the Marketplace
                       <ArrowRight size={13} />

@@ -19,6 +19,12 @@ const GRID_DESCRIPTION_CLASS =
 const CATEGORY_LABEL_CLASS =
   "block truncate font-mono text-[10px] uppercase tracking-[0.16em] text-gray-400";
 
+const ICON_WELL_CLASS =
+  "flex items-center justify-center rounded-xl border border-gray-100 bg-gray-50 text-dq-navy";
+
+const CARD_SURFACE_CLASS =
+  "rounded-xl border border-gray-200 bg-white shadow-[var(--shadow-card)] transition-shadow duration-300 hover:shadow-[var(--shadow-elevated)]";
+
 type ServiceProductCardProps = {
   service: ServiceProduct;
   displayName?: string;
@@ -50,14 +56,14 @@ const ServiceProductCard = ({
   if (variant === "list") {
     const inner = (
       <>
-        <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-orange-50 text-dq-orange">
+        <div className={`h-11 w-11 shrink-0 ${ICON_WELL_CLASS}`}>
           <ServiceIcon size={20} strokeWidth={1.75} />
         </div>
         <div className="min-w-0 flex-1">
           <span className={CATEGORY_LABEL_CLASS} title={categoryLabel}>
             {categoryLabel}
           </span>
-          <h3 className="mt-1.5 text-[15px] font-semibold leading-snug text-dq-navy group-hover/card:text-dq-orange">
+          <h3 className="mt-1.5 text-[15px] font-semibold leading-snug text-dq-navy">
             {title}
           </h3>
           <p className={`mt-1.5 text-sm leading-snug ${DESCRIPTION_CLAMP}`}>
@@ -69,7 +75,7 @@ const ServiceProductCard = ({
           </p>
         </div>
         {canViewDetail && (
-          <span className="flex h-8 w-8 shrink-0 items-center justify-center self-center rounded-full bg-orange-50 text-dq-orange transition-colors group-hover/card:bg-orange-100">
+          <span className="flex h-8 w-8 shrink-0 items-center justify-center self-center rounded-full bg-gray-50 text-gray-400">
             <ArrowRight size={15} strokeWidth={2} />
           </span>
         )}
@@ -77,7 +83,7 @@ const ServiceProductCard = ({
     );
 
     return (
-      <article className="group/card rounded-xl bg-white p-5 shadow-[var(--shadow-card)] transition-shadow duration-300 hover:shadow-[var(--shadow-elevated)]">
+      <article className={`group/card p-5 ${CARD_SURFACE_CLASS}`}>
         {canViewDetail ? (
           <Link to={detailUrl} className="flex items-start gap-5">
             {inner}
@@ -91,14 +97,14 @@ const ServiceProductCard = ({
 
   if (variant === "shelf") {
     return (
-      <article className="relative flex h-full w-full min-h-[220px] flex-col rounded-xl bg-white p-6 shadow-[var(--shadow-card)] transition-shadow duration-300 hover:shadow-[var(--shadow-elevated)]">
+      <article className={`group/card relative flex h-full w-full min-h-[220px] flex-col p-6 ${CARD_SURFACE_CLASS}`}>
         {featured && (
           <span className="absolute -top-2 left-4 inline-flex items-center gap-0.5 rounded bg-dq-orange px-1.5 py-0.5 text-[9px] font-bold uppercase tracking-wide text-white">
             <TrendingUp size={9} />
             Top pick
           </span>
         )}
-        <div className="mb-4 flex h-10 w-10 items-center justify-center rounded-xl bg-navy-50 text-navy-500">
+        <div className={`mb-4 h-10 w-10 ${ICON_WELL_CLASS}`}>
           <ServiceIcon size={18} strokeWidth={1.75} />
         </div>
         <div className="flex flex-wrap items-center gap-1.5">
@@ -113,8 +119,8 @@ const ServiceProductCard = ({
           )}
         </div>
         {canViewDetail ? (
-          <Link to={detailUrl} className="mt-3 block min-w-0 flex-1 group/title">
-            <h3 className="line-clamp-3 text-sm font-semibold leading-relaxed text-dq-navy group-hover/title:text-dq-orange">
+          <Link to={detailUrl} className="mt-3 block min-w-0 flex-1">
+            <h3 className="line-clamp-3 text-sm font-semibold leading-relaxed text-dq-navy">
               {title}
             </h3>
             <p className="mt-4 text-sm text-dq-navy">
@@ -141,15 +147,15 @@ const ServiceProductCard = ({
     const gridInner = (
       <>
         <div className="mb-4 flex items-start gap-3">
-          <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-orange-50 text-dq-orange">
+          <div className={`h-10 w-10 shrink-0 ${ICON_WELL_CLASS}`}>
             <ServiceIcon size={20} strokeWidth={1.75} />
           </div>
-          <h3 className="min-w-0 flex-1 text-base font-semibold leading-snug text-dq-navy group-hover/card:text-dq-orange">
+          <h3 className="min-w-0 flex-1 text-base font-semibold leading-snug text-dq-navy">
             {title}
           </h3>
         </div>
         <p className={GRID_DESCRIPTION_CLASS}>{service.description}</p>
-        <div className="mt-auto space-y-3 pt-6">
+        <div className="mt-auto space-y-3 pt-8">
           <span className={CATEGORY_LABEL_CLASS} title={categoryLabel}>
             {categoryLabel}
           </span>
@@ -159,7 +165,7 @@ const ServiceProductCard = ({
               <span className="text-gray-400"> · {service.duration}</span>
             </p>
             {canViewDetail && (
-              <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-orange-50 text-dq-orange transition-colors group-hover/card:bg-orange-100">
+              <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-gray-50 text-gray-400">
                 <ArrowRight size={15} strokeWidth={2} />
               </span>
             )}
@@ -169,7 +175,7 @@ const ServiceProductCard = ({
     );
 
     return (
-      <article className="group/card relative flex h-full flex-col rounded-xl bg-white p-6 text-left shadow-[var(--shadow-card)] transition-shadow duration-300 hover:shadow-[var(--shadow-elevated)]">
+      <article className={`group/card relative flex h-full flex-col p-6 text-left ${CARD_SURFACE_CLASS}`}>
         {featured && (
           <span className="mb-4 inline-flex w-fit items-center gap-1 rounded-full bg-dq-orange px-2.5 py-1 text-[9px] font-bold uppercase tracking-wider text-white">
             <TrendingUp size={10} strokeWidth={2.5} />
@@ -251,8 +257,8 @@ const FullServiceProductCard = ({
       aria-label={inCart ? `${title} in cart` : `Add ${title} to cart`}
       className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-lg border transition ${
         inCart
-          ? "border-orange-200 bg-orange-50 text-dq-orange"
-          : "border-gray-200 bg-white text-gray-500 hover:border-dq-orange hover:text-dq-navy"
+          ? "border-orange-200 bg-navy-50 text-dq-navy"
+          : "border-gray-200 bg-white text-gray-500 hover:border-gray-300 hover:text-dq-navy"
       }`}
     >
       {inCart ? <Check size={15} strokeWidth={2.5} /> : <ShoppingCart size={15} />}
@@ -261,7 +267,7 @@ const FullServiceProductCard = ({
 
   return (
     <article
-      className={`relative flex h-full flex-col rounded-2xl border border-gray-200 bg-white p-5 text-left transition-all duration-300 hover:border-dq-orange hover:shadow-xl ${
+      className={`relative flex h-full flex-col rounded-2xl border border-gray-200 bg-white p-5 text-left transition-shadow duration-300 hover:shadow-[var(--shadow-elevated)] ${
         featured ? "pt-8" : ""
       }`}
     >
@@ -291,7 +297,7 @@ const FullServiceProductCard = ({
             </span>
           )}
         </div>
-        <h3 className="text-[15px] font-semibold leading-snug text-dq-navy group-hover/card:text-dq-orange">
+        <h3 className="text-[15px] font-semibold leading-snug text-dq-navy">
           {title}
         </h3>
         <p className={`mt-2 text-xs leading-relaxed ${DESCRIPTION_CLAMP}`}>
@@ -313,7 +319,7 @@ const FullServiceProductCard = ({
         <p className="mt-auto pt-4 text-sm text-dq-navy">
           <span className="font-bold">{service.price}</span>
           <span className="text-gray-400"> · {service.duration}</span>
-          <span className="ml-2 text-xs font-medium text-dq-orange group-hover/card:underline">
+          <span className="ml-2 text-xs font-medium text-gray-500">
             View details
           </span>
         </p>

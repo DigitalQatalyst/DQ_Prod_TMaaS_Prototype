@@ -33,7 +33,7 @@ const MarketplacePreviewSection = () => {
       className="bg-gray-50 px-5 py-24 md:px-8 lg:px-10"
     >
       <div className="mx-auto max-w-[1200px]">
-        <p className="mb-4 font-mono text-[11px] uppercase tracking-[0.2em] text-dq-orange">
+        <p className="mb-4 dq-eyebrow">
           Inside the marketplace
         </p>
         <h2 className="mb-4 max-w-2xl text-4xl font-semibold tracking-tight text-dq-navy md:text-5xl">
@@ -74,7 +74,7 @@ const MarketplacePreviewSection = () => {
         <div className="mt-10 text-center">
           <Link
             to="/marketplace"
-            className="inline-flex items-center gap-2 text-sm font-semibold text-dq-navy transition-colors hover:text-dq-orange"
+            className="inline-flex items-center gap-2 text-sm font-semibold text-dq-navy transition-colors hover:text-dq-navy/70"
           >
             Browse all services
             <ArrowRight size={16} />

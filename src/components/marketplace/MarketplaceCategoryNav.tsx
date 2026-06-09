@@ -29,10 +29,10 @@ const MarketplaceCategoryNav = ({
               key={tab.id}
               type="button"
               onClick={() => onTabChange(tab.id)}
-              className={`shrink-0 border-b-2 px-4 py-3.5 text-sm font-medium transition-colors ${
+              className={`shrink-0 border-b-2 px-4 py-3.5 text-sm transition-colors ${
                 isActive
-                  ? "-mb-px border-dq-orange text-dq-orange"
-                  : "border-transparent text-gray-500 hover:text-dq-navy"
+                  ? "-mb-px border-dq-orange font-semibold text-dq-orange"
+                  : "border-transparent font-medium text-gray-500 hover:text-dq-orange"
               }`}
             >
               {tab.label}

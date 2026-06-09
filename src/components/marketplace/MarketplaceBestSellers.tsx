@@ -36,7 +36,7 @@ const MarketplaceBestSellers = ({
   return (
     <section aria-labelledby="marketplace-bestsellers-heading" className="relative pt-10">
       <div className="pr-24">
-        <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-dq-orange">
+        <p className="dq-eyebrow">
           Popular
         </p>
         <h2

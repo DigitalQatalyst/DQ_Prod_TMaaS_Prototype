@@ -299,7 +299,7 @@ const Marketplace = () => {
 
       <MeshSection variant="heroLight" grid className="px-5 pb-8 pt-20 md:px-8 md:pb-10 md:pt-24 lg:px-10">
         <div className="mx-auto flex max-w-3xl flex-col items-center text-center">
-          <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-dq-orange">
+          <p className="dq-eyebrow">
             Marketplace
           </p>
           <h1 className="mt-4 text-balance text-[2.75rem] font-semibold leading-[1.05] tracking-[-0.02em] text-dq-navy sm:text-5xl md:text-6xl lg:text-7xl">
@@ -322,7 +322,7 @@ const Marketplace = () => {
               <button
                 type="button"
                 onClick={() => setSearchQuery("")}
-                className="absolute right-3 top-1/2 flex -translate-y-1/2 items-center justify-center text-gray-400 hover:text-dq-navy"
+                className="absolute right-3 top-1/2 flex -translate-y-1/2 items-center justify-center text-gray-400 hover:text-dq-orange"
                 aria-label="Clear search"
               >
                 <X size={16} />
@@ -429,7 +429,7 @@ const Marketplace = () => {
                         aria-pressed={viewMode === "grid"}
                         className={`flex h-8 w-8 items-center justify-center rounded-md transition-colors ${
                           viewMode === "grid"
-                            ? "bg-orange-50 text-dq-orange"
+                            ? "bg-navy-50 text-dq-navy"
                             : "text-gray-400 hover:text-gray-600"
                         }`}
                       >
@@ -442,7 +442,7 @@ const Marketplace = () => {
                         aria-pressed={viewMode === "list"}
                         className={`flex h-8 w-8 items-center justify-center rounded-md transition-colors ${
                           viewMode === "list"
-                            ? "bg-orange-50 text-dq-orange"
+                            ? "bg-navy-50 text-dq-navy"
                             : "text-gray-400 hover:text-gray-600"
                         }`}
                       >
@@ -468,7 +468,7 @@ const Marketplace = () => {
                   <button
                     type="button"
                     onClick={clearAllFilters}
-                    className="text-xs font-medium text-dq-orange hover:text-[#E04020]"
+                    className="text-xs font-medium text-dq-navy hover:text-dq-navy/80"
                   >
                     Clear all
                   </button>

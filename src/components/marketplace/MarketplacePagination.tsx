@@ -71,7 +71,7 @@ const MarketplacePagination = ({
                 }}
                 className={`h-9 min-w-9 rounded-lg border text-sm font-medium cursor-pointer ${
                   page === currentPage
-                    ? "border-dq-orange bg-white text-dq-navy shadow-none"
+                    ? "border-dq-navy bg-white font-semibold text-dq-navy shadow-none"
                     : "border-transparent bg-transparent text-gray-600 hover:bg-white hover:border-gray-200"
                 }`}
               >

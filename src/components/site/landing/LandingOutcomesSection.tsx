@@ -32,7 +32,7 @@ const LandingOutcomesSection = () => {
     >
       <div className="mx-auto max-w-[1200px]">
         <div className="mb-12">
-          <p className="mb-4 font-mono text-[11px] uppercase tracking-[0.2em] text-dq-orange">
+          <p className="mb-4 dq-eyebrow">
             Practical Outcomes
           </p>
           <h2
