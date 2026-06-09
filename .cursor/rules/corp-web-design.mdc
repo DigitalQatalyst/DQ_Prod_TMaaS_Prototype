@@ -27,8 +27,8 @@ Marketing pages (`/`, `/marketplace`, `/service/:id`) share the **DQ corp web de
 - Platform display name is **Transformation as a Service** (`PLATFORM_NAME` in `src/lib/brandLinks.ts`); acronym is `TMaaS` (`PLATFORM_ACRONYM`); formal line is `TMaaS (Transformation as a Service)` (`PLATFORM_BRAND_LINE`). Do not use "Transformation Management as a Service", "Transformation Marketplace", or "Technology Management as a Service" as the platform name.
 
 ## Differentiate for product pages (TMaaS landing)
-- Use **product landing IA** per `specs/landing-page-prototype-shell.md` v2 — implemented at `/landing-v2` (`IndexProductLanding`, `src/components/site/landing/v2/`)
-- v1 corp-mirror landing remains at `/` (`IndexTraditional`) until v2 is promoted
+- Use **product landing IA** per `specs/landing-page-prototype-shell.md` v2 — default at `/` (`IndexProductLanding`, `src/components/site/landing/v2/`)
+- v1 corp-mirror alternate landing at `/landing-v1` (`IndexTraditional`); `/landing-v2` redirects to `/`
 - Hero: TMaaS logo, product badge row, marketplace mockup; orange primary CTA → `/marketplace`
 - One dark mesh narrative section (`Why TMaaS`); do not alternate dark sections like corp homepage
 - Do **not** add corp-only sections: Team, FAQ, Framework, full ecosystem product grid

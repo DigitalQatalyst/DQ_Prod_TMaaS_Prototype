@@ -9,7 +9,7 @@ export interface FeatureFlags {
   // Additional pages
   explore: boolean;
   alternateLanding: boolean;
-  landingV2: boolean;
+  landingV1: boolean;
   legal: boolean;
 
   // Features
@@ -29,7 +29,7 @@ const PAGE_FLAGS: (keyof FeatureFlags)[] = [
   'contactUs',
   'explore',
   'alternateLanding',
-  'landingV2',
+  'landingV1',
   'legal',
 ];
 
@@ -49,7 +49,7 @@ const DEFAULT_FEATURE_FLAGS: FeatureFlags = {
 
   explore: false,
   alternateLanding: true,
-  landingV2: true,
+  landingV1: true,
   legal: false,
 
   cart: false,

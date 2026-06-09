@@ -98,14 +98,15 @@ const App = () => (
           <Sonner />
           <BrowserRouter>
             <Routes>
-              <Route path="/" element={<FlaggedRoute flag="homepage" element={<IndexTraditional />} />} />
+              <Route path="/" element={<FlaggedRoute flag="homepage" element={<IndexProductLanding />} />} />
+              <Route path="/landing-v2" element={<Navigate to="/" replace />} />
+              <Route
+                path="/landing-v1"
+                element={<FlaggedRoute flag="landingV1" element={<IndexTraditional />} />}
+              />
               <Route
                 path="/home"
                 element={<FlaggedRoute flag="alternateLanding" element={<Index />} />}
-              />
-              <Route
-                path="/landing-v2"
-                element={<FlaggedRoute flag="landingV2" element={<IndexProductLanding />} />}
               />
               <Route path="/explore" element={<FlaggedRoute flag="explore" element={<Explore />} />} />
               <Route
