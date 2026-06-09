@@ -1,23 +1,10 @@
-import { FileX, Layers, Unlink } from "lucide-react";
 import MeshSection from "@/components/site/MeshSection";
-
-const CHALLENGE_CARDS = [
-  {
-    Icon: FileX,
-    title: "Designed, never built",
-    body: "Strategy decks and roadmaps that never connect to execution or running systems.",
-  },
-  {
-    Icon: Layers,
-    title: "Built without a blueprint",
-    body: "Technology deployed without architecture alignment, accountable owners, or delivery cadence.",
-  },
-  {
-    Icon: Unlink,
-    title: "No continuity",
-    body: "Discovery, delivery, and operations treated as disconnected engagements — with no measurable outcomes.",
-  },
-];
+import {
+  CHALLENGE_CARDS,
+  CHALLENGE_CLOSING,
+  CHALLENGE_EYEBROW,
+  CHALLENGE_HEADLINE,
+} from "@/components/site/landing/challengeContent";
 
 const ChallengeSection = () => {
   return (
@@ -39,14 +26,11 @@ const ChallengeSection = () => {
 
       <div className="mx-auto max-w-[1200px]">
         <p className="mb-4 font-mono text-[11px] uppercase tracking-[0.2em] text-dq-orange">
-          Why TMaaS exists
+          {CHALLENGE_EYEBROW}
         </p>
-        <h2 className="mb-4 text-4xl font-semibold tracking-tight text-white md:text-5xl">
-          70% of digital transformations fail to deliver.
+        <h2 className="mb-16 text-4xl font-semibold tracking-tight text-white md:text-5xl">
+          {CHALLENGE_HEADLINE}
         </h2>
-        <p className="mb-16 max-w-2xl text-lg text-white/60">
-          The reasons are consistent. The fix is architectural — and productised.
-        </p>
 
         <div className="grid gap-6 md:grid-cols-3">
           {CHALLENGE_CARDS.map(({ Icon, title, body }) => (
@@ -66,8 +50,7 @@ const ChallengeSection = () => {
         </div>
 
         <p className="mx-auto mt-12 max-w-2xl text-center text-[15px] text-white/50">
-          TMaaS was built to close this gap — with a marketplace that treats
-          transformation as a continuous, managed system.
+          {CHALLENGE_CLOSING}
         </p>
       </div>
     </MeshSection>
