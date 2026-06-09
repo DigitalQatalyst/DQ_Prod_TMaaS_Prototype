@@ -69,7 +69,7 @@ const MarketplaceBestSellers = ({
             >
               <ServiceProductCard
                 service={service}
-                variant="shelf"
+                variant="grid"
                 featured={index === 0 || service.badge === "Top Pick"}
                 displayName={getRemixedName(service, selectedIndustry)}
               />

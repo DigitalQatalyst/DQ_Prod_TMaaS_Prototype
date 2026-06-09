@@ -135,7 +135,7 @@ const ServiceProductCard = ({
   if (variant === "grid") {
     const gridInner = (
       <>
-        <div className={`mb-3 flex items-start gap-3 ${featured ? "mt-1" : ""}`}>
+        <div className={`mb-4 flex items-start gap-3 ${featured ? "mt-1" : ""}`}>
           <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-orange-50 text-dq-orange">
             <ServiceIcon size={20} strokeWidth={1.75} />
           </div>
@@ -143,10 +143,10 @@ const ServiceProductCard = ({
             {title}
           </h3>
         </div>
-        <p className={`text-sm leading-snug ${DESCRIPTION_CLAMP}`}>
+        <p className={`flex-1 text-sm leading-relaxed ${DESCRIPTION_CLAMP}`}>
           {service.description}
         </p>
-        <div className="mt-5 space-y-3">
+        <div className="mt-8 space-y-3">
           <span className="block font-mono text-[10px] uppercase tracking-[0.16em] text-gray-400">
             {categoryLabel}
           </span>
@@ -167,7 +167,7 @@ const ServiceProductCard = ({
 
     return (
       <article
-        className={`group/card relative flex flex-col rounded-xl bg-white p-6 text-left shadow-[var(--shadow-card)] transition-shadow duration-300 hover:shadow-[var(--shadow-elevated)] ${
+        className={`group/card relative flex h-full flex-col rounded-xl bg-white p-6 text-left shadow-[var(--shadow-card)] transition-shadow duration-300 hover:shadow-[var(--shadow-elevated)] ${
           featured ? "pt-8" : ""
         }`}
       >
@@ -178,11 +178,11 @@ const ServiceProductCard = ({
         )}
 
         {canViewDetail ? (
-          <Link to={detailUrl} className="flex flex-col">
+          <Link to={detailUrl} className="flex min-h-0 flex-1 flex-col">
             {gridInner}
           </Link>
         ) : (
-          <div className="flex flex-col">{gridInner}</div>
+          <div className="flex min-h-0 flex-1 flex-col">{gridInner}</div>
         )}
       </article>
     );
