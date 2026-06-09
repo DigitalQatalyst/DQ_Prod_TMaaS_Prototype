@@ -135,7 +135,7 @@ const ServiceProductCard = ({
   if (variant === "grid") {
     const gridInner = (
       <>
-        <div className={`mb-4 flex items-start gap-3 ${featured ? "mt-1" : ""}`}>
+        <div className="mb-4 flex items-start gap-3">
           <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-orange-50 text-dq-orange">
             <ServiceIcon size={20} strokeWidth={1.75} />
           </div>
@@ -146,7 +146,7 @@ const ServiceProductCard = ({
         <p className={`flex-1 text-sm leading-relaxed ${DESCRIPTION_CLAMP}`}>
           {service.description}
         </p>
-        <div className="mt-8 space-y-3">
+        <div className="mt-12 space-y-3">
           <span className="block font-mono text-[10px] uppercase tracking-[0.16em] text-gray-400">
             {categoryLabel}
           </span>
@@ -166,13 +166,10 @@ const ServiceProductCard = ({
     );
 
     return (
-      <article
-        className={`group/card relative flex h-full flex-col rounded-xl bg-white p-6 text-left shadow-[var(--shadow-card)] transition-shadow duration-300 hover:shadow-[var(--shadow-elevated)] ${
-          featured ? "pt-8" : ""
-        }`}
-      >
+      <article className="group/card relative flex h-full flex-col rounded-xl bg-white p-6 text-left shadow-[var(--shadow-card)] transition-shadow duration-300 hover:shadow-[var(--shadow-elevated)]">
         {featured && (
-          <span className="absolute top-3.5 left-6 text-[9px] font-bold uppercase tracking-wide text-dq-orange">
+          <span className="mb-4 inline-flex w-fit items-center gap-1 rounded-full bg-dq-orange px-2.5 py-1 text-[9px] font-bold uppercase tracking-wider text-white">
+            <TrendingUp size={10} strokeWidth={2.5} />
             Best seller
           </span>
         )}
