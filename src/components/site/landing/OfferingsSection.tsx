@@ -1,41 +1,42 @@
 import { Link } from "react-router-dom";
-import { ArrowRight, Monitor, Workflow, Shield, BarChart2, Package } from "lucide-react";
-import SplitSectionHeader from "./SplitSectionHeader";
+import {
+  ArrowRight,
+  Monitor,
+  Workflow,
+  Shield,
+  BarChart2,
+  Package,
+} from "lucide-react";
 
 const OFFERINGS = [
   {
     Icon: Monitor,
     title: "Digital Experience",
-    body: "Customer-facing platforms, portals, and omnichannel experiences designed for adoption and scale.",
-    linkLabel: "Explore services",
+    desc: "Customer-facing platforms, portals, and omnichannel experiences designed for adoption and scale.",
     href: "/marketplace",
   },
   {
     Icon: Workflow,
     title: "Digital Work System",
-    body: "Operating models, workflow automation, and collaboration systems that connect people to outcomes.",
-    linkLabel: "Explore services",
+    desc: "Operating models, workflow automation, and collaboration systems that connect people to outcomes.",
     href: "/marketplace",
   },
   {
     Icon: Shield,
     title: "SecDevOps",
-    body: "Secure delivery pipelines, cloud infrastructure, and DevOps practices built for enterprise compliance.",
-    linkLabel: "Explore services",
+    desc: "Secure delivery pipelines, cloud infrastructure, and DevOps practices built for enterprise compliance.",
     href: "/marketplace",
   },
   {
     Icon: BarChart2,
     title: "Digital Intelligence & Analytics",
-    body: "Data platforms, analytics, and AI capabilities that turn information into actionable insight.",
-    linkLabel: "Explore services",
+    desc: "Data platforms, analytics, and AI capabilities that turn information into actionable insight.",
     href: "/marketplace",
   },
   {
     Icon: Package,
     title: "Bundles",
-    body: "Pre-configured service bundles mapped to common transformation journeys and industry outcomes.",
-    linkLabel: "Explore bundles",
+    desc: "Pre-configured service bundles mapped to common transformation journeys and industry outcomes.",
     href: "/marketplace",
   },
 ];
@@ -47,35 +48,32 @@ const OfferingsSection = () => {
       className="bg-gray-50 px-5 py-24 md:px-8 lg:px-10"
     >
       <div className="mx-auto max-w-[1200px]">
-        <SplitSectionHeader
-          kicker="Our Offerings"
-          title="Comprehensive services. Measurable impact."
-          description="From digital experience to SecDevOps, TMaaS offers a full spectrum of transformation services — delivered by certified providers with proven track records."
-        />
+        <p className="mb-4 font-mono text-[11px] uppercase tracking-[0.2em] text-dq-orange">
+          Capabilities
+        </p>
+        <h2 className="mb-12 text-4xl font-semibold tracking-tight text-dq-navy md:text-5xl">
+          Everything you need to transform — and sustain it.
+        </h2>
 
-        <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-5">
-          {OFFERINGS.map(({ Icon, title, body, linkLabel, href }) => (
-            <div
+        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+          {OFFERINGS.map(({ Icon, title, desc, href }) => (
+            <Link
               key={title}
-              className="flex flex-col rounded-2xl border border-gray-200 bg-white p-6 transition-all duration-300 hover:border-dq-orange hover:shadow-xl"
+              to={href}
+              className="group flex items-center gap-4 rounded-2xl border border-gray-200 p-6 outline-none transition-all hover:border-dq-orange hover:shadow-lg focus-visible:ring-2 focus-visible:ring-dq-orange focus-visible:ring-offset-2"
             >
-              <div className="mb-5 flex h-10 w-10 items-center justify-center rounded-xl bg-dq-orange/10 text-dq-orange">
-                <Icon size={22} strokeWidth={1.75} />
+              <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-navy-50 text-dq-navy transition-colors group-hover:bg-dq-orange group-hover:text-white">
+                <Icon size={22} />
               </div>
-              <h3 className="mb-2 text-base font-semibold tracking-tight text-dq-navy">
-                {title}
-              </h3>
-              <p className="mb-6 flex-1 text-[14px] leading-relaxed text-gray-600">
-                {body}
-              </p>
-              <Link
-                to={href}
-                className="inline-flex items-center gap-1.5 text-[13px] font-semibold text-dq-orange transition hover:gap-2.5"
-              >
-                {linkLabel}
-                <ArrowRight size={14} />
-              </Link>
-            </div>
+              <div className="flex-1">
+                <h3 className="mb-1 text-lg font-semibold text-dq-navy">{title}</h3>
+                <p className="text-[15px] text-gray-600">{desc}</p>
+              </div>
+              <ArrowRight
+                size={20}
+                className="text-gray-400 transition-colors group-hover:text-dq-orange"
+              />
+            </Link>
           ))}
         </div>
       </div>

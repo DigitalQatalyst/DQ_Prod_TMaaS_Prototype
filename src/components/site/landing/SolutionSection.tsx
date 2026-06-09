@@ -1,26 +1,30 @@
-import { Search, ClipboardList, Rocket, BarChart3 } from "lucide-react";
-import SplitSectionHeader from "./SplitSectionHeader";
+import { Link } from "react-router-dom";
+import { ArrowRight } from "lucide-react";
 
-const SOLUTION_ITEMS = [
+const SOLUTION_STEPS = [
   {
-    Icon: Search,
-    title: "Discover",
-    body: "Browse services and bundles mapped to your transformation goals and industry context.",
+    num: "01",
+    suite: "Discover",
+    title: "Explore the marketplace",
+    body: "Browse services and bundles mapped to your transformation goals, industry context, and priority outcomes.",
+    linkLabel: "Explore services",
+    href: "/marketplace",
   },
   {
-    Icon: ClipboardList,
-    title: "Assess & Plan",
-    body: "Blueprint readiness, prioritise backlog, and align stakeholders on a clear 90-day path.",
+    num: "02",
+    suite: "Evaluate",
+    title: "Compare offerings",
+    body: "Review service details, transparent pricing, timelines, and bundled pathways before you commit.",
+    linkLabel: "View service bundles",
+    href: "/marketplace",
   },
   {
-    Icon: Rocket,
-    title: "Execute",
-    body: "Deploy certified pods with weekly cadence, delivery artifacts, and accountable owners.",
-  },
-  {
-    Icon: BarChart3,
-    title: "Measure & Improve",
-    body: "Track outcomes with scorecards, telemetry, and continuous optimisation loops.",
+    num: "03",
+    suite: "Engage",
+    title: "Contact our team",
+    body: "Reach out to scope your needs, ask questions, and activate the right transformation services for your organisation.",
+    linkLabel: "Contact us",
+    href: "/contact",
   },
 ];
 
@@ -28,22 +32,34 @@ const SolutionSection = () => {
   return (
     <section className="bg-white px-5 py-24 md:px-8 lg:px-10">
       <div className="mx-auto max-w-[1200px]">
-        <SplitSectionHeader
-          kicker="The Solution"
-          title="One platform. End-to-end transformation."
-          description="TMaaS brings discovery, planning, execution, and measurement into a single operating system — so transformation becomes repeatable, not one-off."
-        />
+        <p className="mb-4 font-mono text-[11px] uppercase tracking-[0.2em] text-dq-orange">
+          The TMaaS Model
+        </p>
+        <h2 className="mb-16 text-4xl font-semibold tracking-tight text-dq-navy md:text-5xl">
+          Three steps to the right services.
+        </h2>
 
-        <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4 lg:gap-6">
-          {SOLUTION_ITEMS.map(({ Icon, title, body }) => (
-            <div key={title} className="flex flex-col">
-              <div className="mb-5 flex h-12 w-12 items-center justify-center rounded-full border border-gray-200 bg-gray-50 text-dq-orange">
-                <Icon size={22} strokeWidth={1.75} />
+        <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3 lg:gap-6">
+          {SOLUTION_STEPS.map(({ num, suite, title, body, linkLabel, href }) => (
+            <div key={num} className="relative flex flex-col">
+              <div className="mb-3 font-mono text-7xl font-bold leading-none text-dq-navy/[0.15]">
+                {num}
               </div>
-              <h3 className="mb-2 text-lg font-semibold tracking-tight text-dq-navy">
+              <p className="mb-1.5 font-mono text-[10px] uppercase tracking-[0.18em] text-dq-orange">
+                {suite}
+              </p>
+              <h3 className="mb-3 text-xl font-semibold tracking-tight text-dq-navy">
                 {title}
               </h3>
-              <p className="text-[15px] leading-relaxed text-gray-600">{body}</p>
+              <p className="mb-4 flex-1 text-[14px] leading-relaxed text-gray-600">
+                {body}
+              </p>
+              <Link
+                to={href}
+                className="mt-auto inline-flex items-center gap-1 text-sm font-semibold text-dq-orange transition-all hover:gap-2"
+              >
+                {linkLabel} <ArrowRight size={14} />
+              </Link>
             </div>
           ))}
         </div>

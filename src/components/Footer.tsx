@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { Linkedin, Instagram, Youtube } from "lucide-react";
+import TMaaSLogo from "@/components/TMaaSLogo";
 import { featureFlags } from "@/lib/featureFlags";
 
 const Footer = () => {
@@ -8,16 +9,9 @@ const Footer = () => {
       <div className="mx-auto max-w-[1200px]">
         <div className="mb-12 grid grid-cols-1 gap-10 md:grid-cols-[1fr_auto_auto_auto] md:gap-16">
           <div className="space-y-4">
-            <Link to="/" className="flex items-center gap-2">
-              <span className="grid h-7 w-7 place-items-center rounded-md bg-dq-navy text-white">
-                <span className="font-mono text-[11px] font-bold">DQ</span>
-              </span>
-              <span className="text-sm font-semibold text-dq-navy">
-                DigitalQatalyst <span className="text-gray-400">TMaaS</span>
-              </span>
-            </Link>
+            <TMaaSLogo />
             <p className="max-w-[240px] text-[14px] leading-relaxed text-gray-500">
-              Transformation Management as a Service
+              Transformation Management As A Service
             </p>
           </div>
 

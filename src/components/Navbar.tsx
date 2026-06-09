@@ -10,7 +10,6 @@ const Navbar = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
   const location = useLocation();
   const isOnMarketplace = location.pathname.startsWith("/marketplace");
-  const isOnContact = location.pathname.startsWith("/contact");
 
   const navLinkClass = (active: boolean) =>
     `text-[13px] font-medium transition-colors focus-visible:ring-2 focus-visible:ring-dq-orange focus-visible:ring-offset-2 rounded-sm outline-none ${
@@ -36,11 +35,6 @@ const Navbar = () => {
               {featureFlags.isEnabled("marketplace") && (
                 <Link to="/marketplace" className={navLinkClass(isOnMarketplace)}>
                   Marketplace
-                </Link>
-              )}
-              {featureFlags.isEnabled("contactUs") && (
-                <Link to="/contact" className={navLinkClass(isOnContact)}>
-                  Contact
                 </Link>
               )}
             </nav>
@@ -71,6 +65,14 @@ const Navbar = () => {
                 </Link>
               </>
             )}
+            {featureFlags.isEnabled("contactUs") && (
+              <Link
+                to="/contact"
+                className="rounded-full bg-dq-orange px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-[#E04020] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-dq-orange focus-visible:ring-offset-2"
+              >
+                Contact Us
+              </Link>
+            )}
           </div>
 
           <button
@@ -93,15 +95,6 @@ const Navbar = () => {
               onClick={() => setMobileOpen(false)}
             >
               Marketplace
-            </Link>
-          )}
-          {featureFlags.isEnabled("contactUs") && (
-            <Link
-              to="/contact"
-              className="border-b border-gray-100 py-3 text-lg font-medium text-dq-navy"
-              onClick={() => setMobileOpen(false)}
-            >
-              Contact
             </Link>
           )}
           {featureFlags.isEnabled("contextSwitcher") && (
@@ -130,6 +123,15 @@ const Navbar = () => {
                 </Button>
               </Link>
             </>
+          )}
+          {featureFlags.isEnabled("contactUs") && (
+            <Link
+              to="/contact"
+              onClick={() => setMobileOpen(false)}
+              className="mt-4 w-full rounded-full bg-dq-orange py-3 text-center font-semibold text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-dq-orange focus-visible:ring-offset-2"
+            >
+              Contact Us
+            </Link>
           )}
         </div>
       )}

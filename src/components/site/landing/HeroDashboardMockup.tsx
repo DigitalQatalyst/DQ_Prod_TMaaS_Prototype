@@ -1,7 +1,12 @@
+const FEATURED_SERVICES = [
+  { name: "AI Readiness Assessment", category: "AI & Automation" },
+  { name: "Customer Portal Build", category: "Digital Experience" },
+  { name: "Cloud SecDevOps Setup", category: "SecDevOps" },
+];
+
 const HeroDashboardMockup = () => {
   return (
     <div className="relative mx-auto w-full max-w-[520px] lg:max-w-none">
-      {/* tablet frame with isometric perspective */}
       <div
         className="relative"
         style={{
@@ -20,7 +25,6 @@ const HeroDashboardMockup = () => {
         >
           <div className="overflow-hidden rounded-xl bg-[#0a1628]">
             <div className="flex">
-              {/* sidebar */}
               <div className="hidden w-[52px] shrink-0 border-r border-white/10 bg-[#060f1f] py-4 sm:block">
                 <div className="mx-auto mb-6 h-6 w-6 rounded-md bg-dq-orange/80" />
                 {[1, 2, 3, 4, 5].map((i) => (
@@ -33,28 +37,26 @@ const HeroDashboardMockup = () => {
                 ))}
               </div>
 
-              {/* main content */}
               <div className="min-w-0 flex-1 p-4 sm:p-5">
                 <div className="mb-4 flex items-center justify-between gap-2">
                   <div>
                     <div className="font-mono text-[9px] uppercase tracking-[0.15em] text-dq-orange">
-                      TMaaS Dashboard
+                      TMaaS Marketplace
                     </div>
                     <div className="mt-0.5 text-sm font-semibold text-white sm:text-base">
-                      Transformation Overview
+                      Service Catalogue
                     </div>
                   </div>
                   <div className="hidden rounded-full border border-white/10 bg-white/5 px-2.5 py-1 font-mono text-[9px] text-white/60 sm:block">
-                    Live
+                    Browse
                   </div>
                 </div>
 
-                {/* stat cards */}
                 <div className="mb-4 grid grid-cols-3 gap-2">
                   {[
-                    { label: "Projects", value: "12" },
-                    { label: "Services", value: "8" },
-                    { label: "On Track", value: "94%" },
+                    { label: "Services", value: "50+" },
+                    { label: "Categories", value: "12" },
+                    { label: "Bundles", value: "8" },
                   ].map((stat) => (
                     <div
                       key={stat.label}
@@ -70,40 +72,39 @@ const HeroDashboardMockup = () => {
                   ))}
                 </div>
 
-                {/* chart area */}
                 <div className="mb-4 rounded-lg border border-white/10 bg-white/[0.03] p-3">
                   <div className="mb-2 text-[10px] font-medium text-white/70">
-                    Delivery Progress
+                    Featured Services
                   </div>
-                  <div className="flex h-16 items-end gap-1.5">
-                    {[40, 65, 45, 80, 55, 90, 70, 85].map((h, i) => (
+                  <div className="space-y-2">
+                    {FEATURED_SERVICES.map((service) => (
                       <div
-                        key={i}
-                        className="flex-1 rounded-sm bg-gradient-to-t from-dq-orange/80 to-dq-orange/30"
-                        style={{ height: `${h}%` }}
-                      />
+                        key={service.name}
+                        className="flex items-center justify-between gap-2 rounded-md border border-white/[0.06] bg-white/[0.02] px-2.5 py-2"
+                      >
+                        <span className="truncate text-[11px] text-white/80">
+                          {service.name}
+                        </span>
+                        <span className="shrink-0 font-mono text-[8px] uppercase tracking-wider text-dq-orange">
+                          {service.category}
+                        </span>
+                      </div>
                     ))}
                   </div>
                 </div>
 
-                {/* recent activity */}
                 <div>
                   <div className="mb-2 font-mono text-[9px] uppercase tracking-[0.15em] text-white/40">
-                    Recent Activity
+                    Shop by Goal
                   </div>
-                  <div className="space-y-2">
-                    {[
-                      "SecDevOps pod activated",
-                      "Blueprint review completed",
-                      "Outcome scorecard updated",
-                    ].map((item) => (
-                      <div
-                        key={item}
-                        className="flex items-center gap-2 rounded-md border border-white/[0.06] bg-white/[0.02] px-2.5 py-2"
+                  <div className="flex flex-wrap gap-1.5">
+                    {["Grow Revenue", "Launch AI", "Modernise Ops"].map((goal) => (
+                      <span
+                        key={goal}
+                        className="rounded-full border border-white/10 bg-white/[0.04] px-2 py-1 text-[10px] text-white/60"
                       >
-                        <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-dq-orange" />
-                        <span className="truncate text-[11px] text-white/70">{item}</span>
-                      </div>
+                        {goal}
+                      </span>
                     ))}
                   </div>
                 </div>
@@ -113,7 +114,6 @@ const HeroDashboardMockup = () => {
         </div>
       </div>
 
-      {/* glow accent behind tablet */}
       <div
         aria-hidden
         className="absolute -inset-8 -z-10 rounded-full opacity-60 blur-3xl"

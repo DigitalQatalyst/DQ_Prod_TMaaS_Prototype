@@ -34,7 +34,7 @@ const MarketplaceBestSellers = ({
       : `Top ${marketplaceCategoryLabels[activeTab] ?? "picks"}`;
 
   return (
-    <section aria-labelledby="marketplace-bestsellers-heading" className="relative">
+    <section aria-labelledby="marketplace-bestsellers-heading" className="relative pt-10">
       <div className="pr-24">
         <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-dq-orange">
           Popular

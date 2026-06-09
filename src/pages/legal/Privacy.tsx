@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { ArrowLeft, Shield, Download, Calendar } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import Navbar from "@/components/Navbar";
+import LandingNavbar from "@/components/site/landing/LandingNavbar";
 import Footer from "@/components/Footer";
 
 const Privacy = () => {
@@ -59,7 +59,7 @@ const Privacy = () => {
 
   return (
     <div className="min-h-screen bg-background">
-      <Navbar />
+      <LandingNavbar />
 
       <main className="pt-20">
         {/* Header */}

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { Check, Clock, ArrowRight, Loader2, MapPin, Phone, Mail } from "lucide-react";
-import Navbar from "@/components/Navbar";
+import LandingNavbar from "@/components/site/landing/LandingNavbar";
 import Footer from "@/components/Footer";
 import { featureFlags } from "@/lib/featureFlags";
 
@@ -32,15 +32,15 @@ const INITIAL: FormState = {
 };
 
 const INTEREST_OPTIONS = [
-  "Transformation Management",
-  "Design & Deploy Services",
-  "Marketplace Enquiry",
+  "Digital Platform & Architecture",
+  "Transformation Strategy & Advisory",
+  "Training & Capability",
   "General Enquiry",
 ];
 
 const NEED_OPTIONS = [
   "Advisory & Strategy",
-  "Service Walkthrough",
+  "Product Demo or Walkthrough",
   "Diagnostic Assessment",
   "Implementation Support",
   "Transformation Programme",
@@ -74,7 +74,7 @@ const Contact = () => {
       next.phone = "Enter a valid phone number";
     if (!form.organisation.trim()) next.organisation = "Organisation is required";
     if (!form.interest) next.interest = "Select an area of interest";
-    if (!form.need) next.need = "Select what you need from TMaaS";
+    if (!form.need) next.need = "Select what you need from DQ";
     if (!form.message.trim()) next.message = "A short context message is required";
     if (!form.consent) next.consent = "Consent is required to submit";
     setErrors(next);
@@ -124,7 +124,7 @@ const Contact = () => {
 
   return (
     <div className="min-h-screen bg-background">
-      <Navbar />
+      <LandingNavbar />
       {status === "success" ? (
         <section className="bg-white px-5 py-12 md:px-8 md:py-16">
           <div className="mx-auto max-w-[1120px]">
@@ -136,7 +136,7 @@ const Contact = () => {
                 We&apos;ve got your request
               </h2>
               <p className="mx-auto mb-8 max-w-md text-[15px] leading-relaxed text-gray-600">
-                A TMaaS advisor will review your context and reach out within 2 business days
+                A DQ advisor will review your context and reach out within 2 business days
                 to route you to the right pathway.
               </p>
               <div className="flex flex-col justify-center gap-3 sm:flex-row">
@@ -269,7 +269,7 @@ const Contact = () => {
                       </Field>
                       <Field
                         id="need"
-                        label="What do you need from TMaaS?"
+                        label="What do you need from DQ?"
                         required
                         error={errors.need}
                       >
@@ -363,11 +363,11 @@ const Contact = () => {
 
               <aside className="px-1 lg:col-span-4">
                 <p className="mb-4 text-[10px] font-semibold uppercase tracking-[0.16em] text-gray-400">
-                  How TMaaS routes requests
+                  How DQ routes requests
                 </p>
                 <p className="mb-5 text-[13px] leading-relaxed text-gray-500">
-                  A TMaaS advisor reads every submission and matches you to the right entry point
-                  — advisory, marketplace services, diagnostic, or transformation support.
+                  A DQ advisor reads every submission and matches you to the right entry point
+                  — advisory &amp; strategy, product or diagnostic, or transformation support.
                 </p>
                 <div className="flex items-center gap-1.5 text-[13px] text-gray-500">
                   <Clock size={13} className="shrink-0 text-gray-400" />
@@ -390,6 +390,20 @@ const Contact = () => {
                         708, Opal Tower
                       </p>
                       <p className="mt-0.5 text-[12px] text-gray-500">Business Bay, Dubai, UAE</p>
+                    </div>
+                  </a>
+                  <a
+                    href="https://share.google/a0nFDiFNo30ZcNrsL"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="group mb-4 flex items-start gap-2.5"
+                  >
+                    <MapPin size={13} className="mt-0.5 shrink-0 text-dq-orange" />
+                    <div className="border-l border-dq-orange/25 pl-2.5 transition-colors group-hover:border-dq-orange/60">
+                      <p className="text-[13px] font-medium leading-snug text-dq-navy transition-colors group-hover:text-dq-orange">
+                        Kenafric Business Park
+                      </p>
+                      <p className="mt-0.5 text-[12px] text-gray-500">Baba Dogo Road, Nairobi, Kenya</p>
                     </div>
                   </a>
                   <a href="tel:+97142666169" className="group flex items-center gap-2.5 py-1">
@@ -440,7 +454,7 @@ function ContactHero() {
   return (
     <section
       className="relative isolate overflow-hidden px-5 pb-14 pt-14 md:px-8 md:pb-16 md:pt-16 lg:px-10"
-      style={{ background: "linear-gradient(135deg, #f8fafc 0%, #fff7ed 50%, #f8fafc 100%)" }}
+      style={{ background: "var(--mesh-hero-light)" }}
     >
       <div className="mx-auto max-w-[1120px]">
         <div className="mb-4 text-[11px] font-semibold uppercase tracking-[0.14em] text-gray-500">
@@ -450,8 +464,8 @@ function ContactHero() {
           Tell us where you are. We&apos;ll route you to what&apos;s right.
         </h1>
         <p className="max-w-xl text-[15px] leading-relaxed text-gray-600 md:text-[16px]">
-          Every request is reviewed by a TMaaS advisor who matches your context to the right
-          pathway — advisory, marketplace services, diagnostic, or transformation support.
+          Every request is reviewed by a DQ advisor who matches your context to the right
+          pathway — advisory, product, diagnostic, or transformation support.
         </p>
       </div>
     </section>

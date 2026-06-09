@@ -1,22 +1,21 @@
-import { Boxes, Target, CircleHelp } from "lucide-react";
+import { FileX, Layers, Unlink } from "lucide-react";
 import MeshSection from "@/components/site/MeshSection";
-import SplitSectionHeader from "./SplitSectionHeader";
 
 const CHALLENGE_CARDS = [
   {
-    Icon: Boxes,
-    title: "Fragmented approach",
-    body: "Multiple vendors, disconnected tools, and siloed delivery models lead to inconsistent outcomes and duplicated effort.",
+    Icon: FileX,
+    title: "Designed, never built",
+    body: "Strategy decks and roadmaps that never connect to execution or running systems.",
   },
   {
-    Icon: Target,
-    title: "Execution gaps",
-    body: "Strategy rarely translates to delivery. Teams lack the playbooks, accountable owners, and cadence to ship with confidence.",
+    Icon: Layers,
+    title: "Built without a blueprint",
+    body: "Technology deployed without architecture alignment, accountable owners, or delivery cadence.",
   },
   {
-    Icon: CircleHelp,
-    title: "Uncertain outcomes",
-    body: "Without telemetry and scorecards, leadership cannot steer investment toward what is working — or stop what is not.",
+    Icon: Unlink,
+    title: "No continuity",
+    body: "Discovery, delivery, and operations treated as disconnected engagements — with no measurable outcomes.",
   },
 ];
 
@@ -39,33 +38,37 @@ const ChallengeSection = () => {
       />
 
       <div className="mx-auto max-w-[1200px]">
-        <SplitSectionHeader
-          dark
-          kicker="The Challenge"
-          title="Most transformations fail to deliver value."
-          description="Organisations invest heavily in digital transformation — yet the majority never achieve the outcomes they set out to deliver. The reasons are structural, not strategic."
-        />
+        <p className="mb-4 font-mono text-[11px] uppercase tracking-[0.2em] text-dq-orange">
+          Why TMaaS exists
+        </p>
+        <h2 className="mb-4 text-4xl font-semibold tracking-tight text-white md:text-5xl">
+          70% of digital transformations fail to deliver.
+        </h2>
+        <p className="mb-16 max-w-2xl text-lg text-white/60">
+          The reasons are consistent. The fix is architectural — and productised.
+        </p>
 
-        <div className="grid gap-5 md:grid-cols-3 md:gap-6">
+        <div className="grid gap-6 md:grid-cols-3">
           {CHALLENGE_CARDS.map(({ Icon, title, body }) => (
             <div
               key={title}
-              className="group relative overflow-hidden rounded-2xl border border-white/10 bg-white/[0.06] p-8 backdrop-blur-sm"
+              className="rounded-2xl border border-white/10 bg-white/[0.06] p-8 backdrop-blur-sm"
             >
               <div className="mb-5 flex h-10 w-10 items-center justify-center rounded-xl bg-dq-orange/10 text-dq-orange">
-                <Icon size={22} strokeWidth={1.75} />
+                <Icon size={22} />
               </div>
               <h3 className="mb-3 text-xl font-semibold tracking-tight text-white">
                 {title}
               </h3>
               <p className="text-[15px] leading-relaxed text-white/60">{body}</p>
-              <div
-                aria-hidden
-                className="absolute inset-x-0 bottom-0 h-[3px] bg-dq-orange opacity-0 transition-opacity duration-300 group-hover:opacity-100"
-              />
             </div>
           ))}
         </div>
+
+        <p className="mx-auto mt-12 max-w-2xl text-center text-[15px] text-white/50">
+          TMaaS was built to close this gap — with a marketplace that treats
+          transformation as a continuous, managed system.
+        </p>
       </div>
     </MeshSection>
   );

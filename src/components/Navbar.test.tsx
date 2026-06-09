@@ -16,6 +16,10 @@ describe("Navbar", () => {
     );
 
     expect(screen.getByText("Marketplace")).toBeInTheDocument();
+    expect(screen.getByText("Contact Us")).toBeInTheDocument();
+    expect(screen.queryByText("Contact")).not.toBeInTheDocument();
+    expect(screen.queryByText("How it Works")).not.toBeInTheDocument();
+    expect(screen.queryByText("Offerings")).not.toBeInTheDocument();
     expect(screen.queryByText("TMaaS AI Demo")).not.toBeInTheDocument();
   });
 });

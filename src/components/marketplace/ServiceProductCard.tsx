@@ -11,6 +11,9 @@ import { getServiceIcon } from "@/components/marketplace/marketplaceServiceIcons
 
 export type ServiceProduct = (typeof initialServices)[number];
 
+const DESCRIPTION_CLAMP =
+  "overflow-hidden text-gray-500 [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:3]";
+
 type ServiceProductCardProps = {
   service: ServiceProduct;
   displayName?: string;
@@ -52,7 +55,7 @@ const ServiceProductCard = ({
           <h3 className="mt-1.5 text-[15px] font-semibold leading-snug text-dq-navy group-hover/card:text-dq-orange">
             {title}
           </h3>
-          <p className="mt-1.5 line-clamp-2 text-sm leading-relaxed text-gray-500">
+          <p className={`mt-1.5 text-sm leading-snug ${DESCRIPTION_CLAMP}`}>
             {service.description}
           </p>
           <p className="mt-3 text-sm text-dq-navy">
@@ -132,7 +135,7 @@ const ServiceProductCard = ({
   if (variant === "grid") {
     const gridInner = (
       <>
-        <div className={`mb-4 flex items-start gap-3 ${featured ? "mt-1" : ""}`}>
+        <div className={`mb-3 flex items-start gap-3 ${featured ? "mt-1" : ""}`}>
           <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-orange-50 text-dq-orange">
             <ServiceIcon size={20} strokeWidth={1.75} />
           </div>
@@ -140,10 +143,10 @@ const ServiceProductCard = ({
             {title}
           </h3>
         </div>
-        <p className="line-clamp-3 flex-1 text-sm leading-snug text-gray-500">
+        <p className={`text-sm leading-snug ${DESCRIPTION_CLAMP}`}>
           {service.description}
         </p>
-        <div className="mt-auto space-y-3 pt-5">
+        <div className="mt-4 space-y-2.5">
           <span className="block font-mono text-[10px] uppercase tracking-[0.16em] text-gray-400">
             {categoryLabel}
           </span>
@@ -164,7 +167,7 @@ const ServiceProductCard = ({
 
     return (
       <article
-        className={`group/card relative flex h-full min-h-[320px] flex-col rounded-xl bg-white p-6 text-left shadow-[var(--shadow-card)] transition-shadow duration-300 hover:shadow-[var(--shadow-elevated)] ${
+        className={`group/card relative flex flex-col rounded-xl bg-white p-6 text-left shadow-[var(--shadow-card)] transition-shadow duration-300 hover:shadow-[var(--shadow-elevated)] ${
           featured ? "pt-8" : ""
         }`}
       >
@@ -175,11 +178,11 @@ const ServiceProductCard = ({
         )}
 
         {canViewDetail ? (
-          <Link to={detailUrl} className="flex min-h-0 flex-1 flex-col">
+          <Link to={detailUrl} className="flex flex-col">
             {gridInner}
           </Link>
         ) : (
-          <div className="flex min-h-0 flex-1 flex-col">{gridInner}</div>
+          <div className="flex flex-col">{gridInner}</div>
         )}
       </article>
     );
@@ -291,7 +294,7 @@ const FullServiceProductCard = ({
         <h3 className="text-[15px] font-semibold leading-snug text-dq-navy group-hover/card:text-dq-orange">
           {title}
         </h3>
-        <p className="mt-2 line-clamp-2 text-xs leading-relaxed text-gray-500">
+        <p className={`mt-2 text-xs leading-relaxed ${DESCRIPTION_CLAMP}`}>
           {service.description}
         </p>
         <div className="mt-4 border-t border-slate-100 pt-3">
@@ -299,7 +302,7 @@ const FullServiceProductCard = ({
             {service.features.slice(0, 3).map((feat) => (
               <li
                 key={feat}
-                className="flex items-start gap-2 text-[11px] text-gray-600 leading-tight"
+                className="flex items-start gap-2 text-[11px] leading-tight text-gray-600"
               >
                 <span className="mt-1.5 h-1 w-1 shrink-0 rounded-full bg-gray-400" />
                 {feat}
@@ -341,7 +344,7 @@ const FullServiceProductCard = ({
           )}
         </div>
         <h3 className="text-[15px] font-semibold leading-snug text-dq-navy">{title}</h3>
-        <p className="mt-2 line-clamp-2 text-xs leading-relaxed text-gray-500">
+        <p className={`mt-2 text-xs leading-relaxed ${DESCRIPTION_CLAMP}`}>
           {service.description}
         </p>
         <div className="mt-4 border-t border-slate-100 pt-3">
