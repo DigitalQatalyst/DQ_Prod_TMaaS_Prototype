@@ -143,7 +143,7 @@ export const mockedRecommendations = {
 // STATIC MOCKED FAQ RESPONSES - 4 FAQ paths
 export const mockedFAQs = {
   "what-is-tmaas": {
-    message: "TMaaS — Technology Management as a Service — is a digital platform that helps organizations discover, explore, and activate digital transformation through structured services, AI-powered guidance, and collaborative workspaces. Instead of traditional consulting, TMaaS gives you proven transformation roadmaps you can adapt and activate.",
+    message: "TMaaS — Transformation as a Service — is a digital platform that helps organizations discover, explore, and activate digital transformation through structured services, AI-powered guidance, and collaborative workspaces. Instead of traditional consulting, TMaaS gives you proven transformation roadmaps you can adapt and activate.",
     options: ["Explore the services", "How does it work?", "Contact the team"]
   },
   "how-does-it-work": {

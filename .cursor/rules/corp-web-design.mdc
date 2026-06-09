@@ -21,6 +21,10 @@ Marketing pages (`/`, `/marketplace`, `/service/:id`) share the **DQ corp web de
 - CTAs: `rounded-full`; primary orange on product landing (`bg-dq-orange`); secondary glass (`bg-white/60 backdrop-blur-sm border`)
 - Hero backgrounds: `MeshSection` with `hero-grid` overlay and mesh CSS vars from `index.css`
 - Footer section labels: `font-mono text-[10px] uppercase tracking-[0.18em] text-gray-400`
+- Footer link columns: **Explore** (Marketplace, Contact Us — internal, flag-gated), **DQ** (Explore DigitalQatalyst, About — external corp web), **Follow Us** (LinkedIn, X, YouTube)
+- Footer bottom bar always shows Privacy and Terms linking to `https://www.digitalqatalyst.com/privacy` and `/terms` (external, new tab)
+- Corp web links use `https://www.digitalqatalyst.com` base URL; TMaaS product link label is **Marketplace** (not "Design & Deploy Services")
+- Platform display name is **Transformation as a Service** (`PLATFORM_NAME` in `src/lib/brandLinks.ts`); acronym is `TMaaS` (`PLATFORM_ACRONYM`); formal line is `TMaaS (Transformation as a Service)` (`PLATFORM_BRAND_LINE`). Do not use "Transformation Management as a Service", "Transformation Marketplace", or "Technology Management as a Service" as the platform name.
 
 ## Differentiate for product pages (TMaaS landing)
 - Use **product landing IA** per `specs/landing-page-prototype-shell.md` v2 — implemented at `/landing-v2` (`IndexProductLanding`, `src/components/site/landing/v2/`)

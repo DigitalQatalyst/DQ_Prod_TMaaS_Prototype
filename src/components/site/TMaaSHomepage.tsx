@@ -265,7 +265,7 @@ function Hero() {
           style={{ fontWeight: 700, lineHeight: 1.1 }}
         >
           <span className="block overflow-hidden">
-            <Reveal>Transformation&nbsp;Management</Reveal>
+            <Reveal>Transformation</Reveal>
           </span>
           <span className="block overflow-hidden">
             <Reveal delay={0.08}>

@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { Check, Clock, ArrowRight, Loader2, MapPin, Phone, Mail } from "lucide-react";
 import LandingNavbar from "@/components/site/landing/LandingNavbar";
 import Footer from "@/components/Footer";
+import { PLATFORM_NAME } from "@/lib/brandLinks";
 import { featureFlags } from "@/lib/featureFlags";
 
 type FormState = {
@@ -51,7 +52,7 @@ const PHONE_REGEX = /^\+?[\d\s\-(). ]{7,20}$/;
 
 const Contact = () => {
   useEffect(() => {
-    document.title = "Contact TMaaS | Transformation Management as a Service";
+    document.title = `Contact Us | ${PLATFORM_NAME}`;
   }, []);
 
   const [form, setForm] = useState<FormState>(INITIAL);

@@ -138,7 +138,7 @@ const Terms = () => {
                     <section id="acceptance" className="mb-12">
                       <h2 className="mb-4 text-2xl font-bold text-foreground">1. Acceptance of Terms</h2>
                       <p className="text-muted-foreground">
-                        By accessing and using TMaaS (Transformation Management as a Service), you accept and agree to be bound by the terms and provision of this agreement. If you do not agree to abide by the above, please do not use this service.
+                        By accessing and using TMaaS (Transformation as a Service), you accept and agree to be bound by the terms and provision of this agreement. If you do not agree to abide by the above, please do not use this service.
                       </p>
                       <p className="mt-4 text-muted-foreground">
                         These Terms of Service ("Terms") govern your access to and use of TMaaS, including any content, functionality, and services offered on or through the platform.
