@@ -16,11 +16,14 @@ const CATEGORY_ICONS: Record<string, LucideIcon> = {
   ai: BarChart2,
 };
 
-const SERVICE_COUNTS: Record<string, string> = {
-  experience: "24 services",
-  operations: "18 services",
-  security: "15 services",
-  ai: "12 services",
+const CATEGORY_DESCRIPTIONS: Record<string, string> = {
+  experience:
+    "Customer-facing platforms, portals, and engagement experiences designed for adoption and scale.",
+  operations:
+    "Workflow automation, operating models, and productivity systems that connect people to outcomes.",
+  security:
+    "Secure delivery pipelines, cloud infrastructure, and DevSecOps practices built for enterprise compliance.",
+  ai: "Data platforms, analytics, and AI capabilities that turn information into actionable insight.",
 };
 
 const MarketplacePreviewSection = () => {
@@ -29,7 +32,7 @@ const MarketplacePreviewSection = () => {
       id="marketplace-preview"
       className="bg-gray-50 px-5 py-24 md:px-8 lg:px-10"
     >
-      <div className="mx-auto max-w-7xl">
+      <div className="mx-auto max-w-[1200px]">
         <p className="mb-4 font-mono text-[11px] uppercase tracking-[0.2em] text-dq-orange">
           Inside the marketplace
         </p>
@@ -41,25 +44,28 @@ const MarketplacePreviewSection = () => {
           category links to the full marketplace catalogue.
         </p>
 
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="grid gap-6 md:grid-cols-2">
           {marketplaceCoreCapabilities.map(({ id, label }) => {
             const Icon = CATEGORY_ICONS[id];
             return (
               <Link
                 key={id}
                 to="/marketplace"
-                className="group flex flex-col rounded-2xl border border-gray-200 bg-white p-6 outline-none transition-all duration-300 hover:border-dq-orange hover:shadow-xl focus-visible:ring-2 focus-visible:ring-dq-orange focus-visible:ring-offset-2"
+                className="group flex items-center gap-4 rounded-2xl border border-gray-200 bg-white p-6 outline-none transition-all duration-300 hover:border-dq-orange hover:shadow-xl focus-visible:ring-2 focus-visible:ring-dq-orange focus-visible:ring-offset-2"
               >
-                <div className="mb-4 flex h-11 w-11 items-center justify-center rounded-xl bg-navy-50 text-dq-navy transition-colors group-hover:bg-dq-orange group-hover:text-white">
+                <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-navy-50 text-dq-navy transition-colors group-hover:bg-dq-orange group-hover:text-white">
                   <Icon size={22} />
                 </div>
-                <h3 className="mb-1 text-lg font-semibold text-dq-navy">{label}</h3>
-                <p className="mb-4 text-sm text-gray-500">
-                  {SERVICE_COUNTS[id]}
-                </p>
-                <span className="mt-auto inline-flex items-center gap-1 text-sm font-semibold text-dq-orange transition-all group-hover:gap-2">
-                  Browse <ArrowRight size={14} />
-                </span>
+                <div className="flex-1">
+                  <h3 className="mb-1 text-lg font-semibold text-dq-navy">{label}</h3>
+                  <p className="text-[15px] text-gray-600">
+                    {CATEGORY_DESCRIPTIONS[id]}
+                  </p>
+                </div>
+                <ArrowRight
+                  size={20}
+                  className="shrink-0 text-gray-400 transition-colors group-hover:text-dq-orange"
+                />
               </Link>
             );
           })}
