@@ -1,6 +1,6 @@
-# Feature: Landing Page — Feature Specific (v1 — active)
+# Feature: Landing Page — Feature Specific (v1 Corp Mirror)
 
-> **Active spec** — matches current `IndexTraditional` implementation. Product IA v2 draft: `landing-page-prototype-shell-v2-product-ia.md`.
+> **Archive copy.** Canonical active spec: `landing-page-prototype-shell.md` (v1). Product IA evolution: `landing-page-prototype-shell-v2-product-ia.md`.
 
 ## 1. Platform Context
 - Platform: DQ Digital Experience Platform (DXP)
