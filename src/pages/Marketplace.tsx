@@ -302,10 +302,10 @@ const Marketplace = () => {
           <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-dq-orange">
             Marketplace
           </p>
-          <h1 className="mt-3 text-balance text-4xl font-semibold tracking-tight text-dq-navy md:text-5xl">
+          <h1 className="mt-4 text-balance text-[2.75rem] font-semibold leading-[1.05] tracking-[-0.02em] text-dq-navy sm:text-5xl md:text-6xl lg:text-7xl">
             Transformation Services Marketplace
           </h1>
-          <p className="mt-3 max-w-xl text-sm leading-relaxed text-gray-600 md:text-base">
+          <p className="mt-4 max-w-xl text-base leading-relaxed text-gray-600 md:text-lg">
             Discover architecture-led transformation services across digital experience, digital operations, AI enablement, and enterprise modernization.
           </p>
 
