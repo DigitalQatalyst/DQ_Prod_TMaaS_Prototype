@@ -3,6 +3,7 @@ import { Link, useLocation } from "react-router-dom";
 import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import TMaaSLogo from "@/components/TMaaSLogo";
+import ExploreDigitalQatalystCta from "@/components/ExploreDigitalQatalystCta";
 import { featureFlags } from "@/lib/featureFlags";
 
 const NAV_LINKS = [
@@ -64,6 +65,7 @@ const LandingNavbar = () => {
             </div>
           )}
 
+          <ExploreDigitalQatalystCta className="hidden md:inline-flex" />
           {featureFlags.isEnabled("contactUs") && (
             <Link
               to="/contact"
@@ -116,11 +118,15 @@ const LandingNavbar = () => {
               </Link>
             </>
           )}
+          <ExploreDigitalQatalystCta
+            className="mt-4 w-full"
+            showIcon={false}
+          />
           {featureFlags.isEnabled("contactUs") && (
             <Link
               to="/contact"
               onClick={() => setMobileOpen(false)}
-              className="mt-4 w-full rounded-full bg-dq-orange py-3 text-center font-semibold text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-dq-orange focus-visible:ring-offset-2"
+              className="mt-3 w-full rounded-full bg-dq-orange py-3 text-center font-semibold text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-dq-orange focus-visible:ring-offset-2"
             >
               Contact Us
             </Link>

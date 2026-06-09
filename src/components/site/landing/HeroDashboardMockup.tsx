@@ -1,7 +1,7 @@
 const FEATURED_SERVICES = [
-  { name: "AI Readiness Assessment", category: "AI & Automation" },
-  { name: "Customer Portal Build", category: "Digital Experience" },
-  { name: "Cloud SecDevOps Setup", category: "SecDevOps" },
+  { name: "AI Readiness Assessment", category: "Data, AI & Analytics" },
+  { name: "Customer Portal Build", category: "Customer Experience & Engagement" },
+  { name: "Cloud SecDevOps Setup", category: "Development, Security, and Operations" },
 ];
 
 const HeroDashboardMockup = () => {

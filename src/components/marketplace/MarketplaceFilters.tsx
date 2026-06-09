@@ -1,6 +1,7 @@
 import { useState, type ReactNode } from "react";
 import { Button } from "@/components/ui/button";
 import {
+  marketplaceCoreCapabilities,
   marketplaceServiceTypes,
   marketplaceEconomySectors,
 } from "@/data/marketplaceNavigation";
@@ -126,12 +127,10 @@ const MarketplaceFilters = ({
       <div className="space-y-6">
         <FilterSection label="Category">
           <CheckboxGroup
-            options={[
-              { id: "experience", label: "Digital Experience" },
-              { id: "operations", label: "Digital Work System" },
-              { id: "security", label: "SecDevOps" },
-              { id: "ai", label: "Digital Intelligence & Analytics" },
-            ]}
+            options={marketplaceCoreCapabilities.map(({ id, label }) => ({
+              id,
+              label,
+            }))}
             selectedValues={selectedCategories}
             onChange={onCategoryChange}
           />

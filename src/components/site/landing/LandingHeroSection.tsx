@@ -22,9 +22,9 @@ const LandingHeroSection = () => {
           </h1>
 
           <p className="animate-fade-in-up animation-delay-200 mt-6 max-w-2xl text-lg leading-relaxed text-gray-600">
-            TMaaS connects organisations with certified transformation services
-            and proven frameworks — explore the marketplace and contact us when
-            you are ready to move forward.
+            TMaaS is a low-cost, architecture-led marketplace for digital
+            transformation services — using ready-to-launch blueprints to
+            accelerate impact, reduce cost, and ensure scalability.
           </p>
 
           <div className="animate-fade-in-up animation-delay-300 mt-6 flex flex-col items-stretch gap-3 sm:flex-row sm:items-center">

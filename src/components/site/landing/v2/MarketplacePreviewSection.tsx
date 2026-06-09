@@ -5,30 +5,23 @@ import {
   Workflow,
   Shield,
   BarChart2,
+  type LucideIcon,
 } from "lucide-react";
+import { marketplaceCoreCapabilities } from "@/data/marketplaceNavigation";
 
-const CATEGORIES = [
-  {
-    Icon: Monitor,
-    label: "Digital Experience",
-    count: "24 services",
-  },
-  {
-    Icon: Workflow,
-    label: "Digital Work System",
-    count: "18 services",
-  },
-  {
-    Icon: Shield,
-    label: "SecDevOps",
-    count: "15 services",
-  },
-  {
-    Icon: BarChart2,
-    label: "Intelligence & Analytics",
-    count: "12 services",
-  },
-];
+const CATEGORY_ICONS: Record<string, LucideIcon> = {
+  experience: Monitor,
+  operations: Workflow,
+  security: Shield,
+  ai: BarChart2,
+};
+
+const SERVICE_COUNTS: Record<string, string> = {
+  experience: "24 services",
+  operations: "18 services",
+  security: "15 services",
+  ai: "12 services",
+};
 
 const MarketplacePreviewSection = () => {
   return (
@@ -49,22 +42,27 @@ const MarketplacePreviewSection = () => {
         </p>
 
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-          {CATEGORIES.map(({ Icon, label, count }) => (
-            <Link
-              key={label}
-              to="/marketplace"
-              className="group flex flex-col rounded-2xl border border-gray-200 bg-white p-6 outline-none transition-all duration-300 hover:border-dq-orange hover:shadow-xl focus-visible:ring-2 focus-visible:ring-dq-orange focus-visible:ring-offset-2"
-            >
-              <div className="mb-4 flex h-11 w-11 items-center justify-center rounded-xl bg-navy-50 text-dq-navy transition-colors group-hover:bg-dq-orange group-hover:text-white">
-                <Icon size={22} />
-              </div>
-              <h3 className="mb-1 text-lg font-semibold text-dq-navy">{label}</h3>
-              <p className="mb-4 text-sm text-gray-500">{count}</p>
-              <span className="mt-auto inline-flex items-center gap-1 text-sm font-semibold text-dq-orange transition-all group-hover:gap-2">
-                Browse <ArrowRight size={14} />
-              </span>
-            </Link>
-          ))}
+          {marketplaceCoreCapabilities.map(({ id, label }) => {
+            const Icon = CATEGORY_ICONS[id];
+            return (
+              <Link
+                key={id}
+                to="/marketplace"
+                className="group flex flex-col rounded-2xl border border-gray-200 bg-white p-6 outline-none transition-all duration-300 hover:border-dq-orange hover:shadow-xl focus-visible:ring-2 focus-visible:ring-dq-orange focus-visible:ring-offset-2"
+              >
+                <div className="mb-4 flex h-11 w-11 items-center justify-center rounded-xl bg-navy-50 text-dq-navy transition-colors group-hover:bg-dq-orange group-hover:text-white">
+                  <Icon size={22} />
+                </div>
+                <h3 className="mb-1 text-lg font-semibold text-dq-navy">{label}</h3>
+                <p className="mb-4 text-sm text-gray-500">
+                  {SERVICE_COUNTS[id]}
+                </p>
+                <span className="mt-auto inline-flex items-center gap-1 text-sm font-semibold text-dq-orange transition-all group-hover:gap-2">
+                  Browse <ArrowRight size={14} />
+                </span>
+              </Link>
+            );
+          })}
         </div>
 
         <div className="mt-10 text-center">

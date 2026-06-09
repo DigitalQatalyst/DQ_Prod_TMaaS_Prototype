@@ -237,7 +237,7 @@ const Marketplace = () => {
       });
     }
     selectedCategories.forEach((cat) => {
-      const label = cat === "experience" ? "Digital Experience" : cat === "operations" ? "Digital Work System" : cat === "security" ? "SecDevOps" : cat === "ai" ? "Digital Intelligence & Analytics" : cat;
+      const label = marketplaceCategoryLabels[cat] ?? cat;
       chips.push({
         key: `cat-${cat}`,
         label: `Category: ${label}`,

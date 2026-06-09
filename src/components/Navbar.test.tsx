@@ -16,6 +16,7 @@ describe("Navbar", () => {
     );
 
     expect(screen.getByText("Marketplace")).toBeInTheDocument();
+    expect(screen.getByText("Explore DigitalQatalyst")).toBeInTheDocument();
     expect(screen.getByText("Contact Us")).toBeInTheDocument();
     expect(screen.queryByText("Contact")).not.toBeInTheDocument();
     expect(screen.queryByText("How it Works")).not.toBeInTheDocument();
