@@ -146,7 +146,7 @@ const ServiceProductCard = ({
         <p className={`text-sm leading-snug ${DESCRIPTION_CLAMP}`}>
           {service.description}
         </p>
-        <div className="mt-4 space-y-2.5">
+        <div className="mt-5 space-y-3">
           <span className="block font-mono text-[10px] uppercase tracking-[0.16em] text-gray-400">
             {categoryLabel}
           </span>
