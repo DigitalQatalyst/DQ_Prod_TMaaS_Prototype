@@ -1,22 +1,21 @@
-import { Link } from "react-router-dom";
-import { ArrowRight, Search, Scale, Handshake } from "lucide-react";
+import { FileX, Layers, Unlink } from "lucide-react";
 import MeshSection from "@/components/site/MeshSection";
 
 const WHY_CARDS = [
   {
-    Icon: Search,
-    title: "Hard to find the right services",
-    body: "Transformation buyers waste cycles searching fragmented vendor lists with no shared taxonomy or outcome mapping.",
+    Icon: FileX,
+    title: "Designed, never built",
+    body: "Strategy decks and roadmaps that never connect to execution or running systems.",
   },
   {
-    Icon: Scale,
-    title: "Difficult to compare options",
-    body: "Pricing, scope, and delivery models vary wildly — making apples-to-apples evaluation nearly impossible.",
+    Icon: Layers,
+    title: "Built without a blueprint",
+    body: "Technology deployed without architecture alignment, accountable owners, or delivery cadence.",
   },
   {
-    Icon: Handshake,
-    title: "No clear path to engage",
-    body: "Even when the right service is identified, activation often stalls without a governed onboarding path.",
+    Icon: Unlink,
+    title: "No continuity",
+    body: "Discovery, delivery, and operations treated as disconnected engagements — with no measurable outcomes.",
   },
 ];
 
@@ -41,14 +40,13 @@ const WhyTmaasSection = () => {
 
       <div className="mx-auto max-w-[1200px]">
         <p className="mb-4 font-mono text-[11px] uppercase tracking-[0.2em] text-dq-orange">
-          Why TMaaS
+          Why TMaaS exists
         </p>
         <h2 className="mb-4 text-4xl font-semibold tracking-tight text-white md:text-5xl">
-          Buying transformation services should not be this hard.
+          70% of digital transformations fail to deliver.
         </h2>
         <p className="mb-16 max-w-2xl text-lg text-white/60">
-          Organisations need a single place to discover, evaluate, and activate
-          certified transformation services — with transparency from day one.
+          The reasons are consistent. The fix is architectural — and productised.
         </p>
 
         <div className="grid gap-6 md:grid-cols-3">
@@ -69,13 +67,8 @@ const WhyTmaasSection = () => {
         </div>
 
         <p className="mx-auto mt-12 max-w-2xl text-center text-[15px] text-white/50">
-          TMaaS closes the gap with a curated marketplace —{" "}
-          <Link
-            to="/marketplace"
-            className="inline-flex items-center gap-1 font-semibold text-dq-orange transition-all hover:gap-2"
-          >
-            explore services <ArrowRight size={14} />
-          </Link>
+          TMaaS was built to close this gap — with a marketplace that treats
+          transformation as a continuous, managed system.
         </p>
       </div>
     </MeshSection>
