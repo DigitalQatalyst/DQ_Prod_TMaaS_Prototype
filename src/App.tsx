@@ -6,6 +6,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route, useLocation, Navigate } from "react-router-dom";
 import Index from "./pages/Index";
 import IndexTraditional from "./pages/IndexTraditional";
+import IndexProductLanding from "./pages/IndexProductLanding";
 import Explore from "./pages/Explore";
 import Marketplace from "./pages/Marketplace";
 import ServiceDetail from "./pages/ServiceDetail";
@@ -101,6 +102,10 @@ const App = () => (
               <Route
                 path="/home"
                 element={<FlaggedRoute flag="alternateLanding" element={<Index />} />}
+              />
+              <Route
+                path="/landing-v2"
+                element={<FlaggedRoute flag="landingV2" element={<IndexProductLanding />} />}
               />
               <Route path="/explore" element={<FlaggedRoute flag="explore" element={<Explore />} />} />
               <Route

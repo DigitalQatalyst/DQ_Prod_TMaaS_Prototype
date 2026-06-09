@@ -30,6 +30,7 @@ All other routes redirect to the first enabled page. Navigation links and global
 |------|-------|---------|
 | `explore` | `/explore` | off |
 | `alternateLanding` | `/home` | off |
+| `landingV2` | `/landing-v2` | on |
 | `legal` | `/legal/*` | off |
 
 ### Features
