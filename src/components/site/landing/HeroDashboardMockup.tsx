@@ -1,3 +1,5 @@
+import { PLATFORM_NAME } from "@/lib/brandLinks";
+
 const FEATURED_SERVICES = [
   { name: "AI Readiness Assessment", category: "Data, AI & Analytics" },
   { name: "Customer Portal Build", category: "Customer Experience & Engagement" },
@@ -41,7 +43,7 @@ const HeroDashboardMockup = () => {
                 <div className="mb-4 flex items-center justify-between gap-2">
                   <div>
                     <div className="font-mono text-[9px] uppercase tracking-[0.15em] text-dq-orange">
-                      TMaaS Marketplace
+                      {PLATFORM_NAME}
                     </div>
                     <div className="mt-0.5 text-sm font-semibold text-white sm:text-base">
                       Service Catalogue

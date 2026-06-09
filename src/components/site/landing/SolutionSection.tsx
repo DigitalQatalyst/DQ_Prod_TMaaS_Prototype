@@ -33,7 +33,7 @@ const SolutionSection = () => {
     <section className="bg-white px-5 py-24 md:px-8 lg:px-10">
       <div className="mx-auto max-w-[1200px]">
         <p className="mb-4 font-mono text-[11px] uppercase tracking-[0.2em] text-dq-orange">
-          The TMaaS Model
+          The Marketplace Model
         </p>
         <h2 className="mb-16 text-4xl font-semibold tracking-tight text-dq-navy md:text-5xl">
           Three steps to the right services.

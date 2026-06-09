@@ -6,6 +6,7 @@ import ContextSwitcher from "@/components/ContextSwitcher";
 import CartNavButton from "@/components/cart/CartNavButton";
 import ExploreDigitalQatalystCta from "@/components/ExploreDigitalQatalystCta";
 import { featureFlags } from "@/lib/featureFlags";
+import { PLATFORM_NAME } from "@/lib/brandLinks";
 
 const Navbar = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -29,7 +30,9 @@ const Navbar = () => {
               <span className="grid h-7 w-7 place-items-center rounded-md bg-dq-orange text-white">
                 <span className="font-mono text-[11px] font-bold">DQ</span>
               </span>
-              <span className="text-lg text-dq-orange">TMaaS</span>
+              <span className="max-w-[10.5rem] text-sm font-semibold leading-tight text-dq-orange sm:max-w-none sm:text-lg sm:leading-none">
+                {PLATFORM_NAME}
+              </span>
             </Link>
 
             <nav className="hidden items-center gap-6 lg:flex">

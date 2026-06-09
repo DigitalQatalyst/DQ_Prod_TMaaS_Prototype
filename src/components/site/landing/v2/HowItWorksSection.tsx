@@ -36,7 +36,7 @@ const HowItWorksSection = () => {
     >
       <div className="mx-auto max-w-[1200px]">
         <p className="mb-4 font-mono text-[11px] uppercase tracking-[0.2em] text-dq-orange">
-          The TMaaS Journey
+          The Marketplace Journey
         </p>
         <h2 className="mb-16 text-4xl font-semibold tracking-tight text-dq-navy md:text-5xl">
           From discovery to engagement in three steps.

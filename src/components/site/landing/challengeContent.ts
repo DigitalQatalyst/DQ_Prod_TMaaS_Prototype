@@ -1,4 +1,5 @@
 import { Clock, CircleDollarSign, RefreshCw, type LucideIcon } from "lucide-react";
+import { PLATFORM_NAME } from "@/lib/brandLinks";
 
 export type ChallengeCard = {
   Icon: LucideIcon;
@@ -28,5 +29,4 @@ export const CHALLENGE_CARDS: ChallengeCard[] = [
   },
 ];
 
-export const CHALLENGE_CLOSING =
-  "TMaaS was built to close this gap — with a low-cost, architecture-led marketplace that accelerates impact and adapts as your priorities shift.";
+export const CHALLENGE_CLOSING = `${PLATFORM_NAME} was built to close this gap — with a low-cost, architecture-led marketplace that accelerates impact and adapts as your priorities shift.`;

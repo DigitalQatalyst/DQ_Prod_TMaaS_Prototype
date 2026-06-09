@@ -1,5 +1,5 @@
 import { ArrowRight } from "lucide-react";
-import { DQ_CORP_WEB_URL } from "@/lib/brandLinks";
+import { DQ_CORP_WEB_URL, PLATFORM_NAME } from "@/lib/brandLinks";
 
 const STATS = [
   { value: "50+", label: "Certified transformation services" },
@@ -33,7 +33,7 @@ const DqLineageStatsBand = () => {
             Built on a decade of transformation delivery.
           </h3>
           <p className="mb-6 text-[15px] leading-relaxed text-gray-600">
-            TMaaS is a DigitalQatalyst product — bringing marketplace access to
+            {PLATFORM_NAME} is a DigitalQatalyst product — bringing marketplace access to
             the same architecture-driven methodology trusted by organisations
             across six countries.
           </p>
