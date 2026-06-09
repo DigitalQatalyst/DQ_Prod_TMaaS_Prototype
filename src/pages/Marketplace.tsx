@@ -37,7 +37,7 @@ const Marketplace = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
   const [selectedIncluded, setSelectedIncluded] = useState<string[]>([]);
-  const [selectedSectors, setSelectedIndustries] = useState<string[]>([]);
+  const [selectedSectors, setSelectedSectors] = useState<string[]>([]);
   const [selectedServiceTypes, setSelectedServiceTypes] = useState<string[]>([]);
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [sortBy, setSortBy] = useState("popular");
@@ -96,7 +96,7 @@ const Marketplace = () => {
   }, []);
 
   const handleSectorChange = useCallback((value: string) => {
-    setSelectedIndustries((prev) =>
+    setSelectedSectors((prev) =>
       prev.includes(value) ? prev.filter((i) => i !== value) : [...prev, value]
     );
   }, []);
@@ -142,41 +142,41 @@ const Marketplace = () => {
 
   const filteredServices = useMemo(() => {
     return initialServices.filter((pkg) => {
-      const isBundle = (pkg as any).serviceType === "bundle";
-      
+      const isBundle = pkg.serviceType === "bundle";
+      const wantsMultiOnly =
+        selectedIncluded.includes("multi") && !selectedIncluded.includes("single");
+      const wantsSingleOnly =
+        selectedIncluded.includes("single") && !selectedIncluded.includes("multi");
+
       if (activeTab === "bundles") {
         if (!isBundle) return false;
-      } else {
+      } else if (wantsMultiOnly) {
+        if (!isBundle) return false;
+      } else if (wantsSingleOnly) {
         if (isBundle) return false;
+      } else if (isBundle) {
+        return false;
       }
 
-      const matchesCollection = activeTab === "all" || activeTab === "bundles" || pkg.collection === activeTab;
-      
-      const matchesCategory = selectedCategories.length === 0 || selectedCategories.includes(pkg.collection);
+      const matchesCollection =
+        activeTab === "all" || activeTab === "bundles" || pkg.collection === activeTab;
 
-      let matchesIncluded = true;
-      if (selectedIncluded.length > 0) {
-        if (selectedIncluded.includes("multi") && !selectedIncluded.includes("single")) {
-          matchesIncluded = isBundle;
-        } else if (selectedIncluded.includes("single") && !selectedIncluded.includes("multi")) {
-          matchesIncluded = !isBundle;
-        }
-      }
+      const matchesCategory =
+        selectedCategories.length === 0 || selectedCategories.includes(pkg.collection);
 
       const matchesServiceType =
-        selectedServiceTypes.length === 0 || selectedServiceTypes.includes((pkg as any).serviceType);
+        selectedServiceTypes.length === 0 || selectedServiceTypes.includes(pkg.serviceType);
 
-      // Extract the first active industry for remixing name, fallback to 'general'
-      const activeIndustry = selectedSectors.length > 0 ? selectedSectors[0] : "all";
+      const activeSector = selectedSectors.length > 0 ? selectedSectors[0] : "all";
 
       const matchesSearch = searchQuery === "" || 
         pkg.standardName.toLowerCase().includes(searchQuery.toLowerCase()) ||
         pkg.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        getRemixedName(pkg, activeIndustry).toLowerCase().includes(searchQuery.toLowerCase()) ||
+        getRemixedName(pkg, activeSector).toLowerCase().includes(searchQuery.toLowerCase()) ||
         pkg.tags.some(tag => tag.toLowerCase().includes(searchQuery.toLowerCase())) ||
         pkg.features.some(feat => feat.toLowerCase().includes(searchQuery.toLowerCase()));
 
-      return matchesCollection && matchesCategory && matchesIncluded && matchesServiceType && matchesSearch;
+      return matchesCollection && matchesCategory && matchesServiceType && matchesSearch;
     }).sort((a, b) => {
       if (sortBy === "popular") return b.popularityRank - a.popularityRank;
       if (sortBy === "price-low") return parseInt(a.price.replace(/[$,]/g, "")) - parseInt(b.price.replace(/[$,]/g, ""));
@@ -302,7 +302,7 @@ const Marketplace = () => {
           <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-dq-orange">
             Marketplace
           </p>
-          <h1 className="mt-3 text-3xl font-semibold tracking-tight text-dq-navy md:text-4xl">
+          <h1 className="mt-3 text-balance text-4xl font-semibold tracking-tight text-dq-navy md:text-5xl">
             Transformation Services Marketplace
           </h1>
           <p className="mt-3 max-w-xl text-sm leading-relaxed text-gray-600 md:text-base">

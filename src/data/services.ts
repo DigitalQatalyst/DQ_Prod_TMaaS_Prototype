@@ -9675,8 +9675,12 @@ export const initialServices = [
   }
 ];
 
-export const getRemixedName = (service: typeof initialServices[0], collectionId: MarketplaceCollectionId) => {
-  return service.remixName[collectionId as keyof typeof service.remixName] || service.standardName;
+export const getRemixedName = (
+  service: typeof initialServices[0],
+  remixKey: string = "all"
+) => {
+  if (remixKey === "all") return service.standardName;
+  return service.remixName[remixKey as keyof typeof service.remixName] || service.standardName;
 };
 
 type ServiceCollection = "experience" | "operations" | "security" | "ai" | "experience" | "strategy" | "engineering" | "data";
