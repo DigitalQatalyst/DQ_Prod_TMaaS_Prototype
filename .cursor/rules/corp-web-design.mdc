@@ -35,13 +35,16 @@ Marketing pages (`/`, `/marketplace`, `/service/:id`) share the **DQ corp web de
 - Do **not** copy corp homepage stats, problem copy, or section order verbatim
 - Parent brand: optional `Part of DigitalQatalyst` external link; full corp credibility stays on corp web
 
+## Service detail — tab first-heading alignment
+Overview, What You Receive, and How It Works first `sectionHeading` share the same top offset: `serviceDetailSplitLead` on split-grid lead columns; `serviceDetailTabLead` on How It Works first `ServiceDetailSection`.
+
 ## Service detail — hero mesh (`ServiceDetail.tsx`)
 - Scope `heroLight` mesh to the **hero block only** (`absolute inset-0` inside the hero wrapper) — never a fixed `h-[520px]` overlay across tabs
 - Tabs and related services sit in a sibling `bg-background` section below the hero
 
 ## Service detail — About This Service (Overview tab)
 Match the approved two-column mockup in `ServiceDetailAboutSection.tsx`:
-- Grid: `md:grid-cols-[5fr_4fr]` (~55/45), `gap-10` / `lg:gap-14`, `md:items-center` (card vertically centred against taller copy column; `items-start` on mobile stack)
+- Grid: `serviceDetailSplitGrid` + `serviceDetailSplitLead` — **top-aligned** (`items-start` only); lead column `md:pt-7` aligns `sectionHeading` with side-card title; card title before icon
 - Left: `sectionHeading` from `brandAccent.ts` (`text-xl font-semibold tracking-tight text-dq-navy`); two paragraphs at `text-base leading-[1.7] text-[#667085]` with `mt-6 space-y-5`
 - Right “Who it’s for” card: `rounded-2xl p-7 md:p-8`, experience collection uses `bg-[#F3F4F9]` (not strong `violet-50`); white circular icon well; collection accent icon colour via `getAudienceCardAccent`
 - Copy: P1 narrative intro (not raw `description` themes shorthand); P2 from `OVERVIEW_CLOSING_BY_TYPE`; audience without solution-name injection for experience advisory
@@ -52,7 +55,7 @@ All in-page section `h2` titles (About, Key Outcomes, Related Services, tab pane
 
 ## Service detail — What You Receive tab
 Match `ServiceDetailWhatYouReceiveTab.tsx` (same top-row pattern as Overview / About):
-- Top row: open **Deliverables Summary** copy (no bordered white card) + tinted **At a glance** card (`5fr/4fr`, `md:items-center`) with duration and scope count only — **not** a duplicate deliverables checklist
+- Top row: same split-grid tokens as Overview — **Deliverables Summary** + **At a glance** card (duration, scope only)
 - **Deliverables Breakdown**: sole enumerated deliverables list with descriptions (`getDeliverableBreakdown`)
 - **Modules & Applications**: deploy accordion below; `sectionHeading` (no eyebrow)
 - Deliverable titles from existing `deliverables` prop only
@@ -66,8 +69,9 @@ Match the approved four-column mockup in `ServiceDetailKeyOutcomesSection.tsx`:
 ## Service detail — Why It Matters tab
 Match `ServiceDetailWhyItMattersTab.tsx` + `whyItMattersContent.ts`:
 - Intro: `sectionHeading` “Why This Service Matters”; hook line `font-medium text-dq-navy`; problem paragraph `#667085`
-- Before / After: two-column `lg:grid-cols-2`; mono orange eyebrow (`Before` / `After`); subheading “Where You Are Now” / “Where You Can Be”; three cards per side (`sm:grid-cols-2 lg:grid-cols-3` within each column)
-- Before cards: `bg-gray-50/80`; After cards: `border-orange-100` with orange hover accent
+- Before / After: single `rounded-2xl` comparison container (`shadow-card`); `lg:grid-cols-2` panels with gradient backgrounds (gray-50 → white / orange-50 → white)
+- Panel badges: pill chips — gray for Before, orange-tinted for After; stacked item cards with icon wells + `01`–`03` mono labels (not a 3-col grid inside each half)
+- Centre transition: orange `ArrowRight` circle on `lg+`; mobile divider row with arrow between panels
 - Strategic Fit: tinted collection card (`getAudienceCardAccent`), `Compass` icon — not a white bordered card
 - Copy from `getWhyItMattersContent(service)` — contextualise by `collection`, `serviceType`, and solution name; exact override for `online web presence|advisory`
 

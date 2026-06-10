@@ -1,4 +1,14 @@
-import { Compass } from "lucide-react";
+import {
+  AlertCircle,
+  ArrowRight,
+  Compass,
+  GitBranch,
+  Layers,
+  Sparkles,
+  Target,
+  TrendingUp,
+  type LucideIcon,
+} from "lucide-react";
 import { sectionHeading } from "@/lib/brandAccent";
 import {
   getAudienceCardAccent,
@@ -6,50 +16,148 @@ import {
 } from "./serviceDetailHelpers";
 import { getWhyItMattersContent } from "./whyItMattersContent";
 
-const beforeCardClass =
-  "rounded-xl border border-gray-200 bg-gray-50/80 p-5 shadow-[var(--shadow-card)]";
-
-const afterCardClass =
-  "rounded-xl border border-orange-100 bg-white p-5 shadow-[var(--shadow-card)] transition-shadow duration-300 hover:border-dq-orange/30 hover:shadow-[var(--shadow-elevated)]";
+const BEFORE_ICONS = [AlertCircle, GitBranch, Layers] as const;
+const AFTER_ICONS = [Target, Sparkles, TrendingUp] as const;
 
 interface ServiceDetailWhyItMattersTabProps {
   service: ServiceProduct;
 }
 
-function StateSection({
-  eyebrow,
+function StateItem({
+  index,
   title,
-  items,
+  description,
   variant,
+  Icon,
 }: {
-  eyebrow: string;
+  index: number;
   title: string;
-  items: { title: string; description: string }[];
+  description: string;
   variant: "before" | "after";
+  Icon: LucideIcon;
 }) {
-  const cardClass = variant === "before" ? beforeCardClass : afterCardClass;
+  const isBefore = variant === "before";
 
   return (
-    <section aria-labelledby={`${variant}-state-heading`}>
-      <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-dq-orange">
-        {eyebrow}
-      </p>
-      <h3
-        id={`${variant}-state-heading`}
-        className="mt-2 text-lg font-semibold tracking-tight text-dq-navy"
+    <li
+      className={
+        isBefore
+          ? "flex gap-4 rounded-xl border border-gray-100 bg-white p-4 shadow-sm"
+          : "flex gap-4 rounded-xl border border-orange-100/80 bg-white p-4 shadow-sm transition-colors hover:border-dq-orange/25"
+      }
+    >
+      <div
+        className={
+          isBefore
+            ? "flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-gray-100 text-gray-500"
+            : "flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-orange-50 text-dq-orange"
+        }
       >
-        {title}
-      </h3>
-      <ul className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-        {items.map((item) => (
-          <li key={item.title} className={cardClass}>
-            <h4 className="text-sm font-semibold text-dq-navy">{item.title}</h4>
-            <p className="mt-2 text-sm leading-[1.65] text-[#667085]">
-              {item.description}
-            </p>
-          </li>
-        ))}
-      </ul>
+        <Icon size={18} strokeWidth={1.75} aria-hidden />
+      </div>
+      <div className="min-w-0 flex-1">
+        <div className="flex items-baseline gap-2">
+          <span
+            aria-hidden
+            className={
+              isBefore
+                ? "font-mono text-[10px] font-semibold uppercase tracking-[0.14em] text-gray-400"
+                : "font-mono text-[10px] font-semibold uppercase tracking-[0.14em] text-dq-orange"
+            }
+          >
+            {String(index + 1).padStart(2, "0")}
+          </span>
+          <h4 className="text-sm font-semibold text-dq-navy">{title}</h4>
+        </div>
+        <p className="mt-1.5 text-sm leading-[1.65] text-[#667085]">{description}</p>
+      </div>
+    </li>
+  );
+}
+
+function BeforeAfterComparison({
+  before,
+  after,
+}: {
+  before: { eyebrow: string; title: string; items: { title: string; description: string }[] };
+  after: { eyebrow: string; title: string; items: { title: string; description: string }[] };
+}) {
+  return (
+    <section
+      aria-label="Before and after comparison"
+      className="relative overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-[var(--shadow-card)]"
+    >
+      <div className="grid lg:grid-cols-2">
+        <div className="border-b border-gray-200 bg-gradient-to-b from-gray-50/90 to-white p-6 md:p-8 lg:border-b-0 lg:border-r">
+          <header>
+            <span className="inline-flex items-center rounded-full bg-gray-200/70 px-2.5 py-1 font-mono text-[10px] font-semibold uppercase tracking-[0.14em] text-gray-600">
+              {before.eyebrow}
+            </span>
+            <h3 className="mt-3 text-lg font-semibold tracking-tight text-dq-navy">
+              {before.title}
+            </h3>
+          </header>
+          <ul className="mt-6 space-y-3">
+            {before.items.map((item, index) => (
+              <StateItem
+                key={item.title}
+                index={index}
+                title={item.title}
+                description={item.description}
+                variant="before"
+                Icon={BEFORE_ICONS[index % BEFORE_ICONS.length]}
+              />
+            ))}
+          </ul>
+        </div>
+
+        <div className="relative bg-gradient-to-b from-orange-50/50 to-white p-6 md:p-8">
+          <div
+            aria-hidden
+            className="pointer-events-none absolute inset-y-0 left-0 hidden w-px bg-gradient-to-b from-transparent via-dq-orange/20 to-transparent lg:block"
+          />
+          <header>
+            <span className="inline-flex items-center rounded-full bg-dq-orange/10 px-2.5 py-1 font-mono text-[10px] font-semibold uppercase tracking-[0.14em] text-dq-orange">
+              {after.eyebrow}
+            </span>
+            <h3 className="mt-3 text-lg font-semibold tracking-tight text-dq-navy">
+              {after.title}
+            </h3>
+          </header>
+          <ul className="mt-6 space-y-3">
+            {after.items.map((item, index) => (
+              <StateItem
+                key={item.title}
+                index={index}
+                title={item.title}
+                description={item.description}
+                variant="after"
+                Icon={AFTER_ICONS[index % AFTER_ICONS.length]}
+              />
+            ))}
+          </ul>
+        </div>
+      </div>
+
+      <div
+        aria-hidden
+        className="pointer-events-none absolute left-1/2 top-1/2 z-10 hidden -translate-x-1/2 -translate-y-1/2 lg:flex"
+      >
+        <div className="flex h-11 w-11 items-center justify-center rounded-full border-[3px] border-white bg-dq-orange text-white shadow-[0_4px_14px_rgba(251,85,53,0.35)]">
+          <ArrowRight size={18} strokeWidth={2.25} />
+        </div>
+      </div>
+
+      <div
+        aria-hidden
+        className="flex items-center justify-center gap-3 border-t border-gray-100 bg-white px-6 py-3 lg:hidden"
+      >
+        <span className="h-px flex-1 bg-gray-200" />
+        <span className="flex h-8 w-8 items-center justify-center rounded-full bg-dq-orange text-white shadow-sm">
+          <ArrowRight size={14} strokeWidth={2.25} />
+        </span>
+        <span className="h-px flex-1 bg-gray-200" />
+      </div>
     </section>
   );
 }
@@ -76,20 +184,7 @@ export function ServiceDetailWhyItMattersTab({
         </div>
       </section>
 
-      <div className="grid gap-12 lg:grid-cols-2 lg:gap-10">
-        <StateSection
-          eyebrow={content.before.eyebrow}
-          title={content.before.title}
-          items={content.before.items}
-          variant="before"
-        />
-        <StateSection
-          eyebrow={content.after.eyebrow}
-          title={content.after.title}
-          items={content.after.items}
-          variant="after"
-        />
-      </div>
+      <BeforeAfterComparison before={content.before} after={content.after} />
 
       <section aria-labelledby="strategic-fit-heading">
         <div className={`rounded-2xl p-7 md:p-8 ${accent.cardBg}`}>
