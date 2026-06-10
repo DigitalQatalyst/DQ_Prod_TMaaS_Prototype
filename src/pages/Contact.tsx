@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 import { Check, Clock, ArrowRight, Loader2, MapPin, Phone, Mail } from "lucide-react";
 import LandingNavbar from "@/components/site/landing/LandingNavbar";
 import Footer from "@/components/Footer";
-import { PLATFORM_NAME } from "@/lib/brandLinks";
+import { PLATFORM_ACRONYM } from "@/lib/brandLinks";
 import { featureFlags } from "@/lib/featureFlags";
 
 type FormState = {
@@ -51,11 +51,20 @@ const NEED_OPTIONS = [
 const PHONE_REGEX = /^\+?[\d\s\-(). ]{7,20}$/;
 
 const Contact = () => {
+  const [searchParams] = useSearchParams();
+
   useEffect(() => {
-    document.title = `Contact Us | ${PLATFORM_NAME}`;
+    document.title = `Talk to our team | ${PLATFORM_ACRONYM}`;
   }, []);
 
-  const [form, setForm] = useState<FormState>(INITIAL);
+  const [form, setForm] = useState<FormState>(() => {
+    const service = searchParams.get("service")?.trim();
+    if (!service) return INITIAL;
+    return {
+      ...INITIAL,
+      message: `I would like to request a quote for: ${service}`,
+    };
+  });
   const [errors, setErrors] = useState<Partial<Record<keyof FormState, string>>>({});
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
 
@@ -97,7 +106,7 @@ const Contact = () => {
     } catch {
       setStatus("idle");
       setErrors({
-        message: "Submission failed — please try again or email us directly.",
+        message: "Submission failed, please try again or email us directly.",
       });
     }
   };
@@ -137,8 +146,8 @@ const Contact = () => {
                 We&apos;ve got your request
               </h2>
               <p className="mx-auto mb-8 max-w-md text-[15px] leading-relaxed text-gray-600">
-                A DQ advisor will review your context and reach out within 2 business days
-                to route you to the right pathway.
+                A DQ advisor will review your message and get back to you within 2
+                business days with the right next step.
               </p>
               <div className="flex flex-col justify-center gap-3 sm:flex-row">
                 <button
@@ -295,7 +304,7 @@ const Contact = () => {
                       label="Your Message"
                       required
                       error={errors.message}
-                      hint="Tell us your goals, challenges, or timeline. The more context you share, the better we can route your request."
+                      hint="Share your goals, challenges, or timeline so we can help faster."
                     >
                       <textarea
                         id="message"
@@ -352,7 +361,7 @@ const Contact = () => {
                           </>
                         ) : (
                           <>
-                            Submit Request
+                            Send request
                             <ArrowRight size={16} />
                           </>
                         )}
@@ -364,11 +373,11 @@ const Contact = () => {
 
               <aside className="px-1 lg:col-span-4">
                 <p className="mb-4 text-[10px] font-semibold uppercase tracking-[0.16em] text-gray-400">
-                  How DQ routes requests
+                  What happens next
                 </p>
                 <p className="mb-5 text-[13px] leading-relaxed text-gray-500">
-                  A DQ advisor reads every submission and matches you to the right entry point
-                  — advisory &amp; strategy, product or diagnostic, or transformation support.
+                  A DQ advisor reads every message and connects you to the right
+                  services, whether that&apos;s advice, a demo, or hands-on support.
                 </p>
                 <div className="flex items-center gap-1.5 text-[13px] text-gray-500">
                   <Clock size={13} className="shrink-0 text-gray-400" />
@@ -436,7 +445,7 @@ const Contact = () => {
                       to="/marketplace"
                       className="inline-flex items-center gap-1 rounded-sm text-[13px] font-semibold text-dq-navy outline-none transition-colors hover:text-[#E04020] focus-visible:ring-2 focus-visible:ring-dq-orange focus-visible:ring-offset-2"
                     >
-                      Not sure where to start? Browse the Marketplace
+                      Not sure where to start? Browse services
                       <ArrowRight size={13} />
                     </Link>
                   </div>
@@ -459,14 +468,14 @@ function ContactHero() {
     >
       <div className="mx-auto max-w-[1120px]">
         <div className="mb-4 text-[11px] font-semibold uppercase tracking-[0.14em] text-gray-500">
-          CONTACT
+          Talk to our team
         </div>
         <h1 className="mb-5 max-w-2xl text-balance text-4xl font-semibold tracking-tight text-dq-navy md:text-5xl">
-          Tell us where you are. We&apos;ll route you to what&apos;s right.
+          Tell us what you need. We&apos;ll help you get started.
         </h1>
         <p className="max-w-xl text-[15px] leading-relaxed text-gray-600 md:text-[16px]">
-          Every request is reviewed by a DQ advisor who matches your context to the right
-          pathway — advisory, product, diagnostic, or transformation support.
+          Every message is reviewed by a DQ advisor who will match you to the
+          right services and next steps.
         </p>
       </div>
     </section>

@@ -34,7 +34,7 @@ const Footer = () => {
               {featureFlags.isEnabled("contactUs") && (
                 <li>
                   <Link to="/contact" className="transition-colors hover:text-dq-orange">
-                    Contact Us
+                    Talk to our team
                   </Link>
                 </li>
               )}

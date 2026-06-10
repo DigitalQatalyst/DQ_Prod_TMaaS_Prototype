@@ -1,7 +1,6 @@
-import { useMemo } from "react";
 import ServiceProductCard from "@/components/marketplace/ServiceProductCard";
-import { getBestSellers } from "@/data/services";
 import { getRemixedName } from "@/data/services";
+import { useBestSellers } from "@/hooks/useCatalog";
 import { marketplaceCategoryLabels } from "@/data/marketplaceNavigation";
 import {
   Carousel,
@@ -21,10 +20,7 @@ const MarketplaceBestSellers = ({
   selectedIndustry,
 }: MarketplaceBestSellersProps) => {
   const collection = activeTab === "all" ? "all" : activeTab;
-  const bestSellers = useMemo(
-    () => getBestSellers(collection as "all" | "ai" | "cx" | "ops" | "growth" | "gov", 6),
-    [collection]
-  );
+  const { data: bestSellers = [] } = useBestSellers(collection, 6);
 
   if (bestSellers.length === 0) return null;
 
@@ -46,7 +42,7 @@ const MarketplaceBestSellers = ({
           {heading}
         </h2>
         <p className="mt-4 text-base text-gray-600">
-          Popular packages — fixed scope and pricing.
+          Top services with fixed scope and transparent pricing.
         </p>
       </div>
 

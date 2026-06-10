@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import LandingNavbar from "@/components/site/landing/LandingNavbar";
 import Footer from "@/components/Footer";
@@ -14,18 +14,29 @@ import { ServiceDetailRelatedServices } from "@/components/service-detail/Servic
 import {
   getDeliverySteps,
 } from "@/components/service-detail/ServiceDetailDeliverySection";
+import { getDisplayTitle } from "@/components/service-detail/serviceDetailHelpers";
+import { PLATFORM_ACRONYM } from "@/lib/brandLinks";
 import { Button } from "@/components/ui/button";
-import { initialServices } from "@/data/services";
-import { deployModulesData } from "@/data/deployModules";
 import { featureFlags } from "@/lib/featureFlags";
+import { useServiceDetail } from "@/hooks/useServiceDetail";
 
 const ServiceDetail = () => {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [dialogPrompt, setDialogPrompt] = useState("");
+  const variantId = parseInt(id || "0", 10);
 
-  const service = initialServices.find((s) => s.id === parseInt(id || "0"));
+  const { data: detail, isLoading } = useServiceDetail(variantId);
+  const service = detail?.service;
+
+  useEffect(() => {
+    if (!service) {
+      document.title = `Service not found | ${PLATFORM_ACRONYM}`;
+      return;
+    }
+    document.title = `${getDisplayTitle(service.standardName)} | ${PLATFORM_ACRONYM}`;
+  }, [service]);
 
   const isAdvisoryService = service?.serviceType === "advisory";
   const isDesignService =
@@ -34,33 +45,29 @@ const ServiceDetail = () => {
     service && ["deploy", "ai_deploy"].includes(service.serviceType);
   const requiresQuoteCTA = service?.serviceType === "bundle";
 
+  if (isLoading && !service) {
+    return (
+      <div className="flex min-h-screen flex-col items-center justify-center bg-background">
+        <p className="text-gray-500">Loading service…</p>
+      </div>
+    );
+  }
+
   if (!service) {
     return (
       <div className="flex min-h-screen flex-col items-center justify-center bg-background">
-        <h2 className="mb-4 text-2xl font-semibold text-dq-navy">Service Not Found</h2>
+        <h2 className="mb-4 text-2xl font-semibold text-dq-navy">Service not found</h2>
+        <p className="mb-6 max-w-sm text-center text-sm text-gray-600">
+          This service may have moved. Browse the marketplace to find what you need.
+        </p>
         <Button onClick={() => navigate("/marketplace")} className="rounded-full bg-dq-navy">
-          Return to Marketplace
+          Browse services
         </Button>
       </div>
     );
   }
 
-  const getDeployModules = (name: string) => {
-    if (deployModulesData[name]) return deployModulesData[name];
-    const baseNameMatch = name.match(/^(.*?)\s*\(/);
-    if (baseNameMatch) {
-      const baseName = baseNameMatch[1];
-      const matchingKey = Object.keys(deployModulesData).find((key) =>
-        key.startsWith(baseName)
-      );
-      if (matchingKey) return deployModulesData[matchingKey];
-    }
-    return [];
-  };
-
-  const deployModules = isDeployService
-    ? getDeployModules(service.standardName)
-    : [];
+  const deployModules = isDeployService ? (detail?.deployModules ?? []) : [];
 
   const handleStartOnboarding = (pkgName: string) => {
     setDialogPrompt(`I would like to get started with the ${pkgName} service.`);
@@ -129,21 +136,20 @@ const ServiceDetail = () => {
 
       <MeshSection variant="ctaOrange" className="px-5 py-20 md:px-8 lg:px-10">
         <div className="mx-auto max-w-3xl text-center">
-          <p className="dq-eyebrow-on-dark">Need guidance?</p>
+          <p className="dq-eyebrow-on-dark">Need help?</p>
           <h2 className="mt-3 text-3xl font-semibold tracking-tight text-white md:text-4xl">
-            Still not sure which service is right for you?
+            Not sure if this is the right fit?
           </h2>
           <p className="mt-4 text-base leading-relaxed text-white/70 md:text-lg">
-            A DQ advisor can help you compare options, confirm fit, and point
-            you to the right next step, whether that&apos;s this service or
-            another in the marketplace.
+            Our team can help you compare options and find the best service for
+            your goals.
           </p>
           <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
             <ServiceDetailPrimaryButton onClick={handleBookConsultation}>
-              Book a Consultation
+              Talk to our team
             </ServiceDetailPrimaryButton>
             <ServiceDetailSecondaryButtonDark onClick={() => navigate("/marketplace")}>
-              Explore more services
+              Browse more services
             </ServiceDetailSecondaryButtonDark>
           </div>
         </div>

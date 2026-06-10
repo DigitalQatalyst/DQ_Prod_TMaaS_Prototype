@@ -1,4 +1,5 @@
 import { useState, useMemo, useEffect, useCallback } from "react";
+import { PLATFORM_ACRONYM } from "@/lib/brandLinks";
 import { useSearchParams } from "react-router-dom";
 import LandingNavbar from "@/components/site/landing/LandingNavbar";
 import Footer from "@/components/Footer";
@@ -24,7 +25,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { initialServices, getRemixedName } from "@/data/services";
+import { getRemixedName } from "@/data/services";
 
 const PAGE_SIZE = 15;
 type ViewMode = "grid" | "list";
@@ -32,6 +33,7 @@ type ViewMode = "grid" | "list";
 // Removed old labels
 
 const Marketplace = () => {
+  const { services: catalog, isLoading: catalogLoading } = useCatalogServices();
   const [searchParams, setSearchParams] = useSearchParams();
   const [activeTab, setActiveTab] = useState<string>("all");
   const [searchQuery, setSearchQuery] = useState("");
@@ -48,6 +50,10 @@ const Marketplace = () => {
     requestAnimationFrame(() => {
       document.getElementById("catalog-grid")?.scrollIntoView({ behavior: "smooth" });
     });
+  }, []);
+
+  useEffect(() => {
+    document.title = `Marketplace | Digital Transformation Services | ${PLATFORM_ACRONYM}`;
   }, []);
 
   useEffect(() => {
@@ -132,16 +138,20 @@ const Marketplace = () => {
   const bestSellerIds = useMemo(() => {
     if (!showBestSellers) return new Set<number>();
     const collection = activeTab === "all" ? "all" : activeTab;
+    const pool =
+      collection === "all"
+        ? catalog
+        : catalog.filter((s) => s.collection === collection);
     return new Set(
-      getBestSellers(
-        collection as "all" | "ai" | "cx" | "ops" | "growth" | "gov",
-        4
-      ).map((s) => s.id)
+      [...pool]
+        .sort((a, b) => b.popularityRank - a.popularityRank)
+        .slice(0, 4)
+        .map((s) => s.id)
     );
-  }, [showBestSellers, activeTab]);
+  }, [showBestSellers, activeTab, catalog]);
 
   const filteredServices = useMemo(() => {
-    return initialServices.filter((pkg) => {
+    return catalog.filter((pkg) => {
       const isBundle = pkg.serviceType === "bundle";
       const wantsMultiOnly =
         selectedIncluded.includes("multi") && !selectedIncluded.includes("single");
@@ -183,7 +193,7 @@ const Marketplace = () => {
       if (sortBy === "fastest") return parseInt(a.duration) - parseInt(b.duration);
       return 0;
     });
-  }, [activeTab, searchQuery, selectedCategories, selectedIncluded, selectedServiceTypes, selectedSectors, sortBy]);
+  }, [catalog, activeTab, searchQuery, selectedCategories, selectedIncluded, selectedServiceTypes, selectedSectors, sortBy]);
 
   const catalogServices = useMemo(() => {
     if (!showBestSellers) return filteredServices;
@@ -300,13 +310,14 @@ const Marketplace = () => {
       <MeshSection variant="heroLight" grid className="px-5 pb-8 pt-20 md:px-8 md:pb-10 md:pt-24 lg:px-10">
         <div className="mx-auto flex max-w-3xl flex-col items-center text-center">
           <p className="dq-eyebrow">
-            Marketplace
+            Digital transformation marketplace
           </p>
           <h1 className="mt-4 text-balance text-[2.75rem] font-semibold leading-[1.05] tracking-[-0.02em] text-dq-navy sm:text-5xl md:text-6xl lg:text-7xl">
-            Transformation Services Marketplace
+            Browse transformation services
           </h1>
           <p className="mt-4 max-w-xl text-base leading-relaxed text-gray-600 md:text-lg">
-            Discover architecture-led transformation services across digital experience, digital operations, AI enablement, and enterprise modernization.
+            50+ digital transformation services with clear pricing. Filter by
+            goal, industry, or category.
           </p>
 
           <div className="relative mt-6 flex w-full items-center">
@@ -334,6 +345,9 @@ const Marketplace = () => {
 
       <section className="bg-background px-5 pb-16 pt-2 md:px-8 lg:px-10">
         <div className="mx-auto max-w-[1280px]">
+          {catalogLoading && (
+            <p className="mb-6 text-center text-sm text-gray-500">Loading catalog…</p>
+          )}
           <div id="catalog-grid" className="scroll-mt-32">
             {showBestSellers && (
               <div className="mb-10">

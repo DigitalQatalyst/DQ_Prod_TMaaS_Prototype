@@ -24,8 +24,8 @@ export function ServiceDetailRelatedServices({
         Related Services
       </h2>
       <p className="mt-2 max-w-2xl text-sm leading-relaxed text-gray-500">
-        Explore complementary services in the same transformation journey, from
-        discovery through design, delivery, and managed operations.
+        More services that pair well with this one across your transformation
+        journey.
       </p>
       <ul className="mt-6 grid list-none gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {relatedServices.map((relatedService) => (

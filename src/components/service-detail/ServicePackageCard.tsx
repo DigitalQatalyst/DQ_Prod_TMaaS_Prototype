@@ -12,8 +12,8 @@ import {
 
 const PACKAGE_FEATURES = [
   "SLA-backed delivery",
-  "Included specialists",
-  "Governance assurance",
+  "Expert team included",
+  "Clear delivery milestones",
 ] as const;
 
 interface ServicePackageCardProps {
@@ -60,7 +60,7 @@ export function ServicePackageCard({
             className="group"
             onClick={onRequestQuote}
           >
-            Request Quote
+            Get a quote
             <ArrowRight
               size={16}
               className="transition group-hover:translate-x-0.5"
