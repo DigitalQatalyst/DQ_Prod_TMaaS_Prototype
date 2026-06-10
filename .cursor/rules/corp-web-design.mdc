@@ -69,6 +69,12 @@ Match the approved four-column mockup in `ServiceDetailKeyOutcomesSection.tsx`:
 - Orange step numbers `01`–`04` (`text-4xl font-bold text-dq-orange`), then `font-medium` navy outcome title (lighter than `sectionHeading`), then `#667085` description
 - Keep titles/descriptions from `getKeyOutcomes()`, layout only, do not swap in mockup copy
 
+## Service detail, How It Works delivery stepper
+Match `HowWeWorkSection` on `DQ_CORPWEB_PROTOTYPE` About Us (`About.tsx`):
+- Desktop: horizontal `bg-gray-200` connector at `top-[28px]`; dynamic `grid-cols-{n}`; `h-14 w-14` mono circles (`01` padding); active step `bg-dq-orange border-dq-orange shadow-lg`, inactive `bg-white border-gray-200`; left-aligned title + `#667085`/`gray-600` body
+- Mobile: vertical timeline with `w-px` connectors between circles (`h-12 w-12` circles)
+- Do not use the old centred dashed-line stepper (`h-7` blue-tint circles)
+
 ## Service detail, Why It Matters tab
 Match `ServiceDetailWhyItMattersTab.tsx` + `whyItMattersContent.ts`:
 - Intro: `sectionHeading` “Why This Service Matters”; hook line `font-medium text-dq-navy`; problem paragraph `#667085`
