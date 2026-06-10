@@ -1,19 +1,7 @@
-import { Link } from "react-router-dom";
-import { ArrowRight, ChevronRight, Clock, Zap } from "lucide-react";
-import {
-  Breadcrumb,
-  BreadcrumbItem,
-  BreadcrumbLink,
-  BreadcrumbList,
-  BreadcrumbPage,
-  BreadcrumbSeparator,
-} from "@/components/ui/breadcrumb";
+import { Clock, Users, Zap } from "lucide-react";
 import { getServiceIcon } from "@/components/marketplace/marketplaceServiceIcons";
 import { marketplaceServiceTypeLabels } from "@/data/marketplaceNavigation";
-import {
-  ServiceDetailPrimaryButton,
-  ServiceDetailSecondaryButton,
-} from "./ServiceDetailButtons";
+import { ServicePackageCard } from "./ServicePackageCard";
 import {
   getCategoryShortLabel,
   getCollectionAccent,
@@ -23,14 +11,16 @@ import {
 
 interface ServiceDetailHeroProps {
   service: ServiceProduct;
+  requiresQuoteCTA: boolean;
   onRequestQuote: () => void;
-  onBookConsultation: () => void;
+  onStartOnboarding: (name: string) => void;
 }
 
 export function ServiceDetailHero({
   service,
+  requiresQuoteCTA,
   onRequestQuote,
-  onBookConsultation,
+  onStartOnboarding,
 }: ServiceDetailHeroProps) {
   const title = getDisplayTitle(service.standardName);
   const categoryLabel = getCategoryShortLabel(service.collection);
@@ -42,95 +32,64 @@ export function ServiceDetailHero({
 
   return (
     <div>
-      <Breadcrumb className="mb-8">
-        <BreadcrumbList>
-          <BreadcrumbItem>
-            <BreadcrumbLink asChild>
-              <Link
-                to="/marketplace"
-                className="text-xs font-medium text-gray-500 transition-colors hover:text-dq-navy"
+      <div className="grid items-start gap-10 lg:grid-cols-[minmax(0,1fr)_340px] lg:gap-12">
+        <div className="min-w-0">
+          <h1 className="animate-fade-in-up text-balance text-3xl font-semibold leading-[1.1] tracking-[-0.02em] text-dq-navy sm:text-4xl md:text-5xl">
+            {title}
+          </h1>
+
+          <div className="animate-fade-in-up animation-delay-100 mt-4 flex flex-wrap items-center gap-2">
+            <span
+              className={`inline-flex items-center gap-2 font-mono text-[10px] font-semibold uppercase tracking-[0.16em] ${accent.badge}`}
+            >
+              <span
+                className={`flex h-8 w-8 items-center justify-center rounded-xl ${accent.iconBg}`}
               >
-                Marketplace
-              </Link>
-            </BreadcrumbLink>
-          </BreadcrumbItem>
-          <BreadcrumbSeparator>
-            <ChevronRight size={12} className="text-gray-300" />
-          </BreadcrumbSeparator>
-          <BreadcrumbItem>
-            <BreadcrumbLink asChild>
-              <Link
-                to={`/marketplace?collection=${service.collection}`}
-                className="text-xs font-medium text-gray-500 transition-colors hover:text-dq-navy"
-              >
-                {categoryLabel}
-              </Link>
-            </BreadcrumbLink>
-          </BreadcrumbItem>
-          <BreadcrumbSeparator>
-            <ChevronRight size={12} className="text-gray-300" />
-          </BreadcrumbSeparator>
-          <BreadcrumbItem>
-            <BreadcrumbPage className="max-w-[240px] truncate text-xs font-medium text-dq-navy sm:max-w-none">
-              {title}
-            </BreadcrumbPage>
-          </BreadcrumbItem>
-        </BreadcrumbList>
-      </Breadcrumb>
+                <ServiceIcon size={16} className={accent.icon} strokeWidth={1.75} />
+              </span>
+              {categoryLabel}
+            </span>
+            <span className="rounded-full bg-gray-100 px-3 py-1 font-mono text-[10px] font-semibold uppercase tracking-[0.14em] text-gray-600">
+              {typeLabel}
+            </span>
+            {isHighImpact && (
+              <span className="inline-flex items-center gap-1 rounded-full bg-dq-navy px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider text-white">
+                <Zap size={10} className="fill-white" />
+                High-Impact
+              </span>
+            )}
+          </div>
 
-      <div className="mb-5 flex flex-wrap items-center gap-2">
-        <span
-          className={`inline-flex items-center gap-2 font-mono text-[10px] font-semibold uppercase tracking-[0.16em] ${accent.badge}`}
-        >
-          <span
-            className={`flex h-8 w-8 items-center justify-center rounded-xl ${accent.iconBg}`}
-          >
-            <ServiceIcon size={16} className={accent.icon} strokeWidth={1.75} />
-          </span>
-          {categoryLabel}
-        </span>
-        <span className="rounded-full bg-gray-100 px-3 py-1 font-mono text-[10px] font-semibold uppercase tracking-[0.14em] text-gray-600">
-          {typeLabel}
-        </span>
-        {isHighImpact && (
-          <span className="inline-flex items-center gap-1 rounded-full bg-dq-navy px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider text-white">
-            <Zap size={10} className="fill-white" />
-            High-Impact
-          </span>
-        )}
-      </div>
+          <p className="animate-fade-in-up animation-delay-200 mt-5 max-w-2xl text-base leading-relaxed text-gray-600 md:text-lg">
+            {service.description}
+          </p>
 
-      <h1 className="text-balance text-3xl font-semibold leading-[1.1] tracking-[-0.02em] text-dq-navy sm:text-4xl md:text-5xl">
-        {title}
-      </h1>
+          <div className="animate-fade-in-up animation-delay-300 mt-5 flex flex-wrap items-center gap-x-5 gap-y-2 text-sm text-gray-600">
+            <span className="inline-flex items-center gap-1.5">
+              <Clock size={14} className="shrink-0 text-gray-400" strokeWidth={1.75} aria-hidden />
+              <span>
+                <span className="text-gray-400">Timeline</span>{" "}
+                <span className="font-medium text-dq-navy">{service.duration}</span>
+              </span>
+            </span>
+            <span className="inline-flex items-center gap-1.5">
+              <Users size={14} className="shrink-0 text-gray-400" strokeWidth={1.75} aria-hidden />
+              <span>
+                <span className="text-gray-400">Ideal for</span>{" "}
+                <span className="font-medium text-dq-navy">{service.audience}</span>
+              </span>
+            </span>
+          </div>
+        </div>
 
-      <p className="mt-5 max-w-2xl text-base leading-relaxed text-gray-600 md:text-lg">
-        {service.description}
-      </p>
-
-      <div className="mt-6 flex items-center gap-2 text-sm">
-        <Clock size={15} className="text-dq-orange" aria-hidden />
-        <span className="text-gray-500">Timeline</span>
-        <span className="font-semibold text-dq-navy">{service.duration}</span>
-      </div>
-
-      <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
-        <ServiceDetailPrimaryButton
-          className="group w-full sm:w-auto"
-          onClick={onRequestQuote}
-        >
-          Request Quote
-          <ArrowRight
-            size={16}
-            className="transition group-hover:translate-x-0.5"
+        <div className="animate-fade-in-up animation-delay-200 lg:sticky lg:top-24 lg:self-start">
+          <ServicePackageCard
+            service={service}
+            requiresQuoteCTA={requiresQuoteCTA}
+            onRequestQuote={onRequestQuote}
+            onStartOnboarding={onStartOnboarding}
           />
-        </ServiceDetailPrimaryButton>
-        <ServiceDetailSecondaryButton
-          className="w-full sm:w-auto"
-          onClick={onBookConsultation}
-        >
-          Book a Consultation
-        </ServiceDetailSecondaryButton>
+        </div>
       </div>
     </div>
   );
