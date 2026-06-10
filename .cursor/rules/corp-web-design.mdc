@@ -38,6 +38,17 @@ Marketing pages (`/`, `/marketplace`, `/service/:id`) share the **DQ corp web de
 - Do **not** copy corp homepage stats, problem copy, or section order verbatim
 - Parent brand: optional `Part of DigitalQatalyst` external link; full corp credibility stays on corp web
 
+## Product landing copy (TMaaS positioning)
+- Position TMaaS as DigitalQatalyst's **transformation operating platform**, not a generic consultancy or abstract "acceleration" headline
+- Lead with the **productised services model**: marketplace discovery, AI-ready blueprints, governed fulfilment, reusable operating models
+- Contrast with **isolated consulting engagements**; emphasise structured, scalable execution
+- Problem cards map to buyer pains: Transformation Lead (initiative fit), Business Lead (cost/ROI), Technology Leader (disconnected delivery)
+- Outcome cards map to buyer gains: transparent ROI, faster blueprint-led delivery, scalable governed execution
+- Journey steps: Discover (marketplace) → Evaluate (AI-guided exploration) → Engage (governed fulfilment activation)
+- Primary CTA label: **Browse services**; secondary: **Talk to our team** (not "Explore Marketplace" / "Contact Us")
+- Use substantiated metrics only (`4 wks`, `50+`, `From $1k`); avoid unqualified multipliers (`12×`, `99%`) unless sourced
+- Hero eyebrow: **Transformation operating platform**; badge row: `TMaaS` + status chip (e.g. Live)
+
 ## Service detail, tab first-heading alignment
 Overview, What You Receive, and How It Works first `sectionHeading` share the same top offset: `serviceDetailSplitLead` on split-grid lead columns; `serviceDetailTabLead` on How It Works first `ServiceDetailSection`.
 

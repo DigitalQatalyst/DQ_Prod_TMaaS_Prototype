@@ -2,7 +2,8 @@ import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
 import MeshSection from "@/components/site/MeshSection";
 import HeroDashboardMockup from "@/components/site/landing/HeroDashboardMockup";
-import { PLATFORM_NAME } from "@/lib/brandLinks";
+import ProductBadgeRow from "@/components/site/landing/v2/ProductBadgeRow";
+import { PLATFORM_ACRONYM } from "@/lib/brandLinks";
 import { btnPrimary, btnSecondary } from "@/lib/brandAccent";
 import { cn } from "@/lib/utils";
 
@@ -15,19 +16,25 @@ const LandingHeroSection = () => {
     >
       <div className="relative mx-auto grid max-w-7xl items-center gap-12 lg:grid-cols-2 lg:gap-16">
         <div>
-          <p className="animate-fade-in-up dq-eyebrow">
-            {PLATFORM_NAME}
+          <div className="animate-fade-in-up">
+            <ProductBadgeRow code={PLATFORM_ACRONYM} status="Live" />
+          </div>
+
+          <p className="animate-fade-in-up animation-delay-100 mt-5 dq-eyebrow">
+            Transformation operating platform
           </p>
 
           <h1 className="animate-fade-in-up animation-delay-100 mt-5 text-balance text-[2.75rem] font-semibold leading-[1.0] tracking-[-0.03em] text-dq-navy sm:text-6xl md:text-7xl lg:text-8xl">
-            <span className="block">Digital Transformation</span>
-            <span className="block text-dq-orange">Accelerated</span>
+            <span className="block">Industrialise digital</span>
+            <span className="block text-dq-orange">transformation delivery</span>
           </h1>
 
           <p className="animate-fade-in-up animation-delay-200 mt-6 max-w-2xl text-lg leading-relaxed text-gray-600">
-            {PLATFORM_NAME} is a low-cost, architecture-led marketplace for digital
-            transformation services — using ready-to-launch blueprints to
-            accelerate impact, reduce cost, and ensure scalability.
+            {PLATFORM_ACRONYM} is DigitalQatalyst&apos;s operating platform for
+            productised transformation: an architecture-led marketplace of
+            AI-ready blueprints, governed fulfilment, and transparent pricing.
+            Move beyond isolated consulting engagements to structured execution
+            you can activate in weeks.
           </p>
 
           <div className="animate-fade-in-up animation-delay-300 mt-6 flex flex-col items-stretch gap-3 sm:flex-row sm:items-center">
@@ -35,7 +42,7 @@ const LandingHeroSection = () => {
               to="/marketplace"
               className={cn(btnPrimary, "group w-full sm:w-auto")}
             >
-              Explore Marketplace
+              Browse services
               <ArrowRight
                 size={16}
                 className="transition group-hover:translate-x-0.5"
@@ -45,7 +52,7 @@ const LandingHeroSection = () => {
               to="/contact"
               className={cn(btnSecondary, "w-full sm:w-auto")}
             >
-              Contact Us
+              Talk to our team
             </Link>
           </div>
         </div>

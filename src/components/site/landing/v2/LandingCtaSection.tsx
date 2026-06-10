@@ -24,17 +24,17 @@ const LandingCtaSection = () => {
 
       <div className="relative mx-auto max-w-[720px]">
         <p className="dq-eyebrow-on-dark mb-4">
-          Ready to Begin
+          Next step
         </p>
 
         <h2 className="text-balance text-4xl font-semibold leading-[1.05] tracking-tight text-white md:text-5xl">
-          Find your next service —{" "}
-          <span className="text-dq-orange">start in the marketplace.</span>
+          Your next transformation service is{" "}
+          <span className="text-dq-orange">already in the catalogue.</span>
         </h2>
 
         <p className="mx-auto mt-5 max-w-md text-[15px] leading-relaxed text-white/60">
-          Browse certified transformation services, then contact us when you are
-          ready to activate.
+          Browse productised services on your own, or talk to us when you&apos;re
+          ready to scope and activate governed delivery.
         </p>
 
         <div className="mt-8 flex flex-wrap justify-center gap-3">
@@ -42,14 +42,14 @@ const LandingCtaSection = () => {
             to="/marketplace"
             className={cn(btnPrimaryOnDark, "px-7")}
           >
-            Explore Marketplace
+            Browse services
             <ArrowRight size={15} />
           </Link>
           <Link
             to="/contact"
             className={cn(btnSecondaryOnDark, "px-7")}
           >
-            Contact Us
+            Talk to our team
           </Link>
         </div>
       </div>

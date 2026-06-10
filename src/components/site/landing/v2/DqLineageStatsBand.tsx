@@ -2,10 +2,10 @@ import { ArrowRight } from "lucide-react";
 import { DQ_CORP_WEB_URL, PLATFORM_NAME } from "@/lib/brandLinks";
 
 const STATS = [
-  { value: "50+", label: "Certified transformation services" },
-  { value: "5", label: "Core capability categories" },
+  { value: "50+", label: "Productised transformation services" },
+  { value: "4", label: "Marketplace capability areas" },
   { value: "6+", label: "Countries with active programmes" },
-  { value: "4 wks", label: "Typical time to first engagement" },
+  { value: "4 wks", label: "Median time to first engagement" },
 ];
 
 const DqLineageStatsBand = () => {
@@ -30,12 +30,12 @@ const DqLineageStatsBand = () => {
             Part of DigitalQatalyst
           </p>
           <h3 className="mb-3 text-2xl font-semibold tracking-tight text-dq-navy">
-            Built on a decade of transformation delivery.
+            A decade of transformation delivery behind the platform.
           </h3>
           <p className="mb-6 text-[15px] leading-relaxed text-gray-600">
-            {PLATFORM_NAME} is a DigitalQatalyst product — bringing marketplace access to
-            the same architecture-driven methodology trusted by organisations
-            across six countries.
+            {PLATFORM_NAME} is DigitalQatalyst&apos;s operating platform,
+            industrialising the same architecture-led methodology trusted across
+            six countries into a governed, productised delivery model.
           </p>
           <a
             href={DQ_CORP_WEB_URL}
@@ -43,7 +43,7 @@ const DqLineageStatsBand = () => {
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 text-sm font-semibold text-dq-navy transition-all hover:gap-3"
           >
-            Explore DigitalQatalyst
+            About DigitalQatalyst
             <ArrowRight size={16} />
           </a>
         </div>

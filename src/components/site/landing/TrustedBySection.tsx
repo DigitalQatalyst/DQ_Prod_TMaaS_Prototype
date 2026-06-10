@@ -19,7 +19,7 @@ const TrustedBySection = () => {
   return (
     <section className="border-y border-gray-100 bg-white px-5 py-12 md:px-8 lg:px-10">
       <p className="mb-6 text-center font-mono text-[11px] uppercase tracking-widest text-gray-400">
-        Trusted by leading organisations
+        Trusted by transformation teams at
       </p>
       <div className="marquee-mask mx-auto max-w-[1200px] overflow-hidden">
         <div className="marquee-track gap-12">

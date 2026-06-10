@@ -77,7 +77,7 @@ const LandingNavbar = () => {
                 "px-4 py-2"
               )}
             >
-              Contact Us
+              Talk to our team
             </Link>
           )}
 
@@ -130,7 +130,7 @@ const LandingNavbar = () => {
               onClick={() => setMobileOpen(false)}
               className={cn(btnPrimary, "mt-3 w-full py-3 text-center")}
             >
-              Contact Us
+              Talk to our team
             </Link>
           )}
         </div>

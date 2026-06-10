@@ -13,8 +13,9 @@ const Footer = () => {
         <div className="mb-12 grid grid-cols-1 gap-10 md:grid-cols-[1fr_auto_auto_auto] md:gap-16">
           <div className="space-y-4">
             <TMaaSLogo />
-            <p className="max-w-[240px] text-[14px] leading-relaxed text-gray-500">
-              {PLATFORM_NAME}
+            <p className="max-w-[280px] text-[14px] leading-relaxed text-gray-500">
+              DigitalQatalyst&apos;s transformation operating platform:
+              productised services, governed delivery, AI-ready blueprints.
             </p>
           </div>
 

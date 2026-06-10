@@ -1,25 +1,24 @@
 const OUTCOMES = [
   {
-    tag: "Cost",
+    tag: "Business value",
     metric: "From $1k",
-    metricLabel: "Low-cost starting point for transformation",
-    title:
-      "Enterprise transformation without enterprise-scale upfront investment.",
-    body: "Explore productized services with transparent pricing — start with a focused engagement and scale as outcomes prove out.",
+    metricLabel: "Typical entry engagement",
+    title: "Transparent, cost-effective solutions with measurable ROI.",
+    body: "Published pricing and scoped blueprints help business leaders fund with confidence. Start focused, scale as value is proven.",
   },
   {
     tag: "Speed",
-    metric: "12×",
-    metricLabel: "Faster time to realise impact from digital transformation",
-    title: "Practical impact in as little as four weeks.",
-    body: "Realise practical impact from transformation in as fast as 4 weeks, due to focused execution of transformation.",
+    metric: "4 wks",
+    metricLabel: "Typical time to first delivered outcome",
+    title: "Ready-to-launch blueprints, not another strategy phase.",
+    body: "AI-assisted, architecture-led services compress time to impact. Structured fulfilment in weeks, not quarters of discovery.",
   },
   {
-    tag: "Success",
-    metric: "99%",
-    metricLabel: "Success rate of transformation programs executed through an agile approach",
-    title: "Goals realised even as priorities shift.",
-    body: "Increased ability to successfully realise transformation goals due to ability to adapt to changing demand and priorities.",
+    tag: "Scale",
+    metric: "50+",
+    metricLabel: "Certified productised services",
+    title: "Flexible, scalable delivery that adapts with you.",
+    body: "Reusable operating models and governed execution let technology leaders streamline delivery without restarting from zero.",
   },
 ];
 
@@ -33,13 +32,13 @@ const ClientOutcomesSection = () => {
       <div className="mx-auto max-w-[1200px]">
         <div className="mb-12">
           <p className="mb-4 dq-eyebrow">
-            Client Outcomes
+            What teams achieve
           </p>
           <h2
             id="client-outcomes-heading"
             className="text-4xl font-semibold tracking-tight text-dq-navy md:text-5xl"
           >
-            Real impact. Measurable results. Faster time to value.
+            Lower risk to start. Faster to value. Built to scale.
           </h2>
         </div>
 

@@ -18,12 +18,12 @@ const CATEGORY_ICONS: Record<string, LucideIcon> = {
 
 const CATEGORY_DESCRIPTIONS: Record<string, string> = {
   experience:
-    "Customer-facing platforms, portals, and engagement experiences designed for adoption and scale.",
+    "Portals and engagement platforms designed for adoption at scale.",
   operations:
-    "Workflow automation, operating models, and productivity systems that connect people to outcomes.",
+    "Workflow automation and operating models that connect teams to outcomes.",
   security:
-    "Secure delivery pipelines, cloud infrastructure, and DevSecOps practices built for enterprise compliance.",
-  ai: "Data platforms, analytics, and AI capabilities that turn information into actionable insight.",
+    "Cloud infrastructure, secure pipelines, and DevSecOps for enterprise compliance.",
+  ai: "Data platforms, analytics, and AI-assisted capabilities for governed insight.",
 };
 
 const MarketplacePreviewSection = () => {
@@ -34,14 +34,14 @@ const MarketplacePreviewSection = () => {
     >
       <div className="mx-auto max-w-[1200px]">
         <p className="mb-4 dq-eyebrow">
-          Inside the marketplace
+          Marketplace discovery
         </p>
         <h2 className="mb-4 max-w-2xl text-4xl font-semibold tracking-tight text-dq-navy md:text-5xl">
-          Browse transformation services by category.
+          Find productised services by capability and outcome.
         </h2>
         <p className="mb-12 max-w-xl text-lg text-gray-600">
-          Start with the capability area that matches your priority — every
-          category links to the full marketplace catalogue.
+          E-commerce-style discovery across four capability areas. Each links to
+          the full catalogue of architecture-led, ready-to-launch blueprints.
         </p>
 
         <div className="grid gap-6 md:grid-cols-2">
@@ -76,7 +76,7 @@ const MarketplacePreviewSection = () => {
             to="/marketplace"
             className="inline-flex items-center gap-2 text-sm font-semibold text-dq-navy transition-colors hover:text-dq-navy/70"
           >
-            Browse all services
+            View all 50+ services
             <ArrowRight size={16} />
           </Link>
         </div>
