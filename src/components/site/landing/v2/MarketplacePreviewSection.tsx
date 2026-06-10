@@ -18,12 +18,12 @@ const CATEGORY_ICONS: Record<string, LucideIcon> = {
 
 const CATEGORY_DESCRIPTIONS: Record<string, string> = {
   experience:
-    "Portals and engagement platforms designed for adoption at scale.",
+    "Customer portals, apps, and digital experiences built to scale.",
   operations:
-    "Workflow automation and operating models that connect teams to outcomes.",
+    "Workflows and automation that help teams work smarter.",
   security:
-    "Cloud infrastructure, secure pipelines, and DevSecOps for enterprise compliance.",
-  ai: "Data platforms, analytics, and AI-assisted capabilities for governed insight.",
+    "Cloud, security, and DevOps for compliant enterprise delivery.",
+  ai: "Data, analytics, and AI services that turn insight into action.",
 };
 
 const MarketplacePreviewSection = () => {
@@ -34,14 +34,14 @@ const MarketplacePreviewSection = () => {
     >
       <div className="mx-auto max-w-[1200px]">
         <p className="mb-4 dq-eyebrow">
-          Marketplace discovery
+          The marketplace
         </p>
         <h2 className="mb-4 max-w-2xl text-4xl font-semibold tracking-tight text-dq-navy md:text-5xl">
-          Find productised services by capability and outcome.
+          Browse digital transformation services by category.
         </h2>
         <p className="mb-12 max-w-xl text-lg text-gray-600">
-          E-commerce-style discovery across four capability areas. Each links to
-          the full catalogue of architecture-led, ready-to-launch blueprints.
+          Four capability areas. One catalogue. Pick what matters most and
+          explore ready-to-launch services.
         </p>
 
         <div className="grid gap-6 md:grid-cols-2">

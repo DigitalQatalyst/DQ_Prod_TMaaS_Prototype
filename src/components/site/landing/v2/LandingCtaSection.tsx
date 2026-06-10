@@ -24,17 +24,17 @@ const LandingCtaSection = () => {
 
       <div className="relative mx-auto max-w-[720px]">
         <p className="dq-eyebrow-on-dark mb-4">
-          Next step
+          Get started
         </p>
 
         <h2 className="text-balance text-4xl font-semibold leading-[1.05] tracking-tight text-white md:text-5xl">
-          Your next transformation service is{" "}
-          <span className="text-dq-orange">already in the catalogue.</span>
+          Find your next service{" "}
+          <span className="text-dq-orange">in the marketplace.</span>
         </h2>
 
         <p className="mx-auto mt-5 max-w-md text-[15px] leading-relaxed text-white/60">
-          Browse productised services on your own, or talk to us when you&apos;re
-          ready to scope and activate governed delivery.
+          Browse on your own or talk to our team when you&apos;re ready to
+          launch.
         </p>
 
         <div className="mt-8 flex flex-wrap justify-center gap-3">

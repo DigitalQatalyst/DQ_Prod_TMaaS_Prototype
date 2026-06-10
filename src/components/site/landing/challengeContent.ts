@@ -7,27 +7,27 @@ export type ChallengeCard = {
   body: string;
 };
 
-export const CHALLENGE_EYEBROW = "Why teams switch";
+export const CHALLENGE_EYEBROW = "The challenge";
 
 export const CHALLENGE_HEADLINE =
-  "Transformation shouldn't depend on isolated consulting engagements";
+  "Digital transformation is slow, costly, and hard to scale";
 
 export const CHALLENGE_CARDS: ChallengeCard[] = [
   {
     Icon: Clock,
-    title: "Hard to find initiatives that fit your goals",
-    body: "Transformation leads struggle to identify and tailor programmes aligned with organisational priorities. Every engagement starts from scratch.",
+    title: "Slow to start",
+    body: "Consultant-led programmes take months before anything ships. Every project starts from scratch.",
   },
   {
     Icon: CircleDollarSign,
-    title: "High cost, unclear business value",
-    body: "Business leaders face open-ended budgets and weak ROI visibility, making it difficult to justify spend or decide what to fund next.",
+    title: "Expensive and unclear",
+    body: "Open-ended budgets and hidden costs make it hard to see value or know what to fund next.",
   },
   {
     Icon: RefreshCw,
-    title: "Disconnected, complex delivery",
-    body: "Technology leaders are overwhelmed by fragmented processes, siloed stakeholders, and delivery models that don't scale or adapt.",
+    title: "Hard to adapt",
+    body: "Disconnected tools and teams can't keep up when business priorities change.",
   },
 ];
 
-export const CHALLENGE_CLOSING = `${PLATFORM_NAME} industrialises delivery through a productised marketplace: AI-ready blueprints, governed execution, and reusable operating models that adapt as priorities shift.`;
+export const CHALLENGE_CLOSING = `${PLATFORM_NAME} fixes this with a marketplace of ready-to-launch blueprints, clear pricing, and delivery that scales with you.`;

@@ -1,24 +1,24 @@
 const OUTCOMES = [
   {
-    tag: "Business value",
+    tag: "Cost",
     metric: "From $1k",
-    metricLabel: "Typical entry engagement",
-    title: "Transparent, cost-effective solutions with measurable ROI.",
-    body: "Published pricing and scoped blueprints help business leaders fund with confidence. Start focused, scale as value is proven.",
+    metricLabel: "Starting price for services",
+    title: "Low cost to start. Clear value to scale.",
+    body: "Transparent pricing on every service. Start small, prove results, then grow.",
   },
   {
     tag: "Speed",
     metric: "4 wks",
-    metricLabel: "Typical time to first delivered outcome",
-    title: "Ready-to-launch blueprints, not another strategy phase.",
-    body: "AI-assisted, architecture-led services compress time to impact. Structured fulfilment in weeks, not quarters of discovery.",
+    metricLabel: "Time to first outcome",
+    title: "Impact in weeks, not months.",
+    body: "Ready-to-launch blueprints and AI-powered delivery get you moving fast.",
   },
   {
     tag: "Scale",
     metric: "50+",
-    metricLabel: "Certified productised services",
-    title: "Flexible, scalable delivery that adapts with you.",
-    body: "Reusable operating models and governed execution let technology leaders streamline delivery without restarting from zero.",
+    metricLabel: "Transformation services",
+    title: "Built to grow with your business.",
+    body: "Modular services and proven blueprints adapt as your priorities change.",
   },
 ];
 
@@ -32,13 +32,13 @@ const ClientOutcomesSection = () => {
       <div className="mx-auto max-w-[1200px]">
         <div className="mb-12">
           <p className="mb-4 dq-eyebrow">
-            What teams achieve
+            Results
           </p>
           <h2
             id="client-outcomes-heading"
             className="text-4xl font-semibold tracking-tight text-dq-navy md:text-5xl"
           >
-            Lower risk to start. Faster to value. Built to scale.
+            Less cost. Faster impact. Room to scale.
           </h2>
         </div>
 

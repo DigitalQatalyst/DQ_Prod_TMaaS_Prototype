@@ -6,23 +6,23 @@ const JOURNEY_STEPS = [
     num: "01",
     suite: "Discover",
     title: "Browse the marketplace",
-    body: "Explore productised services and blueprints by goal, industry, and capability, with transparent pricing from the start.",
+    body: "Find services and blueprints by goal, industry, and outcome. Pricing is clear from the start.",
     linkLabel: "Browse services",
     href: "/marketplace",
   },
   {
     num: "02",
     suite: "Evaluate",
-    title: "Explore with AI-guided consulting",
-    body: "Compare scope, timelines, and bundled pathways. Use guided exploration to shortlist services aligned to your priorities.",
-    linkLabel: "Compare offerings",
+    title: "Compare your options",
+    body: "Review scope, timelines, and bundles. Use AI-guided exploration to shortlist what fits.",
+    linkLabel: "Compare services",
     href: "/marketplace",
   },
   {
     num: "03",
     suite: "Engage",
-    title: "Activate governed fulfilment",
-    body: "Scope your needs with our team and launch structured delivery, with stakeholder coordination and delivery visibility built in.",
+    title: "Launch with our team",
+    body: "Talk to us to scope your needs and start delivery with full visibility from day one.",
     linkLabel: "Talk to our team",
     href: "/contact",
   },
@@ -39,7 +39,7 @@ const HowItWorksSection = () => {
           How TMaaS works
         </p>
         <h2 className="mb-16 text-4xl font-semibold tracking-tight text-dq-navy md:text-5xl">
-          From discovery to governed delivery in three steps.
+          From browse to launch in three steps.
         </h2>
 
         <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3 lg:gap-6">

@@ -21,20 +21,19 @@ const LandingHeroSection = () => {
           </div>
 
           <p className="animate-fade-in-up animation-delay-100 mt-5 dq-eyebrow">
-            Transformation operating platform
+            Digital transformation marketplace
           </p>
 
           <h1 className="animate-fade-in-up animation-delay-100 mt-5 text-balance text-[2.75rem] font-semibold leading-[1.0] tracking-[-0.03em] text-dq-navy sm:text-6xl md:text-7xl lg:text-8xl">
-            <span className="block">Industrialise digital</span>
-            <span className="block text-dq-orange">transformation delivery</span>
+            <span className="block">Digital transformation</span>
+            <span className="block text-dq-orange">accelerated</span>
           </h1>
 
           <p className="animate-fade-in-up animation-delay-200 mt-6 max-w-2xl text-lg leading-relaxed text-gray-600">
-            {PLATFORM_ACRONYM} is DigitalQatalyst&apos;s operating platform for
-            productised transformation: an architecture-led marketplace of
-            AI-ready blueprints, governed fulfilment, and transparent pricing.
-            Move beyond isolated consulting engagements to structured execution
-            you can activate in weeks.
+            {PLATFORM_ACRONYM} is a low-cost marketplace for digital
+            transformation services. Browse AI-powered, ready-to-launch
+            blueprints with transparent pricing and start delivering impact in
+            weeks.
           </p>
 
           <div className="animate-fade-in-up animation-delay-300 mt-6 flex flex-col items-stretch gap-3 sm:flex-row sm:items-center">

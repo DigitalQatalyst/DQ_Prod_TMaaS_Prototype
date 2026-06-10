@@ -2,10 +2,10 @@ import { ArrowRight } from "lucide-react";
 import { DQ_CORP_WEB_URL, PLATFORM_NAME } from "@/lib/brandLinks";
 
 const STATS = [
-  { value: "50+", label: "Productised transformation services" },
-  { value: "4", label: "Marketplace capability areas" },
-  { value: "6+", label: "Countries with active programmes" },
-  { value: "4 wks", label: "Median time to first engagement" },
+  { value: "50+", label: "Digital transformation services" },
+  { value: "4", label: "Service categories" },
+  { value: "6+", label: "Countries served" },
+  { value: "4 wks", label: "Typical time to start" },
 ];
 
 const DqLineageStatsBand = () => {
@@ -30,12 +30,11 @@ const DqLineageStatsBand = () => {
             Part of DigitalQatalyst
           </p>
           <h3 className="mb-3 text-2xl font-semibold tracking-tight text-dq-navy">
-            A decade of transformation delivery behind the platform.
+            Built on a decade of transformation delivery.
           </h3>
           <p className="mb-6 text-[15px] leading-relaxed text-gray-600">
-            {PLATFORM_NAME} is DigitalQatalyst&apos;s operating platform,
-            industrialising the same architecture-led methodology trusted across
-            six countries into a governed, productised delivery model.
+            {PLATFORM_NAME} is a DigitalQatalyst product. The same trusted
+            approach, now available through a simple online marketplace.
           </p>
           <a
             href={DQ_CORP_WEB_URL}

@@ -14,8 +14,8 @@ const Footer = () => {
           <div className="space-y-4">
             <TMaaSLogo />
             <p className="max-w-[280px] text-[14px] leading-relaxed text-gray-500">
-              DigitalQatalyst&apos;s transformation operating platform:
-              productised services, governed delivery, AI-ready blueprints.
+              A marketplace for digital transformation services. AI-powered
+              blueprints, clear pricing, faster delivery.
             </p>
           </div>
 
