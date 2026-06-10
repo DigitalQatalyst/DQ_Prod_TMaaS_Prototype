@@ -40,8 +40,8 @@ const GET_STARTED_FAQ = (ctx: FaqContext): ServiceFaq => ({
   question: "How do I get started?",
   answer:
     ctx.price === "Free"
-      ? "Use Request Quote on this page to open our contact form with this service pre-filled. A DQ advisor will confirm scope and next steps."
-      : `Use Request Quote on this page to open our contact form with this service pre-filled. A DQ advisor will share a proposal with timelines and pricing (list price: ${ctx.price}, ${ctx.duration}).`,
+      ? "Contact us to discuss this service. A DQ advisor will confirm scope and next steps."
+      : `Contact us to discuss this service. A DQ advisor will share a proposal with timelines and pricing (list price: ${ctx.price}, ${ctx.duration}).`,
 });
 
 const TYPE_FAQ_BUILDERS: Record<string, (ctx: FaqContext) => ServiceFaq[]> = {

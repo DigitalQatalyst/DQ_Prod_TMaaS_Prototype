@@ -40,7 +40,7 @@ export function ServiceDetailFaqsTab({ service }: ServiceDetailFaqsTabProps) {
               <AccordionTrigger className="py-4 text-left text-sm font-semibold text-dq-navy hover:no-underline">
                 {faq.question}
               </AccordionTrigger>
-              <AccordionContent className="border-t border-gray-100 pb-4 pt-0">
+              <AccordionContent className="border-t border-gray-100 pt-4">
                 <p className="text-sm leading-[1.65] text-[#667085]">{faq.answer}</p>
               </AccordionContent>
             </AccordionItem>
@@ -56,29 +56,23 @@ export function ServiceDetailFaqsTab({ service }: ServiceDetailFaqsTabProps) {
           Still have questions?
         </h3>
         <p className="mt-2 text-sm leading-relaxed text-[#667085]">
+          Our team can help you scope the right approach for your organisation.{" "}
           {featureFlags.isEnabled("contactUs") ? (
-            <>
-              Our team can help you scope the right approach for your organisation.{" "}
-              <Link
-                to="/contact"
-                className="font-semibold text-dq-orange transition-colors hover:text-dq-orange/80"
-              >
-                Contact us
-              </Link>{" "}
-              or request a quote from the service package above.
-            </>
+            <Link
+              to="/contact"
+              className="font-semibold text-dq-orange transition-colors hover:text-dq-orange/80"
+            >
+              Contact us
+            </Link>
           ) : (
-            <>
-              Our team can help you scope the right approach for your organisation.{" "}
-              <a
-                href="mailto:info@digitalqatalyst.com"
-                className="font-semibold text-dq-orange transition-colors hover:text-dq-orange/80"
-              >
-                Contact us
-              </a>{" "}
-              or request a quote from the service package above.
-            </>
+            <a
+              href="mailto:info@digitalqatalyst.com"
+              className="font-semibold text-dq-orange transition-colors hover:text-dq-orange/80"
+            >
+              Contact us
+            </a>
           )}
+          .
         </p>
       </section>
     </div>
