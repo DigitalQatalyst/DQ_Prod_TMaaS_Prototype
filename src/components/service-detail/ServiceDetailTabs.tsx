@@ -3,10 +3,10 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import type { DeliveryProcess } from "./ServiceDetailDeliverySection";
 import { ServiceDetailDeliverySection } from "./ServiceDetailDeliverySection";
 import { ServiceDetailOverviewTab } from "./ServiceDetailOverviewTab";
-import { ServiceDetailSection } from "./ServiceDetailSection";
 import { ServiceDetailWhatYouReceiveTab } from "./ServiceDetailWhatYouReceiveTab";
+import { ServiceDetailFaqsTab } from "./ServiceDetailFaqsTab";
 import { ServiceDetailWhyItMattersTab } from "./ServiceDetailWhyItMattersTab";
-import { WHAT_HAPPENS_NEXT_STEPS, type ServiceProduct } from "./serviceDetailHelpers";
+import type { ServiceProduct } from "./serviceDetailHelpers";
 
 const SERVICE_DETAIL_TABS = [
   { value: "overview", label: "Overview" },
@@ -18,9 +18,6 @@ const SERVICE_DETAIL_TABS = [
 
 const tabTriggerClass =
   "rounded-none border-b-2 border-transparent px-4 pb-3 pt-1 text-sm font-semibold text-dq-navy transition-colors hover:text-dq-navy/80 data-[state=active]:border-dq-orange data-[state=active]:bg-transparent data-[state=active]:text-dq-orange data-[state=active]:shadow-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-dq-orange focus-visible:ring-offset-2";
-
-const itemCardClass =
-  "rounded-xl border border-gray-200 bg-white p-5 shadow-[var(--shadow-card)] transition-shadow duration-300 hover:shadow-[var(--shadow-elevated)]";
 
 interface ServiceDetailTabsProps {
   service: ServiceProduct;
@@ -63,33 +60,13 @@ export function ServiceDetailTabs({
       </TabsContent>
 
       <TabsContent value="how-it-works" className="mt-0 focus-visible:outline-none">
-        <div className="space-y-16">
-          {deliveryProcess.steps.length > 0 ? (
-            <ServiceDetailDeliverySection process={deliveryProcess} />
-          ) : (
-            <p className="text-sm leading-relaxed text-gray-500">
-              Delivery process details for this service will be available soon.
-            </p>
-          )}
-
-          <ServiceDetailSection title="What Happens Next?">
-            <ol className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-              {WHAT_HAPPENS_NEXT_STEPS.map((step) => (
-                <li key={step.num} className={`${itemCardClass} flex gap-3`}>
-                  <span className="w-6 shrink-0 font-mono text-xs font-semibold text-dq-navy/25">
-                    {step.num}
-                  </span>
-                  <div className="min-w-0">
-                    <p className="text-sm font-semibold text-dq-navy">{step.title}</p>
-                    <p className="mt-1 text-[13px] leading-relaxed text-gray-500">
-                      {step.body}
-                    </p>
-                  </div>
-                </li>
-              ))}
-            </ol>
-          </ServiceDetailSection>
-        </div>
+        {deliveryProcess.steps.length > 0 ? (
+          <ServiceDetailDeliverySection process={deliveryProcess} />
+        ) : (
+          <p className="text-sm leading-relaxed text-gray-500">
+            Delivery process details for this service will be available soon.
+          </p>
+        )}
       </TabsContent>
 
       <TabsContent value="why-it-matters" className="mt-0 focus-visible:outline-none">
@@ -97,13 +74,7 @@ export function ServiceDetailTabs({
       </TabsContent>
 
       <TabsContent value="faqs" className="mt-0 focus-visible:outline-none">
-        <div className="rounded-xl border border-gray-200 bg-white p-8 text-center shadow-[var(--shadow-card)]">
-          <p className="text-sm font-semibold text-dq-navy">FAQs coming soon</p>
-          <p className="mt-2 text-sm leading-relaxed text-gray-500">
-            Common questions about this service will be published here. Contact us
-            if you need guidance in the meantime.
-          </p>
-        </div>
+        <ServiceDetailFaqsTab service={service} />
       </TabsContent>
     </Tabs>
   );
