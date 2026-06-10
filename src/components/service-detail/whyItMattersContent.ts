@@ -21,10 +21,6 @@ export interface WhyItMattersContent {
     title: string;
     items: WhyItMattersStateItem[];
   };
-  strategicFit: {
-    title: string;
-    paragraphs: string[];
-  };
 }
 
 interface SolutionContext {
@@ -68,15 +64,15 @@ const COLLECTION_CONTEXT: Record<
 
 const SOLUTION_HOOKS: Record<string, string> = {
   "online web presence":
-    "Your website is often the first — and most critical — digital touchpoint.",
+    "Your website is often the first, and most critical, digital touchpoint.",
   "online social presence":
     "Your social channels are where audiences form first impressions and build ongoing relationships.",
   "mobile apps":
-    "Your mobile apps are where users engage most deeply — and where experience gaps have the greatest impact.",
+    "Your mobile apps are where users engage most deeply, and where experience gaps have the greatest impact.",
   "physical channels":
-    "Your physical and digital touchpoints must work as one — or customer journeys break at the seams.",
+    "Your physical and digital touchpoints must work as one, or customer journeys break at the seams.",
   "experience solutions":
-    "Connected digital experiences are how customers judge your brand — across every channel and journey.",
+    "Connected digital experiences are how customers judge your brand, across every channel and journey.",
   "crm solutions":
     "Your CRM is the backbone of how you understand, serve, and retain customers.",
   "marketing solutions":
@@ -84,9 +80,9 @@ const SOLUTION_HOOKS: Record<string, string> = {
   "smart sales & quotation":
     "Your sales and quotation processes directly shape revenue velocity and customer confidence.",
   "customer support & success":
-    "Customer support is where brand promises are kept — or broken — at scale.",
+    "Customer support is where brand promises are kept, or broken, at scale.",
   "digital workplace":
-    "Your digital workplace is how teams collaborate, decide, and deliver — every day.",
+    "Your digital workplace is how teams collaborate, decide, and deliver, every day.",
   "business process automation":
     "Manual processes and disconnected workflows are among the biggest drains on operational performance.",
   "specialized operations":
@@ -94,21 +90,21 @@ const SOLUTION_HOOKS: Record<string, string> = {
   "enterprise operations":
     "Enterprise operations span the systems and workflows that keep your organisation running at scale.",
   "governance, risk & compliance":
-    "Governance and compliance are not overhead — they are what makes sustainable transformation possible.",
+    "Governance and compliance are not overhead, they are what makes sustainable transformation possible.",
   "enterprise resource planning":
-    "Your ERP connects finance, operations, and supply chain — making it foundational to organisational performance.",
+    "Your ERP connects finance, operations, and supply chain, making it foundational to organisational performance.",
   "workforce management":
     "Workforce systems shape how you deploy talent, manage capacity, and respond to demand.",
   "enterprise data platform":
     "Your data platform is the foundation for every insight, automation, and AI initiative you pursue.",
   "business intelligence & analytics":
-    "Analytics capability determines whether decisions are driven by evidence — or by assumption.",
+    "Analytics capability determines whether decisions are driven by evidence, or by assumption.",
   "enterprise ai & automation":
-    "AI and automation are reshaping how organisations operate — but only where use cases are validated and governed.",
+    "AI and automation are reshaping how organisations operate, but only where use cases are validated and governed.",
   "technology governance":
     "Technology governance is what turns ambitious delivery into sustainable, risk-aware progress.",
   "devsecops automation":
-    "DevSecOps practices determine how fast you can ship — and how confidently you can scale.",
+    "DevSecOps practices determine how fast you can ship, and how confidently you can scale.",
   "it operations & support":
     "IT operations keep critical platforms available, secure, and fit for evolving business needs.",
 };
@@ -134,13 +130,13 @@ const PROBLEM_PARAGRAPH_BUILDERS: Record<
   ai_design: (ctx) =>
     `Yet many organisations pursue AI without validated use cases, unclear guardrails for ${ctx.capability}, and designs that cannot be deployed responsibly. This ${SERVICE_TYPE_LABELS.ai_design} gives you the framework to innovate with governance built in.`,
   deploy: (ctx) =>
-    `Yet many organisations stall between approved designs and production — with integration gaps, quality risks, and delayed go-live across ${ctx.capability}. This ${SERVICE_TYPE_LABELS.deploy} gives you structured delivery to move from plan to live with confidence.`,
+    `Yet many organisations stall between approved designs and production, with integration gaps, quality risks, and delayed go-live across ${ctx.capability}. This ${SERVICE_TYPE_LABELS.deploy} gives you structured delivery to move from plan to live with confidence.`,
   ai_deploy: (ctx) =>
-    `Yet many AI initiatives fail to reach production — blocked by integration complexity, safety concerns, and missing operational readiness for ${ctx.capability}. This ${SERVICE_TYPE_LABELS.ai_deploy} gives you a governed path from design to live AI capability.`,
+    `Yet many AI initiatives fail to reach production, blocked by integration complexity, safety concerns, and missing operational readiness for ${ctx.capability}. This ${SERVICE_TYPE_LABELS.ai_deploy} gives you a governed path from design to live AI capability.`,
   manage: (ctx) =>
-    `Yet many organisations struggle to sustain platform performance after go-live — with reactive support, rising costs, and declining value from ${ctx.capability}. This ${SERVICE_TYPE_LABELS.manage} gives you predictable operations and continuous improvement under SLA governance.`,
+    `Yet many organisations struggle to sustain platform performance after go-live, with reactive support, rising costs, and declining value from ${ctx.capability}. This ${SERVICE_TYPE_LABELS.manage} gives you predictable operations and continuous improvement under SLA governance.`,
   bundle: (ctx) =>
-    `Yet many transformation programmes fragment across vendors, stages, and priorities — leaving gaps in ${ctx.capability} and no single view of progress. This ${SERVICE_TYPE_LABELS.bundle} gives you coordinated end-to-end delivery with unified governance.`,
+    `Yet many transformation programmes fragment across vendors, stages, and priorities, leaving gaps in ${ctx.capability} and no single view of progress. This ${SERVICE_TYPE_LABELS.bundle} gives you coordinated end-to-end delivery with unified governance.`,
 };
 
 const BEFORE_AFTER_BY_TYPE: Record<
@@ -401,40 +397,9 @@ const BEFORE_AFTER_BY_TYPE: Record<
   },
 };
 
-const STRATEGIC_FIT_BY_TYPE: Record<string, (ctx: SolutionContext) => string[]> = {
-  advisory: (ctx) => [
-    `This ${SERVICE_TYPE_LABELS.advisory} supports digital transformation readiness by providing the clarity you need to align stakeholders, prioritise investments, and build a strong foundation for growth across your ${ctx.solution} scope.`,
-    `It also identifies opportunities to enhance ${ctx.capability} and unlock AI enablement potential.`,
-  ],
-  design: (ctx) => [
-    `This ${SERVICE_TYPE_LABELS.design} supports digital transformation readiness by translating strategy into user-centred designs, governance-aligned specifications, and a clear path to implementation for ${ctx.solution}.`,
-    `It also establishes the design foundations needed to enhance ${ctx.capability} and prepare for AI-enabled experiences.`,
-  ],
-  ai_design: (ctx) => [
-    `This ${SERVICE_TYPE_LABELS.ai_design} supports responsible AI adoption by validating use cases, defining guardrails, and producing deployment-ready specifications for ${ctx.solution}.`,
-    `It also positions your organisation to enhance ${ctx.capability} with governed, human-in-the-loop AI workflows.`,
-  ],
-  deploy: (ctx) => [
-    `This ${SERVICE_TYPE_LABELS.deploy} supports digital transformation readiness by delivering production-ready capability for ${ctx.solution} with quality assurance, integration, and structured handover.`,
-    `It also accelerates time-to-value across ${ctx.capability} with SLA-backed delivery governance.`,
-  ],
-  ai_deploy: (ctx) => [
-    `This ${SERVICE_TYPE_LABELS.ai_deploy} supports responsible AI scale-up by moving validated designs into production with monitoring, safety controls, and operational handover for ${ctx.solution}.`,
-    `It also unlocks measurable value from ${ctx.capability} through governed, production-grade AI deployment.`,
-  ],
-  manage: (ctx) => [
-    `This ${SERVICE_TYPE_LABELS.manage} supports sustained transformation value by keeping ${ctx.solution} running, optimised, and aligned to business priorities under SLA governance.`,
-    `It also ensures ${ctx.capability} continues to evolve with lifecycle reporting and continuous improvement.`,
-  ],
-  bundle: (ctx) => [
-    `This ${SERVICE_TYPE_LABELS.bundle} supports digital transformation readiness by coordinating discovery, design, delivery, and operations for ${ctx.solution} under unified TMaaS governance.`,
-    `It also delivers bundled efficiency across ${ctx.capability} without sacrificing oversight or quality.`,
-  ],
-};
-
 const EXACT_CONTENT_OVERRIDES: Record<string, Partial<WhyItMattersContent>> = {
   "online web presence|advisory": {
-    hook: "Your website is often the first — and most critical — digital touchpoint.",
+    hook: "Your website is often the first, and most critical, digital touchpoint.",
     problemParagraph:
       "Yet many organisations struggle with fragmented web presence, unclear customer journeys, and missed engagement opportunities. This assessment gives you the clarity to fix what's holding you back and focus on what will drive impact.",
     before: {
@@ -477,13 +442,6 @@ const EXACT_CONTENT_OVERRIDES: Record<string, Partial<WhyItMattersContent>> = {
           description:
             "A focused roadmap sets the foundation for digital transformation and measurable impact.",
         },
-      ],
-    },
-    strategicFit: {
-      title: "Strategic Fit",
-      paragraphs: [
-        "This assessment supports digital transformation readiness by providing the clarity you need to align stakeholders, prioritise investments, and build a strong foundation for growth.",
-        "It also identifies opportunities to enhance customer experiences and unlock AI enablement potential.",
       ],
     },
   },
@@ -557,8 +515,6 @@ export function getWhyItMattersContent(service: ServiceProduct): WhyItMattersCon
     BEFORE_AFTER_BY_TYPE[serviceType] ?? BEFORE_AFTER_BY_TYPE.advisory;
   const problemBuilder =
     PROBLEM_PARAGRAPH_BUILDERS[serviceType] ?? PROBLEM_PARAGRAPH_BUILDERS.advisory;
-  const strategicFitBuilder =
-    STRATEGIC_FIT_BY_TYPE[serviceType] ?? STRATEGIC_FIT_BY_TYPE.advisory;
 
   const baseContent: WhyItMattersContent = {
     hook: buildHook(ctx, service),
@@ -573,10 +529,6 @@ export function getWhyItMattersContent(service: ServiceProduct): WhyItMattersCon
       title: "Where You Can Be",
       items: contextualizeItems(beforeAfter.after, ctx, serviceType),
     },
-    strategicFit: {
-      title: "Strategic Fit",
-      paragraphs: strategicFitBuilder(ctx),
-    },
   };
 
   if (!exactOverride) {
@@ -588,6 +540,5 @@ export function getWhyItMattersContent(service: ServiceProduct): WhyItMattersCon
     ...exactOverride,
     before: exactOverride.before ?? baseContent.before,
     after: exactOverride.after ?? baseContent.after,
-    strategicFit: exactOverride.strategicFit ?? baseContent.strategicFit,
   };
 }

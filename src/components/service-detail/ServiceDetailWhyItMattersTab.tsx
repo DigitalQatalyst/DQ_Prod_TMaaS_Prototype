@@ -1,7 +1,6 @@
 import {
   AlertCircle,
   ArrowRight,
-  Compass,
   GitBranch,
   Layers,
   Sparkles,
@@ -9,11 +8,8 @@ import {
   TrendingUp,
   type LucideIcon,
 } from "lucide-react";
-import { sectionHeading } from "@/lib/brandAccent";
-import {
-  getAudienceCardAccent,
-  type ServiceProduct,
-} from "./serviceDetailHelpers";
+import { sectionHeading, serviceDetailTabLead } from "@/lib/brandAccent";
+import type { ServiceProduct } from "./serviceDetailHelpers";
 import { getWhyItMattersContent } from "./whyItMattersContent";
 
 const BEFORE_ICONS = [AlertCircle, GitBranch, Layers] as const;
@@ -166,11 +162,10 @@ export function ServiceDetailWhyItMattersTab({
   service,
 }: ServiceDetailWhyItMattersTabProps) {
   const content = getWhyItMattersContent(service);
-  const accent = getAudienceCardAccent(service.collection);
 
   return (
     <div className="space-y-12">
-      <section aria-labelledby="why-service-matters-heading">
+      <section aria-labelledby="why-service-matters-heading" className={serviceDetailTabLead}>
         <h2 id="why-service-matters-heading" className={sectionHeading}>
           Why This Service Matters
         </h2>
@@ -185,37 +180,6 @@ export function ServiceDetailWhyItMattersTab({
       </section>
 
       <BeforeAfterComparison before={content.before} after={content.after} />
-
-      <section aria-labelledby="strategic-fit-heading">
-        <div className={`rounded-2xl p-7 md:p-8 ${accent.cardBg}`}>
-          <div
-            className={`mb-5 flex h-11 w-11 items-center justify-center rounded-full ${accent.iconWell}`}
-          >
-            <Compass
-              size={20}
-              className={accent.icon}
-              strokeWidth={1.75}
-              aria-hidden
-            />
-          </div>
-          <h3
-            id="strategic-fit-heading"
-            className="text-lg font-semibold text-dq-navy"
-          >
-            {content.strategicFit.title}
-          </h3>
-          <div className="mt-4 space-y-4">
-            {content.strategicFit.paragraphs.map((paragraph) => (
-              <p
-                key={paragraph}
-                className="text-base leading-[1.7] text-[#667085]"
-              >
-                {paragraph}
-              </p>
-            ))}
-          </div>
-        </div>
-      </section>
     </div>
   );
 }
