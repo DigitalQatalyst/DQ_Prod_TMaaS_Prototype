@@ -59,9 +59,8 @@ All in-page section `h2` titles (About, Key Outcomes, Related Services, tab pane
 ## Service detail, What You Receive tab
 Match `ServiceDetailWhatYouReceiveTab.tsx` (same top-row pattern as Overview / About):
 - Top row: same split-grid tokens as Overview, **Deliverables Summary** + **At a glance** card (duration, scope only)
-- **Deliverables Breakdown**: sole enumerated deliverables list with descriptions (`getDeliverableBreakdown`)
+- **Deliverables Breakdown**: sole enumerated deliverables list with descriptions (`getDeliverableBreakdown`); max **4** grouped deliverables per service via `getDeliverablesForService(service)` keyed by `serviceType`
 - **Modules & Applications**: deploy accordion below; `sectionHeading` (no eyebrow)
-- Deliverable titles from existing `deliverables` prop only
 
 ## Service detail, Key Outcomes (Overview tab)
 Match the approved four-column mockup in `ServiceDetailKeyOutcomesSection.tsx`:

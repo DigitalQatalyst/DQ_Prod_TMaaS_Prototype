@@ -241,6 +241,10 @@ export function getDisplayTitle(standardName: string): string {
   return standardName.replace(" (High-Impact)", "");
 }
 
+export function formatPackagePrice(price: string): string {
+  return price.replace(/^Starting From\s+/i, "From ");
+}
+
 export function getServiceSolutionName(standardName: string): string {
   const withoutHighImpact = standardName.replace(" (High-Impact)", "");
   const stagedMatch = withoutHighImpact.match(
@@ -690,53 +694,130 @@ const DELIVERABLES_SUMMARY_BY_TYPE: Record<string, [string, string]> = {
   ],
 };
 
-const DELIVERABLE_DESCRIPTIONS: Record<string, string> = {
-  "Opportunity Areas":
-    "Identifies high-impact improvement areas across your digital presence and customer journeys.",
-  "Transformation Vision":
-    "Defines a clear direction for how your organisation should evolve digitally.",
-  "Initial Recommendations":
-    "Provides practical next steps to improve experience, engagement, and performance.",
-  "Solution Blueprint":
-    "Documents the target solution architecture, components, and integration approach.",
-  "Process Design":
-    "Maps operational workflows and handoffs required to support the target experience.",
-  "Operating Model":
-    "Defines roles, responsibilities, and governance for ongoing digital operations.",
-  Prototype:
-    "Validates key user flows and design decisions through an interactive reference experience.",
-  "Delivery Backlog":
-    "Prioritises features and work items for structured implementation phases.",
-  "Technical Specifications":
-    "Captures functional and technical requirements for build and integration teams.",
-  "Deployment Roadmap":
-    "Outlines phased release planning, dependencies, and milestone sequencing.",
-  "KPI Model":
-    "Defines success measures and tracking approach for transformation outcomes.",
-  "Executive Brief":
-    "Summarises findings, decisions, and recommendations for leadership stakeholders.",
-  "Validated MVP Direction":
-    "Confirms the minimum viable scope and success criteria for initial delivery.",
-  "Priority User Flows":
-    "Documents the critical journeys to implement first for maximum user impact.",
-  "Initial Product Backlog":
-    "Structures the first wave of build items aligned to validated priorities.",
-  "Delivery Plan":
-    "Sets timelines, resources, and governance checkpoints for implementation.",
-  "Production MVP":
-    "Delivers the first production-ready release against agreed acceptance criteria.",
-  "Deployment Package":
-    "Includes release assets, configuration, and go-live documentation.",
-  "Support & Handover":
-    "Transfers knowledge, access, and runbooks for operational continuity.",
+const MAX_DELIVERABLES = 4;
+
+const DELIVERABLES_BY_TYPE: Record<string, readonly string[]> = {
+  advisory: [
+    "Current-State Assessment",
+    "Opportunity Analysis",
+    "Transformation Vision",
+    "Priority Recommendations",
+  ],
+  design: [
+    "Discovery & Strategy",
+    "Experience Design",
+    "Technical Specifications",
+    "Success Framework",
+  ],
+  ai_design: [
+    "AI Opportunity Validation",
+    "Experience & Workflow Design",
+    "Responsible AI Specifications",
+    "Deployment Readiness Pack",
+  ],
+  deploy: [
+    "Scope & Validation",
+    "Solution Architecture",
+    "Production Release",
+    "Handover & Support",
+  ],
+  ai_deploy: [
+    "AI Scope & Validation",
+    "Integration Architecture",
+    "Production AI Release",
+    "Operational Handover",
+  ],
+  manage: [
+    "Service Operations Report",
+    "Performance Optimisation Plan",
+    "Governance & SLA Review",
+    "Lifecycle Roadmap",
+  ],
 };
+
+const DELIVERABLE_DESCRIPTIONS_BY_TYPE: Record<
+  string,
+  Record<string, string>
+> = {
+  advisory: {
+    "Current-State Assessment":
+      "Evaluates your organisation's present capabilities, maturity, and constraints across the engagement scope.",
+    "Opportunity Analysis":
+      "Identifies high-impact improvement areas and prioritised opportunities aligned to business outcomes.",
+    "Transformation Vision":
+      "Defines a clear direction for how your organisation should evolve digitally.",
+    "Priority Recommendations":
+      "Provides executive-ready next steps to improve experience, engagement, and performance.",
+  },
+  design: {
+    "Discovery & Strategy":
+      "Synthesises discovery findings, stakeholder alignment, and strategic direction into a coherent foundation for design.",
+    "Experience Design":
+      "Shapes user-centred experiences through solution blueprints, process design, operating models, and validated prototypes.",
+    "Technical Specifications":
+      "Documents implementation-ready requirements, delivery backlogs, and deployment sequencing for build teams.",
+    "Success Framework":
+      "Defines KPIs, executive summaries, and governance checkpoints to measure and communicate outcomes.",
+  },
+  ai_design: {
+    "AI Opportunity Validation":
+      "Validates AI use cases, value hypotheses, and feasibility against your business and governance context.",
+    "Experience & Workflow Design":
+      "Designs human-in-the-loop workflows, interaction patterns, and experience touchpoints for AI-enabled capabilities.",
+    "Responsible AI Specifications":
+      "Documents guardrails, data boundaries, oversight models, and compliance controls for controlled deployment.",
+    "Deployment Readiness Pack":
+      "Packages specifications, prototype assets, and rollout criteria that de-risk production AI investment.",
+  },
+  deploy: {
+    "Scope & Validation":
+      "Confirms MVP scope, priority user flows, and acceptance criteria before build begins.",
+    "Solution Architecture":
+      "Defines target architecture, technical specifications, and a phased delivery plan aligned to governance.",
+    "Production Release":
+      "Delivers the production-ready build, deployment package, and validated release against agreed milestones.",
+    "Handover & Support":
+      "Transfers knowledge, access, runbooks, and stabilisation support for operational continuity.",
+  },
+  ai_deploy: {
+    "AI Scope & Validation":
+      "Confirms production scope, integration points, and safety requirements for AI capabilities.",
+    "Integration Architecture":
+      "Defines orchestration, model integration, monitoring hooks, and platform dependencies.",
+    "Production AI Release":
+      "Deploys governed AI capabilities with performance validation and production acceptance evidence.",
+    "Operational Handover":
+      "Provides runbooks, monitoring setup, and handover materials for responsible AI operations.",
+  },
+  manage: {
+    "Service Operations Report":
+      "Recurring report on platform health, incidents, service levels, and operational performance.",
+    "Performance Optimisation Plan":
+      "Identifies and tracks improvements to experience, efficiency, and platform utilisation.",
+    "Governance & SLA Review":
+      "Structured review of service levels, risks, escalations, and lifecycle governance obligations.",
+    "Lifecycle Roadmap":
+      "Forward-looking plan for capability evolution, upgrades, and alignment to business priorities.",
+  },
+};
+
+export function getDeliverablesForService(
+  service: ServiceProduct
+): readonly string[] {
+  const titles = DELIVERABLES_BY_TYPE[service.serviceType];
+  if (titles?.length) {
+    return titles.slice(0, MAX_DELIVERABLES);
+  }
+  return DELIVERABLES_BY_TYPE.advisory;
+}
 
 function buildDeliverableDescription(
   service: ServiceProduct,
   title: string
 ): string {
-  if (DELIVERABLE_DESCRIPTIONS[title]) {
-    return DELIVERABLE_DESCRIPTIONS[title];
+  const byType = DELIVERABLE_DESCRIPTIONS_BY_TYPE[service.serviceType];
+  if (byType?.[title]) {
+    return byType[title];
   }
 
   const solution = getServiceSolutionName(service.standardName);

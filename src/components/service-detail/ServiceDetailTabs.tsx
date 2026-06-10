@@ -21,7 +21,6 @@ const tabTriggerClass =
 
 interface ServiceDetailTabsProps {
   service: ServiceProduct;
-  deliverables: readonly string[];
   deliveryProcess: DeliveryProcess;
   deployModules: { name: string; features: string[] }[];
   isDeployService: boolean;
@@ -29,7 +28,6 @@ interface ServiceDetailTabsProps {
 
 export function ServiceDetailTabs({
   service,
-  deliverables,
   deliveryProcess,
   deployModules,
   isDeployService,
@@ -53,7 +51,6 @@ export function ServiceDetailTabs({
       <TabsContent value="what-you-receive" className="mt-0 focus-visible:outline-none">
         <ServiceDetailWhatYouReceiveTab
           service={service}
-          deliverables={deliverables}
           deployModules={deployModules}
           isDeployService={isDeployService}
         />

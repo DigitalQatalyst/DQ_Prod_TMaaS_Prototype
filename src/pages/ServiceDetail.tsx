@@ -1,11 +1,9 @@
 import { useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { ArrowRight } from "lucide-react";
 import LandingNavbar from "@/components/site/landing/LandingNavbar";
 import Footer from "@/components/Footer";
 import MeshSection from "@/components/site/MeshSection";
 import DiagnoseDialog from "@/components/DiagnoseDialog";
-import RequestOfferDialog from "@/components/RequestOfferDialog";
 import {
   ServiceDetailPrimaryButton,
   ServiceDetailSecondaryButtonDark,
@@ -21,44 +19,10 @@ import { initialServices } from "@/data/services";
 import { deployModulesData } from "@/data/deployModules";
 import { featureFlags } from "@/lib/featureFlags";
 
-const ADVISORY_DELIVERABLES = [
-  "Opportunity Areas",
-  "Transformation Vision",
-  "Initial Recommendations",
-];
-
-const DESIGN_DELIVERABLES = [
-  "Opportunity Areas",
-  "Transformation Vision",
-  "Initial Recommendations",
-  "Solution Blueprint",
-  "Process Design",
-  "Operating Model",
-  "Prototype",
-  "Delivery Backlog",
-  "Technical Specifications",
-  "Deployment Roadmap",
-  "KPI Model",
-  "Executive Brief",
-];
-
-const DEPLOY_DELIVERABLES = [
-  "Validated MVP Direction",
-  "Priority User Flows",
-  "Initial Product Backlog",
-  "Solution Blueprint",
-  "Technical Specifications",
-  "Delivery Plan",
-  "Production MVP",
-  "Deployment Package",
-  "Support & Handover",
-];
-
 const ServiceDetail = () => {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
   const [isDialogOpen, setIsDialogOpen] = useState(false);
-  const [isOfferDialogOpen, setIsOfferDialogOpen] = useState(false);
   const [dialogPrompt, setDialogPrompt] = useState("");
 
   const service = initialServices.find((s) => s.id === parseInt(id || "0"));
@@ -109,15 +73,16 @@ const ServiceDetail = () => {
     isDeploy: !!isDeployService,
   });
 
-  const deliverables = isAdvisoryService
-    ? ADVISORY_DELIVERABLES
-    : isDesignService
-      ? DESIGN_DELIVERABLES
-      : isDeployService
-        ? DEPLOY_DELIVERABLES
-        : service.features;
+  const handleRequestQuote = () => {
+    if (featureFlags.isEnabled("contactUs")) {
+      navigate(
+        `/contact?service=${encodeURIComponent(service.standardName)}`
+      );
+      return;
+    }
+    handleStartOnboarding(service.standardName);
+  };
 
-  const handleRequestQuote = () => setIsOfferDialogOpen(true);
   const handleBookConsultation = () => {
     if (featureFlags.isEnabled("contactUs")) {
       navigate("/contact");
@@ -143,7 +108,6 @@ const ServiceDetail = () => {
               service={service}
               requiresQuoteCTA={!!requiresQuoteCTA}
               onRequestQuote={handleRequestQuote}
-              onBookConsultation={handleBookConsultation}
               onStartOnboarding={handleStartOnboarding}
             />
           </div>
@@ -153,7 +117,6 @@ const ServiceDetail = () => {
           <div className="mx-auto max-w-[1200px]">
             <ServiceDetailTabs
               service={service}
-              deliverables={deliverables}
               deliveryProcess={deliveryProcess}
               deployModules={deployModules}
               isDeployService={!!isDeployService}
@@ -166,36 +129,25 @@ const ServiceDetail = () => {
 
       <MeshSection variant="ctaOrange" className="px-5 py-20 md:px-8 lg:px-10">
         <div className="mx-auto max-w-3xl text-center">
-          <p className="dq-eyebrow-on-dark">
-            Ready to Transform?
-          </p>
+          <p className="dq-eyebrow-on-dark">Need guidance?</p>
           <h2 className="mt-3 text-3xl font-semibold tracking-tight text-white md:text-4xl">
-            Ready to Get Started?
+            Still not sure which service is right for you?
           </h2>
           <p className="mt-4 text-base leading-relaxed text-white/70 md:text-lg">
-            Launch your transformation initiative with structured delivery,
-            governance oversight, and dedicated TMaaS specialists.
+            A DQ advisor can help you compare options, confirm fit, and point
+            you to the right next step, whether that&apos;s this service or
+            another in the marketplace.
           </p>
           <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
-            <ServiceDetailPrimaryButton className="group" onClick={handleRequestQuote}>
-              Request Quote
-              <ArrowRight
-                size={16}
-                className="transition group-hover:translate-x-0.5"
-              />
-            </ServiceDetailPrimaryButton>
-            <ServiceDetailSecondaryButtonDark onClick={handleBookConsultation}>
+            <ServiceDetailPrimaryButton onClick={handleBookConsultation}>
               Book a Consultation
+            </ServiceDetailPrimaryButton>
+            <ServiceDetailSecondaryButtonDark onClick={() => navigate("/marketplace")}>
+              Explore more services
             </ServiceDetailSecondaryButtonDark>
           </div>
         </div>
       </MeshSection>
-
-      <RequestOfferDialog
-        isOpen={isOfferDialogOpen}
-        onClose={() => setIsOfferDialogOpen(false)}
-        serviceName={service.standardName}
-      />
 
       <DiagnoseDialog
         isOpen={isDialogOpen}
