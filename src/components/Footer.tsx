@@ -27,7 +27,7 @@ const Footer = () => {
               {featureFlags.isEnabled("marketplace") && (
                 <li>
                   <Link to="/marketplace" className="transition-colors hover:text-dq-orange">
-                    Marketplace
+                    Services
                   </Link>
                 </li>
               )}
