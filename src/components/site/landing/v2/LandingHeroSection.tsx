@@ -16,7 +16,7 @@ const LandingHeroSection = () => {
       <div className="relative mx-auto grid max-w-7xl items-center gap-12 lg:grid-cols-2 lg:gap-16">
         <div>
           <p className="animate-fade-in-up dq-eyebrow">
-            Digital transformation marketplace
+            Transformation Management as a Service
           </p>
 
           <h1 className="animate-fade-in-up animation-delay-100 mt-5 text-balance text-[2.75rem] font-semibold leading-[1.0] tracking-[-0.03em] text-dq-navy sm:text-6xl md:text-7xl lg:text-8xl">
