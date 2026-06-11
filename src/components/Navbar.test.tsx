@@ -15,7 +15,7 @@ describe("Navbar", () => {
       </AuthProvider>
     );
 
-    expect(screen.getByText("Marketplace")).toBeInTheDocument();
+    expect(screen.getByText("Services")).toBeInTheDocument();
     expect(screen.getByText("Explore DigitalQatalyst")).toBeInTheDocument();
     expect(screen.getByText("Contact Us")).toBeInTheDocument();
     expect(screen.queryByText("Contact")).not.toBeInTheDocument();

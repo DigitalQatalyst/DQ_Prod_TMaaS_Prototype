@@ -9,7 +9,7 @@ import { featureFlags } from "@/lib/featureFlags";
 import { cn } from "@/lib/utils";
 
 const NAV_LINKS = [
-  { label: "Marketplace", href: "/marketplace", flag: "marketplace" as const },
+  { label: "Services", href: "/marketplace", flag: "marketplace" as const },
 ];
 
 const LandingNavbar = () => {

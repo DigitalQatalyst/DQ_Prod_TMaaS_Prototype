@@ -38,7 +38,7 @@ const Navbar = () => {
             <nav className="hidden items-center gap-6 lg:flex">
               {featureFlags.isEnabled("marketplace") && (
                 <Link to="/marketplace" className={navLinkClass(isOnMarketplace)}>
-                  Marketplace
+                  Services
                 </Link>
               )}
             </nav>
@@ -99,7 +99,7 @@ const Navbar = () => {
               className="border-b border-gray-100 py-3 text-lg font-medium text-dq-navy"
               onClick={() => setMobileOpen(false)}
             >
-              Marketplace
+              Services
             </Link>
           )}
           {featureFlags.isEnabled("contextSwitcher") && (

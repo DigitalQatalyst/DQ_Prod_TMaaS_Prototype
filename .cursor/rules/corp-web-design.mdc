@@ -33,7 +33,7 @@ Marketing pages (`/`, `/marketplace`, `/service/:id`) share the **DQ corp web de
 - Use **product landing IA** per `specs/landing-page-prototype-shell.md` v2, default at `/` (`IndexProductLanding`, `src/components/site/landing/v2/`)
 - v1 corp-mirror alternate landing at `/landing-v1` (`IndexTraditional`); `/landing-v2` redirects to `/`
 - Hero: TMaaS logo, marketplace mockup; orange primary CTA → `/marketplace` (no product badge row)
-- Landing navbar: Marketplace nav link stays grey on all routes (no orange active state)
+- Landing navbar: Services nav link stays grey on all routes (no orange active state)
 - One dark mesh narrative section (`Why TMaaS`); do not alternate dark sections like corp homepage
 - Do **not** add corp-only sections: Team, FAQ, Framework, full ecosystem product grid
 - Do **not** copy corp homepage stats, problem copy, or section order verbatim
