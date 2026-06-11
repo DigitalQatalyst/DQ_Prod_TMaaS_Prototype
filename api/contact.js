@@ -65,7 +65,7 @@ function buildEmailHtml(fields) {
     <tr><td>
       <table width="600" cellpadding="0" cellspacing="0" style="background:#ffffff;border-radius:12px;border:1px solid #e5e7eb;overflow:hidden;margin:0 auto">
         <tr><td style="background:#0d1b3e;padding:24px 32px">
-          <span style="color:#ffffff;font-size:18px;font-weight:700;letter-spacing:-0.3px">TMaaS — New Contact Request</span>
+          <span style="color:#ffffff;font-size:18px;font-weight:700;letter-spacing:-0.3px">TMaaS: New Contact Request</span>
         </td></tr>
         <tr><td style="padding:28px 32px">
           <table cellpadding="0" cellspacing="0" width="100%">
@@ -139,7 +139,7 @@ async function handler(req, res) {
 
     const mailPayload = {
       message: {
-        subject: `TMaaS Contact Request from ${firstName} ${lastName} — ${organisation}`,
+        subject: `TMaaS Contact Request from ${firstName} ${lastName} - ${organisation}`,
         body: {
           contentType: 'HTML',
           content: buildEmailHtml({ firstName, lastName, email, phone, organisation, role, interest, need, message, consent }),

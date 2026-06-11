@@ -3,13 +3,13 @@ import { Link } from "react-router-dom";
 import { ArrowRight, Check, ShoppingCart, TrendingUp, Zap } from "lucide-react";
 import { toast } from "sonner";
 import { useCart } from "@/contexts/CartContext";
-import { initialServices } from "@/data/services";
-
+import { useCatalogData } from "@/contexts/CatalogContext";
 import { marketplaceCategoryLabels } from "@/data/marketplaceNavigation";
 import { featureFlags } from "@/lib/featureFlags";
 import { getServiceIcon } from "@/components/marketplace/marketplaceServiceIcons";
+import type { ServiceProduct } from "@/types/serviceProduct";
 
-export type ServiceProduct = (typeof initialServices)[number];
+export type { ServiceProduct };
 
 const DESCRIPTION_CLAMP = "line-clamp-3 overflow-hidden text-gray-500";
 
@@ -30,10 +30,10 @@ type ServiceProductCardProps = {
   displayName?: string;
   featured?: boolean;
   /**
-   * full — homepage featured (deliverables list)
-   * grid — marketplace catalog (link-first)
-   * list — marketplace catalog horizontal row
-   * shelf — compact horizontal best-seller tile
+   * full, homepage featured (deliverables list)
+   * grid, marketplace catalog (link-first)
+   * list, marketplace catalog horizontal row
+   * shelf, compact horizontal best-seller tile
    */
   variant?: "full" | "grid" | "list" | "shelf";
 };
@@ -194,7 +194,7 @@ const ServiceProductCard = ({
     );
   }
 
-  // full — homepage featured (keeps add-to-cart)
+  // full, homepage featured (keeps add-to-cart)
   return (
     <FullServiceProductCard
       service={service}
@@ -230,13 +230,14 @@ const FullServiceProductCard = ({
   canViewDetail,
   canUseCart,
 }: FullCardProps) => {
+  const catalog = useCatalogData();
   const { addItem, hasItem, openCart } = useCart();
   const inCart = hasItem(service.id);
 
   let relatedServiceName = "";
   if (service.relatedServices && service.relatedServices.length > 0) {
     const relatedId = service.relatedServices[0];
-    const relatedSvc = initialServices.find((s) => s.id === relatedId);
+    const relatedSvc = catalog.find((s) => s.id === relatedId);
     if (relatedSvc) relatedServiceName = relatedSvc.standardName;
   }
 

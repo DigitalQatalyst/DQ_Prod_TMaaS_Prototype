@@ -30,8 +30,8 @@ const STAKEHOLDER_TYPES: { value: StakeholderType; label: string; description: s
   { value: "Project Sponsor",  label: "Project Sponsor",  description: "Executive accountable for project.", minEngagement: "Quarterly" },
   { value: "Project Owner",    label: "Project Owner",    description: "Business owner.",                  minEngagement: "Monthly"  },
   { value: "Project Manager",  label: "Project Manager",  description: "Day-to-day counterpart.",           minEngagement: "Weekly"   },
-  { value: "Project Team",     label: "Project Team",     description: "Operational contributors.",         minEngagement: "—"        },
-  { value: "External",         label: "External",         description: "Other departments outside primary delivery scope.", minEngagement: "—" },
+  { value: "Project Team",     label: "Project Team",     description: "Operational contributors.",         minEngagement: "-"        },
+  { value: "External",         label: "External",         description: "Other departments outside primary delivery scope.", minEngagement: "-" },
 ];
 
 const INFLUENCE_LEVELS = ["High", "Medium", "Low"];
@@ -168,7 +168,7 @@ const EditStakeholderModal = ({
                     <span className="block text-xs font-semibold text-navy-950">{t.label}</span>
                     <span className="block text-[10px] text-gray-500 leading-snug">
                       {t.description}
-                      {t.minEngagement !== "—" && (
+                      {t.minEngagement !== "-" && (
                         <> · <span className="font-medium">Min. {t.minEngagement}</span></>
                       )}
                     </span>
@@ -354,7 +354,7 @@ export const StakeholdersTab = () => {
 
                   <TableCell>
                     <Badge variant="outline" className={`text-[10px] font-semibold whitespace-nowrap ${getTypeBadgeClass(sh.type)}`}>
-                      {sh.type || "—"}
+                      {sh.type || "-"}
                     </Badge>
                   </TableCell>
 
@@ -422,7 +422,7 @@ export const StakeholdersTab = () => {
               </Badge>
               <span className="text-[10px] text-gray-500 leading-snug">
                 {t.description}
-                {t.minEngagement !== "—" && (
+                {t.minEngagement !== "-" && (
                   <> · <span className="font-medium text-gray-700">Min. {t.minEngagement}</span></>
                 )}
               </span>

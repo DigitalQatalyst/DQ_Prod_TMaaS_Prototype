@@ -1,0 +1,13 @@
+INSERT INTO listing_placements (listing_id, placement, category_id, rank) VALUES (6, 'best_seller', 'operations', 1);
+INSERT INTO listing_placements (listing_id, placement, category_id, rank) VALUES (7, 'best_seller', 'operations', 2);
+INSERT INTO listing_placements (listing_id, placement, category_id, rank) VALUES (8, 'best_seller', 'operations', 3);
+INSERT INTO listing_placements (listing_id, placement, category_id, rank) VALUES (19, 'best_seller', 'security', 0);
+INSERT INTO listing_placements (listing_id, placement, category_id, rank) VALUES (10, 'best_seller', 'security', 1);
+INSERT INTO listing_placements (listing_id, placement, category_id, rank) VALUES (11, 'best_seller', 'security', 2);
+INSERT INTO listing_placements (listing_id, placement, category_id, rank) VALUES (12, 'best_seller', 'security', 3);
+INSERT INTO listing_placements (listing_id, placement, category_id, rank) VALUES (20, 'best_seller', 'ai', 0);
+INSERT INTO listing_placements (listing_id, placement, category_id, rank) VALUES (13, 'best_seller', 'ai', 1);
+INSERT INTO listing_placements (listing_id, placement, category_id, rank) VALUES (14, 'best_seller', 'ai', 2);
+INSERT INTO listing_placements (listing_id, placement, category_id, rank) VALUES (15, 'best_seller', 'ai', 3);
+SELECT reset_catalog_sequences();
+SELECT refresh_product_search_index();

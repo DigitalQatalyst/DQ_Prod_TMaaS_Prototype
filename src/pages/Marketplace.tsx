@@ -26,6 +26,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { getRemixedName } from "@/data/services";
+import { useCatalogServices } from "@/hooks/useCatalog";
 
 const PAGE_SIZE = 15;
 type ViewMode = "grid" | "list";
@@ -138,10 +139,11 @@ const Marketplace = () => {
   const bestSellerIds = useMemo(() => {
     if (!showBestSellers) return new Set<number>();
     const collection = activeTab === "all" ? "all" : activeTab;
-    const pool =
+    const pool = (
       collection === "all"
         ? catalog
-        : catalog.filter((s) => s.collection === collection);
+        : catalog.filter((s) => s.collection === collection)
+    ).filter((s) => s.serviceType !== "bundle");
     return new Set(
       [...pool]
         .sort((a, b) => b.popularityRank - a.popularityRank)

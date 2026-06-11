@@ -135,7 +135,7 @@ const ManualRagSelector = ({ indicator, currentStatus, onSelect }: ManualRagSele
               <div className="flex items-center gap-2 mb-3">
                 {cfg.icon}
                 <span className={`font-bold text-sm ${cfg.labelColor}`}>
-                  {criterion.status.charAt(0).toUpperCase() + criterion.status.slice(1)} — {criterion.label}
+                  {criterion.status.charAt(0).toUpperCase() + criterion.status.slice(1)}, {criterion.label}
                 </span>
                 {isSelected && (
                   <span className={`ml-auto text-[10px] font-bold uppercase tracking-widest px-2 py-0.5 rounded-full ${

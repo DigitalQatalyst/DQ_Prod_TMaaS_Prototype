@@ -28,7 +28,7 @@ const LandingCtaSection = () => {
         </p>
 
         <h2 className="text-balance text-4xl font-semibold leading-[1.05] tracking-tight text-white md:text-5xl">
-          Deploy your transformation —{" "}
+          Deploy your transformation -{" "}
           <span className="text-dq-orange">in weeks, not months.</span>
         </h2>
 

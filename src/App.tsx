@@ -52,6 +52,7 @@ import Cart from "./pages/Cart";
 
 import { AuthProvider } from "@/contexts/AuthContext";
 import { CartProvider } from "@/contexts/CartContext";
+import { CatalogProvider } from "@/contexts/CatalogContext";
 import CartDrawer from "@/components/cart/CartDrawer";
 import { FeatureFlagAdmin } from "@/components/FeatureFlagAdmin";
 import { featureFlags, getFirstEnabledRoute } from "@/lib/featureFlags";
@@ -92,6 +93,7 @@ const FlaggedRoute = ({
 const App = () => (
   <QueryClientProvider client={queryClient}>
     <AuthProvider>
+      <CatalogProvider>
       <CartProvider>
         <TooltipProvider>
           <Toaster />
@@ -269,6 +271,7 @@ const App = () => (
           {import.meta.env.DEV && <FeatureFlagAdmin />}
         </TooltipProvider>
       </CartProvider>
+      </CatalogProvider>
     </AuthProvider>
   </QueryClientProvider>
 );

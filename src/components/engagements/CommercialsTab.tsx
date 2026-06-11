@@ -189,7 +189,7 @@ export const CommercialsTab = () => {
                     {formatCurrency(pm.paidAmount, contractData.currency)}
                   </TableCell>
                   <TableCell className="text-sm font-medium text-amber-600">
-                    {pm.outstandingAmount > 0 ? formatCurrency(pm.outstandingAmount, contractData.currency) : "—"}
+                    {pm.outstandingAmount > 0 ? formatCurrency(pm.outstandingAmount, contractData.currency) : "-"}
                   </TableCell>
                   <TableCell className="text-sm font-medium text-navy-950">
                     {pm.contractDate}
@@ -258,7 +258,7 @@ export const CommercialsTab = () => {
                     </Badge>
                   </TableCell>
                   <TableCell className="font-semibold text-navy-950">
-                    {cc.value === 0 ? "—" : formatCurrency(cc.value, contractData.currency)}
+                    {cc.value === 0 ? "-" : formatCurrency(cc.value, contractData.currency)}
                   </TableCell>
                   <TableCell className="text-right">
                     {cc.attachments > 0 ? (
@@ -267,7 +267,7 @@ export const CommercialsTab = () => {
                         {cc.attachments} File{cc.attachments > 1 ? 's' : ''}
                       </Button>
                     ) : (
-                      <span className="text-xs text-gray-400 mr-3">—</span>
+                      <span className="text-xs text-gray-400 mr-3">-</span>
                     )}
                   </TableCell>
                 </TableRow>

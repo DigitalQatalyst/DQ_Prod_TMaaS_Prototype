@@ -5,7 +5,7 @@ const OUTCOMES = [
     metricLabel: "Low-cost starting point for transformation",
     title:
       "Enterprise transformation without enterprise-scale upfront investment.",
-    body: "Explore productized services with transparent pricing — start with a focused engagement and scale as outcomes prove out.",
+    body: "Explore productized services with transparent pricing, start with a focused engagement and scale as outcomes prove out.",
   },
   {
     tag: "Speed",

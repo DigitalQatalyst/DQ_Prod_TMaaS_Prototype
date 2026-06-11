@@ -12,7 +12,7 @@ When destructuring `useState`, the state variable and setter must use matching b
 // Good
 const [selectedSectors, setSelectedSectors] = useState<string[]>([]);
 
-// Bad — setter name does not match state; easy to call the wrong function in handlers/reset
+// Bad, setter name does not match state; easy to call the wrong function in handlers/reset
 const [selectedSectors, setSelectedIndustries] = useState<string[]>([]);
 ```
 

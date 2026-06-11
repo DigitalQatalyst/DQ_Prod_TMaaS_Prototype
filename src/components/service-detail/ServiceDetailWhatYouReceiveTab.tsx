@@ -12,7 +12,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import { initialServices } from "@/data/services";
+import { useCatalogData } from "@/contexts/CatalogContext";
 import { marketplaceServiceTypeLabels } from "@/data/marketplaceNavigation";
 import {
   getAudienceCardAccent,
@@ -154,6 +154,7 @@ function DeliverablesBreakdown({
 
 function BundleIncludedSection({ service }: { service: ServiceProduct }) {
   const navigate = useNavigate();
+  const catalog = useCatalogData();
 
   if (
     service.serviceType !== "bundle" ||
@@ -174,7 +175,7 @@ function BundleIncludedSection({ service }: { service: ServiceProduct }) {
       <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {service.relatedServices
           .map((relatedId: number) =>
-            initialServices.find((s) => s.id === relatedId)
+            catalog.find((s) => s.id === relatedId)
           )
           .filter((s) => s && s.serviceType !== "advisory")
           .map((s) => (

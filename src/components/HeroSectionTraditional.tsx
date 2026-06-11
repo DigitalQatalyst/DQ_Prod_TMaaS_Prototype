@@ -29,7 +29,7 @@ const HeroSectionTraditional = () => {
         {/* Subheading */}
         <p className="mt-5 text-balance text-base leading-relaxed text-navy-600 sm:text-lg md:text-[1.125rem]">
           Access certified specialists, proven frameworks, and end-to-end
-          delivery support — all in one marketplace built for digital
+          delivery support, all in one marketplace built for digital
           transformation.
         </p>
 

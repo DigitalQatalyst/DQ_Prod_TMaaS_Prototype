@@ -26,7 +26,7 @@ const LandingHeroSection = () => {
 
           <p className="animate-fade-in-up animation-delay-200 mt-6 max-w-2xl text-lg leading-relaxed text-gray-600">
             {PLATFORM_NAME} is a low-cost, architecture-led marketplace for digital
-            transformation services — using ready-to-launch blueprints to
+            transformation services, using ready-to-launch blueprints to
             accelerate impact, reduce cost, and ensure scalability.
           </p>
 
