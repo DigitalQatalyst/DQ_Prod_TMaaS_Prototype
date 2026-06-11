@@ -1,0 +1,18 @@
+---
+description: Contact form API routing for local dev and Vercel
+globs: vite.config.ts, scripts/vite-contact-api-plugin.ts, api/contact.js, vercel.json, src/pages/Contact.tsx
+---
+
+## Contact form API
+
+- The contact form POSTs to `/api/contact` (`api/contact.js` — Vercel serverless on deploy).
+- **Local `npm run dev`**: Vite must serve `/api/contact` via `contactApiDevPlugin` in `vite.config.ts`. Do not rely on Vite alone — without the plugin, the route returns 404.
+- **Env vars** (in `.env.local`, server-side only): `MSGRAPH_TENANT_ID`, `MSGRAPH_CLIENT_ID`, `MSGRAPH_CLIENT_SECRET`, `MSGRAPH_SENDER_UPN`, `MSGRAPH_RECIPIENT_EMAIL`. The dev plugin loads these with `loadEnv(..., "")`.
+- **vercel.json**: SPA rewrite must exclude `/api/*` — use `"/((?!api/).*)"` → `/index.html`, not a catch-all `"/(.*)"`.
+- Submit errors belong in `submitError` state, not on the `message` field.
+
+## Service-driven contact enquiries
+
+- Service detail CTAs must link with `buildContactPath(service, intent)` (`service`, `type`, `collection`, `intent` query params).
+- When `?service=` is present, hide "What are you exploring?" / "What do you need from DQ?" and show the service enquiry summary instead.
+- Interest and need are derived in `src/lib/contactFormPrefill.ts` and still submitted to the API.

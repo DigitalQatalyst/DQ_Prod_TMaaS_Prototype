@@ -15,6 +15,7 @@ import {
   getDeliverySteps,
 } from "@/components/service-detail/ServiceDetailDeliverySection";
 import { getDisplayTitle } from "@/components/service-detail/serviceDetailHelpers";
+import { buildContactPath } from "@/lib/contactFormPrefill";
 import { PLATFORM_ACRONYM } from "@/lib/brandLinks";
 import { Button } from "@/components/ui/button";
 import { featureFlags } from "@/lib/featureFlags";
@@ -82,9 +83,7 @@ const ServiceDetail = () => {
 
   const handleRequestQuote = () => {
     if (featureFlags.isEnabled("contactUs")) {
-      navigate(
-        `/contact?service=${encodeURIComponent(service.standardName)}`
-      );
+      navigate(buildContactPath(service, "quote"));
       return;
     }
     handleStartOnboarding(service.standardName);
@@ -92,7 +91,7 @@ const ServiceDetail = () => {
 
   const handleBookConsultation = () => {
     if (featureFlags.isEnabled("contactUs")) {
-      navigate("/contact");
+      navigate(buildContactPath(service, "consultation"));
       return;
     }
     handleStartOnboarding(service.standardName);

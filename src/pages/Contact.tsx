@@ -4,6 +4,12 @@ import { Check, Clock, ArrowRight, Loader2, MapPin, Phone, Mail } from "lucide-r
 import LandingNavbar from "@/components/site/landing/LandingNavbar";
 import Footer from "@/components/Footer";
 import { PLATFORM_ACRONYM } from "@/lib/brandLinks";
+import {
+  CONTACT_INTEREST_OPTIONS,
+  CONTACT_NEED_OPTIONS,
+  getServiceEnquiryFormDefaults,
+  parseServiceContactParams,
+} from "@/lib/contactFormPrefill";
 import { featureFlags } from "@/lib/featureFlags";
 
 type FormState = {
@@ -32,22 +38,6 @@ const INITIAL: FormState = {
   consent: false,
 };
 
-const INTEREST_OPTIONS = [
-  "Digital Platform & Architecture",
-  "Transformation Strategy & Advisory",
-  "Training & Capability",
-  "General Enquiry",
-];
-
-const NEED_OPTIONS = [
-  "Advisory & Strategy",
-  "Product Demo or Walkthrough",
-  "Diagnostic Assessment",
-  "Implementation Support",
-  "Transformation Programme",
-  "General Enquiry",
-];
-
 const PHONE_REGEX = /^\+?[\d\s\-(). ]{7,20}$/;
 
 const Contact = () => {
@@ -57,20 +47,23 @@ const Contact = () => {
     document.title = `Talk to our team | ${PLATFORM_ACRONYM}`;
   }, []);
 
+  const serviceEnquiry = parseServiceContactParams(searchParams);
+
   const [form, setForm] = useState<FormState>(() => {
-    const service = searchParams.get("service")?.trim();
-    if (!service) return INITIAL;
+    if (!serviceEnquiry) return INITIAL;
     return {
       ...INITIAL,
-      message: `I would like to request a quote for: ${service}`,
+      ...getServiceEnquiryFormDefaults(serviceEnquiry),
     };
   });
   const [errors, setErrors] = useState<Partial<Record<keyof FormState, string>>>({});
+  const [submitError, setSubmitError] = useState<string | null>(null);
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
 
   const setField = <K extends keyof FormState>(key: K, value: FormState[K]) => {
     setForm((prev) => ({ ...prev, [key]: value }));
     if (errors[key]) setErrors((prev) => ({ ...prev, [key]: undefined }));
+    if (submitError) setSubmitError(null);
   };
 
   const validate = (): boolean => {
@@ -83,8 +76,10 @@ const Contact = () => {
     if (form.phone.trim() && !PHONE_REGEX.test(form.phone.trim()))
       next.phone = "Enter a valid phone number";
     if (!form.organisation.trim()) next.organisation = "Organisation is required";
-    if (!form.interest) next.interest = "Select an area of interest";
-    if (!form.need) next.need = "Select what you need from DQ";
+    if (!serviceEnquiry) {
+      if (!form.interest) next.interest = "Select an area of interest";
+      if (!form.need) next.need = "Select what you need from DQ";
+    }
     if (!form.message.trim()) next.message = "A short context message is required";
     if (!form.consent) next.consent = "Consent is required to submit";
     setErrors(next);
@@ -95,25 +90,34 @@ const Contact = () => {
     e.preventDefault();
     if (!validate()) return;
     setStatus("loading");
+    setSubmitError(null);
     try {
       const res = await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(form),
       });
-      if (!res.ok) throw new Error("Server error");
+      if (!res.ok) {
+        const data = (await res.json().catch(() => null)) as { error?: string } | null;
+        throw new Error(
+          data?.error ?? "Submission failed, please try again or email us directly."
+        );
+      }
       setStatus("success");
-    } catch {
+    } catch (error) {
       setStatus("idle");
-      setErrors({
-        message: "Submission failed, please try again or email us directly.",
-      });
+      setSubmitError(
+        error instanceof Error
+          ? error.message
+          : "Submission failed, please try again or email us directly."
+      );
     }
   };
 
   const resetForm = () => {
     setForm(INITIAL);
     setErrors({});
+    setSubmitError(null);
     setStatus("idle");
   };
 
@@ -256,48 +260,62 @@ const Contact = () => {
                       />
                     </Field>
 
-                    <div className="grid gap-4 sm:grid-cols-2">
-                      <Field
-                        id="interest"
-                        label="What are you exploring?"
-                        required
-                        error={errors.interest}
-                      >
-                        <select
+                    {serviceEnquiry ? (
+                      <div className="rounded-xl border border-gray-200 bg-white px-4 py-4">
+                        <p className="text-[10px] font-semibold uppercase tracking-[0.16em] text-gray-400">
+                          Service enquiry
+                        </p>
+                        <p className="mt-1 text-base font-semibold text-dq-navy">
+                          {serviceEnquiry.service}
+                        </p>
+                        <p className="mt-1 text-sm text-gray-600">
+                          We&apos;ll route your request to the right DQ advisor for this service.
+                        </p>
+                      </div>
+                    ) : (
+                      <div className="grid gap-4 sm:grid-cols-2">
+                        <Field
                           id="interest"
-                          value={form.interest}
-                          onChange={(e) => setField("interest", e.target.value)}
-                          className={inputClass(errors.interest)}
+                          label="What are you exploring?"
+                          required
+                          error={errors.interest}
                         >
-                          <option value="">Select an area…</option>
-                          {INTEREST_OPTIONS.map((opt) => (
-                            <option key={opt} value={opt}>
-                              {opt}
-                            </option>
-                          ))}
-                        </select>
-                      </Field>
-                      <Field
-                        id="need"
-                        label="What do you need from DQ?"
-                        required
-                        error={errors.need}
-                      >
-                        <select
+                          <select
+                            id="interest"
+                            value={form.interest}
+                            onChange={(e) => setField("interest", e.target.value)}
+                            className={inputClass(errors.interest)}
+                          >
+                            <option value="">Select an area…</option>
+                            {CONTACT_INTEREST_OPTIONS.map((opt) => (
+                              <option key={opt} value={opt}>
+                                {opt}
+                              </option>
+                            ))}
+                          </select>
+                        </Field>
+                        <Field
                           id="need"
-                          value={form.need}
-                          onChange={(e) => setField("need", e.target.value)}
-                          className={inputClass(errors.need)}
+                          label="What do you need from DQ?"
+                          required
+                          error={errors.need}
                         >
-                          <option value="">Select a need…</option>
-                          {NEED_OPTIONS.map((opt) => (
-                            <option key={opt} value={opt}>
-                              {opt}
-                            </option>
-                          ))}
-                        </select>
-                      </Field>
-                    </div>
+                          <select
+                            id="need"
+                            value={form.need}
+                            onChange={(e) => setField("need", e.target.value)}
+                            className={inputClass(errors.need)}
+                          >
+                            <option value="">Select a need…</option>
+                            {CONTACT_NEED_OPTIONS.map((opt) => (
+                              <option key={opt} value={opt}>
+                                {opt}
+                              </option>
+                            ))}
+                          </select>
+                        </Field>
+                      </div>
+                    )}
 
                     <Field
                       id="message"
@@ -344,6 +362,12 @@ const Contact = () => {
                         </p>
                       )}
                     </div>
+
+                    {submitError && (
+                      <p className="rounded-lg border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700" role="alert">
+                        {submitError}
+                      </p>
+                    )}
 
                     <div className="flex flex-col-reverse gap-3 sm:flex-row sm:items-center sm:justify-between">
                       <p className="text-center text-[12px] text-gray-500 sm:text-left">
