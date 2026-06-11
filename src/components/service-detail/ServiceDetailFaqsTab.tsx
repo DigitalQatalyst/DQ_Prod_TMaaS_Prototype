@@ -6,6 +6,7 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { sectionHeading, serviceDetailTabLead } from "@/lib/brandAccent";
+import { buildContactPath } from "@/lib/contactFormPrefill";
 import { featureFlags } from "@/lib/featureFlags";
 import { getServiceFaqsContent } from "./serviceFaqsContent";
 import type { ServiceProduct } from "./serviceDetailHelpers";
@@ -59,7 +60,7 @@ export function ServiceDetailFaqsTab({ service }: ServiceDetailFaqsTabProps) {
           Our team can help you scope the right approach for your organisation.{" "}
           {featureFlags.isEnabled("contactUs") ? (
             <Link
-              to="/contact"
+              to={buildContactPath(service, "consultation")}
               className="font-semibold text-dq-orange transition-colors hover:text-dq-orange/80"
             >
               Contact us

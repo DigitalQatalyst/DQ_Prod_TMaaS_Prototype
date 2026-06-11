@@ -113,6 +113,17 @@ Match `ServiceDetailWhyItMattersTab.tsx` + `whyItMattersContent.ts`:
 - CTAs on mobile: primary actions `w-full sm:w-auto` in stacked CTA rows (landing, contact, service detail bottom band)
 - Contact form: submit button full width on mobile; consent label must not use `whitespace-nowrap`
 
+## Contact integration tests
+- UI flow: `src/pages/Contact.integration.test.tsx` (validation, quote prefill, success/error, resubmit)
+- API handler: `src/test/contactApi.integration.test.ts` (OPTIONS, validation, Graph sendMail, env/error paths)
+- Run with `npm test`; node-environment API tests require `setup.ts` to guard `window` usage
+
+## Supabase catalog integration tests
+- Mocked service layer: `src/services/catalogService.integration.test.ts` with `src/test/supabaseMock.ts`
+- Live remote catalog: `src/test/supabaseLive.integration.test.ts` (skipped when `VITE_SUPABASE_*` missing from `.env.local`)
+- `vitest.config.ts` loads `.env.local` via `loadEnv` and injects `import.meta.env.VITE_SUPABASE_*` for live tests
+- Covers: listings view mapping, service-by-id, best sellers, deploy modules, detail payload, RLS anon read, flag/static fallback
+
 ## Do Not
 - Reintroduce morphing navbar or Inter as default body font
 - Reskin corp homepage section-for-section with product copy swaps
