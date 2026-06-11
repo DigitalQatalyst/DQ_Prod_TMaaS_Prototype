@@ -1,6 +1,10 @@
 import { Link } from "react-router-dom";
-import { Linkedin, Instagram, Youtube } from "lucide-react";
+import { Linkedin, Twitter, Youtube } from "lucide-react";
+import TMaaSLogo from "@/components/TMaaSLogo";
+import { PLATFORM_NAME } from "@/lib/brandLinks";
 import { featureFlags } from "@/lib/featureFlags";
+
+const CORP_WEB_BASE = "https://www.digitalqatalyst.com";
 
 const Footer = () => {
   return (
@@ -8,94 +12,60 @@ const Footer = () => {
       <div className="mx-auto max-w-[1200px]">
         <div className="mb-12 grid grid-cols-1 gap-10 md:grid-cols-[1fr_auto_auto_auto] md:gap-16">
           <div className="space-y-4">
-            <Link to="/" className="flex items-center gap-2">
-              <span className="grid h-7 w-7 place-items-center rounded-md bg-dq-navy text-white">
-                <span className="font-mono text-[11px] font-bold">DQ</span>
-              </span>
-              <span className="text-sm font-semibold text-dq-navy">
-                DigitalQatalyst <span className="text-gray-400">TMaaS</span>
-              </span>
-            </Link>
-            <p className="max-w-[240px] text-[14px] leading-relaxed text-gray-500">
-              Transformation Management as a Service
+            <TMaaSLogo />
+            <p className="max-w-[280px] text-[14px] leading-relaxed text-gray-500">
+              A marketplace for digital transformation services. AI-powered
+              blueprints, clear pricing, faster delivery.
             </p>
           </div>
 
           <div>
             <p className="mb-4 font-mono text-[10px] uppercase tracking-[0.18em] text-gray-400">
-              Explore DigitalQatalyst
+              Explore
             </p>
             <ul className="space-y-2.5 text-[14px] text-gray-600">
-              <li>
-                <a
-                  href="https://digitalqatalyst.com"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="transition-colors hover:text-dq-orange"
-                >
-                  Visit DigitalQatalyst.com
-                </a>
-              </li>
-              <li>
-                <a
-                  href="https://digitalqatalyst.com/products"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="transition-colors hover:text-dq-orange"
-                >
-                  Our Products
-                </a>
-              </li>
-              {featureFlags.isEnabled("legal") && (
-                <>
-                  <li>
-                    <Link to="/legal/terms" className="transition-colors hover:text-dq-orange">
-                      Terms & Conditions
-                    </Link>
-                  </li>
-                  <li>
-                    <Link to="/legal/privacy" className="transition-colors hover:text-dq-orange">
-                      Privacy Policy
-                    </Link>
-                  </li>
-                </>
-              )}
-            </ul>
-          </div>
-
-          <div>
-            <p className="mb-4 font-mono text-[10px] uppercase tracking-[0.18em] text-gray-400">
-              Explore TMaaS
-            </p>
-            <ul className="space-y-2.5 text-[14px] text-gray-600">
-              {featureFlags.isEnabled("explore") && (
-                <li>
-                  <Link to="/explore" className="transition-colors hover:text-dq-orange">
-                    About TMaaS
-                  </Link>
-                </li>
-              )}
-              {featureFlags.isEnabled("chatAssistant") && (
-                <li>
-                  <Link to="/#hero" className="transition-colors hover:text-dq-orange">
-                    Start with AI
-                  </Link>
-                </li>
-              )}
               {featureFlags.isEnabled("marketplace") && (
                 <li>
                   <Link to="/marketplace" className="transition-colors hover:text-dq-orange">
-                    Design & Deploy Services
+                    Marketplace
                   </Link>
                 </li>
               )}
               {featureFlags.isEnabled("contactUs") && (
                 <li>
                   <Link to="/contact" className="transition-colors hover:text-dq-orange">
-                    Contact Us
+                    Talk to our team
                   </Link>
                 </li>
               )}
+            </ul>
+          </div>
+
+          <div>
+            <p className="mb-4 font-mono text-[10px] uppercase tracking-[0.18em] text-gray-400">
+              DQ
+            </p>
+            <ul className="space-y-2.5 text-[14px] text-gray-600">
+              <li>
+                <a
+                  href={CORP_WEB_BASE}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="transition-colors hover:text-dq-orange"
+                >
+                  Explore DigitalQatalyst
+                </a>
+              </li>
+              <li>
+                <a
+                  href={`${CORP_WEB_BASE}/about`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="transition-colors hover:text-dq-orange"
+                >
+                  About
+                </a>
+              </li>
             </ul>
           </div>
 
@@ -106,7 +76,7 @@ const Footer = () => {
             <ul className="space-y-2.5">
               <li>
                 <a
-                  href="https://linkedin.com/company/digitalqatalyst"
+                  href="https://www.linkedin.com/company/digitalqatalyst"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-2 text-[14px] text-gray-600 transition-colors hover:text-dq-orange"
@@ -117,18 +87,18 @@ const Footer = () => {
               </li>
               <li>
                 <a
-                  href="https://instagram.com/digitalqatalyst"
+                  href="https://x.com/digitalqatalyst"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-2 text-[14px] text-gray-600 transition-colors hover:text-dq-orange"
                 >
-                  <Instagram size={14} />
-                  Instagram
+                  <Twitter size={14} />
+                  X
                 </a>
               </li>
               <li>
                 <a
-                  href="https://youtube.com/@digitalqatalyst"
+                  href="https://www.youtube.com/@digitalqatalyst"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-2 text-[14px] text-gray-600 transition-colors hover:text-dq-orange"
@@ -143,16 +113,24 @@ const Footer = () => {
 
         <div className="flex flex-col items-center justify-between gap-3 border-t border-gray-100 pt-6 text-[12px] text-gray-400 sm:flex-row">
           <p>© 2026 DigitalQatalyst. All rights reserved.</p>
-          {featureFlags.isEnabled("legal") && (
-            <div className="flex gap-5">
-              <Link to="/legal/privacy" className="transition-colors hover:text-gray-700">
-                Privacy
-              </Link>
-              <Link to="/legal/terms" className="transition-colors hover:text-gray-700">
-                Terms
-              </Link>
-            </div>
-          )}
+          <div className="flex gap-5">
+            <a
+              href={`${CORP_WEB_BASE}/privacy`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="transition-colors hover:text-gray-700"
+            >
+              Privacy
+            </a>
+            <a
+              href={`${CORP_WEB_BASE}/terms`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="transition-colors hover:text-gray-700"
+            >
+              Terms
+            </a>
+          </div>
         </div>
       </div>
     </footer>

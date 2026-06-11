@@ -52,7 +52,7 @@ const ValuePropsSection = () => {
           </p>
         </motion.div>
 
-        {/* Card with 3 cols separated by dashed lines — like reference screenshot 3 */}
+        {/* Card with 3 cols separated by dashed lines, like reference screenshot 3 */}
         <motion.div
           initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}

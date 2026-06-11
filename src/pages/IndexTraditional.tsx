@@ -5,7 +5,7 @@ import ChallengeSection from "@/components/site/landing/ChallengeSection";
 import SolutionSection from "@/components/site/landing/SolutionSection";
 import OfferingsSection from "@/components/site/landing/OfferingsSection";
 import StatsSection from "@/components/site/landing/StatsSection";
-import LandingHowItWorksSection from "@/components/site/landing/LandingHowItWorksSection";
+import LandingOutcomesSection from "@/components/site/landing/LandingOutcomesSection";
 import LandingCtaSection from "@/components/site/landing/LandingCtaSection";
 import Footer from "@/components/Footer";
 
@@ -19,8 +19,8 @@ const IndexTraditional = () => {
         <ChallengeSection />
         <SolutionSection />
         <OfferingsSection />
+        <LandingOutcomesSection />
         <StatsSection />
-        <LandingHowItWorksSection />
         <LandingCtaSection />
       </main>
       <Footer />

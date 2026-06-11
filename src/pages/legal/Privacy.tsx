@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { ArrowLeft, Shield, Download, Calendar } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import Navbar from "@/components/Navbar";
+import LandingNavbar from "@/components/site/landing/LandingNavbar";
 import Footer from "@/components/Footer";
 
 const Privacy = () => {
@@ -59,7 +59,7 @@ const Privacy = () => {
 
   return (
     <div className="min-h-screen bg-background">
-      <Navbar />
+      <LandingNavbar />
 
       <main className="pt-20">
         {/* Header */}
@@ -137,7 +137,7 @@ const Privacy = () => {
                     <section id="introduction" className="mb-12">
                       <h2 className="mb-4 text-2xl font-bold text-foreground">1. Introduction</h2>
                       <p className="text-muted-foreground">
-                        At DigitalQatalyst, we take your privacy seriously. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you use TMaaS (Transformation Management as a Service).
+                        At DigitalQatalyst, we take your privacy seriously. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you use TMaaS (Transformation as a Service).
                       </p>
                       <p className="mt-4 text-muted-foreground">
                         Please read this privacy policy carefully. If you do not agree with the terms of this privacy policy, please do not access the platform.

@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 import { Check, Clock, ArrowRight, Loader2, MapPin, Phone, Mail } from "lucide-react";
-import Navbar from "@/components/Navbar";
+import LandingNavbar from "@/components/site/landing/LandingNavbar";
 import Footer from "@/components/Footer";
+import { PLATFORM_ACRONYM } from "@/lib/brandLinks";
 import { featureFlags } from "@/lib/featureFlags";
 
 type FormState = {
@@ -32,15 +33,15 @@ const INITIAL: FormState = {
 };
 
 const INTEREST_OPTIONS = [
-  "Transformation Management",
-  "Design & Deploy Services",
-  "Marketplace Enquiry",
+  "Digital Platform & Architecture",
+  "Transformation Strategy & Advisory",
+  "Training & Capability",
   "General Enquiry",
 ];
 
 const NEED_OPTIONS = [
   "Advisory & Strategy",
-  "Service Walkthrough",
+  "Product Demo or Walkthrough",
   "Diagnostic Assessment",
   "Implementation Support",
   "Transformation Programme",
@@ -50,11 +51,20 @@ const NEED_OPTIONS = [
 const PHONE_REGEX = /^\+?[\d\s\-(). ]{7,20}$/;
 
 const Contact = () => {
+  const [searchParams] = useSearchParams();
+
   useEffect(() => {
-    document.title = "Contact TMaaS | Transformation Management as a Service";
+    document.title = `Talk to our team | ${PLATFORM_ACRONYM}`;
   }, []);
 
-  const [form, setForm] = useState<FormState>(INITIAL);
+  const [form, setForm] = useState<FormState>(() => {
+    const service = searchParams.get("service")?.trim();
+    if (!service) return INITIAL;
+    return {
+      ...INITIAL,
+      message: `I would like to request a quote for: ${service}`,
+    };
+  });
   const [errors, setErrors] = useState<Partial<Record<keyof FormState, string>>>({});
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
 
@@ -74,7 +84,7 @@ const Contact = () => {
       next.phone = "Enter a valid phone number";
     if (!form.organisation.trim()) next.organisation = "Organisation is required";
     if (!form.interest) next.interest = "Select an area of interest";
-    if (!form.need) next.need = "Select what you need from TMaaS";
+    if (!form.need) next.need = "Select what you need from DQ";
     if (!form.message.trim()) next.message = "A short context message is required";
     if (!form.consent) next.consent = "Consent is required to submit";
     setErrors(next);
@@ -96,7 +106,7 @@ const Contact = () => {
     } catch {
       setStatus("idle");
       setErrors({
-        message: "Submission failed — please try again or email us directly.",
+        message: "Submission failed, please try again or email us directly.",
       });
     }
   };
@@ -108,7 +118,7 @@ const Contact = () => {
   };
 
   const privacyLink = featureFlags.isEnabled("legal") ? (
-    <Link to="/legal/privacy" className="underline transition-colors hover:text-dq-navy">
+    <Link to="/legal/privacy" className="underline transition-colors hover:text-dq-orange">
       Privacy Policy
     </Link>
   ) : (
@@ -116,7 +126,7 @@ const Contact = () => {
       href="https://digitalqatalyst.com/privacy"
       target="_blank"
       rel="noopener noreferrer"
-      className="underline transition-colors hover:text-dq-navy"
+      className="underline transition-colors hover:text-dq-orange"
     >
       Privacy Policy
     </a>
@@ -124,9 +134,9 @@ const Contact = () => {
 
   return (
     <div className="min-h-screen bg-background">
-      <Navbar />
+      <LandingNavbar />
       {status === "success" ? (
-        <section className="bg-white px-5 py-12 md:px-8 md:py-16">
+        <section className="bg-white px-5 pb-12 pt-20 md:px-8 md:pb-16 md:pt-24">
           <div className="mx-auto max-w-[1120px]">
             <div className="mx-auto max-w-2xl rounded-2xl border border-gray-200 bg-white p-8 text-center shadow-sm md:p-12">
               <div className="mx-auto mb-6 flex h-16 w-16 items-center justify-center rounded-full bg-[#ECFDF3]">
@@ -136,14 +146,14 @@ const Contact = () => {
                 We&apos;ve got your request
               </h2>
               <p className="mx-auto mb-8 max-w-md text-[15px] leading-relaxed text-gray-600">
-                A TMaaS advisor will review your context and reach out within 2 business days
-                to route you to the right pathway.
+                A DQ advisor will review your message and get back to you within 2
+                business days with the right next step.
               </p>
               <div className="flex flex-col justify-center gap-3 sm:flex-row">
                 <button
                   type="button"
                   onClick={resetForm}
-                  className="rounded-full border border-gray-200 px-6 py-2.5 text-[15px] font-semibold text-dq-navy outline-none transition-colors hover:border-dq-orange hover:text-dq-orange focus-visible:ring-2 focus-visible:ring-dq-orange focus-visible:ring-offset-2"
+                  className="rounded-full border border-gray-200 px-6 py-2.5 text-[15px] font-semibold text-dq-navy outline-none transition-colors hover:border-dq-navy hover:text-dq-navy focus-visible:ring-2 focus-visible:ring-dq-orange focus-visible:ring-offset-2"
                 >
                   Submit another request
                 </button>
@@ -166,7 +176,7 @@ const Contact = () => {
                 <form
                   onSubmit={handleSubmit}
                   noValidate
-                  className="rounded-xl bg-gray-50 p-6 md:p-8 lg:p-10"
+                  className="rounded-xl bg-gray-50 p-5 sm:p-6 md:p-8 lg:p-10"
                 >
                   <div className="space-y-7">
                     <div className="grid gap-4 sm:grid-cols-2">
@@ -269,7 +279,7 @@ const Contact = () => {
                       </Field>
                       <Field
                         id="need"
-                        label="What do you need from TMaaS?"
+                        label="What do you need from DQ?"
                         required
                         error={errors.need}
                       >
@@ -294,7 +304,7 @@ const Contact = () => {
                       label="Your Message"
                       required
                       error={errors.message}
-                      hint="Tell us your goals, challenges, or timeline. The more context you share, the better we can route your request."
+                      hint="Share your goals, challenges, or timeline so we can help faster."
                     >
                       <textarea
                         id="message"
@@ -316,14 +326,14 @@ const Contact = () => {
                           aria-invalid={!!errors.consent}
                           checked={form.consent}
                           onChange={(e) => setField("consent", e.target.checked)}
-                          className="mt-0.5 h-4 w-4 shrink-0 rounded border-gray-300 text-dq-orange focus:ring-dq-orange"
+                          className="mt-0.5 h-4 w-4 shrink-0 rounded border-gray-300 text-dq-navy focus:ring-dq-orange"
                         />
                         <span
                           className={`text-[13px] leading-relaxed transition-colors ${errors.consent ? "text-red-600" : "text-gray-500"}`}
                         >
                           I agree to the processing of my data for this consultation request, in
                           accordance with the {privacyLink}
-                          <span aria-hidden="true" className="whitespace-nowrap">
+                          <span aria-hidden="true">
                             . <span className="text-red-600">*</span>
                           </span>
                         </span>
@@ -335,14 +345,14 @@ const Contact = () => {
                       )}
                     </div>
 
-                    <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-                      <p className="text-[12px] text-gray-500">
+                    <div className="flex flex-col-reverse gap-3 sm:flex-row sm:items-center sm:justify-between">
+                      <p className="text-center text-[12px] text-gray-500 sm:text-left">
                         <span className="text-red-600">*</span> Required fields.
                       </p>
                       <button
                         type="submit"
                         disabled={status === "loading"}
-                        className="inline-flex items-center justify-center gap-2 rounded-full bg-dq-orange px-6 py-3 text-[15px] font-semibold text-white outline-none transition-colors hover:bg-[#E04020] focus-visible:ring-2 focus-visible:ring-dq-orange focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-80"
+                        className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-dq-orange px-6 py-3 text-[15px] font-semibold text-white outline-none transition-colors hover:bg-[#E04020] glow-orange focus-visible:ring-2 focus-visible:ring-dq-orange focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-80 sm:w-auto"
                       >
                         {status === "loading" ? (
                           <>
@@ -351,7 +361,7 @@ const Contact = () => {
                           </>
                         ) : (
                           <>
-                            Submit Request
+                            Send request
                             <ArrowRight size={16} />
                           </>
                         )}
@@ -361,13 +371,13 @@ const Contact = () => {
                 </form>
               </div>
 
-              <aside className="px-1 lg:col-span-4">
+              <aside className="border-t border-gray-100 px-1 pt-8 lg:col-span-4 lg:border-t-0 lg:pt-0">
                 <p className="mb-4 text-[10px] font-semibold uppercase tracking-[0.16em] text-gray-400">
-                  How TMaaS routes requests
+                  What happens next
                 </p>
                 <p className="mb-5 text-[13px] leading-relaxed text-gray-500">
-                  A TMaaS advisor reads every submission and matches you to the right entry point
-                  — advisory, marketplace services, diagnostic, or transformation support.
+                  A DQ advisor reads every message and connects you to the right
+                  services, whether that&apos;s advice, a demo, or hands-on support.
                 </p>
                 <div className="flex items-center gap-1.5 text-[13px] text-gray-500">
                   <Clock size={13} className="shrink-0 text-gray-400" />
@@ -384,12 +394,26 @@ const Contact = () => {
                     rel="noopener noreferrer"
                     className="group mb-4 flex items-start gap-2.5"
                   >
-                    <MapPin size={13} className="mt-0.5 shrink-0 text-dq-orange" />
-                    <div className="border-l border-dq-orange/25 pl-2.5 transition-colors group-hover:border-dq-orange/60">
+                    <MapPin size={13} className="mt-0.5 shrink-0 text-dq-navy" />
+                    <div className="border-l border-dq-navy/25 pl-2.5 transition-colors group-hover:border-dq-navy/60">
                       <p className="text-[13px] font-medium leading-snug text-dq-navy transition-colors group-hover:text-dq-orange">
                         708, Opal Tower
                       </p>
                       <p className="mt-0.5 text-[12px] text-gray-500">Business Bay, Dubai, UAE</p>
+                    </div>
+                  </a>
+                  <a
+                    href="https://share.google/a0nFDiFNo30ZcNrsL"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="group mb-4 flex items-start gap-2.5"
+                  >
+                    <MapPin size={13} className="mt-0.5 shrink-0 text-dq-navy" />
+                    <div className="border-l border-dq-navy/25 pl-2.5 transition-colors group-hover:border-dq-navy/60">
+                      <p className="text-[13px] font-medium leading-snug text-dq-navy transition-colors group-hover:text-dq-orange">
+                        Kenafric Business Park
+                      </p>
+                      <p className="mt-0.5 text-[12px] text-gray-500">Baba Dogo Road, Nairobi, Kenya</p>
                     </div>
                   </a>
                   <a href="tel:+97142666169" className="group flex items-center gap-2.5 py-1">
@@ -397,7 +421,7 @@ const Contact = () => {
                       size={13}
                       className="shrink-0 text-gray-400 transition-colors group-hover:text-dq-orange"
                     />
-                    <span className="text-[13px] text-gray-600 transition-colors group-hover:text-dq-navy">
+                    <span className="text-[13px] text-gray-600 transition-colors group-hover:text-dq-orange">
                       +971 4 266 6169
                     </span>
                   </a>
@@ -409,7 +433,7 @@ const Contact = () => {
                       size={13}
                       className="shrink-0 text-gray-400 transition-colors group-hover:text-dq-orange"
                     />
-                    <span className="text-[13px] text-gray-600 transition-colors group-hover:text-dq-navy">
+                    <span className="text-[13px] text-gray-600 transition-colors group-hover:text-dq-orange">
                       info@digitalqatalyst.com
                     </span>
                   </a>
@@ -419,9 +443,9 @@ const Contact = () => {
                   <div className="mt-6">
                     <Link
                       to="/marketplace"
-                      className="inline-flex items-center gap-1 rounded-sm text-[13px] font-semibold text-dq-orange outline-none transition-colors hover:text-[#E04020] focus-visible:ring-2 focus-visible:ring-dq-orange focus-visible:ring-offset-2"
+                      className="inline-flex items-center gap-1 rounded-sm text-[13px] font-semibold text-dq-navy outline-none transition-colors hover:text-[#E04020] focus-visible:ring-2 focus-visible:ring-dq-orange focus-visible:ring-offset-2"
                     >
-                      Not sure where to start? Browse the Marketplace
+                      Not sure where to start? Browse services
                       <ArrowRight size={13} />
                     </Link>
                   </div>
@@ -439,19 +463,19 @@ const Contact = () => {
 function ContactHero() {
   return (
     <section
-      className="relative isolate overflow-hidden px-5 pb-14 pt-14 md:px-8 md:pb-16 md:pt-16 lg:px-10"
-      style={{ background: "linear-gradient(135deg, #f8fafc 0%, #fff7ed 50%, #f8fafc 100%)" }}
+      className="relative isolate overflow-hidden px-5 pb-14 pt-20 md:px-8 md:pb-16 md:pt-24 lg:px-10"
+      style={{ background: "var(--mesh-hero-light)" }}
     >
       <div className="mx-auto max-w-[1120px]">
         <div className="mb-4 text-[11px] font-semibold uppercase tracking-[0.14em] text-gray-500">
-          CONTACT
+          Talk to our team
         </div>
         <h1 className="mb-5 max-w-2xl text-balance text-4xl font-semibold tracking-tight text-dq-navy md:text-5xl">
-          Tell us where you are. We&apos;ll route you to what&apos;s right.
+          Tell us what you need. We&apos;ll help you get started.
         </h1>
         <p className="max-w-xl text-[15px] leading-relaxed text-gray-600 md:text-[16px]">
-          Every request is reviewed by a TMaaS advisor who matches your context to the right
-          pathway — advisory, marketplace services, diagnostic, or transformation support.
+          Every message is reviewed by a DQ advisor who will match you to the
+          right services and next steps.
         </p>
       </div>
     </section>

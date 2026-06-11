@@ -71,7 +71,7 @@ export const engagementHealthIndicators: EngagementHealthIndicator[] = [
     },
     navigation: {
       tab: "delivery",
-      destinationLabel: "Delivery — Milestones & deliverables",
+      destinationLabel: "Delivery, Milestones & deliverables",
     },
   },
   {
@@ -91,7 +91,7 @@ export const engagementHealthIndicators: EngagementHealthIndicator[] = [
     },
     navigation: {
       tab: "commercials",
-      destinationLabel: "Commercials — Contract changes",
+      destinationLabel: "Commercials, Contract changes",
     },
   },
   {
@@ -111,7 +111,7 @@ export const engagementHealthIndicators: EngagementHealthIndicator[] = [
     },
     navigation: {
       tab: "delivery",
-      destinationLabel: "Delivery — Deliverables & tasks",
+      destinationLabel: "Delivery, Deliverables & tasks",
     },
   },
   {
@@ -134,7 +134,7 @@ export const engagementHealthIndicators: EngagementHealthIndicator[] = [
     navigation: {
       tab: "raid",
       raidSubTab: "dependencies",
-      destinationLabel: "RAID — Dependencies",
+      destinationLabel: "RAID, Dependencies",
     },
   },
   {
@@ -154,7 +154,7 @@ export const engagementHealthIndicators: EngagementHealthIndicator[] = [
     },
     navigation: {
       tab: "delivery",
-      destinationLabel: "Delivery — Milestones",
+      destinationLabel: "Delivery, Milestones",
     },
   },
   {
@@ -193,7 +193,7 @@ export const engagementHealthIndicators: EngagementHealthIndicator[] = [
     ],
     description: "Delivery Lead assessment of stakeholder engagement, approvals, and governance participation.",
     logic: "Manually assessed by Delivery Lead using predefined governance criteria. Green: all stakeholders engaged and approvals on track. Amber: some gaps but being managed. Red: critical disengagement or escalation.",
-    currentReason: "Stakeholder engagement is inconsistent — approval on Phase 2 SOW is delayed but being actively pursued.",
+    currentReason: "Stakeholder engagement is inconsistent, approval on Phase 2 SOW is delayed but being actively pursued.",
     trend: "stable",
     timeInState: "12 days",
     lastTransition: "2026-02-16",
@@ -204,7 +204,7 @@ export const engagementHealthIndicators: EngagementHealthIndicator[] = [
     },
     navigation: {
       tab: "stakeholders",
-      destinationLabel: "Stakeholders — Catalogue",
+      destinationLabel: "Stakeholders, Catalogue",
     },
   },
   {
@@ -243,7 +243,7 @@ export const engagementHealthIndicators: EngagementHealthIndicator[] = [
     ],
     description: "Delivery Lead assessment of whether business benefits are defined, measurable, and on track to be realised.",
     logic: "Manually assessed by Delivery Lead using predefined governance criteria. Green: benefits defined and tracked. Amber: gaps in measurability or alignment. Red: benefits undefined or unachievable.",
-    currentReason: "Benefits are defined but progress tracking is not yet in place — client and team alignment on expected outcomes is still being finalised.",
+    currentReason: "Benefits are defined but progress tracking is not yet in place, client and team alignment on expected outcomes is still being finalised.",
     trend: "deteriorating",
     timeInState: "8 days",
     lastTransition: "2026-02-20",
@@ -253,7 +253,7 @@ export const engagementHealthIndicators: EngagementHealthIndicator[] = [
     },
     navigation: {
       tab: "delivery",
-      destinationLabel: "Delivery — Vision & KRIs",
+      destinationLabel: "Delivery, Vision & KRIs",
     },
   },
 ];

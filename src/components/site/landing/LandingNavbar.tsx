@@ -1,85 +1,82 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import TMaaSLogo from "@/components/TMaaSLogo";
+import ExploreDigitalQatalystCta from "@/components/ExploreDigitalQatalystCta";
+import { btnPrimary, btnSecondary } from "@/lib/brandAccent";
 import { featureFlags } from "@/lib/featureFlags";
+import { cn } from "@/lib/utils";
 
 const NAV_LINKS = [
-  { label: "Marketplace", href: "/marketplace", flag: "marketplace" as const, external: false },
-  { label: "How it Works", href: "#how-it-works", flag: null, external: false },
-  { label: "Offerings", href: "#offerings", flag: null, external: false },
-  { label: "Resources", href: "/legal/faq", flag: "legal" as const, external: false },
-  { label: "About Us", href: "/explore", flag: "explore" as const, external: false },
+  { label: "Services", href: "/marketplace", flag: "marketplace" as const },
 ];
 
 const LandingNavbar = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
+  const location = useLocation();
+  const isOnContact = location.pathname.startsWith("/contact");
 
   const visibleLinks = NAV_LINKS.filter(
     (link) => !link.flag || featureFlags.isEnabled(link.flag)
   );
 
-  const navLinkClass =
-    "text-[13px] font-medium text-gray-600 transition-colors hover:text-dq-navy focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-dq-orange focus-visible:ring-offset-2 rounded-sm";
+  const navLinkClass = cn(
+    "text-sm font-medium text-gray-600 transition-colors hover:text-dq-navy focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-dq-orange focus-visible:ring-offset-2 rounded-sm"
+  );
 
-  const renderLink = (link: (typeof NAV_LINKS)[number]) => {
-    if (link.href.startsWith("#")) {
-      return (
-        <a key={link.label} href={link.href} className={navLinkClass}>
-          {link.label}
-        </a>
-      );
-    }
-    return (
-      <Link key={link.label} to={link.href} className={navLinkClass}>
-        {link.label}
-      </Link>
-    );
-  };
+  const renderLink = (link: (typeof NAV_LINKS)[number]) => (
+    <Link key={link.label} to={link.href} className={navLinkClass}>
+      {link.label}
+    </Link>
+  );
 
   return (
     <>
-      <header className="sticky top-0 z-40 flex h-16 items-center border-b border-gray-100 bg-white px-5 md:px-8 lg:px-10">
-        <div className="mx-auto grid w-full max-w-[1200px] grid-cols-[1fr_auto_1fr] items-center">
-          <Link
-            to="/home"
-            className="flex items-center gap-2 font-semibold tracking-tight transition-opacity hover:opacity-80"
-          >
-            <span className="grid h-7 w-7 place-items-center rounded-md bg-dq-orange text-white">
-              <span className="font-mono text-[11px] font-bold">DQ</span>
-            </span>
-            <span className="text-lg text-dq-orange">TMaaS</span>
-          </Link>
+      <header className="sticky top-0 z-40 flex h-16 items-center justify-between border-b border-gray-100 bg-white px-5 md:px-8 lg:px-10">
+        <div className="flex items-center gap-8">
+          <TMaaSLogo />
 
-          <nav className="hidden items-center justify-center gap-7 lg:flex">
+          <nav className="hidden items-center gap-6 lg:flex">
             {visibleLinks.map(renderLink)}
           </nav>
+        </div>
 
-          <div className="hidden items-center justify-end gap-3 lg:flex">
-            {featureFlags.isEnabled("auth") && (
-              <>
-                <Link
-                  to="/sign-in"
-                  className="px-2 text-[13px] font-medium text-gray-600 transition-colors hover:text-dq-navy"
-                >
-                  Log in
-                </Link>
-                <Link to="/sign-in">
-                  <Button
-                    size="sm"
-                    className="rounded-full bg-dq-orange px-5 text-[13px] font-semibold text-white hover:bg-[#E04020]"
-                  >
-                    Get Started
-                  </Button>
-                </Link>
-              </>
-            )}
-          </div>
+        <div className="flex items-center gap-3 md:gap-4">
+          {featureFlags.isEnabled("auth") && (
+            <div className="hidden items-center gap-3 md:flex">
+              <Link
+                to="/sign-in"
+                className="px-2 text-sm font-medium text-gray-600 transition-colors hover:text-dq-navy"
+              >
+                Log in
+              </Link>
+              <Link to="/sign-in">
+                <Button size="sm" className={cn(btnPrimary, "px-5")}>
+                  Get Started
+                </Button>
+              </Link>
+            </div>
+          )}
+
+          <ExploreDigitalQatalystCta className="hidden md:inline-flex" />
+          {featureFlags.isEnabled("contactUs") && (
+            <Link
+              to="/contact"
+              className={cn(
+                "hidden md:block",
+                isOnContact ? btnPrimary : btnSecondary,
+                "px-4 py-2"
+              )}
+            >
+              Talk to our team
+            </Link>
+          )}
 
           <button
             type="button"
             aria-label={mobileOpen ? "Close menu" : "Open menu"}
-            className="col-start-3 justify-self-end rounded-md p-2 outline-none focus-visible:ring-2 focus-visible:ring-dq-orange focus-visible:ring-offset-2 lg:hidden"
+            className="rounded-md p-2 outline-none focus-visible:ring-2 focus-visible:ring-dq-navy focus-visible:ring-offset-2 lg:hidden"
             onClick={() => setMobileOpen(!mobileOpen)}
           >
             {mobileOpen ? <X size={24} /> : <Menu size={24} />}
@@ -89,27 +86,16 @@ const LandingNavbar = () => {
 
       {mobileOpen && (
         <div className="fixed inset-0 top-16 z-30 flex flex-col gap-1 overflow-y-auto bg-white p-4 lg:hidden">
-          {visibleLinks.map((link) =>
-            link.href.startsWith("#") ? (
-              <a
-                key={link.label}
-                href={link.href}
-                className="border-b border-gray-100 py-3 text-lg font-medium text-dq-navy"
-                onClick={() => setMobileOpen(false)}
-              >
-                {link.label}
-              </a>
-            ) : (
-              <Link
-                key={link.label}
-                to={link.href}
-                className="border-b border-gray-100 py-3 text-lg font-medium text-dq-navy"
-                onClick={() => setMobileOpen(false)}
-              >
-                {link.label}
-              </Link>
-            )
-          )}
+          {visibleLinks.map((link) => (
+            <Link
+              key={link.label}
+              to={link.href}
+              className="border-b border-gray-100 py-3 text-lg font-medium text-dq-navy"
+              onClick={() => setMobileOpen(false)}
+            >
+              {link.label}
+            </Link>
+          ))}
           {featureFlags.isEnabled("auth") && (
             <>
               <Link
@@ -120,11 +106,24 @@ const LandingNavbar = () => {
                 Log in
               </Link>
               <Link to="/sign-in" onClick={() => setMobileOpen(false)} className="mt-4">
-                <Button className="w-full rounded-full bg-dq-orange py-3 text-center font-semibold text-white hover:bg-[#E04020]">
+                <Button className={cn(btnPrimary, "w-full py-3")}>
                   Get Started
                 </Button>
               </Link>
             </>
+          )}
+          <ExploreDigitalQatalystCta
+            className="mt-4 w-full"
+            showIcon={false}
+          />
+          {featureFlags.isEnabled("contactUs") && (
+            <Link
+              to="/contact"
+              onClick={() => setMobileOpen(false)}
+              className={cn(btnPrimary, "mt-3 w-full py-3 text-center")}
+            >
+              Talk to our team
+            </Link>
           )}
         </div>
       )}

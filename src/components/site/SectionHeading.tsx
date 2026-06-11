@@ -24,7 +24,7 @@ export default function SectionHeading({
       )}
     >
       {kicker ? (
-        <p className="mb-4 font-mono text-[11px] uppercase tracking-[0.2em] text-dq-orange">
+        <p className="dq-eyebrow mb-4">
           {kicker}
         </p>
       ) : null}

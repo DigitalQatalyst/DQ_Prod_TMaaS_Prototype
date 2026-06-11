@@ -12,7 +12,7 @@ import { featureFlags } from "@/lib/featureFlags";
 const faqs = [
   {
     question: "What is TMaaS?",
-    answer: "TMaaS (Transformation Management as a Service) is a low-cost, architecture-led digital transformation marketplace and execution platform. It enables organisations to identify, design, deploy, and continuously drive digital transformation initiatives using AI-powered, ready-to-launch blueprints grounded in enterprise architecture.",
+    answer: "TMaaS (Transformation as a Service) is a low-cost, architecture-led digital transformation marketplace and execution platform. It enables organisations to identify, design, deploy, and continuously drive digital transformation initiatives using AI-powered, ready-to-launch blueprints grounded in enterprise architecture.",
   },
   {
     question: "How is TMaaS different from traditional consulting?",

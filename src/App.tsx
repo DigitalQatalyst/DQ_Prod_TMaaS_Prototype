@@ -6,6 +6,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route, useLocation, Navigate } from "react-router-dom";
 import Index from "./pages/Index";
 import IndexTraditional from "./pages/IndexTraditional";
+import IndexProductLanding from "./pages/IndexProductLanding";
 import Explore from "./pages/Explore";
 import Marketplace from "./pages/Marketplace";
 import ServiceDetail from "./pages/ServiceDetail";
@@ -51,6 +52,7 @@ import Cart from "./pages/Cart";
 
 import { AuthProvider } from "@/contexts/AuthContext";
 import { CartProvider } from "@/contexts/CartContext";
+import { CatalogProvider } from "@/contexts/CatalogContext";
 import CartDrawer from "@/components/cart/CartDrawer";
 import { FeatureFlagAdmin } from "@/components/FeatureFlagAdmin";
 import { featureFlags, getFirstEnabledRoute } from "@/lib/featureFlags";
@@ -91,16 +93,22 @@ const FlaggedRoute = ({
 const App = () => (
   <QueryClientProvider client={queryClient}>
     <AuthProvider>
+      <CatalogProvider>
       <CartProvider>
         <TooltipProvider>
           <Toaster />
           <Sonner />
           <BrowserRouter>
             <Routes>
-              <Route path="/" element={<FlaggedRoute flag="homepage" element={<Index />} />} />
+              <Route path="/" element={<FlaggedRoute flag="homepage" element={<IndexProductLanding />} />} />
+              <Route path="/landing-v2" element={<Navigate to="/" replace />} />
+              <Route
+                path="/landing-v1"
+                element={<FlaggedRoute flag="landingV1" element={<IndexTraditional />} />}
+              />
               <Route
                 path="/home"
-                element={<FlaggedRoute flag="alternateLanding" element={<IndexTraditional />} />}
+                element={<FlaggedRoute flag="alternateLanding" element={<Index />} />}
               />
               <Route path="/explore" element={<FlaggedRoute flag="explore" element={<Explore />} />} />
               <Route
@@ -263,6 +271,7 @@ const App = () => (
           {import.meta.env.DEV && <FeatureFlagAdmin />}
         </TooltipProvider>
       </CartProvider>
+      </CatalogProvider>
     </AuthProvider>
   </QueryClientProvider>
 );

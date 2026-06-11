@@ -297,7 +297,7 @@ export const DeliveryTab = () => {
                     <TableCell>
                       <div className="flex flex-wrap gap-1">
                         {(milestone.outcomeMapping ?? []).length === 0 ? (
-                          <span className="text-xs text-gray-400">—</span>
+                          <span className="text-xs text-gray-400">-</span>
                         ) : (
                           milestone.outcomeMapping.map((kriId: string) => (
                             <Badge

@@ -40,8 +40,8 @@ const MarketplacePagination = ({
   const pages = getPageNumbers(currentPage, totalPages);
 
   return (
-    <Pagination className="mt-12">
-      <PaginationContent className="gap-1.5">
+    <Pagination className="mt-12 overflow-x-auto">
+      <PaginationContent className="flex-wrap justify-center gap-1.5">
         <PaginationItem>
           <PaginationPrevious
             href="#"
@@ -49,7 +49,7 @@ const MarketplacePagination = ({
               e.preventDefault();
               if (currentPage > 1) onPageChange(currentPage - 1);
             }}
-            className={`h-9 rounded-lg border border-gray-200 bg-white px-3 text-sm text-gray-600 hover:bg-gray-50 ${
+            className={`h-9 rounded-lg border border-gray-200 bg-white px-2.5 text-sm text-gray-600 hover:bg-gray-50 sm:px-3 [&>span]:hidden sm:[&>span]:inline ${
               currentPage <= 1 ? "pointer-events-none opacity-40" : "cursor-pointer"
             }`}
           />
@@ -71,7 +71,7 @@ const MarketplacePagination = ({
                 }}
                 className={`h-9 min-w-9 rounded-lg border text-sm font-medium cursor-pointer ${
                   page === currentPage
-                    ? "border-dq-orange bg-white text-dq-navy shadow-none"
+                    ? "border-dq-navy bg-white font-semibold text-dq-navy shadow-none"
                     : "border-transparent bg-transparent text-gray-600 hover:bg-white hover:border-gray-200"
                 }`}
               >
@@ -88,7 +88,7 @@ const MarketplacePagination = ({
               e.preventDefault();
               if (currentPage < totalPages) onPageChange(currentPage + 1);
             }}
-            className={`h-9 rounded-lg border border-gray-200 bg-white px-3 text-sm text-gray-600 hover:bg-gray-50 ${
+            className={`h-9 rounded-lg border border-gray-200 bg-white px-2.5 text-sm text-gray-600 hover:bg-gray-50 sm:px-3 [&>span]:hidden sm:[&>span]:inline ${
               currentPage >= totalPages ? "pointer-events-none opacity-40" : "cursor-pointer"
             }`}
           />

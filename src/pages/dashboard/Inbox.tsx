@@ -27,7 +27,7 @@ const MOCK_THREADS: Thread[] = [
     lastMessageAt: "Today · 10:12",
     messages: [
       { id: "m1", from: "Rayyan Basha", body: "Sharing the draft architecture pack for review.", at: "09:40" },
-      { id: "m2", from: "Mohammed Al-Rashid", body: "Thanks — can we align on the risk items before Thursday?", at: "10:12" },
+      { id: "m2", from: "Mohammed Al-Rashid", body: "Thanks, can we align on the risk items before Thursday?", at: "10:12" },
     ],
   },
   {

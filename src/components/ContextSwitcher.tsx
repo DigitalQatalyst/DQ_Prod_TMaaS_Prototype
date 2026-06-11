@@ -146,7 +146,7 @@ const ContextSwitcher = ({
             <span className="hidden min-w-0 truncate text-sm text-navy-950/60 sm:inline">
               Viewing as:{" "}
               <span className="font-semibold text-navy-950">{user.name}</span>
-              <span className="text-navy-950/50"> — {user.roleTitle}</span>
+              <span className="text-navy-950/50">, {user.roleTitle}</span>
             </span>
             <ChevronDown size={16} className="shrink-0 text-navy-950/40" />
           </button>

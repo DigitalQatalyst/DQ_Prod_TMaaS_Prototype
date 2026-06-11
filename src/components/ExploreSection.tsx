@@ -52,7 +52,7 @@ const ExploreSection = () => {
             <span className="text-gradient-brand">marketplaces</span>
           </h2>
           <p className="mt-5 text-base text-muted-foreground md:text-lg">
-            Whether you're diagnosing problems, browsing services, or seeking ongoing support—we've got you covered.
+            Whether you're diagnosing problems, browsing services, or seeking ongoing support-we've got you covered.
           </p>
         </motion.div>
 

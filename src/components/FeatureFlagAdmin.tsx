@@ -39,7 +39,7 @@ export function FeatureFlagAdmin() {
 
   const groupedFlags = {
     'MVP Pages': ['homepage', 'marketplace', 'serviceDetail', 'contactUs'],
-    'Additional Pages': ['explore', 'alternateLanding', 'legal'],
+    'Additional Pages': ['explore', 'alternateLanding', 'landingV1', 'legal'],
     Features: [
       'cart',
       'chatAssistant',

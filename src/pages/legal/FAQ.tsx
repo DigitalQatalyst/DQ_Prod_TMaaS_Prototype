@@ -10,7 +10,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import Navbar from "@/components/Navbar";
+import LandingNavbar from "@/components/site/landing/LandingNavbar";
 import Footer from "@/components/Footer";
 
 const FAQ = () => {
@@ -128,7 +128,7 @@ const FAQ = () => {
 
   return (
     <div className="min-h-screen bg-background">
-      <Navbar />
+      <LandingNavbar />
 
       <main className="pt-20">
         {/* Header */}

@@ -9,9 +9,11 @@ export interface FeatureFlags {
   // Additional pages
   explore: boolean;
   alternateLanding: boolean;
+  landingV1: boolean;
   legal: boolean;
 
   // Features
+  supabaseCatalog: boolean;
   cart: boolean;
   chatAssistant: boolean;
   auth: boolean;
@@ -28,6 +30,7 @@ const PAGE_FLAGS: (keyof FeatureFlags)[] = [
   'contactUs',
   'explore',
   'alternateLanding',
+  'landingV1',
   'legal',
 ];
 
@@ -38,7 +41,7 @@ const ROUTE_PRIORITY: { flag: keyof FeatureFlags; path: string }[] = [
   { flag: 'contactUs', path: '/contact' },
 ];
 
-// MVP defaults — only the four launch features enabled
+// MVP defaults, only the four launch features enabled
 const DEFAULT_FEATURE_FLAGS: FeatureFlags = {
   homepage: true,
   marketplace: true,
@@ -47,8 +50,10 @@ const DEFAULT_FEATURE_FLAGS: FeatureFlags = {
 
   explore: false,
   alternateLanding: true,
+  landingV1: true,
   legal: false,
 
+  supabaseCatalog: true,
   cart: false,
   chatAssistant: false,
   auth: false,

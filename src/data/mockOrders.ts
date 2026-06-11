@@ -554,7 +554,7 @@ export const mockOrders: ServiceOrder[] = [
   {
     id: "SO-003",
     serviceOrderNumber: "DEWA-SO-003",
-    serviceName: "Mobile App Experience (High-Impact) - Design",
+    serviceName: "Mobile Apps (High-Impact) - Design",
     serviceCode: "EXP-MOB-DES",
     serviceType: "Design",
     clientOrganisation: "Dubai Electricity & Water Authority",
@@ -625,7 +625,7 @@ export const mockOrders: ServiceOrder[] = [
   {
     id: "SO-004",
     serviceOrderNumber: "DEWA-SO-004",
-    serviceName: "Phygital Customer Presence (High-Impact) - Design",
+    serviceName: "Physical Channels (High-Impact) - Design",
     serviceCode: "EXP-PHY-DES",
     serviceType: "Design",
     clientOrganisation: "Dubai Electricity & Water Authority",

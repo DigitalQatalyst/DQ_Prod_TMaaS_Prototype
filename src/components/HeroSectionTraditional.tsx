@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { ArrowRight, Sparkles } from "lucide-react";
 import MeshSection from "./site/MeshSection";
+import { PLATFORM_NAME } from "@/lib/brandLinks";
 import { featureFlags } from "@/lib/featureFlags";
 
 const HeroSectionTraditional = () => {
@@ -14,7 +15,7 @@ const HeroSectionTraditional = () => {
         {/* Eyebrow */}
         <p className="inline-flex items-center gap-1.5 rounded-full border border-orange-200 bg-orange-50 px-3 py-1 text-sm font-medium text-orange-700">
           <Sparkles size={13} className="text-orange-500" strokeWidth={2} />
-          Transformation-as-a-Service
+          {PLATFORM_NAME}
         </p>
 
         {/* Heading */}
@@ -28,7 +29,7 @@ const HeroSectionTraditional = () => {
         {/* Subheading */}
         <p className="mt-5 text-balance text-base leading-relaxed text-navy-600 sm:text-lg md:text-[1.125rem]">
           Access certified specialists, proven frameworks, and end-to-end
-          delivery support — all in one marketplace built for digital
+          delivery support, all in one marketplace built for digital
           transformation.
         </p>
 

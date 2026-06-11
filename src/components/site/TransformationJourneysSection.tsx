@@ -25,7 +25,7 @@ const TransformationJourneysSection = () => {
       <div className="mx-auto max-w-[1200px]">
         <div className="mb-10 flex flex-col justify-between gap-6 md:flex-row md:items-end">
           <div className="max-w-2xl">
-            <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-dq-orange">
+            <p className="dq-eyebrow">
               Bundles
             </p>
             <h2 className="mt-4 text-4xl font-semibold tracking-tight text-dq-navy md:text-5xl">

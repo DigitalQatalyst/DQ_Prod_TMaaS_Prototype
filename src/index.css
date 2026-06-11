@@ -150,6 +150,11 @@
     @apply border-border;
   }
 
+  html,
+  body {
+    overflow-x: clip;
+  }
+
   body {
     @apply bg-background text-foreground font-sans antialiased;
     font-feature-settings: "kern" 1, "liga" 1, "calt" 1;
@@ -223,8 +228,33 @@
   .glow-orange { box-shadow: var(--glow-orange-md); }
   .glow-navy { box-shadow: var(--glow-navy-md); }
 
+  .dq-eyebrow {
+    @apply font-mono text-[11px] uppercase tracking-[0.2em] text-dq-orange;
+  }
+
+  .dq-eyebrow-on-dark {
+    @apply font-mono text-[11px] uppercase tracking-[0.2em] text-dq-orange;
+  }
+
+  .dq-icon-well {
+    @apply flex items-center justify-center rounded-xl bg-navy-50 text-dq-navy;
+  }
+
+  .dq-micro-label {
+    @apply font-mono text-[10px] uppercase tracking-[0.18em] text-dq-orange;
+  }
+
   .text-balance {
     text-wrap: balance;
+  }
+
+  .scrollbar-none {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .scrollbar-none::-webkit-scrollbar {
+    display: none;
   }
 }
 

@@ -411,7 +411,7 @@ const ServiceRequestDialog = ({ open, onOpenChange, service }: ServiceRequestDia
                       </p>
                       <p className="mt-1 text-xs text-muted-foreground">
                         "DQ's strategic guidance helped us accelerate our digital transformation by 6 months." 
-                        <span className="font-medium"> — CTO, Fortune 500 Energy Company</span>
+                        <span className="font-medium">, CTO, Fortune 500 Energy Company</span>
                       </p>
                     </div>
                   </div>

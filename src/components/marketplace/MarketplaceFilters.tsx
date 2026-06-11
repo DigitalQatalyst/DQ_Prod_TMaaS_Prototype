@@ -1,6 +1,7 @@
 import { useState, type ReactNode } from "react";
 import { Button } from "@/components/ui/button";
 import {
+  marketplaceCoreCapabilities,
   marketplaceServiceTypes,
   marketplaceEconomySectors,
 } from "@/data/marketplaceNavigation";
@@ -67,16 +68,17 @@ function CheckboxGroup({
   return (
     <div className="space-y-4">
       {options.map((opt) => (
-        <div key={opt.id} className="flex items-start gap-3">
+        <div key={opt.id} className="flex min-w-0 items-start gap-3">
           <Checkbox
             id={`filter-${opt.id}`}
             checked={selectedValues.includes(opt.id)}
             onCheckedChange={() => onChange(opt.id)}
-            className="mt-0.5 border-gray-300 data-[state=checked]:border-navy-500 data-[state=checked]:bg-navy-500"
+            className="mt-0.5 shrink-0 border-gray-300 data-[state=checked]:border-navy-500 data-[state=checked]:bg-navy-500"
           />
           <Label
             htmlFor={`filter-${opt.id}`}
-            className="cursor-pointer text-sm font-normal leading-snug text-gray-600"
+            title={opt.label}
+            className="min-w-0 flex-1 cursor-pointer truncate text-sm font-normal leading-snug text-gray-600"
           >
             {opt.label}
           </Label>
@@ -114,7 +116,7 @@ const MarketplaceFilters = ({
           disabled={!showClearAll}
           className={`text-xs font-medium transition ${
             showClearAll
-              ? "text-dq-orange hover:text-[#E04020]"
+              ? "text-dq-navy hover:text-dq-navy/80"
               : "cursor-default text-gray-300"
           }`}
         >
@@ -126,12 +128,10 @@ const MarketplaceFilters = ({
       <div className="space-y-6">
         <FilterSection label="Category">
           <CheckboxGroup
-            options={[
-              { id: "experience", label: "Digital Experience" },
-              { id: "operations", label: "Digital Work System" },
-              { id: "security", label: "SecDevOps" },
-              { id: "ai", label: "Digital Intelligence & Analytics" },
-            ]}
+            options={marketplaceCoreCapabilities.map(({ id, label }) => ({
+              id,
+              label,
+            }))}
             selectedValues={selectedCategories}
             onChange={onCategoryChange}
           />
@@ -148,6 +148,14 @@ const MarketplaceFilters = ({
           />
         </FilterSection>
 
+        <FilterSection label="Service Type">
+          <CheckboxGroup
+            options={marketplaceServiceTypes}
+            selectedValues={selectedServiceTypes}
+            onChange={onServiceTypeChange}
+          />
+        </FilterSection>
+
         <FilterSection label="Economy 4.0 Sector">
           <CheckboxGroup
             options={visibleSectors}
@@ -158,7 +166,7 @@ const MarketplaceFilters = ({
             <button
               type="button"
               onClick={() => setSectorsExpanded((prev) => !prev)}
-              className="mt-4 flex w-full items-center justify-between text-xs font-medium text-gray-500 hover:text-dq-navy"
+              className="mt-4 flex w-full items-center justify-between text-xs font-medium text-gray-500 hover:text-dq-orange"
             >
               {sectorsExpanded ? "Show less" : "Show more"}
               <ChevronDown
@@ -172,14 +180,6 @@ const MarketplaceFilters = ({
               Updates service titles for your sector.
             </p>
           )}
-        </FilterSection>
-
-        <FilterSection label="Service Type" defaultOpen={false}>
-          <CheckboxGroup
-            options={marketplaceServiceTypes}
-            selectedValues={selectedServiceTypes}
-            onChange={onServiceTypeChange}
-          />
         </FilterSection>
       </div>
 
