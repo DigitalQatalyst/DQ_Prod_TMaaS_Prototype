@@ -4,7 +4,7 @@ import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import TMaaSLogo from "@/components/TMaaSLogo";
 import ExploreDigitalQatalystCta from "@/components/ExploreDigitalQatalystCta";
-import { btnPrimary, btnSecondary, navActive } from "@/lib/brandAccent";
+import { btnPrimary, btnSecondary } from "@/lib/brandAccent";
 import { featureFlags } from "@/lib/featureFlags";
 import { cn } from "@/lib/utils";
 
@@ -15,29 +15,21 @@ const NAV_LINKS = [
 const LandingNavbar = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
   const location = useLocation();
-  const isOnMarketplace =
-    location.pathname.startsWith("/marketplace") ||
-    location.pathname.startsWith("/service");
   const isOnContact = location.pathname.startsWith("/contact");
 
   const visibleLinks = NAV_LINKS.filter(
     (link) => !link.flag || featureFlags.isEnabled(link.flag)
   );
 
-  const navLinkClass = (active = false) =>
-    cn(
-      "text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-dq-orange focus-visible:ring-offset-2 rounded-sm",
-      active ? navActive : `text-gray-600 hover:text-dq-navy`
-    );
+  const navLinkClass = cn(
+    "text-sm font-medium text-gray-600 transition-colors hover:text-dq-navy focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-dq-orange focus-visible:ring-offset-2 rounded-sm"
+  );
 
-  const renderLink = (link: (typeof NAV_LINKS)[number]) => {
-    const active = link.href === "/marketplace" && isOnMarketplace;
-    return (
-      <Link key={link.label} to={link.href} className={navLinkClass(active)}>
-        {link.label}
-      </Link>
-    );
-  };
+  const renderLink = (link: (typeof NAV_LINKS)[number]) => (
+    <Link key={link.label} to={link.href} className={navLinkClass}>
+      {link.label}
+    </Link>
+  );
 
   return (
     <>

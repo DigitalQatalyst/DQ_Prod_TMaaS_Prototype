@@ -27,12 +27,13 @@ Marketing pages (`/`, `/marketplace`, `/service/:id`) share the **DQ corp web de
 - Footer link columns: **Explore** (Marketplace, Contact Us, internal, flag-gated), **DQ** (Explore DigitalQatalyst, About, external corp web), **Follow Us** (LinkedIn, X, YouTube)
 - Footer bottom bar always shows Privacy and Terms linking to `https://www.digitalqatalyst.com/privacy` and `/terms` (external, new tab)
 - Corp web links use `https://www.digitalqatalyst.com` base URL; TMaaS product link label is **Marketplace** (not "Design & Deploy Services")
-- Platform display name is **Transformation as a Service** (`PLATFORM_NAME` in `src/lib/brandLinks.ts`); acronym is `TMaaS` (`PLATFORM_ACRONYM`); formal line is `TMaaS (Transformation as a Service)` (`PLATFORM_BRAND_LINE`). Do not use "Transformation Management as a Service", "Transformation Marketplace", or "Technology Management as a Service" as the platform name.
+- Platform display name is **Marketplace** (`PLATFORM_NAME`, `PLATFORM_ACRONYM`, and `PLATFORM_BRAND_LINE` in `src/lib/brandLinks.ts`). Do not revert to "Transformation as a Service", "TMaaS", "Transformation Management as a Service", or "Technology Management as a Service" as the platform name.
 
 ## Differentiate for product pages (TMaaS landing)
 - Use **product landing IA** per `specs/landing-page-prototype-shell.md` v2, default at `/` (`IndexProductLanding`, `src/components/site/landing/v2/`)
 - v1 corp-mirror alternate landing at `/landing-v1` (`IndexTraditional`); `/landing-v2` redirects to `/`
-- Hero: TMaaS logo, product badge row, marketplace mockup; orange primary CTA → `/marketplace`
+- Hero: TMaaS logo, marketplace mockup; orange primary CTA → `/marketplace` (no product badge row)
+- Landing navbar: Marketplace nav link stays grey on all routes (no orange active state)
 - One dark mesh narrative section (`Why TMaaS`); do not alternate dark sections like corp homepage
 - Do **not** add corp-only sections: Team, FAQ, Framework, full ecosystem product grid
 - Do **not** copy corp homepage stats, problem copy, or section order verbatim

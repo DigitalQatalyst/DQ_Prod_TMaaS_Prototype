@@ -2,8 +2,7 @@ import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
 import MeshSection from "@/components/site/MeshSection";
 import HeroDashboardMockup from "@/components/site/landing/HeroDashboardMockup";
-import ProductBadgeRow from "@/components/site/landing/v2/ProductBadgeRow";
-import { PLATFORM_ACRONYM } from "@/lib/brandLinks";
+import { PLATFORM_NAME } from "@/lib/brandLinks";
 import { btnPrimary, btnSecondary } from "@/lib/brandAccent";
 import { cn } from "@/lib/utils";
 
@@ -16,11 +15,7 @@ const LandingHeroSection = () => {
     >
       <div className="relative mx-auto grid max-w-7xl items-center gap-12 lg:grid-cols-2 lg:gap-16">
         <div>
-          <div className="animate-fade-in-up">
-            <ProductBadgeRow code={PLATFORM_ACRONYM} status="Live" />
-          </div>
-
-          <p className="animate-fade-in-up animation-delay-100 mt-5 dq-eyebrow">
+          <p className="animate-fade-in-up dq-eyebrow">
             Digital transformation marketplace
           </p>
 
@@ -30,7 +25,7 @@ const LandingHeroSection = () => {
           </h1>
 
           <p className="animate-fade-in-up animation-delay-200 mt-6 max-w-2xl text-lg leading-relaxed text-gray-600">
-            {PLATFORM_ACRONYM} is a low-cost marketplace for digital
+            {PLATFORM_NAME} is a low-cost platform for digital
             transformation services. Browse AI-powered, ready-to-launch
             blueprints with transparent pricing and start delivering impact in
             weeks.
