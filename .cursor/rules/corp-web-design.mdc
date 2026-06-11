@@ -104,7 +104,7 @@ Match `ServiceDetailWhyItMattersTab.tsx` + `whyItMattersContent.ts`:
 
 ## Responsive layout (marketing pages)
 - Prevent page-level horizontal scroll: `overflow-x: clip` on `html`/`body`; clip decorative overflow on hero mockup wrappers (`overflow-hidden` + inner padding, 3D transform only from `lg:`)
-- Hero mockup (`HeroDashboardMockup`): use `filter: drop-shadow()` on the transformed card, not `box-shadow` + `shadow-2xl`; no full-bleed `rounded-full` glow behind the card (clips unevenly when right-aligned)
+- Hero mockup (`HeroDashboardMockup`): no box-shadow, drop-shadow, or glow behind the card — border only on the white frame
 - Sticky navbar clearance: hero sections use `pt-20 md:pt-24` (or `pt-16 md:pt-24` on landing hero), not `pt-14`
 - Hero H1 scale: stepped down on narrow viewports; two-column heroes use `lg:text-7xl xl:text-8xl`, not `lg:text-8xl` in a split grid
 - Horizontal tab/category nav: `flex-nowrap overflow-x-auto scrollbar-none`; tab triggers `shrink-0`
