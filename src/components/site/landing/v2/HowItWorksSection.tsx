@@ -44,7 +44,10 @@ const HowItWorksSection = () => {
 
         <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3 lg:gap-6">
           {JOURNEY_STEPS.map(({ num, suite, title, body, linkLabel, href }) => (
-            <div key={num} className="relative flex flex-col">
+            <div
+              key={num}
+              className="relative flex flex-col sm:last:col-span-2 lg:last:col-span-1"
+            >
               <div className="mb-3 font-mono text-7xl font-bold leading-none text-dq-navy/[0.15]">
                 {num}
               </div>

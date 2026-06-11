@@ -144,11 +144,19 @@ const ServiceDetail = () => {
             Our team can help you compare options and find the best service for
             your goals.
           </p>
-          <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
-            <ServiceDetailPrimaryButton onClick={handleBookConsultation}>
+          <div className="mt-8 flex flex-col items-stretch justify-center gap-3 sm:flex-row sm:items-center">
+            <ServiceDetailPrimaryButton
+              onClick={handleBookConsultation}
+              fullWidth
+              className="sm:w-auto"
+            >
               Talk to our team
             </ServiceDetailPrimaryButton>
-            <ServiceDetailSecondaryButtonDark onClick={() => navigate("/marketplace")}>
+            <ServiceDetailSecondaryButtonDark
+              onClick={() => navigate("/marketplace")}
+              fullWidth
+              className="sm:w-auto"
+            >
               Browse more services
             </ServiceDetailSecondaryButtonDark>
           </div>

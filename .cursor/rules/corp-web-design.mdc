@@ -102,6 +102,17 @@ Match `ServiceDetailWhyItMattersTab.tsx` + `whyItMattersContent.ts`:
 - Centre transition: orange `ArrowRight` circle on `lg+`; mobile divider row with arrow between panels
 - Copy from `getWhyItMattersContent(service)`, contextualise by `collection`, `serviceType`, and solution name; exact override for `online web presence|advisory`
 
+## Responsive layout (marketing pages)
+- Prevent page-level horizontal scroll: `overflow-x: clip` on `html`/`body`; clip decorative overflow on hero mockup wrappers (`overflow-hidden`, 3D transform only from `lg:`)
+- Sticky navbar clearance: hero sections use `pt-20 md:pt-24` (or `pt-16 md:pt-24` on landing hero), not `pt-14`
+- Hero H1 scale: stepped down on narrow viewports; two-column heroes use `lg:text-7xl xl:text-8xl`, not `lg:text-8xl` in a split grid
+- Horizontal tab/category nav: `flex-nowrap overflow-x-auto scrollbar-none`; tab triggers `shrink-0`
+- Marketplace catalog toolbar: stack on mobile (`flex-col` → `sm:flex-row`); sort + view controls `w-full sm:w-auto`
+- Best-sellers carousel: header row + nav buttons in one flex row inside `<Carousel>` (buttons need carousel context)
+- Service detail delivery stepper: vertical timeline below `lg`; horizontal grid uses `grid-cols-2 xl:grid-cols-4` for four steps
+- CTAs on mobile: primary actions `w-full sm:w-auto` in stacked CTA rows (landing, contact, service detail bottom band)
+- Contact form: submit button full width on mobile; consent label must not use `whitespace-nowrap`
+
 ## Do Not
 - Reintroduce morphing navbar or Inter as default body font
 - Reskin corp homepage section-for-section with product copy swaps

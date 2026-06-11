@@ -37,17 +37,17 @@ const LandingCtaSection = () => {
           launch.
         </p>
 
-        <div className="mt-8 flex flex-wrap justify-center gap-3">
+        <div className="mt-8 flex flex-col items-stretch gap-3 sm:flex-row sm:flex-wrap sm:items-center sm:justify-center">
           <Link
             to="/marketplace"
-            className={cn(btnPrimaryOnDark, "px-7")}
+            className={cn(btnPrimaryOnDark, "w-full px-7 sm:w-auto")}
           >
             Browse services
             <ArrowRight size={15} />
           </Link>
           <Link
             to="/contact"
-            className={cn(btnSecondaryOnDark, "px-7")}
+            className={cn(btnSecondaryOnDark, "w-full px-7 sm:w-auto")}
           >
             Talk to our team
           </Link>

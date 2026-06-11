@@ -19,7 +19,7 @@ const MarketplaceCategoryNav = ({
   return (
     <div className="sticky top-16 z-30 bg-background">
       <nav
-        className="flex gap-0 overflow-x-auto border-b border-gray-200/80"
+        className="-mx-5 flex flex-nowrap gap-0 overflow-x-auto border-b border-gray-200/80 px-5 scrollbar-none md:-mx-8 md:px-8 lg:-mx-10 lg:px-10"
         aria-label="Service categories"
       >
         {tabs.map((tab) => {

@@ -56,9 +56,9 @@ const MarketplacePreviewSection = () => {
                 <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-navy-50 text-dq-navy transition-colors group-hover:bg-dq-orange group-hover:text-white">
                   <Icon size={22} />
                 </div>
-                <div className="flex-1">
+                <div className="min-w-0 flex-1">
                   <h3 className="mb-1 text-lg font-semibold text-dq-navy">{label}</h3>
-                  <p className="text-[15px] text-gray-600">
+                  <p className="text-[15px] leading-relaxed text-gray-600">
                     {CATEGORY_DESCRIPTIONS[id]}
                   </p>
                 </div>

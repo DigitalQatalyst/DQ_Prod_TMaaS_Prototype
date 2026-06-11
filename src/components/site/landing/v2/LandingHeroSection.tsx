@@ -14,12 +14,12 @@ const LandingHeroSection = () => {
       className="px-5 pb-16 pt-16 md:px-8 md:pb-20 md:pt-24 lg:px-10 lg:pb-24 lg:pt-28"
     >
       <div className="relative mx-auto grid max-w-7xl items-center gap-12 lg:grid-cols-2 lg:gap-16">
-        <div>
+        <div className="min-w-0">
           <p className="animate-fade-in-up dq-eyebrow">
             Transformation Management as a Service
           </p>
 
-          <h1 className="animate-fade-in-up animation-delay-100 mt-5 text-balance text-[2.75rem] font-semibold leading-[1.0] tracking-[-0.03em] text-dq-navy sm:text-6xl md:text-7xl lg:text-8xl">
+          <h1 className="animate-fade-in-up animation-delay-100 mt-5 text-balance text-[2.75rem] font-semibold leading-[1.0] tracking-[-0.03em] text-dq-navy sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl">
             <span className="block">Digital transformation</span>
             <span className="block text-dq-orange">accelerated</span>
           </h1>
@@ -51,7 +51,7 @@ const LandingHeroSection = () => {
           </div>
         </div>
 
-        <div className="animate-fade-in-up animation-delay-200 lg:justify-self-end">
+        <div className="animate-fade-in-up animation-delay-200 min-w-0 overflow-hidden lg:justify-self-end">
           <HeroDashboardMockup />
         </div>
       </div>

@@ -314,7 +314,7 @@ const Marketplace = () => {
           <p className="dq-eyebrow">
             Digital transformation marketplace
           </p>
-          <h1 className="mt-4 text-balance text-[2.75rem] font-semibold leading-[1.05] tracking-[-0.02em] text-dq-navy sm:text-5xl md:text-6xl lg:text-7xl">
+          <h1 className="mt-4 text-balance text-[2.25rem] font-semibold leading-[1.05] tracking-[-0.02em] text-dq-navy min-[400px]:text-[2.75rem] sm:text-5xl md:text-6xl lg:text-7xl">
             Browse transformation services
           </h1>
           <p className="mt-4 max-w-xl text-base leading-relaxed text-gray-600 md:text-lg">
@@ -394,19 +394,19 @@ const Marketplace = () => {
               </aside>
 
               <main className="min-w-0 flex-1">
-                <div className="mb-6 flex flex-wrap items-center justify-between gap-4">
-                  <div className="flex items-center gap-3">
+                <div className="mb-6 flex flex-col gap-4 sm:flex-row sm:flex-wrap sm:items-center sm:justify-between">
+                  <div className="flex min-w-0 items-center gap-3">
                     <Button
                       type="button"
                       variant="outline"
                       size="sm"
                       onClick={() => setSidebarOpen(!sidebarOpen)}
-                      className="h-9 gap-1.5 rounded-lg border-gray-200 lg:hidden"
+                      className="h-9 shrink-0 gap-1.5 rounded-lg border-gray-200 lg:hidden"
                     >
                       <Filter size={14} />
                       Filters
                     </Button>
-                    <p className="text-sm text-gray-600">
+                    <p className="min-w-0 text-sm text-gray-600">
                       {catalogServices.length === 0 ? (
                         <>0 services</>
                       ) : (
@@ -425,9 +425,9 @@ const Marketplace = () => {
                     </p>
                   </div>
 
-                  <div className="flex items-center gap-3">
+                  <div className="flex w-full items-center justify-between gap-3 sm:w-auto sm:justify-end">
                     <Select value={sortBy} onValueChange={setSortBy}>
-                      <SelectTrigger className="h-9 w-[10.5rem] rounded-lg border-gray-200 bg-white text-sm shadow-none">
+                      <SelectTrigger className="h-9 w-full min-w-0 max-w-[10.5rem] rounded-lg border-gray-200 bg-white text-sm shadow-none sm:w-[10.5rem]">
                         <SelectValue placeholder="Sort by" />
                       </SelectTrigger>
                       <SelectContent>

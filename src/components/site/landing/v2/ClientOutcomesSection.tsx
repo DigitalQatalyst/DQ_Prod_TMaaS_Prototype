@@ -46,7 +46,7 @@ const ClientOutcomesSection = () => {
           {OUTCOMES.map(({ tag, metric, metricLabel, title, body }) => (
             <div
               key={tag}
-              className="group flex flex-col rounded-2xl border border-gray-200 bg-gray-50 p-8 transition-all duration-300 hover:border-dq-orange hover:shadow-xl"
+              className="group flex flex-col rounded-2xl border border-gray-200 bg-gray-50 p-6 transition-all duration-300 hover:border-dq-orange hover:shadow-xl sm:p-8"
             >
               <p className="mb-6 font-mono text-[10px] uppercase tracking-[0.18em] text-gray-400">
                 {tag}

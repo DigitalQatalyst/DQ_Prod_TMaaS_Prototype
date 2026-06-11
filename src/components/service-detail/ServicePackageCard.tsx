@@ -35,7 +35,7 @@ export function ServicePackageCard({
 
   return (
     <article className={cn(servicePackageCardClass, className)}>
-      <p className="whitespace-nowrap text-2xl font-semibold tracking-tight text-dq-navy">
+      <p className="text-2xl font-semibold tracking-tight text-dq-navy">
         {formatPackagePrice(service.price)}
       </p>
       <p className="mt-1 text-sm text-gray-500">{service.duration}</p>

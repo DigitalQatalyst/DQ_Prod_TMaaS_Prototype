@@ -9,18 +9,10 @@ const FEATURED_SERVICES = [
 const HeroDashboardMockup = () => {
   return (
     <div className="relative mx-auto w-full max-w-[520px] lg:max-w-none">
-      <div
-        className="relative"
-        style={{
-          perspective: "1200px",
-          perspectiveOrigin: "50% 50%",
-        }}
-      >
+      <div className="relative lg:[perspective:1200px] lg:[perspective-origin:50%_50%]">
         <div
-          className="relative rounded-2xl border border-gray-200 bg-white p-3 shadow-2xl"
+          className="relative rounded-2xl border border-gray-200 bg-white p-3 shadow-2xl lg:[transform:rotateY(-8deg)_rotateX(4deg)] lg:[transform-style:preserve-3d]"
           style={{
-            transform: "rotateY(-8deg) rotateX(4deg)",
-            transformStyle: "preserve-3d",
             boxShadow:
               "0 25px 60px -12px rgba(3, 15, 53, 0.25), 0 0 0 1px rgba(3, 15, 53, 0.04)",
           }}
@@ -118,7 +110,7 @@ const HeroDashboardMockup = () => {
 
       <div
         aria-hidden
-        className="absolute -inset-8 -z-10 rounded-full opacity-60 blur-3xl"
+        className="absolute -inset-4 -z-10 rounded-full opacity-60 blur-3xl sm:-inset-8"
         style={{
           background:
             "radial-gradient(ellipse at center, oklch(0.65 0.208 29 / 0.15), transparent 70%)",

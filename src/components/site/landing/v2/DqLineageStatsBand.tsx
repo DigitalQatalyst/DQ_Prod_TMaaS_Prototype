@@ -18,7 +18,7 @@ const DqLineageStatsBand = () => {
               <div className="mb-2 text-5xl font-semibold tracking-tight text-dq-navy md:text-6xl">
                 {value}
               </div>
-              <p className="max-w-[200px] text-sm leading-snug text-gray-600">
+              <p className="max-w-xs text-sm leading-snug text-gray-600">
                 {label}
               </p>
             </div>

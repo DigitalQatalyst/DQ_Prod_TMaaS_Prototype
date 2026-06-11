@@ -136,7 +136,7 @@ const Contact = () => {
     <div className="min-h-screen bg-background">
       <LandingNavbar />
       {status === "success" ? (
-        <section className="bg-white px-5 py-12 md:px-8 md:py-16">
+        <section className="bg-white px-5 pb-12 pt-20 md:px-8 md:pb-16 md:pt-24">
           <div className="mx-auto max-w-[1120px]">
             <div className="mx-auto max-w-2xl rounded-2xl border border-gray-200 bg-white p-8 text-center shadow-sm md:p-12">
               <div className="mx-auto mb-6 flex h-16 w-16 items-center justify-center rounded-full bg-[#ECFDF3]">
@@ -176,7 +176,7 @@ const Contact = () => {
                 <form
                   onSubmit={handleSubmit}
                   noValidate
-                  className="rounded-xl bg-gray-50 p-6 md:p-8 lg:p-10"
+                  className="rounded-xl bg-gray-50 p-5 sm:p-6 md:p-8 lg:p-10"
                 >
                   <div className="space-y-7">
                     <div className="grid gap-4 sm:grid-cols-2">
@@ -333,7 +333,7 @@ const Contact = () => {
                         >
                           I agree to the processing of my data for this consultation request, in
                           accordance with the {privacyLink}
-                          <span aria-hidden="true" className="whitespace-nowrap">
+                          <span aria-hidden="true">
                             . <span className="text-red-600">*</span>
                           </span>
                         </span>
@@ -345,14 +345,14 @@ const Contact = () => {
                       )}
                     </div>
 
-                    <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-                      <p className="text-[12px] text-gray-500">
+                    <div className="flex flex-col-reverse gap-3 sm:flex-row sm:items-center sm:justify-between">
+                      <p className="text-center text-[12px] text-gray-500 sm:text-left">
                         <span className="text-red-600">*</span> Required fields.
                       </p>
                       <button
                         type="submit"
                         disabled={status === "loading"}
-                        className="inline-flex items-center justify-center gap-2 rounded-full bg-dq-orange px-6 py-3 text-[15px] font-semibold text-white outline-none transition-colors hover:bg-[#E04020] glow-orange focus-visible:ring-2 focus-visible:ring-dq-orange focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-80"
+                        className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-dq-orange px-6 py-3 text-[15px] font-semibold text-white outline-none transition-colors hover:bg-[#E04020] glow-orange focus-visible:ring-2 focus-visible:ring-dq-orange focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-80 sm:w-auto"
                       >
                         {status === "loading" ? (
                           <>
@@ -371,7 +371,7 @@ const Contact = () => {
                 </form>
               </div>
 
-              <aside className="px-1 lg:col-span-4">
+              <aside className="border-t border-gray-100 px-1 pt-8 lg:col-span-4 lg:border-t-0 lg:pt-0">
                 <p className="mb-4 text-[10px] font-semibold uppercase tracking-[0.16em] text-gray-400">
                   What happens next
                 </p>
@@ -463,7 +463,7 @@ const Contact = () => {
 function ContactHero() {
   return (
     <section
-      className="relative isolate overflow-hidden px-5 pb-14 pt-14 md:px-8 md:pb-16 md:pt-16 lg:px-10"
+      className="relative isolate overflow-hidden px-5 pb-14 pt-20 md:px-8 md:pb-16 md:pt-24 lg:px-10"
       style={{ background: "var(--mesh-hero-light)" }}
     >
       <div className="mx-auto max-w-[1120px]">

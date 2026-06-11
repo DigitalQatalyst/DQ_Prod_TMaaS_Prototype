@@ -30,34 +30,35 @@ const MarketplaceBestSellers = ({
       : `Top ${marketplaceCategoryLabels[activeTab] ?? "picks"}`;
 
   return (
-    <section aria-labelledby="marketplace-bestsellers-heading" className="relative pt-10">
-      <div className="pr-24">
-        <p className="dq-eyebrow">
-          Popular
-        </p>
-        <h2
-          id="marketplace-bestsellers-heading"
-          className="mt-4 text-4xl font-semibold tracking-tight text-dq-navy md:text-5xl"
-        >
-          {heading}
-        </h2>
-        <p className="mt-4 text-base text-gray-600">
-          Top services with fixed scope and transparent pricing.
-        </p>
-      </div>
-
+    <section aria-labelledby="marketplace-bestsellers-heading" className="pt-10">
       <Carousel
         opts={{
           align: "start",
           loop: false,
         }}
-        className="mt-10 w-full"
+        className="w-full"
       >
-        <div className="absolute -top-14 right-0 flex items-center gap-2">
-          <CarouselPrevious className="static h-8 w-8 translate-y-0" />
-          <CarouselNext className="static h-8 w-8 translate-y-0" />
+        <div className="flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
+          <div className="min-w-0">
+            <p className="dq-eyebrow">Popular</p>
+            <h2
+              id="marketplace-bestsellers-heading"
+              className="mt-4 text-4xl font-semibold tracking-tight text-dq-navy md:text-5xl"
+            >
+              {heading}
+            </h2>
+            <p className="mt-4 text-base text-gray-600">
+              Top services with fixed scope and transparent pricing.
+            </p>
+          </div>
+
+          <div className="flex shrink-0 items-center gap-2 self-end sm:self-auto">
+            <CarouselPrevious className="static h-8 w-8 translate-y-0" />
+            <CarouselNext className="static h-8 w-8 translate-y-0" />
+          </div>
         </div>
-        <CarouselContent className="-ml-4 pt-2 pb-2">
+
+        <CarouselContent className="-ml-4 mt-8 pt-2 pb-2">
           {bestSellers.map((service) => (
             <CarouselItem
               key={service.id}

@@ -32,7 +32,7 @@ export function ServiceDetailHero({
 
   return (
     <div>
-      <div className="grid items-start gap-10 lg:grid-cols-[minmax(0,1fr)_340px] lg:gap-12">
+      <div className="grid items-start gap-10 lg:grid-cols-[minmax(0,1fr)_300px] lg:gap-10 xl:grid-cols-[minmax(0,1fr)_340px] xl:gap-12">
         <div className="min-w-0">
           <h1 className="animate-fade-in-up text-balance text-3xl font-semibold leading-[1.1] tracking-[-0.02em] text-dq-navy sm:text-4xl md:text-5xl">
             {title}
@@ -64,7 +64,7 @@ export function ServiceDetailHero({
             {service.description}
           </p>
 
-          <div className="animate-fade-in-up animation-delay-300 mt-5 flex flex-wrap items-center gap-x-5 gap-y-2 text-sm text-gray-600">
+          <div className="animate-fade-in-up animation-delay-300 mt-5 flex flex-col gap-2 text-sm text-gray-600 sm:flex-row sm:flex-wrap sm:items-center sm:gap-x-5 sm:gap-y-2">
             <span className="inline-flex items-center gap-1.5">
               <Clock size={14} className="shrink-0 text-gray-400" strokeWidth={1.75} aria-hidden />
               <span>

@@ -44,7 +44,7 @@ function stepperGridClass(stepCount: number): string {
   if (stepCount <= 1) return "grid-cols-1 max-w-sm";
   if (stepCount === 2) return "grid-cols-2";
   if (stepCount === 3) return "grid-cols-3";
-  return "grid-cols-4";
+  return "grid-cols-2 xl:grid-cols-4";
 }
 
 function StepCircle({
@@ -80,7 +80,7 @@ function StepCircle({
 function HorizontalDeliveryStepper({ steps }: { steps: DeliveryStep[] }) {
   return (
     <>
-      <div className="relative hidden md:block">
+      <div className="relative hidden lg:block">
         <div
           className="absolute left-[3%] right-[3%] top-[28px] h-px bg-gray-200"
           aria-hidden
@@ -96,7 +96,7 @@ function HorizontalDeliveryStepper({ steps }: { steps: DeliveryStep[] }) {
         </div>
       </div>
 
-      <div className="space-y-5 md:hidden">
+      <div className="space-y-5 lg:hidden">
         {steps.map((item, index) => (
           <div key={item.step} className="flex gap-4">
             <div className="flex shrink-0 flex-col items-center">
