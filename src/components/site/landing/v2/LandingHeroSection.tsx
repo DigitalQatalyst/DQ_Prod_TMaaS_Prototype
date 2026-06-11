@@ -51,7 +51,7 @@ const LandingHeroSection = () => {
           </div>
         </div>
 
-        <div className="animate-fade-in-up animation-delay-200 min-w-0 overflow-hidden lg:justify-self-end">
+        <div className="animate-fade-in-up animation-delay-200 min-w-0 overflow-hidden px-2 py-4 sm:px-4 sm:py-6 lg:justify-self-end">
           <HeroDashboardMockup />
         </div>
       </div>
