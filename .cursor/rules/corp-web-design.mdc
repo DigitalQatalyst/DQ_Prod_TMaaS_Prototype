@@ -89,7 +89,7 @@ All in-page section `h2` titles (About, Key Outcomes, Related Services, tab pane
 
 ## Service detail, What You Receive tab
 Match `ServiceDetailWhatYouReceiveTab.tsx` (same top-row pattern as Overview / About):
-- Single **Deliverables** section: intro paragraphs, inline duration/scope line, then numbered breakdown list (no separate Summary vs Breakdown headings)
+- Single **Deliverables** section: inline duration/scope line only (no `deliverablesSummary` intro paragraphs), then numbered breakdown as a plain divided list (not a bordered card/table)
 - **Modules & Applications**: deploy accordion below; `sectionHeading` (no eyebrow)
 
 ## Service detail, Key Outcomes (Overview tab)

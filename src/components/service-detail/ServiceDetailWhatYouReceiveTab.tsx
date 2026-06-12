@@ -14,7 +14,6 @@ import {
   getDeliverableBreakdown,
   getDeliverablesAtAGlance,
   getDeliverablesForService,
-  getDeliverablesSummaryContent,
   getMarketplaceCardTitle,
   getPdpTypeBadgeLabel,
   type ServiceProduct,
@@ -41,10 +40,6 @@ function DeliverablesSection({
   deliverables: readonly string[];
   pdpContent?: PdpContent;
 }) {
-  const { paragraphs: fallbackParagraphs } = getDeliverablesSummaryContent(service);
-  const paragraphs = pdpContent?.deliverablesSummary?.length
-    ? pdpContent.deliverablesSummary
-    : fallbackParagraphs;
   const atAGlance = getDeliverablesAtAGlance(service, deliverableCount);
   const items = pdpContent?.deliverables?.length
     ? pdpContent.deliverables
@@ -55,13 +50,6 @@ function DeliverablesSection({
       <h2 id="deliverables-heading" className={sectionHeading}>
         Deliverables
       </h2>
-      <div className="mt-4 space-y-4">
-        {paragraphs.map((paragraph) => (
-          <p key={paragraph} className="max-w-3xl text-base leading-[1.7] text-[#667085]">
-            {paragraph}
-          </p>
-        ))}
-      </div>
       <p className="mt-4 text-sm font-medium text-dq-navy">
         <span className="text-gray-500">Duration:</span> {atAGlance.duration}
         <span className="mx-2 text-gray-300" aria-hidden>
@@ -70,33 +58,26 @@ function DeliverablesSection({
         <span className="text-gray-500">Scope:</span> {atAGlance.scopeLabel}
       </p>
 
-      <ol className="mt-6 list-none overflow-hidden rounded-2xl border border-gray-200 bg-white">
+      <ul className="mt-6 list-none divide-y divide-gray-200 border-t border-gray-200">
         {items.map((item, index) => (
-          <li
-            key={item.title}
-            className="border-t border-gray-100 first:border-t-0"
-          >
-            <div className="flex flex-col gap-3 px-5 py-4 sm:flex-row sm:items-center sm:gap-5 sm:px-6">
+          <li key={item.title} className="py-5 first:pt-5">
+            <div className="flex flex-col gap-2 sm:flex-row sm:items-start sm:gap-6">
               <span
                 aria-hidden
-                className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-orange-50 text-sm font-semibold text-dq-orange"
+                className="shrink-0 font-mono text-sm font-semibold text-dq-orange"
               >
                 {String(index + 1).padStart(2, "0")}
               </span>
-              <span className="shrink-0 text-sm font-medium text-dq-navy sm:w-36 lg:w-44">
-                {item.title}
-              </span>
-              <div
-                className="hidden h-10 w-px shrink-0 bg-gray-200 sm:block"
-                aria-hidden
-              />
-              <p className="min-w-0 flex-1 text-sm leading-[1.65] text-[#667085]">
-                {item.description}
-              </p>
+              <div className="min-w-0 flex-1">
+                <p className="text-sm font-medium text-dq-navy">{item.title}</p>
+                <p className="mt-1 text-sm leading-[1.65] text-[#667085]">
+                  {item.description}
+                </p>
+              </div>
             </div>
           </li>
         ))}
-      </ol>
+      </ul>
     </section>
   );
 }
