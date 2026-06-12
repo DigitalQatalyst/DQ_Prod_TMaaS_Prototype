@@ -12,6 +12,9 @@ dist
 dist-ssr
 *.local
 
+# Local Supabase CLI state, seeds, and migrations (managed outside this repo)
+/supabase/
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
