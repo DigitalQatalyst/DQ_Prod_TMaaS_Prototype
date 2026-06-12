@@ -2,6 +2,7 @@
  * Generates Option A PDP copy for Supabase seeding.
  * Rules: no em dashes, no "In one week" hero openers (see /workspace/pdp-copy-style.md).
  */
+import { buildWhyItMattersContent } from "../../src/lib/whyItMattersCopy";
 import type { ServiceProduct } from "../../src/types/serviceProduct";
 
 export type DeliverableItem = { title: string; description: string };
@@ -20,14 +21,6 @@ export type DeliveryProcessContent = {
   totalDuration: string;
   steps: DeliveryStep[];
 };
-export type WhyItMattersStateItem = { title: string; description: string };
-export type WhyItMattersContent = {
-  hook: string;
-  problemParagraph: string;
-  before: { eyebrow: string; title: string; items: WhyItMattersStateItem[] };
-  after: { eyebrow: string; title: string; items: WhyItMattersStateItem[] };
-};
-
 export type GeneratedPdpContent = {
   heroSummary: string;
   overviewParagraphs: string[];
@@ -39,7 +32,7 @@ export type GeneratedPdpContent = {
   faqs: FaqItem[];
   deliveryProcess: DeliveryProcessContent;
   packageHighlights: string[];
-  whyItMatters: WhyItMattersContent;
+  whyItMatters: ReturnType<typeof buildWhyItMattersContent>;
 };
 
 const GENERIC_POSITIONING = /\(High-Impact\) Positioning Strategy/i;
@@ -404,54 +397,6 @@ function buildDeliveryProcess(service: ServiceProduct): DeliveryProcessContent {
   };
 }
 
-function buildWhyItMatters(service: ServiceProduct): WhyItMattersContent {
-  const solution = solutionLabel(service.standardName);
-  const domain = COLLECTION_DOMAIN[service.collection] ?? "this capability area";
-
-  return {
-    hook: `Strong ${solution.toLowerCase()} outcomes depend on clear priorities, aligned teams, and governed delivery.`,
-    problemParagraph: stripEmDash(
-      `Many organisations struggle with fragmented ${domain}, unclear priorities, and slow progress from insight to action. This service gives you structured TMaaS delivery to move forward with confidence.`
-    ),
-    before: {
-      eyebrow: "Today",
-      title: "Common challenges",
-      items: [
-        {
-          title: "Unclear priorities",
-          description: "Teams lack a shared view of what to fix first and why.",
-        },
-        {
-          title: "Siloed decisions",
-          description: "Stakeholders work from different assumptions and incomplete evidence.",
-        },
-        {
-          title: "Slow progress",
-          description: "Good ideas stall before they become funded, governed delivery.",
-        },
-      ],
-    },
-    after: {
-      eyebrow: "With TMaaS",
-      title: "Expected outcomes",
-      items: [
-        {
-          title: "Shared priorities",
-          description: "Leadership aligns on the highest-value next steps for this scope.",
-        },
-        {
-          title: "Actionable outputs",
-          description: "Your teams receive practical artefacts they can execute against.",
-        },
-        {
-          title: "Governed delivery",
-          description: "Progress continues with clear milestones, reporting, and accountability.",
-        },
-      ],
-    },
-  };
-}
-
 export function generatePdpContent(service: ServiceProduct): GeneratedPdpContent {
   const faqBlock = buildFaqs(service);
   const positioning = stripEmDash(service.positioning);
@@ -471,7 +416,7 @@ export function generatePdpContent(service: ServiceProduct): GeneratedPdpContent
     deliveryProcess: buildDeliveryProcess(service),
     packageHighlights:
       PACKAGE_HIGHLIGHTS[service.serviceType] ?? PACKAGE_HIGHLIGHTS.advisory,
-    whyItMatters: buildWhyItMatters(service),
+    whyItMatters: buildWhyItMattersContent(service),
   };
 }
 
