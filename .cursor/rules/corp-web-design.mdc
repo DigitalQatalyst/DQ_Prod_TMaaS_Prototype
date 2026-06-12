@@ -98,6 +98,14 @@ Match the approved four-column mockup in `ServiceDetailKeyOutcomesSection.tsx`:
 - Orange step numbers `01`–`04` (`text-4xl font-bold text-dq-orange`), then `font-medium` navy outcome title (lighter than `sectionHeading`), then `#667085` description
 - Keep titles/descriptions from `getKeyOutcomes()`, layout only, do not swap in mockup copy
 
+## Service detail, How It Works delivery lifecycles
+Keep `delivery_process` aligned across `getDeliverySteps()` (`ServiceDetailDeliverySection.tsx`), `scripts/lib/pdpCopyGenerator.ts`, and Supabase `product_content` seed/migrations:
+- **Assess (advisory)**: Scope (Days 1-2) → Assess (Days 3-4) → Advise (Day 5); total `1 Week`
+- **Design / AI Design**: Discover → Design → Handover (seed); code fallback may use 4 steps
+- **Deploy / AI Deploy**: Prepare → Build → Go live
+- **Managed**: Onboard (Week 1) → Operate (Ongoing) → Improve (Ongoing); total `Ongoing`
+- Do not ship single-step Assess or Managed lifecycles in PDP seed data; PDP content overrides code fallbacks when Supabase catalog is enabled
+
 ## Service detail, How It Works delivery stepper
 Match `HowWeWorkSection` on `DQ_CORPWEB_PROTOTYPE` About Us (`About.tsx`):
 - Desktop: horizontal `bg-gray-200` connector at `top-[28px]`; dynamic `grid-cols-{n}`; `h-14 w-14` mono circles (`01` padding); active step `bg-dq-orange border-dq-orange shadow-lg`, inactive `bg-white border-gray-200`; left-aligned title + `#667085`/`gray-600` body
