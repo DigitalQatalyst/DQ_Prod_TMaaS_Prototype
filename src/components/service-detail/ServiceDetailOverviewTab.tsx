@@ -1,15 +1,17 @@
+import type { PdpContent } from "@/types/catalog";
 import type { ServiceProduct } from "./serviceDetailHelpers";
 import { ServiceDetailAboutSection } from "./ServiceDetailAboutSection";
 import { ServiceDetailKeyOutcomesSection } from "./ServiceDetailKeyOutcomesSection";
 
 interface ServiceDetailOverviewTabProps {
   service: ServiceProduct;
+  pdpContent?: PdpContent;
 }
 
-export function ServiceDetailOverviewTab({ service }: ServiceDetailOverviewTabProps) {
+export function ServiceDetailOverviewTab({ service, pdpContent }: ServiceDetailOverviewTabProps) {
   return (
     <div className="space-y-12">
-      <ServiceDetailAboutSection service={service} />
+      <ServiceDetailAboutSection service={service} pdpContent={pdpContent} />
       <ServiceDetailKeyOutcomesSection service={service} />
     </div>
   );

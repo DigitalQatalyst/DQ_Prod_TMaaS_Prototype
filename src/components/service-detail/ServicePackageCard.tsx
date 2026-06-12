@@ -10,7 +10,7 @@ import {
   type ServiceProduct,
 } from "./serviceDetailHelpers";
 
-const PACKAGE_FEATURES = [
+const DEFAULT_PACKAGE_FEATURES = [
   "SLA-backed delivery",
   "Expert team included",
   "Clear delivery milestones",
@@ -21,6 +21,7 @@ interface ServicePackageCardProps {
   requiresQuoteCTA: boolean;
   onRequestQuote: () => void;
   onStartOnboarding: (name: string) => void;
+  packageHighlights?: string[];
   className?: string;
 }
 
@@ -29,8 +30,11 @@ export function ServicePackageCard({
   requiresQuoteCTA,
   onRequestQuote,
   onStartOnboarding,
+  packageHighlights,
   className,
 }: ServicePackageCardProps) {
+  const features =
+    packageHighlights?.length ? packageHighlights : DEFAULT_PACKAGE_FEATURES;
   const { addItem, hasItem, openCart } = useCart();
 
   return (
@@ -41,7 +45,7 @@ export function ServicePackageCard({
       <p className="mt-1 text-sm text-gray-500">{service.duration}</p>
 
       <ul className="mt-6 space-y-3 border-t border-gray-100 pt-6">
-        {PACKAGE_FEATURES.map((item) => (
+        {features.map((item) => (
           <li key={item} className="flex items-start gap-2.5 text-sm text-gray-700">
             <CheckCircle2
               size={16}

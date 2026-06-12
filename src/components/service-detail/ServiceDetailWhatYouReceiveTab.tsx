@@ -14,6 +14,7 @@ import {
 } from "@/components/ui/accordion";
 import { useCatalogData } from "@/contexts/CatalogContext";
 import { marketplaceServiceTypeLabels } from "@/data/marketplaceNavigation";
+import type { PdpContent } from "@/types/catalog";
 import {
   getAudienceCardAccent,
   getDeliverableBreakdown,
@@ -30,16 +31,22 @@ interface ServiceDetailWhatYouReceiveTabProps {
   service: ServiceProduct;
   deployModules: { name: string; features: string[] }[];
   isDeployService: boolean;
+  pdpContent?: PdpContent;
 }
 
 function DeliverablesIntroSection({
   service,
   deliverableCount,
+  pdpContent,
 }: {
   service: ServiceProduct;
   deliverableCount: number;
+  pdpContent?: PdpContent;
 }) {
-  const { paragraphs } = getDeliverablesSummaryContent(service);
+  const { paragraphs: fallbackParagraphs } = getDeliverablesSummaryContent(service);
+  const paragraphs = pdpContent?.deliverablesSummary?.length
+    ? pdpContent.deliverablesSummary
+    : fallbackParagraphs;
   const atAGlance = getDeliverablesAtAGlance(service, deliverableCount);
   const accent = getAudienceCardAccent(service.collection);
 
@@ -106,11 +113,15 @@ function DeliverablesIntroSection({
 function DeliverablesBreakdown({
   service,
   deliverables,
+  pdpContent,
 }: {
   service: ServiceProduct;
   deliverables: readonly string[];
+  pdpContent?: PdpContent;
 }) {
-  const items = getDeliverableBreakdown(service, deliverables);
+  const items = pdpContent?.deliverables?.length
+    ? pdpContent.deliverables
+    : getDeliverableBreakdown(service, deliverables);
 
   return (
     <section aria-labelledby="deliverables-breakdown-heading">
@@ -266,9 +277,12 @@ export function ServiceDetailWhatYouReceiveTab({
   service,
   deployModules,
   isDeployService,
+  pdpContent,
 }: ServiceDetailWhatYouReceiveTabProps) {
   const isBundle = service.serviceType === "bundle";
-  const deliverables = getDeliverablesForService(service);
+  const deliverables = pdpContent?.deliverables?.length
+    ? pdpContent.deliverables.map((d) => d.title)
+    : getDeliverablesForService(service);
 
   if (isBundle) {
     return (
@@ -283,8 +297,13 @@ export function ServiceDetailWhatYouReceiveTab({
       <DeliverablesIntroSection
         service={service}
         deliverableCount={deliverables.length}
+        pdpContent={pdpContent}
       />
-      <DeliverablesBreakdown service={service} deliverables={deliverables} />
+      <DeliverablesBreakdown
+        service={service}
+        deliverables={deliverables}
+        pdpContent={pdpContent}
+      />
       {isDeployService && (
         <ModulesApplicationsSection deployModules={deployModules} />
       )}

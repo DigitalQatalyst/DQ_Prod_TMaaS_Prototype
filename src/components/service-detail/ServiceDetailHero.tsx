@@ -14,6 +14,7 @@ interface ServiceDetailHeroProps {
   requiresQuoteCTA: boolean;
   onRequestQuote: () => void;
   onStartOnboarding: (name: string) => void;
+  packageHighlights?: string[];
 }
 
 export function ServiceDetailHero({
@@ -21,6 +22,7 @@ export function ServiceDetailHero({
   requiresQuoteCTA,
   onRequestQuote,
   onStartOnboarding,
+  packageHighlights,
 }: ServiceDetailHeroProps) {
   const title = getDisplayTitle(service.standardName);
   const categoryLabel = getCategoryShortLabel(service.collection);
@@ -88,6 +90,7 @@ export function ServiceDetailHero({
             requiresQuoteCTA={requiresQuoteCTA}
             onRequestQuote={onRequestQuote}
             onStartOnboarding={onStartOnboarding}
+            packageHighlights={packageHighlights}
           />
         </div>
       </div>

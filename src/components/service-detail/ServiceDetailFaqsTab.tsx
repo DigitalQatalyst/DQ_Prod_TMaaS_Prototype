@@ -8,6 +8,7 @@ import {
 import { sectionHeading, serviceDetailTabLead } from "@/lib/brandAccent";
 import { buildContactPath } from "@/lib/contactFormPrefill";
 import { featureFlags } from "@/lib/featureFlags";
+import type { PdpContent } from "@/types/catalog";
 import { getServiceFaqsContent } from "./serviceFaqsContent";
 import type { ServiceProduct } from "./serviceDetailHelpers";
 
@@ -16,10 +17,13 @@ const itemCardClass =
 
 interface ServiceDetailFaqsTabProps {
   service: ServiceProduct;
+  pdpContent?: PdpContent;
 }
 
-export function ServiceDetailFaqsTab({ service }: ServiceDetailFaqsTabProps) {
-  const { intro, faqs } = getServiceFaqsContent(service);
+export function ServiceDetailFaqsTab({ service, pdpContent }: ServiceDetailFaqsTabProps) {
+  const fallback = getServiceFaqsContent(service);
+  const intro = pdpContent?.faqIntro ?? fallback.intro;
+  const faqs = pdpContent?.faqs?.length ? pdpContent.faqs : fallback.faqs;
 
   return (
     <div className="space-y-12">

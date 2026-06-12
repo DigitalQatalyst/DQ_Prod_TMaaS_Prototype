@@ -9,6 +9,7 @@ import {
   type LucideIcon,
 } from "lucide-react";
 import { sectionHeading, serviceDetailTabLead } from "@/lib/brandAccent";
+import type { PdpContent } from "@/types/catalog";
 import type { ServiceProduct } from "./serviceDetailHelpers";
 import { getWhyItMattersContent } from "./whyItMattersContent";
 
@@ -17,6 +18,7 @@ const AFTER_ICONS = [Target, Sparkles, TrendingUp] as const;
 
 interface ServiceDetailWhyItMattersTabProps {
   service: ServiceProduct;
+  pdpContent?: PdpContent;
 }
 
 function StateItem({
@@ -160,8 +162,9 @@ function BeforeAfterComparison({
 
 export function ServiceDetailWhyItMattersTab({
   service,
+  pdpContent,
 }: ServiceDetailWhyItMattersTabProps) {
-  const content = getWhyItMattersContent(service);
+  const content = pdpContent?.whyItMatters ?? getWhyItMattersContent(service);
 
   return (
     <div className="space-y-12">
