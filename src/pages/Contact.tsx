@@ -13,12 +13,10 @@ import {
   getServiceEnquiryFormDefaults,
   parseServiceContactParams,
 } from "@/lib/contactFormPrefill";
-import ContactTurnstile from "@/components/ContactTurnstile";
 import { PLATFORM_CONTACT_LINE } from "@/lib/brandLinks";
 import {
   getLaunchAdvisoryFormDefaults,
   isLaunchAdvisoryEnquiry,
-  LAUNCH_ADVISORY_HEADLINE,
 } from "@/lib/launchOffering";
 import { featureFlags } from "@/lib/featureFlags";
 
@@ -71,7 +69,6 @@ const Contact = () => {
   const [errors, setErrors] = useState<Partial<Record<keyof FormState, string>>>({});
   const [submitError, setSubmitError] = useState<string | null>(null);
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
-  const [turnstileToken, setTurnstileToken] = useState<string | null>(null);
   const [honeypot, setHoneypot] = useState("");
 
   const setField = <K extends keyof FormState>(key: K, value: FormState[K]) => {
@@ -103,10 +100,6 @@ const Contact = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!turnstileToken) {
-      setSubmitError("Complete the security check before submitting.");
-      return;
-    }
     if (!validate()) return;
     setStatus("loading");
     setSubmitError(null);
@@ -116,7 +109,6 @@ const Contact = () => {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           ...form,
-          turnstileToken,
           website: honeypot,
         }),
       });
@@ -142,7 +134,6 @@ const Contact = () => {
     setErrors({});
     setSubmitError(null);
     setStatus("idle");
-    setTurnstileToken(null);
     setHoneypot("");
   };
 
@@ -292,20 +283,7 @@ const Contact = () => {
                       />
                     </Field>
 
-                    {launchAdvisoryEnquiry ? (
-                      <div className="rounded-xl border border-dq-orange/20 bg-orange-50/40 px-4 py-4">
-                        <p className="text-[10px] font-semibold uppercase tracking-[0.16em] text-dq-orange">
-                          Launch offer
-                        </p>
-                        <p className="mt-1 text-base font-semibold text-dq-navy">
-                          {LAUNCH_ADVISORY_HEADLINE}
-                        </p>
-                        <p className="mt-1 text-sm text-gray-600">
-                          Tell us a little about your organisation and we&apos;ll schedule your free
-                          advisory session.
-                        </p>
-                      </div>
-                    ) : serviceEnquiry ? (
+                    {serviceEnquiry ? (
                       <div className="rounded-xl border border-gray-200 bg-white px-4 py-4">
                         <p className="text-[10px] font-semibold uppercase tracking-[0.16em] text-gray-400">
                           Service enquiry
@@ -421,16 +399,6 @@ const Contact = () => {
                       />
                     </div>
 
-                    <ContactTurnstile
-                      onVerify={setTurnstileToken}
-                      onExpire={() => setTurnstileToken(null)}
-                      onError={() =>
-                        setSubmitError(
-                          "Security verification failed to load. Please refresh the page or email us at info@digitalqatalyst.com."
-                        )
-                      }
-                    />
-
                     {submitError && (
                       <p className="rounded-lg border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700" role="alert">
                         {submitError}
@@ -443,7 +411,7 @@ const Contact = () => {
                       </p>
                       <button
                         type="submit"
-                        disabled={status === "loading" || !turnstileToken}
+                        disabled={status === "loading"}
                         className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-dq-orange px-6 py-3 text-[15px] font-semibold text-white outline-none transition-colors hover:bg-[#E04020] glow-orange focus-visible:ring-2 focus-visible:ring-dq-orange focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-80 sm:w-auto"
                       >
                         {status === "loading" ? (
