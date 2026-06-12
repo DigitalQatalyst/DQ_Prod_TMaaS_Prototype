@@ -30,7 +30,7 @@ const VARIANT_LABELS: Record<
   ai_design: { variant_name: "AI Design", badge: "AI Design" },
   deploy: { variant_name: "Deploy", badge: "Deploy" },
   ai_deploy: { variant_name: "AI Deploy", badge: "AI Deploy" },
-  manage: { variant_name: "Managed", badge: "Managed" },
+  manage: { variant_name: "Managed Service", badge: "Managed Service" },
 };
 
 const PRODUCT_DOMAIN: Record<number, string> = {

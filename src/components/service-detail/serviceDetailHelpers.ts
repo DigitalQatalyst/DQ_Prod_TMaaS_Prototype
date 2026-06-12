@@ -237,9 +237,16 @@ const DEFAULT_BENEFITS = [
   "Establish governance foundations",
 ] as const;
 
-export function getDisplayTitle(standardName: string): string {
-  return standardName.replace(" (High-Impact)", "");
-}
+export {
+  getDisplayTitle,
+  getMarketplaceCardTitle,
+  getPdpDisplayTitle,
+  getPdpTypeBadgeLabel,
+  getDisplayProductName,
+  BUNDLE_PDP_SUBTITLE,
+  BUNDLE_PDP_SUBTITLE_SHORT,
+  BUNDLE_INCLUSION_LINE,
+} from "@/lib/marketplaceDisplayLabels";
 
 export function formatPackagePrice(price: string): string {
   return formatPriceDisplay(price.replace(/^Starting From\s+/i, "From "));
@@ -689,7 +696,7 @@ const DELIVERABLES_SUMMARY_BY_TYPE: Record<string, [string, string]> = {
     "Each report and artefact supports continuous improvement, risk visibility, and lifecycle governance.",
   ],
   bundle: [
-    "This bundle coordinates deliverables across multiple service stages, from discovery through design, delivery, and operations.",
+    "Includes design, AI design, deploy, AI deploy, and managed service stages, scoped during assessment.",
     "Each included service contributes scoped outputs under unified TMaaS governance and reporting.",
   ],
 };

@@ -105,7 +105,7 @@ export function getPrerenderPayloadForPath(path: string): PrerenderPagePayload |
   if (path === MARKETPLACE_SEO.path) {
     const items = initialServices.map((service) => ({
       id: service.id,
-      name: getDisplayTitle(service.standardName),
+      name: getDisplayTitle(service.standardName, service.serviceType),
       url: absoluteUrl(`/service/${service.id}`),
     }));
 
@@ -145,7 +145,7 @@ export function getPrerenderPayloadForPath(path: string): PrerenderPagePayload |
   const service = getServiceById(serviceId);
   if (!service) return null;
 
-  const displayTitle = getDisplayTitle(service.standardName);
+  const displayTitle = getDisplayTitle(service.standardName, service.serviceType);
   const servicePath = `/service/${serviceId}`;
   const description = buildServiceMetaDescription(displayTitle, service);
   const faqSchema = buildServiceFaqStructuredData(

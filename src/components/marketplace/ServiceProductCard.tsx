@@ -8,6 +8,7 @@ import { marketplaceCategoryLabels } from "@/data/marketplaceNavigation";
 import { featureFlags } from "@/lib/featureFlags";
 import { formatPriceDisplay } from "@/lib/serviceProductUtils";
 import { getServiceIcon } from "@/components/marketplace/marketplaceServiceIcons";
+import { getMarketplaceCardTitle } from "@/lib/marketplaceDisplayLabels";
 import type { ServiceProduct } from "@/types/serviceProduct";
 
 export type { ServiceProduct };
@@ -45,9 +46,9 @@ const ServiceProductCard = ({
   featured = false,
   variant = "grid",
 }: ServiceProductCardProps) => {
-  const rawTitle = displayName ?? service.standardName;
-  const isHighImpact = rawTitle.includes("(High-Impact)");
-  const title = rawTitle.replace(" (High-Impact)", "");
+  const title =
+    displayName ?? getMarketplaceCardTitle(service.standardName, service.serviceType);
+  const isHighImpact = service.standardName.includes("(High-Impact)");
   const categoryLabel = marketplaceCategoryLabels[service.collection] ?? service.collection;
   const detailUrl = `/service/${service.id}`;
   const canViewDetail = featureFlags.isEnabled("serviceDetail");

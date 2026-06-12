@@ -1,4 +1,7 @@
-import { marketplaceServiceTypeLabels } from "@/data/marketplaceNavigation";
+import {
+  getDisplayProductName,
+  MARKETPLACE_SERVICE_TYPE_LABELS,
+} from "@/lib/marketplaceDisplayLabels";
 import { buildWhyItMattersContent } from "@/lib/whyItMattersCopy";
 import type { ServiceProduct } from "@/types/serviceProduct";
 
@@ -87,9 +90,9 @@ const HERO_TYPE_LEAD: Record<string, string> = {
 };
 
 export function buildVariantHeroDescription(service: ServiceProduct): string {
-  const solution = getServiceSolutionName(service.standardName);
+  const solution = getDisplayProductName(service.standardName);
   const stageLabel =
-    marketplaceServiceTypeLabels[service.serviceType] ?? service.badge;
+    MARKETPLACE_SERVICE_TYPE_LABELS[service.serviceType] ?? service.badge;
   const typeLead = HERO_TYPE_LEAD[service.serviceType] ?? HERO_TYPE_LEAD.advisory;
   const why = buildWhyItMattersContent(service);
   const scope = restateProblemParagraph(why.problemParagraph);

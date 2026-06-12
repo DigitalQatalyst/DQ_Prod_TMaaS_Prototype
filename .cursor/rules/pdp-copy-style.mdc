@@ -17,6 +17,13 @@ Reference: `/workspace/pdp-copy-style.md`
 5. Use **DigitalQatalyst team** (not "DQ advisor").
 6. British spelling where already used: organisation, prioritised.
 
+## Buyer-facing labels
+
+- Stage and product display names: `src/lib/marketplaceDisplayLabels.ts` (cards, PDP badges, bundle subtitles). DB `variant_name` slugs stay unchanged.
+- Assess: title/card uses **Assess**; PDP type badge uses **Assessment**. Managed customer-facing label is **Managed Service**.
+- Transformation Bundle: marketplace card suffix **End-to-end bundle**; PDP H1 suffix **End-to-end transformation**. Flexible set bundles (`Advisory Set`, etc.) use renamed product only (no suffix).
+- Bundle PDP subtitle and inclusion line: `BUNDLE_PDP_SUBTITLE`, `BUNDLE_INCLUSION_LINE` in the same module.
+
 ## Variant SEO copy (required)
 
 - Single source: `src/lib/variantSeoCopy.ts` (hero description, positioning) and `src/lib/serviceFaqsCopy.ts` (FAQs).

@@ -279,7 +279,7 @@ const Marketplace = () => {
         data={buildMarketplaceStructuredData(
           initialServices.map((service) => ({
             id: service.id,
-            name: getDisplayTitle(service.standardName),
+            name: getDisplayTitle(service.standardName, service.serviceType),
             url: absoluteUrl(`/service/${service.id}`),
           })),
         )}
