@@ -44,7 +44,7 @@ const HeroDashboardMockup = () => {
 
                 <div className="mb-4 grid grid-cols-3 gap-2">
                   {[
-                    { label: "Services", value: "50+" },
+                    { label: "Services", value: "100+" },
                     { label: "Categories", value: "12" },
                     { label: "Bundles", value: "8" },
                   ].map((stat) => (

@@ -32,7 +32,7 @@ const HowItWorksSection = () => {
   return (
     <section
       id="how-it-works"
-      className="bg-white px-5 py-24 md:px-8 lg:px-10"
+      className="bg-gray-50 px-5 py-24 md:px-8 lg:px-10"
     >
       <div className="mx-auto max-w-[1200px]">
         <p className="mb-4 dq-eyebrow">

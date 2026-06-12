@@ -24,8 +24,10 @@ Marketing pages (`/`, `/marketplace`, `/service/:id`) share the **DQ corp web de
 - CTAs: `rounded-full`; primary orange on product landing (`bg-dq-orange`); secondary glass (`bg-white/60 backdrop-blur-sm border`)
 - Hero backgrounds: `MeshSection` with `hero-grid` overlay and mesh CSS vars from `index.css`
 - Footer section labels: `font-mono text-[10px] uppercase tracking-[0.18em] text-gray-400`
-- Footer link columns: **Explore** (Marketplace, Contact Us, internal, flag-gated), **DQ** (Explore DigitalQatalyst, About, external corp web), **Follow Us** (LinkedIn, X, YouTube)
-- Footer bottom bar always shows Privacy and Terms linking to `https://www.digitalqatalyst.com/privacy` and `/terms` (external, new tab)
+- Footer link columns: **Explore** (Marketplace, Talk to our team, flag-gated), **Follow Us** (LinkedIn, X, YouTube, Explore DigitalQatalyst external link). No separate DQ column.
+- Footer bottom bar: Privacy and Terms link to in-app `/legal/privacy` and `/legal/terms` when `legal` flag is enabled; otherwise external corp web URLs
+- Footer and hero descriptions use `PLATFORM_NAME_EXPANDED` / expanded copy: **Transformation Management as a Service (TMaaS)** via `brandLinks.ts`
+- Service count copy is **100+** everywhere (not 50+ or 200+); typical start time is **<1 day** (not 4 wks)
 - Corp web links use `https://www.digitalqatalyst.com` base URL; TMaaS product link label is **Marketplace** (not "Design & Deploy Services")
 - Platform display name is **Marketplace** (`PLATFORM_NAME`, `PLATFORM_ACRONYM`, and `PLATFORM_BRAND_LINE` in `src/lib/brandLinks.ts`). Do not revert to "Transformation as a Service", "TMaaS", "Transformation Management as a Service", or "Technology Management as a Service" as the platform name.
 
@@ -44,7 +46,7 @@ Marketing pages (`/`, `/marketplace`, `/service/:id`) share the **DQ corp web de
 - Avoid internal jargon on the landing page: `industrialise`, `productised`, `governed fulfilment`, `operating platform`, `architecture-led`
 - Hero H1 should include **digital transformation**; subcopy mirrors USP in one or two short sentences (low-cost marketplace, AI-powered blueprints, transparent pricing, weeks not months)
 - Problem cards: three short pains (slow, expensive, hard to adapt); closing line ties to marketplace + blueprints
-- Outcome cards: cost, speed, scale with substantiated metrics only (`4 wks`, `50+`, `From $1k`)
+- Outcome cards: cost, speed, scale with substantiated metrics only (`<1 day`, `100+`, `From $1k`)
 - Journey steps: Discover (browse) → Evaluate (compare) → Engage (launch with team)
 - Primary CTA: **Browse services**; secondary: **Talk to our team**
 - Badge row: `TMaaS` + status chip (e.g. Live); page `<title>` and meta description use TMaaS + digital transformation marketplace keywords
@@ -114,6 +116,11 @@ Match `ServiceDetailWhyItMattersTab.tsx` + `whyItMattersContent.ts`:
 - Service detail delivery stepper: vertical timeline below `lg`; horizontal grid uses `grid-cols-2 xl:grid-cols-4` for four steps
 - CTAs on mobile: primary actions `w-full sm:w-auto` in stacked CTA rows (landing, contact, service detail bottom band)
 - Contact form: submit button full width on mobile; consent label must not use `whitespace-nowrap`
+
+## Contact form Turnstile
+- Production requires `VITE_TURNSTILE_SITE_KEY` and `TURNSTILE_SECRET_KEY` (Cloudflare Turnstile)
+- Local dev: `.env.example` documents always-pass test keys; `ContactTurnstile` and `contact-security.js` fall back to test keys when unset in dev
+- Do not block form submission in dev solely because Turnstile env vars are missing
 
 ## Contact integration tests
 - UI flow: `src/pages/Contact.integration.test.tsx` (validation, quote prefill, success/error, resubmit)

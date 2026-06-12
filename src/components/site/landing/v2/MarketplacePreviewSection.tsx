@@ -76,7 +76,7 @@ const MarketplacePreviewSection = () => {
             to="/marketplace"
             className="inline-flex items-center gap-2 text-sm font-semibold text-dq-navy transition-colors hover:text-dq-navy/70"
           >
-            View all 50+ services
+            View all 100+ services
             <ArrowRight size={16} />
           </Link>
         </div>

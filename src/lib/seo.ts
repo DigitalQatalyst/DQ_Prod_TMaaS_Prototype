@@ -37,7 +37,7 @@ export const HOME_SEO = {
 export const MARKETPLACE_SEO = {
   title: `Marketplace | Digital Transformation Services | ${SEO_BRAND}`,
   description:
-    "Explore 200+ digital transformation services with clear pricing and timelines. Filter by AI, experience, operations, or security to find the right blueprint.",
+    "Explore 100+ digital transformation services with clear pricing and timelines. Filter by AI, experience, operations, or security to find the right blueprint.",
   path: "/marketplace",
 } as const;
 

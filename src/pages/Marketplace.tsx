@@ -295,7 +295,7 @@ const Marketplace = () => {
             Browse transformation services
           </h1>
           <p className="mt-4 max-w-xl text-base leading-relaxed text-gray-600 md:text-lg">
-            Explore 200+ transformation services across AI, experience,
+            Explore 100+ transformation services across AI, experience,
             operations, and security.
           </p>
 

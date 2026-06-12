@@ -2,6 +2,8 @@ import { useEffect, useRef } from "react";
 
 const TURNSTILE_SCRIPT_ID = "cf-turnstile-script";
 const TURNSTILE_SCRIPT_SRC = "https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit";
+/** Cloudflare always-pass test key — safe for local dev only (see .env.example). */
+const TURNSTILE_DEV_SITE_KEY = "1x00000000000000000000AA";
 
 type TurnstileApi = {
   render: (
@@ -33,7 +35,9 @@ type ContactTurnstileProps = {
 export default function ContactTurnstile({ onVerify, onExpire, onError }: ContactTurnstileProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const widgetIdRef = useRef<string | null>(null);
-  const siteKey = import.meta.env.VITE_TURNSTILE_SITE_KEY as string | undefined;
+  const configuredSiteKey = import.meta.env.VITE_TURNSTILE_SITE_KEY as string | undefined;
+  const siteKey =
+    configuredSiteKey || (import.meta.env.DEV ? TURNSTILE_DEV_SITE_KEY : undefined);
 
   useEffect(() => {
     if (import.meta.env.MODE === "test") {

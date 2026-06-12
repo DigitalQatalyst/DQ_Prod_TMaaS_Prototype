@@ -25,11 +25,11 @@ const IndexProductLanding = () => {
       <LandingNavbar />
       <main>
         <LandingHeroSection />
-        <MarketplacePreviewSection />
         <TrustedBySection />
         <WhyTmaasSection />
         <HowItWorksSection />
         <ClientOutcomesSection />
+        <MarketplacePreviewSection />
         <DqLineageStatsBand />
         <LandingCtaSection />
       </main>

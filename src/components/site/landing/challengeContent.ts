@@ -30,4 +30,4 @@ export const CHALLENGE_CARDS: ChallengeCard[] = [
   },
 ];
 
-export const CHALLENGE_CLOSING = `${PLATFORM_NAME} fixes this — ${PLATFORM_HERO_SUBCOPY.replace(/^TMaaS is /, "")}`;
+export const CHALLENGE_CLOSING = `${PLATFORM_NAME} fixes this — ${PLATFORM_HERO_SUBCOPY.replace(/^Transformation Management as a Service \(TMaaS\) is /, "")}`;
