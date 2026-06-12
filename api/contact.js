@@ -1,4 +1,4 @@
-import { checkRateLimit, getClientIp } from './contact-security.js';
+import { checkRateLimit, getClientIp, verifyTurnstile } from './contact-security.js';
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const PHONE_RE = /^\+?[\d\s\-(). ]{7,20}$/;
@@ -171,6 +171,11 @@ async function handler(req, res) {
   const validationError = validateBody(req.body);
   if (validationError) {
     return res.status(400).json({ ok: false, error: validationError });
+  }
+
+  const turnstileResult = await verifyTurnstile(req.body?.turnstileToken, clientIp);
+  if (!turnstileResult.ok) {
+    return res.status(400).json({ ok: false, error: turnstileResult.error });
   }
 
   const { firstName, lastName, email, phone, organisation, role, interest, need, message, consent } = req.body;

@@ -8,6 +8,7 @@ const CONTACT_API_ENV_KEYS = [
   "MSGRAPH_CLIENT_SECRET",
   "MSGRAPH_SENDER_UPN",
   "MSGRAPH_RECIPIENT_EMAIL",
+  "TURNSTILE_SECRET_KEY",
 ] as const;
 
 function readJsonBody(req: Connect.IncomingMessage): Promise<unknown> {

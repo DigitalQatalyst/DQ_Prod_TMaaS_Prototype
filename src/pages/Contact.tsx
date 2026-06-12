@@ -14,6 +14,7 @@ import {
   parseServiceContactParams,
 } from "@/lib/contactFormPrefill";
 import { PLATFORM_CONTACT_LINE } from "@/lib/brandLinks";
+import ContactTurnstile from "@/components/ContactTurnstile";
 import {
   getLaunchAdvisoryFormDefaults,
   isLaunchAdvisoryEnquiry,
@@ -69,6 +70,7 @@ const Contact = () => {
   const [errors, setErrors] = useState<Partial<Record<keyof FormState, string>>>({});
   const [submitError, setSubmitError] = useState<string | null>(null);
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
+  const [turnstileToken, setTurnstileToken] = useState<string | null>(null);
   const [honeypot, setHoneypot] = useState("");
 
   const setField = <K extends keyof FormState>(key: K, value: FormState[K]) => {
@@ -100,6 +102,10 @@ const Contact = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (!turnstileToken) {
+      setSubmitError("Complete the security check before submitting.");
+      return;
+    }
     if (!validate()) return;
     setStatus("loading");
     setSubmitError(null);
@@ -109,6 +115,7 @@ const Contact = () => {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           ...form,
+          turnstileToken,
           website: honeypot,
         }),
       });
@@ -134,6 +141,7 @@ const Contact = () => {
     setErrors({});
     setSubmitError(null);
     setStatus("idle");
+    setTurnstileToken(null);
     setHoneypot("");
   };
 
@@ -399,6 +407,16 @@ const Contact = () => {
                       />
                     </div>
 
+                    <ContactTurnstile
+                      onVerify={setTurnstileToken}
+                      onExpire={() => setTurnstileToken(null)}
+                      onError={() =>
+                        setSubmitError(
+                          "Security verification failed to load. Please refresh the page or email us at info@digitalqatalyst.com."
+                        )
+                      }
+                    />
+
                     {submitError && (
                       <p className="rounded-lg border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700" role="alert">
                         {submitError}
@@ -411,7 +429,7 @@ const Contact = () => {
                       </p>
                       <button
                         type="submit"
-                        disabled={status === "loading"}
+                        disabled={status === "loading" || !turnstileToken}
                         className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-dq-orange px-6 py-3 text-[15px] font-semibold text-white outline-none transition-colors hover:bg-[#E04020] glow-orange focus-visible:ring-2 focus-visible:ring-dq-orange focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-80 sm:w-auto"
                       >
                         {status === "loading" ? (
