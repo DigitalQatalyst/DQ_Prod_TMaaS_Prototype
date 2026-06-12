@@ -48,7 +48,7 @@ function resolveSolutionKey(standardName: string): string {
 
 function aiDesignBlock(noun: string, context: string): TypeBlock {
   return {
-    problemParagraph: `Many organisations pursue AI for ${context} without validated use cases, unclear guardrails, or specifications ready for controlled deployment. This AI design engagement defines responsible workflows and deployment-ready specifications.`,
+    problemParagraph: `Many organisations apply AI to ${context} without validated use cases, unclear guardrails, or specifications ready for controlled deployment. This AI design engagement defines responsible workflows and deployment-ready specifications.`,
     gaps: [
       gap(
         "Unvalidated AI use cases",
@@ -150,7 +150,7 @@ function aiDeployBlock(noun: string, context: string): TypeBlock {
 
 function manageBlock(noun: string, context: string): TypeBlock {
   return {
-    problemParagraph: `Many organisations struggle to sustain ${context} after go-live, with reactive support, rising costs, and declining platform value. This managed service provides SLA-backed operations and continuous improvement.`,
+    problemParagraph: `Many organisations struggle to sustain performance across ${context} after go-live, with reactive support, rising costs, and declining platform value. This managed service provides SLA-backed operations and continuous improvement.`,
     gaps: [
       gap(
         "Reactive operations",
