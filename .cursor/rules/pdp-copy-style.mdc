@@ -20,7 +20,7 @@ Reference: `/workspace/pdp-copy-style.md`
 ## Variant SEO copy (required)
 
 - Single source: `src/lib/variantSeoCopy.ts` (hero description, positioning) and `src/lib/serviceFaqsCopy.ts` (FAQs).
-- Every variant needs a **unique** hero/description mentioning stage, price, duration, and outcome. Never share product-line body copy across Assess/Design/Deploy variants.
+- Every variant needs a **unique** hero/description mentioning stage and outcome. Put price and duration in metadata, FAQs, and package card only, not in hero/description body copy.
 - Positioning must use correct grammar (`perform` vs `performs` for plural domains). No em dashes.
 - Sync fixture: `npm run catalog:sync-variant-copy` before regenerating PDP seed.
 

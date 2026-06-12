@@ -267,7 +267,7 @@ function buildContext(service: ServiceProduct): FaqContext {
 
 export function buildServiceFaqsContent(service: ServiceProduct): ServiceFaqsContent {
   const ctx = buildContext(service);
-  const intro = `Key questions about the ${ctx.solution} ${ctx.serviceTypeLabel.toLowerCase()} service (${ctx.duration}, ${ctx.price}).`;
+  const intro = `Key questions about the ${ctx.solution} ${ctx.serviceTypeLabel.toLowerCase()} service.`;
 
   const faqs = [
     buildPrimaryFaq(ctx),

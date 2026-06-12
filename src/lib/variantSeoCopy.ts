@@ -90,13 +90,11 @@ export function buildVariantHeroDescription(service: ServiceProduct): string {
   const solution = getServiceSolutionName(service.standardName);
   const stageLabel =
     marketplaceServiceTypeLabels[service.serviceType] ?? service.badge;
-  const price = service.price;
-  const duration = service.duration;
   const typeLead = HERO_TYPE_LEAD[service.serviceType] ?? HERO_TYPE_LEAD.advisory;
   const why = buildWhyItMattersContent(service);
   const scope = restateProblemParagraph(why.problemParagraph);
 
-  const opener = `The ${solution} ${stageLabel} service (${price}, ${duration})`;
+  const opener = `The ${solution} ${stageLabel} service`;
   const parts = [opener, typeLead];
   if (scope && !scope.startsWith(opener)) {
     parts.push(scope);
