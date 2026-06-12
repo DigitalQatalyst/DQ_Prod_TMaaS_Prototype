@@ -327,7 +327,7 @@ const Marketplace = () => {
         </div>
       </MeshSection>
 
-      <section className="bg-background px-5 pb-16 pt-12 md:px-8 md:pt-14 lg:px-10 lg:pt-16">
+      <section className="bg-background px-5 pb-16 pt-12 md:px-8 md:pt-16 lg:px-10">
         <div className="mx-auto max-w-[1280px]">
           <div id="catalog-grid" className="scroll-mt-32">
             {showBestSellers && (
