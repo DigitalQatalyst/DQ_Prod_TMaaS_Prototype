@@ -42,7 +42,9 @@ export function ServicePackageCard({
       <p className="text-2xl font-semibold tracking-tight text-dq-navy">
         {formatPackagePrice(service.price)}
       </p>
-      <p className="mt-1 text-sm text-gray-500">{service.implementationModel}</p>
+      <p className="mt-1 text-sm text-gray-500">
+        <span className="text-gray-400">Timeline:</span> {service.duration}
+      </p>
 
       <ul className="mt-6 space-y-3 border-t border-gray-100 pt-6">
         {features.map((item) => (

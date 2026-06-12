@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { CheckCircle2, Sparkles, Package, ArrowRight } from "lucide-react";
+import { Bot, CheckCircle2, Package, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
 
@@ -58,7 +58,7 @@ const Complete = () => {
               className="cursor-pointer rounded-xl border-2 border-border bg-gradient-to-br from-blue-500/10 to-purple-500/10 p-6 text-left transition-all hover:border-primary hover:shadow-elevated"
             >
               <div className="mb-3 flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-brand">
-                <Sparkles size={24} className="text-primary-foreground" />
+                <Bot size={24} className="text-primary-foreground" />
               </div>
               <h3 className="mb-2 text-lg font-semibold text-foreground">Start with AI</h3>
               <p className="mb-4 text-sm text-muted-foreground">

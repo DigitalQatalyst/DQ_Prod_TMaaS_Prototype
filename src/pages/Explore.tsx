@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Search, PenTool, Rocket, TrendingUp, Brain, BookOpen, HelpCircle, Layers, Cloud, Server, Cog, Briefcase, Sparkles, ArrowRight } from "lucide-react";
+import { Search, PenTool, Rocket, TrendingUp, Brain, BookOpen, HelpCircle, Layers, Cloud, Server, Cog, Briefcase, ArrowRight } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import MeshSection from "@/components/site/MeshSection";
@@ -97,7 +97,7 @@ const marketplaces = [
         comingSoon: true,
       },
       {
-        icon: Sparkles,
+        icon: Brain,
         name: "AI Agents",
         description: "Intelligent automation and AI-powered agents",
         href: "/drive/ai-agents",

@@ -1,4 +1,4 @@
-import { Clock, Users, Zap } from "lucide-react";
+import { Users, Zap } from "lucide-react";
 import { ServicePackageCard } from "./ServicePackageCard";
 import {
   BUNDLE_PDP_SUBTITLE,
@@ -68,14 +68,7 @@ export function ServiceDetailHero({
             {service.description}
           </p>
 
-          <div className="animate-fade-in-up animation-delay-300 mt-5 flex flex-col gap-2 text-sm text-gray-600 sm:flex-row sm:flex-wrap sm:items-center sm:gap-x-5 sm:gap-y-2">
-            <span className="inline-flex items-center gap-1.5">
-              <Clock size={14} className="shrink-0 text-gray-400" strokeWidth={1.75} aria-hidden />
-              <span>
-                <span className="text-gray-500">Timeline:</span>{" "}
-                <span className="font-medium text-dq-navy">{service.duration}</span>
-              </span>
-            </span>
+          <div className="animate-fade-in-up animation-delay-300 mt-5 text-sm text-gray-600">
             <span className="inline-flex items-center gap-1.5">
               <Users size={14} className="shrink-0 text-gray-400" strokeWidth={1.75} aria-hidden />
               <span>

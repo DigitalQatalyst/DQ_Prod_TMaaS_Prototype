@@ -1,5 +1,4 @@
 import { Link } from "react-router-dom";
-import { ArrowRight } from "lucide-react";
 import {
   Accordion,
   AccordionContent,
@@ -66,18 +65,16 @@ export function ServiceDetailFaqsTab({ service, pdpContent }: ServiceDetailFaqsT
           {featureFlags.isEnabled("contactUs") ? (
             <Link
               to={buildContactPath(service, "consultation")}
-              className="inline-flex items-center gap-1 font-semibold text-dq-orange transition-colors hover:text-dq-orange/80"
+              className="font-semibold text-dq-orange transition-colors hover:text-dq-orange/80"
             >
-              Contact us
-              <ArrowRight size={14} aria-hidden />
+              Contact us →
             </Link>
           ) : (
             <a
               href="mailto:info@digitalqatalyst.com"
-              className="inline-flex items-center gap-1 font-semibold text-dq-orange transition-colors hover:text-dq-orange/80"
+              className="font-semibold text-dq-orange transition-colors hover:text-dq-orange/80"
             >
-              Contact us
-              <ArrowRight size={14} aria-hidden />
+              Contact us →
             </a>
           )}
         </p>

@@ -89,7 +89,7 @@ function HorizontalDeliveryStepper({ steps }: { steps: DeliveryStep[] }) {
           {steps.map((item) => (
             <div key={item.step} className="flex flex-col items-start">
               <StepCircle step={item.step} active={item.active} />
-              <h3 className="mb-2 text-base font-semibold text-dq-navy">{item.title}</h3>
+              <h3 className="mb-2 text-sm font-semibold text-dq-navy">{item.title}</h3>
               <p className="text-[14px] leading-relaxed text-gray-600">{item.body}</p>
             </div>
           ))}
@@ -106,7 +106,7 @@ function HorizontalDeliveryStepper({ steps }: { steps: DeliveryStep[] }) {
               ) : null}
             </div>
             <div className="pb-4">
-              <h3 className="mb-1.5 text-base font-semibold text-dq-navy">{item.title}</h3>
+              <h3 className="mb-1.5 text-sm font-semibold text-dq-navy">{item.title}</h3>
               <p className="text-[14px] leading-relaxed text-gray-600">{item.body}</p>
             </div>
           </div>

@@ -16,7 +16,7 @@ export const recommendedBundles: ServiceBundle[] = [
     "servicesIncludedCount": 5,
     "timeline": "16-24 Weeks",
     "price": "Custom",
-    "icon": "Sparkles",
+    "icon": "Package",
     "category": "Customer Experience"
   },
   {
@@ -26,7 +26,7 @@ export const recommendedBundles: ServiceBundle[] = [
     "servicesIncludedCount": 5,
     "timeline": "16-24 Weeks",
     "price": "Custom",
-    "icon": "Sparkles",
+    "icon": "Package",
     "category": "Digital Workspace"
   },
   {
@@ -36,7 +36,7 @@ export const recommendedBundles: ServiceBundle[] = [
     "servicesIncludedCount": 5,
     "timeline": "16-24 Weeks",
     "price": "Custom",
-    "icon": "Sparkles",
+    "icon": "Package",
     "category": "AI & Analytics"
   },
   {
@@ -46,7 +46,7 @@ export const recommendedBundles: ServiceBundle[] = [
     "servicesIncludedCount": 5,
     "timeline": "16-24 Weeks",
     "price": "Custom",
-    "icon": "Sparkles",
+    "icon": "Package",
     "category": "SecDevOps"
   }
 ];
