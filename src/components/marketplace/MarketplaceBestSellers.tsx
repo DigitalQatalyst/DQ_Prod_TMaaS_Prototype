@@ -25,14 +25,15 @@ const MarketplaceBestSellers = ({
   if (bestSellers.length === 0) return null;
 
   const categoryLabel = marketplaceCategoryLabels[activeTab];
-  const eyebrow = activeTab === "all" ? "Featured" : (categoryLabel ?? "Featured");
+  const eyebrow =
+    activeTab === "all" ? "Curated selection" : `${categoryLabel ?? "Category"} highlights`;
   const subcopy =
     activeTab === "all"
-      ? "Hand-picked services across assessment, design, and delivery."
+      ? "Popular starting points across assessment, design, and delivery."
       : `Standout services in ${categoryLabel ?? "this category"}.`;
 
   return (
-    <section aria-labelledby="marketplace-top-picks-heading" className="pt-10">
+    <section aria-labelledby="marketplace-featured-heading" className="pt-10">
       <Carousel
         opts={{
           align: "start",
@@ -44,10 +45,10 @@ const MarketplaceBestSellers = ({
           <div className="min-w-0">
             <p className="dq-eyebrow">{eyebrow}</p>
             <h2
-              id="marketplace-top-picks-heading"
+              id="marketplace-featured-heading"
               className="mt-4 text-4xl font-semibold tracking-tight text-dq-navy md:text-5xl"
             >
-              Top picks
+              Featured services
             </h2>
             <p className="mt-4 text-base text-gray-600">{subcopy}</p>
           </div>
