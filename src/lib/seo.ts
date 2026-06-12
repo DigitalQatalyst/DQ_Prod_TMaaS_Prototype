@@ -1,3 +1,5 @@
+import { PLATFORM_HERO_SUBCOPY } from "@/lib/brandLinks";
+
 export const SEO_BRAND = "TMaaS";
 export const SEO_PUBLISHER = "DigitalQatalyst";
 
@@ -28,8 +30,7 @@ export const DEFAULT_OG_IMAGE_PATH = "/og-image.png";
 
 export const HOME_SEO = {
   title: `${SEO_BRAND} | Digital Transformation Marketplace | ${SEO_PUBLISHER}`,
-  description:
-    "TMaaS is a low-cost marketplace for digital transformation services. Browse AI-powered blueprints with transparent pricing and launch in weeks.",
+  description: PLATFORM_HERO_SUBCOPY,
   path: "/",
 } as const;
 
@@ -43,7 +44,7 @@ export const MARKETPLACE_SEO = {
 export const CONTACT_SEO = {
   title: `Talk to our team | ${SEO_BRAND}`,
   description:
-    "Get in touch with DigitalQatalyst. Request a quote, book a consultation, or ask how TMaaS marketplace services can accelerate your transformation.",
+    "Talk to the DigitalQatalyst team about TMaaS. Request a quote, book a consultation, or get help finding the right transformation service.",
   path: "/contact",
 } as const;
 

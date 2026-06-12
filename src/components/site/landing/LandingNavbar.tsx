@@ -5,11 +5,16 @@ import { Button } from "@/components/ui/button";
 import TMaaSLogo from "@/components/TMaaSLogo";
 import ExploreDigitalQatalystCta from "@/components/ExploreDigitalQatalystCta";
 import { btnPrimary, btnSecondary } from "@/lib/brandAccent";
+import { NAV_BROWSE_MARKETPLACE_LABEL } from "@/lib/brandLinks";
 import { featureFlags } from "@/lib/featureFlags";
 import { cn } from "@/lib/utils";
 
 const NAV_LINKS = [
-  { label: "Services", href: "/marketplace", flag: "marketplace" as const },
+  {
+    label: NAV_BROWSE_MARKETPLACE_LABEL,
+    href: "/marketplace",
+    flag: "marketplace" as const,
+  },
 ];
 
 const LandingNavbar = () => {

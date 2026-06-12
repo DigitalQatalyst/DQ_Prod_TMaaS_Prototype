@@ -1,5 +1,5 @@
 import { ArrowRight } from "lucide-react";
-import { DQ_CORP_WEB_URL, PLATFORM_NAME } from "@/lib/brandLinks";
+import { DQ_CORP_WEB_URL, PLATFORM_LINEAGE_LINE } from "@/lib/brandLinks";
 
 const STATS = [
   { value: "200+", label: "Digital transformation services" },
@@ -36,8 +36,7 @@ const DqLineageStatsBand = () => {
             Built on a decade of transformation delivery.
           </p>
           <p className="mb-6 text-[15px] leading-relaxed text-gray-600">
-            {PLATFORM_NAME} is a DigitalQatalyst product. The same trusted
-            approach, now available through a simple online marketplace.
+            {PLATFORM_LINEAGE_LINE}
           </p>
           <a
             href={DQ_CORP_WEB_URL}

@@ -1,7 +1,11 @@
 import { Link } from "react-router-dom";
 import { Linkedin, Twitter, Youtube } from "lucide-react";
 import TMaaSLogo from "@/components/TMaaSLogo";
-import { PLATFORM_NAME } from "@/lib/brandLinks";
+import {
+  NAV_BROWSE_MARKETPLACE_LABEL,
+  PLATFORM_HERO_SUBCOPY,
+  PLATFORM_LINEAGE_LINE,
+} from "@/lib/brandLinks";
 import { featureFlags } from "@/lib/featureFlags";
 
 const CORP_WEB_BASE = "https://www.digitalqatalyst.com";
@@ -14,8 +18,10 @@ const Footer = () => {
           <div className="space-y-4">
             <TMaaSLogo />
             <p className="max-w-[280px] text-[14px] leading-relaxed text-gray-500">
-              A marketplace for digital transformation services. AI-powered
-              blueprints, clear pricing, faster delivery.
+              {PLATFORM_HERO_SUBCOPY}
+            </p>
+            <p className="max-w-[280px] text-[13px] leading-relaxed text-gray-400">
+              {PLATFORM_LINEAGE_LINE}
             </p>
           </div>
 
@@ -27,7 +33,7 @@ const Footer = () => {
               {featureFlags.isEnabled("marketplace") && (
                 <li>
                   <Link to="/marketplace" className="transition-colors hover:text-dq-orange">
-                    Services
+                    {NAV_BROWSE_MARKETPLACE_LABEL}
                   </Link>
                 </li>
               )}

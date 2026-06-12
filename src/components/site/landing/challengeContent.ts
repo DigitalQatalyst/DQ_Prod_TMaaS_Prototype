@@ -1,5 +1,5 @@
 import { Clock, CircleDollarSign, RefreshCw, type LucideIcon } from "lucide-react";
-import { PLATFORM_NAME } from "@/lib/brandLinks";
+import { PLATFORM_NAME, PLATFORM_HERO_SUBCOPY } from "@/lib/brandLinks";
 
 export type ChallengeCard = {
   Icon: LucideIcon;
@@ -30,4 +30,4 @@ export const CHALLENGE_CARDS: ChallengeCard[] = [
   },
 ];
 
-export const CHALLENGE_CLOSING = `${PLATFORM_NAME} fixes this with a marketplace of ready-to-launch blueprints, clear pricing, and delivery that scales with you.`;
+export const CHALLENGE_CLOSING = `${PLATFORM_NAME} fixes this — ${PLATFORM_HERO_SUBCOPY.replace(/^TMaaS is /, "")}`;

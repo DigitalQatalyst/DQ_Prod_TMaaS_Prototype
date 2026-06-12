@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
 import MeshSection from "@/components/site/MeshSection";
+import { NAV_BROWSE_MARKETPLACE_LABEL } from "@/lib/brandLinks";
 import { btnPrimaryOnDark, btnSecondaryOnDark } from "@/lib/brandAccent";
 import { cn } from "@/lib/utils";
 
@@ -42,7 +43,7 @@ const LandingCtaSection = () => {
             to="/marketplace"
             className={cn(btnPrimaryOnDark, "w-full px-7 sm:w-auto")}
           >
-            Browse services
+            {NAV_BROWSE_MARKETPLACE_LABEL}
             <ArrowRight size={15} />
           </Link>
           <Link

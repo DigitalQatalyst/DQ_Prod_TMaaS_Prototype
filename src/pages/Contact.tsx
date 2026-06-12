@@ -14,6 +14,7 @@ import {
   parseServiceContactParams,
 } from "@/lib/contactFormPrefill";
 import ContactTurnstile from "@/components/ContactTurnstile";
+import { PLATFORM_CONTACT_LINE } from "@/lib/brandLinks";
 import { featureFlags } from "@/lib/featureFlags";
 
 const MAX_ROLE_LEN = 150;
@@ -536,9 +537,9 @@ function ContactHero() {
       style={{ background: "var(--mesh-hero-light)" }}
     >
       <div className="mx-auto max-w-[1120px]">
-        <div className="mb-4 text-[11px] font-semibold uppercase tracking-[0.14em] text-gray-500">
-          Talk to our team
-        </div>
+        <p className="mb-4 max-w-2xl text-[15px] font-medium leading-relaxed text-gray-600">
+          {PLATFORM_CONTACT_LINE}
+        </p>
         <h1 className="mb-5 max-w-2xl text-balance text-4xl font-semibold tracking-tight text-dq-navy md:text-5xl">
           Tell us what you need. We&apos;ll help you get started.
         </h1>
