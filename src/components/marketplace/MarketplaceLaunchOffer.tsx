@@ -1,67 +1,62 @@
 import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
-import LaunchAdvisoryIllustration from "@/components/marketplace/LaunchAdvisoryIllustration";
 import {
   LAUNCH_ADVISORY_CTA_LABEL,
   LAUNCH_ADVISORY_EYEBROW,
-  LAUNCH_ADVISORY_HEADLINE,
   LAUNCH_ADVISORY_SUBCOPY,
   buildLaunchAdvisoryContactPath,
 } from "@/lib/launchOffering";
-import { btnPrimary } from "@/lib/brandAccent";
+import { btnPrimaryOnDark } from "@/lib/brandAccent";
 import { cn } from "@/lib/utils";
 import { featureFlags } from "@/lib/featureFlags";
 
 const MarketplaceLaunchOffer = () => {
-  const contactPath = buildLaunchAdvisoryContactPath();
-  const canContact = featureFlags.isEnabled("contactUs");
-
-  if (!canContact) return null;
+  if (!featureFlags.isEnabled("contactUs")) return null;
 
   return (
-    <section
-      aria-labelledby="marketplace-launch-offer-heading"
-      className="relative mb-12 overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-card"
-    >
-      <div
-        aria-hidden
-        className="pointer-events-none absolute inset-0 -z-0"
-        style={{ background: "var(--mesh-hero-light)" }}
-      />
-      <div
-        aria-hidden
-        className="hero-grid pointer-events-none absolute inset-0 -z-0 opacity-30"
-      />
+    <section aria-labelledby="marketplace-launch-offer-heading" className="mb-10">
+      <div className="relative isolate overflow-hidden rounded-2xl text-center text-white shadow-lg">
+        <div
+          aria-hidden
+          className="absolute inset-0 -z-10"
+          style={{ background: "var(--mesh-cta-orange)" }}
+        />
+        <div
+          aria-hidden
+          className="absolute inset-0 -z-10 opacity-20"
+          style={{
+            backgroundImage:
+              "linear-gradient(to right, rgba(255,255,255,0.06) 1px, transparent 1px), linear-gradient(to bottom, rgba(255,255,255,0.06) 1px, transparent 1px)",
+            backgroundSize: "64px 64px",
+            maskImage:
+              "radial-gradient(ellipse 60% 50% at 50% 50%, black 40%, transparent 80%)",
+          }}
+        />
 
-      <div className="relative z-10 grid lg:grid-cols-[1.1fr_0.9fr] lg:items-stretch">
-        <div className="flex flex-col justify-center px-6 py-10 md:px-10 md:py-12 lg:py-14">
-          <p className="dq-eyebrow">{LAUNCH_ADVISORY_EYEBROW}</p>
+        <div className="relative px-6 py-10 md:px-10 md:py-12 lg:px-12 lg:py-14">
+          <p className="dq-eyebrow-on-dark mb-4">{LAUNCH_ADVISORY_EYEBROW}</p>
+
           <h2
             id="marketplace-launch-offer-heading"
-            className="mt-4 max-w-xl text-3xl font-semibold tracking-tight text-dq-navy md:text-4xl lg:text-[2.5rem] lg:leading-[1.1]"
+            className="mx-auto max-w-2xl text-balance text-3xl font-semibold leading-[1.05] tracking-tight text-white md:text-4xl lg:text-[2.75rem]"
           >
-            {LAUNCH_ADVISORY_HEADLINE}
+            Start with a free{" "}
+            <span className="text-dq-orange">transformation advisory.</span>
           </h2>
-          <p className="mt-4 max-w-lg text-[15px] leading-relaxed text-gray-600 md:text-base">
+
+          <p className="mx-auto mt-5 max-w-lg text-[15px] leading-relaxed text-white/60">
             {LAUNCH_ADVISORY_SUBCOPY}
           </p>
-          <div className="mt-8">
-            <Link to={contactPath} className={cn(btnPrimary, "group w-full sm:w-auto")}>
+
+          <div className="mt-8 flex justify-center">
+            <Link
+              to={buildLaunchAdvisoryContactPath()}
+              className={cn(btnPrimaryOnDark, "w-full px-7 sm:w-auto")}
+            >
               {LAUNCH_ADVISORY_CTA_LABEL}
-              <ArrowRight
-                size={16}
-                className="transition-transform group-hover:translate-x-0.5"
-              />
+              <ArrowRight size={15} />
             </Link>
           </div>
-        </div>
-
-        <div className="relative min-h-[200px] overflow-hidden border-t border-gray-100 lg:min-h-[280px] lg:border-l lg:border-t-0">
-          <LaunchAdvisoryIllustration className="absolute inset-0 h-full w-full scale-105 opacity-90" />
-          <div
-            aria-hidden
-            className="absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-white/80 to-transparent lg:hidden"
-          />
         </div>
       </div>
     </section>
