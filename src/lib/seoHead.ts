@@ -1,3 +1,4 @@
+import { PLATFORM_HERO_HEADLINE } from "@/lib/brandLinks";
 import {
   absoluteUrl,
   buildServiceMetaDescription,
@@ -96,7 +97,7 @@ export function getPrerenderPayloadForPath(path: string): PrerenderPagePayload |
       },
       jsonLd: buildHomeStructuredData(),
       noscript: {
-        heading: "TMaaS Digital Transformation Marketplace",
+        heading: PLATFORM_HERO_HEADLINE,
         description: HOME_SEO.description,
       },
     };
