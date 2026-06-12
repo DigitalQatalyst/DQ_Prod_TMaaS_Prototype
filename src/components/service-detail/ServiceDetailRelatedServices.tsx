@@ -18,10 +18,7 @@ export function ServiceDetailRelatedServices({
   }
 
   return (
-    <section
-      className="mt-16 border-t border-gray-200 pt-16"
-      aria-labelledby="related-services-heading"
-    >
+    <section aria-labelledby="related-services-heading">
       <h2 id="related-services-heading" className={sectionHeading}>
         Related Services
       </h2>

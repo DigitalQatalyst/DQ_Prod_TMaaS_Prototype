@@ -20,7 +20,7 @@ const SERVICE_DETAIL_TABS = [
 ] as const;
 
 const tabTriggerClass =
-  "shrink-0 rounded-none border-b-2 border-transparent px-3 pb-3 pt-1 text-sm font-semibold text-dq-navy transition-colors hover:text-dq-navy/80 data-[state=active]:border-dq-orange data-[state=active]:bg-transparent data-[state=active]:text-dq-orange data-[state=active]:shadow-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-dq-orange focus-visible:ring-offset-2 sm:px-4";
+  "shrink-0 rounded-none border-b-2 border-transparent px-3 pb-2 pt-1 text-sm font-semibold text-dq-navy transition-colors hover:text-dq-navy/80 data-[state=active]:border-dq-orange data-[state=active]:bg-transparent data-[state=active]:text-dq-orange data-[state=active]:shadow-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-dq-orange focus-visible:ring-offset-2 sm:px-4";
 
 interface ServiceDetailTabsProps {
   service: ServiceProduct;
@@ -41,7 +41,7 @@ export function ServiceDetailTabs({
 
   return (
     <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
-      <TabsList className="mb-8 flex h-auto w-full flex-nowrap justify-start gap-0 overflow-x-auto rounded-none border-b border-gray-200 bg-transparent p-0 scrollbar-none sm:gap-1">
+      <TabsList className="mb-6 flex h-auto w-full flex-nowrap justify-start gap-0 overflow-x-auto rounded-none border-b border-gray-200 bg-transparent p-0 scrollbar-none sm:gap-1">
         {SERVICE_DETAIL_TABS.map((tab) => (
           <TabsTrigger key={tab.value} value={tab.value} className={tabTriggerClass}>
             {tab.label}

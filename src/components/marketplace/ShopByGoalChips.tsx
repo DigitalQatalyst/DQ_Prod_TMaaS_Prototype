@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { ArrowRight, Sparkles } from "lucide-react";
+import { ArrowRight, Target } from "lucide-react";
 import { marketplaceGoals } from "@/data/marketplaceNavigation";
 
 type ShopByGoalChipsProps = {
@@ -34,7 +34,7 @@ const ShopByGoalChips = ({
               to={`/marketplace?goal=${encodeURIComponent(goal.id)}`}
               className={chipClass}
             >
-              <Sparkles size={12} className="shrink-0 text-orange-500" strokeWidth={2} />
+              <Target size={12} className="shrink-0 text-orange-500" strokeWidth={2} />
               {goal.label}
               <ArrowRight size={12} className="opacity-60" />
             </Link>
@@ -48,7 +48,7 @@ const ShopByGoalChips = ({
             onClick={() => onSelectGoal?.(goal.id)}
             className={chipClass}
           >
-            <Sparkles size={12} className="shrink-0 text-orange-500" strokeWidth={2} />
+            <Target size={12} className="shrink-0 text-orange-500" strokeWidth={2} />
             {goal.label}
           </button>
         );

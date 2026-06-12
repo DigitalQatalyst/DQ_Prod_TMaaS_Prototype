@@ -265,6 +265,6 @@ export const mode01QuickActions = [
     id: "recommendations",
     label: "Get recommendations",
     category: "advisory",
-    icon: "Sparkles"
+    icon: "Lightbulb"
   }
 ];

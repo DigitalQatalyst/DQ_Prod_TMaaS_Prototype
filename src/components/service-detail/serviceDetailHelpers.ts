@@ -21,9 +21,9 @@ export const collectionAccent: Record<
   { badge: string; icon: string; iconBg: string }
 > = {
   experience: {
-    badge: "text-violet-700",
-    icon: "text-violet-600",
-    iconBg: "bg-violet-50",
+    badge: "text-dq-navy",
+    icon: "text-dq-navy",
+    iconBg: "bg-navy-50",
   },
   operations: {
     badge: "text-blue-700",
@@ -36,9 +36,9 @@ export const collectionAccent: Record<
     iconBg: "bg-emerald-50",
   },
   ai: {
-    badge: "text-indigo-700",
-    icon: "text-indigo-600",
-    iconBg: "bg-indigo-50",
+    badge: "text-dq-navy",
+    icon: "text-dq-navy",
+    iconBg: "bg-navy-50",
   },
   bundles: {
     badge: "text-dq-navy",
@@ -52,9 +52,9 @@ export const collectionAudienceCard: Record<
   { cardBg: string; iconWell: string; icon: string }
 > = {
   experience: {
-    cardBg: "bg-[#F3F4F9]",
+    cardBg: "bg-gray-50",
     iconWell: "bg-white",
-    icon: "text-violet-600",
+    icon: "text-dq-navy",
   },
   operations: {
     cardBg: "bg-blue-50",
@@ -67,9 +67,9 @@ export const collectionAudienceCard: Record<
     icon: "text-emerald-600",
   },
   ai: {
-    cardBg: "bg-indigo-50",
+    cardBg: "bg-gray-50",
     iconWell: "bg-white",
-    icon: "text-indigo-600",
+    icon: "text-dq-navy",
   },
   bundles: {
     cardBg: "bg-orange-50",

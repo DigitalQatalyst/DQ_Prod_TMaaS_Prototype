@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { ArrowUp, Sparkles } from "lucide-react";
+import { ArrowUp, Bot } from "lucide-react";
 import DiagnoseDialog from "./DiagnoseDialog";
 import MeshSection from "./site/MeshSection";
 
@@ -117,7 +117,7 @@ const HeroSection = () => {
                 onClick={() => openWithPrompt(item.prompt)}
                 className="inline-flex items-center gap-1.5 rounded-full border border-gray-200 bg-white/60 px-3.5 py-2 text-xs font-medium text-dq-navy backdrop-blur-sm transition-all duration-300 hover:border-dq-orange hover:bg-white hover:shadow-md"
               >
-                <Sparkles
+                <Bot
                   size={12}
                   className="shrink-0 text-dq-orange"
                   strokeWidth={2}

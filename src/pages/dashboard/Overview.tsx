@@ -12,7 +12,7 @@ import {
   Calendar,
   FileText,
   HelpCircle,
-  Sparkles,
+  Bot,
   ShoppingBag,
   Mail,
   Activity,
@@ -209,7 +209,7 @@ const ClientOverview = () => {
             <Card className="rounded-2xl border-orange-200 bg-orange-50/30 shadow-sm">
               <CardHeader className="pb-2">
                 <div className="flex items-center gap-2 mb-1">
-                  <Sparkles size={16} className="text-orange-500" />
+                  <Bot size={16} className="text-orange-500" />
                   <CardTitle className="text-sm font-bold text-navy-950">Recommended Services</CardTitle>
                 </div>
                 <CardDescription className="text-xs text-gray-600">Based on your active engagements and operational profile.</CardDescription>

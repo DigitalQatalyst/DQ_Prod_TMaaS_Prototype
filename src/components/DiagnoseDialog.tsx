@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { X, ArrowRight, Sparkles, Send, ExternalLink, User } from "lucide-react";
+import { X, ArrowRight, Bot, Send, ExternalLink, User } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { mockedRecommendations, mockedFAQs, mockedEscalation, teamHandoff } from "@/data/butlerAI";
@@ -630,7 +630,7 @@ const DiagnoseDialog = ({ isOpen, onClose, initialProblem = "" }: DiagnoseDialog
         <div className="flex shrink-0 items-center justify-between border-b border-border p-4">
           <div className="flex items-center gap-2">
             <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-brand">
-              <Sparkles size={16} className="text-primary-foreground" />
+              <Bot size={16} className="text-primary-foreground" />
             </div>
             <div>
               <h2 className="text-sm font-semibold text-foreground">TMaaS AI Butler</h2>

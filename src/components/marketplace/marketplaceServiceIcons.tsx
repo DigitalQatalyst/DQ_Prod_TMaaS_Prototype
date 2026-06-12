@@ -9,14 +9,14 @@ import {
   Settings2,
   ShieldCheck,
   Smartphone,
-  Sparkles,
   Workflow,
+  Wand2,
 } from "lucide-react";
 
 const serviceTypeIcons: Record<string, LucideIcon> = {
   advisory: Globe,
   design: PenLine,
-  ai_design: Sparkles,
+  ai_design: Wand2,
   deploy: Smartphone,
   ai_deploy: Bot,
   manage: Settings2,

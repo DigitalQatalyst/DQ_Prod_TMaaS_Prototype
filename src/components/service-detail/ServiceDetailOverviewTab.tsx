@@ -10,7 +10,7 @@ interface ServiceDetailOverviewTabProps {
 
 export function ServiceDetailOverviewTab({ service, pdpContent }: ServiceDetailOverviewTabProps) {
   return (
-    <div className="space-y-12">
+    <div className="space-y-10">
       <ServiceDetailAboutSection service={service} pdpContent={pdpContent} />
       <ServiceDetailKeyOutcomesSection service={service} />
     </div>

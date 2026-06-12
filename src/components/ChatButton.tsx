@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { MessageCircle, X, Sparkles, Brain, Search, ShoppingCart } from "lucide-react";
+import { MessageCircle, X, Brain, Search, ShoppingCart } from "lucide-react";
 import { useLocation } from "react-router-dom";
 import DiagnoseDialog from "./DiagnoseDialog";
 

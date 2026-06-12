@@ -3,7 +3,7 @@ import {
   ArrowRight,
   GitBranch,
   Layers,
-  Sparkles,
+  Lightbulb,
   Target,
   TrendingUp,
   type LucideIcon,
@@ -14,7 +14,7 @@ import type { ServiceProduct } from "./serviceDetailHelpers";
 import { getWhyItMattersContent } from "./whyItMattersContent";
 
 const BEFORE_ICONS = [AlertCircle, GitBranch, Layers] as const;
-const AFTER_ICONS = [Target, Sparkles, TrendingUp] as const;
+const AFTER_ICONS = [Target, Lightbulb, TrendingUp] as const;
 
 interface ServiceDetailWhyItMattersTabProps {
   service: ServiceProduct;

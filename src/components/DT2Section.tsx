@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Zap, Layers, Sparkles, RefreshCw } from "lucide-react";
+import { Zap, Layers, Brain, RefreshCw } from "lucide-react";
 
 const features = [
   {
@@ -9,7 +9,7 @@ const features = [
     benefits: ["Industry-standard specs", "Pre-defined templates", "Digital repository"],
   },
   {
-    icon: Sparkles,
+    icon: Brain,
     title: "AI-Augmented Build",
     description: "Digital Twin outputs drive AI-accelerated builds based on proven marketplace platforms.",
     benefits: ["Proven platforms", "Accelerated delivery", "Reduced rework"],
