@@ -19,6 +19,6 @@ Reference: `/workspace/pdp-copy-style.md`
 
 ## Generator
 
-- PDP seed SQL: `npm run db:pdp-content:sql` → `supabase/migrations/20250610000012_seed_pdp_content.sql`
+- PDP seed SQL: `npm run db:pdp-content:sql` → local `supabase/migrations/…` (gitignored; apply via Supabase dashboard or CLI)
 - Apply migrations `20250610000011` (schema) then `20250610000012` (content) in Supabase SQL Editor.
 - `fetchPdpContent` must degrade gracefully when PDP tables/columns are not migrated yet.
