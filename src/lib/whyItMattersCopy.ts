@@ -1801,18 +1801,51 @@ const SECTOR_OPERATIONS: Record<string, SolutionProfile> = {
 
 Object.assign(SOLUTION_PROFILES, SECTOR_OPERATIONS);
 
+function contextPhrase(key: string): string {
+  const phrases: Record<string, string> = {
+    "online web presence": "your web presence",
+    "online social presence": "your social channels",
+    "mobile apps": "your mobile apps",
+    "physical channels": "your phygital touchpoints",
+    "integrated experience": "your integrated customer experiences",
+    "crm solutions": "your CRM capability",
+    "marketing solutions": "your marketing platforms",
+    "smart sales & quotation": "your sales and quoting processes",
+    "customer support & success": "your customer support operations",
+    "digital workplace": "your digital workplace",
+    "business process automation": "your business processes",
+    "specialised operations": "your specialised operations",
+    "enterprise operations": "your enterprise operations",
+    "governance, risk & compliance": "your GRC programme",
+    "enterprise resource planning": "your ERP landscape",
+    "workforce management": "your workforce systems",
+    "enterprise data platform": "your enterprise data platform",
+    "business intelligence & analytics": "your analytics capability",
+    "enterprise ai & automation": "your AI and automation portfolio",
+    "technology governance": "your technology governance model",
+    "devsecops automation": "your software delivery pipelines",
+    "it operations & support": "your IT service operations",
+    "farming operations": "your farming operations",
+    "government operations": "your government services",
+    "hospitality operations": "your hospitality operations",
+    "infrastructure operations": "your infrastructure operations",
+    "logistics operations": "your logistics network",
+    "manufacturing operations": "your manufacturing operations",
+    "retail operations": "your retail operations",
+    "service operations": "your field service operations",
+    "wellness operations": "your wellness operations",
+  };
+  return phrases[key] ?? `your ${key}`;
+}
+
 const TYPE_BUILDERS: Record<
   Exclude<ServiceTypeKey, "advisory" | "design">,
-  (profile: SolutionProfile, key: string) => TypeBlock
+  (key: string) => TypeBlock
 > = {
-  ai_design: (profile, key) =>
-    aiDesignBlock(key, profile.hook.replace(/^Your /i, "").replace(/\.$/, "")),
-  deploy: (profile, key) =>
-    deployBlock(key, profile.hook.replace(/^Your /i, "").replace(/\.$/, "")),
-  ai_deploy: (profile, key) =>
-    aiDeployBlock(key, profile.hook.replace(/^Your /i, "").replace(/\.$/, "")),
-  manage: (profile, key) =>
-    manageBlock(key, profile.hook.replace(/^Your /i, "").replace(/\.$/, "")),
+  ai_design: (key) => aiDesignBlock(key, contextPhrase(key)),
+  deploy: (key) => deployBlock(key, contextPhrase(key)),
+  ai_deploy: (key) => aiDeployBlock(key, contextPhrase(key)),
+  manage: (key) => manageBlock(key, contextPhrase(key)),
 };
 
 function fallbackProfile(key: string): SolutionProfile {
@@ -1873,7 +1906,7 @@ function resolveTypeBlock(
 ): TypeBlock {
   if (serviceType === "advisory") return profile.advisory;
   if (serviceType === "design") return profile.design;
-  return TYPE_BUILDERS[serviceType](profile, solutionKey);
+  return TYPE_BUILDERS[serviceType](solutionKey);
 }
 
 function toWhyItMattersContent(
