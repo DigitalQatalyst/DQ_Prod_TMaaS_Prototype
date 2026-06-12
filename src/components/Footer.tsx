@@ -4,7 +4,6 @@ import TMaaSLogo from "@/components/TMaaSLogo";
 import {
   NAV_BROWSE_MARKETPLACE_LABEL,
   PLATFORM_HERO_SUBCOPY,
-  PLATFORM_LINEAGE_LINE,
 } from "@/lib/brandLinks";
 import { featureFlags } from "@/lib/featureFlags";
 
@@ -23,9 +22,6 @@ const Footer = () => {
             <TMaaSLogo />
             <p className="max-w-[320px] text-[14px] leading-relaxed text-gray-500">
               {PLATFORM_HERO_SUBCOPY}
-            </p>
-            <p className="max-w-[320px] text-[13px] leading-relaxed text-gray-400">
-              {PLATFORM_LINEAGE_LINE}
             </p>
           </div>
 
