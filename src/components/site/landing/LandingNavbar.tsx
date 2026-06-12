@@ -4,8 +4,9 @@ import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import TMaaSLogo from "@/components/TMaaSLogo";
 import ExploreDigitalQatalystCta from "@/components/ExploreDigitalQatalystCta";
-import { btnPrimary, btnSecondary } from "@/lib/brandAccent";
+import { btnPrimary } from "@/lib/brandAccent";
 import { NAV_BROWSE_MARKETPLACE_LABEL } from "@/lib/brandLinks";
+import { LAUNCH_ADVISORY_CTA_LABEL, buildLaunchAdvisoryContactPath } from "@/lib/launchOffering";
 import { featureFlags } from "@/lib/featureFlags";
 import { cn } from "@/lib/utils";
 
@@ -20,7 +21,10 @@ const NAV_LINKS = [
 const LandingNavbar = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
   const location = useLocation();
-  const isOnContact = location.pathname.startsWith("/contact");
+  const launchAdvisoryPath = buildLaunchAdvisoryContactPath();
+  const isOnLaunchAdvisory =
+    location.pathname.startsWith("/contact") &&
+    location.search.includes("offering=launch-advisory");
 
   const visibleLinks = NAV_LINKS.filter(
     (link) => !link.flag || featureFlags.isEnabled(link.flag)
@@ -67,14 +71,10 @@ const LandingNavbar = () => {
           <ExploreDigitalQatalystCta className="hidden md:inline-flex" />
           {featureFlags.isEnabled("contactUs") && (
             <Link
-              to="/contact"
-              className={cn(
-                "hidden md:block",
-                isOnContact ? btnPrimary : btnSecondary,
-                "px-4 py-2"
-              )}
+              to={launchAdvisoryPath}
+              className={cn(btnPrimary, "hidden px-4 py-2 md:inline-flex", isOnLaunchAdvisory && "ring-2 ring-dq-orange ring-offset-2")}
             >
-              Talk to our team
+              {LAUNCH_ADVISORY_CTA_LABEL}
             </Link>
           )}
 
@@ -123,11 +123,11 @@ const LandingNavbar = () => {
           />
           {featureFlags.isEnabled("contactUs") && (
             <Link
-              to="/contact"
+              to={launchAdvisoryPath}
               onClick={() => setMobileOpen(false)}
               className={cn(btnPrimary, "mt-3 w-full py-3 text-center")}
             >
-              Talk to our team
+              {LAUNCH_ADVISORY_CTA_LABEL}
             </Link>
           )}
         </div>

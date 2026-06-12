@@ -9,7 +9,13 @@ import {
   PLATFORM_HERO_HEADLINE_PRIMARY,
   PLATFORM_HERO_SUBCOPY,
 } from "@/lib/brandLinks";
+import {
+  LAUNCH_ADVISORY_CTA_LABEL,
+  LAUNCH_ADVISORY_EYEBROW,
+  buildLaunchAdvisoryContactPath,
+} from "@/lib/launchOffering";
 import { btnPrimary, btnSecondary, landingHeroHeading } from "@/lib/brandAccent";
+import { featureFlags } from "@/lib/featureFlags";
 import { cn } from "@/lib/utils";
 
 const LandingHeroSection = () => {
@@ -34,22 +40,41 @@ const LandingHeroSection = () => {
             {PLATFORM_HERO_SUBCOPY}
           </p>
 
-          <div className="animate-fade-in-up animation-delay-300 mt-6 flex flex-col items-stretch gap-3 sm:flex-row sm:items-center">
+          {featureFlags.isEnabled("contactUs") && (
+            <p className="animate-fade-in-up animation-delay-300 mt-6 font-mono text-[10px] uppercase tracking-[0.18em] text-dq-orange">
+              {LAUNCH_ADVISORY_EYEBROW}
+            </p>
+          )}
+
+          <div className="animate-fade-in-up animation-delay-300 mt-4 flex flex-col items-stretch gap-3 sm:flex-row sm:items-center">
+            {featureFlags.isEnabled("contactUs") ? (
+              <Link
+                to={buildLaunchAdvisoryContactPath()}
+                className={cn(btnPrimary, "group w-full sm:w-auto")}
+              >
+                {LAUNCH_ADVISORY_CTA_LABEL}
+                <ArrowRight
+                  size={16}
+                  className="transition group-hover:translate-x-0.5"
+                />
+              </Link>
+            ) : (
+              <Link
+                to="/marketplace"
+                className={cn(btnPrimary, "group w-full sm:w-auto")}
+              >
+                {NAV_BROWSE_MARKETPLACE_LABEL}
+                <ArrowRight
+                  size={16}
+                  className="transition group-hover:translate-x-0.5"
+                />
+              </Link>
+            )}
             <Link
               to="/marketplace"
-              className={cn(btnPrimary, "group w-full sm:w-auto")}
-            >
-              {NAV_BROWSE_MARKETPLACE_LABEL}
-              <ArrowRight
-                size={16}
-                className="transition group-hover:translate-x-0.5"
-              />
-            </Link>
-            <Link
-              to="/contact"
               className={cn(btnSecondary, "w-full sm:w-auto")}
             >
-              Talk to our team
+              {NAV_BROWSE_MARKETPLACE_LABEL}
             </Link>
           </div>
         </div>

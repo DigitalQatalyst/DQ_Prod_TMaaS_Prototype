@@ -14,6 +14,8 @@ import { Input } from "@/components/ui/input";
 import MarketplaceCategoryNav from "@/components/marketplace/MarketplaceCategoryNav";
 import MarketplaceFilters from "@/components/marketplace/MarketplaceFilters";
 import MarketplaceBestSellers from "@/components/marketplace/MarketplaceBestSellers";
+import MarketplaceLaunchOffer from "@/components/marketplace/MarketplaceLaunchOffer";
+import { LAUNCH_ADVISORY_SERVICE_ID } from "@/lib/launchOffering";
 import MarketplacePagination from "@/components/marketplace/MarketplacePagination";
 import ServiceProductCard from "@/components/marketplace/ServiceProductCard";
 import MeshSection from "@/components/site/MeshSection";
@@ -137,10 +139,12 @@ const Marketplace = () => {
   const showBestSellers = !hasRefinementFilters && activeTab !== "bundles";
   const bestSellerCollection = activeTab === "all" ? "all" : activeTab;
   const { data: bestSellers = [] } = useBestSellers(bestSellerCollection, 4, showBestSellers);
-  const excludeVariantIds = useMemo(
-    () => (showBestSellers ? bestSellers.map((service) => service.id) : []),
-    [bestSellers, showBestSellers]
-  );
+  const excludeVariantIds = useMemo(() => {
+    if (!showBestSellers) return [];
+    const ids = new Set(bestSellers.map((service) => service.id));
+    ids.add(LAUNCH_ADVISORY_SERVICE_ID);
+    return [...ids];
+  }, [bestSellers, showBestSellers]);
 
   const catalogListParams = useMemo(
     () => ({
@@ -330,12 +334,15 @@ const Marketplace = () => {
         <div className="mx-auto max-w-[1280px]">
           <div id="catalog-grid" className="scroll-mt-32">
             {showBestSellers && (
-              <div className="mb-10">
-                <MarketplaceBestSellers
-                  activeTab="all"
-                  selectedIndustry={selectedSectors.length > 0 ? selectedSectors[0] : "all"}
-                />
-              </div>
+              <>
+                <MarketplaceLaunchOffer />
+                <div className="mb-10">
+                  <MarketplaceBestSellers
+                    activeTab="all"
+                    selectedIndustry={selectedSectors.length > 0 ? selectedSectors[0] : "all"}
+                  />
+                </div>
+              </>
             )}
 
             {showBestSellers && (

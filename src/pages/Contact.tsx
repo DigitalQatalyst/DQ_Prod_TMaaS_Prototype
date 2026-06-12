@@ -15,6 +15,11 @@ import {
 } from "@/lib/contactFormPrefill";
 import ContactTurnstile from "@/components/ContactTurnstile";
 import { PLATFORM_CONTACT_LINE } from "@/lib/brandLinks";
+import {
+  getLaunchAdvisoryFormDefaults,
+  isLaunchAdvisoryEnquiry,
+  LAUNCH_ADVISORY_HEADLINE,
+} from "@/lib/launchOffering";
 import { featureFlags } from "@/lib/featureFlags";
 
 const MAX_ROLE_LEN = 150;
@@ -50,9 +55,13 @@ const PHONE_REGEX = /^\+?[\d\s\-(). ]{7,20}$/;
 const Contact = () => {
   const [searchParams] = useSearchParams();
 
-  const serviceEnquiry = parseServiceContactParams(searchParams);
+  const launchAdvisoryEnquiry = isLaunchAdvisoryEnquiry(searchParams);
+  const serviceEnquiry = launchAdvisoryEnquiry ? null : parseServiceContactParams(searchParams);
 
   const [form, setForm] = useState<FormState>(() => {
+    if (launchAdvisoryEnquiry) {
+      return { ...INITIAL, ...getLaunchAdvisoryFormDefaults() };
+    }
     if (!serviceEnquiry) return INITIAL;
     return {
       ...INITIAL,
@@ -82,7 +91,7 @@ const Contact = () => {
       next.phone = "Enter a valid phone number";
     if (!form.organisation.trim()) next.organisation = "Organisation is required";
     if (form.role.trim().length > MAX_ROLE_LEN) next.role = "Role must be 150 characters or fewer";
-    if (!serviceEnquiry) {
+    if (!serviceEnquiry && !launchAdvisoryEnquiry) {
       if (!form.interest) next.interest = "Select an area of interest";
       if (!form.need) next.need = "Select what you need from DQ";
     }
@@ -283,7 +292,20 @@ const Contact = () => {
                       />
                     </Field>
 
-                    {serviceEnquiry ? (
+                    {launchAdvisoryEnquiry ? (
+                      <div className="rounded-xl border border-dq-orange/20 bg-orange-50/40 px-4 py-4">
+                        <p className="text-[10px] font-semibold uppercase tracking-[0.16em] text-dq-orange">
+                          Launch offer
+                        </p>
+                        <p className="mt-1 text-base font-semibold text-dq-navy">
+                          {LAUNCH_ADVISORY_HEADLINE}
+                        </p>
+                        <p className="mt-1 text-sm text-gray-600">
+                          Tell us a little about your organisation and we&apos;ll schedule your free
+                          advisory session.
+                        </p>
+                      </div>
+                    ) : serviceEnquiry ? (
                       <div className="rounded-xl border border-gray-200 bg-white px-4 py-4">
                         <p className="text-[10px] font-semibold uppercase tracking-[0.16em] text-gray-400">
                           Service enquiry
