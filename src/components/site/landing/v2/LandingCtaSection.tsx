@@ -32,6 +32,9 @@ const LandingCtaSection = () => {
       />
 
       <div className="relative mx-auto max-w-[720px]">
+        {featureFlags.isEnabled("contactUs") && (
+          <p className="dq-eyebrow-on-dark mb-4">{LAUNCH_ADVISORY_EYEBROW}</p>
+        )}
         <h2 className="text-balance text-4xl font-semibold leading-[1.05] tracking-tight text-white md:text-5xl">
           {featureFlags.isEnabled("contactUs") ? (
             LAUNCH_ADVISORY_HEADLINE
