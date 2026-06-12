@@ -1,6 +1,6 @@
 import type { MouseEvent } from "react";
 import { Link } from "react-router-dom";
-import { ArrowRight, Check, ShoppingCart, TrendingUp, Zap } from "lucide-react";
+import { ArrowRight, Check, ShoppingCart, TrendingUp } from "lucide-react";
 import { toast } from "sonner";
 import { useCart } from "@/contexts/CartContext";
 import { useCatalogData } from "@/contexts/CatalogContext";
@@ -46,9 +46,10 @@ const ServiceProductCard = ({
   featured = false,
   variant = "grid",
 }: ServiceProductCardProps) => {
-  const title =
-    displayName ?? getMarketplaceCardTitle(service.standardName, service.serviceType);
-  const isHighImpact = service.standardName.includes("(High-Impact)");
+  const title = getMarketplaceCardTitle(
+    displayName ?? service.standardName,
+    service.serviceType
+  );
   const categoryLabel = marketplaceCategoryLabels[service.collection] ?? service.collection;
   const detailUrl = `/service/${service.id}`;
   const canViewDetail = featureFlags.isEnabled("serviceDetail");
@@ -115,17 +116,9 @@ const ServiceProductCard = ({
         <div className={`mb-4 h-10 w-10 ${ICON_WELL_CLASS}`}>
           <ServiceIcon size={18} strokeWidth={1.75} />
         </div>
-        <div className="flex flex-wrap items-center gap-1.5">
-          <span className="font-mono text-[10px] uppercase tracking-[0.16em] text-navy-400">
-            {categoryLabel}
-          </span>
-          {isHighImpact && (
-            <span className="inline-flex items-center gap-0.5 rounded bg-navy-950 px-1 py-0.5 text-[8px] font-bold uppercase tracking-wider text-white">
-              <Zap size={8} className="fill-white" />
-              High-Impact
-            </span>
-          )}
-        </div>
+        <span className="font-mono text-[10px] uppercase tracking-[0.16em] text-navy-400">
+          {categoryLabel}
+        </span>
         {canViewDetail ? (
           <Link to={detailUrl} className="mt-3 block min-w-0 flex-1">
             <h3 className="line-clamp-3 text-sm font-semibold leading-relaxed text-dq-navy">
@@ -213,7 +206,6 @@ const ServiceProductCard = ({
       service={service}
       title={title}
       categoryLabel={categoryLabel}
-      isHighImpact={isHighImpact}
       featured={featured}
       detailUrl={detailUrl}
       canViewDetail={canViewDetail}
@@ -226,7 +218,6 @@ type FullCardProps = {
   service: ServiceProduct;
   title: string;
   categoryLabel: string;
-  isHighImpact: boolean;
   featured: boolean;
   detailUrl: string;
   canViewDetail: boolean;
@@ -237,7 +228,6 @@ const FullServiceProductCard = ({
   service,
   title,
   categoryLabel,
-  isHighImpact,
   featured,
   detailUrl,
   canViewDetail,
@@ -252,7 +242,12 @@ const FullServiceProductCard = ({
   if (service.relatedServices && service.relatedServices.length > 0) {
     const relatedId = service.relatedServices[0];
     const relatedSvc = catalog.find((s) => s.id === relatedId);
-    if (relatedSvc) relatedServiceName = relatedSvc.standardName;
+    if (relatedSvc) {
+      relatedServiceName = getMarketplaceCardTitle(
+        relatedSvc.standardName,
+        relatedSvc.serviceType
+      );
+    }
   }
 
   const handleAddToCart = (e: MouseEvent) => {
@@ -300,12 +295,6 @@ const FullServiceProductCard = ({
           <span className="rounded bg-slate-100 px-2 py-0.5 text-[9px] font-semibold uppercase tracking-wide text-slate-600">
             {categoryLabel}
           </span>
-          {isHighImpact && (
-            <span className="inline-flex items-center gap-1 rounded bg-navy-950 px-1.5 py-0.5 text-[9px] font-bold uppercase tracking-wider text-white">
-              <Zap size={9} className="fill-white" />
-              High-Impact
-            </span>
-          )}
           {service.badge && (
             <span className="rounded border border-orange-100 bg-orange-50 px-2 py-0.5 text-[9px] font-semibold uppercase tracking-wide text-orange-700">
               {service.badge}
@@ -352,12 +341,6 @@ const FullServiceProductCard = ({
           <span className="rounded bg-slate-100 px-2 py-0.5 text-[9px] font-semibold uppercase tracking-wide text-slate-600">
             {categoryLabel}
           </span>
-          {isHighImpact && (
-            <span className="inline-flex items-center gap-1 rounded bg-navy-950 px-1.5 py-0.5 text-[9px] font-bold uppercase tracking-wider text-white">
-              <Zap size={9} className="fill-white" />
-              High-Impact
-            </span>
-          )}
           {service.badge && (
             <span className="rounded border border-orange-100 bg-orange-50 px-2 py-0.5 text-[9px] font-semibold uppercase tracking-wide text-orange-700">
               {service.badge}

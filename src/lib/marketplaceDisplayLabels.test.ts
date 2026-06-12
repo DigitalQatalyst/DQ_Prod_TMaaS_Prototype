@@ -41,4 +41,10 @@ describe("marketplaceDisplayLabels", () => {
       "Flexible Advisory Package"
     );
   });
+
+  it("strips High-Impact when title is passed via displayName override", () => {
+    expect(
+      getMarketplaceCardTitle("Online Web Presence (High-Impact) - Assess", "advisory")
+    ).toBe("Online Web Presence - Assess");
+  });
 });
