@@ -24,13 +24,15 @@ const MarketplaceBestSellers = ({
 
   if (bestSellers.length === 0) return null;
 
-  const heading =
+  const categoryLabel = marketplaceCategoryLabels[activeTab];
+  const eyebrow = activeTab === "all" ? "Featured" : (categoryLabel ?? "Featured");
+  const subcopy =
     activeTab === "all"
-      ? "Best sellers"
-      : `Top ${marketplaceCategoryLabels[activeTab] ?? "picks"}`;
+      ? "Hand-picked services across assessment, design, and delivery."
+      : `Standout services in ${categoryLabel ?? "this category"}.`;
 
   return (
-    <section aria-labelledby="marketplace-bestsellers-heading" className="pt-10">
+    <section aria-labelledby="marketplace-top-picks-heading" className="pt-10">
       <Carousel
         opts={{
           align: "start",
@@ -40,16 +42,14 @@ const MarketplaceBestSellers = ({
       >
         <div className="flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
           <div className="min-w-0">
-            <p className="dq-eyebrow">Popular</p>
+            <p className="dq-eyebrow">{eyebrow}</p>
             <h2
-              id="marketplace-bestsellers-heading"
+              id="marketplace-top-picks-heading"
               className="mt-4 text-4xl font-semibold tracking-tight text-dq-navy md:text-5xl"
             >
-              {heading}
+              Top picks
             </h2>
-            <p className="mt-4 text-base text-gray-600">
-              Top services with fixed scope and transparent pricing.
-            </p>
+            <p className="mt-4 text-base text-gray-600">{subcopy}</p>
           </div>
 
           <div className="flex shrink-0 items-center gap-2 self-end sm:self-auto">

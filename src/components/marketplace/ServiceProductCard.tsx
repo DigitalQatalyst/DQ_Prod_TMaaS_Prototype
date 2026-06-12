@@ -193,7 +193,7 @@ const ServiceProductCard = ({
         {featured && (
           <span className="pointer-events-none absolute -top-2 left-4 z-10 inline-flex w-fit items-center gap-1 rounded-full bg-dq-orange px-2.5 py-1 text-[9px] font-bold uppercase tracking-wider text-white">
             <TrendingUp size={10} strokeWidth={2.5} />
-            Best seller
+            Top pick
           </span>
         )}
 
@@ -310,7 +310,7 @@ const FullServiceProductCard = ({
       {featured && (
         <span className="absolute top-3 left-4 inline-flex items-center gap-1 rounded-full bg-orange-500 px-2 py-0.5 text-[9px] font-bold uppercase tracking-wider text-white">
           <TrendingUp size={10} />
-          Best seller
+          Top pick
         </span>
       )}
       {canUseCart && <div className="absolute top-3 right-3">{cartButton}</div>}

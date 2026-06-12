@@ -408,7 +408,7 @@ const Marketplace = () => {
                         <SelectValue placeholder="Sort by" />
                       </SelectTrigger>
                       <SelectContent>
-                        <SelectItem value="popular">Most popular</SelectItem>
+                        <SelectItem value="popular">Featured</SelectItem>
                         <SelectItem value="fastest">Fastest delivery</SelectItem>
                         <SelectItem value="price-low">Lowest price</SelectItem>
                       </SelectContent>
