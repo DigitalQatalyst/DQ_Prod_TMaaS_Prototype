@@ -1,6 +1,7 @@
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { MemoryRouter, Route, Routes } from "react-router-dom";
+import { HelmetProvider } from "react-helmet-async";
 
 import Contact from "./Contact";
 
@@ -18,11 +19,13 @@ const VALID = {
 
 function renderContact(initialEntry = "/contact") {
   return render(
-    <MemoryRouter initialEntries={[initialEntry]}>
-      <Routes>
-        <Route path="/contact" element={<Contact />} />
-      </Routes>
-    </MemoryRouter>
+    <HelmetProvider>
+      <MemoryRouter initialEntries={[initialEntry]}>
+        <Routes>
+          <Route path="/contact" element={<Contact />} />
+        </Routes>
+      </MemoryRouter>
+    </HelmetProvider>
   );
 }
 
@@ -149,6 +152,8 @@ describe("Contact integration", () => {
           need: "Advisory & Strategy",
           message: "I would like to request a quote for: AI Readiness Assessment",
           consent: true,
+          turnstileToken: "test-turnstile-token",
+          website: "",
         }),
       });
     });
@@ -187,6 +192,8 @@ describe("Contact integration", () => {
         body: JSON.stringify({
           ...VALID,
           consent: true,
+          turnstileToken: "test-turnstile-token",
+          website: "",
         }),
       });
     });

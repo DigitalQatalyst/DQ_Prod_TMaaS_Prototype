@@ -11,16 +11,18 @@ import {
 
 interface ServiceDetailHeroProps {
   service: ServiceProduct;
-  requiresQuoteCTA: boolean;
-  onRequestQuote: () => void;
+  primaryCtaLabel: string;
+  onPrimaryCta: () => void;
   onStartOnboarding: (name: string) => void;
+  packageHighlights?: string[];
 }
 
 export function ServiceDetailHero({
   service,
-  requiresQuoteCTA,
-  onRequestQuote,
+  primaryCtaLabel,
+  onPrimaryCta,
   onStartOnboarding,
+  packageHighlights,
 }: ServiceDetailHeroProps) {
   const title = getDisplayTitle(service.standardName);
   const categoryLabel = getCategoryShortLabel(service.collection);
@@ -85,9 +87,10 @@ export function ServiceDetailHero({
         <div className="animate-fade-in-up animation-delay-200 lg:sticky lg:top-24 lg:self-start">
           <ServicePackageCard
             service={service}
-            requiresQuoteCTA={requiresQuoteCTA}
-            onRequestQuote={onRequestQuote}
+            primaryCtaLabel={primaryCtaLabel}
+            onPrimaryCta={onPrimaryCta}
             onStartOnboarding={onStartOnboarding}
+            packageHighlights={packageHighlights}
           />
         </div>
       </div>

@@ -7,7 +7,7 @@ import {
   useState,
   type ReactNode,
 } from "react";
-import { parseServicePrice } from "@/data/services";
+import { parseServicePrice } from "@/lib/serviceProductUtils";
 import { useCatalogData } from "@/contexts/CatalogContext";
 import { fetchServiceById, shouldUseSupabaseCatalog } from "@/services/catalogService";
 import type { ServiceProduct } from "@/types/serviceProduct";

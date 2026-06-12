@@ -1,6 +1,11 @@
+import { checkRateLimit, getClientIp, verifyTurnstile } from './contact-security.js';
+
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const PHONE_RE = /^\+?[\d\s\-(). ]{7,20}$/;
 const MAX_LEN = { name: 100, org: 200, role: 150, message: 5000, other: 100, phone: 30 };
+
+let cachedAccessToken = null;
+let tokenExpiresAt = 0;
 
 function escapeHtml(str) {
   return String(str ?? '')
@@ -12,12 +17,13 @@ function escapeHtml(str) {
 }
 
 function validateBody(body) {
-  const { firstName, lastName, email, phone, organisation, interest, need, message, consent } = body;
+  const { firstName, lastName, email, phone, organisation, role, interest, need, message, consent } = body;
   if (!firstName?.trim() || firstName.length > MAX_LEN.name) return 'Invalid firstName';
   if (!lastName?.trim()  || lastName.length  > MAX_LEN.name) return 'Invalid lastName';
   if (!email?.trim() || !EMAIL_RE.test(email) || email.length > MAX_LEN.other) return 'Invalid email';
   if (phone?.trim() && (!PHONE_RE.test(phone.trim()) || phone.length > MAX_LEN.phone)) return 'Invalid phone';
   if (!organisation?.trim() || organisation.length > MAX_LEN.org) return 'Invalid organisation';
+  if (role?.trim() && role.length > MAX_LEN.role) return 'Invalid role';
   if (!interest?.trim() || interest.length > MAX_LEN.other) return 'Invalid interest';
   if (!need?.trim()     || need.length     > MAX_LEN.other) return 'Invalid need';
   if (!message?.trim()  || message.length  > MAX_LEN.message) return 'Invalid message';
@@ -26,6 +32,11 @@ function validateBody(body) {
 }
 
 async function getAccessToken() {
+  const now = Date.now();
+  if (cachedAccessToken && now < tokenExpiresAt - 60_000) {
+    return cachedAccessToken;
+  }
+
   const params = new URLSearchParams({
     client_id: process.env.MSGRAPH_CLIENT_ID,
     client_secret: process.env.MSGRAPH_CLIENT_SECRET,
@@ -48,7 +59,9 @@ async function getAccessToken() {
   }
 
   const data = await res.json();
-  return data.access_token;
+  cachedAccessToken = data.access_token;
+  tokenExpiresAt = now + (data.expires_in ?? 3600) * 1000;
+  return cachedAccessToken;
 }
 
 function buildEmailHtml(fields) {
@@ -114,22 +127,57 @@ async function handler(req, res) {
     return res.status(405).json({ ok: false, error: 'Method not allowed' });
   }
 
-  const { MSGRAPH_TENANT_ID, MSGRAPH_CLIENT_ID, MSGRAPH_CLIENT_SECRET, MSGRAPH_SENDER_UPN, MSGRAPH_RECIPIENT_EMAIL } = process.env;
+  const {
+    MSGRAPH_TENANT_ID,
+    MSGRAPH_CLIENT_ID,
+    MSGRAPH_CLIENT_SECRET,
+    MSGRAPH_SENDER_UPN,
+    MSGRAPH_RECIPIENT_EMAIL,
+    TURNSTILE_SECRET_KEY,
+  } = process.env;
 
-  if (!MSGRAPH_TENANT_ID || !MSGRAPH_CLIENT_ID || !MSGRAPH_CLIENT_SECRET || !MSGRAPH_SENDER_UPN || !MSGRAPH_RECIPIENT_EMAIL) {
+  if (
+    !MSGRAPH_TENANT_ID ||
+    !MSGRAPH_CLIENT_ID ||
+    !MSGRAPH_CLIENT_SECRET ||
+    !MSGRAPH_SENDER_UPN ||
+    !MSGRAPH_RECIPIENT_EMAIL ||
+    !TURNSTILE_SECRET_KEY
+  ) {
     console.error('[contact] Missing env vars:', {
       MSGRAPH_TENANT_ID: !!MSGRAPH_TENANT_ID,
       MSGRAPH_CLIENT_ID: !!MSGRAPH_CLIENT_ID,
       MSGRAPH_CLIENT_SECRET: !!MSGRAPH_CLIENT_SECRET,
       MSGRAPH_SENDER_UPN: !!MSGRAPH_SENDER_UPN,
       MSGRAPH_RECIPIENT_EMAIL: !!MSGRAPH_RECIPIENT_EMAIL,
+      TURNSTILE_SECRET_KEY: !!TURNSTILE_SECRET_KEY,
     });
     return res.status(500).json({ ok: false, error: 'Service configuration error. Please email us directly at info@digitalqatalyst.com.' });
+  }
+
+  const clientIp = getClientIp(req);
+
+  if (req.body?.website?.trim()) {
+    return res.status(200).json({ ok: true });
+  }
+
+  const rateLimit = checkRateLimit(clientIp);
+  if (!rateLimit.allowed) {
+    res.setHeader('Retry-After', String(rateLimit.retryAfterSec));
+    return res.status(429).json({
+      ok: false,
+      error: 'Too many requests. Please wait a few minutes and try again.',
+    });
   }
 
   const validationError = validateBody(req.body);
   if (validationError) {
     return res.status(400).json({ ok: false, error: validationError });
+  }
+
+  const turnstileResult = await verifyTurnstile(req.body?.turnstileToken, clientIp);
+  if (!turnstileResult.ok) {
+    return res.status(400).json({ ok: false, error: turnstileResult.error });
   }
 
   const { firstName, lastName, email, phone, organisation, role, interest, need, message, consent } = req.body;
@@ -175,6 +223,11 @@ async function handler(req, res) {
     console.error('[contact] handler error:', err);
     return res.status(500).json({ ok: false, error: 'An unexpected error occurred. Please try again or email us at info@digitalqatalyst.com.' });
   }
+}
+
+export function resetContactApiCacheForTests() {
+  cachedAccessToken = null;
+  tokenExpiresAt = 0;
 }
 
 export default handler;

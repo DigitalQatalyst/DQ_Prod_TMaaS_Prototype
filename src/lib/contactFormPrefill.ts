@@ -1,4 +1,28 @@
-import type { ServiceProduct } from "@/types/serviceProduct";
+import type { ServiceProduct, ServiceTypeId } from "@/types/serviceProduct";
+
+export type ServicePackageCta = {
+  label: string;
+  intent: ContactEnquiryIntent;
+};
+
+/** Primary package-card CTA by service stage. */
+export function getServicePackageCta(serviceType: ServiceTypeId): ServicePackageCta {
+  switch (serviceType) {
+    case "advisory":
+      return { label: "Start here", intent: "consultation" };
+    case "design":
+    case "ai_design":
+    case "deploy":
+    case "ai_deploy":
+      return { label: "Get a quote", intent: "quote" };
+    case "manage":
+      return { label: "Talk to our team", intent: "consultation" };
+    case "bundle":
+      return { label: "Request proposal", intent: "quote" };
+    default:
+      return { label: "Get a quote", intent: "quote" };
+  }
+}
 
 export const CONTACT_INTEREST_OPTIONS = [
   "Digital Platform & Architecture",
@@ -77,9 +101,16 @@ export function mapServiceToNeed(
 
 export function buildServiceEnquiryMessage(
   serviceName: string,
-  intent?: string
+  intent?: string,
+  serviceType?: string
 ): string {
-  if (intent === "consultation") {
+  if (serviceType === "bundle") {
+    return `I would like to request a proposal for: ${serviceName}`;
+  }
+  if (serviceType === "advisory") {
+    return `I'd like to get started with: ${serviceName}`;
+  }
+  if (intent === "consultation" || serviceType === "manage") {
     return `I would like to talk to the team about: ${serviceName}`;
   }
   return `I would like to request a quote for: ${serviceName}`;
@@ -102,6 +133,6 @@ export function getServiceEnquiryFormDefaults(params: ServiceContactParams) {
   return {
     interest: mapServiceToInterest(params.collection, params.type),
     need: mapServiceToNeed(params.type, params.intent),
-    message: buildServiceEnquiryMessage(params.service, params.intent),
+    message: buildServiceEnquiryMessage(params.service, params.intent, params.type),
   };
 }

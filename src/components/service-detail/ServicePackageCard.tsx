@@ -10,7 +10,7 @@ import {
   type ServiceProduct,
 } from "./serviceDetailHelpers";
 
-const PACKAGE_FEATURES = [
+const DEFAULT_PACKAGE_FEATURES = [
   "SLA-backed delivery",
   "Expert team included",
   "Clear delivery milestones",
@@ -18,19 +18,23 @@ const PACKAGE_FEATURES = [
 
 interface ServicePackageCardProps {
   service: ServiceProduct;
-  requiresQuoteCTA: boolean;
-  onRequestQuote: () => void;
+  primaryCtaLabel: string;
+  onPrimaryCta: () => void;
   onStartOnboarding: (name: string) => void;
+  packageHighlights?: string[];
   className?: string;
 }
 
 export function ServicePackageCard({
   service,
-  requiresQuoteCTA,
-  onRequestQuote,
+  primaryCtaLabel,
+  onPrimaryCta,
   onStartOnboarding,
+  packageHighlights,
   className,
 }: ServicePackageCardProps) {
+  const features =
+    packageHighlights?.length ? packageHighlights : DEFAULT_PACKAGE_FEATURES;
   const { addItem, hasItem, openCart } = useCart();
 
   return (
@@ -41,7 +45,7 @@ export function ServicePackageCard({
       <p className="mt-1 text-sm text-gray-500">{service.duration}</p>
 
       <ul className="mt-6 space-y-3 border-t border-gray-100 pt-6">
-        {PACKAGE_FEATURES.map((item) => (
+        {features.map((item) => (
           <li key={item} className="flex items-start gap-2.5 text-sm text-gray-700">
             <CheckCircle2
               size={16}
@@ -54,13 +58,13 @@ export function ServicePackageCard({
       </ul>
 
       <div className="mt-6">
-        {requiresQuoteCTA || !featureFlags.isEnabled("cart") ? (
+        {service.serviceType === "bundle" || !featureFlags.isEnabled("cart") ? (
           <ServiceDetailPrimaryButton
             fullWidth
             className="group"
-            onClick={onRequestQuote}
+            onClick={onPrimaryCta}
           >
-            Get a quote
+            {primaryCtaLabel}
             <ArrowRight
               size={16}
               className="transition group-hover:translate-x-0.5"

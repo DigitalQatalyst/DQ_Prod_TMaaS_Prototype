@@ -11,11 +11,7 @@ const HeroDashboardMockup = () => {
     <div className="relative mx-auto w-full max-w-[520px] lg:max-w-none">
       <div className="relative lg:[perspective:1200px] lg:[perspective-origin:50%_50%]">
         <div
-          className="relative rounded-2xl border border-gray-200 bg-white p-3 shadow-2xl lg:[transform:rotateY(-8deg)_rotateX(4deg)] lg:[transform-style:preserve-3d]"
-          style={{
-            boxShadow:
-              "0 25px 60px -12px rgba(3, 15, 53, 0.25), 0 0 0 1px rgba(3, 15, 53, 0.04)",
-          }}
+          className="relative rounded-2xl border border-gray-200 bg-white p-3 lg:[transform:rotateY(-8deg)_rotateX(4deg)] lg:[transform-style:preserve-3d]"
         >
           <div className="overflow-hidden rounded-xl bg-[#0a1628]">
             <div className="flex">
@@ -107,15 +103,6 @@ const HeroDashboardMockup = () => {
           </div>
         </div>
       </div>
-
-      <div
-        aria-hidden
-        className="absolute -inset-4 -z-10 rounded-full opacity-60 blur-3xl sm:-inset-8"
-        style={{
-          background:
-            "radial-gradient(ellipse at center, oklch(0.65 0.208 29 / 0.15), transparent 70%)",
-        }}
-      />
     </div>
   );
 };

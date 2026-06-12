@@ -5,6 +5,7 @@ import {
   serviceDetailSplitGrid,
   serviceDetailSplitLead,
 } from "@/lib/brandAccent";
+import type { PdpContent } from "@/types/catalog";
 import {
   getAudienceCardAccent,
   getOverviewContent,
@@ -13,10 +14,16 @@ import {
 
 interface ServiceDetailAboutSectionProps {
   service: ServiceProduct;
+  pdpContent?: PdpContent;
 }
 
-export function ServiceDetailAboutSection({ service }: ServiceDetailAboutSectionProps) {
-  const { paragraphs, audienceDescription } = getOverviewContent(service);
+export function ServiceDetailAboutSection({ service, pdpContent }: ServiceDetailAboutSectionProps) {
+  const fallback = getOverviewContent(service);
+  const paragraphs = pdpContent?.overviewParagraphs?.length
+    ? pdpContent.overviewParagraphs
+    : fallback.paragraphs;
+  const audienceDescription =
+    pdpContent?.audienceDescription ?? fallback.audienceDescription;
   const accent = getAudienceCardAccent(service.collection);
 
   return (

@@ -1,0 +1,24 @@
+---
+description: PDP and marketplace copy voice for TMaaS service detail pages
+globs: scripts/lib/pdpCopyGenerator.ts,scripts/generate-pdp-content-sql.ts,src/components/service-detail/**,supabase/migrations/*pdp*
+alwaysApply: false
+---
+
+# PDP copy style (Option A)
+
+Reference: `/workspace/pdp-copy-style.md`
+
+## Required voice rules
+
+1. **No em dashes** (`—`). Use commas, colons, or full stops instead.
+2. **Do not open hero copy with duration** (e.g. never start with "In one week,"). Duration belongs in metadata, timeline, and FAQs.
+3. Lead with outcome or scope, not process jargon ("strategic discovery engagement").
+4. Name the **solution** (web presence, data platform), not generic "digital presence" unless the product is experience/web.
+5. Use **DigitalQatalyst team** (not "DQ advisor").
+6. British spelling where already used: organisation, prioritised.
+
+## Generator
+
+- PDP seed SQL: `npm run db:pdp-content:sql` → `supabase/migrations/20250610000012_seed_pdp_content.sql`
+- Apply migrations `20250610000011` (schema) then `20250610000012` (content) in Supabase SQL Editor.
+- `fetchPdpContent` must degrade gracefully when PDP tables/columns are not migrated yet.

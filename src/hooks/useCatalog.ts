@@ -1,26 +1,50 @@
-import { useQuery } from "@tanstack/react-query";
-import { initialServices } from "@/data/services";
-import { getBestSellers as getStaticBestSellers } from "@/data/services";
+import { useEffect, useMemo, useRef } from "react";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { useRegisterCatalogServices } from "@/contexts/CatalogContext";
+import { getCatalogPlaceholder } from "@/lib/catalogPlaceholder";
+import { CATALOG_QUERY_KEY } from "@/lib/catalogQueryKeys";
+import { filterCatalogServices, type MarketplaceCatalogFilters } from "@/lib/marketplaceCatalogFilters";
 import {
+  enrichCatalogListExtras,
   fetchCatalog,
-  fetchBestSellers,
   pickTopServicesByPopularity,
   shouldUseSupabaseCatalog,
 } from "@/services/catalogService";
+import type { CatalogListParams } from "@/types/catalog";
 import type { ServiceProduct } from "@/types/serviceProduct";
 
-export const CATALOG_QUERY_KEY = ["catalog"] as const;
+export { CATALOG_QUERY_KEY };
 
-export function useCatalog() {
+const CATALOG_STALE_MS = 5 * 60 * 1000;
+
+export function useCatalog({ enabled = true }: { enabled?: boolean } = {}) {
   const useRemote = shouldUseSupabaseCatalog();
+  const queryClient = useQueryClient();
+  const enrichedRef = useRef(false);
 
-  return useQuery({
+  const query = useQuery({
     queryKey: CATALOG_QUERY_KEY,
     queryFn: fetchCatalog,
-    enabled: useRemote,
-    staleTime: 5 * 60 * 1000,
-    placeholderData: initialServices,
+    enabled,
+    staleTime: CATALOG_STALE_MS,
+    placeholderData: useRemote ? getCatalogPlaceholder : undefined,
   });
+
+  useEffect(() => {
+    enrichedRef.current = false;
+  }, [enabled, useRemote]);
+
+  useEffect(() => {
+    if (!useRemote || !enabled || !query.data?.length) return;
+    if (query.isPlaceholderData || enrichedRef.current) return;
+
+    enrichedRef.current = true;
+    void enrichCatalogListExtras(query.data).then((enriched) => {
+      queryClient.setQueryData(CATALOG_QUERY_KEY, enriched);
+    });
+  }, [enabled, query.data, query.isPlaceholderData, queryClient, useRemote]);
+
+  return query;
 }
 
 export function useCatalogServices(): {
@@ -29,45 +53,56 @@ export function useCatalogServices(): {
   isError: boolean;
 } {
   const useRemote = shouldUseSupabaseCatalog();
-  const query = useCatalog();
-
-  if (!useRemote) {
-    return { services: initialServices, isLoading: false, isError: false };
-  }
+  const query = useCatalog({ enabled: !useRemote });
 
   return {
-    services: query.data ?? initialServices,
+    services: query.data ?? [],
     isLoading: query.isLoading,
     isError: query.isError,
   };
 }
 
-export function useBestSellers(collection: string, limit = 6) {
-  const useRemote = shouldUseSupabaseCatalog();
-  const catalogQuery = useCatalog();
-  const staticSellers = getStaticBestSellers(
-    collection as Parameters<typeof getStaticBestSellers>[0],
-    limit
-  );
+export function useBestSellers(collection: string, limit = 6, enabled = true) {
+  const catalogQuery = useCatalog({ enabled });
 
-  const query = useQuery({
-    queryKey: ["best-sellers", collection, limit],
-    queryFn: () => fetchBestSellers(collection, limit),
-    enabled: useRemote,
-    staleTime: 5 * 60 * 1000,
-  });
+  const data = useMemo(() => {
+    if (!enabled || !catalogQuery.data?.length) return [];
+    return pickTopServicesByPopularity(catalogQuery.data, collection, limit);
+  }, [catalogQuery.data, collection, enabled, limit]);
 
-  if (!useRemote) {
-    return { data: staticSellers, isLoading: false, isError: false };
-  }
-
-  const catalogFallback = catalogQuery.data
-    ? pickTopServicesByPopularity(catalogQuery.data, collection, limit)
-    : [];
+  useRegisterCatalogServices(data);
 
   return {
-    data: query.data ?? catalogFallback,
-    isLoading: query.isLoading && !query.data && !catalogQuery.data,
-    isError: query.isError,
+    data,
+    isLoading: false,
+    isError: catalogQuery.isError,
+    isRefreshing: catalogQuery.isFetching && !catalogQuery.isPlaceholderData,
   };
 }
+
+export function useMarketplaceListings(params: CatalogListParams) {
+  const catalogQuery = useCatalog();
+
+  const pageResult = useMemo(() => {
+    const catalog = catalogQuery.data ?? [];
+    const filtered = filterCatalogServices(catalog, params);
+    const start = (params.page - 1) * params.pageSize;
+
+    return {
+      services: filtered.slice(start, start + params.pageSize),
+      totalCount: filtered.length,
+    };
+  }, [catalogQuery.data, params]);
+
+  useRegisterCatalogServices(pageResult.services);
+
+  return {
+    services: pageResult.services,
+    totalCount: pageResult.totalCount,
+    isLoading: false,
+    isError: catalogQuery.isError,
+    isRefreshing: catalogQuery.isFetching && !catalogQuery.isPlaceholderData,
+  };
+}
+
+export type { MarketplaceCatalogFilters };

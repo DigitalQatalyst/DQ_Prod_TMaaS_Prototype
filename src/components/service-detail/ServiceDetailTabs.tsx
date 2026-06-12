@@ -6,6 +6,7 @@ import { ServiceDetailOverviewTab } from "./ServiceDetailOverviewTab";
 import { ServiceDetailWhatYouReceiveTab } from "./ServiceDetailWhatYouReceiveTab";
 import { ServiceDetailFaqsTab } from "./ServiceDetailFaqsTab";
 import { ServiceDetailWhyItMattersTab } from "./ServiceDetailWhyItMattersTab";
+import type { PdpContent } from "@/types/catalog";
 import type { ServiceProduct } from "./serviceDetailHelpers";
 
 const SERVICE_DETAIL_TABS = [
@@ -24,6 +25,7 @@ interface ServiceDetailTabsProps {
   deliveryProcess: DeliveryProcess;
   deployModules: { name: string; features: string[] }[];
   isDeployService: boolean;
+  pdpContent?: PdpContent;
 }
 
 export function ServiceDetailTabs({
@@ -31,6 +33,7 @@ export function ServiceDetailTabs({
   deliveryProcess,
   deployModules,
   isDeployService,
+  pdpContent,
 }: ServiceDetailTabsProps) {
   const [activeTab, setActiveTab] = useState("overview");
 
@@ -45,7 +48,7 @@ export function ServiceDetailTabs({
       </TabsList>
 
       <TabsContent value="overview" className="mt-0 focus-visible:outline-none">
-        <ServiceDetailOverviewTab service={service} />
+        <ServiceDetailOverviewTab service={service} pdpContent={pdpContent} />
       </TabsContent>
 
       <TabsContent value="what-you-receive" className="mt-0 focus-visible:outline-none">
@@ -53,6 +56,7 @@ export function ServiceDetailTabs({
           service={service}
           deployModules={deployModules}
           isDeployService={isDeployService}
+          pdpContent={pdpContent}
         />
       </TabsContent>
 
@@ -67,11 +71,11 @@ export function ServiceDetailTabs({
       </TabsContent>
 
       <TabsContent value="why-it-matters" className="mt-0 focus-visible:outline-none">
-        <ServiceDetailWhyItMattersTab service={service} />
+        <ServiceDetailWhyItMattersTab service={service} pdpContent={pdpContent} />
       </TabsContent>
 
       <TabsContent value="faqs" className="mt-0 focus-visible:outline-none">
-        <ServiceDetailFaqsTab service={service} />
+        <ServiceDetailFaqsTab service={service} pdpContent={pdpContent} />
       </TabsContent>
     </Tabs>
   );

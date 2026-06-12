@@ -3,6 +3,7 @@ import { describe, expect, it } from "vitest";
 import {
   buildContactPath,
   getServiceEnquiryFormDefaults,
+  getServicePackageCta,
   mapServiceToInterest,
   mapServiceToNeed,
 } from "./contactFormPrefill";
@@ -32,18 +33,31 @@ describe("contactFormPrefill", () => {
     );
   });
 
-  it("returns enquiry defaults for service-driven submissions", () => {
+  it("returns enquiry defaults for assess services", () => {
     expect(
       getServiceEnquiryFormDefaults({
         service: "AI Readiness Assessment",
         type: "advisory",
         collection: "ai",
-        intent: "quote",
+        intent: "consultation",
       })
     ).toEqual({
       interest: "Transformation Strategy & Advisory",
       need: "Advisory & Strategy",
-      message: "I would like to request a quote for: AI Readiness Assessment",
+      message: "I'd like to get started with: AI Readiness Assessment",
+    });
+  });
+
+  it("maps service stages to package CTA labels", () => {
+    expect(getServicePackageCta("advisory")).toEqual({
+      label: "Start here",
+      intent: "consultation",
+    });
+    expect(getServicePackageCta("design").label).toBe("Get a quote");
+    expect(getServicePackageCta("manage").label).toBe("Talk to our team");
+    expect(getServicePackageCta("bundle")).toEqual({
+      label: "Request proposal",
+      intent: "quote",
     });
   });
 });

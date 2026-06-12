@@ -1,5 +1,5 @@
 import ServiceProductCard from "@/components/marketplace/ServiceProductCard";
-import { getRemixedName } from "@/data/services";
+import { getRemixedName } from "@/lib/serviceProductUtils";
 import { useBestSellers } from "@/hooks/useCatalog";
 import { marketplaceCategoryLabels } from "@/data/marketplaceNavigation";
 import {

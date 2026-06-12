@@ -1,9 +1,10 @@
-import { useState, useEffect } from "react";
+import { lazy, Suspense, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import LandingNavbar from "@/components/site/landing/LandingNavbar";
 import Footer from "@/components/Footer";
 import MeshSection from "@/components/site/MeshSection";
-import DiagnoseDialog from "@/components/DiagnoseDialog";
+
+const DiagnoseDialog = lazy(() => import("@/components/DiagnoseDialog"));
 import {
   ServiceDetailPrimaryButton,
   ServiceDetailSecondaryButtonDark,
@@ -15,8 +16,15 @@ import {
   getDeliverySteps,
 } from "@/components/service-detail/ServiceDetailDeliverySection";
 import { getDisplayTitle } from "@/components/service-detail/serviceDetailHelpers";
-import { buildContactPath } from "@/lib/contactFormPrefill";
-import { PLATFORM_ACRONYM } from "@/lib/brandLinks";
+import { buildContactPath, getServicePackageCta } from "@/lib/contactFormPrefill";
+import JsonLd from "@/components/JsonLd";
+import Seo from "@/components/Seo";
+import { buildServiceMetaDescription, SEO_BRAND } from "@/lib/seo";
+import {
+  buildServiceFaqStructuredData,
+  buildServiceStructuredData,
+} from "@/lib/structuredData";
+import { getServiceFaqsContent } from "@/components/service-detail/serviceFaqsContent";
 import { Button } from "@/components/ui/button";
 import { featureFlags } from "@/lib/featureFlags";
 import { useServiceDetail } from "@/hooks/useServiceDetail";
@@ -31,24 +39,22 @@ const ServiceDetail = () => {
   const { data: detail, isLoading } = useServiceDetail(variantId);
   const service = detail?.service;
 
-  useEffect(() => {
-    if (!service) {
-      document.title = `Service not found | ${PLATFORM_ACRONYM}`;
-      return;
-    }
-    document.title = `${getDisplayTitle(service.standardName)} | ${PLATFORM_ACRONYM}`;
-  }, [service]);
-
   const isAdvisoryService = service?.serviceType === "advisory";
   const isDesignService =
     service && ["design", "ai_design"].includes(service.serviceType);
   const isDeployService =
     service && ["deploy", "ai_deploy"].includes(service.serviceType);
-  const requiresQuoteCTA = service?.serviceType === "bundle";
+  const servicePath = `/service/${id ?? ""}`;
 
   if (isLoading && !service) {
     return (
       <div className="flex min-h-screen flex-col items-center justify-center bg-background">
+        <Seo
+          title={`Loading service | ${SEO_BRAND}`}
+          description="Loading digital transformation service details from the TMaaS marketplace."
+          path={servicePath}
+          noindex
+        />
         <p className="text-gray-500">Loading service…</p>
       </div>
     );
@@ -57,6 +63,12 @@ const ServiceDetail = () => {
   if (!service) {
     return (
       <div className="flex min-h-screen flex-col items-center justify-center bg-background">
+        <Seo
+          title={`Service not found | ${SEO_BRAND}`}
+          description="This service could not be found. Browse the TMaaS marketplace for digital transformation services."
+          path={servicePath}
+          noindex
+        />
         <h2 className="mb-4 text-2xl font-semibold text-dq-navy">Service not found</h2>
         <p className="mb-6 max-w-sm text-center text-sm text-gray-600">
           This service may have moved. Browse the marketplace to find what you need.
@@ -75,15 +87,20 @@ const ServiceDetail = () => {
     setIsDialogOpen(true);
   };
 
-  const deliveryProcess = getDeliverySteps(service.serviceType, {
-    isAdvisory: !!isAdvisoryService,
-    isDesign: !!isDesignService,
-    isDeploy: !!isDeployService,
-  });
+  const pdpContent = detail?.pdpContent;
+  const deliveryProcess =
+    pdpContent?.deliveryProcess ??
+    getDeliverySteps(service.serviceType, {
+      isAdvisory: !!isAdvisoryService,
+      isDesign: !!isDesignService,
+      isDeploy: !!isDeployService,
+    });
 
-  const handleRequestQuote = () => {
+  const packageCta = getServicePackageCta(service.serviceType);
+
+  const handlePrimaryCta = () => {
     if (featureFlags.isEnabled("contactUs")) {
-      navigate(buildContactPath(service, "quote"));
+      navigate(buildContactPath(service, packageCta.intent));
       return;
     }
     handleStartOnboarding(service.standardName);
@@ -97,8 +114,31 @@ const ServiceDetail = () => {
     handleStartOnboarding(service.standardName);
   };
 
+  const displayTitle = getDisplayTitle(service.standardName);
+
   return (
     <div className="min-h-screen bg-background text-left">
+      <Seo
+        title={`${displayTitle} | ${SEO_BRAND}`}
+        description={buildServiceMetaDescription(displayTitle, service)}
+        path={servicePath}
+        ogType="product"
+      />
+      <JsonLd
+        data={buildServiceStructuredData(service, displayTitle, servicePath)}
+      />
+      {(() => {
+        const faqItems = pdpContent?.faqs?.length
+          ? pdpContent.faqs
+          : getServiceFaqsContent(service).faqs;
+        const faqSchema = buildServiceFaqStructuredData(
+          service,
+          displayTitle,
+          servicePath,
+          faqItems
+        );
+        return faqSchema ? <JsonLd data={faqSchema} /> : null;
+      })()}
       <LandingNavbar />
 
       <div className="relative overflow-hidden">
@@ -112,9 +152,10 @@ const ServiceDetail = () => {
           <div className="relative z-10 mx-auto max-w-[1200px]">
             <ServiceDetailHero
               service={service}
-              requiresQuoteCTA={!!requiresQuoteCTA}
-              onRequestQuote={handleRequestQuote}
+              primaryCtaLabel={packageCta.label}
+              onPrimaryCta={handlePrimaryCta}
               onStartOnboarding={handleStartOnboarding}
+              packageHighlights={pdpContent?.packageHighlights}
             />
           </div>
         </div>
@@ -126,6 +167,7 @@ const ServiceDetail = () => {
               deliveryProcess={deliveryProcess}
               deployModules={deployModules}
               isDeployService={!!isDeployService}
+              pdpContent={pdpContent}
             />
 
             <ServiceDetailRelatedServices service={service} />
@@ -162,11 +204,15 @@ const ServiceDetail = () => {
         </div>
       </MeshSection>
 
-      <DiagnoseDialog
-        isOpen={isDialogOpen}
-        onClose={() => setIsDialogOpen(false)}
-        initialProblem={dialogPrompt}
-      />
+      {isDialogOpen ? (
+        <Suspense fallback={null}>
+          <DiagnoseDialog
+            isOpen={isDialogOpen}
+            onClose={() => setIsDialogOpen(false)}
+            initialProblem={dialogPrompt}
+          />
+        </Suspense>
+      ) : null}
       <Footer />
     </div>
   );

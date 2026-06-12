@@ -1,3 +1,5 @@
+import Seo from "@/components/Seo";
+import { HOME_SEO } from "@/lib/seo";
 import Navbar from "@/components/Navbar";
 import HeroSection from "@/components/HeroSection";
 import MarketplaceBestSellers from "@/components/marketplace/MarketplaceBestSellers";
@@ -11,6 +13,12 @@ import Footer from "@/components/Footer";
 const Index = () => {
   return (
     <div className="min-h-screen bg-background">
+      <Seo
+        title={HOME_SEO.title}
+        description={HOME_SEO.description}
+        path="/home"
+        noindex
+      />
       <Navbar />
       <HeroSection />
 

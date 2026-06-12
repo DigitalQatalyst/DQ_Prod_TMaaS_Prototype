@@ -19,7 +19,7 @@ const servicesToSeed = seedAll
   : initialServices.filter((s) => curatedIdSet.has(s.id));
 
 const VARIANT_SUFFIX_RE =
-  / - (Assess|Design|AI Design|Implementation|AI Implementation|Managed Service|Transformation Bundle)$/;
+  / - (Assess|Design|AI Design|Deploy|AI Deploy|Managed|Implementation|AI Implementation|Managed Service|Transformation Bundle|Advisory Set|Design Services Set|Deploy Services Set|Managed Services Set)$/;
 
 function esc(s: string): string {
   return s.replace(/'/g, "''");

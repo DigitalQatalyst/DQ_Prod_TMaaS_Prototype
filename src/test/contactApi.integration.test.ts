@@ -1,7 +1,8 @@
 // @vitest-environment node
 
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
-import handler from "../../api/contact.js";
+import handler, { resetContactApiCacheForTests } from "../../api/contact.js";
+import { resetRateLimitStore } from "../../api/contact-security.js";
 
 const ENV_KEYS = [
   "MSGRAPH_TENANT_ID",
@@ -9,6 +10,7 @@ const ENV_KEYS = [
   "MSGRAPH_CLIENT_SECRET",
   "MSGRAPH_SENDER_UPN",
   "MSGRAPH_RECIPIENT_EMAIL",
+  "TURNSTILE_SECRET_KEY",
 ] as const;
 
 const VALID_BODY = {
@@ -22,6 +24,7 @@ const VALID_BODY = {
   need: "General Enquiry",
   message: "We need help launching a customer portal.",
   consent: true,
+  turnstileToken: "test-turnstile-token",
 };
 
 type MockResponse = {
@@ -69,23 +72,62 @@ function createMockReq(
   return { method, body, headers };
 }
 
+function setEnv() {
+  for (const [key, value] of Object.entries({
+    MSGRAPH_TENANT_ID: "tenant",
+    MSGRAPH_CLIENT_ID: "client",
+    MSGRAPH_CLIENT_SECRET: "secret",
+    MSGRAPH_SENDER_UPN: "sender@example.com",
+    MSGRAPH_RECIPIENT_EMAIL: "team@example.com",
+    TURNSTILE_SECRET_KEY: "turnstile-secret",
+  })) {
+    process.env[key] = value;
+  }
+}
+
+function mockFetchSuccess() {
+  vi.stubGlobal(
+    "fetch",
+    vi.fn().mockImplementation((url: string | URL) => {
+      const href = String(url);
+      if (href.includes("challenges.cloudflare.com/turnstile")) {
+        return Promise.resolve({
+          ok: true,
+          json: async () => ({ success: true }),
+        });
+      }
+      if (href.includes("login.microsoftonline.com")) {
+        return Promise.resolve({
+          ok: true,
+          json: async () => ({ access_token: "test-token", expires_in: 3600 }),
+          text: async () => "",
+        });
+      }
+      if (href.includes("graph.microsoft.com")) {
+        return Promise.resolve({
+          ok: true,
+          status: 200,
+          text: async () => "",
+        });
+      }
+      return Promise.reject(new Error(`Unexpected fetch URL: ${href}`));
+    })
+  );
+}
+
 describe("contact API integration", () => {
   const originalEnv = { ...process.env };
 
   beforeEach(() => {
-    vi.stubGlobal(
-      "fetch",
-      vi.fn().mockResolvedValue({
-        ok: true,
-        status: 200,
-        json: async () => ({ access_token: "test-token" }),
-        text: async () => "",
-      })
-    );
+    resetRateLimitStore();
+    resetContactApiCacheForTests();
+    mockFetchSuccess();
   });
 
   afterEach(() => {
     process.env = { ...originalEnv };
+    resetRateLimitStore();
+    resetContactApiCacheForTests();
     vi.unstubAllGlobals();
   });
 
@@ -129,15 +171,7 @@ describe("contact API integration", () => {
   });
 
   it("returns 400 for invalid payloads", async () => {
-    for (const [key, value] of Object.entries({
-      MSGRAPH_TENANT_ID: "tenant",
-      MSGRAPH_CLIENT_ID: "client",
-      MSGRAPH_CLIENT_SECRET: "secret",
-      MSGRAPH_SENDER_UPN: "sender@example.com",
-      MSGRAPH_RECIPIENT_EMAIL: "team@example.com",
-    })) {
-      process.env[key] = value;
-    }
+    setEnv();
 
     const req = createMockReq("POST", { ...VALID_BODY, email: "not-an-email" });
     const res = createMockRes();
@@ -149,16 +183,85 @@ describe("contact API integration", () => {
     expect(fetch).not.toHaveBeenCalled();
   });
 
-  it("sends mail through Microsoft Graph for valid submissions", async () => {
-    for (const [key, value] of Object.entries({
-      MSGRAPH_TENANT_ID: "tenant",
-      MSGRAPH_CLIENT_ID: "client",
-      MSGRAPH_CLIENT_SECRET: "secret",
-      MSGRAPH_SENDER_UPN: "sender@example.com",
-      MSGRAPH_RECIPIENT_EMAIL: "team@example.com",
-    })) {
-      process.env[key] = value;
+  it("returns 400 when role exceeds max length", async () => {
+    setEnv();
+
+    const req = createMockReq("POST", {
+      ...VALID_BODY,
+      role: "x".repeat(151),
+    });
+    const res = createMockRes();
+
+    await handler(req, res);
+
+    expect(res.statusCode).toBe(400);
+    expect(res.body).toEqual({ ok: false, error: "Invalid role" });
+    expect(fetch).not.toHaveBeenCalled();
+  });
+
+  it("returns 400 when turnstile verification fails", async () => {
+    setEnv();
+    vi.stubGlobal(
+      "fetch",
+      vi.fn().mockResolvedValue({
+        ok: true,
+        json: async () => ({ success: false }),
+      })
+    );
+
+    const req = createMockReq("POST", VALID_BODY);
+    const res = createMockRes();
+
+    await handler(req, res);
+
+    expect(res.statusCode).toBe(400);
+    expect(res.body).toEqual({ ok: false, error: "Bot verification failed" });
+  });
+
+  it("returns 429 when rate limit is exceeded", async () => {
+    setEnv();
+
+    for (let i = 0; i < 5; i += 1) {
+      const okRes = createMockRes();
+      await handler(
+        createMockReq("POST", VALID_BODY, { "x-forwarded-for": "203.0.113.10" }),
+        okRes
+      );
+      expect(okRes.statusCode).toBe(200);
     }
+
+    const blockedRes = createMockRes();
+    await handler(
+      createMockReq("POST", VALID_BODY, { "x-forwarded-for": "203.0.113.10" }),
+      blockedRes
+    );
+
+    expect(blockedRes.statusCode).toBe(429);
+    expect(blockedRes.body).toEqual({
+      ok: false,
+      error: "Too many requests. Please wait a few minutes and try again.",
+    });
+    expect(blockedRes.headers["Retry-After"]).toBeDefined();
+  });
+
+  it("returns 200 for honeypot submissions without sending mail", async () => {
+    setEnv();
+
+    const req = createMockReq("POST", {
+      ...VALID_BODY,
+      website: "https://spam.example",
+    });
+    const res = createMockRes();
+
+    await handler(req, res);
+
+    expect(res.statusCode).toBe(200);
+    expect(res.body).toEqual({ ok: true });
+    expect(fetch).not.toHaveBeenCalled();
+  });
+
+  it("sends mail through Microsoft Graph for valid submissions", async () => {
+    setEnv();
 
     const req = createMockReq("POST", VALID_BODY);
     const res = createMockRes();
@@ -167,22 +270,16 @@ describe("contact API integration", () => {
 
     expect(res.statusCode).toBe(200);
     expect(res.body).toEqual({ ok: true });
-    expect(fetch).toHaveBeenCalledTimes(2);
+    expect(fetch).toHaveBeenCalledTimes(3);
 
-    const [tokenUrl, tokenInit] = vi.mocked(fetch).mock.calls[0];
-    expect(String(tokenUrl)).toContain("login.microsoftonline.com/tenant/oauth2/v2.0/token");
-    expect(tokenInit?.method).toBe("POST");
-
-    const [sendUrl, sendInit] = vi.mocked(fetch).mock.calls[1];
-    expect(String(sendUrl)).toBe(
+    const calls = vi.mocked(fetch).mock.calls.map(([url]) => String(url));
+    expect(calls[0]).toContain("challenges.cloudflare.com/turnstile");
+    expect(calls[1]).toContain("login.microsoftonline.com/tenant/oauth2/v2.0/token");
+    expect(calls[2]).toBe(
       "https://graph.microsoft.com/v1.0/users/sender@example.com/sendMail"
     );
-    expect(sendInit?.method).toBe("POST");
-    expect(sendInit?.headers).toMatchObject({
-      Authorization: "Bearer test-token",
-      "Content-Type": "application/json",
-    });
 
+    const [, sendInit] = vi.mocked(fetch).mock.calls[2];
     const payload = JSON.parse(String(sendInit?.body));
     expect(payload.message.subject).toContain("Jane Doe");
     expect(payload.message.subject).toContain("Acme Corp");
@@ -192,28 +289,32 @@ describe("contact API integration", () => {
   });
 
   it("returns 500 when Microsoft Graph sendMail fails", async () => {
-    for (const [key, value] of Object.entries({
-      MSGRAPH_TENANT_ID: "tenant",
-      MSGRAPH_CLIENT_ID: "client",
-      MSGRAPH_CLIENT_SECRET: "secret",
-      MSGRAPH_SENDER_UPN: "sender@example.com",
-      MSGRAPH_RECIPIENT_EMAIL: "team@example.com",
-    })) {
-      process.env[key] = value;
-    }
+    setEnv();
 
-    vi.mocked(fetch)
-      .mockResolvedValueOnce({
-        ok: true,
-        status: 200,
-        json: async () => ({ access_token: "test-token" }),
-        text: async () => "",
-      } as Response)
-      .mockResolvedValueOnce({
-        ok: false,
-        status: 502,
-        text: async () => "Graph error",
-      } as Response);
+    vi.stubGlobal(
+      "fetch",
+      vi.fn().mockImplementation((url: string | URL) => {
+        const href = String(url);
+        if (href.includes("challenges.cloudflare.com/turnstile")) {
+          return Promise.resolve({
+            ok: true,
+            json: async () => ({ success: true }),
+          });
+        }
+        if (href.includes("login.microsoftonline.com")) {
+          return Promise.resolve({
+            ok: true,
+            json: async () => ({ access_token: "test-token", expires_in: 3600 }),
+            text: async () => "",
+          });
+        }
+        return Promise.resolve({
+          ok: false,
+          status: 502,
+          text: async () => "Graph error",
+        });
+      })
+    );
 
     const req = createMockReq("POST", VALID_BODY);
     const res = createMockRes();

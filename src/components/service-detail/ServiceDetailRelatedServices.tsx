@@ -1,4 +1,5 @@
 import ServiceProductCard from "@/components/marketplace/ServiceProductCard";
+import { useCatalogData } from "@/contexts/CatalogContext";
 import { sectionHeading } from "@/lib/brandAccent";
 import { getRelatedServices, type ServiceProduct } from "./serviceDetailHelpers";
 
@@ -9,7 +10,8 @@ interface ServiceDetailRelatedServicesProps {
 export function ServiceDetailRelatedServices({
   service,
 }: ServiceDetailRelatedServicesProps) {
-  const relatedServices = getRelatedServices(service);
+  const catalog = useCatalogData();
+  const relatedServices = getRelatedServices(service, catalog);
 
   if (relatedServices.length === 0) {
     return null;
