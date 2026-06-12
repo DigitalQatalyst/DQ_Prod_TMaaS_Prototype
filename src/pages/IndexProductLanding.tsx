@@ -3,7 +3,6 @@ import Seo from "@/components/Seo";
 import { HOME_SEO } from "@/lib/seo";
 import { buildHomeStructuredData } from "@/lib/structuredData";
 import LandingNavbar from "@/components/site/landing/LandingNavbar";
-import TrustedBySection from "@/components/site/landing/TrustedBySection";
 import Footer from "@/components/Footer";
 import LandingHeroSection from "@/components/site/landing/v2/LandingHeroSection";
 import MarketplacePreviewSection from "@/components/site/landing/v2/MarketplacePreviewSection";
@@ -25,7 +24,6 @@ const IndexProductLanding = () => {
       <LandingNavbar />
       <main>
         <LandingHeroSection />
-        <TrustedBySection />
         <WhyTmaasSection />
         <HowItWorksSection />
         <ClientOutcomesSection />
