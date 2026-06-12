@@ -15,7 +15,6 @@ import MarketplaceCategoryNav from "@/components/marketplace/MarketplaceCategory
 import MarketplaceFilters from "@/components/marketplace/MarketplaceFilters";
 import MarketplaceBestSellers from "@/components/marketplace/MarketplaceBestSellers";
 import MarketplaceLaunchOffer from "@/components/marketplace/MarketplaceLaunchOffer";
-import { LAUNCH_ADVISORY_SERVICE_ID } from "@/lib/launchOffering";
 import MarketplacePagination from "@/components/marketplace/MarketplacePagination";
 import ServiceProductCard from "@/components/marketplace/ServiceProductCard";
 import MeshSection from "@/components/site/MeshSection";
@@ -139,12 +138,10 @@ const Marketplace = () => {
   const showBestSellers = !hasRefinementFilters && activeTab !== "bundles";
   const bestSellerCollection = activeTab === "all" ? "all" : activeTab;
   const { data: bestSellers = [] } = useBestSellers(bestSellerCollection, 4, showBestSellers);
-  const excludeVariantIds = useMemo(() => {
-    if (!showBestSellers) return [];
-    const ids = new Set(bestSellers.map((service) => service.id));
-    ids.add(LAUNCH_ADVISORY_SERVICE_ID);
-    return [...ids];
-  }, [bestSellers, showBestSellers]);
+  const excludeVariantIds = useMemo(
+    () => (showBestSellers ? bestSellers.map((service) => service.id) : []),
+    [bestSellers, showBestSellers]
+  );
 
   const catalogListParams = useMemo(
     () => ({
@@ -330,7 +327,7 @@ const Marketplace = () => {
         </div>
       </MeshSection>
 
-      <section className="bg-background px-5 pb-16 pt-2 md:px-8 lg:px-10">
+      <section className="bg-background px-5 pb-16 pt-12 md:px-8 md:pt-14 lg:px-10 lg:pt-16">
         <div className="mx-auto max-w-[1280px]">
           <div id="catalog-grid" className="scroll-mt-32">
             {showBestSellers && (
