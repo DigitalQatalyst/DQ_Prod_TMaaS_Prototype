@@ -9,12 +9,12 @@ const buttonVariants = cva(
   {
     variants: {
       variant: {
-        default: "bg-orange-500 text-white shadow-sm hover:bg-orange-400 shadow-[var(--glow-orange-md)]",
+        default: "bg-dq-orange text-white shadow-sm hover:bg-[#E04020] glow-orange",
         destructive: "bg-destructive text-destructive-foreground hover:bg-destructive/90",
         outline: "border border-navy-200 bg-transparent hover:bg-navy-50 text-navy-950",
         secondary: "bg-navy-100 text-navy-950 hover:bg-navy-200",
         ghost: "hover:bg-navy-50 text-navy-950",
-        link: "text-orange-500 underline-offset-4 hover:underline",
+        link: "text-dq-navy underline-offset-4 hover:text-dq-orange hover:underline",
       },
       size: {
         default: "h-10 px-5 py-2",

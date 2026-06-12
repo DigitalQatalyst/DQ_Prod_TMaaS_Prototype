@@ -5,12 +5,14 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import { Link } from "react-router-dom";
 import SectionHeading from "@/components/site/SectionHeading";
+import { featureFlags } from "@/lib/featureFlags";
 
 const faqs = [
   {
     question: "What is TMaaS?",
-    answer: "TMaaS (Transformation Management as a Service) is a low-cost, architecture-led digital transformation marketplace and execution platform. It enables organisations to identify, design, deploy, and continuously drive digital transformation initiatives using AI-powered, ready-to-launch blueprints grounded in enterprise architecture.",
+    answer: "TMaaS (Transformation as a Service) is a low-cost, architecture-led digital transformation marketplace and execution platform. It enables organisations to identify, design, deploy, and continuously drive digital transformation initiatives using AI-powered, ready-to-launch blueprints grounded in enterprise architecture.",
   },
   {
     question: "How is TMaaS different from traditional consulting?",
@@ -44,8 +46,8 @@ const faqs = [
 
 const FAQSection = () => {
   return (
-    <section className="border-t border-navy-100 bg-white py-20 md:py-24">
-      <div className="mx-auto max-w-5xl px-6">
+    <section className="border-t border-gray-100 bg-gray-50 px-5 py-24 md:px-8 lg:px-10">
+      <div className="mx-auto max-w-[1200px]">
         <motion.div
           initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -53,20 +55,9 @@ const FAQSection = () => {
           className="mb-12"
         >
           <SectionHeading
-            title={
-              <>
-                Frequently Asked{" "}
-                <span className="bg-gradient-to-r from-navy-950 via-orange-600 to-orange-500 bg-clip-text text-transparent">
-                  Questions
-                </span>
-              </>
-            }
-            description={
-              <>
-                Everything you need to know about TMaaS and digital
-                transformation
-              </>
-            }
+            kicker="FAQ"
+            title="Frequently Asked Questions"
+            description="Everything you need to know about TMaaS and digital transformation"
           />
         </motion.div>
 
@@ -75,15 +66,16 @@ const FAQSection = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ delay: 0.1 }}
+          className="mx-auto max-w-3xl"
         >
           <Accordion type="single" collapsible className="space-y-4">
             {faqs.map((faq, i) => (
               <AccordionItem
                 key={i}
                 value={`item-${i}`}
-                className="rounded-2xl border border-navy-100 bg-white/70 px-6 shadow-card backdrop-blur"
+                className="rounded-2xl border border-gray-200 bg-white px-6 transition-all duration-300 hover:border-dq-orange hover:shadow-xl"
               >
-                <AccordionTrigger className="text-left font-semibold text-navy-950 hover:no-underline">
+                <AccordionTrigger className="text-left font-semibold text-dq-navy hover:no-underline">
                   {faq.question}
                 </AccordionTrigger>
                 <AccordionContent className="text-sm leading-relaxed text-gray-600">
@@ -103,9 +95,18 @@ const FAQSection = () => {
         >
           <p className="text-sm text-gray-600">
             Still have questions?{" "}
-            <a href="#" className="font-semibold text-orange-600 hover:underline">
-              Contact our team
-            </a>
+            {featureFlags.isEnabled("contactUs") ? (
+              <Link to="/contact" className="font-semibold text-dq-orange hover:underline">
+                Contact our team
+              </Link>
+            ) : (
+              <a
+                href="mailto:info@digitalqatalyst.com"
+                className="font-semibold text-dq-orange hover:underline"
+              >
+                Contact our team
+              </a>
+            )}
           </p>
         </motion.div>
       </div>

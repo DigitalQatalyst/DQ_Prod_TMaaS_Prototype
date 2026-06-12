@@ -103,7 +103,7 @@ export const getFeaturedByCollection = (
     .sort((a, b) => b.popularityRank - a.popularityRank)
     .slice(0, limit);
 
-/** Best sellers for marketplace — all categories or one collection */
+/** Best sellers for marketplace, all categories or one collection */
 export const getBestSellers = (
   collection: "all" | ServiceCollection = "all",
   limit = 4

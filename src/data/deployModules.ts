@@ -118,7 +118,7 @@ export const deployModulesData: Record<string, DeployModule[]> = {
       ]
     }
   ],
-  "Mobile App Experience (High-Impact) - Implementation": [
+  "Mobile Apps (High-Impact) - Implementation": [
     {
       "name": "Mobile Application Platform",
       "features": [
@@ -170,7 +170,7 @@ export const deployModulesData: Record<string, DeployModule[]> = {
       ]
     }
   ],
-  "Phygital Customer Presence (High-Impact) - Implementation": [
+  "Physical Channels (High-Impact) - Implementation": [
     {
       "name": "Channel Orchestration",
       "features": [
@@ -222,7 +222,7 @@ export const deployModulesData: Record<string, DeployModule[]> = {
       ]
     }
   ],
-  "Digital Content & Journey (High-Impact) - Implementation": [
+  "Experience Solutions (High-Impact) - Implementation": [
     {
       "name": "Enterprise CMS",
       "features": [
@@ -274,7 +274,7 @@ export const deployModulesData: Record<string, DeployModule[]> = {
       ]
     }
   ],
-  "Customer Relationship Management (High-Impact) - Implementation": [
+  "CRM Solutions (High-Impact) - Implementation": [
     {
       "name": "Customer Management",
       "features": [
@@ -326,7 +326,7 @@ export const deployModulesData: Record<string, DeployModule[]> = {
       ]
     }
   ],
-  "Digital Marketing & Campaigns (High-Impact) - Implementation": [
+  "Marketing Solutions (High-Impact) - Implementation": [
     {
       "name": "Campaign Automation",
       "features": [

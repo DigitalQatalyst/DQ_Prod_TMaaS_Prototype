@@ -21,7 +21,7 @@ const BundleProductCard = ({ bundle }: BundleProductCardProps) => {
             {bundle.servicesIncludedCount} Services Included
           </span>
         </div>
-        <h3 className="text-sm font-semibold leading-snug text-navy-950 group-hover/card:text-orange-600">
+        <h3 className="text-sm font-semibold leading-snug text-dq-navy">
           {bundle.title}
         </h3>
         <p className="mt-1.5 line-clamp-2 text-xs leading-relaxed text-gray-500">

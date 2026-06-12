@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import { Search, FileText, Shield, HelpCircle, Scale, ChevronRight } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import Navbar from "@/components/Navbar";
+import LandingNavbar from "@/components/site/landing/LandingNavbar";
 import Footer from "@/components/Footer";
 
 const Legal = () => {
@@ -44,7 +44,7 @@ const Legal = () => {
 
   return (
     <div className="min-h-screen bg-background">
-      <Navbar />
+      <LandingNavbar />
       
       <main className="pt-20">
         {/* Hero Section */}

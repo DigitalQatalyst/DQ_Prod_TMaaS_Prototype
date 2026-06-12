@@ -1,3 +1,5 @@
+import Seo from "@/components/Seo";
+import { HOME_SEO } from "@/lib/seo";
 import Navbar from "@/components/Navbar";
 import HeroSection from "@/components/HeroSection";
 import MarketplaceBestSellers from "@/components/marketplace/MarketplaceBestSellers";
@@ -11,17 +13,24 @@ import Footer from "@/components/Footer";
 const Index = () => {
   return (
     <div className="min-h-screen bg-background">
+      <Seo
+        title={HOME_SEO.title}
+        description={HOME_SEO.description}
+        path="/home"
+        noindex
+      />
       <Navbar />
       <HeroSection />
-      
-      <div className="mx-auto max-w-7xl px-6 py-12 md:py-16">
-        <MarketplaceBestSellers activeTab="all" selectedIndustry="all" />
-      </div>
+
+      <section className="px-5 py-24 md:px-8 lg:px-10">
+        <div className="mx-auto max-w-[1200px]">
+          <MarketplaceBestSellers activeTab="all" selectedIndustry="all" />
+        </div>
+      </section>
 
       <TransformationJourneysSection />
       <ExploreByCategorySection />
       <IndustrySolutionsSection />
-      
       <HowItWorksSection />
       <FAQSection />
       <Footer />

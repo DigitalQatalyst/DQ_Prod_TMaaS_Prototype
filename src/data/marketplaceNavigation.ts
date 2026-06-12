@@ -9,12 +9,16 @@ export const marketplaceGoals = [
 ] as const;
 
 export const marketplaceCapabilities = [
-  { id: "experience", label: "Digital Experience" },
-  { id: "operations", label: "Digital Work System" },
-  { id: "security", label: "SecDevOps" },
-  { id: "ai", label: "Digital Intelligence & Analytics" },
+  { id: "experience", label: "Customer Experience & Engagement" },
+  { id: "operations", label: "Business Operations & Productivity" },
+  { id: "security", label: "Development, Security, and Operations" },
+  { id: "ai", label: "Data, AI & Analytics" },
   { id: "bundles", label: "Bundles" },
 ] as const;
+
+export const marketplaceCoreCapabilities = marketplaceCapabilities.filter(
+  (capability) => capability.id !== "bundles"
+);
 
 export const marketplaceEconomySectors = [
   { id: "farming-4-0", label: "Farming 4.0" },

@@ -38,27 +38,28 @@ const HeroSection = () => {
 
   return (
     <MeshSection
+      id="hero"
       variant="heroLight"
       grid
-      className="border-b border-navy-100/80 pb-16 pt-28 md:pb-20 md:pt-36"
+      className="px-5 pb-16 pt-28 md:px-8 md:pb-20 md:pt-36 lg:px-10"
     >
-
-      <div className="relative z-10 mx-auto max-w-3xl px-6 text-center">
-        <p className="inline-flex items-center gap-1.5 text-sm font-medium text-navy-800">
-          <Sparkles size={15} className="text-orange-500" strokeWidth={2} />
+      <div className="relative z-10 mx-auto max-w-7xl text-center">
+        <p className="animate-fade-in-up font-mono text-[11px] uppercase tracking-[0.2em] text-dq-orange">
           AI Mode
         </p>
 
-        <h1 className="mt-4 font-heading text-balance text-3xl font-bold leading-tight tracking-tight text-navy-950 sm:text-4xl md:text-[2.75rem] md:leading-[1.15]">
-          Find the right{" "}
-          <span className="text-orange-600">transformation services</span>
-          <br className="hidden sm:block" />
-          <span className="sm:whitespace-nowrap"> for your business</span>
+        <h1 className="animate-fade-in-up animation-delay-200 mt-4 text-balance text-[2.75rem] font-semibold leading-[1.0] tracking-[-0.03em] text-dq-navy sm:text-6xl md:text-7xl lg:text-8xl">
+          <span className="block">Find the right</span>
+          <span className="block text-dq-orange">transformation services</span>
+          <span className="block sm:whitespace-nowrap">for your business</span>
         </h1>
 
-        {/* Agent prompt — AWS-style card */}
-        <div className="mt-10 text-left">
-          <div className="overflow-hidden rounded-xl border border-navy-200/80 bg-white shadow-sm transition-shadow focus-within:border-orange-300 focus-within:shadow-md focus-within:ring-2 focus-within:ring-orange-500/15">
+        <p className="animate-fade-in-up animation-delay-300 mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-gray-600">
+          Describe your business challenge and Butler will guide you to the right TMaaS services.
+        </p>
+
+        <div className="animate-fade-in-up animation-delay-300 mt-10 text-left">
+          <div className="mx-auto max-w-2xl overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-sm transition-all duration-300 focus-within:border-dq-orange focus-within:shadow-xl">
             <label htmlFor="butler-prompt" className="sr-only">
               Describe your business need
             </label>
@@ -71,13 +72,13 @@ const HeroSection = () => {
               onKeyDown={handleKeyDown}
               placeholder="Describe your business challenge and Butler will guide you to the right services."
               rows={4}
-              className="block w-full min-h-[7.5rem] resize-none border-0 bg-transparent px-4 pt-4 pb-2 text-base leading-relaxed text-navy-950 placeholder:text-gray-400 focus:outline-none focus:ring-0 md:text-[17px]"
+              className="block w-full min-h-[7.5rem] resize-none border-0 bg-transparent px-4 pb-2 pt-4 text-base leading-relaxed text-dq-navy placeholder:text-gray-400 focus:outline-none focus:ring-0 md:text-[17px]"
             />
 
-            <div className="flex items-center justify-between gap-3 border-t border-navy-100/80 px-3 py-2.5">
+            <div className="flex items-center justify-between gap-3 border-t border-gray-100 px-3 py-2.5">
               <Link
                 to="/marketplace"
-                className="text-xs font-medium text-gray-500 transition-colors hover:text-orange-600"
+                className="text-xs font-medium text-gray-500 transition-colors hover:text-dq-orange"
               >
                 Browse marketplace
               </Link>
@@ -92,7 +93,7 @@ const HeroSection = () => {
                   type="button"
                   onClick={handleSubmit}
                   disabled={!problem.trim()}
-                  className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-orange-500 text-white transition hover:bg-orange-600 disabled:cursor-not-allowed disabled:bg-gray-200 disabled:text-gray-400"
+                  className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-dq-orange text-white transition hover:bg-[#E04020] disabled:cursor-not-allowed disabled:bg-gray-200 disabled:text-gray-400"
                   aria-label="Send to Butler"
                 >
                   <ArrowUp size={18} strokeWidth={2.25} />
@@ -107,7 +108,6 @@ const HeroSection = () => {
           </p>
         </div>
 
-        {/* Quick prompts */}
         <div className="mt-8">
           <div className="flex flex-wrap items-center justify-center gap-2">
             {suggestions.map((item) => (
@@ -115,11 +115,11 @@ const HeroSection = () => {
                 key={item.label}
                 type="button"
                 onClick={() => openWithPrompt(item.prompt)}
-                className="inline-flex items-center gap-1.5 rounded-full border border-navy-100 bg-white px-3.5 py-2 text-xs font-medium text-navy-800 shadow-sm transition hover:border-orange-200 hover:bg-orange-50/50 hover:text-orange-700"
+                className="inline-flex items-center gap-1.5 rounded-full border border-gray-200 bg-white/60 px-3.5 py-2 text-xs font-medium text-dq-navy backdrop-blur-sm transition-all duration-300 hover:border-dq-orange hover:bg-white hover:shadow-md"
               >
                 <Sparkles
                   size={12}
-                  className="shrink-0 text-orange-500"
+                  className="shrink-0 text-dq-orange"
                   strokeWidth={2}
                 />
                 {item.label}

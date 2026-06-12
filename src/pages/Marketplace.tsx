@@ -1,16 +1,21 @@
 import { useState, useMemo, useEffect, useCallback } from "react";
+import Seo from "@/components/Seo";
+import JsonLd from "@/components/JsonLd";
+import { MARKETPLACE_SEO, absoluteUrl } from "@/lib/seo";
+import { buildMarketplaceStructuredData } from "@/lib/structuredData";
+import { initialServices } from "@/data/services";
+import { getDisplayTitle } from "@/components/service-detail/serviceDetailHelpers";
 import { useSearchParams } from "react-router-dom";
-import Navbar from "@/components/Navbar";
+import LandingNavbar from "@/components/site/landing/LandingNavbar";
 import Footer from "@/components/Footer";
-import { Filter, Search, X, Sparkles } from "lucide-react";
+import { Filter, LayoutGrid, List, Search, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import DiagnoseDialog from "@/components/DiagnoseDialog";
 import MarketplaceCategoryNav from "@/components/marketplace/MarketplaceCategoryNav";
 import MarketplaceFilters from "@/components/marketplace/MarketplaceFilters";
 import MarketplaceBestSellers from "@/components/marketplace/MarketplaceBestSellers";
+import MarketplacePagination from "@/components/marketplace/MarketplacePagination";
 import ServiceProductCard from "@/components/marketplace/ServiceProductCard";
-import { getBestSellers } from "@/data/services";
 import MeshSection from "@/components/site/MeshSection";
 import {
   marketplaceCategoryLabels,
@@ -24,7 +29,12 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { initialServices, getRemixedName } from "@/data/services";
+import { useBestSellers, useMarketplaceListings } from "@/hooks/useCatalog";
+import type { MarketplaceSortBy } from "@/lib/marketplaceCatalogFilters";
+import { getRemixedName } from "@/lib/serviceProductUtils";
+
+const PAGE_SIZE = 15;
+type ViewMode = "grid" | "list";
 
 // Removed old labels
 
@@ -34,12 +44,12 @@ const Marketplace = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
   const [selectedIncluded, setSelectedIncluded] = useState<string[]>([]);
-  const [selectedSectors, setSelectedIndustries] = useState<string[]>([]);
+  const [selectedSectors, setSelectedSectors] = useState<string[]>([]);
   const [selectedServiceTypes, setSelectedServiceTypes] = useState<string[]>([]);
   const [sidebarOpen, setSidebarOpen] = useState(false);
-  const [isDialogOpen, setIsDialogOpen] = useState(false);
-  const [dialogPrompt, setDialogPrompt] = useState("");
-  const [sortBy, setSortBy] = useState("popular");
+  const [sortBy, setSortBy] = useState<MarketplaceSortBy>("popular");
+  const [currentPage, setCurrentPage] = useState(1);
+  const [viewMode, setViewMode] = useState<ViewMode>("grid");
 
   const scrollToCatalog = useCallback(() => {
     requestAnimationFrame(() => {
@@ -48,7 +58,6 @@ const Marketplace = () => {
   }, []);
 
   useEffect(() => {
-
     const collection = searchParams.get("collection");
     if (
       collection &&
@@ -93,7 +102,7 @@ const Marketplace = () => {
   }, []);
 
   const handleSectorChange = useCallback((value: string) => {
-    setSelectedIndustries((prev) =>
+    setSelectedSectors((prev) =>
       prev.includes(value) ? prev.filter((i) => i !== value) : [...prev, value]
     );
   }, []);
@@ -125,67 +134,72 @@ const Marketplace = () => {
   const hasActiveFilters = hasRefinementFilters || activeTab !== "all";
 
   const showBestSellers = !hasRefinementFilters && activeTab !== "bundles";
+  const bestSellerCollection = activeTab === "all" ? "all" : activeTab;
+  const { data: bestSellers = [] } = useBestSellers(bestSellerCollection, 4, showBestSellers);
+  const excludeVariantIds = useMemo(
+    () => (showBestSellers ? bestSellers.map((service) => service.id) : []),
+    [bestSellers, showBestSellers]
+  );
 
-  const bestSellerIds = useMemo(() => {
-    if (!showBestSellers) return new Set<number>();
-    const collection = activeTab === "all" ? "all" : activeTab;
-    return new Set(
-      getBestSellers(
-        collection as "all" | "ai" | "cx" | "ops" | "growth" | "gov",
-        4
-      ).map((s) => s.id)
-    );
-  }, [showBestSellers, activeTab]);
+  const catalogListParams = useMemo(
+    () => ({
+      page: currentPage,
+      pageSize: PAGE_SIZE,
+      activeTab,
+      searchQuery,
+      selectedCategories,
+      selectedServiceTypes,
+      selectedIncluded,
+      selectedSectors,
+      sortBy,
+      excludeVariantIds,
+    }),
+    [
+      activeTab,
+      currentPage,
+      excludeVariantIds,
+      searchQuery,
+      selectedCategories,
+      selectedIncluded,
+      selectedSectors,
+      selectedServiceTypes,
+      sortBy,
+    ]
+  );
 
-  const filteredServices = useMemo(() => {
-    return initialServices.filter((pkg) => {
-      const isBundle = (pkg as any).serviceType === "bundle";
-      
-      if (activeTab === "bundles") {
-        if (!isBundle) return false;
-      } else {
-        if (isBundle) return false;
-      }
+  const { services: paginatedServices, totalCount: catalogServicesCount } =
+    useMarketplaceListings(catalogListParams);
 
-      const matchesCollection = activeTab === "all" || activeTab === "bundles" || pkg.collection === activeTab;
-      
-      const matchesCategory = selectedCategories.length === 0 || selectedCategories.includes(pkg.collection);
+  const totalPages = Math.max(1, Math.ceil(catalogServicesCount / PAGE_SIZE));
 
-      let matchesIncluded = true;
-      if (selectedIncluded.length > 0) {
-        if (selectedIncluded.includes("multi") && !selectedIncluded.includes("single")) {
-          matchesIncluded = isBundle;
-        } else if (selectedIncluded.includes("single") && !selectedIncluded.includes("multi")) {
-          matchesIncluded = !isBundle;
-        }
-      }
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [
+    activeTab,
+    searchQuery,
+    selectedCategories,
+    selectedIncluded,
+    selectedSectors,
+    selectedServiceTypes,
+    sortBy,
+  ]);
 
-      const matchesServiceType =
-        selectedServiceTypes.length === 0 || selectedServiceTypes.includes((pkg as any).serviceType);
+  useEffect(() => {
+    if (currentPage > totalPages) {
+      setCurrentPage(totalPages);
+    }
+  }, [currentPage, totalPages]);
 
-      // Extract the first active industry for remixing name, fallback to 'general'
-      const activeIndustry = selectedSectors.length > 0 ? selectedSectors[0] : "all";
+  const showingFrom = catalogServicesCount === 0 ? 0 : (currentPage - 1) * PAGE_SIZE + 1;
+  const showingTo = Math.min(currentPage * PAGE_SIZE, catalogServicesCount);
 
-      const matchesSearch = searchQuery === "" || 
-        pkg.standardName.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        pkg.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        getRemixedName(pkg, activeIndustry).toLowerCase().includes(searchQuery.toLowerCase()) ||
-        pkg.tags.some(tag => tag.toLowerCase().includes(searchQuery.toLowerCase())) ||
-        pkg.features.some(feat => feat.toLowerCase().includes(searchQuery.toLowerCase()));
-
-      return matchesCollection && matchesCategory && matchesIncluded && matchesServiceType && matchesSearch;
-    }).sort((a, b) => {
-      if (sortBy === "popular") return b.popularityRank - a.popularityRank;
-      if (sortBy === "price-low") return parseInt(a.price.replace(/[$,]/g, "")) - parseInt(b.price.replace(/[$,]/g, ""));
-      if (sortBy === "fastest") return parseInt(a.duration) - parseInt(b.duration);
-      return 0;
-    });
-  }, [activeTab, searchQuery, selectedCategories, selectedIncluded, selectedServiceTypes, selectedSectors, sortBy]);
-
-  const catalogServices = useMemo(() => {
-    if (!showBestSellers) return filteredServices;
-    return filteredServices.filter((s) => !bestSellerIds.has(s.id));
-  }, [filteredServices, showBestSellers, bestSellerIds]);
+  const handlePageChange = useCallback(
+    (page: number) => {
+      setCurrentPage(page);
+      scrollToCatalog();
+    },
+    [scrollToCatalog]
+  );
 
   const activeFilterChips = useMemo(() => {
     const chips: { key: string; label: string; onRemove: () => void }[] = [];
@@ -198,7 +212,7 @@ const Marketplace = () => {
       });
     }
     selectedCategories.forEach((cat) => {
-      const label = cat === "experience" ? "Digital Experience" : cat === "operations" ? "Digital Work System" : cat === "security" ? "SecDevOps" : cat === "ai" ? "Digital Intelligence & Analytics" : cat;
+      const label = marketplaceCategoryLabels[cat] ?? cat;
       chips.push({
         key: `cat-${cat}`,
         label: `Category: ${label}`,
@@ -254,134 +268,182 @@ const Marketplace = () => {
 
 
 
-  const handleAskAI = () => {
-    setDialogPrompt("");
-    setIsDialogOpen(true);
-  };
-
   return (
     <div className="min-h-screen bg-background">
-      <Navbar />
+      <Seo
+        title={MARKETPLACE_SEO.title}
+        description={MARKETPLACE_SEO.description}
+        path={MARKETPLACE_SEO.path}
+      />
+      <JsonLd
+        data={buildMarketplaceStructuredData(
+          initialServices.map((service) => ({
+            id: service.id,
+            name: getDisplayTitle(service.standardName),
+            url: absoluteUrl(`/service/${service.id}`),
+          })),
+        )}
+      />
+      <LandingNavbar />
 
-      <MeshSection variant="heroLight" grid className="border-b border-navy-100 pt-20 pb-6">
-        <div className="mx-auto max-w-3xl px-6 flex flex-col items-center text-center">
-          <h1 className="font-heading text-3xl font-bold tracking-tight text-navy-950 md:text-4xl">
-            Transformation Services Marketplace
+      <MeshSection variant="heroLight" grid className="px-5 pb-8 pt-20 md:px-8 md:pb-10 md:pt-24 lg:px-10">
+        <div className="mx-auto flex max-w-3xl flex-col items-center text-center">
+          <p className="dq-eyebrow">
+            Digital transformation marketplace
+          </p>
+          <h1 className="mt-4 text-balance text-[2.25rem] font-semibold leading-[1.05] tracking-[-0.02em] text-dq-navy min-[400px]:text-[2.75rem] sm:text-5xl md:text-6xl lg:text-7xl">
+            Browse transformation services
           </h1>
-          <p className="mt-3 text-base text-gray-600 max-w-xl">
-            Discover architecture-led transformation services across digital experience, digital operations, AI enablement, and enterprise modernization.
+          <p className="mt-4 max-w-xl text-base leading-relaxed text-gray-600 md:text-lg">
+            200+ digital transformation services with clear pricing. Filter by
+            goal, industry, or category.
           </p>
 
-          <div className="relative mt-8 w-full flex items-center">
-            <Search className="absolute left-4 top-1/2 h-5 w-5 -translate-y-1/2 text-gray-400" />
+          <div className="relative mt-6 flex w-full items-center">
+            <Search className="absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-400" />
             <Input
               type="search"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              placeholder="Search services or describe your transformation goals…"
-              className="h-14 rounded-2xl border-navy-200 bg-white pl-12 pr-44 text-base shadow-sm focus-visible:ring-orange-500 w-full"
+              placeholder="Search services by name, category, or keyword…"
+              className="h-11 w-full rounded-xl border-gray-200 bg-white pl-11 pr-10 text-sm shadow-sm transition-all duration-300 focus-visible:border-dq-orange focus-visible:ring-dq-orange"
             />
-            <div className="absolute right-2 top-1/2 -translate-y-1/2 flex items-center gap-3">
-              {searchQuery && (
-                <button
-                  type="button"
-                  onClick={() => setSearchQuery("")}
-                  className="text-gray-400 hover:text-navy-950 flex items-center justify-center h-full"
-                  aria-label="Clear search"
-                >
-                  <X size={16} />
-                </button>
-              )}
-              <Button 
-                type="button" 
-                size="sm"
-                onClick={handleAskAI}
-                className="h-10 bg-orange-500 hover:bg-orange-400 text-white rounded-xl text-xs font-bold px-4 flex items-center gap-1.5"
+            {searchQuery && (
+              <button
+                type="button"
+                onClick={() => setSearchQuery("")}
+                className="absolute right-3 top-1/2 flex -translate-y-1/2 items-center justify-center text-gray-400 hover:text-dq-orange"
+                aria-label="Clear search"
               >
-                <Sparkles size={14} className="fill-white" />
-                Or Ask AI
-              </Button>
-            </div>
+                <X size={16} />
+              </button>
+            )}
           </div>
-          <p className="mt-3 text-[10px] text-gray-400 max-w-lg leading-relaxed">
-            By using Butler, you agree that your prompt may be processed to recommend TMaaS services. Do not submit confidential data.
-          </p>
         </div>
       </MeshSection>
 
-      <div className="mx-auto max-w-7xl px-6 py-6">
-        <div id="catalog-grid" className="scroll-mt-20 space-y-5">
-          {showBestSellers && (
-            <MarketplaceBestSellers
-              activeTab="all"
-              selectedIndustry={selectedSectors.length > 0 ? selectedSectors[0] : "all"}
-            />
-          )}
-
-          {showBestSellers && (
-            <h3 className="text-lg font-bold tracking-tight text-navy-950">
-              All services
-            </h3>
-          )}
-
-          <MarketplaceCategoryNav
-            activeTab={activeTab}
-            onTabChange={applyCollectionFilter}
-          />
-
-          <div className="flex flex-col lg:flex-row lg:items-start gap-6">
-            <aside
-              className={`lg:w-56 shrink-0 ${
-                sidebarOpen ? "block" : "hidden lg:block"
-              }`}
-            >
-              <div className="lg:sticky lg:top-24">
-                <MarketplaceFilters
-                  selectedSectors={selectedSectors}
-                  onSectorChange={handleSectorChange}
-                  selectedCategories={selectedCategories}
-                  onCategoryChange={handleCategoryChange}
-                  selectedIncluded={selectedIncluded}
-                  onIncludedChange={handleIncludedChange}
-                  selectedServiceTypes={selectedServiceTypes}
-                  onServiceTypeChange={handleServiceTypeChange}
-                  onClearAll={clearAllFilters}
-                  showClearAll={hasActiveFilters}
+      <section className="bg-background px-5 pb-16 pt-2 md:px-8 lg:px-10">
+        <div className="mx-auto max-w-[1280px]">
+          <div id="catalog-grid" className="scroll-mt-32">
+            {showBestSellers && (
+              <div className="mb-10">
+                <MarketplaceBestSellers
+                  activeTab="all"
+                  selectedIndustry={selectedSectors.length > 0 ? selectedSectors[0] : "all"}
                 />
               </div>
-            </aside>
+            )}
 
-            <main className="min-w-0 flex-1">
-              <div className="mb-4 flex flex-wrap items-center justify-between gap-3">
-                <div className="flex items-center gap-2">
-                  <Button
-                    type="button"
-                    variant="outline"
-                    size="sm"
-                    onClick={() => setSidebarOpen(!sidebarOpen)}
-                    className="h-9 gap-1.5 rounded-lg border-navy-100 lg:hidden"
-                  >
-                    <Filter size={14} />
-                    Filters
-                  </Button>
-                  <p className="text-sm text-gray-600">
-                    <span className="font-semibold text-navy-950">
-                      {catalogServices.length}
-                    </span>
-                    {catalogServices.length === 1 ? " service" : " services"}
-                  </p>
+            {showBestSellers && (
+              <h2 className="mb-6 text-2xl font-semibold tracking-tight text-dq-navy">
+                All services
+              </h2>
+            )}
+
+            <MarketplaceCategoryNav
+              activeTab={activeTab}
+              onTabChange={applyCollectionFilter}
+            />
+
+            <div className="mt-8 flex flex-col gap-6 lg:flex-row lg:items-start">
+              <aside
+                className={`lg:w-[240px] shrink-0 ${
+                  sidebarOpen ? "block" : "hidden lg:block"
+                }`}
+              >
+                <div className="lg:sticky lg:top-32">
+                  <MarketplaceFilters
+                    selectedSectors={selectedSectors}
+                    onSectorChange={handleSectorChange}
+                    selectedCategories={selectedCategories}
+                    onCategoryChange={handleCategoryChange}
+                    selectedIncluded={selectedIncluded}
+                    onIncludedChange={handleIncludedChange}
+                    selectedServiceTypes={selectedServiceTypes}
+                    onServiceTypeChange={handleServiceTypeChange}
+                    onClearAll={clearAllFilters}
+                    showClearAll={hasActiveFilters}
+                  />
                 </div>
-                <Select value={sortBy} onValueChange={setSortBy}>
-                  <SelectTrigger className="h-9 w-[10.5rem] border-navy-100 bg-white text-sm rounded-lg">
-                    <SelectValue placeholder="Sort by" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="popular">Most popular</SelectItem>
-                    <SelectItem value="fastest">Fastest delivery</SelectItem>
-                    <SelectItem value="price-low">Lowest price</SelectItem>
-                  </SelectContent>
-                </Select>
-              </div>
+              </aside>
+
+              <main className="min-w-0 flex-1">
+                <div className="mb-6 flex flex-col gap-4 sm:flex-row sm:flex-wrap sm:items-center sm:justify-between">
+                  <div className="flex min-w-0 items-center gap-3">
+                    <Button
+                      type="button"
+                      variant="outline"
+                      size="sm"
+                      onClick={() => setSidebarOpen(!sidebarOpen)}
+                      className="h-9 shrink-0 gap-1.5 rounded-lg border-gray-200 lg:hidden"
+                    >
+                      <Filter size={14} />
+                      Filters
+                    </Button>
+                    <p className="min-w-0 text-sm text-gray-600">
+                      {catalogServicesCount === 0 ? (
+                        <>0 services</>
+                      ) : (
+                        <>
+                          Showing{" "}
+                          <span className="font-semibold text-dq-navy">
+                            {showingFrom}–{showingTo}
+                          </span>{" "}
+                          of{" "}
+                          <span className="font-semibold text-dq-navy">
+                            {catalogServicesCount}
+                          </span>{" "}
+                          {catalogServicesCount === 1 ? "service" : "services"}
+                        </>
+                      )}
+                    </p>
+                  </div>
+
+                  <div className="flex w-full items-center justify-between gap-3 sm:w-auto sm:justify-end">
+                    <Select
+                      value={sortBy}
+                      onValueChange={(value) => setSortBy(value as MarketplaceSortBy)}
+                    >
+                      <SelectTrigger className="h-9 w-full min-w-0 max-w-[10.5rem] rounded-lg border-gray-200 bg-white text-sm shadow-none sm:w-[10.5rem]">
+                        <SelectValue placeholder="Sort by" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="popular">Most popular</SelectItem>
+                        <SelectItem value="fastest">Fastest delivery</SelectItem>
+                        <SelectItem value="price-low">Lowest price</SelectItem>
+                      </SelectContent>
+                    </Select>
+
+                    <div className="flex items-center rounded-lg border border-gray-200 bg-white p-0.5">
+                      <button
+                        type="button"
+                        onClick={() => setViewMode("grid")}
+                        aria-label="Grid view"
+                        aria-pressed={viewMode === "grid"}
+                        className={`flex h-8 w-8 items-center justify-center rounded-md transition-colors ${
+                          viewMode === "grid"
+                            ? "bg-navy-50 text-dq-navy"
+                            : "text-gray-400 hover:text-gray-600"
+                        }`}
+                      >
+                        <LayoutGrid size={16} />
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => setViewMode("list")}
+                        aria-label="List view"
+                        aria-pressed={viewMode === "list"}
+                        className={`flex h-8 w-8 items-center justify-center rounded-md transition-colors ${
+                          viewMode === "list"
+                            ? "bg-navy-50 text-dq-navy"
+                            : "text-gray-400 hover:text-gray-600"
+                        }`}
+                      >
+                        <List size={16} />
+                      </button>
+                    </div>
+                  </div>
+                </div>
 
               {activeFilterChips.length > 0 && (
                 <div className="mb-4 flex flex-wrap items-center gap-2">
@@ -390,7 +452,7 @@ const Marketplace = () => {
                       key={chip.key}
                       type="button"
                       onClick={chip.onRemove}
-                      className="inline-flex items-center gap-1 rounded-full border border-navy-100 bg-slate-50 py-1 pl-2.5 pr-1.5 text-xs font-medium text-navy-950 hover:bg-slate-100"
+                      className="inline-flex items-center gap-1 rounded-full border border-gray-200 bg-gray-50 py-1 pl-2.5 pr-1.5 text-xs font-medium text-dq-navy hover:bg-gray-100"
                     >
                       {chip.label}
                       <X size={12} className="text-gray-400" />
@@ -399,69 +461,70 @@ const Marketplace = () => {
                   <button
                     type="button"
                     onClick={clearAllFilters}
-                    className="text-xs font-medium text-orange-600 hover:text-orange-500"
+                    className="text-xs font-medium text-dq-navy hover:text-dq-navy/80"
                   >
                     Clear all
                   </button>
                 </div>
               )}
 
-              {catalogServices.length === 0 ? (
-                <div className="rounded-xl border border-navy-100 bg-white p-12 text-center">
+              {catalogServicesCount === 0 ? (
+                <div className="rounded-2xl border border-gray-200 bg-white p-12 text-center">
                   <Search
                     size={32}
                     className="mx-auto mb-4 text-gray-300"
                     strokeWidth={1.5}
                   />
-                  <h3 className="text-sm font-semibold text-navy-950">
+                  <h3 className="text-sm font-semibold text-dq-navy">
                     No services match
                   </h3>
                   <p className="mt-2 text-sm text-gray-500">
-                    Try fewer filters or a different category. Not sure where to start?
+                    Try fewer filters or a different search term.
                   </p>
                   <Button
                     type="button"
-                    onClick={handleAskAI}
-                    variant="outline"
-                    className="mt-6 mx-2 h-9 rounded-lg border-navy-100 text-sm text-navy-950 font-semibold"
-                  >
-                    Use AI Guidance
-                  </Button>
-                  <Button
-                    type="button"
                     onClick={clearAllFilters}
-                    className="mt-6 mx-2 h-9 rounded-lg bg-navy-950 px-5 text-sm text-white hover:bg-navy-900"
+                    className="mt-6 h-9 rounded-full bg-dq-navy px-5 text-sm text-white hover:bg-dq-navy/90"
                   >
                     Reset filters
                   </Button>
                 </div>
               ) : (
-                <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
-                  {catalogServices.map((pkg) => (
-                    <ServiceProductCard
-                      key={pkg.id}
-                      service={pkg}
-                      variant="grid"
-                      displayName={getRemixedName(pkg, selectedSectors.length > 0 ? selectedSectors[0] : "all")}
-                    />
-                  ))}
+                <div className="pb-4">
+                  <div
+                    className={
+                      viewMode === "grid"
+                        ? "grid items-stretch gap-5 sm:grid-cols-2 xl:grid-cols-3"
+                        : "flex flex-col gap-4"
+                    }
+                  >
+                    {paginatedServices.map((pkg) => (
+                      <ServiceProductCard
+                        key={pkg.id}
+                        service={pkg}
+                        variant={viewMode}
+                        displayName={getRemixedName(
+                          pkg,
+                          selectedSectors.length > 0 ? selectedSectors[0] : "all"
+                        )}
+                      />
+                    ))}
+                  </div>
+
+                  <MarketplacePagination
+                    currentPage={currentPage}
+                    totalPages={totalPages}
+                    onPageChange={handlePageChange}
+                  />
                 </div>
               )}
             </main>
           </div>
         </div>
-      </div>
+        </div>
+      </section>
 
       <Footer />
-
-      <DiagnoseDialog
-        isOpen={isDialogOpen}
-        onClose={() => {
-          setIsDialogOpen(false);
-          setDialogPrompt("");
-        }}
-        initialProblem={dialogPrompt}
-      />
     </div>
   );
 };

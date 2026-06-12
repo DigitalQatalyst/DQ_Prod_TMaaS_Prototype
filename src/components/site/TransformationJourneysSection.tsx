@@ -2,47 +2,49 @@ import { useMemo } from "react";
 import ServiceProductCard from "@/components/marketplace/ServiceProductCard";
 import { initialServices } from "@/data/services";
 import { useNavigate } from "react-router-dom";
-import { Button } from "@/components/ui/button";
 
 const TransformationJourneysSection = () => {
   const navigate = useNavigate();
-  
+
   const journeys = useMemo(() => {
     const targetNames = [
       "Design Services set",
       "Deploy Services set",
-      "Managed Services set"
+      "Managed Services set",
     ];
-    
+
     return targetNames
-      .map(name => initialServices.find(s => s.standardName === name))
+      .map((name) => initialServices.find((s) => s.standardName === name))
       .filter(Boolean) as typeof initialServices;
   }, []);
 
   if (journeys.length === 0) return null;
 
   return (
-    <section className="bg-slate-50 py-20 border-t border-navy-50">
-      <div className="mx-auto max-w-7xl px-6">
-        <div className="flex flex-col md:flex-row md:items-end justify-between mb-10 gap-6">
+    <section className="border-t border-gray-100 bg-gray-50 px-5 py-24 md:px-8 lg:px-10">
+      <div className="mx-auto max-w-[1200px]">
+        <div className="mb-10 flex flex-col justify-between gap-6 md:flex-row md:items-end">
           <div className="max-w-2xl">
-            <h2 className="text-2xl font-bold tracking-tight text-navy-950 sm:text-3xl font-heading">
+            <p className="dq-eyebrow">
+              Bundles
+            </p>
+            <h2 className="mt-4 text-4xl font-semibold tracking-tight text-dq-navy md:text-5xl">
               Transformation Journeys
             </h2>
-            <p className="mt-3 text-base text-gray-600">
+            <p className="mt-4 text-base leading-relaxed text-gray-600">
               End-to-end service bundles designed to accelerate your digital transformation across design, implementation, and ongoing operations.
             </p>
           </div>
-          <Button 
+          <button
+            type="button"
             onClick={() => {
               navigate("/marketplace?collection=bundles");
               window.scrollTo(0, 0);
             }}
-            variant="outline"
-            className="rounded-xl border-navy-200 text-navy-950 font-bold shrink-0 hidden md:flex h-11"
+            className="hidden h-11 shrink-0 items-center justify-center rounded-full border border-[#c5cde8] bg-white/60 px-6 text-sm font-semibold text-dq-navy backdrop-blur-sm transition hover:border-[#a0aacc] hover:bg-white md:inline-flex"
           >
             View all bundles
-          </Button>
+          </button>
         </div>
 
         <div className="grid gap-6 md:grid-cols-3">
@@ -56,17 +58,17 @@ const TransformationJourneysSection = () => {
             />
           ))}
         </div>
-        
-        <Button 
+
+        <button
+          type="button"
           onClick={() => {
             navigate("/marketplace?collection=bundles");
             window.scrollTo(0, 0);
           }}
-          variant="outline"
-          className="w-full mt-8 rounded-xl border-navy-200 text-navy-950 font-bold md:hidden h-11"
+          className="mt-8 flex h-11 w-full items-center justify-center rounded-full border border-[#c5cde8] bg-white/60 text-sm font-semibold text-dq-navy backdrop-blur-sm transition hover:border-[#a0aacc] hover:bg-white md:hidden"
         >
           View all bundles
-        </Button>
+        </button>
       </div>
     </section>
   );

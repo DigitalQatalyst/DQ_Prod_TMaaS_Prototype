@@ -1,0 +1,19 @@
+---
+description: Service catalog CSV editorial workflow and fixture sync
+globs:
+  - .service-catalog/**
+  - scripts/*catalog*
+  - scripts/sync-fixture-from-csv.ts
+  - src/data/services.ts
+---
+
+# Catalog CSV workflow
+
+- **Source of truth for copy:** `.service-catalog/products.csv` (35 rows) and `.service-catalog/product_variants.csv` (221 rows).
+- **Regenerate copy:** `npm run catalog:generate` then `npm run catalog:validate`.
+- **Sync static fixture:** `npm run catalog:sync-fixture` — must preserve helper exports (`getServiceById`, `getBestSellers`, etc.) appended after `initialServices`.
+- **DB import:** `SUPABASE_SERVICE_ROLE_KEY` + `npm run catalog:import` — upserts products, variants, content, listings.
+- **Variant labels:** Assess, Design, AI Design, Deploy, AI Deploy, Managed (not Implementation / Managed Service).
+- **British English** in customer-facing copy fields; `Specialised Operations` title (slug stays `specialized-operations`).
+- **Immutable in CSV edits:** id, slug, sku, product_id, collection_id, duration_*, delivery_complexity, implementation_model, timestamps.
+- **Standards doc:** `/workspace/catalog-copy-standards.md`

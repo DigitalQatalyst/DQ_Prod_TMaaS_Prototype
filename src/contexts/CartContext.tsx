@@ -7,7 +7,10 @@ import {
   useState,
   type ReactNode,
 } from "react";
-import { getServiceById, initialServices, parseServicePrice } from "@/data/services";
+import { parseServicePrice } from "@/lib/serviceProductUtils";
+import { useCatalogData } from "@/contexts/CatalogContext";
+import { fetchServiceById, shouldUseSupabaseCatalog } from "@/services/catalogService";
+import type { ServiceProduct } from "@/types/serviceProduct";
 
 const STORAGE_KEY = "tmaas-cart-v1";
 
@@ -15,8 +18,6 @@ export type CartLine = {
   serviceId: number;
   quantity: number;
 };
-
-type ServiceProduct = (typeof initialServices)[number];
 
 export type ResolvedCartLine = {
   service: ServiceProduct;
@@ -61,27 +62,63 @@ function readStoredCart(): CartLine[] {
 }
 
 export const CartProvider = ({ children }: { children: ReactNode }) => {
+  const catalog = useCatalogData();
   const [items, setItems] = useState<CartLine[]>(() => readStoredCart());
   const [isOpen, setIsOpen] = useState(false);
+  const [resolvedCache, setResolvedCache] = useState<Map<number, ServiceProduct>>(
+    () => new Map()
+  );
 
   useEffect(() => {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(items));
   }, [items]);
 
-  const addItem = useCallback((serviceId: number) => {
-    if (!getServiceById(serviceId)) return;
-    setItems((prev) => {
-      const existing = prev.find((l) => l.serviceId === serviceId);
-      if (existing) {
-        return prev.map((l) =>
-          l.serviceId === serviceId
-            ? { ...l, quantity: l.quantity + 1 }
-            : l
-        );
-      }
-      return [...prev, { serviceId, quantity: 1 }];
+  const resolveService = useCallback(
+    (serviceId: number): ServiceProduct | undefined => {
+      const cached = resolvedCache.get(serviceId);
+      if (cached) return cached;
+      return catalog.find((s) => s.id === serviceId);
+    },
+    [catalog, resolvedCache]
+  );
+
+  useEffect(() => {
+    if (!shouldUseSupabaseCatalog()) return;
+
+    const missingIds = items
+      .map((line) => line.serviceId)
+      .filter((id) => !catalog.find((s) => s.id === id) && !resolvedCache.has(id));
+
+    if (missingIds.length === 0) return;
+
+    void Promise.all(missingIds.map((id) => fetchServiceById(id))).then((results) => {
+      setResolvedCache((prev) => {
+        const next = new Map(prev);
+        results.forEach((service) => {
+          if (service) next.set(service.id, service);
+        });
+        return next;
+      });
     });
-  }, []);
+  }, [items, catalog, resolvedCache]);
+
+  const addItem = useCallback(
+    (serviceId: number) => {
+      if (!resolveService(serviceId)) return;
+      setItems((prev) => {
+        const existing = prev.find((l) => l.serviceId === serviceId);
+        if (existing) {
+          return prev.map((l) =>
+            l.serviceId === serviceId
+              ? { ...l, quantity: l.quantity + 1 }
+              : l
+          );
+        }
+        return [...prev, { serviceId, quantity: 1 }];
+      });
+    },
+    [resolveService]
+  );
 
   const removeItem = useCallback((serviceId: number) => {
     setItems((prev) => prev.filter((l) => l.serviceId !== serviceId));
@@ -115,7 +152,7 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
   const resolvedItems = useMemo(() => {
     return items
       .map((line) => {
-        const service = getServiceById(line.serviceId);
+        const service = resolveService(line.serviceId);
         if (!service) return null;
         const unit = parseServicePrice(service.price);
         return {
@@ -125,7 +162,7 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
         };
       })
       .filter((line): line is ResolvedCartLine => line !== null);
-  }, [items]);
+  }, [items, resolveService]);
 
   const itemCount = useMemo(
     () => items.reduce((sum, l) => sum + l.quantity, 0),

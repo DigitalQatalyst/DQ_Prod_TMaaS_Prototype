@@ -17,28 +17,30 @@ const MarketplaceCategoryNav = ({
   onTabChange,
 }: MarketplaceCategoryNavProps) => {
   return (
-    <nav
-      className="flex gap-2 overflow-x-auto pb-1 scrollbar-thin"
-      aria-label="Service categories"
-    >
-      {tabs.map((tab) => {
-        const isActive = activeTab === tab.id;
-        return (
-          <button
-            key={tab.id}
-            type="button"
-            onClick={() => onTabChange(tab.id)}
-            className={`shrink-0 rounded-full px-4 py-2 text-sm font-medium transition ${
-              isActive
-                ? "bg-navy-950 text-white shadow-sm"
-                : "border border-navy-100 bg-white text-navy-950 hover:border-navy-200 hover:bg-slate-50"
-            }`}
-          >
-            {tab.label}
-          </button>
-        );
-      })}
-    </nav>
+    <div className="sticky top-16 z-30 bg-background">
+      <nav
+        className="-mx-5 flex flex-nowrap gap-0 overflow-x-auto border-b border-gray-200/80 px-5 scrollbar-none md:-mx-8 md:px-8 lg:-mx-10 lg:px-10"
+        aria-label="Service categories"
+      >
+        {tabs.map((tab) => {
+          const isActive = activeTab === tab.id;
+          return (
+            <button
+              key={tab.id}
+              type="button"
+              onClick={() => onTabChange(tab.id)}
+              className={`shrink-0 border-b-2 px-4 py-3.5 text-sm transition-colors ${
+                isActive
+                  ? "-mb-px border-dq-orange font-semibold text-dq-orange"
+                  : "border-transparent font-medium text-gray-500 hover:text-dq-orange"
+              }`}
+            >
+              {tab.label}
+            </button>
+          );
+        })}
+      </nav>
+    </div>
   );
 };
 

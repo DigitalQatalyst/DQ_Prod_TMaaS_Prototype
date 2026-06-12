@@ -19,13 +19,13 @@ const PODS = [
   {
     tag: "Assess",
     title: "Find the constraint, fast.",
-    body: "Signal capture, stakeholder mapping, and readiness scoring to expose the real blockers to progress — not the assumed ones.",
+    body: "Signal capture, stakeholder mapping, and readiness scoring to expose the real blockers to progress, not the assumed ones.",
     accent: "from-orange-500/20 to-transparent",
   },
   {
     tag: "Design",
     title: "Blueprint what you can ship.",
-    body: "Architecture-backed plans across operating model, data fabric, and AI substrate — sized to execution reality.",
+    body: "Architecture-backed plans across operating model, data fabric, and AI substrate, sized to execution reality.",
     accent: "from-navy-300/30 to-transparent",
   },
   {
@@ -256,7 +256,7 @@ function Hero() {
             <span className="absolute inset-0 animate-ping rounded-full bg-orange-500/60" />
             <span className="relative h-1.5 w-1.5 rounded-full bg-orange-500" />
           </span>
-          TMaaS v1 — delivery pods now available
+          TMaaS v1, delivery pods now available
           <Icon.arrow className="h-3 w-3" />
         </motion.div>
 
@@ -265,7 +265,7 @@ function Hero() {
           style={{ fontWeight: 700, lineHeight: 1.1 }}
         >
           <span className="block overflow-hidden">
-            <Reveal>Transformation&nbsp;Management</Reveal>
+            <Reveal>Transformation</Reveal>
           </span>
           <span className="block overflow-hidden">
             <Reveal delay={0.08}>
@@ -289,7 +289,7 @@ function Hero() {
           transition={{ delay: 0.5, duration: 0.6 }}
           className="mt-8 max-w-xl text-lg leading-relaxed text-gray-600"
         >
-          TMaaS is an execution layer for digital transformation — a marketplace
+          TMaaS is an execution layer for digital transformation, a marketplace
           of certified pods that diagnose, design, deliver, and operate the
           change with measurable outcome SLAs.
         </motion.p>
@@ -490,7 +490,7 @@ function Pods() {
             </h2>
           </div>
           <p className="max-w-md text-gray-600 md:justify-self-end">
-            TMaaS turns transformation into a repeatable operating system — with
+            TMaaS turns transformation into a repeatable operating system, with
             weekly cadence, evidence-based decisions, and delivery artifacts you
             can ship.
           </p>
@@ -562,8 +562,8 @@ function Outcomes() {
             .
           </h2>
           <p className="mt-6 max-w-xl text-white/70">
-            Every pod is backed by a scorecard — readiness, delivery, adoption,
-            and value metrics — so leadership can steer the programme with
+            Every pod is backed by a scorecard, readiness, delivery, adoption,
+            and value metrics, so leadership can steer the programme with
             evidence.
           </p>
 
@@ -705,7 +705,7 @@ function FAQ() {
     },
     {
       q: "Can we start small?",
-      a: "Yes — begin with an assessment pod, then scale into delivery pods once the blueprint is agreed.",
+      a: "Yes, begin with an assessment pod, then scale into delivery pods once the blueprint is agreed.",
     },
   ];
 
@@ -755,7 +755,7 @@ function Footer() {
               </span>
             </div>
             <p className="mt-4 max-w-sm text-sm text-gray-600">
-              Execution pods for digital transformation — built around measurable
+              Execution pods for digital transformation, built around measurable
               outcomes and an evidence-led operating rhythm.
             </p>
           </div>
