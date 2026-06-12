@@ -3,6 +3,7 @@ import {
   marketplaceGoals,
   marketplaceServiceTypeLabels,
 } from "@/data/marketplaceNavigation";
+import { formatPriceDisplay } from "@/lib/serviceProductUtils";
 import type { ServiceProduct } from "@/types/serviceProduct";
 
 export type { ServiceProduct };
@@ -241,7 +242,7 @@ export function getDisplayTitle(standardName: string): string {
 }
 
 export function formatPackagePrice(price: string): string {
-  return price.replace(/^Starting From\s+/i, "From ");
+  return formatPriceDisplay(price.replace(/^Starting From\s+/i, "From "));
 }
 
 export function getServiceSolutionName(standardName: string): string {

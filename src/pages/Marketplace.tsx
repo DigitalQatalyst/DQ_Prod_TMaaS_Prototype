@@ -295,8 +295,8 @@ const Marketplace = () => {
             Browse transformation services
           </h1>
           <p className="mt-4 max-w-xl text-base leading-relaxed text-gray-600 md:text-lg">
-            200+ digital transformation services with clear pricing. Filter by
-            goal, industry, or category.
+            Explore 200+ transformation services across AI, experience,
+            operations, and security.
           </p>
 
           <div className="relative mt-6 flex w-full items-center">

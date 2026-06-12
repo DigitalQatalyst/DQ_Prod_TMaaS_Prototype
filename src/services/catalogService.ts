@@ -329,7 +329,7 @@ function mapRowToServiceProduct(
     remixName: extras.remixNames.get(variantId) ?? {},
     description: content?.description ?? row.short_description ?? "",
     positioning: content?.positioning ?? row.positioning ?? "",
-    price: row.price_display ?? "Custom",
+    price: row.price_display ?? "Pricing on request",
     duration: row.duration_display,
     popularityRank: row.popularity_score,
     deliveryComplexity: (row.delivery_complexity ?? "medium") as ServiceProduct["deliveryComplexity"],

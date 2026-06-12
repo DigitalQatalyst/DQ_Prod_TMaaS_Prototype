@@ -6,6 +6,7 @@ import { useCart } from "@/contexts/CartContext";
 import { useCatalogData } from "@/contexts/CatalogContext";
 import { marketplaceCategoryLabels } from "@/data/marketplaceNavigation";
 import { featureFlags } from "@/lib/featureFlags";
+import { formatPriceDisplay } from "@/lib/serviceProductUtils";
 import { getServiceIcon } from "@/components/marketplace/marketplaceServiceIcons";
 import type { ServiceProduct } from "@/types/serviceProduct";
 
@@ -52,6 +53,7 @@ const ServiceProductCard = ({
   const canViewDetail = featureFlags.isEnabled("serviceDetail");
   const canUseCart = featureFlags.isEnabled("cart");
   const ServiceIcon = getServiceIcon(service.collection, service.serviceType);
+  const priceLabel = formatPriceDisplay(service.price);
 
   if (variant === "list") {
     const inner = (
@@ -70,13 +72,14 @@ const ServiceProductCard = ({
             {service.description}
           </p>
           <p className="mt-3 text-sm text-dq-navy">
-            <span className="font-semibold">{service.price}</span>
+            <span className="font-semibold">{priceLabel}</span>
             <span className="text-gray-400"> · {service.duration}</span>
           </p>
         </div>
         {canViewDetail && (
           <span className="flex h-8 w-8 shrink-0 items-center justify-center self-center rounded-full bg-gray-50 text-gray-400">
-            <ArrowRight size={15} strokeWidth={2} />
+            <ArrowRight size={15} strokeWidth={2} aria-hidden />
+            <span className="sr-only">View service</span>
           </span>
         )}
       </>
@@ -85,7 +88,11 @@ const ServiceProductCard = ({
     return (
       <article className={`group/card p-5 ${CARD_SURFACE_CLASS}`}>
         {canViewDetail ? (
-          <Link to={detailUrl} className="flex items-start gap-5">
+          <Link
+            to={detailUrl}
+            className="flex items-start gap-5"
+            aria-label={`View service: ${title}`}
+          >
             {inner}
           </Link>
         ) : (
@@ -124,7 +131,7 @@ const ServiceProductCard = ({
               {title}
             </h3>
             <p className="mt-4 text-sm text-dq-navy">
-              <span className="font-semibold">{service.price}</span>
+              <span className="font-semibold">{priceLabel}</span>
               <span className="text-gray-400"> · {service.duration}</span>
             </p>
           </Link>
@@ -134,7 +141,7 @@ const ServiceProductCard = ({
               {title}
             </h3>
             <p className="mt-4 text-sm text-dq-navy">
-              <span className="font-semibold">{service.price}</span>
+              <span className="font-semibold">{priceLabel}</span>
               <span className="text-gray-400"> · {service.duration}</span>
             </p>
           </div>
@@ -161,12 +168,13 @@ const ServiceProductCard = ({
           </span>
           <div className="flex items-center justify-between">
             <p className="text-sm text-dq-navy">
-              <span className="font-semibold">{service.price}</span>
+              <span className="font-semibold">{priceLabel}</span>
               <span className="text-gray-400"> · {service.duration}</span>
             </p>
             {canViewDetail && (
               <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-gray-50 text-gray-400">
-                <ArrowRight size={15} strokeWidth={2} />
+                <ArrowRight size={15} strokeWidth={2} aria-hidden />
+                <span className="sr-only">View service</span>
               </span>
             )}
           </div>
@@ -184,7 +192,11 @@ const ServiceProductCard = ({
         )}
 
         {canViewDetail ? (
-          <Link to={detailUrl} className="flex min-h-0 flex-1 flex-col">
+          <Link
+            to={detailUrl}
+            className="flex min-h-0 flex-1 flex-col"
+            aria-label={`View service: ${title}`}
+          >
             {gridInner}
           </Link>
         ) : (
@@ -233,6 +245,7 @@ const FullServiceProductCard = ({
   const catalog = useCatalogData();
   const { addItem, hasItem, openCart } = useCart();
   const inCart = hasItem(service.id);
+  const priceLabel = formatPriceDisplay(service.price);
 
   let relatedServiceName = "";
   if (service.relatedServices && service.relatedServices.length > 0) {
@@ -318,7 +331,7 @@ const FullServiceProductCard = ({
           </ul>
         </div>
         <p className="mt-auto pt-4 text-sm text-dq-navy">
-          <span className="font-bold">{service.price}</span>
+          <span className="font-bold">{priceLabel}</span>
           <span className="text-gray-400"> · {service.duration}</span>
           <span className="ml-2 text-xs font-medium text-gray-500">
             View details
@@ -368,7 +381,7 @@ const FullServiceProductCard = ({
           </ul>
         </div>
         <p className="mt-auto pt-4 text-sm text-dq-navy">
-          <span className="font-bold">{service.price}</span>
+          <span className="font-bold">{priceLabel}</span>
           <span className="text-gray-400"> · {service.duration}</span>
         </p>
         {relatedServiceName && (
