@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { ArrowRight, Zap } from "lucide-react";
-import { sectionHeading } from "@/lib/brandAccent";
+import { sectionHeading, serviceDetailTabLead } from "@/lib/brandAccent";
 import {
   Accordion,
   AccordionContent,
@@ -46,11 +46,11 @@ function DeliverablesSection({
     : getDeliverableBreakdown(service, deliverables);
 
   return (
-    <section aria-labelledby="deliverables-heading">
+    <section aria-labelledby="deliverables-heading" className={serviceDetailTabLead}>
       <h2 id="deliverables-heading" className={sectionHeading}>
         Deliverables
       </h2>
-      <p className="mt-4 text-sm font-medium text-dq-navy">
+      <p className="mt-2 text-sm font-medium text-dq-navy">
         <span className="text-gray-500">Duration:</span> {atAGlance.duration}
         <span className="mx-2 text-gray-300" aria-hidden>
           •
@@ -58,9 +58,9 @@ function DeliverablesSection({
         <span className="text-gray-500">Scope:</span> {atAGlance.scopeLabel}
       </p>
 
-      <ul className="mt-6 list-none divide-y divide-gray-200 border-t border-gray-200">
+      <ul className="mt-6 list-none divide-y divide-gray-200">
         {items.map((item, index) => (
-          <li key={item.title} className="py-5 first:pt-5">
+          <li key={item.title} className="py-4">
             <div className="flex flex-col gap-2 sm:flex-row sm:items-start sm:gap-6">
               <span
                 aria-hidden
