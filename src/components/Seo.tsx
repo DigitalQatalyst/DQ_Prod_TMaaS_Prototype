@@ -37,6 +37,9 @@ const Seo = ({
       <meta property="og:url" content={canonical} />
       <meta property="og:type" content={ogType} />
       <meta property="og:image" content={ogImage} />
+      <meta property="og:image:width" content="1200" />
+      <meta property="og:image:height" content="630" />
+      <meta property="og:image:alt" content="TMaaS by DigitalQatalyst" />
       <meta property="og:site_name" content={SEO_PUBLISHER} />
 
       <meta name="twitter:card" content="summary_large_image" />
@@ -44,6 +47,7 @@ const Seo = ({
       <meta name="twitter:title" content={title} />
       <meta name="twitter:description" content={metaDescription} />
       <meta name="twitter:image" content={ogImage} />
+      <meta name="twitter:creator" content="@digitalqatalyst" />
     </Helmet>
   );
 };
