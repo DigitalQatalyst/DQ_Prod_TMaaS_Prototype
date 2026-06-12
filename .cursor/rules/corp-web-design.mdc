@@ -66,15 +66,29 @@ Marketing pages (`/`, `/marketplace`, `/service/:id`) share the **DQ corp web de
 ## Service detail, tab first-heading alignment
 Overview, What You Receive, and How It Works first `sectionHeading` share the same top offset: `serviceDetailSplitLead` on split-grid lead columns; `serviceDetailTabLead` on How It Works first `ServiceDetailSection`.
 
+## Service detail, related services
+- `ServiceDetailRelatedServices` sits in its own **white** full-width band below the tabs (`border-t border-gray-100 bg-white`), not inside the gray tab content area
+
+## Service detail, FAQs CTA
+- “Still have questions?” block ends with **Contact us →** (arrow icon), not a trailing period
+
+## Platform icons
+- Do not use Lucide `Sparkles` anywhere on the platform; use `Bot`, `Wand2`, `Target`, or other brand-appropriate icons
+
 ## Service detail, hero mesh (`ServiceDetail.tsx`)
 - Scope `heroLight` mesh to the **hero block only** (`absolute inset-0` inside the hero wrapper), never a fixed `h-[520px]` overlay across tabs
 - Tabs and related services sit in a sibling `bg-background` section below the hero
 
+## Service detail, hero meta & tags (`ServiceDetailHero.tsx`)
+- Only **High-Impact** uses a pill badge; category and service type are plain text separated by `•`
+- Use **Timeline:** and **Ideal for:** labels (with colons) in hero meta; timeline stays in hero left column only
+- Package card under price shows `implementationModel` (not duration); no violet/purple collection accents — use `dq-navy` / `navy-50`
+
 ## Service detail, About This Service (Overview tab)
-Match the approved two-column mockup in `ServiceDetailAboutSection.tsx`:
-- Grid: `serviceDetailSplitGrid` + `serviceDetailSplitLead`, **top-aligned** (`items-start` only); lead column `md:pt-7` aligns `sectionHeading` with side-card title; card title before icon
-- Left: `sectionHeading` from `brandAccent.ts` (`text-xl font-semibold tracking-tight text-dq-navy`); two paragraphs at `text-base leading-[1.7] text-[#667085]` with `mt-6 space-y-5`
-- Right “Who it’s for” card: `rounded-2xl p-7 md:p-8`, experience collection uses `bg-[#F3F4F9]` (not strong `violet-50`); white circular icon well; collection accent icon colour via `getAudienceCardAccent`
+Match `ServiceDetailAboutSection.tsx`:
+- Grid: `serviceDetailSplitGrid` + `serviceDetailSplitLead`, top-aligned
+- Left: `sectionHeading`; paragraphs at `text-base leading-[1.7] text-[#667085]`
+- Right “Who it’s for”: no tinted card or icon — `border-l-2 border-dq-navy/15 pl-4` quote-style block
 - Copy: P1 narrative intro (not raw `description` themes shorthand); P2 from `OVERVIEW_CLOSING_BY_TYPE`; audience without solution-name injection for experience advisory
 - Do not use `lg:` breakpoint for this grid, two columns from `md:` upward
 
@@ -82,9 +96,9 @@ Match the approved two-column mockup in `ServiceDetailAboutSection.tsx`:
 All in-page section `h2` titles (About, Key Outcomes, Related Services, tab panels via `ServiceDetailSection`) use **`sectionHeading`** from `@/lib/brandAccent`, corp web card title scale (`text-xl font-semibold`), not `text-2xl`/`font-bold` or responsive `md:text-3xl` jumps.
 
 ## Service detail, What You Receive tab
-Match `ServiceDetailWhatYouReceiveTab.tsx` (same top-row pattern as Overview / About):
-- Top row: same split-grid tokens as Overview, **Deliverables Summary** + **At a glance** card (duration, scope only)
-- **Deliverables Breakdown**: sole enumerated deliverables list with descriptions (`getDeliverableBreakdown`); max **4** grouped deliverables per service via `getDeliverablesForService(service)` keyed by `serviceType`
+Match `ServiceDetailWhatYouReceiveTab.tsx`:
+- Single **Deliverables** section: summary paragraphs, inline `Duration:` / `Scope:` meta line, then numbered breakdown list (no separate At a glance card)
+- Max **4** grouped deliverables per service via `getDeliverablesForService(service)` keyed by `serviceType`
 - **Modules & Applications**: deploy accordion below; `sectionHeading` (no eyebrow)
 
 ## Service detail, Key Outcomes (Overview tab)
@@ -95,6 +109,8 @@ Match the approved four-column mockup in `ServiceDetailKeyOutcomesSection.tsx`:
 
 ## Service detail, How It Works delivery stepper
 Match `HowWeWorkSection` on `DQ_CORPWEB_PROTOTYPE` About Us (`About.tsx`):
+- **Assess (advisory)** services use a standard 3-step lifecycle: Scope → Assess → Advise (1 week total)
+- Step titles use `text-base font-semibold` (not `text-lg`)
 - Desktop: horizontal `bg-gray-200` connector at `top-[28px]`; dynamic `grid-cols-{n}`; `h-14 w-14` mono circles (`01` padding); active step `bg-dq-orange border-dq-orange shadow-lg`, inactive `bg-white border-gray-200`; left-aligned title + `#667085`/`gray-600` body
 - Mobile: vertical timeline with `w-px` connectors between circles (`h-12 w-12` circles)
 - Do not use the old centred dashed-line stepper (`h-7` blue-tint circles)

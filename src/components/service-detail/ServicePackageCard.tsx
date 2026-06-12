@@ -1,4 +1,4 @@
-import { ArrowRight, Check, CheckCircle2, ShoppingCart, Sparkles } from "lucide-react";
+import { ArrowRight, Bot, Check, CheckCircle2, ShoppingCart } from "lucide-react";
 import { toast } from "sonner";
 import { useCart } from "@/contexts/CartContext";
 import { featureFlags } from "@/lib/featureFlags";
@@ -42,7 +42,7 @@ export function ServicePackageCard({
       <p className="text-2xl font-semibold tracking-tight text-dq-navy">
         {formatPackagePrice(service.price)}
       </p>
-      <p className="mt-1 text-sm text-gray-500">{service.duration}</p>
+      <p className="mt-1 text-sm text-gray-500">{service.implementationModel}</p>
 
       <ul className="mt-6 space-y-3 border-t border-gray-100 pt-6">
         {features.map((item) => (
@@ -105,7 +105,7 @@ export function ServicePackageCard({
                 className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-dq-navy px-6 py-3.5 text-sm font-semibold text-white transition hover:bg-dq-navy/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-dq-orange focus-visible:ring-offset-2"
                 onClick={() => onStartOnboarding(service.standardName)}
               >
-                <Sparkles size={16} className="text-orange-400" />
+                <Bot size={16} className="text-orange-400" />
                 Ask AI
               </button>
             )}

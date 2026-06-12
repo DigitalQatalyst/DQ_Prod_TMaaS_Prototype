@@ -36,13 +36,13 @@ export const serviceDetailSplitGrid =
   "grid grid-cols-1 items-start gap-8 md:grid-cols-[5fr_4fr] md:gap-10 lg:gap-14";
 
 /** Lead column offset, aligns `sectionHeading` with side-card title (card uses `p-7 md:p-8`) */
-export const serviceDetailSplitLead = "min-w-0 md:pt-7 lg:pt-8";
+export const serviceDetailSplitLead = "min-w-0 md:pt-4 lg:pt-5";
 
 /** Tinted side card in split intro rows */
 export const serviceDetailSideCard = "rounded-2xl p-7 md:p-8";
 
 /** First tab-section offset, matches split-grid lead column on How It Works */
-export const serviceDetailTabLead = "md:pt-7 lg:pt-8";
+export const serviceDetailTabLead = "md:pt-4 lg:pt-5";
 
 /** Primary CTA, orange fill (corp offerings / marketplace pattern) */
 export const btnPrimary =

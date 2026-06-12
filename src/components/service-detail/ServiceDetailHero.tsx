@@ -1,10 +1,8 @@
 import { Clock, Users, Zap } from "lucide-react";
-import { getServiceIcon } from "@/components/marketplace/marketplaceServiceIcons";
 import { ServicePackageCard } from "./ServicePackageCard";
 import {
   BUNDLE_PDP_SUBTITLE,
   getCategoryShortLabel,
-  getCollectionAccent,
   getPdpDisplayTitle,
   getPdpTypeBadgeLabel,
   type ServiceProduct,
@@ -27,8 +25,6 @@ export function ServiceDetailHero({
 }: ServiceDetailHeroProps) {
   const title = getPdpDisplayTitle(service.standardName, service.serviceType);
   const categoryLabel = getCategoryShortLabel(service.collection);
-  const accent = getCollectionAccent(service.collection);
-  const ServiceIcon = getServiceIcon(service.collection, service.serviceType);
   const isHighImpact = service.standardName.includes("(High-Impact)");
   const typeLabel = getPdpTypeBadgeLabel(service.serviceType, service.badge);
   const isBundle = service.serviceType === "bundle";
@@ -41,25 +37,22 @@ export function ServiceDetailHero({
             {title}
           </h1>
 
-          <div className="animate-fade-in-up animation-delay-100 mt-4 flex flex-wrap items-center gap-2">
-            <span
-              className={`inline-flex items-center gap-2 font-mono text-[10px] font-semibold uppercase tracking-[0.16em] ${accent.badge}`}
-            >
-              <span
-                className={`flex h-8 w-8 items-center justify-center rounded-xl ${accent.iconBg}`}
-              >
-                <ServiceIcon size={16} className={accent.icon} strokeWidth={1.75} />
-              </span>
-              {categoryLabel}
+          <div className="animate-fade-in-up animation-delay-100 mt-4 flex flex-wrap items-center gap-x-2 gap-y-1 text-sm text-gray-600">
+            <span className="font-medium text-dq-navy">{categoryLabel}</span>
+            <span className="text-gray-300" aria-hidden>
+              •
             </span>
-            <span className="rounded-full bg-gray-100 px-3 py-1 font-mono text-[10px] font-semibold uppercase tracking-[0.14em] text-gray-600">
-              {typeLabel}
-            </span>
+            <span>{typeLabel}</span>
             {isHighImpact && (
-              <span className="inline-flex items-center gap-1 rounded-full bg-dq-navy px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider text-white">
-                <Zap size={10} className="fill-white" />
-                High-Impact
-              </span>
+              <>
+                <span className="text-gray-300" aria-hidden>
+                  •
+                </span>
+                <span className="inline-flex items-center gap-1 rounded-full bg-dq-navy px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider text-white">
+                  <Zap size={10} className="fill-white" />
+                  High-Impact
+                </span>
+              </>
             )}
           </div>
 
@@ -79,14 +72,14 @@ export function ServiceDetailHero({
             <span className="inline-flex items-center gap-1.5">
               <Clock size={14} className="shrink-0 text-gray-400" strokeWidth={1.75} aria-hidden />
               <span>
-                <span className="text-gray-400">Timeline</span>{" "}
+                <span className="text-gray-500">Timeline:</span>{" "}
                 <span className="font-medium text-dq-navy">{service.duration}</span>
               </span>
             </span>
             <span className="inline-flex items-center gap-1.5">
               <Users size={14} className="shrink-0 text-gray-400" strokeWidth={1.75} aria-hidden />
               <span>
-                <span className="text-gray-400">Ideal for</span>{" "}
+                <span className="text-gray-500">Ideal for:</span>{" "}
                 <span className="font-medium text-dq-navy">{service.audience}</span>
               </span>
             </span>

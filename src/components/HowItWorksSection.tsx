@@ -3,7 +3,7 @@ import {
   ArrowRight,
   MessageSquareCode,
   Settings2,
-  Sparkles,
+  Bot,
   Workflow,
 } from "lucide-react";
 
@@ -119,7 +119,7 @@ const HowItWorksSection = () => {
             onClick={openButler}
             className="inline-flex h-11 items-center justify-center gap-2 rounded-full border border-[#c5cde8] bg-white/60 px-6 text-sm font-semibold text-dq-navy backdrop-blur-sm transition hover:border-[#a0aacc] hover:bg-white"
           >
-            <Sparkles size={15} className="text-dq-orange" />
+            <Bot size={15} className="text-dq-orange" />
             Ask Butler
           </button>
         </div>

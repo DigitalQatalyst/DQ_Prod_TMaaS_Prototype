@@ -25,7 +25,7 @@ export function ServiceDetailSection({
           {description}
         </p>
       ) : null}
-      <div className="mt-8">{children}</div>
+      <div className="mt-6">{children}</div>
     </section>
   );
 }

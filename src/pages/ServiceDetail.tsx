@@ -160,7 +160,7 @@ const ServiceDetail = () => {
           </div>
         </div>
 
-        <div className="bg-background px-5 pb-20 pt-12 md:px-8 md:pb-24 md:pt-14 lg:px-10 lg:pt-16">
+        <div className="bg-background px-5 pb-16 pt-10 md:px-8 md:pb-20 md:pt-12 lg:px-10 lg:pt-14">
           <div className="mx-auto max-w-[1200px]">
             <ServiceDetailTabs
               service={service}
@@ -169,10 +169,14 @@ const ServiceDetail = () => {
               isDeployService={!!isDeployService}
               pdpContent={pdpContent}
             />
-
-            <ServiceDetailRelatedServices service={service} />
           </div>
         </div>
+
+        <section className="border-t border-gray-100 bg-white px-5 py-14 md:px-8 md:py-16 lg:px-10">
+          <div className="mx-auto max-w-[1200px]">
+            <ServiceDetailRelatedServices service={service} />
+          </div>
+        </section>
       </div>
 
       <MeshSection variant="ctaOrange" className="px-5 py-20 md:px-8 lg:px-10">

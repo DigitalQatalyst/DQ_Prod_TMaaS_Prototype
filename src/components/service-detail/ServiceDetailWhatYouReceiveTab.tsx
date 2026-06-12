@@ -1,11 +1,6 @@
 import { useNavigate } from "react-router-dom";
-import { ArrowRight, ClipboardList, Zap } from "lucide-react";
-import {
-  sectionHeading,
-  serviceDetailSideCard,
-  serviceDetailSplitGrid,
-  serviceDetailSplitLead,
-} from "@/lib/brandAccent";
+import { ArrowRight, Zap } from "lucide-react";
+import { sectionHeading } from "@/lib/brandAccent";
 import {
   Accordion,
   AccordionContent,
@@ -16,7 +11,6 @@ import { useCatalogData } from "@/contexts/CatalogContext";
 import type { PdpContent } from "@/types/catalog";
 import {
   BUNDLE_INCLUSION_LINE,
-  getAudienceCardAccent,
   getDeliverableBreakdown,
   getDeliverablesAtAGlance,
   getDeliverablesForService,
@@ -36,13 +30,15 @@ interface ServiceDetailWhatYouReceiveTabProps {
   pdpContent?: PdpContent;
 }
 
-function DeliverablesIntroSection({
+function DeliverablesSection({
   service,
   deliverableCount,
+  deliverables,
   pdpContent,
 }: {
   service: ServiceProduct;
   deliverableCount: number;
+  deliverables: readonly string[];
   pdpContent?: PdpContent;
 }) {
   const { paragraphs: fallbackParagraphs } = getDeliverablesSummaryContent(service);
@@ -50,88 +46,28 @@ function DeliverablesIntroSection({
     ? pdpContent.deliverablesSummary
     : fallbackParagraphs;
   const atAGlance = getDeliverablesAtAGlance(service, deliverableCount);
-  const accent = getAudienceCardAccent(service.collection);
-
-  return (
-    <section aria-labelledby="deliverables-summary-heading">
-      <div className={serviceDetailSplitGrid}>
-        <div className={serviceDetailSplitLead}>
-          <h2 id="deliverables-summary-heading" className={sectionHeading}>
-            Deliverables Summary
-          </h2>
-          <div className="mt-6 space-y-5">
-            {paragraphs.map((paragraph) => (
-              <p
-                key={paragraph}
-                className="text-base leading-[1.7] text-[#667085]"
-              >
-                {paragraph}
-              </p>
-            ))}
-          </div>
-        </div>
-
-        <aside
-          className={`${serviceDetailSideCard} ${accent.cardBg}`}
-          aria-labelledby="deliverables-at-a-glance-heading"
-        >
-          <h3 id="deliverables-at-a-glance-heading" className={sectionHeading}>
-            At a glance
-          </h3>
-          <div
-            className={`mt-5 flex h-11 w-11 items-center justify-center rounded-full ${accent.iconWell}`}
-          >
-            <ClipboardList
-              size={20}
-              className={accent.icon}
-              strokeWidth={1.75}
-              aria-hidden
-            />
-          </div>
-          <dl className="mt-5 space-y-4">
-            <div>
-              <dt className="font-mono text-[10px] uppercase tracking-[0.14em] text-gray-400">
-                Duration
-              </dt>
-              <dd className="mt-1 text-sm font-medium text-dq-navy">
-                {atAGlance.duration}
-              </dd>
-            </div>
-            <div>
-              <dt className="font-mono text-[10px] uppercase tracking-[0.14em] text-gray-400">
-                Scope
-              </dt>
-              <dd className="mt-1 text-sm font-medium text-dq-navy">
-                {atAGlance.scopeLabel}
-              </dd>
-            </div>
-          </dl>
-        </aside>
-      </div>
-    </section>
-  );
-}
-
-function DeliverablesBreakdown({
-  service,
-  deliverables,
-  pdpContent,
-}: {
-  service: ServiceProduct;
-  deliverables: readonly string[];
-  pdpContent?: PdpContent;
-}) {
   const items = pdpContent?.deliverables?.length
     ? pdpContent.deliverables
     : getDeliverableBreakdown(service, deliverables);
 
   return (
-    <section aria-labelledby="deliverables-breakdown-heading">
-      <h2 id="deliverables-breakdown-heading" className={sectionHeading}>
-        Deliverables Breakdown
+    <section aria-labelledby="deliverables-heading">
+      <h2 id="deliverables-heading" className={sectionHeading}>
+        Deliverables
       </h2>
-      <p className="mt-2 text-sm leading-relaxed text-[#667085]">
-        Each output is focused, actionable, and easy to apply.
+      <div className="mt-4 space-y-4">
+        {paragraphs.map((paragraph) => (
+          <p key={paragraph} className="max-w-3xl text-base leading-[1.7] text-[#667085]">
+            {paragraph}
+          </p>
+        ))}
+      </div>
+      <p className="mt-4 text-sm font-medium text-dq-navy">
+        <span className="text-gray-500">Duration:</span> {atAGlance.duration}
+        <span className="mx-2 text-gray-300" aria-hidden>
+          •
+        </span>
+        <span className="text-gray-500">Scope:</span> {atAGlance.scopeLabel}
       </p>
 
       <ol className="mt-6 list-none overflow-hidden rounded-2xl border border-gray-200 bg-white">
@@ -140,7 +76,7 @@ function DeliverablesBreakdown({
             key={item.title}
             className="border-t border-gray-100 first:border-t-0"
           >
-            <div className="flex flex-col gap-3 px-5 py-5 sm:flex-row sm:items-center sm:gap-5 sm:px-6">
+            <div className="flex flex-col gap-3 px-5 py-4 sm:flex-row sm:items-center sm:gap-5 sm:px-6">
               <span
                 aria-hidden
                 className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-orange-50 text-sm font-semibold text-dq-orange"
@@ -287,21 +223,17 @@ export function ServiceDetailWhatYouReceiveTab({
 
   if (isBundle) {
     return (
-      <div className="space-y-12">
+      <div className="space-y-10">
         <BundleIncludedSection service={service} />
       </div>
     );
   }
 
   return (
-    <div className="space-y-12">
-      <DeliverablesIntroSection
+    <div className="space-y-10">
+      <DeliverablesSection
         service={service}
         deliverableCount={deliverables.length}
-        pdpContent={pdpContent}
-      />
-      <DeliverablesBreakdown
-        service={service}
         deliverables={deliverables}
         pdpContent={pdpContent}
       />

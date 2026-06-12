@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { ArrowRight } from "lucide-react";
 import {
   Accordion,
   AccordionContent,
@@ -26,7 +27,7 @@ export function ServiceDetailFaqsTab({ service, pdpContent }: ServiceDetailFaqsT
   const faqs = pdpContent?.faqs?.length ? pdpContent.faqs : fallback.faqs;
 
   return (
-    <div className="space-y-12">
+    <div className="space-y-10">
       <section aria-labelledby="service-faqs-heading" className={serviceDetailTabLead}>
         <h2 id="service-faqs-heading" className={sectionHeading}>
           Frequently Asked Questions
@@ -65,19 +66,20 @@ export function ServiceDetailFaqsTab({ service, pdpContent }: ServiceDetailFaqsT
           {featureFlags.isEnabled("contactUs") ? (
             <Link
               to={buildContactPath(service, "consultation")}
-              className="font-semibold text-dq-orange transition-colors hover:text-dq-orange/80"
+              className="inline-flex items-center gap-1 font-semibold text-dq-orange transition-colors hover:text-dq-orange/80"
             >
               Contact us
+              <ArrowRight size={14} aria-hidden />
             </Link>
           ) : (
             <a
               href="mailto:info@digitalqatalyst.com"
-              className="font-semibold text-dq-orange transition-colors hover:text-dq-orange/80"
+              className="inline-flex items-center gap-1 font-semibold text-dq-orange transition-colors hover:text-dq-orange/80"
             >
               Contact us
+              <ArrowRight size={14} aria-hidden />
             </a>
           )}
-          .
         </p>
       </section>
     </div>

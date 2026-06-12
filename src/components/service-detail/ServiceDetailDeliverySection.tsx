@@ -89,7 +89,7 @@ function HorizontalDeliveryStepper({ steps }: { steps: DeliveryStep[] }) {
           {steps.map((item) => (
             <div key={item.step} className="flex flex-col items-start">
               <StepCircle step={item.step} active={item.active} />
-              <h3 className="mb-2 text-lg font-semibold text-dq-navy">{item.title}</h3>
+              <h3 className="mb-2 text-base font-semibold text-dq-navy">{item.title}</h3>
               <p className="text-[14px] leading-relaxed text-gray-600">{item.body}</p>
             </div>
           ))}
@@ -106,7 +106,7 @@ function HorizontalDeliveryStepper({ steps }: { steps: DeliveryStep[] }) {
               ) : null}
             </div>
             <div className="pb-4">
-              <h3 className="mb-1.5 text-lg font-semibold text-dq-navy">{item.title}</h3>
+              <h3 className="mb-1.5 text-base font-semibold text-dq-navy">{item.title}</h3>
               <p className="text-[14px] leading-relaxed text-gray-600">{item.body}</p>
             </div>
           </div>
@@ -168,7 +168,7 @@ export function ServiceDetailDeliverySection({
   const { steps, totalDuration } = process;
 
   return (
-    <div className="space-y-16">
+    <div className="space-y-12">
       <ServiceDetailSection
         className={serviceDetailTabLead}
         title="Our Delivery Process"
@@ -197,17 +197,35 @@ export function getDeliverySteps(
 ): DeliveryProcess {
   if (flags.isAdvisory) {
     return {
-      totalDuration: "Up to 1 Week",
+      totalDuration: "1 Week",
       steps: [
         {
           step: 1,
-          title: "Assess",
-          duration: "1 Week",
-          body: "We evaluate your organisation, current challenges, and transformation goals to identify the highest-value opportunities.",
-          whatHappens: "Evaluate organisation, challenges, and transformation goals",
-          dqEffort: "high",
+          title: "Scope",
+          duration: "Days 1-2",
+          body: "We align on your goals, stakeholders, and assessment focus so the engagement stays targeted and efficient.",
+          whatHappens: "Kick-off, context gathering, and assessment scope",
+          dqEffort: "medium",
           yourEffort: "medium",
           active: true,
+        },
+        {
+          step: 2,
+          title: "Assess",
+          duration: "Days 3-4",
+          body: "We review your current state, surface priority gaps, and gather evidence your leadership team can act on.",
+          whatHappens: "Current-state review, gap analysis, and evidence capture",
+          dqEffort: "high",
+          yourEffort: "medium",
+        },
+        {
+          step: 3,
+          title: "Advise",
+          duration: "Day 5",
+          body: "We deliver findings, recommendations, and practical next steps so you know what to prioritise in the marketplace.",
+          whatHappens: "Findings playback, recommendations, and next-step roadmap",
+          dqEffort: "medium",
+          yourEffort: "low",
         },
       ],
     };

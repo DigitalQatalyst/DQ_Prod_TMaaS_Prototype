@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { ArrowRight, Sparkles } from "lucide-react";
+import { ArrowRight, Bot } from "lucide-react";
 import MeshSection from "./site/MeshSection";
 import { PLATFORM_NAME } from "@/lib/brandLinks";
 import { featureFlags } from "@/lib/featureFlags";
@@ -14,7 +14,7 @@ const HeroSectionTraditional = () => {
       <div className="relative z-10 mx-auto max-w-3xl px-6 text-center">
         {/* Eyebrow */}
         <p className="inline-flex items-center gap-1.5 rounded-full border border-orange-200 bg-orange-50 px-3 py-1 text-sm font-medium text-orange-700">
-          <Sparkles size={13} className="text-orange-500" strokeWidth={2} />
+          <Bot size={13} className="text-orange-500" strokeWidth={2} />
           {PLATFORM_NAME}
         </p>
 
