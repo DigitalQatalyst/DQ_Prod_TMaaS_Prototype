@@ -123,12 +123,16 @@ async function fetchCatalogListExtras(variantIds: number[]): Promise<VariantExtr
   const supabase = getSupabaseClient();
   if (!supabase || variantIds.length === 0) return empty;
 
-  const [featuresRes, tagsRes, remixRes] = await Promise.all([
+  const [featuresRes, tagsRes, contentRes, remixRes] = await Promise.all([
     supabase
       .from("product_features")
       .select("variant_id, feature_text, sort_order")
       .in("variant_id", variantIds),
     supabase.from("product_tags").select("variant_id, tag_name").in("variant_id", variantIds),
+    supabase
+      .from("product_content")
+      .select("variant_id, description, positioning")
+      .in("variant_id", variantIds),
     supabase
       .from("variant_sector_titles")
       .select("variant_id, sector_category_id, title")
@@ -149,6 +153,14 @@ async function fetchCatalogListExtras(variantIds: number[]): Promise<VariantExtr
     tags.set(row.variant_id, list);
   }
 
+  const descriptions = new Map<number, { description: string; positioning: string | null }>();
+  for (const row of contentRes.data ?? []) {
+    descriptions.set(row.variant_id, {
+      description: row.description,
+      positioning: row.positioning,
+    });
+  }
+
   const remixNames = new Map<number, Record<string, string>>();
   for (const row of remixRes.data ?? []) {
     const current = remixNames.get(row.variant_id) ?? {};
@@ -156,7 +168,7 @@ async function fetchCatalogListExtras(variantIds: number[]): Promise<VariantExtr
     remixNames.set(row.variant_id, current);
   }
 
-  return { ...empty, features, tags, remixNames };
+  return { ...empty, features, tags, descriptions, remixNames };
 }
 
 async function mapListingRowsToServices(
@@ -206,12 +218,21 @@ export async function enrichCatalogListExtras(
   if (services.length === 0) return services;
 
   const extras = await fetchCatalogListExtras(services.map((service) => service.id));
-  return services.map((service) => ({
-    ...service,
-    features: extras.features.get(service.id) ?? service.features,
-    tags: extras.tags.get(service.id) ?? service.tags,
-    remixName: extras.remixNames.get(service.id) ?? service.remixName,
-  }));
+  return services.map((service) => {
+    const content = extras.descriptions.get(service.id);
+    return {
+      ...service,
+      features: extras.features.get(service.id) ?? service.features,
+      tags: extras.tags.get(service.id) ?? service.tags,
+      remixName: extras.remixNames.get(service.id) ?? service.remixName,
+      ...(content
+        ? {
+            description: content.description,
+            positioning: content.positioning ?? service.positioning,
+          }
+        : {}),
+    };
+  });
 }
 
 async function fetchVariantExtras(variantIds: number[]) {
@@ -358,7 +379,7 @@ export async function fetchCatalogFromSupabase(): Promise<ServiceProduct[]> {
 
   if (error) throw error;
 
-  return mapListingRowsToServicesSync((data ?? []) as ListingViewRow[]);
+  return mapListingRowsToServices((data ?? []) as ListingViewRow[], "full");
 }
 
 export async function fetchCatalogPage(params: CatalogListParams): Promise<CatalogPageResult> {

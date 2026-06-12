@@ -1,7 +1,7 @@
 import { initialServices } from "@/data/services";
 import type { ServiceProduct } from "@/types/serviceProduct";
 
-const CACHE_KEY = "tmaas-marketplace-catalog";
+const CACHE_KEY = "tmaas-marketplace-catalog-v2";
 const CACHE_TTL_MS = 5 * 60 * 1000;
 
 type CatalogCachePayload = {
