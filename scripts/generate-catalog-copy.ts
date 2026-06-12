@@ -68,12 +68,19 @@ const PRODUCT_DOMAIN: Record<number, string> = {
 };
 
 const PRODUCT_TITLE_OVERRIDES: Record<number, string> = {
+  3: "Mobile Apps & Services (High-Impact)",
+  4: "Physical & Frontline Channels (High-Impact)",
   5: "Integrated Experience (High-Impact)",
+  6: "CRM & Customer Relationship (High-Impact)",
+  7: "Marketing Operations (High-Impact)",
   12: "Specialised Operations (High-Impact)",
-  33: "Design Services Set",
-  34: "Deploy Services Set",
-  35: "Managed Services Set",
+  32: "Flexible Advisory Package",
+  33: "Flexible Design Package",
+  34: "Flexible Deploy Package",
+  35: "Flexible Managed Services Package",
 };
+
+const BUNDLE_STAGE_LABEL = "End-to-end bundle";
 
 const SHORT_DESC_OVERRIDES: Record<number, string> = {
   22: "Improve IT service delivery and employee support through better incident handling, knowledge, automation and service management.",
@@ -210,11 +217,16 @@ function transformVariant(row: VariantRow, products: Map<string, ProductRow>): V
 
   next.positioning = buildPositioning(serviceTypeId, domain, productId);
 
-  if (serviceTypeId === "bundle" && productId >= 32) {
-    const product = products.get(String(productId));
-    if (product) {
-      next.variant_name = product.title;
+  if (serviceTypeId === "bundle") {
+    if (productId >= 32) {
+      const product = products.get(String(productId));
+      if (product) {
+        next.variant_name = product.title;
+      }
+    } else {
+      next.variant_name = BUNDLE_STAGE_LABEL;
     }
+    next.badge = BUNDLE_STAGE_LABEL;
   }
 
   return next;
@@ -269,7 +281,7 @@ function buildBundleVariant(
   const productId = BUNDLE_PRODUCT_ID[service.id];
   const product = productMap.get(String(productId));
   const variantName =
-    productId >= 32 ? (product?.title ?? service.standardName) : "Transformation Bundle";
+    productId >= 32 ? (product?.title ?? service.standardName) : BUNDLE_STAGE_LABEL;
 
   const row: VariantRow = {
     id: String(service.id),
@@ -283,7 +295,7 @@ function buildBundleVariant(
     duration_weeks_max: productId >= 32 ? "" : "24",
     delivery_complexity: service.deliveryComplexity,
     implementation_model: service.implementationModel,
-    badge: "Bundle",
+    badge: BUNDLE_STAGE_LABEL,
     positioning: "",
     is_default_variant: "false",
     status: "published",

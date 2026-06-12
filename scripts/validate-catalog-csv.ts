@@ -20,8 +20,10 @@ const VARIANT_LABELS: Record<string, { variant_name: string; badge: string }> = 
   ai_design: { variant_name: "AI Design", badge: "AI Design" },
   deploy: { variant_name: "Deploy", badge: "Deploy" },
   ai_deploy: { variant_name: "AI Deploy", badge: "AI Deploy" },
-  manage: { variant_name: "Managed", badge: "Managed" },
+  manage: { variant_name: "Managed Service", badge: "Managed Service" },
 };
+
+const BUNDLE_STAGE_LABEL = "End-to-end bundle";
 
 const US_SPELLING = /\b(optimize|organization|specialized)\b/i;
 
@@ -96,8 +98,8 @@ function main() {
       }
     }
 
-    if (row.service_type_id === "bundle" && row.badge !== "Bundle") {
-      errors.push(`Variant ${row.id}: bundle badge must be Bundle`);
+    if (row.service_type_id === "bundle" && row.badge !== BUNDLE_STAGE_LABEL) {
+      errors.push(`Variant ${row.id}: bundle badge must be ${BUNDLE_STAGE_LABEL}`);
     }
 
     if (/maturity gaps/i.test(row.positioning)) {

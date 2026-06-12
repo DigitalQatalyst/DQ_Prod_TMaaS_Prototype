@@ -6,8 +6,8 @@
 const VARIANT_SUFFIX_RE =
   /^(.+?)\s+-\s+(Assess|Design|AI Design|Deploy|AI Deploy|Managed|Managed Service|Transformation Bundle|Advisory Set|Design Services Set|Deploy Services Set|Managed Services Set)$/;
 
-/** Product family stem renames (display only). */
-const PRODUCT_DISPLAY_RENAMES: Record<string, string> = {
+/** Product family stem renames (display only). Slugs unchanged. */
+export const PRODUCT_DISPLAY_RENAMES: Record<string, string> = {
   "Mobile Apps": "Mobile Apps & Services",
   "Physical Channels": "Physical & Frontline Channels",
   "CRM Solutions": "CRM & Customer Relationship",
@@ -115,7 +115,7 @@ function formatTitle(
   const { productStem, variantSuffix } = parseStandardName(standardName);
   const product = renameProductStem(productStem);
 
-  if (variantSuffix && productStem === variantSuffix && PRODUCT_DISPLAY_RENAMES[productStem]) {
+  if (variantSuffix && productStem === variantSuffix) {
     return product;
   }
 

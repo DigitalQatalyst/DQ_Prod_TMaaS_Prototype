@@ -23,6 +23,7 @@ Reference: `/workspace/pdp-copy-style.md`
 - Assess: title/card uses **Assess**; PDP type badge uses **Assessment**. Managed customer-facing label is **Managed Service**.
 - Transformation Bundle: marketplace card suffix **End-to-end bundle**; PDP H1 suffix **End-to-end transformation**. Flexible set bundles (`Advisory Set`, etc.) use renamed product only (no suffix).
 - Bundle PDP subtitle and inclusion line: `BUNDLE_PDP_SUBTITLE`, `BUNDLE_INCLUSION_LINE` in the same module.
+- Supabase catalog labels: `npm run db:display-labels:sql` → `supabase/migrations/20250610000013_update_display_labels.sql` (products.title, product_variants, search index).
 
 ## Variant SEO copy (required)
 
