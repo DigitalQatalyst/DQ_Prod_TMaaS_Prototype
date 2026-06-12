@@ -87,9 +87,9 @@ export const iconWellOnDark =
 export const navActive = "font-semibold text-dq-orange";
 export const tabActive = "-mb-px border-dq-orange font-medium text-dq-orange";
 
-/** Card hover, corp border accent */
+/** Card hover, corp border accent (use with `shadow-card` base) */
 export const cardInteractive =
-  "transition-all duration-300 hover:border-dq-orange hover:shadow-[var(--shadow-elevated)]";
+  "transition-all duration-300 hover:border-dq-orange hover:shadow-elevated";
 
 /** Inline action link */
 export const linkAction =
