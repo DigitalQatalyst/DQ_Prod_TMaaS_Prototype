@@ -18,8 +18,8 @@ const DEFAULT_PACKAGE_FEATURES = [
 
 interface ServicePackageCardProps {
   service: ServiceProduct;
-  requiresQuoteCTA: boolean;
-  onRequestQuote: () => void;
+  primaryCtaLabel: string;
+  onPrimaryCta: () => void;
   onStartOnboarding: (name: string) => void;
   packageHighlights?: string[];
   className?: string;
@@ -27,8 +27,8 @@ interface ServicePackageCardProps {
 
 export function ServicePackageCard({
   service,
-  requiresQuoteCTA,
-  onRequestQuote,
+  primaryCtaLabel,
+  onPrimaryCta,
   onStartOnboarding,
   packageHighlights,
   className,
@@ -58,13 +58,13 @@ export function ServicePackageCard({
       </ul>
 
       <div className="mt-6">
-        {requiresQuoteCTA || !featureFlags.isEnabled("cart") ? (
+        {service.serviceType === "bundle" || !featureFlags.isEnabled("cart") ? (
           <ServiceDetailPrimaryButton
             fullWidth
             className="group"
-            onClick={onRequestQuote}
+            onClick={onPrimaryCta}
           >
-            Get a quote
+            {primaryCtaLabel}
             <ArrowRight
               size={16}
               className="transition group-hover:translate-x-0.5"

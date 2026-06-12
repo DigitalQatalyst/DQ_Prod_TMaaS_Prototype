@@ -1,5 +1,10 @@
 import { useState, useMemo, useEffect, useCallback } from "react";
-import { PLATFORM_ACRONYM } from "@/lib/brandLinks";
+import Seo from "@/components/Seo";
+import JsonLd from "@/components/JsonLd";
+import { MARKETPLACE_SEO, absoluteUrl } from "@/lib/seo";
+import { buildMarketplaceStructuredData } from "@/lib/structuredData";
+import { initialServices } from "@/data/services";
+import { getDisplayTitle } from "@/components/service-detail/serviceDetailHelpers";
 import { useSearchParams } from "react-router-dom";
 import LandingNavbar from "@/components/site/landing/LandingNavbar";
 import Footer from "@/components/Footer";
@@ -11,7 +16,6 @@ import MarketplaceFilters from "@/components/marketplace/MarketplaceFilters";
 import MarketplaceBestSellers from "@/components/marketplace/MarketplaceBestSellers";
 import MarketplacePagination from "@/components/marketplace/MarketplacePagination";
 import ServiceProductCard from "@/components/marketplace/ServiceProductCard";
-import { getBestSellers } from "@/data/services";
 import MeshSection from "@/components/site/MeshSection";
 import {
   marketplaceCategoryLabels,
@@ -25,8 +29,9 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { getRemixedName } from "@/data/services";
-import { useCatalogServices } from "@/hooks/useCatalog";
+import { useBestSellers, useMarketplaceListings } from "@/hooks/useCatalog";
+import type { MarketplaceSortBy } from "@/lib/marketplaceCatalogFilters";
+import { getRemixedName } from "@/lib/serviceProductUtils";
 
 const PAGE_SIZE = 15;
 type ViewMode = "grid" | "list";
@@ -34,7 +39,6 @@ type ViewMode = "grid" | "list";
 // Removed old labels
 
 const Marketplace = () => {
-  const { services: catalog, isLoading: catalogLoading } = useCatalogServices();
   const [searchParams, setSearchParams] = useSearchParams();
   const [activeTab, setActiveTab] = useState<string>("all");
   const [searchQuery, setSearchQuery] = useState("");
@@ -43,7 +47,7 @@ const Marketplace = () => {
   const [selectedSectors, setSelectedSectors] = useState<string[]>([]);
   const [selectedServiceTypes, setSelectedServiceTypes] = useState<string[]>([]);
   const [sidebarOpen, setSidebarOpen] = useState(false);
-  const [sortBy, setSortBy] = useState("popular");
+  const [sortBy, setSortBy] = useState<MarketplaceSortBy>("popular");
   const [currentPage, setCurrentPage] = useState(1);
   const [viewMode, setViewMode] = useState<ViewMode>("grid");
 
@@ -54,11 +58,6 @@ const Marketplace = () => {
   }, []);
 
   useEffect(() => {
-    document.title = `Marketplace | Digital Transformation Services | ${PLATFORM_ACRONYM}`;
-  }, []);
-
-  useEffect(() => {
-
     const collection = searchParams.get("collection");
     if (
       collection &&
@@ -135,79 +134,43 @@ const Marketplace = () => {
   const hasActiveFilters = hasRefinementFilters || activeTab !== "all";
 
   const showBestSellers = !hasRefinementFilters && activeTab !== "bundles";
+  const bestSellerCollection = activeTab === "all" ? "all" : activeTab;
+  const { data: bestSellers = [] } = useBestSellers(bestSellerCollection, 4, showBestSellers);
+  const excludeVariantIds = useMemo(
+    () => (showBestSellers ? bestSellers.map((service) => service.id) : []),
+    [bestSellers, showBestSellers]
+  );
 
-  const bestSellerIds = useMemo(() => {
-    if (!showBestSellers) return new Set<number>();
-    const collection = activeTab === "all" ? "all" : activeTab;
-    const pool = (
-      collection === "all"
-        ? catalog
-        : catalog.filter((s) => s.collection === collection)
-    ).filter((s) => s.serviceType !== "bundle");
-    return new Set(
-      [...pool]
-        .sort((a, b) => b.popularityRank - a.popularityRank)
-        .slice(0, 4)
-        .map((s) => s.id)
-    );
-  }, [showBestSellers, activeTab, catalog]);
+  const catalogListParams = useMemo(
+    () => ({
+      page: currentPage,
+      pageSize: PAGE_SIZE,
+      activeTab,
+      searchQuery,
+      selectedCategories,
+      selectedServiceTypes,
+      selectedIncluded,
+      selectedSectors,
+      sortBy,
+      excludeVariantIds,
+    }),
+    [
+      activeTab,
+      currentPage,
+      excludeVariantIds,
+      searchQuery,
+      selectedCategories,
+      selectedIncluded,
+      selectedSectors,
+      selectedServiceTypes,
+      sortBy,
+    ]
+  );
 
-  const filteredServices = useMemo(() => {
-    return catalog.filter((pkg) => {
-      const isBundle = pkg.serviceType === "bundle";
-      const wantsMultiOnly =
-        selectedIncluded.includes("multi") && !selectedIncluded.includes("single");
-      const wantsSingleOnly =
-        selectedIncluded.includes("single") && !selectedIncluded.includes("multi");
+  const { services: paginatedServices, totalCount: catalogServicesCount } =
+    useMarketplaceListings(catalogListParams);
 
-      if (activeTab === "bundles") {
-        if (!isBundle) return false;
-      } else if (wantsMultiOnly) {
-        if (!isBundle) return false;
-      } else if (wantsSingleOnly) {
-        if (isBundle) return false;
-      } else if (isBundle) {
-        return false;
-      }
-
-      const matchesCollection =
-        activeTab === "all" || activeTab === "bundles" || pkg.collection === activeTab;
-
-      const matchesCategory =
-        selectedCategories.length === 0 || selectedCategories.includes(pkg.collection);
-
-      const matchesServiceType =
-        selectedServiceTypes.length === 0 || selectedServiceTypes.includes(pkg.serviceType);
-
-      const activeSector = selectedSectors.length > 0 ? selectedSectors[0] : "all";
-
-      const matchesSearch = searchQuery === "" || 
-        pkg.standardName.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        pkg.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        getRemixedName(pkg, activeSector).toLowerCase().includes(searchQuery.toLowerCase()) ||
-        pkg.tags.some(tag => tag.toLowerCase().includes(searchQuery.toLowerCase())) ||
-        pkg.features.some(feat => feat.toLowerCase().includes(searchQuery.toLowerCase()));
-
-      return matchesCollection && matchesCategory && matchesServiceType && matchesSearch;
-    }).sort((a, b) => {
-      if (sortBy === "popular") return b.popularityRank - a.popularityRank;
-      if (sortBy === "price-low") return parseInt(a.price.replace(/[$,]/g, "")) - parseInt(b.price.replace(/[$,]/g, ""));
-      if (sortBy === "fastest") return parseInt(a.duration) - parseInt(b.duration);
-      return 0;
-    });
-  }, [catalog, activeTab, searchQuery, selectedCategories, selectedIncluded, selectedServiceTypes, selectedSectors, sortBy]);
-
-  const catalogServices = useMemo(() => {
-    if (!showBestSellers) return filteredServices;
-    return filteredServices.filter((s) => !bestSellerIds.has(s.id));
-  }, [filteredServices, showBestSellers, bestSellerIds]);
-
-  const totalPages = Math.max(1, Math.ceil(catalogServices.length / PAGE_SIZE));
-
-  const paginatedServices = useMemo(() => {
-    const start = (currentPage - 1) * PAGE_SIZE;
-    return catalogServices.slice(start, start + PAGE_SIZE);
-  }, [catalogServices, currentPage]);
+  const totalPages = Math.max(1, Math.ceil(catalogServicesCount / PAGE_SIZE));
 
   useEffect(() => {
     setCurrentPage(1);
@@ -227,8 +190,8 @@ const Marketplace = () => {
     }
   }, [currentPage, totalPages]);
 
-  const showingFrom = catalogServices.length === 0 ? 0 : (currentPage - 1) * PAGE_SIZE + 1;
-  const showingTo = Math.min(currentPage * PAGE_SIZE, catalogServices.length);
+  const showingFrom = catalogServicesCount === 0 ? 0 : (currentPage - 1) * PAGE_SIZE + 1;
+  const showingTo = Math.min(currentPage * PAGE_SIZE, catalogServicesCount);
 
   const handlePageChange = useCallback(
     (page: number) => {
@@ -307,6 +270,20 @@ const Marketplace = () => {
 
   return (
     <div className="min-h-screen bg-background">
+      <Seo
+        title={MARKETPLACE_SEO.title}
+        description={MARKETPLACE_SEO.description}
+        path={MARKETPLACE_SEO.path}
+      />
+      <JsonLd
+        data={buildMarketplaceStructuredData(
+          initialServices.map((service) => ({
+            id: service.id,
+            name: getDisplayTitle(service.standardName),
+            url: absoluteUrl(`/service/${service.id}`),
+          })),
+        )}
+      />
       <LandingNavbar />
 
       <MeshSection variant="heroLight" grid className="px-5 pb-8 pt-20 md:px-8 md:pb-10 md:pt-24 lg:px-10">
@@ -318,7 +295,7 @@ const Marketplace = () => {
             Browse transformation services
           </h1>
           <p className="mt-4 max-w-xl text-base leading-relaxed text-gray-600 md:text-lg">
-            50+ digital transformation services with clear pricing. Filter by
+            200+ digital transformation services with clear pricing. Filter by
             goal, industry, or category.
           </p>
 
@@ -347,9 +324,6 @@ const Marketplace = () => {
 
       <section className="bg-background px-5 pb-16 pt-2 md:px-8 lg:px-10">
         <div className="mx-auto max-w-[1280px]">
-          {catalogLoading && (
-            <p className="mb-6 text-center text-sm text-gray-500">Loading catalog…</p>
-          )}
           <div id="catalog-grid" className="scroll-mt-32">
             {showBestSellers && (
               <div className="mb-10">
@@ -361,9 +335,9 @@ const Marketplace = () => {
             )}
 
             {showBestSellers && (
-              <h3 className="mb-6 text-2xl font-semibold tracking-tight text-dq-navy">
+              <h2 className="mb-6 text-2xl font-semibold tracking-tight text-dq-navy">
                 All services
-              </h3>
+              </h2>
             )}
 
             <MarketplaceCategoryNav
@@ -407,7 +381,7 @@ const Marketplace = () => {
                       Filters
                     </Button>
                     <p className="min-w-0 text-sm text-gray-600">
-                      {catalogServices.length === 0 ? (
+                      {catalogServicesCount === 0 ? (
                         <>0 services</>
                       ) : (
                         <>
@@ -417,16 +391,19 @@ const Marketplace = () => {
                           </span>{" "}
                           of{" "}
                           <span className="font-semibold text-dq-navy">
-                            {catalogServices.length}
+                            {catalogServicesCount}
                           </span>{" "}
-                          {catalogServices.length === 1 ? "service" : "services"}
+                          {catalogServicesCount === 1 ? "service" : "services"}
                         </>
                       )}
                     </p>
                   </div>
 
                   <div className="flex w-full items-center justify-between gap-3 sm:w-auto sm:justify-end">
-                    <Select value={sortBy} onValueChange={setSortBy}>
+                    <Select
+                      value={sortBy}
+                      onValueChange={(value) => setSortBy(value as MarketplaceSortBy)}
+                    >
                       <SelectTrigger className="h-9 w-full min-w-0 max-w-[10.5rem] rounded-lg border-gray-200 bg-white text-sm shadow-none sm:w-[10.5rem]">
                         <SelectValue placeholder="Sort by" />
                       </SelectTrigger>
@@ -491,7 +468,7 @@ const Marketplace = () => {
                 </div>
               )}
 
-              {catalogServices.length === 0 ? (
+              {catalogServicesCount === 0 ? (
                 <div className="rounded-2xl border border-gray-200 bg-white p-12 text-center">
                   <Search
                     size={32}

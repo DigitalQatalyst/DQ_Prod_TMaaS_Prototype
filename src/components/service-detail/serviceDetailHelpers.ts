@@ -3,10 +3,9 @@ import {
   marketplaceGoals,
   marketplaceServiceTypeLabels,
 } from "@/data/marketplaceNavigation";
-import type { initialServices } from "@/data/services";
-import { initialServices as servicesCatalog } from "@/data/services";
+import type { ServiceProduct } from "@/types/serviceProduct";
 
-export type ServiceProduct = (typeof initialServices)[number];
+export type { ServiceProduct };
 
 export const marketplaceCategoryShortLabels: Record<string, string> = {
   experience: "Digital Experience",
@@ -248,7 +247,7 @@ export function formatPackagePrice(price: string): string {
 export function getServiceSolutionName(standardName: string): string {
   const withoutHighImpact = standardName.replace(" (High-Impact)", "");
   const stagedMatch = withoutHighImpact.match(
-    /^(.+?)\s+-\s+(?:Assess|Design|AI Design|Implementation|AI Implementation|Managed Service|Transformation Bundle)$/
+    /^(.+?)\s+-\s+(?:Assess|Design|AI Design|Deploy|AI Deploy|Managed|Implementation|AI Implementation|Managed Service|Transformation Bundle|Advisory Set|Design Services Set|Deploy Services Set|Managed Services Set)$/
   );
   if (stagedMatch) return stagedMatch[1].trim();
   return withoutHighImpact.trim();
@@ -933,7 +932,7 @@ function findSolutionBundle(
 
 export function getRelatedServices(
   service: ServiceProduct,
-  catalog: readonly ServiceProduct[] = servicesCatalog
+  catalog: readonly ServiceProduct[]
 ): ServiceProduct[] {
   const seen = new Set<number>([service.id]);
   const related: ServiceProduct[] = [];

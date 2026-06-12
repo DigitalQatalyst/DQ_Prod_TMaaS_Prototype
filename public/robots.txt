@@ -1,14 +1,13 @@
-User-agent: Googlebot
-Allow: /
-
-User-agent: Bingbot
-Allow: /
-
-User-agent: Twitterbot
-Allow: /
-
-User-agent: facebookexternalhit
-Allow: /
-
 User-agent: *
 Allow: /
+Disallow: /api/
+Disallow: /dashboard/
+Disallow: /onboarding/
+Disallow: /sign-in
+Disallow: /landing-v1
+Disallow: /home
+Disallow: /explore
+Disallow: /butler-demo
+Disallow: /cart
+
+Sitemap: https://tmaas.digitalqatalyst.com/sitemap.xml

@@ -1,3 +1,7 @@
+import JsonLd from "@/components/JsonLd";
+import Seo from "@/components/Seo";
+import { HOME_SEO } from "@/lib/seo";
+import { buildHomeStructuredData } from "@/lib/structuredData";
 import LandingNavbar from "@/components/site/landing/LandingNavbar";
 import TrustedBySection from "@/components/site/landing/TrustedBySection";
 import Footer from "@/components/Footer";
@@ -12,6 +16,12 @@ import LandingCtaSection from "@/components/site/landing/v2/LandingCtaSection";
 const IndexProductLanding = () => {
   return (
     <div className="min-h-screen bg-white">
+      <Seo
+        title={HOME_SEO.title}
+        description={HOME_SEO.description}
+        path={HOME_SEO.path}
+      />
+      <JsonLd data={buildHomeStructuredData()} />
       <LandingNavbar />
       <main>
         <LandingHeroSection />

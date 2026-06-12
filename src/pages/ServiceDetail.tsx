@@ -16,7 +16,7 @@ import {
   getDeliverySteps,
 } from "@/components/service-detail/ServiceDetailDeliverySection";
 import { getDisplayTitle } from "@/components/service-detail/serviceDetailHelpers";
-import { buildContactPath } from "@/lib/contactFormPrefill";
+import { buildContactPath, getServicePackageCta } from "@/lib/contactFormPrefill";
 import JsonLd from "@/components/JsonLd";
 import Seo from "@/components/Seo";
 import { buildServiceMetaDescription, SEO_BRAND } from "@/lib/seo";
@@ -44,8 +44,6 @@ const ServiceDetail = () => {
     service && ["design", "ai_design"].includes(service.serviceType);
   const isDeployService =
     service && ["deploy", "ai_deploy"].includes(service.serviceType);
-  const requiresQuoteCTA = service?.serviceType === "bundle";
-
   const servicePath = `/service/${id ?? ""}`;
 
   if (isLoading && !service) {
@@ -98,9 +96,11 @@ const ServiceDetail = () => {
       isDeploy: !!isDeployService,
     });
 
-  const handleRequestQuote = () => {
+  const packageCta = getServicePackageCta(service.serviceType);
+
+  const handlePrimaryCta = () => {
     if (featureFlags.isEnabled("contactUs")) {
-      navigate(buildContactPath(service, "quote"));
+      navigate(buildContactPath(service, packageCta.intent));
       return;
     }
     handleStartOnboarding(service.standardName);
@@ -152,8 +152,8 @@ const ServiceDetail = () => {
           <div className="relative z-10 mx-auto max-w-[1200px]">
             <ServiceDetailHero
               service={service}
-              requiresQuoteCTA={!!requiresQuoteCTA}
-              onRequestQuote={handleRequestQuote}
+              primaryCtaLabel={packageCta.label}
+              onPrimaryCta={handlePrimaryCta}
               onStartOnboarding={handleStartOnboarding}
               packageHighlights={pdpContent?.packageHighlights}
             />

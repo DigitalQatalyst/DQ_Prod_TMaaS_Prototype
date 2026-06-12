@@ -4,6 +4,7 @@ import { featureFlags } from "@/lib/featureFlags";
 import {
   createSupabaseMock,
   SAMPLE_LISTING_ROW,
+  SAMPLE_SEARCH_INDEX_ROW,
   type TableHandler,
 } from "@/test/supabaseMock";
 
@@ -17,6 +18,11 @@ vi.mock("@/lib/supabase", () => ({
 
 function mockExtrasTables(variantId = SAMPLE_LISTING_ROW.variant_id) {
   const handlers: Record<string, TableHandler> = {
+    product_search_index: {
+      data: [SAMPLE_SEARCH_INDEX_ROW],
+      error: null,
+      count: 1,
+    },
     product_features: {
       data: [{ variant_id: variantId, feature_text: "Dedicated TMaaS specialist team", sort_order: 0 }],
       error: null,
@@ -43,10 +49,10 @@ function mockExtrasTables(variantId = SAMPLE_LISTING_ROW.variant_id) {
     bundle_items: { data: [], error: null },
     marketplace_listings_view: (state) => {
       if (state.filters.variant_id__in) {
-        return {
-          data: [{ variant_id: variantId, product_id: SAMPLE_LISTING_ROW.product_id }],
-          error: null,
-        };
+        return { data: [SAMPLE_LISTING_ROW], error: null };
+      }
+      if (state.filters.listing_id__in) {
+        return { data: [SAMPLE_LISTING_ROW], error: null };
       }
       return { data: [SAMPLE_LISTING_ROW], error: null };
     },
@@ -100,14 +106,14 @@ describe("catalogService Supabase integration", () => {
       collection: "ai",
       serviceType: "advisory",
       standardName: "Enterprise Data Platform (High-Impact) - Assess",
-      description: "Full description from product_content.",
+      description: "Assess your data platform readiness.",
       price: "Free",
       duration: "1 Week",
       popularityRank: 100,
-      features: ["Dedicated TMaaS specialist team"],
-      tags: ["ai"],
-      outcomes: ["modernise-technology"],
-      timelineMilestones: ["Phase 1: Discovery"],
+      features: [],
+      tags: [],
+      outcomes: [],
+      timelineMilestones: [],
     });
   });
 
@@ -148,7 +154,7 @@ describe("catalogService Supabase integration", () => {
     expect(service?.features).toContain("Dedicated TMaaS specialist team");
   });
 
-  it("prefers best-seller placements and backfills by popularity", async () => {
+  it("returns best sellers from the shared catalog query", async () => {
     const secondListing = {
       ...SAMPLE_LISTING_ROW,
       listing_id: 12,
@@ -160,24 +166,20 @@ describe("catalogService Supabase integration", () => {
     getSupabaseClient.mockReturnValue(
       createSupabaseMock({
         ...mockExtrasTables(),
+        product_search_index: {
+          data: [
+            { variant_id: 103, listing_id: 11, popularity_score: 100, is_bundle: false },
+            { variant_id: 109, listing_id: 12, popularity_score: 99, is_bundle: false },
+          ],
+          error: null,
+          count: 2,
+        },
         marketplace_listings_view: (state) => {
           if (state.filters.listing_id__in) {
-            return {
-              data: [
-                { listing_id: 11, variant_id: 103 },
-                { listing_id: 12, variant_id: 109 },
-              ],
-              error: null,
-            };
+            return { data: [SAMPLE_LISTING_ROW, secondListing], error: null };
           }
           if (state.filters.variant_id__in) {
-            return {
-              data: [
-                { variant_id: 103, product_id: 4 },
-                { variant_id: 109, product_id: 5 },
-              ],
-              error: null,
-            };
+            return { data: [SAMPLE_LISTING_ROW, secondListing], error: null };
           }
           return { data: [SAMPLE_LISTING_ROW, secondListing], error: null };
         },
@@ -305,6 +307,27 @@ describe("catalogService Supabase integration", () => {
     });
   });
 
+  it("fetches a paginated catalog page from product_search_index", async () => {
+    getSupabaseClient.mockReturnValue(createSupabaseMock(mockExtrasTables()));
+
+    const { fetchCatalogPage } = await import("./catalogService");
+    const page = await fetchCatalogPage({
+      page: 1,
+      pageSize: 15,
+      activeTab: "all",
+      searchQuery: "",
+      selectedCategories: [],
+      selectedServiceTypes: [],
+      selectedIncluded: [],
+      selectedSectors: [],
+      sortBy: "popular",
+    });
+
+    expect(page.totalCount).toBe(1);
+    expect(page.services).toHaveLength(1);
+    expect(page.services[0]?.id).toBe(103);
+  });
+
   it("ranks services by popularity within a collection", async () => {
     const { pickTopServicesByPopularity } = await import("./catalogService");
     const services = [
@@ -315,6 +338,6 @@ describe("catalogService Supabase integration", () => {
     ];
 
     const topAi = pickTopServicesByPopularity(services, "ai", 2);
-    expect(topAi.map((service) => service.id)).toEqual([2, 1]);
+    expect(topAi.map((service) => service.id)).toEqual([1, 2]);
   });
 });

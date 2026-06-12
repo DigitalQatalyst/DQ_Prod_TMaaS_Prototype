@@ -49,8 +49,8 @@ const DEFAULT_FEATURE_FLAGS: FeatureFlags = {
   contactUs: true,
 
   explore: false,
-  alternateLanding: true,
-  landingV1: true,
+  alternateLanding: false,
+  landingV1: false,
   legal: false,
 
   supabaseCatalog: true,

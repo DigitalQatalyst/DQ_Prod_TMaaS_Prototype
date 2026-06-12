@@ -2,7 +2,7 @@ import { ArrowRight } from "lucide-react";
 import { DQ_CORP_WEB_URL, PLATFORM_NAME } from "@/lib/brandLinks";
 
 const STATS = [
-  { value: "50+", label: "Digital transformation services" },
+  { value: "200+", label: "Digital transformation services" },
   { value: "4", label: "Service categories" },
   { value: "6+", label: "Countries served" },
   { value: "4 wks", label: "Typical time to start" },
@@ -10,7 +10,10 @@ const STATS = [
 
 const DqLineageStatsBand = () => {
   return (
-    <section className="bg-gray-50 px-5 py-24 md:px-8 lg:px-10">
+    <section className="bg-gray-50 px-5 py-24 md:px-8 lg:px-10" aria-labelledby="dq-lineage-stats-heading">
+      <h2 id="dq-lineage-stats-heading" className="sr-only">
+        TMaaS at a glance
+      </h2>
       <div className="mx-auto grid max-w-[1200px] gap-12 lg:grid-cols-[1.4fr_1fr] lg:items-center">
         <div className="grid gap-8 sm:grid-cols-2">
           {STATS.map(({ value, label }) => (
@@ -29,9 +32,9 @@ const DqLineageStatsBand = () => {
           <p className="mb-3 dq-eyebrow">
             Part of DigitalQatalyst
           </p>
-          <h3 className="mb-3 text-2xl font-semibold tracking-tight text-dq-navy">
+          <p className="mb-3 text-2xl font-semibold tracking-tight text-dq-navy">
             Built on a decade of transformation delivery.
-          </h3>
+          </p>
           <p className="mb-6 text-[15px] leading-relaxed text-gray-600">
             {PLATFORM_NAME} is a DigitalQatalyst product. The same trusted
             approach, now available through a simple online marketplace.

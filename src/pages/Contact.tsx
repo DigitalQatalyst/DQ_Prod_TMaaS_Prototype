@@ -1,16 +1,22 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Link, useSearchParams } from "react-router-dom";
 import { Check, Clock, ArrowRight, Loader2, MapPin, Phone, Mail } from "lucide-react";
 import LandingNavbar from "@/components/site/landing/LandingNavbar";
 import Footer from "@/components/Footer";
-import { PLATFORM_ACRONYM } from "@/lib/brandLinks";
+import JsonLd from "@/components/JsonLd";
+import Seo from "@/components/Seo";
+import { CONTACT_SEO } from "@/lib/seo";
+import { buildContactStructuredData } from "@/lib/structuredData";
 import {
   CONTACT_INTEREST_OPTIONS,
   CONTACT_NEED_OPTIONS,
   getServiceEnquiryFormDefaults,
   parseServiceContactParams,
 } from "@/lib/contactFormPrefill";
+import ContactTurnstile from "@/components/ContactTurnstile";
 import { featureFlags } from "@/lib/featureFlags";
+
+const MAX_ROLE_LEN = 150;
 
 type FormState = {
   firstName: string;
@@ -43,10 +49,6 @@ const PHONE_REGEX = /^\+?[\d\s\-(). ]{7,20}$/;
 const Contact = () => {
   const [searchParams] = useSearchParams();
 
-  useEffect(() => {
-    document.title = `Talk to our team | ${PLATFORM_ACRONYM}`;
-  }, []);
-
   const serviceEnquiry = parseServiceContactParams(searchParams);
 
   const [form, setForm] = useState<FormState>(() => {
@@ -59,6 +61,8 @@ const Contact = () => {
   const [errors, setErrors] = useState<Partial<Record<keyof FormState, string>>>({});
   const [submitError, setSubmitError] = useState<string | null>(null);
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
+  const [turnstileToken, setTurnstileToken] = useState<string | null>(null);
+  const [honeypot, setHoneypot] = useState("");
 
   const setField = <K extends keyof FormState>(key: K, value: FormState[K]) => {
     setForm((prev) => ({ ...prev, [key]: value }));
@@ -76,6 +80,7 @@ const Contact = () => {
     if (form.phone.trim() && !PHONE_REGEX.test(form.phone.trim()))
       next.phone = "Enter a valid phone number";
     if (!form.organisation.trim()) next.organisation = "Organisation is required";
+    if (form.role.trim().length > MAX_ROLE_LEN) next.role = "Role must be 150 characters or fewer";
     if (!serviceEnquiry) {
       if (!form.interest) next.interest = "Select an area of interest";
       if (!form.need) next.need = "Select what you need from DQ";
@@ -88,6 +93,10 @@ const Contact = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (!turnstileToken) {
+      setSubmitError("Complete the security check before submitting.");
+      return;
+    }
     if (!validate()) return;
     setStatus("loading");
     setSubmitError(null);
@@ -95,7 +104,11 @@ const Contact = () => {
       const res = await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(form),
+        body: JSON.stringify({
+          ...form,
+          turnstileToken,
+          website: honeypot,
+        }),
       });
       if (!res.ok) {
         const data = (await res.json().catch(() => null)) as { error?: string } | null;
@@ -119,6 +132,8 @@ const Contact = () => {
     setErrors({});
     setSubmitError(null);
     setStatus("idle");
+    setTurnstileToken(null);
+    setHoneypot("");
   };
 
   const privacyLink = featureFlags.isEnabled("legal") ? (
@@ -138,6 +153,12 @@ const Contact = () => {
 
   return (
     <div className="min-h-screen bg-background">
+      <Seo
+        title={CONTACT_SEO.title}
+        description={CONTACT_SEO.description}
+        path={CONTACT_SEO.path}
+      />
+      <JsonLd data={buildContactStructuredData()} />
       <LandingNavbar />
       {status === "success" ? (
         <section className="bg-white px-5 pb-12 pt-20 md:px-8 md:pb-16 md:pt-24">
@@ -146,9 +167,9 @@ const Contact = () => {
               <div className="mx-auto mb-6 flex h-16 w-16 items-center justify-center rounded-full bg-[#ECFDF3]">
                 <Check size={32} className="text-green-600" strokeWidth={2.5} />
               </div>
-              <h2 className="mb-3 text-2xl font-semibold tracking-tight text-dq-navy md:text-3xl">
+              <h1 className="mb-3 text-2xl font-semibold tracking-tight text-dq-navy md:text-3xl">
                 We&apos;ve got your request
-              </h2>
+              </h1>
               <p className="mx-auto mb-8 max-w-md text-[15px] leading-relaxed text-gray-600">
                 A DQ advisor will review your message and get back to you within 2
                 business days with the right next step.
@@ -254,6 +275,7 @@ const Contact = () => {
                         type="text"
                         autoComplete="organization-title"
                         placeholder="e.g. Director of Digital Transformation"
+                        maxLength={MAX_ROLE_LEN}
                         value={form.role}
                         onChange={(e) => setField("role", e.target.value)}
                         className={inputClass(errors.role)}
@@ -363,6 +385,29 @@ const Contact = () => {
                       )}
                     </div>
 
+                    <div className="absolute -left-[9999px] h-0 w-0 overflow-hidden" aria-hidden="true">
+                      <label htmlFor="website">Website</label>
+                      <input
+                        id="website"
+                        type="text"
+                        name="website"
+                        tabIndex={-1}
+                        autoComplete="off"
+                        value={honeypot}
+                        onChange={(e) => setHoneypot(e.target.value)}
+                      />
+                    </div>
+
+                    <ContactTurnstile
+                      onVerify={setTurnstileToken}
+                      onExpire={() => setTurnstileToken(null)}
+                      onError={() =>
+                        setSubmitError(
+                          "Security verification failed to load. Please refresh the page or email us at info@digitalqatalyst.com."
+                        )
+                      }
+                    />
+
                     {submitError && (
                       <p className="rounded-lg border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700" role="alert">
                         {submitError}
@@ -375,7 +420,7 @@ const Contact = () => {
                       </p>
                       <button
                         type="submit"
-                        disabled={status === "loading"}
+                        disabled={status === "loading" || !turnstileToken}
                         className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-dq-orange px-6 py-3 text-[15px] font-semibold text-white outline-none transition-colors hover:bg-[#E04020] glow-orange focus-visible:ring-2 focus-visible:ring-dq-orange focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-80 sm:w-auto"
                       >
                         {status === "loading" ? (

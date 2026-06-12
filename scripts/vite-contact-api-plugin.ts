@@ -2,12 +2,13 @@ import type { Connect } from "vite";
 import type { Plugin } from "vite";
 import contactHandler from "../api/contact.js";
 
-const MSGRAPH_ENV_KEYS = [
+const CONTACT_API_ENV_KEYS = [
   "MSGRAPH_TENANT_ID",
   "MSGRAPH_CLIENT_ID",
   "MSGRAPH_CLIENT_SECRET",
   "MSGRAPH_SENDER_UPN",
   "MSGRAPH_RECIPIENT_EMAIL",
+  "TURNSTILE_SECRET_KEY",
 ] as const;
 
 function readJsonBody(req: Connect.IncomingMessage): Promise<unknown> {
@@ -69,7 +70,7 @@ export function contactApiDevPlugin(env: Record<string, string>): Plugin {
   return {
     name: "contact-api-dev",
     configureServer(server) {
-      for (const key of MSGRAPH_ENV_KEYS) {
+      for (const key of CONTACT_API_ENV_KEYS) {
         const value = env[key];
         if (value) {
           process.env[key] = value;

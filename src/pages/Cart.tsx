@@ -3,7 +3,7 @@ import { Minus, Plus, ShoppingBag, Trash2, ArrowRight } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { useCart } from "@/contexts/CartContext";
-import { formatServicePrice } from "@/data/services";
+import { formatServicePrice } from "@/lib/serviceProductUtils";
 import { Button } from "@/components/ui/button";
 
 const Cart = () => {

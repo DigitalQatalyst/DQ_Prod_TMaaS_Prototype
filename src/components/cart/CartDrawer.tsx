@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { Minus, Plus, ShoppingBag, Trash2 } from "lucide-react";
 import { useCart } from "@/contexts/CartContext";
-import { formatServicePrice } from "@/data/services";
+import { formatServicePrice } from "@/lib/serviceProductUtils";
 import { Button } from "@/components/ui/button";
 import {
   Sheet,
