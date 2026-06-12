@@ -106,14 +106,15 @@ describe("catalogService Supabase integration", () => {
       collection: "ai",
       serviceType: "advisory",
       standardName: "Enterprise Data Platform (High-Impact) - Assess",
-      description: "Assess your data platform readiness.",
+      description: "Full description from product_content.",
+      positioning: "(High-Impact) Positioning Strategy",
       price: "Free",
       duration: "1 Week",
       popularityRank: 100,
-      features: [],
-      tags: [],
-      outcomes: [],
-      timelineMilestones: [],
+      features: ["Dedicated TMaaS specialist team"],
+      tags: ["ai"],
+      outcomes: ["modernise-technology"],
+      timelineMilestones: ["Phase 1: Discovery"],
     });
   });
 

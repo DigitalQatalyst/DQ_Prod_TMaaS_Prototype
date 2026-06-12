@@ -1,7 +1,14 @@
 import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
 import MeshSection from "@/components/site/MeshSection";
+import { NAV_BROWSE_MARKETPLACE_LABEL } from "@/lib/brandLinks";
+import {
+  LAUNCH_ADVISORY_CTA_LABEL,
+  LAUNCH_ADVISORY_EYEBROW,
+  buildLaunchAdvisoryContactPath,
+} from "@/lib/launchOffering";
 import { btnPrimaryOnDark, btnSecondaryOnDark } from "@/lib/brandAccent";
+import { featureFlags } from "@/lib/featureFlags";
 import { cn } from "@/lib/utils";
 
 const LandingCtaSection = () => {
@@ -24,32 +31,52 @@ const LandingCtaSection = () => {
 
       <div className="relative mx-auto max-w-[720px]">
         <p className="dq-eyebrow-on-dark mb-4">
-          Get started
+          {featureFlags.isEnabled("contactUs") ? LAUNCH_ADVISORY_EYEBROW : "Get started"}
         </p>
 
         <h2 className="text-balance text-4xl font-semibold leading-[1.05] tracking-tight text-white md:text-5xl">
-          Find your next service{" "}
-          <span className="text-dq-orange">in the marketplace.</span>
+          {featureFlags.isEnabled("contactUs") ? (
+            <>
+              Start with a free{" "}
+              <span className="text-dq-orange">transformation advisory.</span>
+            </>
+          ) : (
+            <>
+              Find your next service{" "}
+              <span className="text-dq-orange">in the marketplace.</span>
+            </>
+          )}
         </h2>
 
         <p className="mx-auto mt-5 max-w-md text-[15px] leading-relaxed text-white/60">
-          Browse on your own or talk to our team when you&apos;re ready to
-          launch.
+          {featureFlags.isEnabled("contactUs")
+            ? "Book a no-cost session with a DQ advisor, or browse the marketplace when you are ready."
+            : "Browse on your own and find the right service for your next step."}
         </p>
 
         <div className="mt-8 flex flex-col items-stretch gap-3 sm:flex-row sm:flex-wrap sm:items-center sm:justify-center">
+          {featureFlags.isEnabled("contactUs") ? (
+            <Link
+              to={buildLaunchAdvisoryContactPath()}
+              className={cn(btnPrimaryOnDark, "w-full px-7 sm:w-auto")}
+            >
+              {LAUNCH_ADVISORY_CTA_LABEL}
+              <ArrowRight size={15} />
+            </Link>
+          ) : (
+            <Link
+              to="/marketplace"
+              className={cn(btnPrimaryOnDark, "w-full px-7 sm:w-auto")}
+            >
+              {NAV_BROWSE_MARKETPLACE_LABEL}
+              <ArrowRight size={15} />
+            </Link>
+          )}
           <Link
             to="/marketplace"
-            className={cn(btnPrimaryOnDark, "w-full px-7 sm:w-auto")}
-          >
-            Browse services
-            <ArrowRight size={15} />
-          </Link>
-          <Link
-            to="/contact"
             className={cn(btnSecondaryOnDark, "w-full px-7 sm:w-auto")}
           >
-            Talk to our team
+            {NAV_BROWSE_MARKETPLACE_LABEL}
           </Link>
         </div>
       </div>

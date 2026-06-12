@@ -1,348 +1,155 @@
-import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
-import { motion } from "framer-motion";
-import { ArrowLeft, Shield, Download, Calendar } from "lucide-react";
-import { Button } from "@/components/ui/button";
 import LandingNavbar from "@/components/site/landing/LandingNavbar";
 import Footer from "@/components/Footer";
+import Seo from "@/components/Seo";
+import { LegalPageLayout, type LegalSection } from "@/components/LegalPageLayout";
+import { PLATFORM_NAME_EXPANDED } from "@/lib/brandLinks";
+import { SEO_BRAND } from "@/lib/seo";
+
+const LAST_UPDATED = "June 2026";
+
+const SECTIONS: LegalSection[] = [
+  {
+    id: "who-we-are",
+    heading: "1. Who We Are",
+    body: [
+      'DigitalQatalyst DMCC ("DigitalQatalyst", "we", "our", "us") is a digital transformation consultancy incorporated in the Dubai Multi Commodities Centre (DMCC) Free Zone, Dubai, United Arab Emirates (DMCC Licence No. 131122).',
+      `For the purposes of applicable data protection law, DigitalQatalyst DMCC is the data controller of any personal information collected through the ${PLATFORM_NAME_EXPANDED} platform.`,
+      "Registered address: Unit 1992, DMCC Business Center, Level 1, Jewellery & Gemplex 3, PO Box 340505, Dubai, UAE.",
+      "Email: info@digitalqatalyst.com | Telephone: +971 4 266 6169",
+    ],
+  },
+  {
+    id: "applicable-law",
+    heading: "2. Applicable Data Protection Law",
+    body: [
+      "As a DMCC-incorporated entity operating in the UAE, DigitalQatalyst DMCC is subject to the UAE Federal Decree-Law No. 45 of 2021 on the Protection of Personal Data (UAE PDPL) and its implementing regulations.",
+      "Where we process personal data of individuals located in the European Economic Area (EEA) or the United Kingdom, the EU General Data Protection Regulation (GDPR) and the UK GDPR may also apply. This Privacy Policy is written to satisfy both frameworks.",
+      "The supervisory authority for UAE PDPL matters is the UAE Data Office (uaedataoffice.ae). For EEA individuals, the relevant supervisory authority is the data protection authority in your country of residence.",
+    ],
+  },
+  {
+    id: "information-we-collect",
+    heading: "3. Information We Collect",
+    body: [
+      "We collect information in two ways: information you provide to us directly, and information collected automatically when you use our website.",
+      `Information you provide directly includes your name, work email address, organisation name, job role, and any context you share when submitting an enquiry through the TMaaS contact form or requesting information about a marketplace service.`,
+      "Information collected automatically includes standard web server logs (IP address, browser type, pages visited, time and date of visit). We may use analytics tools to understand aggregate website usage patterns. We do not use advertising cookies or cross-site behavioural tracking.",
+      "Third-party connections: our website loads web fonts from Google Fonts (fonts.googleapis.com). This results in your browser making a connection to Google's servers, which may process your IP address. We do not control Google's data practices; please refer to Google's Privacy Policy for details.",
+    ],
+  },
+  {
+    id: "how-we-use-your-information",
+    heading: "4. How We Use Your Information",
+    body: [
+      "We use the information you provide to respond to your enquiries, route your request to the appropriate DQ advisor or service team, and send you relevant information about TMaaS services where you have consented or where we have a legitimate interest in doing so.",
+      "We use automatically collected information to maintain the security and performance of our website, understand how visitors use the TMaaS platform, and improve our content and services.",
+      "We do not use your personal information for automated decision-making or profiling that produces legal or similarly significant effects.",
+    ],
+  },
+  {
+    id: "legal-basis",
+    heading: "5. Legal Basis for Processing",
+    body: [
+      "Under the UAE PDPL and GDPR (where applicable), we rely on the following legal bases for processing your personal data:",
+      "Consent — where you have given us clear consent for a specific purpose, such as receiving marketing communications.",
+      "Legitimate interests — where processing is necessary for our legitimate business interests (responding to enquiries, improving our website, maintaining records), and those interests are not overridden by your rights and freedoms.",
+      "Contract — where processing is necessary to take steps at your request prior to entering into a contract, or to perform a contract with you.",
+      "Legal obligation — where processing is required to comply with applicable law.",
+    ],
+  },
+  {
+    id: "sharing-your-information",
+    heading: "6. Sharing Your Information",
+    body: [
+      "We do not sell, rent, or trade your personal information to third parties for their own marketing purposes.",
+      "We may share your information with trusted service providers who assist us in operating our website and delivering our services (for example, email delivery platforms, CRM software, cloud hosting providers), under contractual obligations that require them to keep your information confidential and process it only on our instructions.",
+      "We may disclose information where required by UAE law, regulation, legal process, or governmental request, or where necessary to protect the rights, property, or safety of DigitalQatalyst DMCC, our clients, or others.",
+    ],
+  },
+  {
+    id: "international-transfers",
+    heading: "7. International Data Transfers",
+    body: [
+      "DigitalQatalyst DMCC operates from Dubai, UAE and serves clients across the GCC and internationally. Your personal data may be processed in countries other than your own.",
+      "Under the UAE PDPL, we ensure that cross-border transfers of personal data are conducted in accordance with the conditions and safeguards set out by the UAE Data Office.",
+      "Where we transfer personal data of EEA or UK individuals to countries without an adequacy decision, we use appropriate safeguards — such as Standard Contractual Clauses (SCCs) or equivalent mechanisms — to ensure your data receives the same level of protection.",
+    ],
+  },
+  {
+    id: "data-retention",
+    heading: "8. Data Retention",
+    body: [
+      "We retain personal data only for as long as necessary to fulfil the purposes for which it was collected, or as required by applicable law.",
+      "Enquiry and correspondence data is retained for a minimum of five years, in line with commercial record-keeping requirements under UAE law. You may request deletion of your data at any time — see Your Rights below — subject to any legal obligation to retain it.",
+    ],
+  },
+  {
+    id: "your-rights",
+    heading: "9. Your Rights",
+    body: [
+      "Depending on your jurisdiction, you may have the following rights in relation to your personal data:",
+      "Access — the right to request a copy of the personal data we hold about you.",
+      "Correction — the right to request that we correct inaccurate or incomplete data.",
+      "Erasure — the right to request that we delete your personal data where there is no lawful reason to continue processing it.",
+      "Restriction — the right to ask us to restrict processing of your data in certain circumstances.",
+      "Portability — the right to receive your data in a structured, machine-readable format (applies under GDPR and equivalent provisions).",
+      "Objection — the right to object to processing based on legitimate interests, including for direct marketing.",
+      "To exercise any of these rights, please email info@digitalqatalyst.com. We will acknowledge your request promptly and respond within the timeframe required by applicable law (typically 30 days for GDPR requests; timelines under UAE PDPL are set by the UAE Data Office). You also have the right to lodge a complaint with the relevant supervisory authority — the UAE Data Office for UAE PDPL matters, or your local data protection authority for GDPR matters.",
+    ],
+  },
+  {
+    id: "cookies",
+    heading: "10. Cookies",
+    body: [
+      "Our website uses essential cookies required for the site to function correctly. We do not use advertising, tracking, or behavioural profiling cookies.",
+      "As noted in Section 3, our website connects to Google Fonts to load typefaces. This is a functional dependency, not a tracking mechanism, but it involves a network request to Google's servers.",
+      "You can control cookies through your browser settings. Disabling essential cookies may affect the functionality of parts of our website.",
+    ],
+  },
+  {
+    id: "security",
+    heading: "11. Security",
+    body: [
+      "We implement appropriate technical and organisational measures to protect your personal data against unauthorised access, disclosure, alteration, loss, or destruction. All data transmitted between your browser and our website is encrypted using TLS.",
+      "No method of transmission over the internet is completely secure. While we take reasonable precautions, we cannot guarantee the absolute security of your data.",
+    ],
+  },
+  {
+    id: "changes",
+    heading: "12. Changes to This Policy",
+    body: [
+      'We may update this Privacy Policy from time to time to reflect changes in our practices or applicable law. When we make material changes, we will update the "Last updated" date at the top of this page.',
+      "We encourage you to review this policy periodically.",
+    ],
+  },
+  {
+    id: "contact",
+    heading: "13. Contact Us",
+    body: [
+      "If you have questions, concerns, or requests relating to this Privacy Policy or the way we handle your personal data, please contact us at info@digitalqatalyst.com.",
+      "DigitalQatalyst DMCC · Unit 1992, DMCC Business Center, Level 1, Jewellery & Gemplex 3, PO Box 340505, Dubai, UAE",
+    ],
+  },
+];
 
 const Privacy = () => {
-  const [activeSection, setActiveSection] = useState("");
-
-  const sections = [
-    { id: "introduction", title: "1. Introduction" },
-    { id: "collection", title: "2. Information We Collect" },
-    { id: "usage", title: "3. How We Use Your Information" },
-    { id: "sharing", title: "4. Information Sharing" },
-    { id: "security", title: "5. Data Security" },
-    { id: "retention", title: "6. Data Retention" },
-    { id: "rights", title: "7. Your Rights" },
-    { id: "cookies", title: "8. Cookies and Tracking" },
-    { id: "children", title: "9. Children's Privacy" },
-    { id: "changes", title: "10. Changes to This Policy" },
-    { id: "contact", title: "11. Contact Us" },
-  ];
-
-  useEffect(() => {
-    const handleScroll = () => {
-      const scrollPosition = window.scrollY + 200;
-
-      for (const section of sections) {
-        const element = document.getElementById(section.id);
-        if (element) {
-          const { offsetTop, offsetHeight } = element;
-          if (scrollPosition >= offsetTop && scrollPosition < offsetTop + offsetHeight) {
-            setActiveSection(section.id);
-            break;
-          }
-        }
-      }
-    };
-
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
-  const scrollToSection = (id: string) => {
-    const element = document.getElementById(id);
-    if (element) {
-      const offset = 100;
-      const elementPosition = element.getBoundingClientRect().top;
-      const offsetPosition = elementPosition + window.pageYOffset - offset;
-
-      window.scrollTo({
-        top: offsetPosition,
-        behavior: "smooth",
-      });
-    }
-  };
-
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-white">
+      <Seo
+        title={`Privacy Policy | ${SEO_BRAND}`}
+        description={`How DigitalQatalyst DMCC collects, uses, and protects your personal information on the ${PLATFORM_NAME_EXPANDED} platform.`}
+        path="/legal/privacy"
+      />
       <LandingNavbar />
-
       <main className="pt-20">
-        {/* Header */}
-        <section className="border-b border-border bg-muted/30 py-12">
-          <div className="mx-auto max-w-7xl px-6">
-            <Link to="/legal">
-              <Button variant="ghost" className="mb-6 gap-2">
-                <ArrowLeft size={16} />
-                Back to Legal
-              </Button>
-            </Link>
-
-            <div className="flex items-start justify-between">
-              <div className="flex-1">
-                <div className="mb-4 flex items-center gap-3">
-                  <div className="rounded-lg bg-green-100 p-2">
-                    <Shield size={24} className="text-green-600" />
-                  </div>
-                  <h1 className="text-3xl font-bold text-foreground">Privacy Policy</h1>
-                </div>
-                <p className="text-muted-foreground">
-                  Explains what information we collect and why, how we use it, and how to review and update it
-                </p>
-                <div className="mt-4 flex items-center gap-4 text-sm text-muted-foreground">
-                  <div className="flex items-center gap-2">
-                    <Calendar size={16} />
-                    <span>Effective: January 1, 2026</span>
-                  </div>
-                </div>
-              </div>
-
-              <Button variant="outline" className="gap-2">
-                <Download size={16} />
-                Download PDF
-              </Button>
-            </div>
-          </div>
-        </section>
-
-        {/* Content */}
-        <section className="py-12">
-          <div className="mx-auto max-w-7xl px-6">
-            <div className="flex gap-12">
-              {/* Table of Contents - Sticky Sidebar */}
-              <aside className="hidden w-64 shrink-0 lg:block">
-                <div className="sticky top-24">
-                  <h3 className="mb-4 text-sm font-semibold text-foreground">Table of Contents</h3>
-                  <nav className="space-y-1">
-                    {sections.map((section) => (
-                      <button
-                        key={section.id}
-                        onClick={() => scrollToSection(section.id)}
-                        className={`block w-full rounded-lg px-3 py-2 text-left text-sm transition-colors ${
-                          activeSection === section.id
-                            ? "bg-primary/10 font-medium text-primary"
-                            : "text-muted-foreground hover:bg-muted hover:text-foreground"
-                        }`}
-                      >
-                        {section.title}
-                      </button>
-                    ))}
-                  </nav>
-                </div>
-              </aside>
-
-              {/* Main Content */}
-              <div className="flex-1">
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5 }}
-                  className="prose prose-slate max-w-none"
-                >
-                  <div className="rounded-lg border border-border bg-card p-8">
-                    <section id="introduction" className="mb-12">
-                      <h2 className="mb-4 text-2xl font-bold text-foreground">1. Introduction</h2>
-                      <p className="text-muted-foreground">
-                        At DigitalQatalyst, we take your privacy seriously. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you use TMaaS (Transformation as a Service).
-                      </p>
-                      <p className="mt-4 text-muted-foreground">
-                        Please read this privacy policy carefully. If you do not agree with the terms of this privacy policy, please do not access the platform.
-                      </p>
-                    </section>
-
-                    <section id="collection" className="mb-12">
-                      <h2 className="mb-4 text-2xl font-bold text-foreground">2. Information We Collect</h2>
-                      <p className="text-muted-foreground">
-                        We collect information that you provide directly to us, including:
-                      </p>
-                      
-                      <h3 className="mt-6 mb-3 text-lg font-semibold text-foreground">Personal Information</h3>
-                      <ul className="space-y-2 text-muted-foreground">
-                        <li>• Name and contact information (email, phone number)</li>
-                        <li>• Company name and job title</li>
-                        <li>• Account credentials</li>
-                        <li>• Payment information</li>
-                        <li>• Profile information</li>
-                      </ul>
-
-                      <h3 className="mt-6 mb-3 text-lg font-semibold text-foreground">Usage Information</h3>
-                      <ul className="space-y-2 text-muted-foreground">
-                        <li>• Log data (IP address, browser type, pages visited)</li>
-                        <li>• Device information</li>
-                        <li>• Usage patterns and preferences</li>
-                        <li>• Interaction with our services</li>
-                      </ul>
-
-                      <h3 className="mt-6 mb-3 text-lg font-semibold text-foreground">Business Information</h3>
-                      <ul className="space-y-2 text-muted-foreground">
-                        <li>• Transformation project data</li>
-                        <li>• Diagnostic responses and results</li>
-                        <li>• Documents and files you upload</li>
-                        <li>• Communications and collaboration data</li>
-                      </ul>
-                    </section>
-
-                    <section id="usage" className="mb-12">
-                      <h2 className="mb-4 text-2xl font-bold text-foreground">3. How We Use Your Information</h2>
-                      <p className="text-muted-foreground">
-                        We use the information we collect to:
-                      </p>
-                      <ul className="mt-4 space-y-2 text-muted-foreground">
-                        <li>• Provide, maintain, and improve our services</li>
-                        <li>• Process transactions and send related information</li>
-                        <li>• Send technical notices and support messages</li>
-                        <li>• Respond to your comments and questions</li>
-                        <li>• Provide AI-powered recommendations and insights</li>
-                        <li>• Monitor and analyze trends and usage</li>
-                        <li>• Detect and prevent fraud and abuse</li>
-                        <li>• Comply with legal obligations</li>
-                      </ul>
-                    </section>
-
-                    <section id="sharing" className="mb-12">
-                      <h2 className="mb-4 text-2xl font-bold text-foreground">4. Information Sharing</h2>
-                      <p className="text-muted-foreground">
-                        We may share your information in the following circumstances:
-                      </p>
-                      
-                      <h3 className="mt-6 mb-3 text-lg font-semibold text-foreground">With Your Consent</h3>
-                      <p className="text-muted-foreground">
-                        We share information with your explicit consent or at your direction.
-                      </p>
-
-                      <h3 className="mt-6 mb-3 text-lg font-semibold text-foreground">Service Providers</h3>
-                      <p className="text-muted-foreground">
-                        We work with third-party service providers who perform services on our behalf, such as:
-                      </p>
-                      <ul className="mt-2 space-y-2 text-muted-foreground">
-                        <li>• Cloud hosting providers</li>
-                        <li>• Payment processors</li>
-                        <li>• Analytics providers</li>
-                        <li>• Customer support tools</li>
-                      </ul>
-
-                      <h3 className="mt-6 mb-3 text-lg font-semibold text-foreground">Legal Requirements</h3>
-                      <p className="text-muted-foreground">
-                        We may disclose information if required by law or in response to valid requests by public authorities.
-                      </p>
-                    </section>
-
-                    <section id="security" className="mb-12">
-                      <h2 className="mb-4 text-2xl font-bold text-foreground">5. Data Security</h2>
-                      <p className="text-muted-foreground">
-                        We implement appropriate technical and organizational measures to protect your information, including:
-                      </p>
-                      <ul className="mt-4 space-y-2 text-muted-foreground">
-                        <li>• Encryption of data in transit and at rest</li>
-                        <li>• Regular security assessments</li>
-                        <li>• Access controls and authentication</li>
-                        <li>• Employee training on data protection</li>
-                        <li>• Incident response procedures</li>
-                      </ul>
-                      <p className="mt-4 text-muted-foreground">
-                        However, no method of transmission over the Internet is 100% secure. While we strive to protect your information, we cannot guarantee absolute security.
-                      </p>
-                    </section>
-
-                    <section id="retention" className="mb-12">
-                      <h2 className="mb-4 text-2xl font-bold text-foreground">6. Data Retention</h2>
-                      <p className="text-muted-foreground">
-                        We retain your information for as long as necessary to:
-                      </p>
-                      <ul className="mt-4 space-y-2 text-muted-foreground">
-                        <li>• Provide our services</li>
-                        <li>• Comply with legal obligations</li>
-                        <li>• Resolve disputes</li>
-                        <li>• Enforce our agreements</li>
-                      </ul>
-                      <p className="mt-4 text-muted-foreground">
-                        When we no longer need your information, we will securely delete or anonymize it.
-                      </p>
-                    </section>
-
-                    <section id="rights" className="mb-12">
-                      <h2 className="mb-4 text-2xl font-bold text-foreground">7. Your Rights</h2>
-                      <p className="text-muted-foreground">
-                        Depending on your location, you may have the following rights:
-                      </p>
-                      <ul className="mt-4 space-y-2 text-muted-foreground">
-                        <li>• <strong>Access:</strong> Request access to your personal information</li>
-                        <li>• <strong>Correction:</strong> Request correction of inaccurate information</li>
-                        <li>• <strong>Deletion:</strong> Request deletion of your information</li>
-                        <li>• <strong>Portability:</strong> Request a copy of your information</li>
-                        <li>• <strong>Objection:</strong> Object to processing of your information</li>
-                        <li>• <strong>Restriction:</strong> Request restriction of processing</li>
-                      </ul>
-                      <p className="mt-4 text-muted-foreground">
-                        To exercise these rights, please contact us using the information provided below.
-                      </p>
-                    </section>
-
-                    <section id="cookies" className="mb-12">
-                      <h2 className="mb-4 text-2xl font-bold text-foreground">8. Cookies and Tracking</h2>
-                      <p className="text-muted-foreground">
-                        We use cookies and similar tracking technologies to:
-                      </p>
-                      <ul className="mt-4 space-y-2 text-muted-foreground">
-                        <li>• Remember your preferences</li>
-                        <li>• Understand how you use our services</li>
-                        <li>• Improve your experience</li>
-                        <li>• Provide personalized content</li>
-                      </ul>
-                      <p className="mt-4 text-muted-foreground">
-                        You can control cookies through your browser settings. However, disabling cookies may affect your ability to use certain features.
-                      </p>
-                    </section>
-
-                    <section id="children" className="mb-12">
-                      <h2 className="mb-4 text-2xl font-bold text-foreground">9. Children's Privacy</h2>
-                      <p className="text-muted-foreground">
-                        TMaaS is not intended for children under 18 years of age. We do not knowingly collect personal information from children. If you believe we have collected information from a child, please contact us immediately.
-                      </p>
-                    </section>
-
-                    <section id="changes" className="mb-12">
-                      <h2 className="mb-4 text-2xl font-bold text-foreground">10. Changes to This Policy</h2>
-                      <p className="text-muted-foreground">
-                        We may update this Privacy Policy from time to time. We will notify you of any changes by:
-                      </p>
-                      <ul className="mt-4 space-y-2 text-muted-foreground">
-                        <li>• Posting the new policy on this page</li>
-                        <li>• Updating the "Effective Date" at the top</li>
-                        <li>• Sending you an email notification (for material changes)</li>
-                      </ul>
-                      <p className="mt-4 text-muted-foreground">
-                        Your continued use of TMaaS after changes become effective constitutes acceptance of the updated policy.
-                      </p>
-                    </section>
-
-                    <section id="contact" className="mb-12">
-                      <h2 className="mb-4 text-2xl font-bold text-foreground">11. Contact Us</h2>
-                      <p className="text-muted-foreground">
-                        If you have questions or concerns about this Privacy Policy, please contact us:
-                      </p>
-                      <div className="mt-4 rounded-lg border border-border bg-muted/50 p-4">
-                        <p className="text-sm text-muted-foreground">
-                          <strong className="text-foreground">Email:</strong> privacy@digitalqatalyst.com
-                        </p>
-                        <p className="mt-2 text-sm text-muted-foreground">
-                          <strong className="text-foreground">Support:</strong>{" "}
-                          <Link to="/dashboard/support" className="text-primary hover:underline">
-                            Contact Support Team
-                          </Link>
-                        </p>
-                      </div>
-                    </section>
-
-                    {/* Additional Notice */}
-                    <div className="mt-12 rounded-lg border border-border bg-muted/50 p-6">
-                      <h3 className="mb-2 text-lg font-semibold text-foreground">Your Privacy Matters</h3>
-                      <p className="text-sm text-muted-foreground">
-                        We are committed to protecting your privacy and being transparent about our data practices. If you have any questions or concerns, please don't hesitate to reach out.
-                      </p>
-                    </div>
-                  </div>
-                </motion.div>
-              </div>
-            </div>
-          </div>
-        </section>
+        <LegalPageLayout
+          eyebrow="Legal"
+          title="Privacy Policy"
+          subtitle="How DigitalQatalyst DMCC collects, uses, and protects your personal information."
+          lastUpdated={LAST_UPDATED}
+          sections={SECTIONS}
+        />
       </main>
-
       <Footer />
     </div>
   );

@@ -1,4 +1,4 @@
-import { DQ_CORP_WEB_URL } from "@/lib/brandLinks";
+import { DQ_CORP_WEB_URL, PLATFORM_HERO_SUBCOPY } from "@/lib/brandLinks";
 import {
   absoluteUrl,
   DEFAULT_OG_IMAGE_PATH,
@@ -42,8 +42,7 @@ export function buildHomeStructuredData() {
         "@id": websiteId(),
         name: SEO_BRAND,
         url: siteUrl,
-        description:
-          "TMaaS is a marketplace for digital transformation services with transparent pricing and AI-powered blueprints.",
+        description: PLATFORM_HERO_SUBCOPY,
         publisher: { "@id": orgId() },
         potentialAction: {
           "@type": "SearchAction",

@@ -1,7 +1,7 @@
 const STATS = [
   { value: "100+", label: "Expert service providers" },
   { value: "6+", label: "Countries served" },
-  { value: "50+", label: "Transformation services" },
+  { value: "100+", label: "Transformation services" },
   { value: "15", label: "Years of industry experience" },
 ];
 

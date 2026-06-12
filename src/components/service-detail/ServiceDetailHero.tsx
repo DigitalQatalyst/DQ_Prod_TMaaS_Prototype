@@ -1,11 +1,12 @@
 import { Clock, Users, Zap } from "lucide-react";
 import { getServiceIcon } from "@/components/marketplace/marketplaceServiceIcons";
-import { marketplaceServiceTypeLabels } from "@/data/marketplaceNavigation";
 import { ServicePackageCard } from "./ServicePackageCard";
 import {
+  BUNDLE_PDP_SUBTITLE,
   getCategoryShortLabel,
   getCollectionAccent,
-  getDisplayTitle,
+  getPdpDisplayTitle,
+  getPdpTypeBadgeLabel,
   type ServiceProduct,
 } from "./serviceDetailHelpers";
 
@@ -24,13 +25,13 @@ export function ServiceDetailHero({
   onStartOnboarding,
   packageHighlights,
 }: ServiceDetailHeroProps) {
-  const title = getDisplayTitle(service.standardName);
+  const title = getPdpDisplayTitle(service.standardName, service.serviceType);
   const categoryLabel = getCategoryShortLabel(service.collection);
   const accent = getCollectionAccent(service.collection);
   const ServiceIcon = getServiceIcon(service.collection, service.serviceType);
   const isHighImpact = service.standardName.includes("(High-Impact)");
-  const typeLabel =
-    marketplaceServiceTypeLabels[service.serviceType] || service.serviceType;
+  const typeLabel = getPdpTypeBadgeLabel(service.serviceType, service.badge);
+  const isBundle = service.serviceType === "bundle";
 
   return (
     <div>
@@ -62,7 +63,15 @@ export function ServiceDetailHero({
             )}
           </div>
 
-          <p className="animate-fade-in-up animation-delay-200 mt-5 max-w-2xl text-base leading-relaxed text-gray-600 md:text-lg">
+          {isBundle ? (
+            <p className="animate-fade-in-up animation-delay-200 mt-3 max-w-2xl text-base leading-relaxed text-gray-600 md:text-lg">
+              {BUNDLE_PDP_SUBTITLE}
+            </p>
+          ) : null}
+
+          <p
+            className={`animate-fade-in-up animation-delay-200 max-w-2xl text-base leading-relaxed text-gray-600 md:text-lg ${isBundle ? "mt-4" : "mt-5"}`}
+          >
             {service.description}
           </p>
 

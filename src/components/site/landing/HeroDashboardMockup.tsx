@@ -3,7 +3,7 @@ import { PLATFORM_NAME } from "@/lib/brandLinks";
 const FEATURED_SERVICES = [
   { name: "AI Readiness Assessment", category: "Data, AI & Analytics" },
   { name: "Customer Portal Build", category: "Customer Experience & Engagement" },
-  { name: "Cloud SecDevOps Setup", category: "Development, Security, and Operations" },
+  { name: "Cloud SecDevOps Setup", category: "DevOps and Security" },
 ];
 
 const HeroDashboardMockup = () => {
@@ -44,7 +44,7 @@ const HeroDashboardMockup = () => {
 
                 <div className="mb-4 grid grid-cols-3 gap-2">
                   {[
-                    { label: "Services", value: "50+" },
+                    { label: "Services", value: "100+" },
                     { label: "Categories", value: "12" },
                     { label: "Bundles", value: "8" },
                   ].map((stat) => (

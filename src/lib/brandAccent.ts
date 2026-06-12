@@ -20,6 +20,10 @@ export const eyebrowOnDark = eyebrow;
 export const microLabel =
   "font-mono text-[10px] uppercase tracking-[0.18em] text-dq-orange";
 
+/** Landing hero h1, matches DQ_CORPWEB_PROTOTYPE `Home.tsx` HeroSection */
+export const landingHeroHeading =
+  "text-balance text-[2.75rem] font-semibold leading-[1.0] tracking-[-0.03em] text-dq-navy sm:text-6xl md:text-7xl lg:text-8xl";
+
 /**
  * In-page section h2, corp web content card title scale
  * (e.g. ServiceOverviewCard `text-xl font-bold` → semibold per TMaaS tokens).
@@ -83,9 +87,9 @@ export const iconWellOnDark =
 export const navActive = "font-semibold text-dq-orange";
 export const tabActive = "-mb-px border-dq-orange font-medium text-dq-orange";
 
-/** Card hover, corp border accent */
+/** Card hover, corp border accent (use with `shadow-card` base) */
 export const cardInteractive =
-  "transition-all duration-300 hover:border-dq-orange hover:shadow-[var(--shadow-elevated)]";
+  "transition-all duration-300 hover:border-dq-orange hover:shadow-elevated";
 
 /** Inline action link */
 export const linkAction =

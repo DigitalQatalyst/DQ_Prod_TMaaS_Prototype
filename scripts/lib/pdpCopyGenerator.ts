@@ -2,7 +2,12 @@
  * Generates Option A PDP copy for Supabase seeding.
  * Rules: no em dashes, no "In one week" hero openers (see /workspace/pdp-copy-style.md).
  */
+import { buildServiceFaqsContent } from "../../src/lib/serviceFaqsCopy";
 import { buildWhyItMattersContent } from "../../src/lib/whyItMattersCopy";
+import {
+  buildVariantHeroDescription,
+  buildVariantPositioning,
+} from "../../src/lib/variantSeoCopy";
 import type { ServiceProduct } from "../../src/types/serviceProduct";
 
 export type DeliverableItem = { title: string; description: string };
@@ -35,10 +40,6 @@ export type GeneratedPdpContent = {
   whyItMatters: ReturnType<typeof buildWhyItMattersContent>;
 };
 
-const GENERIC_POSITIONING = /\(High-Impact\) Positioning Strategy/i;
-const GENERIC_DESCRIPTION =
-  /^(A strategic discovery|Discovery engagement|Assessment of|Strategic assessment of|Architecture alignment)/i;
-
 function stripEmDash(text: string): string {
   return text.replace(/\s*—\s*/g, ", ").replace(/\s+/g, " ").trim();
 }
@@ -61,13 +62,6 @@ const COLLECTION_DOMAIN: Record<string, string> = {
   operations: "business operations and productivity",
   security: "governance, risk, and platform reliability",
   ai: "data, analytics, and intelligent automation",
-};
-
-const HERO_OVERRIDES: Record<string, string> = {
-  "online web presence|advisory":
-    "We assess how your web presence performs today across journeys, content, conversion, and AI readiness, and return prioritised recommendations your leadership team can act on.",
-  "enterprise data platform|advisory":
-    "We map your data maturity across governance, quality, platform readiness, and pipeline gaps, and return prioritised recommendations your data and technology leaders can act on.",
 };
 
 const DELIVERABLES_SUMMARY_OVERRIDES: Record<string, string[]> = {
@@ -153,28 +147,6 @@ const PACKAGE_HIGHLIGHTS: Record<string, string[]> = {
   ],
 };
 
-function buildHeroSummary(service: ServiceProduct): string {
-  const key = `${solutionKey(service.standardName)}|${service.serviceType}`;
-  if (HERO_OVERRIDES[key]) return HERO_OVERRIDES[key];
-
-  const desc = stripEmDash(service.description);
-  if (desc && !GENERIC_DESCRIPTION.test(desc)) return desc;
-
-  const solution = solutionLabel(service.standardName);
-  const domain = COLLECTION_DOMAIN[service.collection] ?? "your target capability";
-
-  const byType: Record<string, string> = {
-    advisory: `We assess ${solution.toLowerCase()} across ${domain}, and return prioritised recommendations your leadership team can act on.`,
-    design: `We translate your ${solution.toLowerCase()} goals into user-centred designs and implementation-ready specifications aligned to governance standards.`,
-    ai_design: `We define responsible AI use cases and workflows for ${solution.toLowerCase()}, with specifications ready for controlled deployment.`,
-    deploy: `We deliver production-ready ${solution.toLowerCase()} capabilities with structured testing, integration, and handover to your teams.`,
-    ai_deploy: `We deploy governed AI capabilities for ${solution.toLowerCase()} with monitoring, safety controls, and operational handover built in.`,
-    manage: `We run SLA-backed operations for ${solution.toLowerCase()} with continuous monitoring, optimisation, and lifecycle governance.`,
-  };
-
-  return byType[service.serviceType] ?? desc;
-}
-
 function buildDeliverablesSummary(service: ServiceProduct): string[] {
   const key = `${solutionKey(service.standardName)}|${service.serviceType}`;
   if (DELIVERABLES_SUMMARY_OVERRIDES[key]) return DELIVERABLES_SUMMARY_OVERRIDES[key];
@@ -213,15 +185,10 @@ function buildDeliverablesSummary(service: ServiceProduct): string[] {
 }
 
 function buildOverviewParagraphs(service: ServiceProduct): string[] {
-  const hero = buildHeroSummary(service);
-  const positioning = stripEmDash(service.positioning);
-  const closing =
-    positioning && !GENERIC_POSITIONING.test(positioning)
-      ? positioning
-      : "We combine expert-led delivery with governance oversight so your teams can move forward with clarity and measurable outcomes.";
-
-  if (hero === closing) return [hero];
-  return [hero, closing];
+  const hero = buildVariantHeroDescription(service);
+  const positioning = buildVariantPositioning(service);
+  if (hero === positioning) return [hero];
+  return [hero, positioning];
 }
 
 function buildAudienceDescription(service: ServiceProduct): string {
@@ -241,49 +208,6 @@ function buildDeliverables(service: ServiceProduct): DeliverableItem[] {
       `Supports your ${solution} engagement with structured insight and actionable detail on ${title.toLowerCase()}.`
     ),
   }));
-}
-
-function getStartedAnswer(service: ServiceProduct): string {
-  if (service.price === "Free") {
-    return "Request a consultation or submit a contact form. The DigitalQatalyst team will confirm scope and next steps before work begins.";
-  }
-  return `Request a quote or book a consultation. The DigitalQatalyst team will share scope, timeline, and commercial terms (reference price: ${service.price}, ${service.duration}).`;
-}
-
-function buildFaqs(service: ServiceProduct): { intro: string; items: FaqItem[] } {
-  const solution = solutionLabel(service.standardName);
-  const typeLabel = service.serviceType.replace("_", " ");
-  const intro = `Key questions about the ${solution} ${typeLabel} service.`;
-
-  const items: FaqItem[] = [
-    {
-      question: `What is included in the ${solution} scope?`,
-      answer: stripEmDash(
-        `Scope covers ${COLLECTION_DOMAIN[service.collection] ?? "the agreed capability area"}. Exact activities are confirmed during intake with the DigitalQatalyst team.`
-      ),
-    },
-    {
-      question: "What deliverables will we receive?",
-      answer:
-        "Named deliverables are listed in the What You Receive tab. Each output is designed for governance review and practical use by your teams.",
-    },
-    {
-      question: "How long does this engagement take?",
-      answer: `Delivered over ${service.duration} via ${service.implementationModel}. Timelines may adjust based on scope and stakeholder availability.`,
-    },
-    {
-      question: "What happens after this engagement?",
-      answer: stripEmDash(
-        `Findings can inform the next stage of ${solution.toLowerCase()}, internal planning, or a follow-on TMaaS service. There is no obligation to proceed.`
-      ),
-    },
-    {
-      question: "How do we get started?",
-      answer: getStartedAnswer(service),
-    },
-  ];
-
-  return { intro, items };
 }
 
 function buildDeliveryProcess(service: ServiceProduct): DeliveryProcessContent {
@@ -398,21 +322,19 @@ function buildDeliveryProcess(service: ServiceProduct): DeliveryProcessContent {
 }
 
 export function generatePdpContent(service: ServiceProduct): GeneratedPdpContent {
-  const faqBlock = buildFaqs(service);
-  const positioning = stripEmDash(service.positioning);
+  const faqBlock = buildServiceFaqsContent(service);
+  const heroSummary = buildVariantHeroDescription(service);
+  const positioning = buildVariantPositioning(service);
 
   return {
-    heroSummary: buildHeroSummary(service),
+    heroSummary,
     overviewParagraphs: buildOverviewParagraphs(service),
     audienceDescription: buildAudienceDescription(service),
-    positioning:
-      positioning && !GENERIC_POSITIONING.test(positioning)
-        ? positioning
-        : buildOverviewParagraphs(service)[1] ?? positioning,
+    positioning,
     deliverablesSummary: buildDeliverablesSummary(service),
     deliverables: buildDeliverables(service),
     faqIntro: faqBlock.intro,
-    faqs: faqBlock.items,
+    faqs: faqBlock.faqs,
     deliveryProcess: buildDeliveryProcess(service),
     packageHighlights:
       PACKAGE_HIGHLIGHTS[service.serviceType] ?? PACKAGE_HIGHLIGHTS.advisory,

@@ -133,7 +133,6 @@ async function handler(req, res) {
     MSGRAPH_CLIENT_SECRET,
     MSGRAPH_SENDER_UPN,
     MSGRAPH_RECIPIENT_EMAIL,
-    TURNSTILE_SECRET_KEY,
   } = process.env;
 
   if (
@@ -141,8 +140,7 @@ async function handler(req, res) {
     !MSGRAPH_CLIENT_ID ||
     !MSGRAPH_CLIENT_SECRET ||
     !MSGRAPH_SENDER_UPN ||
-    !MSGRAPH_RECIPIENT_EMAIL ||
-    !TURNSTILE_SECRET_KEY
+    !MSGRAPH_RECIPIENT_EMAIL
   ) {
     console.error('[contact] Missing env vars:', {
       MSGRAPH_TENANT_ID: !!MSGRAPH_TENANT_ID,
@@ -150,7 +148,6 @@ async function handler(req, res) {
       MSGRAPH_CLIENT_SECRET: !!MSGRAPH_CLIENT_SECRET,
       MSGRAPH_SENDER_UPN: !!MSGRAPH_SENDER_UPN,
       MSGRAPH_RECIPIENT_EMAIL: !!MSGRAPH_RECIPIENT_EMAIL,
-      TURNSTILE_SECRET_KEY: !!TURNSTILE_SECRET_KEY,
     });
     return res.status(500).json({ ok: false, error: 'Service configuration error. Please email us directly at info@digitalqatalyst.com.' });
   }

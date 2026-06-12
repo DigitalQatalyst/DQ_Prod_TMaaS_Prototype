@@ -1,3 +1,5 @@
+import { MARKETPLACE_SERVICE_TYPE_LABELS } from "@/lib/marketplaceDisplayLabels";
+
 export const marketplaceGoals = [
   { id: "grow-business", label: "Grow My Business" },
   { id: "improve-operations", label: "Improve Operations" },
@@ -11,7 +13,7 @@ export const marketplaceGoals = [
 export const marketplaceCapabilities = [
   { id: "experience", label: "Customer Experience & Engagement" },
   { id: "operations", label: "Business Operations & Productivity" },
-  { id: "security", label: "Development, Security, and Operations" },
+  { id: "security", label: "DevOps and Security" },
   { id: "ai", label: "Data, AI & Analytics" },
   { id: "bundles", label: "Bundles" },
 ] as const;
@@ -33,12 +35,12 @@ export const marketplaceEconomySectors = [
 ] as const;
 
 export const marketplaceServiceTypes = [
-  { id: "advisory", label: "Advisory" },
-  { id: "design", label: "Design" },
-  { id: "ai_design", label: "AI Design" },
-  { id: "deploy", label: "Deploy" },
-  { id: "ai_deploy", label: "AI Deploy" },
-  { id: "manage", label: "Managed" },
+  { id: "advisory", label: MARKETPLACE_SERVICE_TYPE_LABELS.advisory },
+  { id: "design", label: MARKETPLACE_SERVICE_TYPE_LABELS.design },
+  { id: "ai_design", label: MARKETPLACE_SERVICE_TYPE_LABELS.ai_design },
+  { id: "deploy", label: MARKETPLACE_SERVICE_TYPE_LABELS.deploy },
+  { id: "ai_deploy", label: MARKETPLACE_SERVICE_TYPE_LABELS.ai_deploy },
+  { id: "manage", label: MARKETPLACE_SERVICE_TYPE_LABELS.manage },
 ] as const;
 
 export type MarketplaceCollectionId =

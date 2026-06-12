@@ -51,7 +51,7 @@ const DEFAULT_FEATURE_FLAGS: FeatureFlags = {
   explore: false,
   alternateLanding: false,
   landingV1: false,
-  legal: false,
+  legal: true,
 
   supabaseCatalog: true,
   cart: false,

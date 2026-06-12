@@ -2,8 +2,14 @@ import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
 import MeshSection from "@/components/site/MeshSection";
 import HeroDashboardMockup from "./HeroDashboardMockup";
-import { PLATFORM_NAME } from "@/lib/brandLinks";
-import { btnPrimary, btnSecondary } from "@/lib/brandAccent";
+import {
+  NAV_BROWSE_MARKETPLACE_LABEL,
+  PLATFORM_DESCRIPTOR,
+  PLATFORM_HERO_HEADLINE_ACCENT,
+  PLATFORM_HERO_HEADLINE_PRIMARY,
+  PLATFORM_HERO_SUBCOPY,
+} from "@/lib/brandLinks";
+import { btnPrimary, btnSecondary, landingHeroHeading } from "@/lib/brandAccent";
 import { cn } from "@/lib/utils";
 
 const LandingHeroSection = () => {
@@ -15,19 +21,17 @@ const LandingHeroSection = () => {
     >
       <div className="relative mx-auto grid max-w-7xl items-center gap-12 lg:grid-cols-2 lg:gap-16">
         <div>
-          <p className="animate-fade-in-up dq-eyebrow">
-            {PLATFORM_NAME}
-          </p>
+          <p className="animate-fade-in-up dq-eyebrow">{PLATFORM_DESCRIPTOR}</p>
 
-          <h1 className="animate-fade-in-up animation-delay-100 mt-5 text-balance text-[2.75rem] font-semibold leading-[1.0] tracking-[-0.03em] text-dq-navy sm:text-6xl md:text-7xl lg:text-8xl">
-            <span className="block">Digital Transformation</span>
-            <span className="block text-dq-orange">Accelerated</span>
+          <h1
+            className={`animate-fade-in-up animation-delay-100 mt-5 ${landingHeroHeading}`}
+          >
+            <span className="block">{PLATFORM_HERO_HEADLINE_PRIMARY}</span>
+            <span className="block text-dq-orange">{PLATFORM_HERO_HEADLINE_ACCENT}</span>
           </h1>
 
           <p className="animate-fade-in-up animation-delay-200 mt-6 max-w-2xl text-lg leading-relaxed text-gray-600">
-            {PLATFORM_NAME} is a low-cost, architecture-led marketplace for digital
-            transformation services, using ready-to-launch blueprints to
-            accelerate impact, reduce cost, and ensure scalability.
+            {PLATFORM_HERO_SUBCOPY}
           </p>
 
           <div className="animate-fade-in-up animation-delay-300 mt-6 flex flex-col items-stretch gap-3 sm:flex-row sm:items-center">
@@ -35,7 +39,7 @@ const LandingHeroSection = () => {
               to="/marketplace"
               className={cn(btnPrimary, "group w-full sm:w-auto")}
             >
-              Explore Marketplace
+              {NAV_BROWSE_MARKETPLACE_LABEL}
               <ArrowRight
                 size={16}
                 className="transition group-hover:translate-x-0.5"
@@ -45,12 +49,12 @@ const LandingHeroSection = () => {
               to="/contact"
               className={cn(btnSecondary, "w-full sm:w-auto")}
             >
-              Contact Us
+              Talk to our team
             </Link>
           </div>
         </div>
 
-        <div className="animate-fade-in-up animation-delay-200 lg:justify-self-end">
+        <div className="animate-fade-in-up animation-delay-200">
           <HeroDashboardMockup />
         </div>
       </div>

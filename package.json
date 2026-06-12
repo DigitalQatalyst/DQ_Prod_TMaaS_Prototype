@@ -20,6 +20,8 @@
     "db:seed:sql:all": "SEED_ALL=true tsx scripts/generate-seed-sql.ts > supabase/seed-data.sql",
     "db:migration:full-catalog": "tsx scripts/build-full-catalog-migration.ts",
     "db:pdp-content:sql": "tsx scripts/generate-pdp-content-sql.ts",
+    "db:display-labels:sql": "tsx scripts/generate-display-labels-migration.ts",
+    "catalog:sync-variant-copy": "tsx scripts/sync-variant-seo-copy-to-fixture.ts",
     "catalog:generate": "tsx scripts/generate-catalog-copy.ts",
     "catalog:validate": "tsx scripts/validate-catalog-csv.ts",
     "catalog:import": "tsx scripts/import-catalog-csv.ts",

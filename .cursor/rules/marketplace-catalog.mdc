@@ -11,7 +11,8 @@ alwaysApply: false
 - Reserve `fetchCatalogPage` for integration tests or future server-side pagination when the catalog is too large for client filtering.
 - Show loading only on the initial catalog fetch (`isLoading && !data`), not when filters change.
 - `sortBy: "popular"` must use `sortCatalogByPopularMix()` — stage popularity scores tie across products (all Assess = 100), so a flat sort shows only one type on early pages.
-- `fetchCatalogFromSupabase` is one `marketplace_listings_view` query (no extras). `enrichCatalogListExtras` runs in the background for tags/features/remix.
+- `fetchCatalogFromSupabase` loads `marketplace_listings_view` then joins variant extras (including `product_content.description` per variant). Never use product-level `short_description` alone for card copy.
+- `enrichCatalogListExtras` runs in the background for tags/features/remix/descriptions when placeholder data is shown first.
 - `useCatalog` must use `placeholderData: getCatalogPlaceholder` so the grid renders immediately (fixture or sessionStorage cache).
 - `CatalogPrefetch` in App warms the catalog on first load.
 - `useBestSellers` must derive from `useCatalog()` — never trigger a second full catalog fetch.

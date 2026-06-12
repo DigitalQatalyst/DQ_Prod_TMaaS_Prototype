@@ -1,4 +1,6 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
+import { featureFlags } from "@/lib/featureFlags";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import type { DeliveryProcess } from "./ServiceDetailDeliverySection";
 import { ServiceDetailDeliverySection } from "./ServiceDetailDeliverySection";
@@ -65,7 +67,20 @@ export function ServiceDetailTabs({
           <ServiceDetailDeliverySection process={deliveryProcess} />
         ) : (
           <p className="text-sm leading-relaxed text-gray-500">
-            Delivery process details for this service will be available soon.
+            Delivery steps for this service are tailored during scoping.{" "}
+            {featureFlags.isEnabled("contactUs") ? (
+              <>
+                <Link
+                  to="/contact"
+                  className="font-semibold text-dq-navy underline decoration-dq-navy/30 underline-offset-2 transition-colors hover:text-dq-orange hover:decoration-dq-orange"
+                >
+                  Talk to our team
+                </Link>{" "}
+                for a detailed plan.
+              </>
+            ) : (
+              "Talk to our team for a detailed plan."
+            )}
           </p>
         )}
       </TabsContent>

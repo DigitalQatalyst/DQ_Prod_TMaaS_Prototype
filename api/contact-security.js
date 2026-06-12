@@ -34,8 +34,13 @@ export function resetRateLimitStore() {
   rateLimitHits.clear();
 }
 
+/** Cloudflare always-pass test secret — safe for local dev only (see .env.example). */
+const TURNSTILE_DEV_SECRET_KEY = '1x0000000000000000000000000000000AA';
+
 export async function verifyTurnstile(token, remoteip) {
-  const secret = process.env.TURNSTILE_SECRET_KEY;
+  const secret =
+    process.env.TURNSTILE_SECRET_KEY ||
+    (process.env.NODE_ENV !== 'production' ? TURNSTILE_DEV_SECRET_KEY : undefined);
   if (!secret) {
     return { ok: false, error: 'Service configuration error' };
   }

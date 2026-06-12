@@ -30,7 +30,7 @@ const VARIANT_LABELS: Record<
   ai_design: { variant_name: "AI Design", badge: "AI Design" },
   deploy: { variant_name: "Deploy", badge: "Deploy" },
   ai_deploy: { variant_name: "AI Deploy", badge: "AI Deploy" },
-  manage: { variant_name: "Managed", badge: "Managed" },
+  manage: { variant_name: "Managed Service", badge: "Managed Service" },
 };
 
 const PRODUCT_DOMAIN: Record<number, string> = {
@@ -68,12 +68,19 @@ const PRODUCT_DOMAIN: Record<number, string> = {
 };
 
 const PRODUCT_TITLE_OVERRIDES: Record<number, string> = {
+  3: "Mobile Apps & Services (High-Impact)",
+  4: "Physical & Frontline Channels (High-Impact)",
   5: "Integrated Experience (High-Impact)",
+  6: "CRM & Customer Relationship (High-Impact)",
+  7: "Marketing Operations (High-Impact)",
   12: "Specialised Operations (High-Impact)",
-  33: "Design Services Set",
-  34: "Deploy Services Set",
-  35: "Managed Services Set",
+  32: "Flexible Advisory Package",
+  33: "Flexible Design Package",
+  34: "Flexible Deploy Package",
+  35: "Flexible Managed Services Package",
 };
+
+const BUNDLE_STAGE_LABEL = "End-to-end bundle";
 
 const SHORT_DESC_OVERRIDES: Record<number, string> = {
   22: "Improve IT service delivery and employee support through better incident handling, knowledge, automation and service management.",
@@ -159,10 +166,16 @@ function buildPositioning(
     return `Define responsible AI for ${domain} — prioritised use cases, evidence automation, guardrails, and a blueprint ready to build.`;
   }
 
+  const performClause =
+    domain.includes(" and ") ||
+    /\b(apps|services|operations|channels|campaigns)\b/i.test(domain)
+      ? `${domain} perform today`
+      : `${domain} performs today`;
+
   const templates: Record<string, string> = {
-    advisory: `Review how ${domain} performs today, identify the biggest gaps, and leave with prioritised next steps and a practical roadmap.`,
-    design: `Turn your ${domain} goals into a delivery-ready blueprint — journeys, workflows, integrations, controls, and adoption plan included.`,
-    ai_design: `Define the AI use cases that matter for ${domain}, with data requirements, guardrails, and a blueprint ready to build.`,
+    advisory: `See how ${performClause}, identify the highest-impact gaps, and leave with prioritised next steps and a practical roadmap.`,
+    design: `Turn ${domain} goals into a delivery-ready blueprint with journeys, workflows, integrations, controls, and an adoption plan your teams can execute.`,
+    ai_design: `Define the AI use cases that matter for ${domain}, with data requirements, guardrails, and specifications ready to build.`,
     deploy: `Implement agreed ${domain} changes through managed configuration, integration, testing, and controlled launch support.`,
     ai_deploy: `Put AI-enabled ${domain} workflows into production with security, governance, and adoption built in from day one.`,
     manage: `Run and improve ${domain} with ongoing monitoring, reporting, and optimisation so performance keeps pace with your business.`,
@@ -204,11 +217,16 @@ function transformVariant(row: VariantRow, products: Map<string, ProductRow>): V
 
   next.positioning = buildPositioning(serviceTypeId, domain, productId);
 
-  if (serviceTypeId === "bundle" && productId >= 32) {
-    const product = products.get(String(productId));
-    if (product) {
-      next.variant_name = product.title;
+  if (serviceTypeId === "bundle") {
+    if (productId >= 32) {
+      const product = products.get(String(productId));
+      if (product) {
+        next.variant_name = product.title;
+      }
+    } else {
+      next.variant_name = BUNDLE_STAGE_LABEL;
     }
+    next.badge = BUNDLE_STAGE_LABEL;
   }
 
   return next;
@@ -263,7 +281,7 @@ function buildBundleVariant(
   const productId = BUNDLE_PRODUCT_ID[service.id];
   const product = productMap.get(String(productId));
   const variantName =
-    productId >= 32 ? (product?.title ?? service.standardName) : "Transformation Bundle";
+    productId >= 32 ? (product?.title ?? service.standardName) : BUNDLE_STAGE_LABEL;
 
   const row: VariantRow = {
     id: String(service.id),
@@ -277,7 +295,7 @@ function buildBundleVariant(
     duration_weeks_max: productId >= 32 ? "" : "24",
     delivery_complexity: service.deliveryComplexity,
     implementation_model: service.implementationModel,
-    badge: "Bundle",
+    badge: BUNDLE_STAGE_LABEL,
     positioning: "",
     is_default_variant: "false",
     status: "published",

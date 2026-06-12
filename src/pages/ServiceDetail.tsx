@@ -114,7 +114,7 @@ const ServiceDetail = () => {
     handleStartOnboarding(service.standardName);
   };
 
-  const displayTitle = getDisplayTitle(service.standardName);
+  const displayTitle = getDisplayTitle(service.standardName, service.serviceType);
 
   return (
     <div className="min-h-screen bg-background text-left">

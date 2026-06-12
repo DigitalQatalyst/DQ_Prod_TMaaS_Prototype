@@ -13,14 +13,16 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { useCatalogData } from "@/contexts/CatalogContext";
-import { marketplaceServiceTypeLabels } from "@/data/marketplaceNavigation";
 import type { PdpContent } from "@/types/catalog";
 import {
+  BUNDLE_INCLUSION_LINE,
   getAudienceCardAccent,
   getDeliverableBreakdown,
   getDeliverablesAtAGlance,
   getDeliverablesForService,
   getDeliverablesSummaryContent,
+  getMarketplaceCardTitle,
+  getPdpTypeBadgeLabel,
   type ServiceProduct,
 } from "./serviceDetailHelpers";
 
@@ -180,8 +182,7 @@ function BundleIncludedSection({ service }: { service: ServiceProduct }) {
         What&apos;s Included
       </h2>
       <p className="mt-2 max-w-2xl text-sm leading-relaxed text-[#667085]">
-        This transformation bundle includes the following services for end-to-end
-        delivery.
+        {BUNDLE_INCLUSION_LINE}
       </p>
       <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {service.relatedServices
@@ -193,7 +194,7 @@ function BundleIncludedSection({ service }: { service: ServiceProduct }) {
             <div key={s!.id} className={`${itemCardClass} flex flex-col`}>
               <div className="mb-3 flex flex-wrap items-center gap-2">
                 <span className="font-mono text-[10px] uppercase tracking-[0.14em] text-gray-400">
-                  {marketplaceServiceTypeLabels[s!.serviceType] || s!.serviceType}
+                  {getPdpTypeBadgeLabel(s!.serviceType, s!.badge)}
                 </span>
                 {s!.standardName.includes("(High-Impact)") && (
                   <span className="inline-flex items-center gap-1 rounded-full bg-dq-navy px-2 py-0.5 text-[9px] font-bold uppercase tracking-wider text-white">
@@ -203,7 +204,7 @@ function BundleIncludedSection({ service }: { service: ServiceProduct }) {
                 )}
               </div>
               <h3 className="text-sm font-semibold leading-snug text-dq-navy">
-                {s!.standardName.replace(" (High-Impact)", "")}
+                {getMarketplaceCardTitle(s!.standardName, s!.serviceType)}
               </h3>
               <p className="mt-2 line-clamp-2 flex-1 text-xs leading-relaxed text-[#667085]">
                 {s!.description}

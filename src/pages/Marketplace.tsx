@@ -14,9 +14,11 @@ import { Input } from "@/components/ui/input";
 import MarketplaceCategoryNav from "@/components/marketplace/MarketplaceCategoryNav";
 import MarketplaceFilters from "@/components/marketplace/MarketplaceFilters";
 import MarketplaceBestSellers from "@/components/marketplace/MarketplaceBestSellers";
+import MarketplaceLaunchOffer from "@/components/marketplace/MarketplaceLaunchOffer";
 import MarketplacePagination from "@/components/marketplace/MarketplacePagination";
 import ServiceProductCard from "@/components/marketplace/ServiceProductCard";
 import MeshSection from "@/components/site/MeshSection";
+import { landingHeroHeading } from "@/lib/brandAccent";
 import {
   marketplaceCategoryLabels,
   marketplaceCollectionIds,
@@ -279,27 +281,30 @@ const Marketplace = () => {
         data={buildMarketplaceStructuredData(
           initialServices.map((service) => ({
             id: service.id,
-            name: getDisplayTitle(service.standardName),
+            name: getDisplayTitle(service.standardName, service.serviceType),
             url: absoluteUrl(`/service/${service.id}`),
           })),
         )}
       />
       <LandingNavbar />
 
-      <MeshSection variant="heroLight" grid className="px-5 pb-8 pt-20 md:px-8 md:pb-10 md:pt-24 lg:px-10">
-        <div className="mx-auto flex max-w-3xl flex-col items-center text-center">
-          <p className="dq-eyebrow">
-            Digital transformation marketplace
-          </p>
-          <h1 className="mt-4 text-balance text-[2.25rem] font-semibold leading-[1.05] tracking-[-0.02em] text-dq-navy min-[400px]:text-[2.75rem] sm:text-5xl md:text-6xl lg:text-7xl">
-            Browse transformation services
+      <MeshSection
+        variant="heroLight"
+        grid
+        className="px-5 pb-16 pt-20 md:px-8 md:pb-20 md:pt-24 lg:px-10 lg:pb-24 lg:pt-28"
+      >
+        <div className="mx-auto flex min-h-[280px] max-w-4xl flex-col items-center justify-center text-center sm:min-h-[320px] md:min-h-[360px]">
+          <p className="dq-eyebrow">Digital transformation marketplace</p>
+          <h1 className={`mt-5 ${landingHeroHeading}`}>
+            Browse{" "}
+            <span className="text-dq-orange">transformation</span> services
           </h1>
-          <p className="mt-4 max-w-xl text-base leading-relaxed text-gray-600 md:text-lg">
-            200+ digital transformation services with clear pricing. Filter by
-            goal, industry, or category.
+          <p className="mt-6 max-w-2xl text-lg leading-relaxed text-gray-600">
+            Explore 100+ transformation services across AI, experience,
+            operations, and security.
           </p>
 
-          <div className="relative mt-6 flex w-full items-center">
+          <div className="relative mt-8 flex w-full max-w-2xl items-center">
             <Search className="absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-400" />
             <Input
               type="search"
@@ -322,16 +327,19 @@ const Marketplace = () => {
         </div>
       </MeshSection>
 
-      <section className="bg-background px-5 pb-16 pt-2 md:px-8 lg:px-10">
+      <section className="bg-background px-5 pb-16 pt-10 md:px-8 md:pt-12 lg:px-10 lg:pt-14">
         <div className="mx-auto max-w-[1280px]">
           <div id="catalog-grid" className="scroll-mt-32">
             {showBestSellers && (
-              <div className="mb-10">
-                <MarketplaceBestSellers
-                  activeTab="all"
-                  selectedIndustry={selectedSectors.length > 0 ? selectedSectors[0] : "all"}
-                />
-              </div>
+              <>
+                <MarketplaceLaunchOffer />
+                <div className="mb-10">
+                  <MarketplaceBestSellers
+                    activeTab="all"
+                    selectedIndustry={selectedSectors.length > 0 ? selectedSectors[0] : "all"}
+                  />
+                </div>
+              </>
             )}
 
             {showBestSellers && (
@@ -408,7 +416,7 @@ const Marketplace = () => {
                         <SelectValue placeholder="Sort by" />
                       </SelectTrigger>
                       <SelectContent>
-                        <SelectItem value="popular">Most popular</SelectItem>
+                        <SelectItem value="popular">Featured</SelectItem>
                         <SelectItem value="fastest">Fastest delivery</SelectItem>
                         <SelectItem value="price-low">Lowest price</SelectItem>
                       </SelectContent>

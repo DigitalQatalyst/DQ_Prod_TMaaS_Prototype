@@ -12,7 +12,7 @@ export function TMaaSLogo({ className }: TMaaSLogoProps) {
       to="/"
       className={`flex items-center gap-3 transition-opacity hover:opacity-90 ${className ?? ""}`}
     >
-      <img src={dqLogoOrange} alt={`${PLATFORM_NAME} mark`} className="h-7 w-auto shrink-0" />
+      <img src={dqLogoOrange} alt={PLATFORM_NAME} className="h-7 w-auto shrink-0" />
       <span className="max-w-[10.5rem] text-sm font-bold leading-tight text-dq-orange sm:max-w-none sm:text-base sm:leading-none">
         {PLATFORM_NAME}
       </span>

@@ -2,8 +2,20 @@ import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
 import MeshSection from "@/components/site/MeshSection";
 import HeroDashboardMockup from "@/components/site/landing/HeroDashboardMockup";
-import { PLATFORM_NAME } from "@/lib/brandLinks";
-import { btnPrimary, btnSecondary } from "@/lib/brandAccent";
+import {
+  NAV_BROWSE_MARKETPLACE_LABEL,
+  PLATFORM_DESCRIPTOR,
+  PLATFORM_HERO_HEADLINE_ACCENT,
+  PLATFORM_HERO_HEADLINE_PRIMARY,
+  PLATFORM_HERO_SUBCOPY,
+} from "@/lib/brandLinks";
+import {
+  LAUNCH_ADVISORY_CTA_LABEL,
+  LAUNCH_ADVISORY_EYEBROW,
+  buildLaunchAdvisoryContactPath,
+} from "@/lib/launchOffering";
+import { btnPrimary, btnSecondary, landingHeroHeading } from "@/lib/brandAccent";
+import { featureFlags } from "@/lib/featureFlags";
 import { cn } from "@/lib/utils";
 
 const LandingHeroSection = () => {
@@ -15,38 +27,54 @@ const LandingHeroSection = () => {
     >
       <div className="relative mx-auto grid max-w-7xl items-center gap-12 lg:grid-cols-2 lg:gap-16">
         <div className="min-w-0">
-          <p className="animate-fade-in-up dq-eyebrow">
-            Transformation Management as a Service
-          </p>
+          <p className="animate-fade-in-up dq-eyebrow">{PLATFORM_DESCRIPTOR}</p>
 
-          <h1 className="animate-fade-in-up animation-delay-100 mt-5 text-balance text-[2.75rem] font-semibold leading-[1.0] tracking-[-0.03em] text-dq-navy sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl">
-            <span className="block">Digital transformation</span>
-            <span className="block text-dq-orange">accelerated</span>
+          <h1
+            className={`animate-fade-in-up animation-delay-100 mt-5 ${landingHeroHeading}`}
+          >
+            <span className="block">{PLATFORM_HERO_HEADLINE_PRIMARY}</span>
+            <span className="block text-dq-orange">{PLATFORM_HERO_HEADLINE_ACCENT}</span>
           </h1>
 
           <p className="animate-fade-in-up animation-delay-200 mt-6 max-w-2xl text-lg leading-relaxed text-gray-600">
-            {PLATFORM_NAME} is a low-cost platform for digital
-            transformation services. Browse AI-powered, ready-to-launch
-            blueprints with transparent pricing and start delivering impact in
-            weeks.
+            {PLATFORM_HERO_SUBCOPY}
           </p>
 
-          <div className="animate-fade-in-up animation-delay-300 mt-6 flex flex-col items-stretch gap-3 sm:flex-row sm:items-center">
+          {featureFlags.isEnabled("contactUs") && (
+            <p className="animate-fade-in-up animation-delay-300 mt-6 font-mono text-[10px] uppercase tracking-[0.18em] text-dq-orange">
+              {LAUNCH_ADVISORY_EYEBROW}
+            </p>
+          )}
+
+          <div className="animate-fade-in-up animation-delay-300 mt-4 flex flex-col items-stretch gap-3 sm:flex-row sm:items-center">
+            {featureFlags.isEnabled("contactUs") ? (
+              <Link
+                to={buildLaunchAdvisoryContactPath()}
+                className={cn(btnPrimary, "group w-full sm:w-auto")}
+              >
+                {LAUNCH_ADVISORY_CTA_LABEL}
+                <ArrowRight
+                  size={16}
+                  className="transition group-hover:translate-x-0.5"
+                />
+              </Link>
+            ) : (
+              <Link
+                to="/marketplace"
+                className={cn(btnPrimary, "group w-full sm:w-auto")}
+              >
+                {NAV_BROWSE_MARKETPLACE_LABEL}
+                <ArrowRight
+                  size={16}
+                  className="transition group-hover:translate-x-0.5"
+                />
+              </Link>
+            )}
             <Link
               to="/marketplace"
-              className={cn(btnPrimary, "group w-full sm:w-auto")}
-            >
-              Browse services
-              <ArrowRight
-                size={16}
-                className="transition group-hover:translate-x-0.5"
-              />
-            </Link>
-            <Link
-              to="/contact"
               className={cn(btnSecondary, "w-full sm:w-auto")}
             >
-              Talk to our team
+              {NAV_BROWSE_MARKETPLACE_LABEL}
             </Link>
           </div>
         </div>
