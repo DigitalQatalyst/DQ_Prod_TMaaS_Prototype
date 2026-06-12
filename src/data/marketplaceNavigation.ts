@@ -11,7 +11,7 @@ export const marketplaceGoals = [
 export const marketplaceCapabilities = [
   { id: "experience", label: "Customer Experience & Engagement" },
   { id: "operations", label: "Business Operations & Productivity" },
-  { id: "security", label: "Development, Security, and Operations" },
+  { id: "security", label: "DevOps and Security" },
   { id: "ai", label: "Data, AI & Analytics" },
   { id: "bundles", label: "Bundles" },
 ] as const;

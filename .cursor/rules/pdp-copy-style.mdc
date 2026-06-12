@@ -17,8 +17,15 @@ Reference: `/workspace/pdp-copy-style.md`
 5. Use **DigitalQatalyst team** (not "DQ advisor").
 6. British spelling where already used: organisation, prioritised.
 
+## Variant SEO copy (required)
+
+- Single source: `src/lib/variantSeoCopy.ts` (hero description, positioning) and `src/lib/serviceFaqsCopy.ts` (FAQs).
+- Every variant needs a **unique** hero/description mentioning stage, price, duration, and outcome. Never share product-line body copy across Assess/Design/Deploy variants.
+- Positioning must use correct grammar (`perform` vs `performs` for plural domains). No em dashes.
+- Sync fixture: `npm run catalog:sync-variant-copy` before regenerating PDP seed.
+
 ## Generator
 
 - PDP seed SQL: `npm run db:pdp-content:sql` → local `supabase/migrations/…` (gitignored; apply via Supabase dashboard or CLI)
-- Apply migrations `20250610000011` (schema) then `20250610000012` (content) in Supabase SQL Editor.
+- Apply migrations in Supabase SQL Editor after schema extensions are present.
 - `fetchPdpContent` must degrade gracefully when PDP tables/columns are not migrated yet.

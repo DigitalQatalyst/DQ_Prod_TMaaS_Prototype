@@ -159,10 +159,16 @@ function buildPositioning(
     return `Define responsible AI for ${domain} — prioritised use cases, evidence automation, guardrails, and a blueprint ready to build.`;
   }
 
+  const performClause =
+    domain.includes(" and ") ||
+    /\b(apps|services|operations|channels|campaigns)\b/i.test(domain)
+      ? `${domain} perform today`
+      : `${domain} performs today`;
+
   const templates: Record<string, string> = {
-    advisory: `Review how ${domain} performs today, identify the biggest gaps, and leave with prioritised next steps and a practical roadmap.`,
-    design: `Turn your ${domain} goals into a delivery-ready blueprint — journeys, workflows, integrations, controls, and adoption plan included.`,
-    ai_design: `Define the AI use cases that matter for ${domain}, with data requirements, guardrails, and a blueprint ready to build.`,
+    advisory: `See how ${performClause}, identify the highest-impact gaps, and leave with prioritised next steps and a practical roadmap.`,
+    design: `Turn ${domain} goals into a delivery-ready blueprint with journeys, workflows, integrations, controls, and an adoption plan your teams can execute.`,
+    ai_design: `Define the AI use cases that matter for ${domain}, with data requirements, guardrails, and specifications ready to build.`,
     deploy: `Implement agreed ${domain} changes through managed configuration, integration, testing, and controlled launch support.`,
     ai_deploy: `Put AI-enabled ${domain} workflows into production with security, governance, and adoption built in from day one.`,
     manage: `Run and improve ${domain} with ongoing monitoring, reporting, and optimisation so performance keeps pace with your business.`,
