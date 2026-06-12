@@ -2,14 +2,17 @@ import type { ContactInterest, ContactNeed } from "@/lib/contactFormPrefill";
 
 export const LAUNCH_ADVISORY_OFFERING_PARAM = "launch-advisory";
 
-export const LAUNCH_ADVISORY_CTA_LABEL = "Schedule free advisory";
+export const LAUNCH_ADVISORY_CTA_LABEL = "Claim Yours — Free";
+
+export const LAUNCH_ADVISORY_NAV_CTA_LABEL = "Claim Your Free Advisory";
 
 export const LAUNCH_ADVISORY_EYEBROW = "Launch offer";
 
-export const LAUNCH_ADVISORY_HEADLINE = "Start with a free transformation advisory";
+export const LAUNCH_ADVISORY_HEADLINE =
+  "Your End-to-End Transformation Advisory. On Us.";
 
 export const LAUNCH_ADVISORY_SUBCOPY =
-  "Book a no-cost session with a DQ advisor. Clarify your priorities, identify high-impact gaps, and get a practical path forward in the marketplace.";
+  "No catch. No contract. Our full framework applied to your organisation — before you spend a cent.";
 
 export function buildLaunchAdvisoryContactPath(): string {
   const params = new URLSearchParams({
