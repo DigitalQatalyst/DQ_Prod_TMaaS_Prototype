@@ -6,7 +6,10 @@ export const PLATFORM_ACRONYM = "TMaaS";
 
 export const PLATFORM_DESCRIPTOR = "Digital transformation marketplace";
 
-export const PLATFORM_HERO_HEADLINE = "Digital Transformation Accelerated";
+export const PLATFORM_HERO_HEADLINE_PRIMARY = "Digital Transformation";
+export const PLATFORM_HERO_HEADLINE_ACCENT = "Accelerated";
+
+export const PLATFORM_HERO_HEADLINE = `${PLATFORM_HERO_HEADLINE_PRIMARY} ${PLATFORM_HERO_HEADLINE_ACCENT}`;
 
 export const PLATFORM_HERO_SUBCOPY =
   "TMaaS is a digital transformation marketplace with 200+ services across AI, experience, operations, and security.";

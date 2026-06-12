@@ -20,6 +20,10 @@ export const eyebrowOnDark = eyebrow;
 export const microLabel =
   "font-mono text-[10px] uppercase tracking-[0.18em] text-dq-orange";
 
+/** Landing hero h1, matches DQ_CORPWEB_PROTOTYPE `Home.tsx` HeroSection */
+export const landingHeroHeading =
+  "text-balance text-[2.75rem] font-semibold leading-[1.0] tracking-[-0.03em] text-dq-navy sm:text-6xl md:text-7xl lg:text-8xl";
+
 /**
  * In-page section h2, corp web content card title scale
  * (e.g. ServiceOverviewCard `text-xl font-bold` → semibold per TMaaS tokens).

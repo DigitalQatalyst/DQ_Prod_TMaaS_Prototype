@@ -52,6 +52,7 @@ Marketing pages (`/`, `/marketplace`, `/service/:id`) share the **DQ corp web de
 ## Marketing page copy (Marketplace, Service Detail, Contact)
 - Same voice as homepage: plain language, short sentences, SEO terms (`digital transformation`, `marketplace`, `services`, `blueprints`)
 - Shared CTA labels: **Browse services** (primary), **Talk to our team** (secondary/contact); avoid "Explore Marketplace", "Contact Us", "Book a Consultation"
+- Landing hero H1: use `landingHeroHeading` from `brandAccent.ts` (corp web scale: `leading-[1.0]`, `sm:text-6xl` through `lg:text-8xl`); two-line split with second line `text-dq-orange`
 - Marketplace hero: eyebrow `Digital transformation marketplace`; H1 `Browse transformation services`
 - Contact hero: H1 `Tell us what you need. We'll help you get started.`; submit button `Send request`
 - Service detail bottom CTA: `Not sure if this is the right fit?` + **Talk to our team** / **Browse more services**

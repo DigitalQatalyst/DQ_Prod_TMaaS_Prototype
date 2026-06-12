@@ -5,10 +5,11 @@ import HeroDashboardMockup from "@/components/site/landing/HeroDashboardMockup";
 import {
   NAV_BROWSE_MARKETPLACE_LABEL,
   PLATFORM_DESCRIPTOR,
-  PLATFORM_HERO_HEADLINE,
+  PLATFORM_HERO_HEADLINE_ACCENT,
+  PLATFORM_HERO_HEADLINE_PRIMARY,
   PLATFORM_HERO_SUBCOPY,
 } from "@/lib/brandLinks";
-import { btnPrimary, btnSecondary } from "@/lib/brandAccent";
+import { btnPrimary, btnSecondary, landingHeroHeading } from "@/lib/brandAccent";
 import { cn } from "@/lib/utils";
 
 const LandingHeroSection = () => {
@@ -22,8 +23,11 @@ const LandingHeroSection = () => {
         <div className="min-w-0">
           <p className="animate-fade-in-up dq-eyebrow">{PLATFORM_DESCRIPTOR}</p>
 
-          <h1 className="animate-fade-in-up animation-delay-100 mt-5 text-balance text-[2.75rem] font-semibold leading-[1.05] tracking-[-0.03em] text-dq-navy sm:text-5xl md:text-6xl lg:text-7xl">
-            {PLATFORM_HERO_HEADLINE}
+          <h1
+            className={`animate-fade-in-up animation-delay-100 mt-5 ${landingHeroHeading}`}
+          >
+            <span className="block">{PLATFORM_HERO_HEADLINE_PRIMARY}</span>
+            <span className="block text-dq-orange">{PLATFORM_HERO_HEADLINE_ACCENT}</span>
           </h1>
 
           <p className="animate-fade-in-up animation-delay-200 mt-6 max-w-2xl text-lg leading-relaxed text-gray-600">
