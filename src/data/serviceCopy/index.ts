@@ -1,0 +1,42 @@
+import type { ServiceProduct } from "@/types/serviceProduct";
+import { aiCopy } from "./ai";
+import { experienceCopy } from "./experience";
+import { operationsCopy } from "./operations";
+import { securityCopy } from "./security";
+import type { VariantCopyOverride } from "./types";
+
+export type { VariantCopyOverride, CollectionCopyOverrides, DeliveryStepOverride } from "./types";
+
+/** All per-variant overrides, merged across collections (keyed by variant id). */
+export const serviceCopyOverrides: Record<number, VariantCopyOverride> = {
+  ...experienceCopy,
+  ...operationsCopy,
+  ...aiCopy,
+  ...securityCopy,
+};
+
+/** Returns the override for a variant id, or an empty object if none. */
+export function getVariantCopyOverride(id: number): VariantCopyOverride {
+  return serviceCopyOverrides[id] ?? {};
+}
+
+/**
+ * Returns a copy of the service with card-level override fields merged in.
+ * Used by the seed-SQL generator and any runtime fallback so DB and static
+ * catalog stay in sync.
+ */
+export function applyCardCopyOverride(service: ServiceProduct): ServiceProduct {
+  const o = serviceCopyOverrides[service.id];
+  if (!o) return service;
+  return {
+    ...service,
+    description: o.description ?? service.description,
+    positioning: o.positioning ?? service.positioning,
+    features: o.features ?? service.features,
+    tags: o.tags ?? service.tags,
+    timelineMilestones: o.timelineMilestones ?? service.timelineMilestones,
+    businessImpact: o.businessImpact ?? service.businessImpact,
+    audience: o.audience ?? service.audience,
+    industryRelevance: o.industryRelevance ?? service.industryRelevance,
+  };
+}
