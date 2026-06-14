@@ -443,7 +443,7 @@ export const experience2Copy: CollectionCopyOverrides = {
       {
         question: "What does the SLA cover?",
         answer:
-          "Response and resolution targets for platform incidents, integration failures, and configuration change requests. The DigitalQatalyst team confirms specific targets during the onboarding period.",
+          "The SLA covers system availability monitoring, incident response for platform and integration failures, change management for configuration requests, and a monthly reporting cadence. Specific response and resolution targets are finalised during onboarding to reflect your operational requirements.",
       },
       {
         question: "Can we request new features or changes within the managed service?",
@@ -909,7 +909,7 @@ export const experience2Copy: CollectionCopyOverrides = {
       {
         question: "How do you report against our marketing KPIs?",
         answer:
-          "The reporting framework is aligned to your KPIs during onboarding. Monthly reports pull from your agreed data sources and present metrics in a format your leadership can act on.",
+          "Each month you receive a performance dashboard connected to your analytics stack and presenting the KPIs that matter to your leadership. Every quarter the DigitalQatalyst team runs a business review to interpret trends and agree priorities for the next period. KPI alignment is confirmed during onboarding so the first report reflects what you actually measure.",
       },
       {
         question: "How do we get started?",
@@ -1366,6 +1366,11 @@ export const experience2Copy: CollectionCopyOverrides = {
         question: "How do you handle urgent pricing changes that need to go live quickly?",
         answer:
           "Priority change procedures with defined response times are included in the service agreement. The DigitalQatalyst team confirms the specific turnaround commitments during onboarding.",
+      },
+      {
+        question: "How is our commercial and customer data kept secure?",
+        answer:
+          "Your data is processed within the cloud region agreed at contract signature. Access to your CPQ environment is role-controlled and limited to the DigitalQatalyst team members assigned to your account. On contract end, data is deleted or returned in full per the terms agreed in your service agreement.",
       },
       {
         question: "How do we get started?",
