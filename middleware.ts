@@ -1,26 +1,19 @@
-import { isAllowedPublicPath, isStaticAssetPath } from "./middleware/allowedRoutes";
-import NOT_FOUND_HTML from "./middleware/notFoundHtml";
+import { NextRequest, NextResponse } from "next/server";
+
+function hasSession(request: NextRequest): boolean {
+  return Boolean(request.cookies.get("session_token")?.value);
+}
+
+export function middleware(request: NextRequest) {
+  const { pathname } = request.nextUrl;
+
+  if (pathname.startsWith("/dashboard") && !hasSession(request)) {
+    return NextResponse.redirect(new URL("/sign-in", request.url));
+  }
+
+  return NextResponse.next();
+}
 
 export const config = {
-  matcher: ["/((?!api/).*)"],
+  matcher: ["/dashboard/:path*"],
 };
-
-export default function middleware(request: Request): Response | undefined {
-  const { pathname } = new URL(request.url);
-
-  if (pathname.startsWith("/api/") || isStaticAssetPath(pathname)) {
-    return undefined;
-  }
-
-  if (isAllowedPublicPath(pathname)) {
-    return undefined;
-  }
-
-  return new Response(NOT_FOUND_HTML, {
-    status: 404,
-    headers: {
-      "Content-Type": "text/html; charset=utf-8",
-      "Cache-Control": "no-store",
-    },
-  });
-}

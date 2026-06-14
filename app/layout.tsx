@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Plus_Jakarta_Sans, JetBrains_Mono, Space_Grotesk } from "next/font/google";
+import { Providers } from "@/components/foundation/providers";
 import "./globals.css";
 
 const jakarta = Plus_Jakarta_Sans({
@@ -41,7 +42,9 @@ export default function RootLayout({
       lang="en"
       className={`${jakarta.variable} ${jetbrains.variable} ${spaceGrotesk.variable}`}
     >
-      <body className="antialiased">{children}</body>
+      <body className="antialiased">
+        <Providers>{children}</Providers>
+      </body>
     </html>
   );
 }
