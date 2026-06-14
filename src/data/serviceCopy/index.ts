@@ -1,5 +1,6 @@
 import type { ServiceProduct } from "@/types/serviceProduct";
 import { aiCopy } from "./ai";
+import { bundlesCopy } from "./bundles";
 import { experience1Copy } from "./experience1";
 import { experience2Copy } from "./experience2";
 import { operations1Copy } from "./operations1";
@@ -19,6 +20,7 @@ export const serviceCopyOverrides: Record<number, VariantCopyOverride> = {
   ...operations3Copy,
   ...aiCopy,
   ...securityCopy,
+  ...bundlesCopy,
 };
 
 /** Returns the override for a variant id, or an empty object if none. */
