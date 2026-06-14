@@ -1,7 +1,11 @@
 {
   "compilerOptions": {
     "target": "ES2017",
-    "lib": ["dom", "dom.iterable", "esnext"],
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
     "allowJs": true,
     "skipLibCheck": true,
     "strict": true,
@@ -16,9 +20,46 @@
     "isolatedModules": true,
     "jsx": "react-jsx",
     "incremental": true,
-    "plugins": [{ "name": "next" }],
-    "paths": { "@/*": ["./*"] }
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ],
+    "paths": {
+      "@/*": [
+        "./*"
+      ]
+    }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
-  "exclude": ["node_modules", "src"]
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    ".next/types/**/*.ts",
+    ".next/dev/types/**/*.ts"
+  ],
+  "exclude": [
+    "node_modules",
+    "src/App.css",
+    "src/App.tsx",
+    "src/assets",
+    "src/components",
+    "src/contexts",
+    "src/data",
+    "src/hooks",
+    "src/index.css",
+    "src/layouts",
+    "src/lib",
+    "src/main.tsx",
+    "src/pages",
+    "src/routes",
+    "src/services",
+    "src/test",
+    "src/types",
+    "src/utils",
+    "src/vite-env.d.ts",
+    "scratch",
+    "workspace",
+    "scripts"
+  ]
 }

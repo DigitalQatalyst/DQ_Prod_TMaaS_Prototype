@@ -1,0 +1,345 @@
+@import "tailwindcss";
+
+@theme {
+  --color-dq-navy: #030F35;
+  --color-dq-orange: #FB5535;
+  --font-sans: "Plus Jakarta Sans", sans-serif;
+  --font-mono: "JetBrains Mono", monospace;
+  /* Map shadcn/ui semantic CSS vars to Tailwind 4 color tokens */
+  --color-border: hsl(var(--border));
+  --color-input: hsl(var(--input));
+  --color-ring: hsl(var(--ring));
+  --color-background: hsl(var(--background));
+  --color-foreground: hsl(var(--foreground));
+  --color-primary: hsl(var(--primary));
+  --color-primary-foreground: hsl(var(--primary-foreground));
+  --color-secondary: hsl(var(--secondary));
+  --color-secondary-foreground: hsl(var(--secondary-foreground));
+  --color-muted: hsl(var(--muted));
+  --color-muted-foreground: hsl(var(--muted-foreground));
+  --color-accent: hsl(var(--accent));
+  --color-accent-foreground: hsl(var(--accent-foreground));
+  --color-destructive: hsl(var(--destructive));
+  --color-card: hsl(var(--card));
+  --color-card-foreground: hsl(var(--card-foreground));
+  --color-popover: hsl(var(--popover));
+  --color-popover-foreground: hsl(var(--popover-foreground));
+  /* DQ navy scale — maps CSS vars to Tailwind color utilities */
+  --color-navy-950: var(--navy-950);
+  --color-navy-900: var(--navy-900);
+  --color-navy-800: var(--navy-800);
+  --color-navy-700: var(--navy-700);
+  --color-navy-600: var(--navy-600);
+  --color-navy-500: var(--navy-500);
+  --color-navy-400: var(--navy-400);
+  --color-navy-300: var(--navy-300);
+  --color-navy-200: var(--navy-200);
+  --color-navy-100: var(--navy-100);
+  --color-navy-50: var(--navy-50);
+  /* DQ orange scale */
+  --color-orange-950: var(--orange-950);
+  --color-orange-900: var(--orange-900);
+  --color-orange-800: var(--orange-800);
+  --color-orange-700: var(--orange-700);
+  --color-orange-600: var(--orange-600);
+  --color-orange-500: var(--orange-500);
+  --color-orange-400: var(--orange-400);
+  --color-orange-300: var(--orange-300);
+  --color-orange-200: var(--orange-200);
+  --color-orange-100: var(--orange-100);
+  --color-orange-50: var(--orange-50);
+  /* DQ gray scale */
+  --color-gray-950: var(--gray-950);
+  --color-gray-900: var(--gray-900);
+  --color-gray-800: var(--gray-800);
+  --color-gray-700: var(--gray-700);
+  --color-gray-600: var(--gray-600);
+  --color-gray-500: var(--gray-500);
+  --color-gray-400: var(--gray-400);
+  --color-gray-300: var(--gray-300);
+  --color-gray-200: var(--gray-200);
+  --color-gray-100: var(--gray-100);
+  --color-gray-50: var(--gray-50);
+}
+
+@layer base {
+  :root {
+    --background: 220 20% 97%;
+    --foreground: 222 47% 11%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 222 47% 11%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 222 47% 11%;
+
+    --primary: 11 96% 60%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 222 47% 11%;
+    --secondary-foreground: 0 0% 100%;
+
+    --muted: 220 15% 92%;
+    --muted-foreground: 220 9% 46%;
+
+    --accent: 220 18% 94%;
+    --accent-foreground: 222 47% 11%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 220 13% 88%;
+    --input: 220 13% 91%;
+    --ring: 11 96% 60%;
+
+    --radius: 0.75rem;
+
+    --brand: 11 96% 60%;
+    --brand-foreground: 0 0% 100%;
+    --brand-glow: 11 96% 70%;
+    --navy: 222 47% 11%;
+    --navy-light: 222 30% 18%;
+    --navy-foreground: 220 20% 90%;
+
+    --gradient-brand: linear-gradient(135deg, hsl(11 96% 60%), hsl(25 100% 62%));
+    --gradient-navy: linear-gradient(180deg, hsl(222 47% 11%), hsl(222 30% 18%));
+    --shadow-brand: 0 8px 30px -8px hsl(11 96% 60% / 0.35);
+    --shadow-card: 0 2px 16px -2px hsl(222 47% 11% / 0.06);
+    --shadow-elevated: 0 8px 30px -8px hsl(222 47% 11% / 0.1);
+
+    --sidebar-background: 0 0% 98%;
+    --sidebar-foreground: 240 5.3% 26.1%;
+    --sidebar-primary: 240 5.9% 10%;
+    --sidebar-primary-foreground: 0 0% 98%;
+    --sidebar-accent: 240 4.8% 95.9%;
+    --sidebar-accent-foreground: 240 5.9% 10%;
+    --sidebar-border: 220 13% 91%;
+    --sidebar-ring: 11 96% 60%;
+
+    /* ── DQ Design System palette (subset for TMaaS landing) ─────────────── */
+    /* OKLCH values ported from dq_corp_web reference */
+    --navy-950: oklch(0.12 0.082 264);
+    --navy-900: oklch(0.14 0.100 264);
+    --navy-800: oklch(0.18 0.120 264);
+    --navy-700: oklch(0.22 0.140 264);
+    --navy-600: oklch(0.28 0.155 264);
+    --navy-500: oklch(0.35 0.160 264);
+    --navy-400: oklch(0.48 0.130 264);
+    --navy-300: oklch(0.63 0.090 264);
+    --navy-200: oklch(0.78 0.055 264);
+    --navy-100: oklch(0.92 0.025 264);
+    --navy-50: oklch(0.96 0.012 264);
+
+    --orange-950: oklch(0.30 0.140 29);
+    --orange-900: oklch(0.40 0.165 29);
+    --orange-800: oklch(0.48 0.190 29);
+    --orange-700: oklch(0.56 0.208 29);
+    --orange-600: oklch(0.62 0.208 29);
+    /* TMaaS accent */
+    --dq-orange-500: #FB5535;
+    --orange-500: var(--dq-orange-500);
+    --orange-400: oklch(0.70 0.190 29);
+    --orange-300: oklch(0.80 0.135 29);
+    --orange-200: oklch(0.88 0.080 29);
+    --orange-100: oklch(0.94 0.040 29);
+    --orange-50: oklch(0.97 0.020 29);
+
+    --gray-950: oklch(0.18 0.01 264);
+    --gray-900: oklch(0.24 0.01 264);
+    --gray-800: oklch(0.34 0.01 264);
+    --gray-700: oklch(0.44 0.01 264);
+    --gray-600: oklch(0.54 0.01 264);
+    --gray-500: oklch(0.62 0.01 264);
+    --gray-400: oklch(0.72 0.01 264);
+    --gray-300: oklch(0.82 0.01 264);
+    --gray-200: oklch(0.90 0.01 264);
+    --gray-100: oklch(0.95 0.01 264);
+    --gray-50: oklch(0.98 0.005 264);
+
+    /* Corp web brand tokens */
+    --dq-navy: #030F35;
+    --dq-orange: #FB5535;
+
+    /* Mesh / glow tokens (aligned with DQ_CORPWEB_PROTOTYPE) */
+    --mesh-hero-light: linear-gradient(
+      135deg,
+      oklch(0.98 0.006 264) 0%,
+      oklch(0.96 0.012 264 / 0.8) 35%,
+      oklch(0.97 0.010 30 / 0.35) 65%,
+      oklch(0.99 0.004 264) 100%
+    );
+    --mesh-hero-dark: radial-gradient(
+        ellipse 80% 60% at 20% 40%,
+        oklch(0.25 0.06 264 / 0.8),
+        transparent 70%
+      ),
+      radial-gradient(
+        ellipse 60% 50% at 80% 60%,
+        oklch(0.22 0.04 264 / 0.6),
+        transparent 70%
+      ),
+      oklch(0.12 0.045 264);
+    --mesh-cta-orange: radial-gradient(
+        ellipse 50% 40% at 30% 50%,
+        oklch(0.58 0.22 22 / 0.28),
+        transparent 55%
+      ),
+      radial-gradient(
+        ellipse 40% 50% at 75% 25%,
+        oklch(0.45 0.18 20 / 0.18),
+        transparent 55%
+      ),
+      oklch(0.10 0.040 264);
+
+    --glow-orange-md: 0 0 40px oklch(0.65 0.208 29 / 0.35), 0 0 80px oklch(0.65 0.208 29 / 0.15);
+    --glow-navy-md: 0 0 40px oklch(0.25 0.06 264 / 0.3), 0 8px 32px oklch(0.12 0.045 264 / 0.25);
+    --marquee-mid: 35s;
+
+    --surface-glass-light: oklch(1 0 0 / 0.65);
+    --surface-glass-dark: oklch(1 0 0 / 0.06);
+    --surface-glass-border-light: oklch(0.86 0.010 264 / 0.55);
+    --surface-glass-border-dark: oklch(1 0 0 / 0.10);
+    --blur-md: 16px;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  html,
+  body {
+    overflow-x: clip;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+    font-feature-settings: "kern" 1, "liga" 1, "calt" 1;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-semibold text-dq-navy;
+  }
+}
+
+@layer utilities {
+  .text-gradient-brand {
+    background: var(--gradient-brand);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .bg-gradient-brand {
+    background: var(--gradient-brand);
+  }
+
+  .bg-gradient-navy {
+    background: var(--gradient-navy);
+  }
+
+  .shadow-brand {
+    box-shadow: var(--shadow-brand);
+  }
+
+  .shadow-card {
+    box-shadow: var(--shadow-card);
+  }
+
+  .shadow-elevated {
+    box-shadow: var(--shadow-elevated);
+  }
+
+  /* Design-system marquee utilities (subset) */
+  .marquee-track {
+    display: flex;
+    width: max-content;
+    animation: dq-marquee var(--marquee-mid) linear infinite;
+  }
+
+  .marquee-track-reverse {
+    display: flex;
+    width: max-content;
+    animation: dq-marquee var(--marquee-mid) linear infinite reverse;
+  }
+
+  .marquee-mask {
+    -webkit-mask-image: linear-gradient(90deg, transparent, black 10%, black 90%, transparent);
+            mask-image: linear-gradient(90deg, transparent, black 10%, black 90%, transparent);
+  }
+
+  .surface-glass-light {
+    background-color: var(--surface-glass-light);
+    border: 1px solid var(--surface-glass-border-light);
+    backdrop-filter: blur(var(--blur-md)) saturate(140%);
+    -webkit-backdrop-filter: blur(var(--blur-md)) saturate(140%);
+  }
+
+  .surface-glass-dark {
+    background-color: var(--surface-glass-dark);
+    border: 1px solid var(--surface-glass-border-dark);
+    backdrop-filter: blur(var(--blur-md)) saturate(140%);
+    -webkit-backdrop-filter: blur(var(--blur-md)) saturate(140%);
+  }
+
+  .glow-orange { box-shadow: var(--glow-orange-md); }
+  .glow-navy { box-shadow: var(--glow-navy-md); }
+
+  .dq-eyebrow {
+    @apply font-mono text-[11px] uppercase tracking-[0.2em] text-dq-orange;
+  }
+
+  .dq-eyebrow-on-dark {
+    @apply font-mono text-[11px] uppercase tracking-[0.2em] text-dq-orange;
+  }
+
+  .dq-icon-well {
+    @apply flex items-center justify-center rounded-xl bg-navy-50 text-dq-navy;
+  }
+
+  .dq-micro-label {
+    @apply font-mono text-[10px] uppercase tracking-[0.18em] text-dq-orange;
+  }
+
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .scrollbar-none {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .scrollbar-none::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+/* Grid overlay (used on hero sections) */
+.hero-grid {
+  background-image:
+    linear-gradient(to right, rgba(3, 15, 53, 0.06) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(3, 15, 53, 0.06) 1px, transparent 1px);
+  background-size: 56px 56px;
+  -webkit-mask-image: radial-gradient(ellipse 70% 50% at 50% 30%, black 40%, transparent 80%);
+  mask-image: radial-gradient(ellipse 70% 50% at 50% 30%, black 40%, transparent 80%);
+}
+
+/* Fade-in-up entry animation */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.animate-fade-in-up {
+  animation: fadeInUp 0.7s ease-out both;
+}
+.animation-delay-100 { animation-delay: 0.1s; }
+.animation-delay-200 { animation-delay: 0.2s; }
+.animation-delay-300 { animation-delay: 0.3s; }
+.animation-delay-500 { animation-delay: 0.5s; }
+
+@keyframes dq-marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
