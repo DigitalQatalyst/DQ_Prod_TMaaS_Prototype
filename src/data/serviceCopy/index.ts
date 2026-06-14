@@ -1,16 +1,22 @@
 import type { ServiceProduct } from "@/types/serviceProduct";
 import { aiCopy } from "./ai";
-import { experienceCopy } from "./experience";
-import { operationsCopy } from "./operations";
+import { experience1Copy } from "./experience1";
+import { experience2Copy } from "./experience2";
+import { operations1Copy } from "./operations1";
+import { operations2Copy } from "./operations2";
+import { operations3Copy } from "./operations3";
 import { securityCopy } from "./security";
 import type { VariantCopyOverride } from "./types";
 
 export type { VariantCopyOverride, CollectionCopyOverrides, DeliveryStepOverride } from "./types";
 
-/** All per-variant overrides, merged across collections (keyed by variant id). */
+/** All per-variant overrides, merged across batches (keyed by variant id). */
 export const serviceCopyOverrides: Record<number, VariantCopyOverride> = {
-  ...experienceCopy,
-  ...operationsCopy,
+  ...experience1Copy,
+  ...experience2Copy,
+  ...operations1Copy,
+  ...operations2Copy,
+  ...operations3Copy,
   ...aiCopy,
   ...securityCopy,
 };
