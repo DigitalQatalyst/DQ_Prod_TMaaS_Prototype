@@ -108,7 +108,8 @@ function buildEmailHtml(fields) {
 const ALLOWED_ORIGINS = [
   'http://localhost:5173',
   'http://localhost:8080',
-];
+  process.env.VITE_SITE_URL,
+].filter(Boolean);
 
 async function handler(req, res) {
   const origin = req.headers.origin ?? '';

@@ -35,16 +35,16 @@ export const HOME_SEO = {
 } as const;
 
 export const MARKETPLACE_SEO = {
-  title: `Marketplace | Digital Transformation Services | ${SEO_BRAND}`,
+  title: `Digital Transformation Services Marketplace | ${SEO_BRAND}`,
   description:
     "Explore 100+ digital transformation services with clear pricing and timelines. Filter by AI, experience, operations, or security to find the right blueprint.",
   path: "/marketplace",
 } as const;
 
 export const CONTACT_SEO = {
-  title: `Talk to our team | ${SEO_BRAND}`,
+  title: `Book a Free Transformation Advisory | ${SEO_BRAND}`,
   description:
-    "Talk to the DigitalQatalyst team about TMaaS. Request a quote, book a consultation, or get help finding the right transformation service.",
+    "Talk to a DigitalQatalyst advisor about digital transformation. Book a free advisory session, request a quote, or get help finding the right service.",
   path: "/contact",
 } as const;
 

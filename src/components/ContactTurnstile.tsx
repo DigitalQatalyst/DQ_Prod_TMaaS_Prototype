@@ -1,7 +1,7 @@
 import { useEffect, useRef } from "react";
 
 const TURNSTILE_SCRIPT_ID = "cf-turnstile-script";
-const TURNSTILE_SCRIPT_SRC = "https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit";
+const TURNSTILE_SCRIPT_SRC = "https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit&onload=onTurnstileLoad";
 /** Cloudflare always-pass test key — safe for local dev only (see .env.example). */
 const TURNSTILE_DEV_SITE_KEY = "1x00000000000000000000AA";
 

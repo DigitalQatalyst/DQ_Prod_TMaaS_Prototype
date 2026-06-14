@@ -13,12 +13,11 @@ import {
   getServiceEnquiryFormDefaults,
   parseServiceContactParams,
 } from "@/lib/contactFormPrefill";
-import ContactTurnstile from "@/components/ContactTurnstile";
 import { PLATFORM_CONTACT_LINE } from "@/lib/brandLinks";
+import ContactTurnstile from "@/components/ContactTurnstile";
 import {
   getLaunchAdvisoryFormDefaults,
   isLaunchAdvisoryEnquiry,
-  LAUNCH_ADVISORY_HEADLINE,
 } from "@/lib/launchOffering";
 import { featureFlags } from "@/lib/featureFlags";
 
@@ -178,11 +177,11 @@ const Contact = () => {
                 <Check size={32} className="text-green-600" strokeWidth={2.5} />
               </div>
               <h1 className="mb-3 text-2xl font-semibold tracking-tight text-dq-navy md:text-3xl">
-                We&apos;ve got your request
+                You&apos;re all set.
               </h1>
               <p className="mx-auto mb-8 max-w-md text-[15px] leading-relaxed text-gray-600">
-                A DQ advisor will review your message and get back to you within 2
-                business days with the right next step.
+                Someone from our team will be in touch within 2 business days.
+                In the meantime, feel free to browse the marketplace.
               </p>
               <div className="flex flex-col justify-center gap-3 sm:flex-row">
                 <button
@@ -190,7 +189,7 @@ const Contact = () => {
                   onClick={resetForm}
                   className="rounded-full border border-gray-200 px-6 py-2.5 text-[15px] font-semibold text-dq-navy outline-none transition-colors hover:border-dq-navy hover:text-dq-navy focus-visible:ring-2 focus-visible:ring-dq-orange focus-visible:ring-offset-2"
                 >
-                  Submit another request
+                  Send another message
                 </button>
                 <Link
                   to="/"
@@ -292,20 +291,7 @@ const Contact = () => {
                       />
                     </Field>
 
-                    {launchAdvisoryEnquiry ? (
-                      <div className="rounded-xl border border-dq-orange/20 bg-orange-50/40 px-4 py-4">
-                        <p className="text-[10px] font-semibold uppercase tracking-[0.16em] text-dq-orange">
-                          Launch offer
-                        </p>
-                        <p className="mt-1 text-base font-semibold text-dq-navy">
-                          {LAUNCH_ADVISORY_HEADLINE}
-                        </p>
-                        <p className="mt-1 text-sm text-gray-600">
-                          Tell us a little about your organisation and we&apos;ll schedule your free
-                          advisory session.
-                        </p>
-                      </div>
-                    ) : serviceEnquiry ? (
+                    {serviceEnquiry ? (
                       <div className="rounded-xl border border-gray-200 bg-white px-4 py-4">
                         <p className="text-[10px] font-semibold uppercase tracking-[0.16em] text-gray-400">
                           Service enquiry
@@ -394,8 +380,8 @@ const Contact = () => {
                         <span
                           className={`text-[13px] leading-relaxed transition-colors ${errors.consent ? "text-red-600" : "text-gray-500"}`}
                         >
-                          I agree to the processing of my data for this consultation request, in
-                          accordance with the {privacyLink}
+                          I agree to DQ processing my information to handle this request, in line
+                          with the {privacyLink}
                           <span aria-hidden="true">
                             . <span className="text-red-600">*</span>
                           </span>
@@ -449,11 +435,11 @@ const Contact = () => {
                         {status === "loading" ? (
                           <>
                             <Loader2 size={16} className="animate-spin" />
-                            Submitting…
+                            Sending…
                           </>
                         ) : (
                           <>
-                            Send request
+                            Send my request
                             <ArrowRight size={16} />
                           </>
                         )}
@@ -468,12 +454,13 @@ const Contact = () => {
                   What happens next
                 </p>
                 <p className="mb-5 text-[13px] leading-relaxed text-gray-500">
-                  A DQ advisor reads every message and connects you to the right
-                  services, whether that&apos;s advice, a demo, or hands-on support.
+                  You&apos;re not going into a queue. A real person will read your
+                  message, match you to the right services, and reach out with a
+                  clear next step.
                 </p>
                 <div className="flex items-center gap-1.5 text-[13px] text-gray-500">
                   <Clock size={13} className="shrink-0 text-gray-400" />
-                  Expect a response within 2 business days.
+                  We typically respond within 2 business days.
                 </div>
 
                 <div className="mt-6 border-t border-gray-100 pt-5">
@@ -563,11 +550,11 @@ function ContactHero() {
           {PLATFORM_CONTACT_LINE}
         </p>
         <h1 className="mb-5 max-w-2xl text-balance text-4xl font-semibold tracking-tight text-dq-navy md:text-5xl">
-          Tell us what you need. We&apos;ll help you get started.
+          Let&apos;s find the right path forward for your organisation.
         </h1>
         <p className="max-w-xl text-[15px] leading-relaxed text-gray-600 md:text-[16px]">
-          Every message is reviewed by a DQ advisor who will match you to the
-          right services and next steps.
+          Our advisory team reads every message personally and connects you to
+          exactly what you need — no gatekeeping.
         </p>
       </div>
     </section>
