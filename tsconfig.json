@@ -51,7 +51,7 @@
     "src/layouts",
     "src/lib",
     "src/main.tsx",
-    "src/pages",
+    "src/_pages",
     "src/routes",
     "src/services",
     "src/test",
