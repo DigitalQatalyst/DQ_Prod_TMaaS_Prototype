@@ -18,7 +18,7 @@ export const operations1Copy: CollectionCopyOverrides = {
     positioning:
       "Understand where your digital workplace is losing productivity, then fix the highest-impact gaps first.",
     features: [
-      "Maturity scoring across communication, knowledge, collaboration, and adoption dimensions",
+      "A scored baseline revealing exactly which collaboration and knowledge-sharing gaps cost the most productivity, so your investment targets the highest-return improvements",
       "Gap analysis mapped to specific tools: Microsoft 365, Teams, SharePoint, or equivalents",
       "Interview-led findings from IT, HR, and end-user perspectives to surface adoption blockers",
       "Prioritised roadmap with effort estimates so leadership can sequence investment confidently",
@@ -51,7 +51,7 @@ export const operations1Copy: CollectionCopyOverrides = {
       },
     ],
     packageHighlights: [
-      "Fixed-scope, no-obligation assessment completed within one week",
+      "Fixed scope covering your collaboration tools, intranet, and adoption posture -- confirmed with you before day one so there are no surprises",
       "Covers both technical configuration and human adoption factors",
       "Findings playback with the DigitalQatalyst team included",
     ],
@@ -93,7 +93,7 @@ export const operations1Copy: CollectionCopyOverrides = {
 
   56: {
     description:
-      "A four-week design engagement that translates your digital workplace goals into user-centred wireframes, information architecture, and build-ready specifications covering Microsoft 365 configuration, intranet structure, and adoption planning.",
+      "Turn your digital workplace goals into user-centred wireframes, information architecture, and build-ready specifications covering Microsoft 365 configuration, intranet structure, and adoption planning, delivered across a focused four-week design engagement.",
     positioning:
       "Turn workplace collaboration goals into a blueprint your IT team can build and your employees will actually use.",
     features: [
@@ -168,7 +168,7 @@ export const operations1Copy: CollectionCopyOverrides = {
 
   57: {
     description:
-      "A four-week AI design engagement that identifies where AI can reduce friction in your digital workplace, validates each use case for feasibility and responsibility, and produces governed workflow specifications ready for build.",
+      "Find the AI use cases that will genuinely reduce friction in your digital workplace, validate each for feasibility and responsibility, and produce governed workflow specifications ready for build, all within a four-week AI design engagement.",
     positioning:
       "Find the AI use cases that will genuinely improve employee productivity, and design them safely before spending on build.",
     features: [
@@ -243,7 +243,7 @@ export const operations1Copy: CollectionCopyOverrides = {
 
   58: {
     description:
-      "A twelve-week implementation that configures, integrates, and launches your Microsoft 365 digital workplace environment, covering SharePoint intranet, Teams governance, and the adoption programme your employees need to shift their working habits.",
+      "Get your Microsoft 365 digital workplace environment built, integrated, and adopted, covering SharePoint intranet, Teams governance, and the structured adoption programme your employees need to shift their working habits, delivered across twelve weeks.",
     positioning:
       "Get your digital workplace built, tested, and adopted, not just switched on.",
     features: [
@@ -318,7 +318,7 @@ export const operations1Copy: CollectionCopyOverrides = {
 
   59: {
     description:
-      "A twelve-week engagement that deploys governed AI capabilities across your digital workplace, including Microsoft Copilot, automated knowledge surfacing, and AI-assisted communication tools, with safety controls and monitoring active from day one.",
+      "Put AI to work across your digital workplace with governance, monitoring, and adoption built in from the start, including Microsoft Copilot, automated knowledge surfacing, and AI-assisted communication tools deployed over twelve weeks.",
     positioning:
       "Put AI to work in your digital workplace with governance, monitoring, and adoption built in from the start.",
     features: [
@@ -471,11 +471,11 @@ export const operations1Copy: CollectionCopyOverrides = {
 
   61: {
     description:
-      "A one-week assessment that maps your highest-volume manual processes, scores each for automation potential, and returns a prioritised list of workflows to tackle first along with an honest view of the tooling and data readiness required.",
+      "Find out which manual processes cost the most time and which are genuinely ready to automate, with a prioritised roadmap and an honest view of the tooling and data readiness required, delivered within one week.",
     positioning:
       "Find the manual processes that cost the most time, then get a clear plan to automate the right ones first.",
     features: [
-      "Process inventory across operations, finance, HR, and IT to identify repetitive, rules-based work",
+      "A prioritised map of the manual, rules-based work costing your teams the most time and error rate, ranked by automation ROI so effort goes to the highest-return processes first",
       "Automation potential scoring by volume, error rate, complexity, and data availability",
       "Tool fit analysis covering RPA, workflow automation, and API integration options relative to your existing stack",
       "Prioritised automation roadmap with effort, cost, and expected time-saving estimates for each candidate",
@@ -508,7 +508,7 @@ export const operations1Copy: CollectionCopyOverrides = {
       },
     ],
     packageHighlights: [
-      "Fixed-scope, no-obligation assessment completed within one week",
+      "Fixed scope across your agreed process areas -- no scope creep and no open-ended discovery billing",
       "Tool-neutral: recommends the right automation approach for each process",
       "Business case summary included for stakeholder sign-off",
     ],
@@ -545,7 +545,7 @@ export const operations1Copy: CollectionCopyOverrides = {
 
   62: {
     description:
-      "A four-week design engagement that translates your automation priorities into detailed process specifications, tool configurations, and test plans, giving your delivery team everything needed to build and launch each workflow without ambiguity.",
+      "Eliminate the ambiguity that causes automation rework: get detailed process specifications, tool configurations, and test plans your delivery team can build and launch each workflow against, completed across a focused four-week design engagement.",
     positioning:
       "Design your automations properly before building them: fewer rework cycles, faster go-live, and workflows that hold up in production.",
     features: [
@@ -620,7 +620,7 @@ export const operations1Copy: CollectionCopyOverrides = {
 
   63: {
     description:
-      "A four-week AI design engagement that identifies where intelligent automation, including document processing, decision support, and predictive routing, can extend your business process automation beyond rules-based workflows, with responsible design and deployment specifications for each use case.",
+      "Identify where intelligent automation, including document processing, decision support, and predictive routing, can extend your process automation beyond what rules-based tools handle, with responsible design and deployment specifications for each use case, ready after four weeks.",
     positioning:
       "Design the AI layer that takes your process automation from rules-based to genuinely intelligent, safely and with governance built in.",
     features: [
@@ -695,7 +695,7 @@ export const operations1Copy: CollectionCopyOverrides = {
 
   64: {
     description:
-      "A twelve-week implementation that builds, integrates, tests, and launches your prioritised automation workflows, covering RPA bots, low-code automations, and API integrations, with structured handover to the teams who will maintain them.",
+      "Get your automation workflows built, tested, and running in production, covering RPA bots, low-code automations, and API integrations, with a documented handover including runbooks and administrator sign-off to the teams who will maintain them, delivered across twelve weeks.",
     positioning:
       "Get your automation workflows built, tested, and running in production, with the documentation and training your team needs to own them.",
     features: [
@@ -770,7 +770,7 @@ export const operations1Copy: CollectionCopyOverrides = {
 
   65: {
     description:
-      "A twelve-week engagement that deploys AI-powered automation capabilities into your production environment, including intelligent document processing, AI-driven decision routing, and predictive workflow triggers, with governance controls and monitoring active from day one.",
+      "Put governed AI automation into production, including intelligent document processing, AI-driven decision routing, and predictive workflow triggers, with monitoring active from day one and a pilot-first approach that contains risk before full scale.",
     positioning:
       "Put governed AI automation into production: document intelligence, decision support, and predictive routing, live and monitored.",
     features: [
@@ -923,44 +923,44 @@ export const operations1Copy: CollectionCopyOverrides = {
 
   73: {
     description:
-      "A one-week assessment of your domain-specific operational functions, covering the tools, workflows, and data flows unique to your business unit, and returning a prioritised improvement roadmap your operational leaders can act on immediately.",
+      "Most specialist operations work -- barely. Facilities management teams run on spreadsheets and tribal knowledge. Legal ops functions manage matter intake through email. Field service scheduling lives in a supervisor's head. This one-week assessment maps the workflows, bottlenecks, and tech debt unique to your operational function and tells you where you are losing money, creating compliance risk, and building fragility into something the business depends on.",
     positioning:
-      "Get an honest, evidence-based view of where your specialist operations are underperforming and what to fix first.",
+      "Walk away with a clear picture of where your specialist operation is haemorrhaging time and risk, and which fixes will pay back fastest.",
     features: [
-      "Domain-specific process mapping covering the workflows, handoffs, and system dependencies unique to your operational function",
-      "Gap analysis comparing current tooling and data quality against what the function needs to operate at scale",
-      "Stakeholder interviews with operational leads, front-line staff, and system owners to surface friction that metrics alone miss",
-      "Prioritised improvement roadmap with effort estimates, dependency sequencing, and risk flags for each recommendation",
+      "A domain-specific map of every bottleneck in your operational function -- work order flow, matter lifecycle, inspection cycle, or equivalent -- showing exactly which manual steps and approval delays cost the most throughput and compliance exposure, so you know precisely what to fix first",
+      "Bottleneck scoring identifying where throughput is constrained by manual steps, approval delays, or system gaps in your specific function",
+      "Tech debt identification across the tools and workarounds your team has built up over time, ranked by operational and compliance risk",
+      "Risk exposure assessment flagging the gaps most likely to cause audit failure, safety incidents, or regulatory non-compliance in your domain",
     ],
     timelineMilestones: [
-      "Days 1-2: Stakeholder interviews, process walkthroughs, and system review",
-      "Days 3-4: Gap scoring, dependency mapping, and roadmap drafting",
-      "Day 5: Findings playback and prioritised roadmap handover",
+      "Days 1-2: Stakeholder interviews with operational leads and front-line staff, process walkthroughs, and system and tooling review",
+      "Days 3-4: Bottleneck scoring, tech debt mapping, risk exposure assessment, and improvement roadmap drafting",
+      "Day 5: Findings playback with the DigitalQatalyst team and prioritised roadmap handover",
     ],
     deliverables: [
       {
         title: "Operational Function Assessment Report",
         description:
-          "Documented review of your specialist function covering process maturity, tooling fit, data quality, and the specific gaps limiting performance.",
+          "Documented review of your specialist function covering workflow maturity, tooling fit, bottleneck locations, and the specific gaps limiting throughput and control.",
       },
       {
-        title: "Gap and Risk Register",
+        title: "Bottleneck and Tech Debt Register",
         description:
-          "Every identified gap scored by operational impact and remediation effort, with risk flags for gaps that carry compliance or safety implications.",
+          "Every identified constraint and workaround scored by operational impact and remediation effort, with risk flags for gaps carrying compliance or safety implications.",
       },
       {
         title: "Prioritised Improvement Roadmap",
         description:
-          "Sequenced recommendations with effort estimates and ownership suggestions your operational and IT leads can plan against.",
+          "Sequenced recommendations with effort estimates, dependency mapping, and ownership suggestions your operational and IT leads can plan against immediately.",
       },
       {
         title: "Executive Briefing",
         description:
-          "A concise summary of findings and recommended first investments for your business unit and technology leadership.",
+          "A concise summary of findings, risk exposures, and recommended first investments formatted for your business unit and technology leadership.",
       },
     ],
     packageHighlights: [
-      "Fixed-scope, no-obligation assessment adapted to your specific operational domain",
+      "Fixed scope covering your specific operational function -- no assumptions about what your domain looks like until we have mapped your workflows",
       "Interview-led methodology captures operational reality, not just what systems report",
       "Findings playback with the DigitalQatalyst team included",
     ],
@@ -997,45 +997,45 @@ export const operations1Copy: CollectionCopyOverrides = {
 
   74: {
     description:
-      "A four-week design engagement that translates your specialist operational goals into user-centred workflows, system configurations, and integration specifications tailored to the particular demands of your domain function.",
+      "Your assessment identified the highest-priority problems. Now you need a blueprint that actually fixes them -- process redesigns your operational staff will recognise, system configurations your delivery team can build, and integration specifications that close the gaps between your operational platform and the ERP, scheduling, and reporting tools it needs to talk to. This four-week design engagement produces that blueprint, built for your specific domain.",
     positioning:
-      "Design operational workflows built for your specific domain, not adapted from a generic template that does not fit how your function works.",
+      "Get build-ready process redesigns and system specifications that solve the problems your assessment identified, not a generic operating model document.",
     features: [
-      "Role-specific user journey mapping that reflects the actual tasks, exceptions, and decision points of your operational staff",
-      "Workflow design for domain-specific processes: work order management, quality inspection, case handling, or equivalent function-specific flows",
-      "System configuration specification for your operational platform, covering data models, screen layouts, and automation rules",
-      "Integration design connecting your operational system to ERP, scheduling, reporting, and communication tools your function depends on",
+      "Process redesign for your highest-priority gaps: work order management, matter lifecycle, inspection workflow, or the specific flows where your function is losing the most time",
+      "System configuration specification covering the data model, screen layouts, automation rules, and approval logic your operational platform needs to support the redesigned processes",
+      "Integration design producing API contracts and data transformation rules for the connections between your operational system, ERP, scheduling, and reporting tools",
+      "Adoption and change plan specifying the training, communication, and cut-over activities your team needs to shift to the new workflows without disrupting live operations",
     ],
     timelineMilestones: [
-      "Week 1: Domain discovery workshops, user research, and current-state mapping",
-      "Week 2: To-be workflow design and system configuration scoping",
-      "Week 3: Integration architecture, data model, and configuration specification",
-      "Week 4: Design review, stakeholder sign-off, and build-ready handover",
+      "Week 1: Domain discovery workshops with front-line staff and operational leads, current-state mapping, and problem prioritisation",
+      "Week 2: To-be process redesign for the highest-priority workflows, validated with operational stakeholders",
+      "Week 3: System configuration specification, integration architecture, and data model design",
+      "Week 4: Design review, stakeholder sign-off, and build-ready handover pack",
     ],
     deliverables: [
       {
-        title: "Domain-Specific User Journey Maps",
+        title: "Redesigned Process Maps",
         description:
-          "Workflow diagrams for each key operational task, showing role, system, data, and decision at every step, with exceptions and escalations mapped.",
+          "To-be workflow diagrams for each priority area, showing role, system, data, and decision at every step, with exceptions and escalations mapped and ready for build.",
       },
       {
         title: "System Configuration Specification",
         description:
-          "Detailed build instructions for your operational platform covering objects, fields, screens, rules, and automation triggers.",
+          "Detailed build instructions for your operational platform covering objects, fields, screens, rules, and automation triggers, formatted for your delivery team.",
       },
       {
         title: "Integration Architecture Document",
         description:
-          "Design for connections between your operational system and ERP, scheduling, and reporting tools, with API contracts and data transformation rules.",
+          "API contracts, data transformation rules, and connection design for each integration between your operational system and the platforms it depends on.",
       },
       {
-        title: "Adoption and Training Plan",
+        title: "Adoption and Change Plan",
         description:
-          "Outline of the change management, training, and communication activities needed to shift your operational staff to the redesigned workflows.",
+          "Training outline, communication timeline, and cut-over guidance for the operational staff and managers affected by the redesigned workflows.",
       },
     ],
     packageHighlights: [
-      "Domain-specific design: workflows are built around how your function operates, not a generic process template",
+      "Process redesigns validated with front-line operational staff, not just management requirements",
       "Integration architecture included so downstream systems are part of the design, not an afterthought",
       "Build-ready specifications handed over at end of week four",
     ],
@@ -1072,7 +1072,7 @@ export const operations1Copy: CollectionCopyOverrides = {
 
   75: {
     description:
-      "A four-week AI design engagement that identifies where AI can augment your specialist operational workflows, from predictive scheduling and anomaly detection to AI-assisted decision support, with feasibility validation and responsible design specifications for each use case.",
+      "Identify where AI can genuinely improve your facilities management, field service, quality, or other specialist operational workflows, from predictive scheduling and anomaly detection to AI-assisted decision support, with feasibility validation and responsible design specifications for each use case.",
     positioning:
       "Identify where AI genuinely improves specialist operational performance, and design it responsibly before investing in build.",
     features: [
@@ -1147,7 +1147,7 @@ export const operations1Copy: CollectionCopyOverrides = {
 
   76: {
     description:
-      "A twelve-week implementation that configures, integrates, tests, and launches the operational system capabilities your specialist function needs, with structured knowledge transfer and handover documentation so your team can manage the environment independently.",
+      "Get your specialist operational system, whether for field service, facilities management, quality management, or case handling, configured, integrated, tested, and live in twelve weeks, with week-by-week knowledge transfer and handover documentation so your team can manage the environment independently.",
     positioning:
       "Get your specialist operational system configured, connected, and live, with the training and documentation to own it after handover.",
     features: [
@@ -1222,7 +1222,7 @@ export const operations1Copy: CollectionCopyOverrides = {
 
   77: {
     description:
-      "A twelve-week engagement that puts AI capabilities into your specialist operational environment, including predictive models, intelligent routing, and anomaly detection, with governance controls and performance monitoring active from the pilot phase.",
+      "Deploy AI into your specialist operational environment, whether field service, facilities management, quality, or logistics, including predictive models, intelligent routing, and anomaly detection, with governance controls and performance monitoring active from the pilot phase.",
     positioning:
       "Deploy AI into your specialist operational workflows with the governance, accuracy monitoring, and staff enablement your domain requires.",
     features: [
@@ -1375,46 +1375,46 @@ export const operations1Copy: CollectionCopyOverrides = {
 
   79: {
     description:
-      "A one-week assessment of how your enterprise operational model, including planning, coordination, and execution visibility, performs across functions, returning a prioritised roadmap to close the gaps that slow decision-making and limit cross-functional execution.",
+      "Your quarterly planning cycle finishes two weeks late. Cross-functional projects stall in approval queues nobody owns. Performance reporting takes a fortnight to produce and is already out of date by the time it reaches the COO. These are not technology problems -- they are coordination failures baked into how your enterprise operates. This one-week assessment maps those failures, names where decision rights are ambiguous, and tells you what to fix first.",
     positioning:
-      "Get a clear, evidence-based view of where your enterprise operating model is losing coordination and execution speed.",
+      "Get a COO-ready view of the coordination failures slowing your enterprise down, and a sequenced plan for fixing them.",
     features: [
-      "Enterprise operating model review covering planning cadences, cross-functional handoffs, performance visibility, and decision rights",
-      "Technology assessment of operational platforms: ERP, operational dashboards, and the data flows connecting them",
-      "Stakeholder interviews across COO, finance, operations, and IT to surface coordination failures that system data does not capture",
-      "Prioritised improvement roadmap with sequenced recommendations, effort estimates, and dependency mapping",
+      "A scored gap view of your enterprise coordination failures -- decision rights, handoffs, planning cadence, and performance visibility -- so your COO and leadership team can see exactly which gaps slow execution the most and where to intervene first",
+      "Cross-functional handoff audit tracing where projects stall and approvals queue, with the root cause identified for each failure point",
+      "Planning cycle diagnostic measuring where your quarterly and monthly cycles lose time, from kickoff to sign-off, and why",
+      "Performance visibility gap report documenting where your reporting data is late, incomplete, or inconsistent and what it is costing leadership in decision latency",
     ],
     timelineMilestones: [
-      "Days 1-2: Leadership interviews, operating model documentation review, and system landscape mapping",
-      "Days 3-4: Gap analysis, dependency mapping, and roadmap drafting",
+      "Days 1-2: Leadership interviews with COO, Chief of Staff, and function heads, operating model documentation review, and system landscape mapping",
+      "Days 3-4: Coordination failure analysis, decision rights mapping, and improvement roadmap drafting",
       "Day 5: Findings playback and prioritised roadmap handover to leadership",
     ],
     deliverables: [
       {
         title: "Enterprise Operating Model Assessment",
         description:
-          "Documented review of planning, coordination, visibility, and decision-rights across your enterprise functions, with maturity scores and identified gaps.",
+          "Documented review of planning cadences, cross-functional handoffs, decision rights, and performance visibility across your enterprise functions, with identified failures and their business impact.",
       },
       {
-        title: "Technology and Data Landscape Map",
+        title: "Decision Rights and Coordination Gap Register",
         description:
-          "Inventory of operational platforms, data flows, and integration points with a gap analysis against what the enterprise needs for real-time operational visibility.",
+          "Every identified coordination failure and ambiguous decision right scored by impact on execution speed, with recommended ownership and resolution approach.",
       },
       {
         title: "Prioritised Improvement Roadmap",
         description:
-          "Sequenced recommendations covering operating model design, technology, and data, with effort estimates and ownership assignments your leadership can act on.",
+          "Sequenced recommendations covering operating model design, technology, and data, with effort estimates and ownership assignments your COO can act on.",
       },
       {
         title: "Executive Briefing Pack",
         description:
-          "A concise summary of findings, top risks, and recommended first investments formatted for COO and board-level review.",
+          "A concise summary of findings, top coordination risks, and recommended first investments formatted for COO and board-level review.",
       },
     ],
     packageHighlights: [
-      "Covers operating model design, technology, and data in one integrated assessment",
+      "Delivered within one week without disrupting active planning cycles -- interviews and documentation review only, no operational access required",
       "Interview-led methodology captures coordination failures that system metrics miss",
-      "Fixed-scope, no-obligation assessment completed within one week",
+      "Covers operating model design, technology, and data in one integrated assessment",
     ],
     faqIntro: "Questions about the Enterprise Operations assessment.",
     faqs: [
@@ -1449,47 +1449,47 @@ export const operations1Copy: CollectionCopyOverrides = {
 
   80: {
     description:
-      "A four-week design engagement that translates your enterprise operational goals into redesigned processes, platform configurations, and integration specifications that improve coordination, visibility, and execution discipline across your business functions.",
+      "Your assessment named the coordination failures. Now you need something the COO can bring to the business: redesigned processes that close the planning cycle gaps, a governance framework that resolves the decision rights disputes, and a decision authority matrix that tells each function what they own. This four-week design engagement produces those outputs -- changes your organisation can actually implement, not a slide deck about operating model theory.",
     positioning:
-      "Design the operating model and technology changes that will actually improve how your enterprise coordinates and executes.",
+      "Get the process redesigns, governance frameworks, and decision authority structures your COO needs to bring operating model change to the business.",
     features: [
-      "Cross-functional process redesign covering planning, performance review, escalation, and operational reporting workflows",
-      "Operational data model design defining the metrics, data sources, and refresh cadences your enterprise dashboard needs",
-      "Platform configuration specification for your ERP or operational management system, covering the changes needed to support the redesigned processes",
-      "Change management and communication plan for the operating model changes affecting leadership and operational teams",
+      "Cross-functional process redesigns for your highest-priority coordination failures -- planning cycle, performance review, escalation, and cross-functional project handoff",
+      "Governance framework specifying how decisions are made, escalated, and recorded across enterprise functions, with accountabilities assigned to roles not individuals",
+      "Decision authority matrix defining what each function owns, what requires cross-functional sign-off, and what escalates to the COO -- in a format usable in practice",
+      "Platform configuration specification for the ERP or operational management changes needed to support the redesigned processes, formatted for your delivery team",
     ],
     timelineMilestones: [
-      "Week 1: Operating model workshops, stakeholder alignment, and current-state process mapping",
-      "Week 2: To-be process and data model design with cross-functional stakeholders",
-      "Week 3: Platform configuration specification and integration architecture",
-      "Week 4: Design review, leadership sign-off, and build-ready handover",
+      "Week 1: Operating model workshops with COO and function heads, stakeholder alignment, and current-state process mapping",
+      "Week 2: To-be process redesign and governance framework development with cross-functional stakeholders",
+      "Week 3: Decision authority matrix, platform configuration specification, and integration architecture",
+      "Week 4: Design review, leadership sign-off, and build-ready handover pack",
     ],
     deliverables: [
       {
         title: "Redesigned Cross-Functional Process Maps",
         description:
-          "Detailed to-be workflows for planning, performance review, escalation, and operational reporting, with roles, decision rights, and data flows documented.",
+          "Detailed to-be workflows for planning, performance review, escalation, and operational reporting, with roles, decision rights, and data flows documented for each.",
       },
       {
-        title: "Operational Data Model",
+        title: "Governance Framework",
         description:
-          "Definition of the metrics, data sources, refresh cadences, and ownership rules that underpin your target enterprise operational dashboard.",
+          "Operating model governance structure specifying decision-making forums, cadences, accountabilities, and escalation paths across enterprise functions.",
+      },
+      {
+        title: "Decision Authority Matrix",
+        description:
+          "Role-level specification of what each function can decide independently, what requires cross-functional consensus, and what escalates to executive leadership.",
       },
       {
         title: "Platform Configuration Specification",
         description:
-          "Build instructions for ERP or operational platform changes required to support the redesigned processes, formatted for your delivery team.",
-      },
-      {
-        title: "Change and Communication Plan",
-        description:
-          "Stakeholder map, impact assessment, and communication timeline for the operating model changes, including guidance for engaging the leadership population.",
+          "Build instructions for ERP or operational platform changes required to support the redesigned processes, with data model updates and integration requirements included.",
       },
     ],
     packageHighlights: [
       "Operating model design and technology specification developed together, not in isolation",
       "Cross-functional stakeholders involved in design to prevent implementation conflict later",
-      "Change plan included so the human side of the transformation is designed alongside the technology",
+      "Governance framework and decision authority matrix included so the COO has something concrete to socialise with the business",
     ],
     faqIntro: "Questions about the Enterprise Operations design engagement.",
     faqs: [
@@ -1524,7 +1524,7 @@ export const operations1Copy: CollectionCopyOverrides = {
 
   81: {
     description:
-      "A four-week AI design engagement that identifies where AI can improve enterprise operational decision-making, including demand forecasting, resource optimisation, and operational risk detection, with responsible design and governance specifications for each validated use case.",
+      "Design AI capabilities that improve enterprise operational decisions, not just automate them, covering demand forecasting, resource optimisation, and operational risk detection, with responsible design and governance specifications for each validated use case.",
     positioning:
       "Design AI capabilities that improve enterprise operational decisions, not just automate them.",
     features: [
@@ -1599,47 +1599,47 @@ export const operations1Copy: CollectionCopyOverrides = {
 
   82: {
     description:
-      "A twelve-week programme that configures, integrates, tests, and launches the enterprise operational capabilities needed to improve cross-functional coordination, planning visibility, and execution discipline across your business.",
+      "Large operating model change programmes fail for predictable reasons: adoption collapses when the new processes conflict with how people actually work, political resistance kills cross-functional changes that no single function owns, and the new governance structures do not stick without active reinforcement. This twelve-week deployment programme embeds change adoption directly into delivery -- with cross-functional programme management, per-function sign-off at each phase, and a change champion network that keeps adoption from sliding once the DigitalQatalyst team hands over.",
     positioning:
-      "Implement the enterprise operational technology changes that deliver coordination, visibility, and execution improvements your leadership can measure.",
+      "Deploy operating model changes that stick -- with adoption built into delivery, not bolted on at the end.",
     features: [
-      "ERP and operational platform configuration aligned to approved process designs, covering planning, performance, and operational reporting modules",
-      "Cross-system integration development connecting ERP, data warehouse, and operational dashboards so decision-makers see a consistent view",
-      "Enterprise change and adoption programme with stakeholder communications, manager briefings, and end-user training across affected functions",
-      "Go-live control framework including rollback procedures, hypercare support, and a post-launch performance baseline",
+      "Stakeholder alignment sessions at each programme phase, ensuring cross-functional sign-off before changes go live in any function",
+      "Phased rollout with per-function adoption checkpoints so problems surface and are resolved before the next phase starts",
+      "Change champion network established within the business to sustain adoption and resolve resistance at the operational level",
+      "Post-go-live adoption tracking covering process adherence, decision rights usage, and governance forum participation for the first 30 days",
     ],
     timelineMilestones: [
-      "Weeks 1-2: Environment setup, data migration scoping, and sprint planning with cross-functional leads",
-      "Weeks 3-8: Platform configuration, integration builds, and iterative review with business stakeholders",
-      "Weeks 9-10: User acceptance testing across affected functions and defect resolution",
-      "Weeks 11-12: Controlled go-live, hypercare support, and performance baseline capture",
+      "Weeks 1-2: Environment setup, change champion identification, and sprint planning with cross-functional leads",
+      "Weeks 3-8: Platform configuration, integration builds, and phased stakeholder review with per-function adoption checkpoints",
+      "Weeks 9-10: User acceptance testing across affected functions, adoption readiness assessment, and defect resolution",
+      "Weeks 11-12: Controlled go-live, hypercare support, change champion handover, and 30-day adoption baseline capture",
     ],
     deliverables: [
       {
         title: "Configured Enterprise Operational Platform",
         description:
-          "ERP and operational system modules live in production, configured to the approved specification and accepted by cross-functional business owners.",
+          "ERP and operational system modules live in production, configured to the approved specification and accepted by cross-functional business owners at each phase gate.",
       },
       {
         title: "Integrated Operational Data Flows",
         description:
-          "Tested and documented connections between ERP, data warehouse, and operational dashboards, delivering a consistent enterprise view of performance.",
+          "Tested and documented connections between ERP, data warehouse, and operational dashboards, delivering a consistent enterprise view of performance for decision-makers.",
       },
       {
-        title: "User Acceptance Test Evidence",
+        title: "Change Champion Network and Adoption Materials",
         description:
-          "Executed test scripts covering cross-functional operational scenarios, with defect log, resolution record, and business sign-off documentation.",
+          "Trained change champions within each function, with role-specific adoption guides, FAQs, and escalation paths for the post-go-live period.",
       },
       {
-        title: "Post-Launch Performance Baseline",
+        title: "Post-Launch Adoption and Performance Baseline",
         description:
-          "Measurement of planning cycle time, reporting accuracy, and operational visibility metrics taken at go-live to establish the improvement baseline.",
+          "30-day measurement of process adherence, governance forum participation, and operational visibility metrics to evidence adoption and establish the improvement baseline.",
       },
     ],
     packageHighlights: [
-      "Cross-functional change programme included, not just technical configuration",
-      "Go-live control framework with rollback procedures reduces risk during launch",
-      "Post-launch baseline captured so business benefit can be measured",
+      "Change adoption embedded in every phase of delivery, not addressed only at launch",
+      "Per-function stakeholder sign-off at each phase gate prevents the political resistance that derails enterprise change programmes",
+      "Post-go-live adoption tracking included so the business can see whether the new operating model is actually taking hold",
     ],
     faqIntro: "Questions about the Enterprise Operations deployment engagement.",
     faqs: [
@@ -1674,7 +1674,7 @@ export const operations1Copy: CollectionCopyOverrides = {
 
   83: {
     description:
-      "A twelve-week engagement that deploys AI decision-support capabilities into your enterprise operational environment, including demand forecasting models, supply chain risk detection, and operational anomaly alerting, with governance controls and executive visibility built in from day one.",
+      "Put AI-driven decision support into your enterprise operational workflows, including demand forecasting models, supply chain risk detection, and operational anomaly alerting, with governance controls and executive visibility built in from day one of a twelve-week deployment.",
     positioning:
       "Put AI-driven decision support into your enterprise operational workflows, with the governance and accuracy monitoring that enterprise risk requires.",
     features: [
@@ -1827,7 +1827,7 @@ export const operations1Copy: CollectionCopyOverrides = {
 
   91: {
     description:
-      "A one-week assessment of your ERP environment that maps process coverage gaps, data inconsistencies, and integration weaknesses across finance, procurement, and HR, returning a prioritised remediation roadmap your finance and operations leaders can act on.",
+      "Understand exactly where your ERP is creating manual workarounds, data quality problems, and integration failures across finance, procurement, and HR, then get a prioritised remediation roadmap your leaders can act on, all within one week.",
     positioning:
       "Understand exactly where your ERP is creating manual workarounds and data quality issues, and get a sequenced plan to fix them.",
     features: [
@@ -1864,7 +1864,7 @@ export const operations1Copy: CollectionCopyOverrides = {
       },
     ],
     packageHighlights: [
-      "Fixed-scope, no-obligation assessment completed within one week",
+      "Fixed scope covering your agreed ERP modules -- no unbounded discovery and no access required beyond read-only system review",
       "Finance, procurement, and HR modules assessed in an integrated review, not separately",
       "Data risk flags included so finance leaders understand where ERP gaps create reporting exposure",
     ],
@@ -1873,7 +1873,7 @@ export const operations1Copy: CollectionCopyOverrides = {
       {
         question: "Which ERP platforms does the assessment cover?",
         answer:
-          "SAP, Oracle, Microsoft Dynamics 365, and Sage are the most common. The DigitalQatalyst team confirms platform compatibility during the scoping call.",
+          "SAP, Oracle, Microsoft Dynamics 365, and Sage are the primary platforms covered. If your environment runs a different ERP, confirm with the DigitalQatalyst team during scoping -- most mid-market platforms can be assessed using the same methodology.",
       },
       {
         question: "Can you assess an ERP that is heavily customised?",
@@ -1901,7 +1901,7 @@ export const operations1Copy: CollectionCopyOverrides = {
 
   92: {
     description:
-      "A four-week design engagement that translates your ERP improvement priorities into redesigned process flows, data model specifications, and configuration blueprints your implementation team can build against, covering finance, procurement, and HR modules.",
+      "Design your ERP improvements properly before configuration begins: redesigned process flows, data model specifications, and configuration blueprints your implementation team can build against, covering finance, procurement, and HR modules, across a four-week engagement.",
     positioning:
       "Design your ERP improvements properly before configuration begins: fewer change requests, fewer reconciliation failures, and a system that reflects how your business actually runs.",
     features: [
@@ -1976,7 +1976,7 @@ export const operations1Copy: CollectionCopyOverrides = {
 
   93: {
     description:
-      "A four-week AI design engagement that identifies where AI can improve ERP-driven decision-making, from automated invoice matching and cash flow forecasting to procurement risk detection, with responsible design and governance specifications for each validated use case.",
+      "Make your ERP data work harder for finance, procurement, and HR decision-makers by identifying where AI can improve ERP-driven decisions, from automated invoice matching and cash flow forecasting to procurement risk detection, with responsible design and governance specifications for each validated use case.",
     positioning:
       "Design the AI capabilities that make your ERP data work harder for finance, procurement, and HR decision-makers.",
     features: [
@@ -2051,7 +2051,7 @@ export const operations1Copy: CollectionCopyOverrides = {
 
   94: {
     description:
-      "A twelve-week ERP implementation that configures, integrates, tests, and launches the module improvements and data corrections identified in your design phase, with structured data migration, business user testing, and handover to your finance and IT teams.",
+      "Get your ERP modules correctly configured, your data migrated cleanly, and your finance and procurement teams live on improved processes, with structured data migration, business user testing, and handover to your finance and IT teams, all within twelve weeks.",
     positioning:
       "Get your ERP configured correctly, your data migrated cleanly, and your finance and procurement teams live on improved processes within twelve weeks.",
     features: [
@@ -2126,7 +2126,7 @@ export const operations1Copy: CollectionCopyOverrides = {
 
   95: {
     description:
-      "A twelve-week engagement that deploys AI capabilities into your ERP environment, including automated invoice processing, cash flow forecasting, and spend anomaly detection, with finance-grade audit controls and monitoring active from the pilot phase.",
+      "Deploy AI into your ERP environment with the audit trail, control framework, and accuracy monitoring your finance function requires, covering automated invoice processing, cash flow forecasting, and spend anomaly detection, active from the pilot phase.",
     positioning:
       "Deploy AI into your ERP with the audit trail, control framework, and accuracy monitoring your finance function requires.",
     features: [

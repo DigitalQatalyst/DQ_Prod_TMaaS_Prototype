@@ -14,11 +14,11 @@ export const aiCopy: CollectionCopyOverrides = {
 
   103: {
     description:
-      "A structured week-long assessment of your data platform architecture, governance controls, and pipeline health, returning a scored maturity view and a prioritised roadmap your CDO and engineering leads can act on immediately.",
+      "Pinpoint the architecture weaknesses, governance gaps, and pipeline failures holding your data platform back from becoming a trusted enterprise asset, and leave with a scored maturity view and prioritised roadmap your CDO and engineering leads can act on immediately.",
     positioning:
       "Pinpoint the data quality, governance, and architecture gaps blocking your platform from becoming a trusted enterprise asset.",
     features: [
-      "Maturity scoring across ingestion, storage, governance, and consumption layers",
+      "A domain-by-domain scorecard showing exactly which gaps in ingestion, storage, governance, and consumption are undermining data trust, so investment targets the root causes rather than the symptoms",
       "Data quality and lineage gap identification with root-cause mapping",
       "Prioritised remediation roadmap ranked by business impact and implementation effort",
       "Stakeholder-ready findings pack including an executive summary and a technical annexe",
@@ -94,11 +94,11 @@ export const aiCopy: CollectionCopyOverrides = {
 
   104: {
     description:
-      "A four-week design engagement that turns your enterprise data platform goals into an architecture blueprint, data model specifications, and a governance framework your engineering teams can build against with confidence.",
+      "Turn your enterprise data platform goals into an architecture blueprint, data model specifications, and a governance framework your engineering teams can build against with confidence.",
     positioning:
       "Go from data platform ambition to build-ready specifications: architecture, contracts, governance, and an adoption plan in one engagement.",
     features: [
-      "Target-state platform architecture covering ingestion, processing, storage, and serving layers",
+      "A build-ready architecture blueprint your engineering teams can act on immediately, with every layer -- ingestion, processing, storage, and serving -- specified so delivery starts without rework or ambiguity",
       "Canonical data model and domain ownership definitions aligned to your business domains",
       "Governance framework including lineage, cataloguing, access control, and data quality contracts",
       "Phased build plan with team assignments, milestones, and dependency sequencing",
@@ -175,11 +175,11 @@ export const aiCopy: CollectionCopyOverrides = {
 
   105: {
     description:
-      "A four-week AI design engagement that identifies the highest-value AI use cases for your data platform, validates their feasibility, and produces responsible workflow designs and deployment-ready specifications before any build begins.",
+      "Identify the highest-value AI use cases your data platform can reliably support, validate their feasibility, and leave with responsible workflow designs and deployment-ready specifications before any build investment is committed.",
     positioning:
       "Validate which AI capabilities your data platform can reliably support, and leave with responsible workflow designs your team can build without reinventing guardrails.",
     features: [
-      "AI use-case prioritisation scored against data readiness, technical feasibility, and business value",
+      "A ranked shortlist of AI use cases your data platform can reliably support, each scored against data readiness, feasibility, and business value, so build investment goes only to capabilities with a clear path to production",
       "Responsible AI workflow design covering bias checks, explainability requirements, and human-in-the-loop controls",
       "Data readiness assessment identifying the gaps that must close before each use case can train or run reliably",
       "Deployment-ready specifications including model requirements, feature pipelines, and monitoring design",
@@ -251,14 +251,14 @@ export const aiCopy: CollectionCopyOverrides = {
 
   106: {
     description:
-      "A twelve-week deployment engagement that configures, integrates, and launches your enterprise data platform with structured quality assurance, full pipeline testing, and a clean handover to your operations and data engineering teams.",
+      "Configure, integrate, and launch your enterprise data platform with sprint-gated quality assurance, full pipeline testing, and a clean handover to your operations and data engineering teams, within a fixed twelve-week programme.",
     positioning:
       "Move from approved architecture to a live, tested data platform, with every pipeline validated, every integration confirmed, and your team ready to operate it.",
     features: [
-      "Environment provisioning and infrastructure configuration aligned to your approved architecture blueprint",
+      "A live, production-ready data platform built to the approved blueprint, with all pipelines running, acceptance criteria met, and your operations team certified before the DigitalQatalyst team steps back",
       "Pipeline build and integration testing covering ingestion, transformation, and serving layers end to end",
       "Data quality validation at each layer with acceptance criteria agreed before launch",
-      "Structured handover including runbooks, on-call guides, and a knowledge transfer programme for your operations team",
+      "Week-by-week knowledge transfer with your operations team certified against runbooks and on-call guides before handover",
     ],
     timelineMilestones: [
       "Weeks 1-3: Environment setup, infrastructure provisioning, and pipeline scaffolding",
@@ -297,7 +297,7 @@ export const aiCopy: CollectionCopyOverrides = {
       "Common questions about the Enterprise Data Platform deployment engagement.",
     faqs: [
       {
-        question: "What does 'structured handover' mean in practice?",
+        question: "What does the knowledge transfer programme involve in practice?",
         answer:
           "Your operations and engineering teams join live sessions covering platform monitoring, pipeline triage, and incident response. They receive runbooks, architecture documentation, and a sign-off checklist before the DigitalQatalyst team steps back.",
       },
@@ -327,14 +327,14 @@ export const aiCopy: CollectionCopyOverrides = {
 
   107: {
     description:
-      "A twelve-week AI deployment engagement that puts your designed AI capabilities into production on the enterprise data platform, with governance controls, drift monitoring, and safety checks built in from the first day of operation.",
+      "Put your designed AI capabilities into production on the enterprise data platform with governance controls, drift monitoring, and safety checks built in from the first day of operation.",
     positioning:
       "Launch AI models on your data platform the right way: governed, monitored, and production-hardened before your business depends on them.",
     features: [
-      "Model deployment to production with version control, rollback capability, and environment isolation",
+      "AI models serving live predictions in production, with version control and rollback confirmed working before any model handles business decisions",
       "Real-time drift and performance monitoring configured to alert before model quality degrades",
       "Governance controls including audit logging, prediction traceability, and access controls on model endpoints",
-      "Structured operational handover with incident playbooks and on-call guidance for your ML engineering team",
+      "Documented handover with incident playbooks and on-call guidance for your ML engineering team, validated before the DigitalQatalyst team steps back",
     ],
     timelineMilestones: [
       "Weeks 1-3: ML infrastructure provisioning, model packaging, and staging environment setup",
@@ -403,11 +403,11 @@ export const aiCopy: CollectionCopyOverrides = {
 
   108: {
     description:
-      "An ongoing managed service that keeps your enterprise data platform running, governed, and improving, with SLA-backed pipeline monitoring, incident response, data quality reporting, and continuous optimisation by the DigitalQatalyst team.",
+      "Keep your enterprise data platform running, governed, and improving every month, with SLA-backed pipeline monitoring, incident response, data quality reporting, and continuous optimisation by the DigitalQatalyst team.",
     positioning:
       "Keep your data platform trusted and performant every month, with proactive monitoring, rapid incident resolution, and a continuous improvement cycle built into the service.",
     features: [
-      "24/7 pipeline health monitoring with defined SLAs for incident detection and resolution",
+      "Continuous pipeline health coverage with defined SLAs, so data failures are caught and resolved before they affect the business decisions or reports that depend on them",
       "Monthly data quality reports covering completeness, accuracy, freshness, and lineage coverage",
       "Capacity and performance optimisation reviews ensuring platform costs and query performance stay within targets",
       "Governance and compliance reporting aligned to your data policies and any applicable regulations",
@@ -482,7 +482,7 @@ export const aiCopy: CollectionCopyOverrides = {
 
   109: {
     description:
-      "A focused one-week assessment of your business intelligence and analytics landscape, surfacing the data, tooling, and governance gaps that limit management visibility and leave key decisions relying on spreadsheets rather than trusted reports.",
+      "Surface the data, tooling, and governance gaps that limit management visibility and leave key decisions relying on spreadsheets rather than trusted reports, and leave with a prioritised plan to close what matters most to your decision-makers.",
     positioning:
       "Find out exactly where your BI and analytics capability falls short, and leave with a prioritised plan to close the gaps that matter most to your decision-makers.",
     features: [
@@ -557,7 +557,7 @@ export const aiCopy: CollectionCopyOverrides = {
 
   110: {
     description:
-      "A four-week design engagement that turns your business intelligence and analytics goals into user-centred dashboard specifications, a semantic layer design, and a governed data model your delivery teams can build against.",
+      "Turn your business intelligence and analytics goals into user-centred dashboard specifications, a semantic layer design, and a governed data model your delivery teams can build against, with metrics agreed and signed off before a single report is built.",
     positioning:
       "Design the BI and analytics environment your decision-makers actually need: agreed metrics, clean data models, and dashboards specified before a single report is built.",
     features: [
@@ -633,7 +633,7 @@ export const aiCopy: CollectionCopyOverrides = {
 
   111: {
     description:
-      "A four-week AI design engagement that identifies where machine learning and AI-driven insights can augment your business intelligence and analytics capability, and produces responsible workflow designs and deployment-ready specifications for each validated use case.",
+      "Identify where machine learning and AI-driven insights can augment your business intelligence and analytics capability, validate each use case against your actual data, and leave with responsible workflow designs and deployment-ready specifications ready for engineering.",
     positioning:
       "Design AI-augmented analytics your organisation can trust: use cases validated against your data, workflows designed responsibly, specifications ready to build.",
     features: [
@@ -709,7 +709,7 @@ export const aiCopy: CollectionCopyOverrides = {
 
   112: {
     description:
-      "A twelve-week deployment that builds, connects, and launches your agreed BI and analytics environment, from data pipeline integration and semantic layer implementation to certified dashboards and a trained self-service user community.",
+      "Build, connect, and launch your agreed BI and analytics environment, from data pipeline integration and semantic layer implementation to certified dashboards and a trained self-service user community, within a milestone-gated twelve-week programme.",
     positioning:
       "Get your BI and analytics environment live: data connected, metrics consistent, dashboards certified, and your users confident before the engagement ends.",
     features: [
@@ -785,7 +785,7 @@ export const aiCopy: CollectionCopyOverrides = {
 
   113: {
     description:
-      "A twelve-week AI deployment that puts validated forecasting, anomaly detection, and AI-driven insight capabilities into production within your BI and analytics environment, with governance controls and monitoring configured from the first day of operation.",
+      "Put validated forecasting, anomaly detection, and AI-driven insight capabilities into production within your BI and analytics environment, with governance controls and monitoring configured from the first day of operation.",
     positioning:
       "Launch AI-powered analytics in production: models governed, outputs integrated into your existing dashboards, and your analytics team trained to act on what the AI surfaces.",
     features: [
@@ -861,7 +861,7 @@ export const aiCopy: CollectionCopyOverrides = {
 
   114: {
     description:
-      "An ongoing managed service that keeps your business intelligence and analytics environment accurate, performant, and current, with SLA-backed monitoring, monthly quality reporting, and a continuous improvement cycle managed by the DigitalQatalyst team.",
+      "Keep your business intelligence and analytics environment accurate, performant, and current every month, with SLA-backed monitoring, monthly quality reporting, and a continuous improvement cycle managed by the DigitalQatalyst team.",
     positioning:
       "Maintain a BI and analytics environment your decision-makers can rely on every month, with proactive quality checks, rapid incident resolution, and regular optimisation reviews.",
     features: [
@@ -940,7 +940,7 @@ export const aiCopy: CollectionCopyOverrides = {
 
   115: {
     description:
-      "A one-week structured assessment of your organisation's AI and automation readiness, identifying the highest-value use cases, the data and infrastructure gaps blocking adoption, and the governance controls required before your first production AI capability goes live.",
+      "Identify the highest-value AI and automation opportunities in your organisation, uncover the data and infrastructure gaps blocking adoption, and leave with a prioritised roadmap and the governance requirements your first production capability will need.",
     positioning:
       "Find out where AI and automation will create the most value for your organisation, what is blocking you today, and what needs to happen before you build.",
     features: [
@@ -1015,7 +1015,7 @@ export const aiCopy: CollectionCopyOverrides = {
 
   116: {
     description:
-      "A four-week design engagement that turns your validated AI and automation use cases into user-centred workflow designs, integration specifications, and a governed deployment blueprint your engineering teams can build against.",
+      "Turn your validated AI and automation use cases into user-centred workflow designs, integration specifications, and a governed deployment blueprint your engineering teams can build against, with governance and override controls designed in from the outset.",
     positioning:
       "Translate AI and automation ambitions into build-ready specifications: workflows designed, integrations mapped, governance controls specified, and adoption planned before a line of code is written.",
     features: [
@@ -1091,7 +1091,7 @@ export const aiCopy: CollectionCopyOverrides = {
 
   117: {
     description:
-      "A four-week AI design engagement that validates your enterprise AI and automation use cases, defines responsible workflow designs with governance controls built in, and produces deployment-ready specifications your engineering team can build against without ambiguity.",
+      "Validate your enterprise AI and automation use cases against data readiness, responsible AI requirements, and sector-specific compliance obligations, and leave with deployment-ready specifications your engineering team can build against without ambiguity.",
     positioning:
       "Design enterprise AI capabilities that are viable, responsible, and buildable: each use case validated, each workflow governed, each specification ready for engineering.",
     features: [
@@ -1167,9 +1167,9 @@ export const aiCopy: CollectionCopyOverrides = {
 
   118: {
     description:
-      "A twelve-week deployment that configures, integrates, and launches your enterprise AI and automation capabilities into production, with structured testing, quality assurance, change management, and a clean operational handover to your teams.",
+      "Configure, integrate, and launch your enterprise AI and automation capabilities into production with sprint-gated testing, quality assurance, change management, and a clean operational handover to your teams, within a twelve-week programme.",
     positioning:
-      "Move from approved AI and automation designs to live production capabilities: integrated, tested, adopted, and handed over within a structured twelve-week programme.",
+      "Move from approved AI and automation designs to live production capabilities: integrated, tested, adopted, and handed over within a milestone-gated twelve-week programme.",
     features: [
       "AI and automation capability configuration and integration with your existing applications, data sources, and process workflows",
       "End-to-end testing covering functional validation, edge cases, and performance under expected production load",
@@ -1243,7 +1243,7 @@ export const aiCopy: CollectionCopyOverrides = {
 
   119: {
     description:
-      "A twelve-week AI deployment that puts your validated enterprise AI capabilities into production with full governance controls, real-time monitoring, safety checks, and a structured operational handover so your teams can manage AI responsibly from day one.",
+      "Put your validated enterprise AI capabilities into production with full governance controls, real-time monitoring, safety checks, and a documented handover with runbooks and team sign-off so your teams can manage AI responsibly from day one.",
     positioning:
       "Launch enterprise AI in production the right way: governed, monitored, auditable, and with your teams fully prepared to operate it before the DigitalQatalyst team steps back.",
     features: [
@@ -1319,7 +1319,7 @@ export const aiCopy: CollectionCopyOverrides = {
 
   120: {
     description:
-      "An ongoing managed service that keeps your enterprise AI and automation capabilities operating reliably and responsibly, with SLA-backed monitoring, monthly performance reporting, model lifecycle management, and a continuous improvement cycle run by the DigitalQatalyst team.",
+      "Keep your enterprise AI and automation capabilities operating reliably and responsibly, with SLA-backed monitoring, monthly performance reporting, model lifecycle management, and a continuous improvement cycle run by the DigitalQatalyst team.",
     positioning:
       "Maintain enterprise AI that your organisation can trust every month: monitored, governed, optimised, and with every model lifecycle event handled before it becomes a problem.",
     features: [

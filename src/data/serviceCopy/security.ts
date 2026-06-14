@@ -61,7 +61,7 @@ export const securityCopy: CollectionCopyOverrides = {
       {
         question: "What access do you need to our systems?",
         answer:
-          "Primarily documentation and stakeholder interviews. Any system access is read-only, scoped to evidence gathering, and agreed in writing before the engagement begins.",
+          "The assessment runs on documentation, policy evidence, and stakeholder interviews. If read-only access to a specific tool would accelerate evidence collection, we agree the exact scope with your IT security team in advance -- it is never a requirement to proceed.",
       },
       {
         question: "How quickly will we see results?",
@@ -249,13 +249,13 @@ export const securityCopy: CollectionCopyOverrides = {
 
   88: {
     description:
-      "Configure, integrate, test, and launch your GRC capability across the agreed scope, with structured quality assurance at every stage and a controlled handover that leaves your operations team ready to run.",
+      "Configure, integrate, test, and launch your GRC capability across the agreed scope, with staged testing and signed acceptance criteria at every phase and a controlled handover that leaves your operations team ready to run.",
     positioning:
       "From design to live GRC operations: configured controls, integrated systems, and a tested, handed-over capability.",
     features: [
       "End-to-end configuration of your GRC platform against agreed control requirements and operating model",
       "System integrations connecting risk, compliance, and audit data sources so reporting is automated and accurate",
-      "Structured testing programme covering functional, integration, and user acceptance phases before go-live",
+      "Three-phase testing programme covering functional, integration, and user acceptance before go-live",
       "Controlled launch with runbooks, training, and a hypercare period so operations teams are fully prepared",
     ],
     timelineMilestones: [
@@ -287,7 +287,7 @@ export const securityCopy: CollectionCopyOverrides = {
       },
     ],
     packageHighlights: [
-      "Twelve-week structured delivery with milestones and stakeholder checkpoints",
+      "Twelve-week phased delivery with named milestones and stakeholder checkpoints",
       "Testing evidence pack suitable for internal audit and regulator review",
       "Hypercare period included so operations teams are not left unsupported at go-live",
     ],
@@ -772,7 +772,7 @@ export const securityCopy: CollectionCopyOverrides = {
       },
     ],
     packageHighlights: [
-      "Twelve-week structured delivery with named milestones and governance checkpoints",
+      "Twelve-week phased delivery with named milestones and governance checkpoints",
       "First governance reporting cycle completed before handover closes",
       "Training and runbooks ensure your team operates independently from go-live",
     ],
@@ -809,7 +809,7 @@ export const securityCopy: CollectionCopyOverrides = {
     industryRelevance:
       "Organisations managing complex technology portfolios, multi-vendor environments, or enterprise architecture programmes across any sector",
     businessImpact:
-      "Operationalises technology governance within twelve weeks, replacing ad-hoc decision-making with structured, accountable processes that reduce investment waste and architecture drift.",
+      "Operationalises technology governance within twelve weeks, replacing ad-hoc decision-making with documented, accountable processes that reduce investment waste and architecture drift.",
     tags: ["technology-governance", "portfolio-management", "platform-deployment", "IT-governance"],
   },
 

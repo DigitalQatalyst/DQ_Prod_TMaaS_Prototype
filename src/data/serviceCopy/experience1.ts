@@ -235,9 +235,9 @@ export const experience1Copy: CollectionCopyOverrides = {
 
   4: {
     description:
-      "Bring your website designs to life with a structured build, integration, and launch programme that keeps quality and go-live dates on track, and hands over a fully documented site to your operations team.",
+      "Bring your website designs to life with a phased build, integration, and launch programme that keeps quality and go-live dates on track, and hands over a fully documented site to your operations team.",
     positioning:
-      "Managed web delivery: configured, tested, and launched with structured handover to your team.",
+      "Managed web delivery: configured, tested, and launched with a documented handover to your team.",
     features: [
       "CMS configuration and content migration executed against the agreed specification",
       "Third-party integration setup including analytics, CRM, and marketing tools",
@@ -447,6 +447,11 @@ export const experience1Copy: CollectionCopyOverrides = {
         question: "How are quarterly optimisation priorities set?",
         answer:
           "The DigitalQatalyst team analyses performance data and presents a prioritised list at the start of each quarter. You approve the plan before work begins.",
+      },
+      {
+        question: "What happens if performance drops after go-live?",
+        answer:
+          "The DigitalQatalyst team monitors your website continuously and responds to critical performance incidents within four business hours. Non-critical issues are triaged and resolved in line with the SLA response targets agreed during onboarding.",
       },
       {
         question: "What happens if our website needs a major redesign during the managed contract?",
@@ -1150,7 +1155,7 @@ export const experience1Copy: CollectionCopyOverrides = {
 
   16: {
     description:
-      "Build and launch your mobile app with structured engineering, rigorous QA across iOS and Android, and a documented handover that leaves your team able to manage and evolve the product independently.",
+      "Build and launch your mobile app with sprint-based engineering, rigorous QA across iOS and Android, and a documented handover that leaves your team able to manage and evolve the product independently.",
     positioning:
       "Mobile app delivered: built to specification, tested on real devices, and handed over with full documentation.",
     features: [
@@ -1605,13 +1610,13 @@ export const experience1Copy: CollectionCopyOverrides = {
 
   22: {
     description:
-      "Implement the designed physical channel improvements across your location network with structured rollout management, staff training, and operational handover so every location delivers the new experience from launch day.",
+      "Implement the designed physical channel improvements across your location network with phased rollout management, per-cohort sign-off, staff training, and operational handover so every location delivers the new experience from launch day.",
     positioning:
       "Physical channel improvements deployed: configured, trained, and rolled out across your network.",
     features: [
       "Technology and tooling deployment across agreed locations including configuration and integration testing",
       "Staff training programme delivered in-location and supported by self-service guides for ongoing reference",
-      "Pilot location launch with structured measurement before full network rollout",
+      "Pilot location launch with defined success metrics reviewed before full network rollout",
       "Operations handover covering maintenance procedures, escalation contacts, and SLA documentation",
     ],
     timelineMilestones: [
