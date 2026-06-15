@@ -40,8 +40,8 @@ function StateItem({
     <li
       className={
         isBefore
-          ? "flex h-full gap-4 rounded-xl border border-gray-100 bg-white p-4 shadow-sm"
-          : "flex h-full gap-4 rounded-xl border border-orange-100/80 bg-white p-4 shadow-sm transition-colors hover:border-dq-orange/25"
+          ? "flex gap-4 rounded-xl border border-gray-100 bg-white p-4 shadow-sm"
+          : "flex gap-4 rounded-xl border border-orange-100/80 bg-white p-4 shadow-sm transition-colors hover:border-dq-orange/25"
       }
     >
       <div
@@ -159,12 +159,7 @@ function BeforeAfterComparison({
       </div>
 
       {/* Desktop: row-aligned grid with original column padding */}
-      <div
-        className="relative hidden lg:grid lg:grid-cols-2 lg:gap-y-3"
-        style={{
-          gridTemplateRows: `auto repeat(${before.items.length}, minmax(0, 1fr))`,
-        }}
-      >
+      <div className="relative hidden lg:grid lg:grid-cols-2 lg:items-start lg:gap-y-3">
         <div
           aria-hidden
           className="pointer-events-none absolute inset-0 grid grid-cols-2"
