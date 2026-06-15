@@ -3,6 +3,7 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { useState } from "react";
 import { Toaster } from "sonner";
+import { CatalogProvider } from "@/contexts/CatalogContext";
 
 export function Providers({ children }: { children: React.ReactNode }) {
   const [queryClient] = useState(
@@ -13,12 +14,12 @@ export function Providers({ children }: { children: React.ReactNode }) {
             staleTime: 60 * 1000,
           },
         },
-      })
+      }),
   );
 
   return (
     <QueryClientProvider client={queryClient}>
-      {children}
+      <CatalogProvider>{children}</CatalogProvider>
       <Toaster richColors position="top-right" />
     </QueryClientProvider>
   );
