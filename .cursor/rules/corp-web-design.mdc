@@ -60,7 +60,7 @@ Marketing pages (`/`, `/marketplace`, `/service/:id`) share the **DQ corp web de
 - Marketplace featured carousel: eyebrow `Curated selection`; H2 `Featured services` (not "Top picks")
 - Contact hero: H1 `Tell us what you need. We'll help you get started.`; submit button `Send request`
 - Service detail bottom CTA: `Not sure if this is the right fit?` + **Talk to our team** / **Browse more services**
-- Package card CTAs by stage: Assess **Start here**, Design/Deploy **Get a quote**, Managed **Talk to our team**, Bundle **Request proposal** (`getServicePackageCta` in `contactFormPrefill.ts`)
+- Package card CTAs by stage: Assess and Design **Get started**, Deploy **Get a quote**, Managed **Talk to our team**, Bundle **Request proposal** (`getServicePackageCta` in `contactFormPrefill.ts`)
 - Set `document.title` per page: Marketplace, Contact, and each Service Detail include `TMaaS` and searchable terms
 
 ## Service detail, tab first-heading alignment
@@ -120,6 +120,7 @@ Match `ServiceDetailWhyItMattersTab.tsx` + `whyItMattersContent.ts`:
 - Before / After: single `rounded-2xl` comparison container (`shadow-card`); `lg:grid-cols-2` panels with gradient backgrounds (gray-50 → white / orange-50 → white)
 - Panel badges: pill chips, gray for Before, orange-tinted for After; stacked item cards with icon wells + `01`–`03` mono labels (not a 3-col grid inside each half)
 - Centre transition: orange `ArrowRight` circle on `lg+`; mobile divider row with arrow between panels
+- Desktop paired rows: `display: contents` wrappers so before/after items share a grid row; column padding `p-8` / `px-8`; use default row stretch + `h-full` on item cards so each **pair** matches height at the bottom; **never** use `gridTemplateRows` with `1fr` — that forces every row to the tallest row’s height
 - Copy from `getWhyItMattersContent(service)`, contextualise by `collection`, `serviceType`, and solution name; exact override for `online web presence|advisory`
 
 ## Responsive layout (marketing pages)

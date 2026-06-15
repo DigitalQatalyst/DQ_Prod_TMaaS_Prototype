@@ -11,6 +11,7 @@ alwaysApply: false
 - Reserve `fetchCatalogPage` for integration tests or future server-side pagination when the catalog is too large for client filtering.
 - Show loading only on the initial catalog fetch (`isLoading && !data`), not when filters change.
 - `sortBy: "popular"` must use `sortCatalogByPopularMix()` — stage popularity scores tie across products (all Assess = 100), so a flat sort shows only one type on early pages.
+- Featured carousel (all categories): `FEATURED_SERVICE_VARIANT_IDS` in `src/data/featuredServices.ts` with `popularityRank` / `popularity_score` 110; DBA script `workspace/dba-catalog-copy/update-featured-services.sql`.
 - `fetchCatalogFromSupabase` loads `marketplace_listings_view` then joins variant extras (including `product_content.description` per variant). Never use product-level `short_description` alone for card copy.
 - `enrichCatalogListExtras` runs in the background for tags/features/remix/descriptions when placeholder data is shown first.
 - `useCatalog` must use `placeholderData: getCatalogPlaceholder` so the grid renders immediately (fixture or sessionStorage cache).
