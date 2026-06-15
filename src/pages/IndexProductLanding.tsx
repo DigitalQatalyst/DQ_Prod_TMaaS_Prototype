@@ -9,7 +9,7 @@ import MarketplacePreviewSection from "@/components/site/landing/v2/MarketplaceP
 import WhyTmaasSection from "@/components/site/landing/v2/WhyTmaasSection";
 import HowItWorksSection from "@/components/site/landing/v2/HowItWorksSection";
 import ClientOutcomesSection from "@/components/site/landing/v2/ClientOutcomesSection";
-import DqLineageStatsBand from "@/components/site/landing/v2/DqLineageStatsBand";
+// import DqLineageStatsBand from "@/components/site/landing/v2/DqLineageStatsBand";
 import LandingCtaSection from "@/components/site/landing/v2/LandingCtaSection";
 
 const IndexProductLanding = () => {
@@ -28,7 +28,7 @@ const IndexProductLanding = () => {
         <HowItWorksSection />
         <ClientOutcomesSection />
         <MarketplacePreviewSection />
-        <DqLineageStatsBand />
+        {/* <DqLineageStatsBand /> */}
         <LandingCtaSection />
       </main>
       <Footer />
