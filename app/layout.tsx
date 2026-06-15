@@ -27,10 +27,7 @@ export const metadata: Metadata = {
   title: "TMaaS | Digital Qatalyst",
   description: `${PLATFORM_FULL_NAME} marketplace by Digital Qatalyst.`,
   icons: {
-    icon: [
-      { url: "/favicon.ico", sizes: "any" },
-      { url: "/favicon.svg", type: "image/svg+xml" },
-    ],
+    icon: "/favicon.png",
     apple: "/favicon.png",
   },
   openGraph: {
