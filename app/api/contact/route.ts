@@ -1,6 +1,20 @@
 import { NextRequest, NextResponse } from "next/server";
 import { z } from "zod";
 
+// In-memory rate limiter: 5 submissions per IP per 10 minutes
+const WINDOW_MS = 10 * 60 * 1000;
+const MAX_REQUESTS = 5;
+const ipTimestamps = new Map<string, number[]>();
+
+function isRateLimited(ip: string): boolean {
+  const now = Date.now();
+  const windowStart = now - WINDOW_MS;
+  const timestamps = (ipTimestamps.get(ip) ?? []).filter((t) => t > windowStart);
+  if (timestamps.length >= MAX_REQUESTS) return true;
+  ipTimestamps.set(ip, [...timestamps, now]);
+  return false;
+}
+
 const contactSchema = z.object({
   firstName: z.string().min(1, "First name is required"),
   lastName: z.string().min(1, "Last name is required"),
@@ -18,6 +32,18 @@ const contactSchema = z.object({
 
 export async function POST(request: NextRequest) {
   try {
+    const ip =
+      request.headers.get("x-forwarded-for")?.split(",")[0].trim() ??
+      request.headers.get("x-real-ip") ??
+      "unknown";
+
+    if (isRateLimited(ip)) {
+      return NextResponse.json(
+        { error: "Too many requests. Please try again later." },
+        { status: 429 }
+      );
+    }
+
     const body = (await request.json()) as unknown;
     const validated = contactSchema.safeParse(body);
 
