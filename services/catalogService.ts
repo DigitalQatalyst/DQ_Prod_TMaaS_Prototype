@@ -14,7 +14,7 @@ import type {
 } from "@/lib/types/catalog";
 
 const LISTING_COLUMNS =
-  "listing_id, variant_id, display_title, product_title, variant_name, collection_id, service_type_id, short_description, price_display, duration_display, popularity_score, delivery_complexity, badge, audience, industry_relevance, department, business_impact, implementation_model, positioning, is_high_impact";
+  "listing_id, variant_id, slug, display_title, product_title, variant_name, collection_id, service_type_id, short_description, price_display, duration_display, popularity_score, delivery_complexity, badge, audience, industry_relevance, department, business_impact, implementation_model, positioning, is_high_impact";
 
 type StaticBestSellersCollection =
   | "all"
@@ -61,6 +61,7 @@ async function loadStaticDeployModules(standardName: string): Promise<DeployModu
 type ListingViewRow = {
   listing_id: number;
   variant_id: number;
+  slug: string;
   display_title: string;
   product_title: string;
   variant_name: string;
@@ -357,6 +358,7 @@ function mapRowToServiceProduct(
 
   return {
     id: variantId,
+    slug: row.slug,
     collection: row.collection_id as ServiceProduct["collection"],
     serviceType: row.service_type_id as ServiceProduct["serviceType"],
     standardName: row.display_title,
@@ -541,6 +543,29 @@ export async function fetchServiceById(id: number): Promise<ServiceProduct | und
   }
 }
 
+export async function fetchServiceBySlug(slug: string): Promise<ServiceProduct | undefined> {
+  const supabase = getSupabaseClient();
+  if (!supabase) return undefined;
+
+  try {
+    const { data, error } = await supabase
+      .from("marketplace_listings_view")
+      .select(LISTING_COLUMNS)
+      .eq("slug", slug)
+      .maybeSingle();
+
+    if (error) throw error;
+    if (!data) return undefined;
+
+    const row = data as ListingViewRow;
+    const extras = await fetchVariantExtras([row.variant_id]);
+    return mapRowToServiceProduct(row, extras);
+  } catch (err) {
+    console.error(`[catalog] fetchServiceBySlug(${slug}) failed:`, err);
+    return undefined;
+  }
+}
+
 export async function fetchBestSellers(
   collection: string = "all",
   limit = 4
@@ -695,8 +720,13 @@ export async function fetchDeployModulesForService(
   }));
 }
 
-export async function fetchServiceDetail(id: number): Promise<ServiceDetailPayload | undefined> {
-  const service = await fetchServiceById(id);
+export async function fetchServiceDetail(
+  idOrSlug: number | string
+): Promise<ServiceDetailPayload | undefined> {
+  const service =
+    typeof idOrSlug === "number"
+      ? await fetchServiceById(idOrSlug)
+      : await fetchServiceBySlug(idOrSlug);
   if (!service) return undefined;
 
   let deployModules: DeployModule[] = [];
@@ -705,10 +735,10 @@ export async function fetchServiceDetail(id: number): Promise<ServiceDetailPaylo
   try {
     [deployModules, pdpContent] = await Promise.all([
       fetchDeployModulesForService(service.standardName, service.id),
-      fetchPdpContent(id),
+      fetchPdpContent(service.id),
     ]);
   } catch (err) {
-    console.error(`[catalog] fetchServiceDetail(${id}) enrichment failed, using base service:`, err);
+    console.error(`[catalog] fetchServiceDetail(${idOrSlug}) enrichment failed, using base service:`, err);
     deployModules = await loadStaticDeployModules(service.standardName);
   }
 
