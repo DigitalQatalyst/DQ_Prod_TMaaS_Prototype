@@ -742,10 +742,7 @@ export async function fetchServiceDetail(
     deployModules = await loadStaticDeployModules(service.standardName);
   }
 
-  const enrichedService =
-    pdpContent?.heroSummary != null ? { ...service, description: pdpContent.heroSummary } : service;
-
-  const payload: ServiceDetailPayload = { service: enrichedService, deployModules };
+  const payload: ServiceDetailPayload = { service, deployModules };
   if (pdpContent) payload.pdpContent = pdpContent;
   return payload;
 }

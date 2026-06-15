@@ -1,5 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { initialServices } from "@/data/services";
+import { sectorIdToCatalogTag } from "@/data/marketplaceNavigation";
 import { filterCatalogServices, sortCatalogByPopularMix } from "@/lib/marketplaceCatalogFilters";
 import type { ServiceProduct } from "@/lib/types/serviceProduct";
 
@@ -48,5 +49,47 @@ describe("filterCatalogServices", () => {
     expect(firstPageTypes[0]).toBe("advisory");
     expect(firstPageTypes[1]).toBe("design");
     expect(firstPageTypes[2]).toBe("ai_design");
+  });
+
+  it("filters services by Economy 4.0 sector tags", () => {
+    const farmingTag = sectorIdToCatalogTag("farming-4-0");
+    const farmingServices = initialServices.filter((service) => service.tags.includes(farmingTag));
+
+    const filtered = filterCatalogServices(initialServices, {
+      activeTab: "all",
+      searchQuery: "",
+      selectedCategories: [],
+      selectedServiceTypes: [],
+      selectedIncluded: [],
+      selectedSectors: ["farming-4-0"],
+      sortBy: "popular",
+      excludeVariantIds: [],
+    });
+
+    expect(farmingServices.length).toBeGreaterThan(0);
+    expect(filtered).toHaveLength(farmingServices.length);
+    expect(filtered.every((service) => service.tags.includes(farmingTag))).toBe(true);
+  });
+
+  it("matches sector remix titles when catalog tags are absent", () => {
+    const service = {
+      ...initialServices[0],
+      id: 9999,
+      tags: [],
+      remixName: { "government-4-0": "Government Remix Title" },
+    };
+
+    const filtered = filterCatalogServices([service], {
+      activeTab: "all",
+      searchQuery: "",
+      selectedCategories: [],
+      selectedServiceTypes: [],
+      selectedIncluded: [],
+      selectedSectors: ["government-4-0"],
+      sortBy: "popular",
+      excludeVariantIds: [],
+    });
+
+    expect(filtered).toHaveLength(1);
   });
 });

@@ -4,6 +4,7 @@ import {
   marketplaceServiceTypeLabels,
 } from "@/data/marketplaceNavigation"; // TODO: Task 9 — wire up data;
 import { formatPriceDisplay } from "@/lib/serviceProductUtils";
+import type { PdpContent } from "@/lib/types/catalog";
 import type { ServiceProduct } from "@/lib/types/serviceProduct";
 
 export type { ServiceProduct };
@@ -359,6 +360,40 @@ export function getOverviewContent(service: ServiceProduct): OverviewContent {
     paragraphs: [buildOverviewIntro(service), buildOverviewClosing(service)],
     audienceDescription: buildOverviewAudience(service),
   };
+}
+
+const GENERIC_PDP_AUDIENCE_SUFFIX =
+  "who need clear scope, practical outputs, and governance-aligned delivery";
+
+function isGenericPdpAudienceDescription(text: string): boolean {
+  return text.includes(GENERIC_PDP_AUDIENCE_SUFFIX);
+}
+
+/** Overview tab copy: prefer live catalog description/positioning over stale PDP overview_paragraphs. */
+export function getAboutSectionContent(
+  service: ServiceProduct,
+  pdpContent?: PdpContent
+): OverviewContent {
+  const fallback = getOverviewContent(service);
+
+  const catalogParagraphs = [service.description, service.positioning].filter(
+    (paragraph): paragraph is string => Boolean(paragraph?.trim())
+  );
+
+  const paragraphs =
+    catalogParagraphs.length > 0
+      ? catalogParagraphs
+      : pdpContent?.overviewParagraphs?.length
+        ? pdpContent.overviewParagraphs
+        : fallback.paragraphs;
+
+  const audienceDescription =
+    pdpContent?.audienceDescription &&
+    !isGenericPdpAudienceDescription(pdpContent.audienceDescription)
+      ? pdpContent.audienceDescription
+      : fallback.audienceDescription;
+
+  return { paragraphs, audienceDescription };
 }
 
 export interface KeyOutcome {
