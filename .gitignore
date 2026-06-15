@@ -16,8 +16,11 @@ dist-ssr
 .next/
 out/
 
-# Local Supabase CLI state, seeds, and migrations (managed outside this repo)
-/supabase/
+# Supabase CLI local state
+/supabase/.temp/
+
+# Playwright MCP snapshots
+/.playwright-mcp/
 
 # Editor directories and files
 .vscode/*

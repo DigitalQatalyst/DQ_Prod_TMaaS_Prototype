@@ -9,8 +9,9 @@ export async function generateMetadata({
   params: Promise<{ slug: string }>;
 }): Promise<Metadata> {
   const { slug } = await params;
-  const id = parseInt(slug, 10);
-  const detail = !isNaN(id) ? await fetchServiceDetail(id) : undefined;
+  const numericId = parseInt(slug, 10);
+  const idOrSlug = !isNaN(numericId) ? numericId : slug;
+  const detail = await fetchServiceDetail(idOrSlug);
   const title = detail?.service
     ? getDisplayTitle(detail.service.standardName, detail.service.serviceType)
     : slug

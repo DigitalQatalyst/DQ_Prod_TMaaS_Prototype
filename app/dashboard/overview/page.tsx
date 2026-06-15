@@ -225,7 +225,7 @@ function ClientOverview() {
                 {recommendedServices.map((service) => (
                   <Link
                     key={service.id}
-                    href={`/marketplace/${service.id}`}
+                    href={`/marketplace/${service.slug}`}
                     className="block group"
                   >
                     <div className="rounded-xl border border-orange-100 bg-white p-4 shadow-sm transition-all hover:border-orange-300 hover:shadow-md">
