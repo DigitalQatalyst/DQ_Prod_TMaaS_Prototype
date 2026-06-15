@@ -1,7 +1,13 @@
+import type { Metadata } from "next";
 import LandingNavbar from "@/components/features/landing/landing/LandingNavbar";
 import Footer from "@/components/features/landing/Footer";
 import { LegalPageLayout, type LegalSection } from "@/components/foundation/layouts/LegalPageLayout";
 import { PLATFORM_NAME_EXPANDED } from "@/lib/brandLinks";
+
+export const metadata: Metadata = {
+  title: "Privacy Policy | TMaaS",
+  description: "TMaaS Privacy Policy — Digital Qatalyst.",
+};
 
 const LAST_UPDATED = "June 2026";
 
