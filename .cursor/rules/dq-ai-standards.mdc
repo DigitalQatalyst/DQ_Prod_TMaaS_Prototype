@@ -18,9 +18,9 @@ TMaaS (Transformation Management as a Service) marketplace prototype — Next.js
 
 ## [SECTION: Database setup pack]
 
-- **Clean prod schema:** `database-setup-pack/` (gitignored). Run `00_apply_all_schema.sql` on an empty Supabase project, or `migrations/*.sql` in order.
-- **Catalog seed:** `database-setup-pack/seed/` — only on empty DBs; use `content-updates/` for populated DBs.
-- **Tracked migrations:** `supabase/migrations/` stays local/gitignored; regenerate pack from git history or `npm run db:*` scripts when schema changes.
+- **Regenerate:** `npm run db:setup-pack` → `database-setup-pack/` (gitignored).
+- **Apply on empty DB:** `00_apply_all.sql` or `migrations/01`–`13` in order. Card + PDP copy (09–10) come from `workspace/dba-catalog-copy/` (handoff authority) — do not mix in legacy git `seed_pdp_content` migrations.
+- **Populated DB:** run only workspace `update-card-content.sql` + `seed_pdp_content.sql` (same content as pack 09–10).
 
 ## [SECTION: Catalog CSV Guidelines]
 
