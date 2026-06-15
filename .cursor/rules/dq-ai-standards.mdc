@@ -1,0 +1,320 @@
+---
+description: DQ TMaaS AI coding standards (consolidated)
+globs: ["**/*.ts", "**/*.tsx", "**/*.css"]
+alwaysApply: true
+---
+
+# DQ TMaaS AI Coding Standards
+
+## Project Overview
+TMaaS (Transformation Management as a Service) marketplace prototype — Next.js 16 App Router, TypeScript strict, Tailwind CSS 4, shadcn/ui, Supabase.
+
+## [SECTION: Favicon / App Icons]
+
+- **Next.js App Router file-based metadata wins.** Put icons in `app/` (`favicon.ico`, `icon.png`, `apple-icon.png`). Do **not** rely on `metadata.icons` in `app/layout.tsx` alone — `app/favicon.ico` overrides it.
+- **Source asset:** `public/favicon.png` (DQ logo). Regenerate `app/favicon.ico` and `public/favicon.ico` from it when the logo changes; keep `app/icon.png` and `app/apple-icon.png` in sync.
+- **Remove stale assets:** delete legacy `public/favicon.svg` and old `app/favicon.ico` when replacing — browsers request `/favicon.ico` by default and cache aggressively.
+- **Verify:** `curl -s http://127.0.0.1:3000/ | grep -i 'rel="icon"'` should list hashed `/favicon.ico`, `/icon.png`, and `/apple-icon.png` routes.
+
+## [SECTION: Catalog CSV Guidelines]
+
+- **Source of truth for copy:** `.service-catalog/products.csv` (35 rows) and `.service-catalog/product_variants.csv` (221 rows).
+- **Regenerate copy:** `npm run catalog:generate` then `npm run catalog:validate`.
+- **Sync static fixture:** `npm run catalog:sync-fixture` — must preserve helper exports (`getServiceById`, `getBestSellers`, etc.) appended after `initialServices`.
+- **DB import:** `SUPABASE_SERVICE_ROLE_KEY` + `npm run catalog:import` — upserts products, variants, content, listings.
+- **`/supabase/` is gitignored** — migrations and CLI state stay local; do not commit the folder.
+- **Variant labels:** Assess, Design, AI Design, Deploy, AI Deploy, Managed (not Implementation / Managed Service).
+- **British English** in customer-facing copy fields; `Specialised Operations` title (slug stays `specialized-operations`).
+- **Immutable in CSV edits:** id, slug, sku, product_id, collection_id, duration_*, delivery_complexity, implementation_model, timestamps.
+- **Standards doc:** `/workspace/catalog-copy-standards.md`
+
+## [SECTION: Contact API Development]
+
+### Contact form API
+
+- The contact form POSTs to `/api/contact` (`api/contact.js` — Vercel serverless on deploy).
+- **Local `npm run dev`**: Vite must serve `/api/contact` via `contactApiDevPlugin` in `vite.config.ts`. Do not rely on Vite alone — without the plugin, the route returns 404.
+- **Env vars** (in `.env.local`): Graph mail — `MSGRAPH_TENANT_ID`, `MSGRAPH_CLIENT_ID`, `MSGRAPH_CLIENT_SECRET`, `MSGRAPH_SENDER_UPN`, `MSGRAPH_RECIPIENT_EMAIL` (server-only). Turnstile — `VITE_TURNSTILE_SITE_KEY` (client), `TURNSTILE_SECRET_KEY` (server-only). The dev plugin loads server vars with `loadEnv(..., "")`.
+- **Abuse controls** (`api/contact-security.js`): per-IP rate limit (5 / 15 min), Cloudflare Turnstile verification (`turnstileToken` in POST body), honeypot field `website` (silent 200 if filled). Validate optional `role` against `MAX_LEN.role` (150).
+- **vercel.json**: SPA rewrite must exclude `/api/*` — use `"/((?!api/).*)"` → `/index.html`, not a catch-all `"/(.*)"`.
+- Submit errors belong in `submitError` state, not on the `message` field.
+
+### Service-driven contact enquiries
+
+- Service detail CTAs must link with `buildContactPath(service, intent)` (`service`, `type`, `collection`, `intent` query params).
+- When `?service=` is present, hide "What are you exploring?" / "What do you need from DQ?" and show the service enquiry summary instead.
+- Interest and need are derived in `src/lib/contactFormPrefill.ts` and still submitted to the API.
+
+## [SECTION: Corporate Web Design Standards]
+
+Marketing pages (`/`, `/marketplace`, `/service/:id`) share the **DQ corp web design system** from `DQ_CORPWEB_PROTOTYPE`. They must **not** mirror the corp homepage section stack or copy patterns.
+
+### Copy punctuation
+- Do not use em dashes (`—`) in user-facing copy, meta tags, or email templates. Use commas, colons, periods, or a regular hyphen (`-`) instead.
+
+### Share with corp web (design system)
+- Body font: **Plus Jakarta Sans** (`font-sans`), not Inter
+- Brand colors: `text-dq-navy` (#030F35), `text-dq-orange` (#FB5535)
+- Headings: `font-semibold`, not `font-bold`; hero up to `lg:text-8xl`
+- Eyebrow labels: `font-mono text-[11px] uppercase tracking-[0.2em] text-dq-orange`
+- Section padding: `py-24 px-5 md:px-8 lg:px-10`
+- Content max-width: `max-w-[1200px] mx-auto` (heroes may use `max-w-7xl`)
+- Alternate backgrounds: `white` / `bg-gray-50`
+- Navbar: static `sticky top-0 h-16`, no scroll-morph pill effect
+- Cards: `rounded-2xl border border-gray-200 hover:border-dq-orange hover:shadow-xl transition-all duration-300`
+- CTAs: `rounded-full`; primary orange on product landing (`bg-dq-orange`); secondary glass (`bg-white/60 backdrop-blur-sm border`)
+- Hero backgrounds: `MeshSection` with `hero-grid` overlay and mesh CSS vars from `index.css`
+- Footer section labels: `font-mono text-[10px] uppercase tracking-[0.18em] text-gray-400`
+- Footer link columns: **Explore** (Marketplace, Talk to our team, flag-gated), **Follow Us** (LinkedIn, X, YouTube, Explore DigitalQatalyst external link). No separate DQ column.
+- Footer bottom bar: Privacy and Terms link to in-app `/legal/privacy` and `/legal/terms` when `legal` flag is enabled; otherwise external corp web URLs
+- Footer and hero descriptions use `PLATFORM_NAME_EXPANDED` / expanded copy: **Transformation Management as a Service (TMaaS)** via `brandLinks.ts`
+- Service count copy is **100+** everywhere (not 50+ or 200+); typical start time is **<1 day** (not 4 wks)
+- Corp web links use `https://www.digitalqatalyst.com` base URL; TMaaS product link label is **Marketplace** (not "Design & Deploy Services")
+- Platform display name is **Marketplace** (`PLATFORM_NAME`, `PLATFORM_ACRONYM`, and `PLATFORM_BRAND_LINE` in `src/lib/brandLinks.ts`). Do not revert to "Transformation as a Service", "TMaaS", "Transformation Management as a Service", or "Technology Management as a Service" as the platform name.
+
+### Differentiate for product pages (TMaaS landing)
+- Use **product landing IA** per `specs/landing-page-prototype-shell.md` v2, default at `/` (`IndexProductLanding`, `src/components/site/landing/v2/`)
+- v1 corp-mirror alternate landing at `/landing-v1` (`IndexTraditional`); `/landing-v2` redirects to `/`
+- Hero: TMaaS logo, marketplace mockup; orange primary CTA → `/marketplace` (no product badge row)
+- Landing navbar: Services nav link stays grey on all routes (no orange active state)
+- One dark mesh narrative section (`Why TMaaS`); do not alternate dark sections like corp homepage
+- Do **not** add corp-only sections: Team, FAQ, Framework, full ecosystem product grid
+- Do **not** copy corp homepage stats, problem copy, or section order verbatim
+- Parent brand: optional `Part of DigitalQatalyst` external link; full corp credibility stays on corp web
+
+### Product landing copy (TMaaS positioning)
+- **Marketing + SEO first**: plain language, short sentences, searchable terms (`digital transformation`, `marketplace`, `services`, `blueprints`, `AI-powered`)
+- Avoid internal jargon on the landing page: `industrialise`, `productised`, `governed fulfilment`, `operating platform`, `architecture-led`
+- Hero H1 should include **digital transformation**; subcopy mirrors USP in one or two short sentences (low-cost marketplace, AI-powered blueprints, transparent pricing, weeks not months)
+- Problem cards: three short pains (slow, expensive, hard to adapt); closing line ties to marketplace + blueprints
+- Outcome cards: cost, speed, scale with substantiated metrics only (`<1 day`, `100+`, `From $1k`)
+- Journey steps: Discover (browse) → Evaluate (compare) → Engage (launch with team)
+- Primary CTA: **Browse services**; secondary: **Talk to our team**
+- Badge row: `TMaaS` + status chip (e.g. Live); page `<title>` and meta description use TMaaS + digital transformation marketplace keywords
+
+### Marketing page copy (Marketplace, Service Detail, Contact)
+- Same voice as homepage: plain language, short sentences, SEO terms (`digital transformation`, `marketplace`, `services`, `blueprints`)
+- Shared CTA labels: **Browse marketplace** (secondary on landing), **Schedule free advisory** (primary conversion for launch offer in navbar, hero, closing CTA, marketplace launch band); **Talk to our team** remains on footer and service-detail flows; avoid "Explore Marketplace", "Contact Us", "Book a Consultation"
+- Launch offer: free transformation advisory via `src/lib/launchOffering.ts` → `/contact?offering=launch-advisory`; marketplace `MarketplaceLaunchOffer` is a single CTA card (ctaOrange mesh + grid, not a service card) below the featured carousel; catalog section uses `pt-10 md:pt-12` below hero
+- Landing hero H1: use `landingHeroHeading` from `brandAccent.ts` (corp web scale: `leading-[1.0]`, `sm:text-6xl` through `lg:text-8xl`); two-line split with second line `text-dq-orange`
+- Marketplace hero: eyebrow `Digital transformation marketplace`; H1 `Browse transformation services` with **transformation** in `text-dq-orange`; use `landingHeroHeading` scale and tall hero padding (`lg:pb-24 lg:pt-28`, min-height ~360px on desktop)
+- Marketplace featured carousel: eyebrow `Curated selection`; H2 `Featured services` (not "Top picks")
+- Contact hero: H1 `Tell us what you need. We'll help you get started.`; submit button `Send request`
+- Service detail bottom CTA: `Not sure if this is the right fit?` + **Talk to our team** / **Browse more services**
+- Package card CTAs by stage: Assess and Design **Get started**, Deploy **Get a quote**, Managed **Talk to our team**, Bundle **Request proposal** (`getServicePackageCta` in `contactFormPrefill.ts`)
+- Set `document.title` per page: Marketplace, Contact, and each Service Detail include `TMaaS` and searchable terms
+
+### Service detail, tab first-heading alignment
+Overview, What You Receive, and How It Works first `sectionHeading` share the same top offset: `serviceDetailSplitLead` on split-grid lead columns; `serviceDetailTabLead` on How It Works first `ServiceDetailSection`.
+
+### Service detail, hero meta and package card
+- Hero tag row: category and type as plain text separated by `•`; only **High-Impact** is a navy pill badge with `Zap` icon
+- **Ideal for:** with colon on hero body only; **Timeline:** on `ServicePackageCard` below price (not duplicated in hero)
+- No purple/violet accents on PDP; use `dq-navy` and `dq-orange` only
+- Do not use `Sparkles` icons on marketing or service-detail surfaces (use `Bot`, `Zap`, `Brain`, etc.)
+
+### Service detail, hero mesh (`ServiceDetail.tsx`)
+- Scope `heroLight` mesh to the **hero block only** (`absolute inset-0` inside the hero wrapper), never a fixed `h-[520px]` overlay across tabs
+- Tabs and related services sit in a sibling `bg-background` section below the hero
+
+### Service detail, About This Service (Overview tab)
+Match the approved two-column mockup in `ServiceDetailAboutSection.tsx`:
+- Grid: `serviceDetailSplitGrid` + `serviceDetailSplitLead`, **top-aligned** (`items-start` only); lead column `md:pt-7` aligns `sectionHeading` with side-card title; card title before icon
+- Left: `sectionHeading` from `brandAccent.ts` (`text-xl font-semibold tracking-tight text-dq-navy`); two paragraphs at `text-base leading-[1.7] text-[#667085]` with `mt-6 space-y-5`
+- Right "Who it's for": no tinted card or icon; use `sectionHeading` + `border-l-2 border-dq-navy/15 pl-4` quote-style body copy
+- Copy: P1 narrative intro (not raw `description` themes shorthand); P2 from `OVERVIEW_CLOSING_BY_TYPE`; audience without solution-name injection for experience advisory
+- Do not use `lg:` breakpoint for this grid, two columns from `md:` upward
+
+### Service detail, section headings
+All in-page section `h2` titles (About, Key Outcomes, Related Services, tab panels via `ServiceDetailSection`) use **`sectionHeading`** from `@/lib/brandAccent`, corp web card title scale (`text-xl font-semibold`), not `text-2xl`/`font-bold` or responsive `md:text-3xl` jumps.
+
+### Service detail, What You Receive tab
+Match `ServiceDetailWhatYouReceiveTab.tsx` (same top-row pattern as Overview / About):
+- Single **Deliverables** section: inline duration/scope line only (no `deliverablesSummary` intro paragraphs), then numbered breakdown as a plain divided list (not a bordered card/table)
+- **Modules & Applications**: deploy accordion below; `sectionHeading` (no eyebrow)
+
+### Service detail, Key Outcomes (Overview tab)
+Match the approved four-column mockup in `ServiceDetailKeyOutcomesSection.tsx`:
+- Horizontal row of four equal columns on `lg:` with thin `border-gray-200` vertical dividers (not bordered cards); **symmetric** `px-8` gutter on every column (never asymmetric `pr` on first / `pl` on rest)
+- Orange step numbers `01`–`04` (`text-4xl font-bold text-dq-orange`), then `font-medium` navy outcome title (lighter than `sectionHeading`), then `#667085` description
+- Keep titles/descriptions from `getKeyOutcomes()`, layout only, do not swap in mockup copy
+
+### Service detail, How It Works delivery lifecycles
+Keep `delivery_process` aligned across `getDeliverySteps()` (`ServiceDetailDeliverySection.tsx`), `scripts/lib/pdpCopyGenerator.ts`, and Supabase `product_content` seed/migrations:
+- **Assess (advisory)**: Scope (Days 1-2) → Assess (Days 3-4) → Advise (Day 5); total `1 Week`
+- **Design / AI Design**: Discover → Design → Handover (seed); code fallback may use 4 steps
+- **Deploy / AI Deploy**: Prepare → Build → Go live
+- **Managed**: Onboard (Week 1) → Operate (Ongoing) → Improve (Ongoing); total `Ongoing`
+- Do not ship single-step Assess or Managed lifecycles in PDP seed data; PDP content overrides code fallbacks when Supabase catalog is enabled
+
+### Service detail, How It Works delivery stepper
+Match `HowWeWorkSection` on `DQ_CORPWEB_PROTOTYPE` About Us (`About.tsx`):
+- Desktop: horizontal `bg-gray-200` connector at `top-[28px]`; dynamic `grid-cols-{n}`; `h-14 w-14` mono circles (`01` padding); active step `bg-dq-orange border-dq-orange shadow-lg`, inactive `bg-white border-gray-200`; left-aligned title + `#667085`/`gray-600` body
+- Mobile: vertical timeline with `w-px` connectors between circles (`h-12 w-12` circles)
+- Do not use the old centred dashed-line stepper (`h-7` blue-tint circles)
+- Step titles: `text-sm font-semibold` (not `text-lg`)
+- FAQ contact CTA: inline `Contact us →` text link (no trailing period before link, no arrow icon component)
+
+### Service detail, Why It Matters tab
+Match `ServiceDetailWhyItMattersTab.tsx` + `whyItMattersContent.ts`:
+- Intro: `sectionHeading` "Why This Service Matters"; hook line `font-medium text-dq-navy`; problem paragraph `#667085`
+- Before / After: single `rounded-2xl` comparison container (`shadow-card`); `lg:grid-cols-2` panels with gradient backgrounds (gray-50 → white / orange-50 → white)
+- Panel badges: pill chips, gray for Before, orange-tinted for After; stacked item cards with icon wells + `01`–`03` mono labels (not a 3-col grid inside each half)
+- Centre transition: orange `ArrowRight` circle on `lg+`; mobile divider row with arrow between panels
+- Desktop paired rows: `display: contents` wrappers so before/after items share a grid row; column padding `p-8` / `px-8`; use default row stretch + `h-full` on item cards so each **pair** matches height at the bottom; **never** use `gridTemplateRows` with `1fr` — that forces every row to the tallest row’s height
+- Copy from `getWhyItMattersContent(service)`, contextualise by `collection`, `serviceType`, and solution name; exact override for `online web presence|advisory`
+
+### Responsive layout (marketing pages)
+- Prevent page-level horizontal scroll: `overflow-x: clip` on `html`/`body`; clip decorative overflow on hero mockup wrappers (`overflow-hidden` + inner padding, 3D transform only from `lg:`)
+- Hero mockup (`HeroDashboardMockup`): no box-shadow, drop-shadow, or glow behind the card — border only on the white frame
+- Sticky navbar clearance: hero sections use `pt-20 md:pt-24` (or `pt-16 md:pt-24` on landing hero), not `pt-14`
+- Hero H1 scale: stepped down on narrow viewports; two-column heroes use `lg:text-7xl xl:text-8xl`, not `lg:text-8xl` in a split grid
+- Horizontal tab/category nav: `flex-nowrap overflow-x-auto scrollbar-none`; tab triggers `shrink-0`
+- Marketplace catalog toolbar: stack on mobile (`flex-col` → `sm:flex-row`); sort + view controls `w-full sm:w-auto`
+- Best-sellers carousel: header row + nav buttons in one flex row inside `<Carousel>` (buttons need carousel context)
+- Service detail delivery stepper: vertical timeline below `lg`; horizontal grid uses `grid-cols-2 xl:grid-cols-4` for four steps
+- CTAs on mobile: primary actions `w-full sm:w-auto` in stacked CTA rows (landing, contact, service detail bottom band)
+- Contact form: submit button full width on mobile; consent label must not use `whitespace-nowrap`
+
+### Contact form Turnstile
+- Production requires `VITE_TURNSTILE_SITE_KEY` and `TURNSTILE_SECRET_KEY` (Cloudflare Turnstile)
+- Local dev: `.env.example` documents always-pass test keys; `ContactTurnstile` and `contact-security.js` fall back to test keys when unset in dev
+- Do not block form submission in dev solely because Turnstile env vars are missing
+
+### Contact integration tests
+- UI flow: `src/pages/Contact.integration.test.tsx` (validation, quote prefill, success/error, resubmit)
+- API handler: `src/test/contactApi.integration.test.ts` (OPTIONS, validation, Graph sendMail, env/error paths)
+- Run with `npm test`; node-environment API tests require `setup.ts` to guard `window` usage
+
+### Supabase catalog integration tests
+- Mocked service layer: `src/services/catalogService.integration.test.ts` with `src/test/supabaseMock.ts`
+- Live remote catalog: `src/test/supabaseLive.integration.test.ts` (skipped when `VITE_SUPABASE_*` missing from `.env.local`)
+- `vitest.config.ts` loads `.env.local` via `loadEnv` and injects `import.meta.env.VITE_SUPABASE_*` for live tests
+- Covers: listings view mapping, service-by-id, best sellers, deploy modules, detail payload, RLS anon read, flag/static fallback
+
+### Do Not
+- Reintroduce morphing navbar or Inter as default body font
+- Reskin corp homepage section-for-section with product copy swaps
+- Use `rounded-xl` + `border-navy-100` for marketing cards when corp web pattern applies
+- Change page logic/routing when doing styling-only alignment work
+
+## [SECTION: Marketplace Catalog Conventions]
+
+- `useMarketplaceListings` must load the **full catalog once** via `useCatalog()` and apply `filterCatalogServices()` + pagination in memory.
+- Do **not** key React Query on filter params or call `fetchCatalogPage()` per filter change — that causes ~3s Supabase round-trips on every checkbox.
+- Reserve `fetchCatalogPage` for integration tests or future server-side pagination when the catalog is too large for client filtering.
+- Show loading only on the initial catalog fetch (`isLoading && !data`), not when filters change.
+- `sortBy: "popular"` must use `sortCatalogByPopularMix()` — stage popularity scores tie across products (all Assess = 100), so a flat sort shows only one type on early pages.
+- `fetchCatalogFromSupabase` loads `marketplace_listings_view` then joins variant extras (including `product_content.description` per variant). Never use product-level `short_description` alone for card copy.
+- `enrichCatalogListExtras` runs in the background for tags/features/remix/descriptions when placeholder data is shown first.
+- `useCatalog` must use `placeholderData: getCatalogPlaceholder` so the grid renders immediately (fixture or sessionStorage cache).
+- `CatalogPrefetch` in App warms the catalog on first load.
+- `useBestSellers` must derive from `useCatalog()` — never trigger a second full catalog fetch.
+- Do not block the marketplace UI with a "Loading catalog" empty state when placeholder data exists.
+
+## [SECTION: PDP Copy Style Guide]
+
+Reference: `/workspace/pdp-copy-style.md`
+
+### Required voice rules
+
+1. **No em dashes** (`—`). Use commas, colons, or full stops instead.
+2. **Do not open hero copy with duration** (e.g. never start with "In one week,"). Duration belongs in metadata, timeline, and FAQs.
+3. Lead with outcome or scope, not process jargon ("strategic discovery engagement").
+4. Name the **solution** (web presence, data platform), not generic "digital presence" unless the product is experience/web.
+5. Use **DigitalQatalyst team** (not "DQ advisor").
+6. British spelling where already used: organisation, prioritised.
+
+### Buyer-facing labels
+
+- Stage and product display names: `src/lib/marketplaceDisplayLabels.ts` (cards, PDP badges, bundle subtitles). DB `variant_name` slugs stay unchanged.
+- Assess: title/card uses **Assess**; PDP type badge uses **Assessment**. Managed customer-facing label is **Managed Service**.
+- Transformation Bundle: marketplace card suffix **End-to-end bundle**; PDP H1 suffix **End-to-end transformation**. Flexible set bundles (`Advisory Set`, etc.) use renamed product only (no suffix).
+- Bundle PDP subtitle and inclusion line: `BUNDLE_PDP_SUBTITLE`, `BUNDLE_INCLUSION_LINE` in the same module.
+- Supabase catalog labels: `npm run db:display-labels:sql` → `supabase/migrations/20250610000013_update_display_labels.sql` (products.title, product_variants, search index).
+
+### Variant SEO copy (required)
+
+- Single source: `src/lib/variantSeoCopy.ts` (hero description, positioning) and `src/lib/serviceFaqsCopy.ts` (FAQs).
+- Every variant needs a **unique** hero/description mentioning stage and outcome. Put price and duration in metadata, FAQs, and package card only, not in hero/description body copy.
+- Positioning must use correct grammar (`perform` vs `performs` for plural domains). No em dashes.
+- Sync fixture: `npm run catalog:sync-variant-copy` before regenerating PDP seed.
+
+### Generator
+
+- PDP seed SQL: `npm run db:pdp-content:sql` → local `supabase/migrations/…` (gitignored; apply via Supabase dashboard or CLI)
+- Apply migrations in Supabase SQL Editor after schema extensions are present.
+- `fetchPdpContent` must degrade gracefully when PDP tables/columns are not migrated yet.
+
+## [SECTION: React State Naming Patterns]
+
+When destructuring `useState`, the state variable and setter must use matching base names:
+
+```tsx
+// Good
+const [selectedSectors, setSelectedSectors] = useState<string[]>([]);
+
+// Bad, setter name does not match state; easy to call the wrong function in handlers/reset
+const [selectedSectors, setSelectedIndustries] = useState<string[]>([]);
+```
+
+When adding reset/clear handlers, verify every setter referenced exists and matches the state it clears.
+
+## [SECTION: SEO MVP Implementation]
+
+### Per-page meta
+
+Use the shared `Seo` component (`react-helmet-async`) on every indexable route. Do not set `document.title` directly.
+
+```tsx
+import Seo from "@/components/Seo";
+import { HOME_SEO } from "@/lib/seo";
+
+<Seo title={HOME_SEO.title} description={HOME_SEO.description} path={HOME_SEO.path} />
+```
+
+- **Brand in titles:** `PLATFORM_ACRONYM` / `SEO_BRAND` = `TMaaS` (not the UI label "Marketplace").
+- **Canonical + OG:** `path` must match the route (e.g. `/service/${id}`). Site base URL comes from `VITE_SITE_URL`.
+- **Service descriptions:** use `buildServiceMetaDescription()` (title + price + duration + body, max 155 chars).
+- **Alternate landings** (`/landing-v1`, `/home`): always `noindex`; keep feature flags off for MVP.
+
+### Structured data (JSON-LD)
+
+Use `JsonLd` + builders in `src/lib/structuredData.ts`:
+
+| Page | Schema |
+|------|--------|
+| `/` | `Organization` + `WebSite` (+ `SearchAction`) |
+| `/contact` | `ContactPage` |
+| `/service/:id` | `Service` + `BreadcrumbList` (+ `Offer` when price parses) |
+
+Validate with [Google Rich Results Test](https://search.google.com/test/rich-results) after deploy.
+
+### 404 handling
+
+- **Client:** unknown React Router paths render `NotFound` with `noindex` (not redirect to home).
+- **Edge:** `middleware.ts` returns HTTP **404** for paths not in `middleware/allowedRoutes.ts`.
+- When enabling a new **public** route via feature flags, add it to `PUBLIC_EXACT_PATHS` in `middleware/allowedRoutes.ts`.
+
+### Static HTML prerender (SSG)
+
+- `postbuild` runs `scripts/prerender-html.ts` — writes route-specific `index.html` files under `dist/` with **title, meta, canonical, OG/Twitter, JSON-LD, and noscript fallback** in the initial HTML (no JS required for crawlers).
+- Route payloads live in `src/lib/seoHead.ts` (shared with build script). Keep in sync with page-level `Seo` / `JsonLd` components.
+- Paths come from `scripts/seo-routes.ts` (same list as sitemap).
+- `PRERENDER_SKIP=true` skips prerender for fast local builds.
+- `vercel.json` uses `{ "handle": "filesystem" }` so prerendered files are served before the SPA fallback.
+
+### Build artifacts
+
+- Run `npm run seo:generate` (also runs via `prebuild`) before deploy to refresh `public/sitemap.xml` and `public/robots.txt`.
+- Set `VITE_SITE_URL` in production env (no trailing slash).
+- Social image: `public/og-image.png` (1200×630).
+
+### New public routes
+
+When adding an indexable page: add `Seo` (+ `JsonLd` if applicable), add URL to `scripts/generate-seo-files.ts` static paths, add to `middleware/allowedRoutes.ts`, regenerate sitemap.
+
+### Post-deploy checks
+
+- Lighthouse SEO score (target 90+) on production URL
+- `curl -o /dev/null -s -w "%{http_code}" https://YOUR_DOMAIN/not-a-page` → `404`

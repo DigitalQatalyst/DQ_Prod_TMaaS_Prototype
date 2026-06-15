@@ -5,17 +5,10 @@
 import { writeFileSync } from "node:fs";
 import { join } from "node:path";
 import { initialServices } from "../src/data/services";
-import {
-  escSql,
-  generatePdpContent,
-  jsonSql,
-} from "./lib/pdpCopyGenerator";
+import { escSql, generatePdpContent, jsonSql } from "./lib/pdpCopyGenerator";
 
 const services = initialServices.filter((s) => s.serviceType !== "bundle");
-const outPath = join(
-  process.cwd(),
-  "supabase/migrations/20250610000012_seed_pdp_content.sql"
-);
+const outPath = join(process.cwd(), "supabase/migrations/20250610000012_seed_pdp_content.sql");
 
 const lines: string[] = [
   "-- PDP content seed (Option A voice). Apply after 20250610000011_pdp_content_extensions.sql",
