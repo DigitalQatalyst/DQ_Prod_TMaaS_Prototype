@@ -11,29 +11,27 @@
  *   - product_content.description / positioning (variant level; also re-stated here
  *     so this migration is self-contained)
  *   - products.short_description / audience / industry_relevance / business_impact
- *     (product level, updated once per product from its Assess variant)
+ *     (product level, updated from Assess variants and bundle variants)
  *
- * Run: npx tsx scripts/generate-card-content-update-sql.ts > supabase/migrations/20250614000001_update_card_content.sql
+ * Run: npm run db:card-content:sql
  */
-import { writeFileSync } from "node:fs";
-import { join } from "node:path";
+import { mkdirSync, writeFileSync } from "node:fs";
+import { dirname, join } from "node:path";
 import { initialServices } from "../src/data/services";
 import { applyCardCopyOverride } from "../src/data/serviceCopy";
+import type { ServiceProduct } from "../src/types/serviceProduct";
 
 function esc(s: string): string {
   return s.replace(/'/g, "''");
 }
 
-const services = (initialServices as unknown as import("../src/types/serviceProduct").ServiceProduct[])
-  .filter((s) => s.serviceType !== "bundle")
-  .map(applyCardCopyOverride);
-
+const services = (initialServices as ServiceProduct[]).map(applyCardCopyOverride);
 const ids = services.map((s) => s.id);
-const seenProduct = new Set<number>();
 
 const lines: string[] = [
-  "-- Idempotent card-content update for already-seeded catalog.",
-  "-- Regenerate: npx tsx scripts/generate-card-content-update-sql.ts",
+  "-- Idempotent card-content update for an already-seeded catalog.",
+  "-- Do NOT use seed-data.sql on a populated database (that file is INSERT-only).",
+  "-- Regenerate: npm run db:card-content:sql",
   "BEGIN;",
   "",
   `DELETE FROM product_features WHERE variant_id IN (${ids.join(", ")});`,
@@ -68,14 +66,12 @@ for (const s of services) {
     );
   });
 
-  // Product-level fields are stored once per product family (shared across its 6
-  // stage variants). Update from the Assess variant only, so the product card uses
-  // the assessment-stage description as its short_description.
-  if (s.serviceType === "advisory") {
+  // Staged services: product card fields come from the Assess variant.
+  // Bundles: each bundle variant owns its product-level card fields.
+  if (s.serviceType === "advisory" || s.serviceType === "bundle") {
     lines.push(
       `UPDATE products SET short_description = '${esc(s.description)}', audience = '${esc(s.audience)}', industry_relevance = '${esc(s.industryRelevance)}', business_impact = '${esc(s.businessImpact)}' WHERE id = (SELECT product_id FROM product_variants WHERE id = ${s.id});`
     );
-    seenProduct.add(s.id);
   }
   lines.push("");
 }
@@ -83,9 +79,15 @@ for (const s of services) {
 lines.push("SELECT refresh_product_search_index();");
 lines.push("COMMIT;");
 
-const outPath = join(
+const migrationPath = join(
   process.cwd(),
   "supabase/migrations/20250614000001_update_card_content.sql"
 );
-writeFileSync(outPath, lines.join("\n"), "utf8");
-console.log(`Wrote ${outPath} (${services.length} variants)`);
+const handoffPath = join(process.cwd(), "workspace/dba-catalog-copy/update-card-content.sql");
+const sql = lines.join("\n");
+
+mkdirSync(dirname(handoffPath), { recursive: true });
+writeFileSync(migrationPath, sql, "utf8");
+writeFileSync(handoffPath, sql, "utf8");
+console.log(`Wrote ${migrationPath} (${services.length} variants)`);
+console.log(`Wrote ${handoffPath} (${services.length} variants)`);

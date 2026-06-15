@@ -1,4 +1,6 @@
 BEGIN;
+-- WARNING: Fresh-database seed only. Do NOT run on a populated Supabase project.
+-- For live DB copy updates, use update-card-content.sql instead.
 INSERT INTO categories (id, label, category_type, sort_order, is_facetable) VALUES ('experience', 'Customer Experience & Engagement', 'capability', 0, true) ON CONFLICT (id) DO NOTHING;
 INSERT INTO categories (id, label, category_type, sort_order, is_facetable) VALUES ('operations', 'Business Operations & Productivity', 'capability', 1, true) ON CONFLICT (id) DO NOTHING;
 INSERT INTO categories (id, label, category_type, sort_order, is_facetable) VALUES ('security', 'DevOps and Security', 'capability', 2, true) ON CONFLICT (id) DO NOTHING;

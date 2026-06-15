@@ -23,6 +23,18 @@ https://jchpvnqmdfuqehfxyhjn.supabase.co
 
 ---
 
+## Important: use the UPDATE files, not seed-data.sql
+
+`seed-data.sql` in this folder is a **fresh-database seed** (plain `INSERT` statements). It will fail on a populated database with errors like:
+
+```
+duplicate key value violates unique constraint "products_pkey"
+```
+
+For the live Supabase project, run the two **update** files below instead.
+
+---
+
 ## Step 1: Take a backup FIRST
 
 Before running anything, take a full backup of the database above via:
@@ -37,17 +49,23 @@ Verify the backup is restorable before proceeding.
 
 Both files are in this folder (`workspace/dba-catalog-copy/`).
 
-### File 1: `seed-data.sql`
-- **Updates:** Card-level fields for all 221 products — `short_description`, `product_content` (description + positioning), `product_features`, `product_tags`, `product_timeline_milestones`, `audience`, `industry_relevance`, `business_impact`
-- **Size:** ~371 lines
-- **Idempotent:** Yes. Uses `ON CONFLICT ... DO UPDATE`. Safe to re-run.
+### File 1: `update-card-content.sql`
+- **Updates:** Card-level fields for all 221 variants — `products.short_description`, `product_content` (description + positioning), `product_features`, `product_tags`, `product_timeline_milestones`, `product_variants.positioning`, `audience`, `industry_relevance`, `business_impact`
+- **Idempotent:** Yes. Uses `UPDATE` + `DELETE`/`INSERT` keyed by variant id. Safe to re-run.
 
 ### File 2: `seed_pdp_content.sql`
 - **Updates:** PDP (service detail page) fields for all 186 individual variants — `hero_summary`, `overview_paragraphs`, `audience_description`, `deliverables_summary`, `delivery_process`, `package_highlights`, `variant_deliverables`, `product_faqs`, `faq_intro`
-- **Size:** ~4,309 lines
-- **Idempotent:** Yes. Uses upsert pattern. Safe to re-run.
+- **Idempotent:** Yes. Uses `UPDATE` + `DELETE`/`INSERT` keyed by variant id. Safe to re-run.
 
 Run File 1 first, then File 2.
+
+Regenerate if needed:
+
+```bash
+npm run db:card-content:sql
+npm run db:pdp-content:sql
+# then copy supabase/migrations/20250610000012_seed_pdp_content.sql to workspace/dba-catalog-copy/seed_pdp_content.sql
+```
 
 ---
 
@@ -60,19 +78,20 @@ Restore from the backup taken in Step 1. The source code on this branch is unaff
 ## Verification queries (run after applying)
 
 ```sql
--- Should return 221 distinct descriptions (was ~6 before)
-SELECT COUNT(DISTINCT (content->>'description')) AS distinct_descriptions
+-- Should return ~221 distinct short descriptions (was heavily duplicated before)
+SELECT COUNT(DISTINCT short_description) AS distinct_short_descriptions
 FROM products
-WHERE product_type != 'category';
+WHERE status = 'published';
 
 -- Should return 186 distinct faq_intro values
 SELECT COUNT(DISTINCT faq_intro) AS distinct_faq_intros
-FROM product_pdp_content;
+FROM product_content
+WHERE faq_intro IS NOT NULL;
 
--- Spot-check a specific card (GRC Assess, id 85)
-SELECT short_description, content->>'positioning'
-FROM products
-WHERE id = 85;
+-- Spot-check a specific card (GRC Assess, variant 85)
+SELECT short_description, positioning
+FROM marketplace_listings_view
+WHERE variant_id = 85;
 ```
 
 ---
