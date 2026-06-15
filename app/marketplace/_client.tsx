@@ -291,13 +291,13 @@ export default function MarketplacePageClient() {
           <div id="catalog-grid" className="scroll-mt-32">
             {showBestSellers && (
               <>
-                <MarketplaceLaunchOffer />
                 <div className="mb-10">
                   <MarketplaceBestSellers
                     activeTab="all"
                     selectedIndustry={selectedSectors[0] ?? "all"}
                   />
                 </div>
+                <MarketplaceLaunchOffer />
               </>
             )}
 

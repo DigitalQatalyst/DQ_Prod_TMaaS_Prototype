@@ -5,6 +5,8 @@ import { NAV_BROWSE_MARKETPLACE_LABEL } from "@/lib/brandLinks";
 import {
   LAUNCH_ADVISORY_CTA_LABEL,
   LAUNCH_ADVISORY_EYEBROW,
+  LAUNCH_ADVISORY_HEADLINE,
+  LAUNCH_ADVISORY_SUBCOPY,
   buildLaunchAdvisoryContactPath,
 } from "@/lib/launchOffering";
 import { btnPrimaryOnDark, btnSecondaryOnDark } from "@/lib/brandAccent";
@@ -30,16 +32,12 @@ const LandingCtaSection = () => {
       />
 
       <div className="relative mx-auto max-w-[720px]">
-        <p className="dq-eyebrow-on-dark mb-4">
-          {featureFlags.isEnabled("contactUs") ? LAUNCH_ADVISORY_EYEBROW : "Get started"}
-        </p>
-
+        {featureFlags.isEnabled("contactUs") && (
+          <p className="dq-eyebrow-on-dark mb-4">{LAUNCH_ADVISORY_EYEBROW}</p>
+        )}
         <h2 className="text-balance text-4xl font-semibold leading-[1.05] tracking-tight text-white md:text-5xl">
           {featureFlags.isEnabled("contactUs") ? (
-            <>
-              Start with a free{" "}
-              <span className="text-dq-orange">transformation advisory.</span>
-            </>
+            LAUNCH_ADVISORY_HEADLINE
           ) : (
             <>
               Find your next service{" "}
@@ -50,7 +48,7 @@ const LandingCtaSection = () => {
 
         <p className="mx-auto mt-5 max-w-md text-[15px] leading-relaxed text-white/60">
           {featureFlags.isEnabled("contactUs")
-            ? "Book a no-cost session with a DQ advisor, or browse the marketplace when you are ready."
+            ? LAUNCH_ADVISORY_SUBCOPY
             : "Browse on your own and find the right service for your next step."}
         </p>
 

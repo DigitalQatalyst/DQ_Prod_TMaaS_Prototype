@@ -11,12 +11,14 @@ import {
 } from "../src/data/marketplaceNavigation";
 import { deployModulesData } from "../src/data/deployModules";
 import { CURATED_SERVICE_IDS } from "../src/data/curatedCatalog";
+import { applyCardCopyOverride } from "../src/data/serviceCopy";
 
 const seedAll = process.env.SEED_ALL === "true";
 const curatedIdSet = new Set<number>(CURATED_SERVICE_IDS);
-const servicesToSeed = seedAll
+const servicesToSeed = (seedAll
   ? initialServices
-  : initialServices.filter((s) => curatedIdSet.has(s.id));
+  : initialServices.filter((s) => curatedIdSet.has(s.id))
+).map(applyCardCopyOverride);
 
 const VARIANT_SUFFIX_RE =
   / - (Assess|Design|AI Design|Deploy|AI Deploy|Managed|Implementation|AI Implementation|Managed Service|Transformation Bundle|Advisory Set|Design Services Set|Deploy Services Set|Managed Services Set)$/;

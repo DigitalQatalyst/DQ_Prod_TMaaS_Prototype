@@ -3,7 +3,12 @@
 // No React Helmet / useHead / JSX dependencies.
 // ---------------------------------------------------------------------------
 
-import { PLATFORM_HERO_SUBCOPY, DQ_CORP_WEB_URL } from "@/lib/utils";
+import {
+  DQ_CORP_WEB_URL,
+  PLATFORM_DESCRIPTOR,
+  PLATFORM_FULL_NAME,
+  PLATFORM_HERO_SUBCOPY,
+} from "@/lib/brandLinks";
 
 export const SEO_BRAND = "TMaaS";
 export const SEO_PUBLISHER = "DigitalQatalyst";
@@ -93,8 +98,21 @@ export function buildHomeStructuredData() {
         "@type": "Organization",
         "@id": orgId(),
         name: SEO_PUBLISHER,
+        alternateName: "DQ",
         url: DQ_CORP_WEB_URL,
         logo: absoluteUrl(DEFAULT_OG_IMAGE_PATH),
+        description:
+          "DigitalQatalyst (DQ) is a digital transformation company and the creator of TMaaS — a marketplace for end-to-end transformation services covering AI, customer experience, operations, and cybersecurity.",
+        areaServed: ["AE", "GB", "US", "AU"],
+        knowsAbout: [
+          "Digital Transformation",
+          "Transformation Management as a Service",
+          "AI Strategy",
+          "Customer Experience",
+          "Operational Excellence",
+          "Cybersecurity",
+          "Change Management",
+        ],
         sameAs: [...SOCIAL_PROFILES],
       },
       {
@@ -111,6 +129,37 @@ export function buildHomeStructuredData() {
             urlTemplate: `${siteUrl}/marketplace?q={search_term_string}`,
           },
           "query-input": "required name=search_term_string",
+        },
+      },
+      {
+        "@type": "SoftwareApplication",
+        "@id": `${siteUrl}/#platform`,
+        name: SEO_BRAND,
+        alternateName: PLATFORM_FULL_NAME,
+        applicationCategory: "BusinessApplication",
+        operatingSystem: "Web",
+        url: siteUrl,
+        description: PLATFORM_HERO_SUBCOPY,
+        about: {
+          "@type": "Thing",
+          name: PLATFORM_DESCRIPTOR,
+          description:
+            "A curated marketplace of digital transformation services with transparent pricing, delivery timelines, and end-to-end advisory support.",
+        },
+        featureList: [
+          "100+ digital transformation services",
+          "Transparent pricing and delivery timelines",
+          "AI, experience, operations, and security blueprints",
+          "End-to-end transformation advisory",
+          "Service bundling and managed delivery",
+        ],
+        provider: { "@id": orgId() },
+        offers: {
+          "@type": "Offer",
+          url: absoluteUrl("/marketplace"),
+          description:
+            "Browse and purchase digital transformation services with clear pricing and timelines.",
+          availability: "https://schema.org/InStock",
         },
       },
     ],

@@ -9,9 +9,9 @@ export type ServicePackageCta = {
 export function getServicePackageCta(serviceType: ServiceTypeId): ServicePackageCta {
   switch (serviceType) {
     case "advisory":
-      return { label: "Start here", intent: "consultation" };
     case "design":
     case "ai_design":
+      return { label: "Get started", intent: "consultation" };
     case "deploy":
     case "ai_deploy":
       return { label: "Get a quote", intent: "quote" };
@@ -82,23 +82,20 @@ export function mapServiceToNeed(
   serviceType?: string,
   intent?: string
 ): ContactNeed {
-  if (intent === "consultation") {
-    return "Advisory & Strategy";
-  }
-
   switch (serviceType) {
     case "advisory":
+    case "manage":
       return "Advisory & Strategy";
     case "design":
     case "ai_design":
       return "Diagnostic Assessment";
     case "deploy":
     case "ai_deploy":
-      return "Implementation Support";
+      return intent === "consultation" ? "Advisory & Strategy" : "Implementation Support";
     case "bundle":
       return "Transformation Programme";
     default:
-      return "General Enquiry";
+      return intent === "consultation" ? "Advisory & Strategy" : "General Enquiry";
   }
 }
 
@@ -110,7 +107,11 @@ export function buildServiceEnquiryMessage(
   if (serviceType === "bundle") {
     return `I would like to request a proposal for: ${serviceName}`;
   }
-  if (serviceType === "advisory") {
+  if (
+    serviceType === "advisory" ||
+    serviceType === "design" ||
+    serviceType === "ai_design"
+  ) {
     return `I'd like to get started with: ${serviceName}`;
   }
   if (intent === "consultation" || serviceType === "manage") {

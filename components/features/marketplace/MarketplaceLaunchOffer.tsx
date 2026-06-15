@@ -3,6 +3,7 @@ import { ArrowRight } from "lucide-react";
 import {
   LAUNCH_ADVISORY_CTA_LABEL,
   LAUNCH_ADVISORY_EYEBROW,
+  LAUNCH_ADVISORY_HEADLINE,
   LAUNCH_ADVISORY_SUBCOPY,
   buildLaunchAdvisoryContactPath,
 } from "@/lib/launchOffering";
@@ -40,8 +41,7 @@ const MarketplaceLaunchOffer = () => {
             id="marketplace-launch-offer-heading"
             className="mx-auto max-w-2xl text-balance text-3xl font-semibold leading-[1.05] tracking-tight text-white md:text-4xl lg:text-[2.75rem]"
           >
-            Start with a free{" "}
-            <span className="text-dq-orange">transformation advisory.</span>
+            {LAUNCH_ADVISORY_HEADLINE}
           </h2>
 
           <p className="mx-auto mt-5 max-w-lg text-[15px] leading-relaxed text-white/60">

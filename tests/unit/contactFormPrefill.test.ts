@@ -48,12 +48,34 @@ describe("contactFormPrefill", () => {
     });
   });
 
+  it("returns enquiry defaults for design services", () => {
+    expect(
+      getServiceEnquiryFormDefaults({
+        service: "CRM Solutions Design",
+        type: "design",
+        collection: "experience",
+        intent: "consultation",
+      })
+    ).toEqual({
+      interest: "Digital Platform & Architecture",
+      need: "Diagnostic Assessment",
+      message: "I'd like to get started with: CRM Solutions Design",
+    });
+  });
+
   it("maps service stages to package CTA labels", () => {
     expect(getServicePackageCta("advisory")).toEqual({
-      label: "Start here",
+      label: "Get started",
       intent: "consultation",
     });
-    expect(getServicePackageCta("design").label).toBe("Get a quote");
+    expect(getServicePackageCta("design")).toEqual({
+      label: "Get started",
+      intent: "consultation",
+    });
+    expect(getServicePackageCta("ai_design")).toEqual({
+      label: "Get started",
+      intent: "consultation",
+    });
     expect(getServicePackageCta("manage").label).toBe("Talk to our team");
     expect(getServicePackageCta("bundle")).toEqual({
       label: "Request proposal",

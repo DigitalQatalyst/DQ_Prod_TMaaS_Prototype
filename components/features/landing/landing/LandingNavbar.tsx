@@ -9,7 +9,7 @@ import TMaaSLogo from "@/components/features/landing/TMaaSLogo";
 import ExploreDigitalQatalystCta from "@/components/features/landing/ExploreDigitalQatalystCta";
 import { btnPrimary } from "@/lib/brandAccent";
 import { NAV_BROWSE_MARKETPLACE_LABEL } from "@/lib/brandLinks";
-import { LAUNCH_ADVISORY_CTA_LABEL, buildLaunchAdvisoryContactPath } from "@/lib/launchOffering";
+import { LAUNCH_ADVISORY_NAV_CTA_LABEL, buildLaunchAdvisoryContactPath } from "@/lib/launchOffering";
 import { featureFlags } from "@/lib/featureFlags";
 import { cn } from "@/lib/utils";
 
@@ -76,7 +76,7 @@ const LandingNavbarInner = () => {
             <Link href={launchAdvisoryPath}
               className={cn(btnPrimary, "hidden px-4 py-2 md:inline-flex", isOnLaunchAdvisory && "ring-2 ring-dq-orange ring-offset-2")}
             >
-              {LAUNCH_ADVISORY_CTA_LABEL}
+              {LAUNCH_ADVISORY_NAV_CTA_LABEL}
             </Link>
           )}
 
@@ -127,7 +127,7 @@ const LandingNavbarInner = () => {
               onClick={() => setMobileOpen(false)}
               className={cn(btnPrimary, "mt-3 w-full py-3 text-center")}
             >
-              {LAUNCH_ADVISORY_CTA_LABEL}
+              {LAUNCH_ADVISORY_NAV_CTA_LABEL}
             </Link>
           )}
         </div>
