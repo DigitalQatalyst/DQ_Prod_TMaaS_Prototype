@@ -16,7 +16,6 @@ import WhyTmaasSection from "@/components/features/landing/landing/v2/WhyTmaasSe
 import HowItWorksSection from "@/components/features/landing/landing/v2/HowItWorksSection";
 import ClientOutcomesSection from "@/components/features/landing/landing/v2/ClientOutcomesSection";
 import MarketplacePreviewSection from "@/components/features/landing/landing/v2/MarketplacePreviewSection";
-import DqLineageStatsBand from "@/components/features/landing/landing/v2/DqLineageStatsBand";
 import LandingCtaSection from "@/components/features/landing/landing/v2/LandingCtaSection";
 import LandingNavbar from "@/components/features/landing/landing/LandingNavbar";
 import Footer from "@/components/features/landing/Footer";
@@ -31,7 +30,6 @@ export default function HomePage() {
         <HowItWorksSection />
         <ClientOutcomesSection />
         <MarketplacePreviewSection />
-        <DqLineageStatsBand />
         <LandingCtaSection />
       </main>
       <Footer />

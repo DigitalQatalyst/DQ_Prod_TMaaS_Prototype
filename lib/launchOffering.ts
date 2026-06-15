@@ -9,10 +9,10 @@ export const LAUNCH_ADVISORY_NAV_CTA_LABEL = "Claim Your Free Advisory";
 export const LAUNCH_ADVISORY_EYEBROW = "Register by June";
 
 export const LAUNCH_ADVISORY_HEADLINE =
-  "Your First 3 Months of End-to-End Transformation Advisory — On Us.";
+  "3 months of transformation advisory, free.";
 
 export const LAUNCH_ADVISORY_SUBCOPY =
-  "Get full access to DQ's transformation framework at no cost. Terms and conditions apply.";
+  "Expert guidance from day one. No fee to get started. Terms apply.";
 
 export function buildLaunchAdvisoryContactPath(): string {
   const params = new URLSearchParams({
