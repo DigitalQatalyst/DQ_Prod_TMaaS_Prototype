@@ -1,6 +1,211 @@
 {
   "app": {
+    "[project]/Documents/wip_repos/DQ_DBP/DQ_Prod_TMaaS_Prototype/app/(auth)/sign-in/page": [
+      "static/media/fba5a26ea33df6a3-s.p.18rizl4rsrl42.woff2",
+      "static/media/70bc3e132a0a741e-s.p.3t6q91iet4nsy.woff2",
+      "static/media/0c89a48fa5027cee-s.p.2cyn07wtgehh0.woff2"
+    ],
+    "[project]/Documents/wip_repos/DQ_DBP/DQ_Prod_TMaaS_Prototype/app/(legal)/faq/page": [
+      "static/media/fba5a26ea33df6a3-s.p.18rizl4rsrl42.woff2",
+      "static/media/70bc3e132a0a741e-s.p.3t6q91iet4nsy.woff2",
+      "static/media/0c89a48fa5027cee-s.p.2cyn07wtgehh0.woff2"
+    ],
+    "[project]/Documents/wip_repos/DQ_DBP/DQ_Prod_TMaaS_Prototype/app/(legal)/legal/page": [
+      "static/media/fba5a26ea33df6a3-s.p.18rizl4rsrl42.woff2",
+      "static/media/70bc3e132a0a741e-s.p.3t6q91iet4nsy.woff2",
+      "static/media/0c89a48fa5027cee-s.p.2cyn07wtgehh0.woff2"
+    ],
+    "[project]/Documents/wip_repos/DQ_DBP/DQ_Prod_TMaaS_Prototype/app/(legal)/privacy/page": [
+      "static/media/fba5a26ea33df6a3-s.p.18rizl4rsrl42.woff2",
+      "static/media/70bc3e132a0a741e-s.p.3t6q91iet4nsy.woff2",
+      "static/media/0c89a48fa5027cee-s.p.2cyn07wtgehh0.woff2"
+    ],
+    "[project]/Documents/wip_repos/DQ_DBP/DQ_Prod_TMaaS_Prototype/app/(legal)/terms/page": [
+      "static/media/fba5a26ea33df6a3-s.p.18rizl4rsrl42.woff2",
+      "static/media/70bc3e132a0a741e-s.p.3t6q91iet4nsy.woff2",
+      "static/media/0c89a48fa5027cee-s.p.2cyn07wtgehh0.woff2"
+    ],
+    "[project]/Documents/wip_repos/DQ_DBP/DQ_Prod_TMaaS_Prototype/app/(onboarding)/access/page": [
+      "static/media/fba5a26ea33df6a3-s.p.18rizl4rsrl42.woff2",
+      "static/media/70bc3e132a0a741e-s.p.3t6q91iet4nsy.woff2",
+      "static/media/0c89a48fa5027cee-s.p.2cyn07wtgehh0.woff2"
+    ],
+    "[project]/Documents/wip_repos/DQ_DBP/DQ_Prod_TMaaS_Prototype/app/(onboarding)/complete/page": [
+      "static/media/fba5a26ea33df6a3-s.p.18rizl4rsrl42.woff2",
+      "static/media/70bc3e132a0a741e-s.p.3t6q91iet4nsy.woff2",
+      "static/media/0c89a48fa5027cee-s.p.2cyn07wtgehh0.woff2"
+    ],
+    "[project]/Documents/wip_repos/DQ_DBP/DQ_Prod_TMaaS_Prototype/app/(onboarding)/organisation/page": [
+      "static/media/fba5a26ea33df6a3-s.p.18rizl4rsrl42.woff2",
+      "static/media/70bc3e132a0a741e-s.p.3t6q91iet4nsy.woff2",
+      "static/media/0c89a48fa5027cee-s.p.2cyn07wtgehh0.woff2"
+    ],
+    "[project]/Documents/wip_repos/DQ_DBP/DQ_Prod_TMaaS_Prototype/app/(onboarding)/profile/page": [
+      "static/media/fba5a26ea33df6a3-s.p.18rizl4rsrl42.woff2",
+      "static/media/70bc3e132a0a741e-s.p.3t6q91iet4nsy.woff2",
+      "static/media/0c89a48fa5027cee-s.p.2cyn07wtgehh0.woff2"
+    ],
     "[project]/Documents/wip_repos/DQ_DBP/DQ_Prod_TMaaS_Prototype/app/_not-found/page": [
+      "static/media/fba5a26ea33df6a3-s.p.18rizl4rsrl42.woff2",
+      "static/media/70bc3e132a0a741e-s.p.3t6q91iet4nsy.woff2",
+      "static/media/0c89a48fa5027cee-s.p.2cyn07wtgehh0.woff2"
+    ],
+    "[project]/Documents/wip_repos/DQ_DBP/DQ_Prod_TMaaS_Prototype/app/butler/page": [
+      "static/media/fba5a26ea33df6a3-s.p.18rizl4rsrl42.woff2",
+      "static/media/70bc3e132a0a741e-s.p.3t6q91iet4nsy.woff2",
+      "static/media/0c89a48fa5027cee-s.p.2cyn07wtgehh0.woff2"
+    ],
+    "[project]/Documents/wip_repos/DQ_DBP/DQ_Prod_TMaaS_Prototype/app/cart/page": [
+      "static/media/fba5a26ea33df6a3-s.p.18rizl4rsrl42.woff2",
+      "static/media/70bc3e132a0a741e-s.p.3t6q91iet4nsy.woff2",
+      "static/media/0c89a48fa5027cee-s.p.2cyn07wtgehh0.woff2"
+    ],
+    "[project]/Documents/wip_repos/DQ_DBP/DQ_Prod_TMaaS_Prototype/app/contact/page": [
+      "static/media/fba5a26ea33df6a3-s.p.18rizl4rsrl42.woff2",
+      "static/media/70bc3e132a0a741e-s.p.3t6q91iet4nsy.woff2",
+      "static/media/0c89a48fa5027cee-s.p.2cyn07wtgehh0.woff2"
+    ],
+    "[project]/Documents/wip_repos/DQ_DBP/DQ_Prod_TMaaS_Prototype/app/dashboard/(account)/organisation/page": [
+      "static/media/fba5a26ea33df6a3-s.p.18rizl4rsrl42.woff2",
+      "static/media/70bc3e132a0a741e-s.p.3t6q91iet4nsy.woff2",
+      "static/media/0c89a48fa5027cee-s.p.2cyn07wtgehh0.woff2"
+    ],
+    "[project]/Documents/wip_repos/DQ_DBP/DQ_Prod_TMaaS_Prototype/app/dashboard/(account)/profile/page": [
+      "static/media/fba5a26ea33df6a3-s.p.18rizl4rsrl42.woff2",
+      "static/media/70bc3e132a0a741e-s.p.3t6q91iet4nsy.woff2",
+      "static/media/0c89a48fa5027cee-s.p.2cyn07wtgehh0.woff2"
+    ],
+    "[project]/Documents/wip_repos/DQ_DBP/DQ_Prod_TMaaS_Prototype/app/dashboard/(account)/settings/page": [
+      "static/media/fba5a26ea33df6a3-s.p.18rizl4rsrl42.woff2",
+      "static/media/70bc3e132a0a741e-s.p.3t6q91iet4nsy.woff2",
+      "static/media/0c89a48fa5027cee-s.p.2cyn07wtgehh0.woff2"
+    ],
+    "[project]/Documents/wip_repos/DQ_DBP/DQ_Prod_TMaaS_Prototype/app/dashboard/(admin)/catalogue/page": [
+      "static/media/fba5a26ea33df6a3-s.p.18rizl4rsrl42.woff2",
+      "static/media/70bc3e132a0a741e-s.p.3t6q91iet4nsy.woff2",
+      "static/media/0c89a48fa5027cee-s.p.2cyn07wtgehh0.woff2"
+    ],
+    "[project]/Documents/wip_repos/DQ_DBP/DQ_Prod_TMaaS_Prototype/app/dashboard/(admin)/org-admin/page": [
+      "static/media/fba5a26ea33df6a3-s.p.18rizl4rsrl42.woff2",
+      "static/media/70bc3e132a0a741e-s.p.3t6q91iet4nsy.woff2",
+      "static/media/0c89a48fa5027cee-s.p.2cyn07wtgehh0.woff2"
+    ],
+    "[project]/Documents/wip_repos/DQ_DBP/DQ_Prod_TMaaS_Prototype/app/dashboard/(admin)/organisations/page": [
+      "static/media/fba5a26ea33df6a3-s.p.18rizl4rsrl42.woff2",
+      "static/media/70bc3e132a0a741e-s.p.3t6q91iet4nsy.woff2",
+      "static/media/0c89a48fa5027cee-s.p.2cyn07wtgehh0.woff2"
+    ],
+    "[project]/Documents/wip_repos/DQ_DBP/DQ_Prod_TMaaS_Prototype/app/dashboard/(admin)/users/page": [
+      "static/media/fba5a26ea33df6a3-s.p.18rizl4rsrl42.woff2",
+      "static/media/70bc3e132a0a741e-s.p.3t6q91iet4nsy.woff2",
+      "static/media/0c89a48fa5027cee-s.p.2cyn07wtgehh0.woff2"
+    ],
+    "[project]/Documents/wip_repos/DQ_DBP/DQ_Prod_TMaaS_Prototype/app/dashboard/(comms)/calendar/page": [
+      "static/media/fba5a26ea33df6a3-s.p.18rizl4rsrl42.woff2",
+      "static/media/70bc3e132a0a741e-s.p.3t6q91iet4nsy.woff2",
+      "static/media/0c89a48fa5027cee-s.p.2cyn07wtgehh0.woff2"
+    ],
+    "[project]/Documents/wip_repos/DQ_DBP/DQ_Prod_TMaaS_Prototype/app/dashboard/(comms)/inbox/page": [
+      "static/media/fba5a26ea33df6a3-s.p.18rizl4rsrl42.woff2",
+      "static/media/70bc3e132a0a741e-s.p.3t6q91iet4nsy.woff2",
+      "static/media/0c89a48fa5027cee-s.p.2cyn07wtgehh0.woff2"
+    ],
+    "[project]/Documents/wip_repos/DQ_DBP/DQ_Prod_TMaaS_Prototype/app/dashboard/(comms)/notifications/page": [
+      "static/media/fba5a26ea33df6a3-s.p.18rizl4rsrl42.woff2",
+      "static/media/70bc3e132a0a741e-s.p.3t6q91iet4nsy.woff2",
+      "static/media/0c89a48fa5027cee-s.p.2cyn07wtgehh0.woff2"
+    ],
+    "[project]/Documents/wip_repos/DQ_DBP/DQ_Prod_TMaaS_Prototype/app/dashboard/(docs)/documents/page": [
+      "static/media/fba5a26ea33df6a3-s.p.18rizl4rsrl42.woff2",
+      "static/media/70bc3e132a0a741e-s.p.3t6q91iet4nsy.woff2",
+      "static/media/0c89a48fa5027cee-s.p.2cyn07wtgehh0.woff2"
+    ],
+    "[project]/Documents/wip_repos/DQ_DBP/DQ_Prod_TMaaS_Prototype/app/dashboard/(support)/help-content/page": [
+      "static/media/fba5a26ea33df6a3-s.p.18rizl4rsrl42.woff2",
+      "static/media/70bc3e132a0a741e-s.p.3t6q91iet4nsy.woff2",
+      "static/media/0c89a48fa5027cee-s.p.2cyn07wtgehh0.woff2"
+    ],
+    "[project]/Documents/wip_repos/DQ_DBP/DQ_Prod_TMaaS_Prototype/app/dashboard/(support)/help/page": [
+      "static/media/fba5a26ea33df6a3-s.p.18rizl4rsrl42.woff2",
+      "static/media/70bc3e132a0a741e-s.p.3t6q91iet4nsy.woff2",
+      "static/media/0c89a48fa5027cee-s.p.2cyn07wtgehh0.woff2"
+    ],
+    "[project]/Documents/wip_repos/DQ_DBP/DQ_Prod_TMaaS_Prototype/app/dashboard/(support)/support/page": [
+      "static/media/fba5a26ea33df6a3-s.p.18rizl4rsrl42.woff2",
+      "static/media/70bc3e132a0a741e-s.p.3t6q91iet4nsy.woff2",
+      "static/media/0c89a48fa5027cee-s.p.2cyn07wtgehh0.woff2"
+    ],
+    "[project]/Documents/wip_repos/DQ_DBP/DQ_Prod_TMaaS_Prototype/app/dashboard/active-services/page": [
+      "static/media/fba5a26ea33df6a3-s.p.18rizl4rsrl42.woff2",
+      "static/media/70bc3e132a0a741e-s.p.3t6q91iet4nsy.woff2",
+      "static/media/0c89a48fa5027cee-s.p.2cyn07wtgehh0.woff2"
+    ],
+    "[project]/Documents/wip_repos/DQ_DBP/DQ_Prod_TMaaS_Prototype/app/dashboard/dq/finance/page": [
+      "static/media/fba5a26ea33df6a3-s.p.18rizl4rsrl42.woff2",
+      "static/media/70bc3e132a0a741e-s.p.3t6q91iet4nsy.woff2",
+      "static/media/0c89a48fa5027cee-s.p.2cyn07wtgehh0.woff2"
+    ],
+    "[project]/Documents/wip_repos/DQ_DBP/DQ_Prod_TMaaS_Prototype/app/dashboard/dq/invoices/page": [
+      "static/media/fba5a26ea33df6a3-s.p.18rizl4rsrl42.woff2",
+      "static/media/70bc3e132a0a741e-s.p.3t6q91iet4nsy.woff2",
+      "static/media/0c89a48fa5027cee-s.p.2cyn07wtgehh0.woff2"
+    ],
+    "[project]/Documents/wip_repos/DQ_DBP/DQ_Prod_TMaaS_Prototype/app/dashboard/dq/onboarding/page": [
+      "static/media/fba5a26ea33df6a3-s.p.18rizl4rsrl42.woff2",
+      "static/media/70bc3e132a0a741e-s.p.3t6q91iet4nsy.woff2",
+      "static/media/0c89a48fa5027cee-s.p.2cyn07wtgehh0.woff2"
+    ],
+    "[project]/Documents/wip_repos/DQ_DBP/DQ_Prod_TMaaS_Prototype/app/dashboard/dq/portfolio/page": [
+      "static/media/fba5a26ea33df6a3-s.p.18rizl4rsrl42.woff2",
+      "static/media/70bc3e132a0a741e-s.p.3t6q91iet4nsy.woff2",
+      "static/media/0c89a48fa5027cee-s.p.2cyn07wtgehh0.woff2"
+    ],
+    "[project]/Documents/wip_repos/DQ_DBP/DQ_Prod_TMaaS_Prototype/app/dashboard/dq/queue/page": [
+      "static/media/fba5a26ea33df6a3-s.p.18rizl4rsrl42.woff2",
+      "static/media/70bc3e132a0a741e-s.p.3t6q91iet4nsy.woff2",
+      "static/media/0c89a48fa5027cee-s.p.2cyn07wtgehh0.woff2"
+    ],
+    "[project]/Documents/wip_repos/DQ_DBP/DQ_Prod_TMaaS_Prototype/app/dashboard/dq/support-ops/page": [
+      "static/media/fba5a26ea33df6a3-s.p.18rizl4rsrl42.woff2",
+      "static/media/70bc3e132a0a741e-s.p.3t6q91iet4nsy.woff2",
+      "static/media/0c89a48fa5027cee-s.p.2cyn07wtgehh0.woff2"
+    ],
+    "[project]/Documents/wip_repos/DQ_DBP/DQ_Prod_TMaaS_Prototype/app/dashboard/engagements/[id]/page": [
+      "static/media/fba5a26ea33df6a3-s.p.18rizl4rsrl42.woff2",
+      "static/media/70bc3e132a0a741e-s.p.3t6q91iet4nsy.woff2",
+      "static/media/0c89a48fa5027cee-s.p.2cyn07wtgehh0.woff2"
+    ],
+    "[project]/Documents/wip_repos/DQ_DBP/DQ_Prod_TMaaS_Prototype/app/dashboard/engagements/page": [
+      "static/media/fba5a26ea33df6a3-s.p.18rizl4rsrl42.woff2",
+      "static/media/70bc3e132a0a741e-s.p.3t6q91iet4nsy.woff2",
+      "static/media/0c89a48fa5027cee-s.p.2cyn07wtgehh0.woff2"
+    ],
+    "[project]/Documents/wip_repos/DQ_DBP/DQ_Prod_TMaaS_Prototype/app/dashboard/overview/page": [
+      "static/media/fba5a26ea33df6a3-s.p.18rizl4rsrl42.woff2",
+      "static/media/70bc3e132a0a741e-s.p.3t6q91iet4nsy.woff2",
+      "static/media/0c89a48fa5027cee-s.p.2cyn07wtgehh0.woff2"
+    ],
+    "[project]/Documents/wip_repos/DQ_DBP/DQ_Prod_TMaaS_Prototype/app/dashboard/service-orders/[id]/page": [
+      "static/media/fba5a26ea33df6a3-s.p.18rizl4rsrl42.woff2",
+      "static/media/70bc3e132a0a741e-s.p.3t6q91iet4nsy.woff2",
+      "static/media/0c89a48fa5027cee-s.p.2cyn07wtgehh0.woff2"
+    ],
+    "[project]/Documents/wip_repos/DQ_DBP/DQ_Prod_TMaaS_Prototype/app/dashboard/service-orders/page": [
+      "static/media/fba5a26ea33df6a3-s.p.18rizl4rsrl42.woff2",
+      "static/media/70bc3e132a0a741e-s.p.3t6q91iet4nsy.woff2",
+      "static/media/0c89a48fa5027cee-s.p.2cyn07wtgehh0.woff2"
+    ],
+    "[project]/Documents/wip_repos/DQ_DBP/DQ_Prod_TMaaS_Prototype/app/explore/page": [
+      "static/media/fba5a26ea33df6a3-s.p.18rizl4rsrl42.woff2",
+      "static/media/70bc3e132a0a741e-s.p.3t6q91iet4nsy.woff2",
+      "static/media/0c89a48fa5027cee-s.p.2cyn07wtgehh0.woff2"
+    ],
+    "[project]/Documents/wip_repos/DQ_DBP/DQ_Prod_TMaaS_Prototype/app/marketplace/[slug]/page": [
+      "static/media/fba5a26ea33df6a3-s.p.18rizl4rsrl42.woff2",
+      "static/media/70bc3e132a0a741e-s.p.3t6q91iet4nsy.woff2",
+      "static/media/0c89a48fa5027cee-s.p.2cyn07wtgehh0.woff2"
+    ],
+    "[project]/Documents/wip_repos/DQ_DBP/DQ_Prod_TMaaS_Prototype/app/marketplace/page": [
       "static/media/fba5a26ea33df6a3-s.p.18rizl4rsrl42.woff2",
       "static/media/70bc3e132a0a741e-s.p.3t6q91iet4nsy.woff2",
       "static/media/0c89a48fa5027cee-s.p.2cyn07wtgehh0.woff2"
