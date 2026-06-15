@@ -481,24 +481,40 @@ export async function fetchCatalogPage(params: CatalogListParams): Promise<Catal
   const from = (page - 1) * pageSize;
   const to = from + pageSize - 1;
 
-  const { data, count, error } = await query.range(from, to);
-  if (error) throw error;
+  try {
+    const { data, count, error } = await query.range(from, to);
+    if (error) throw error;
 
-  const variantIds = (data ?? []).map((row) => row.variant_id as number);
-  const services = await fetchServicesByVariantIds(variantIds);
+    const variantIds = (data ?? []).map((row) => row.variant_id as number);
+    const services = await fetchServicesByVariantIds(variantIds);
 
-  return {
-    services,
-    totalCount: count ?? services.length,
-  };
+    return {
+      services,
+      totalCount: count ?? services.length,
+    };
+  } catch (err) {
+    console.error("[catalog] fetchCatalogPage failed, falling back to static data:", err);
+    const catalog = await loadStaticCatalog();
+    const filtered = filterCatalogServices(catalog, params);
+    const start = (params.page - 1) * params.pageSize;
+    return {
+      services: filtered.slice(start, start + params.pageSize),
+      totalCount: filtered.length,
+    };
+  }
 }
 
 export async function fetchCatalog(): Promise<ServiceProduct[]> {
   if (!shouldUseSupabaseCatalog()) return loadStaticCatalog();
 
-  const catalog = await fetchCatalogFromSupabase();
-  writeCachedCatalog(catalog);
-  return catalog;
+  try {
+    const catalog = await fetchCatalogFromSupabase();
+    writeCachedCatalog(catalog);
+    return catalog;
+  } catch (err) {
+    console.error("[catalog] fetchCatalog failed, falling back to static data:", err);
+    return loadStaticCatalog();
+  }
 }
 
 export async function fetchServiceById(id: number): Promise<ServiceProduct | undefined> {
@@ -507,17 +523,22 @@ export async function fetchServiceById(id: number): Promise<ServiceProduct | und
   const supabase = getSupabaseClient();
   if (!supabase) return loadStaticServiceById(id);
 
-  const { data, error } = await supabase
-    .from("marketplace_listings_view")
-    .select(LISTING_COLUMNS)
-    .eq("variant_id", id)
-    .maybeSingle();
+  try {
+    const { data, error } = await supabase
+      .from("marketplace_listings_view")
+      .select(LISTING_COLUMNS)
+      .eq("variant_id", id)
+      .maybeSingle();
 
-  if (error) throw error;
-  if (!data) return undefined;
+    if (error) throw error;
+    if (!data) return undefined;
 
-  const extras = await fetchVariantExtras([id]);
-  return mapRowToServiceProduct(data as ListingViewRow, extras);
+    const extras = await fetchVariantExtras([id]);
+    return mapRowToServiceProduct(data as ListingViewRow, extras);
+  } catch (err) {
+    console.error(`[catalog] fetchServiceById(${id}) failed, falling back to static data:`, err);
+    return loadStaticServiceById(id);
+  }
 }
 
 export async function fetchBestSellers(
@@ -528,8 +549,13 @@ export async function fetchBestSellers(
     return loadStaticBestSellers(collection as StaticBestSellersCollection, limit);
   }
 
-  const catalog = await fetchCatalog();
-  return pickTopServicesByPopularity(catalog, collection, limit);
+  try {
+    const catalog = await fetchCatalog();
+    return pickTopServicesByPopularity(catalog, collection, limit);
+  } catch (err) {
+    console.error("[catalog] fetchBestSellers failed, falling back to static data:", err);
+    return loadStaticBestSellers(collection as StaticBestSellersCollection, limit);
+  }
 }
 
 type ProductContentPdpRow = {
@@ -673,10 +699,18 @@ export async function fetchServiceDetail(id: number): Promise<ServiceDetailPaylo
   const service = await fetchServiceById(id);
   if (!service) return undefined;
 
-  const [deployModules, pdpContent] = await Promise.all([
-    fetchDeployModulesForService(service.standardName, service.id),
-    fetchPdpContent(id),
-  ]);
+  let deployModules: DeployModule[] = [];
+  let pdpContent: PdpContent | undefined;
+
+  try {
+    [deployModules, pdpContent] = await Promise.all([
+      fetchDeployModulesForService(service.standardName, service.id),
+      fetchPdpContent(id),
+    ]);
+  } catch (err) {
+    console.error(`[catalog] fetchServiceDetail(${id}) enrichment failed, using base service:`, err);
+    deployModules = await loadStaticDeployModules(service.standardName);
+  }
 
   const enrichedService =
     pdpContent?.heroSummary != null ? { ...service, description: pdpContent.heroSummary } : service;

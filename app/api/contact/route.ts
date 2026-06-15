@@ -65,11 +65,11 @@ function buildEmailHtml(fields: {
   firstName: string;
   lastName: string;
   email: string;
-  phone?: string;
+  phone?: string | undefined;
   organisation: string;
-  role?: string;
-  interest?: string;
-  need?: string;
+  role?: string | undefined;
+  interest?: string | undefined;
+  need?: string | undefined;
   message: string;
   consent: boolean;
 }): string {
@@ -129,8 +129,9 @@ const contactSchema = z.object({
 
 export async function POST(request: NextRequest) {
   try {
+    const forwarded = request.headers.get("x-forwarded-for");
     const ip =
-      request.headers.get("x-forwarded-for")?.split(",")[0].trim() ??
+      (forwarded ? forwarded.split(",")[0]?.trim() : undefined) ??
       request.headers.get("x-real-ip") ??
       "unknown";
 
@@ -188,7 +189,7 @@ export async function POST(request: NextRequest) {
         subject: `TMaaS Contact Request from ${firstName} ${lastName} - ${organisation}`,
         body: {
           contentType: "HTML",
-          content: buildEmailHtml({ firstName, lastName, email, phone, organisation, role, interest, need, message, consent }),
+          content: buildEmailHtml({ firstName, lastName, email, phone: phone ?? undefined, organisation, role: role ?? undefined, interest: interest ?? undefined, need: need ?? undefined, message, consent }),
         },
         toRecipients: [{ emailAddress: { address: MSGRAPH_RECIPIENT_EMAIL } }],
         replyTo: [{ emailAddress: { address: email, name: `${firstName} ${lastName}` } }],
