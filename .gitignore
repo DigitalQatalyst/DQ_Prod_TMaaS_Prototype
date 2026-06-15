@@ -19,9 +19,6 @@ out/
 # Local Supabase CLI state, seeds, and migrations (managed outside this repo)
 /supabase/
 
-# Local DBA setup pack (schema migrations + seeds for clean prod DB — share offline)
-/database-setup-pack/
-
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json

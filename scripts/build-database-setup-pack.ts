@@ -1,5 +1,5 @@
 /**
- * Builds database-setup-pack/ — gitignored clean-prod migration pack.
+ * Builds release-1-database-setup/ — clean-prod migration pack for Release 1.
  * Sources:
  *   - Schema DDL from git history (pre-supabase untrack)
  *   - Base catalog INSERT from git 08 (structure + rows only; copy superseded in 09–10)
@@ -12,7 +12,7 @@ import { mkdirSync, readFileSync, readdirSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
 
 const root = process.cwd();
-const packRoot = join(root, "database-setup-pack");
+const packRoot = join(root, "release-1-database-setup");
 const migrationsDir = join(packRoot, "migrations");
 const gitRef = "a648937^";
 
@@ -107,9 +107,9 @@ function main() {
     ].join("\n");
   });
 
-  const readme = `# TMaaS Database Setup Pack
+  const readme = `# TMaaS Release 1 — Database Setup
 
-Gitignored pack for a **clean** Supabase production database with **non-generic catalog copy**.
+Migration pack for a **clean** Supabase production database with **non-generic catalog copy**.
 
 Aligned with \`workspace/dba-catalog-copy/handoff.md\`.
 
@@ -184,7 +184,7 @@ echo "Done. Run: SELECT refresh_product_search_index();"
 `;
   writeFileSync(join(packRoot, "apply-all.sh"), applySh, { mode: 0o755 });
 
-  console.log(`\\nPack ready at database-setup-pack/ (${written.length} migrations + 00_apply_all.sql)`);
+  console.log(`\\nPack ready at release-1-database-setup/ (${written.length} migrations + 00_apply_all.sql)`);
 }
 
 main();

@@ -18,9 +18,8 @@ TMaaS (Transformation Management as a Service) marketplace prototype — Next.js
 
 ## [SECTION: Database setup pack]
 
-- **Regenerate:** `npm run db:setup-pack` → `database-setup-pack/` (gitignored).
-- **Apply on empty DB:** `00_apply_all.sql` or `migrations/01`–`13` in order. Card + PDP copy (09–10) come from `workspace/dba-catalog-copy/` (handoff authority) — do not mix in legacy git `seed_pdp_content` migrations.
-- **Populated DB:** run only workspace `update-card-content.sql` + `seed_pdp_content.sql` (same content as pack 09–10).
+- **Regenerate:** `npm run db:setup-pack` → `release-1-database-setup/`.
+- **Apply on empty DB:** `release-1-database-setup/00_apply_all.sql` or `migrations/01`–`13` in order. Card + PDP copy (09–10) come from `workspace/dba-catalog-copy/` (handoff authority).
 
 ## [SECTION: Catalog CSV Guidelines]
 
