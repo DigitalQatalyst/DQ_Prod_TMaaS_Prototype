@@ -16,6 +16,11 @@ TMaaS (Transformation Management as a Service) marketplace prototype — Next.js
 - **Remove stale assets:** delete legacy `public/favicon.svg` and old `app/favicon.ico` when replacing — browsers request `/favicon.ico` by default and cache aggressively.
 - **Verify:** `curl -s http://127.0.0.1:3000/ | grep -i 'rel="icon"'` should list hashed `/favicon.ico`, `/icon.png`, and `/apple-icon.png` routes.
 
+## [SECTION: Database setup pack]
+
+- **Regenerate:** `npm run db:setup-pack` → `release-1-database-setup/`.
+- **Apply on empty DB:** `release-1-database-setup/00_apply_all.sql` or `migrations/01`–`13` in order. Card + PDP copy (09–10) come from `workspace/dba-catalog-copy/` (handoff authority).
+
 ## [SECTION: Catalog CSV Guidelines]
 
 - **Source of truth for copy:** `.service-catalog/products.csv` (35 rows) and `.service-catalog/product_variants.csv` (221 rows).

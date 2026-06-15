@@ -23,6 +23,7 @@
     "db:pdp-content:sql": "tsx scripts/generate-pdp-content-sql.ts",
     "db:card-content:sql": "tsx scripts/generate-card-content-update-sql.ts",
     "db:display-labels:sql": "tsx scripts/generate-display-labels-migration.ts",
+    "db:setup-pack": "tsx scripts/build-database-setup-pack.ts",
     "catalog:sync-variant-copy": "tsx scripts/sync-variant-seo-copy-to-fixture.ts",
     "catalog:generate": "tsx scripts/generate-catalog-copy.ts",
     "catalog:validate": "tsx scripts/validate-catalog-csv.ts",
