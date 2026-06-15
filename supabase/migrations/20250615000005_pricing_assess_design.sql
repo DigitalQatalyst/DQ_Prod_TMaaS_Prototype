@@ -3,7 +3,7 @@ UPDATE variant_prices vp
 SET price_display = 'From $1,000',
     amount        = 1000,
     price_type    = 'from'
-FROM listings l
+FROM marketplace_listings l
 JOIN product_variants v ON l.variant_id = v.id
 WHERE vp.listing_id = l.id
   AND v.service_type_id = 'advisory'
@@ -13,7 +13,7 @@ WHERE vp.listing_id = l.id
 UPDATE variant_prices vp
 SET price_display = 'From $2,000',
     amount        = 2000
-FROM listings l
+FROM marketplace_listings l
 JOIN product_variants v ON l.variant_id = v.id
 WHERE vp.listing_id = l.id
   AND v.service_type_id = 'design'
