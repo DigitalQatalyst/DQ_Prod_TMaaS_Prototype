@@ -7,7 +7,14 @@ alwaysApply: true
 # DQ TMaaS AI Coding Standards
 
 ## Project Overview
-TMaaS (Technology Management as a Service) marketplace prototype — Next.js 16 App Router, TypeScript strict, Tailwind CSS 4, shadcn/ui, Supabase.
+TMaaS (Transformation Management as a Service) marketplace prototype — Next.js 16 App Router, TypeScript strict, Tailwind CSS 4, shadcn/ui, Supabase.
+
+## [SECTION: Favicon / App Icons]
+
+- **Next.js App Router file-based metadata wins.** Put icons in `app/` (`favicon.ico`, `icon.png`, `apple-icon.png`). Do **not** rely on `metadata.icons` in `app/layout.tsx` alone — `app/favicon.ico` overrides it.
+- **Source asset:** `public/favicon.png` (DQ logo). Regenerate `app/favicon.ico` and `public/favicon.ico` from it when the logo changes; keep `app/icon.png` and `app/apple-icon.png` in sync.
+- **Remove stale assets:** delete legacy `public/favicon.svg` and old `app/favicon.ico` when replacing — browsers request `/favicon.ico` by default and cache aggressively.
+- **Verify:** `curl -s http://127.0.0.1:3000/ | grep -i 'rel="icon"'` should list hashed `/favicon.ico`, `/icon.png`, and `/apple-icon.png` routes.
 
 ## [SECTION: Catalog CSV Guidelines]
 
