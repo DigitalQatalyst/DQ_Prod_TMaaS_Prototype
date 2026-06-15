@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import type { Metadata } from "next";
 import MarketplacePageClient from "./_client";
 
@@ -8,5 +9,9 @@ export const metadata: Metadata = {
 };
 
 export default function MarketplacePage() {
-  return <MarketplacePageClient />;
+  return (
+    <Suspense fallback={null}>
+      <MarketplacePageClient />
+    </Suspense>
+  );
 }

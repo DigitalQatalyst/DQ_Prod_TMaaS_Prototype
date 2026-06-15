@@ -198,7 +198,7 @@ function BeforeAfterComparison({
                   title={beforeItem.title}
                   description={beforeItem.description}
                   variant="before"
-                  Icon={BEFORE_ICONS[index % BEFORE_ICONS.length]}
+                  Icon={BEFORE_ICONS[index % BEFORE_ICONS.length]!}
                 />
               </div>
               <div className={`relative h-full px-8 ${rowPadding} ${bottomPadding}`}>
@@ -207,7 +207,7 @@ function BeforeAfterComparison({
                   title={afterItem.title}
                   description={afterItem.description}
                   variant="after"
-                  Icon={AFTER_ICONS[index % AFTER_ICONS.length]}
+                  Icon={AFTER_ICONS[index % AFTER_ICONS.length]!}
                 />
               </div>
             </div>

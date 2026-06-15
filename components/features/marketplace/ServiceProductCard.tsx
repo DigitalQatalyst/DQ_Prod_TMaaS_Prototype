@@ -60,7 +60,7 @@ const ServiceProductCard = ({
     service.serviceType
   );
   const categoryLabel = marketplaceCategoryLabels[service.collection] ?? service.collection;
-  const detailUrl = `/service/${service.id}`;
+  const detailUrl = `/marketplace/${service.id}`;
   const canViewDetail = featureFlags.isEnabled("serviceDetail");
   const canUseCart = featureFlags.isEnabled("cart");
   const ServiceIcon = getServiceIcon(service.collection, service.serviceType);
