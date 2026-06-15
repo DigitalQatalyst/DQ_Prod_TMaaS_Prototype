@@ -10,10 +10,10 @@ function cloneWithId(service: ServiceProduct, id: number): ServiceProduct {
 
 describe("sortCatalogByPopularMix", () => {
   it("interleaves service types instead of grouping by stage popularity", () => {
-    const assessA = cloneWithId(initialServices[0], 1);
-    const designA = cloneWithId(initialServices[1], 2);
-    const deployA = cloneWithId(initialServices[3], 4);
-    const assessB = cloneWithId(initialServices[6], 7);
+    const assessA = cloneWithId(initialServices[0]!, 1);
+    const designA = cloneWithId(initialServices[1]!, 2);
+    const deployA = cloneWithId(initialServices[3]!, 4);
+    const assessB = cloneWithId(initialServices[6]!, 7);
 
     const mixed = sortCatalogByPopularMix([assessA, designA, deployA, assessB]);
 

@@ -79,6 +79,7 @@ export function createSupabaseMock(handlers: Record<string, TableHandler>) {
 export const SAMPLE_LISTING_ROW = {
   listing_id: 11,
   variant_id: 103,
+  slug: "enterprise-data-platform-high-impact-assess-103",
   display_title: "Enterprise Data Platform (High-Impact) - Assess",
   product_title: "Enterprise Data Platform (High-Impact)",
   variant_name: "Assess",

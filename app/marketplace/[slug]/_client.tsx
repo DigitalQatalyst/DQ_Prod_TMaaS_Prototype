@@ -26,9 +26,9 @@ export default function ServiceDetailPageClient({ params }: { params: Promise<{ 
   const router = useRouter();
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [dialogPrompt, setDialogPrompt] = useState("");
-  const variantId = parseInt(slug || "0", 10);
+  const idOrSlug = /^\d+$/.test(slug) ? parseInt(slug, 10) : slug;
 
-  const { data: detail, isLoading } = useServiceDetail(variantId);
+  const { data: detail, isLoading } = useServiceDetail(idOrSlug);
   const service = detail?.service;
 
   const isAdvisoryService = service?.serviceType === "advisory";
