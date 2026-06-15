@@ -40,8 +40,8 @@ function StateItem({
     <li
       className={
         isBefore
-          ? "flex gap-4 rounded-xl border border-gray-100 bg-white p-4 shadow-sm"
-          : "flex gap-4 rounded-xl border border-orange-100/80 bg-white p-4 shadow-sm transition-colors hover:border-dq-orange/25"
+          ? "flex h-full gap-4 rounded-xl border border-gray-100 bg-white p-4 shadow-sm"
+          : "flex h-full gap-4 rounded-xl border border-orange-100/80 bg-white p-4 shadow-sm transition-colors hover:border-dq-orange/25"
       }
     >
       <div
@@ -159,7 +159,7 @@ function BeforeAfterComparison({
       </div>
 
       {/* Desktop: row-aligned grid with original column padding */}
-      <div className="relative hidden lg:grid lg:grid-cols-2 lg:items-start lg:gap-y-3">
+      <div className="relative hidden lg:grid lg:grid-cols-2 lg:gap-y-3">
         <div
           aria-hidden
           className="pointer-events-none absolute inset-0 grid grid-cols-2"
@@ -191,7 +191,7 @@ function BeforeAfterComparison({
           return (
             <div key={beforeItem.title} className="contents">
               <div
-                className={`relative border-r border-gray-200 px-8 ${rowPadding} ${bottomPadding}`}
+                className={`relative h-full border-r border-gray-200 px-8 ${rowPadding} ${bottomPadding}`}
               >
                 <StateItem
                   index={index}
@@ -201,7 +201,7 @@ function BeforeAfterComparison({
                   Icon={BEFORE_ICONS[index % BEFORE_ICONS.length]}
                 />
               </div>
-              <div className={`relative px-8 ${rowPadding} ${bottomPadding}`}>
+              <div className={`relative h-full px-8 ${rowPadding} ${bottomPadding}`}>
                 <StateItem
                   index={index}
                   title={afterItem.title}
