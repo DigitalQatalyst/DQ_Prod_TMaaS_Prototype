@@ -18,3 +18,4 @@ globs:
 - **British English** in customer-facing copy fields; `Specialised Operations` title (slug stays `specialized-operations`).
 - **Immutable in CSV edits:** id, slug, sku, product_id, collection_id, duration_*, delivery_complexity, implementation_model, timestamps.
 - **Standards doc:** `/workspace/catalog-copy-standards.md`
+- **Live DB copy updates:** use `npm run db:card-content:sql` → `workspace/dba-catalog-copy/update-card-content.sql` (UPDATE/DELETE+INSERT, safe on populated DB). Do **not** run `seed-data.sql` or `generate-seed-sql.ts` output on a populated Supabase project — those are plain INSERTs for empty databases and will hit `products_pkey` duplicate-key errors.
