@@ -25,6 +25,13 @@ export const metadata: Metadata = {
   metadataBase: new URL("https://tmaas.digitalqatalyst.com"),
   title: "TMaaS | Digital Qatalyst",
   description: "Technology Management as a Service marketplace by Digital Qatalyst.",
+  icons: {
+    icon: [
+      { url: "/favicon.ico", sizes: "any" },
+      { url: "/favicon.svg", type: "image/svg+xml" },
+    ],
+    apple: "/favicon.png",
+  },
   openGraph: {
     title: "TMaaS | Digital Qatalyst",
     description: "Technology Management as a Service marketplace by Digital Qatalyst.",
