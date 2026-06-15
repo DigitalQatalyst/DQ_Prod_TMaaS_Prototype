@@ -6,7 +6,7 @@ export const LAUNCH_ADVISORY_CTA_LABEL = "Claim 3 Months Free";
 
 export const LAUNCH_ADVISORY_NAV_CTA_LABEL = "Claim Your Free Advisory";
 
-export const LAUNCH_ADVISORY_EYEBROW = "Register by June";
+export const LAUNCH_ADVISORY_EYEBROW = "Limited launch offer";
 
 export const LAUNCH_ADVISORY_HEADLINE =
   "3 months of transformation advisory, free.";
