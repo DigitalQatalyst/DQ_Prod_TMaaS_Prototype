@@ -194,19 +194,10 @@ export default function ContactPageClient() {
     setHoneypot("");
   };
 
-  const privacyLink = featureFlags.isEnabled("legal") ? (
+  const privacyLink = (
     <Link href="/legal/privacy" className="underline transition-colors hover:text-dq-orange">
       Privacy Policy
     </Link>
-  ) : (
-    <a
-      href="https://digitalqatalyst.com/privacy"
-      target="_blank"
-      rel="noopener noreferrer"
-      className="underline transition-colors hover:text-dq-orange"
-    >
-      Privacy Policy
-    </a>
   );
 
   return (

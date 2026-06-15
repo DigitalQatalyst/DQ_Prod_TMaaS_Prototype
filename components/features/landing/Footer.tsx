@@ -7,11 +7,6 @@ import { featureFlags } from "@/lib/featureFlags";
 const CORP_WEB_BASE = "https://www.digitalqatalyst.com";
 
 const Footer = () => {
-  const privacyHref = featureFlags.isEnabled("legal")
-    ? "/legal/privacy"
-    : `${CORP_WEB_BASE}/privacy`;
-  const termsHref = featureFlags.isEnabled("legal") ? "/legal/terms" : `${CORP_WEB_BASE}/terms`;
-  const legalIsInternal = featureFlags.isEnabled("legal");
 
   return (
     <footer className="border-t border-gray-100 bg-white px-5 pb-8 pt-14 md:px-8 lg:px-10">
@@ -100,35 +95,12 @@ const Footer = () => {
         <div className="flex flex-col items-center justify-between gap-3 border-t border-gray-100 pt-6 text-[12px] text-gray-400 sm:flex-row">
           <p>© 2026 DigitalQatalyst. All rights reserved.</p>
           <div className="flex gap-5">
-            {legalIsInternal ? (
-              <>
-                <Link href="/legal/privacy" className="transition-colors hover:text-gray-700">
-                  Privacy
-                </Link>
-                <Link href="/legal/terms" className="transition-colors hover:text-gray-700">
-                  Terms
-                </Link>
-              </>
-            ) : (
-              <>
-                <a
-                  href={privacyHref}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="transition-colors hover:text-gray-700"
-                >
-                  Privacy
-                </a>
-                <a
-                  href={termsHref}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="transition-colors hover:text-gray-700"
-                >
-                  Terms
-                </a>
-              </>
-            )}
+            <Link href="/legal/privacy" className="transition-colors hover:text-gray-700">
+              Privacy
+            </Link>
+            <Link href="/legal/terms" className="transition-colors hover:text-gray-700">
+              Terms
+            </Link>
           </div>
         </div>
       </div>
