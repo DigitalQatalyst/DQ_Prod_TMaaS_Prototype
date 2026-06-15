@@ -20,7 +20,12 @@ import MarketplacePagination from "@/components/features/marketplace/Marketplace
 import ServiceProductCard from "@/components/features/marketplace/ServiceProductCard";
 import MeshSection from "@/components/features/landing/MeshSection";
 import { landingHeroHeading } from "@/lib/brandAccent";
-import { marketplaceCategoryLabels, marketplaceCollectionIds } from "@/data/marketplaceNavigation";
+import {
+  isMarketplaceSectorId,
+  marketplaceCategoryLabels,
+  marketplaceCollectionIds,
+  marketplaceSectorLabels,
+} from "@/data/marketplaceNavigation";
 import { useBestSellers, useMarketplaceListings } from "@/lib/hooks/useCatalog";
 import { getDisplayTitle } from "@/components/features/service-detail/serviceDetailHelpers";
 import { getRemixedName } from "@/lib/serviceProductUtils";
@@ -62,7 +67,19 @@ export default function MarketplacePageClient() {
     }
     const q = searchParams.get("q");
     if (q !== null) setSearchQuery(q);
-    if (collection) scrollToCatalog();
+
+    const sectorParam = searchParams.get("sector");
+    if (sectorParam) {
+      const sectors = sectorParam
+        .split(",")
+        .map((value) => value.trim())
+        .filter(isMarketplaceSectorId);
+      setSelectedSectors(sectors);
+    } else {
+      setSelectedSectors([]);
+    }
+
+    if (collection || sectorParam) scrollToCatalog();
   }, [searchParams, scrollToCatalog]);
 
   const applyCollectionFilter = useCallback(
@@ -89,11 +106,20 @@ export default function MarketplacePageClient() {
     );
   }, []);
 
-  const handleSectorChange = useCallback((value: string) => {
-    setSelectedSectors((prev) =>
-      prev.includes(value) ? prev.filter((i) => i !== value) : [...prev, value]
-    );
-  }, []);
+  const handleSectorChange = useCallback(
+    (value: string) => {
+      const next = selectedSectors.includes(value)
+        ? selectedSectors.filter((i) => i !== value)
+        : [...selectedSectors, value];
+      setSelectedSectors(next);
+
+      const params = new URLSearchParams(searchParams.toString());
+      if (next.length === 0) params.delete("sector");
+      else params.set("sector", next.join(","));
+      router.replace(`/marketplace?${params.toString()}`);
+    },
+    [router, searchParams, selectedSectors]
+  );
 
   const handleServiceTypeChange = useCallback((value: string) => {
     setSelectedServiceTypes((prev) =>
@@ -206,7 +232,7 @@ export default function MarketplacePageClient() {
     selectedSectors.forEach((sector) => {
       chips.push({
         key: `sector-${sector}`,
-        label: `Sector: ${sector}`,
+        label: `Sector: ${marketplaceSectorLabels[sector] ?? sector}`,
         onRemove: () => handleSectorChange(sector),
       });
     });

@@ -34,6 +34,23 @@ export const marketplaceEconomySectors = [
   { id: "wellness-4-0", label: "Wellness 4.0" },
 ] as const;
 
+export const marketplaceSectorIds = new Set(
+  marketplaceEconomySectors.map((sector) => sector.id)
+);
+
+export const marketplaceSectorLabels: Record<string, string> = Object.fromEntries(
+  marketplaceEconomySectors.map((sector) => [sector.id, sector.label])
+);
+
+/** Maps filter ids (farming-4-0) to catalog tags (farming-4.0). */
+export function sectorIdToCatalogTag(sectorId: string): string {
+  return sectorId.replace(/-(\d+)-(\d+)$/, "-$1.$2");
+}
+
+export function isMarketplaceSectorId(value: string): boolean {
+  return marketplaceSectorIds.has(value as (typeof marketplaceEconomySectors)[number]["id"]);
+}
+
 export const marketplaceServiceTypes = [
   { id: "advisory", label: MARKETPLACE_SERVICE_TYPE_LABELS.advisory },
   { id: "design", label: MARKETPLACE_SERVICE_TYPE_LABELS.design },
