@@ -1,8 +1,8 @@
 "use client";
 
-import { useState } from "react";
+import { Suspense, useState } from "react";
 import Link from "next/link"
-import { usePathname } from "next/navigation";
+import { usePathname, useSearchParams } from "next/navigation";
 import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import TMaaSLogo from "@/components/features/landing/TMaaSLogo";
@@ -21,13 +21,14 @@ const NAV_LINKS = [
   },
 ];
 
-const LandingNavbar = () => {
+const LandingNavbarInner = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
   const pathname = usePathname();
+  const searchParams = useSearchParams();
   const launchAdvisoryPath = buildLaunchAdvisoryContactPath();
   const isOnLaunchAdvisory =
     pathname.startsWith("/contact") &&
-    location.search.includes("offering=launch-advisory");
+    searchParams.get("offering") === "launch-advisory";
 
   const visibleLinks = NAV_LINKS.filter(
     (link) => !link.flag || featureFlags.isEnabled(link.flag)
@@ -134,5 +135,11 @@ const LandingNavbar = () => {
     </>
   );
 };
+
+const LandingNavbar = () => (
+  <Suspense fallback={null}>
+    <LandingNavbarInner />
+  </Suspense>
+);
 
 export default LandingNavbar;
