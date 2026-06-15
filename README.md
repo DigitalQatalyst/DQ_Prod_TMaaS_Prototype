@@ -1,6 +1,6 @@
 # TMaaS Prototype
 
-Technology Management as a Service marketplace by Digital Qatalyst.
+Transformation Management as a Service marketplace by Digital Qatalyst.
 
 ## Stack
 

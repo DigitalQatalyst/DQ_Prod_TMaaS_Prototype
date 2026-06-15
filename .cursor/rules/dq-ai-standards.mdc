@@ -7,7 +7,7 @@ alwaysApply: true
 # DQ TMaaS AI Coding Standards
 
 ## Project Overview
-TMaaS (Technology Management as a Service) marketplace prototype — Next.js 16 App Router, TypeScript strict, Tailwind CSS 4, shadcn/ui, Supabase.
+TMaaS (Transformation Management as a Service) marketplace prototype — Next.js 16 App Router, TypeScript strict, Tailwind CSS 4, shadcn/ui, Supabase.
 
 ## [SECTION: Catalog CSV Guidelines]
 

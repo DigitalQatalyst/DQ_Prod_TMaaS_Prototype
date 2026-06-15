@@ -1,7 +1,7 @@
 # Project context
 
 - Repository: `DQ_Prod_TMaaS_Prototype`
-- Platform: TMaaS (Technology Management as a Service) marketplace prototype
+- Platform: TMaaS (Transformation Management as a Service) marketplace prototype
 - Tier: Client tier — public marketplace + auth-gated delivery dashboard
 - Stack: Next.js App Router, TypeScript strict, Tailwind CSS 4, shadcn/ui, Supabase
 - Testing: Vitest + React Testing Library in `tests/{unit,integration}`
