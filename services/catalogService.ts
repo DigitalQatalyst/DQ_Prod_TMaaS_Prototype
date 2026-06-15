@@ -678,10 +678,7 @@ export async function fetchServiceDetail(id: number): Promise<ServiceDetailPaylo
     fetchPdpContent(id),
   ]);
 
-  const enrichedService =
-    pdpContent?.heroSummary != null ? { ...service, description: pdpContent.heroSummary } : service;
-
-  const payload: ServiceDetailPayload = { service: enrichedService, deployModules };
+  const payload: ServiceDetailPayload = { service, deployModules };
   if (pdpContent) payload.pdpContent = pdpContent;
   return payload;
 }

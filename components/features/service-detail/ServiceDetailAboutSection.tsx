@@ -1,6 +1,6 @@
 import { sectionHeading, serviceDetailSplitGrid, serviceDetailSplitLead } from "@/lib/brandAccent";
 import type { PdpContent } from "@/lib/types/catalog";
-import { getOverviewContent, type ServiceProduct } from "./serviceDetailHelpers";
+import { getAboutSectionContent, type ServiceProduct } from "./serviceDetailHelpers";
 
 interface ServiceDetailAboutSectionProps {
   service: ServiceProduct;
@@ -8,11 +8,7 @@ interface ServiceDetailAboutSectionProps {
 }
 
 export function ServiceDetailAboutSection({ service, pdpContent }: ServiceDetailAboutSectionProps) {
-  const fallback = getOverviewContent(service);
-  const paragraphs = pdpContent?.overviewParagraphs?.length
-    ? pdpContent.overviewParagraphs
-    : fallback.paragraphs;
-  const audienceDescription = pdpContent?.audienceDescription ?? fallback.audienceDescription;
+  const { paragraphs, audienceDescription } = getAboutSectionContent(service, pdpContent);
 
   return (
     <section aria-labelledby="about-service-heading">
