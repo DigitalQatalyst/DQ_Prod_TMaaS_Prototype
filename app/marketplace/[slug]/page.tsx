@@ -12,7 +12,7 @@ export async function generateMetadata({
   const id = parseInt(slug, 10);
   const detail = !isNaN(id) ? await fetchServiceDetail(id) : undefined;
   const title = detail?.service
-    ? getDisplayTitle(detail.service)
+    ? getDisplayTitle(detail.service.standardName, detail.service.serviceType)
     : slug.split("-").map((w) => w.charAt(0).toUpperCase() + w.slice(1)).join(" ");
 
   return {

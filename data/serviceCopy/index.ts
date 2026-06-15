@@ -1,4 +1,4 @@
-import type { ServiceProduct } from "@/types/serviceProduct";
+import type { ServiceProduct } from "@/lib/types/serviceProduct";
 import { aiCopy } from "./ai";
 import { bundlesCopy } from "./bundles";
 import { experience1Copy } from "./experience1";
