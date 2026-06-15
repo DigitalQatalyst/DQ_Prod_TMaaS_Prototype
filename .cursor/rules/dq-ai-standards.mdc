@@ -16,6 +16,12 @@ TMaaS (Transformation Management as a Service) marketplace prototype — Next.js
 - **Remove stale assets:** delete legacy `public/favicon.svg` and old `app/favicon.ico` when replacing — browsers request `/favicon.ico` by default and cache aggressively.
 - **Verify:** `curl -s http://127.0.0.1:3000/ | grep -i 'rel="icon"'` should list hashed `/favicon.ico`, `/icon.png`, and `/apple-icon.png` routes.
 
+## [SECTION: Database setup pack]
+
+- **Clean prod schema:** `database-setup-pack/` (gitignored). Run `00_apply_all_schema.sql` on an empty Supabase project, or `migrations/*.sql` in order.
+- **Catalog seed:** `database-setup-pack/seed/` — only on empty DBs; use `content-updates/` for populated DBs.
+- **Tracked migrations:** `supabase/migrations/` stays local/gitignored; regenerate pack from git history or `npm run db:*` scripts when schema changes.
+
 ## [SECTION: Catalog CSV Guidelines]
 
 - **Source of truth for copy:** `.service-catalog/products.csv` (35 rows) and `.service-catalog/product_variants.csv` (221 rows).
