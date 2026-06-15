@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { Minus, Plus, ShoppingBag, Trash2 } from "lucide-react";
-import { useCart } from "@/contexts/CartContext" // TODO: Task 9 — wire up context;
+import { useCart } from "@/contexts/CartContext"; // TODO: Task 9 — wire up context;
 import { formatServicePrice } from "@/lib/serviceProductUtils";
 import { Button } from "@/components/ui/button";
 import {
@@ -63,7 +63,8 @@ const CartDrawer = () => {
                 >
                   <div className="flex items-start justify-between gap-3">
                     <div className="min-w-0">
-                      <Link href={`/service/${service.id}`}
+                      <Link
+                        href={`/service/${service.id}`}
                         onClick={() => setIsOpen(false)}
                         className="text-sm font-bold text-navy-950 hover:text-orange-600 line-clamp-2"
                       >

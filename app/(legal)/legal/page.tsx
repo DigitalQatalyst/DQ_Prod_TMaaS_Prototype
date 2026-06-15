@@ -23,7 +23,8 @@ const legalCategories: LegalCategory[] = [
   {
     icon: Shield,
     title: "Privacy Policy",
-    description: "Explains what information we collect and why, how we use it, and how to review and update it",
+    description:
+      "Explains what information we collect and why, how we use it, and how to review and update it",
     path: "/legal/privacy",
     color: "bg-green-100 text-green-600",
   },
@@ -63,7 +64,10 @@ export default function LegalPage() {
           {/* Search Bar */}
           <div className="mt-8">
             <div className="relative mx-auto max-w-2xl">
-              <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400" size={20} />
+              <Search
+                className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400"
+                size={20}
+              />
               <input
                 type="text"
                 placeholder="Search legal documents..."
@@ -93,7 +97,9 @@ export default function LegalPage() {
                   href={category.path}
                   className="group rounded-lg border border-gray-200 bg-white p-6 transition-all hover:shadow-lg hover:border-dq-orange/50"
                 >
-                  <div className={`mb-4 inline-flex h-12 w-12 items-center justify-center rounded-lg ${category.color}`}>
+                  <div
+                    className={`mb-4 inline-flex h-12 w-12 items-center justify-center rounded-lg ${category.color}`}
+                  >
                     <Icon size={24} />
                   </div>
                   <h3 className="mb-2 flex items-center justify-between text-lg font-semibold text-dq-navy">
@@ -133,9 +139,7 @@ export default function LegalPage() {
 
           {/* Last Updated */}
           <div className="mt-8 text-center">
-            <p className="text-sm text-gray-500">
-              Last updated: January 1, 2026
-            </p>
+            <p className="text-sm text-gray-500">Last updated: January 1, 2026</p>
           </div>
         </div>
       </section>

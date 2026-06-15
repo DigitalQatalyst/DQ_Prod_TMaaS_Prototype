@@ -53,17 +53,15 @@ export function ServiceDetailFaqsTab({ service, pdpContent }: ServiceDetailFaqsT
         </Accordion>
       </section>
 
-      <section
-        aria-labelledby="faqs-contact-heading"
-        className={`${itemCardClass} px-6 py-5`}
-      >
+      <section aria-labelledby="faqs-contact-heading" className={`${itemCardClass} px-6 py-5`}>
         <h3 id="faqs-contact-heading" className="text-sm font-semibold text-dq-navy">
           Still have questions?
         </h3>
         <p className="mt-2 text-sm leading-relaxed text-[#667085]">
           Our team can help you scope the right approach for your organisation.{" "}
           {featureFlags.isEnabled("contactUs") ? (
-            <Link href={buildContactPath(service, "consultation")}
+            <Link
+              href={buildContactPath(service, "consultation")}
               className="font-semibold text-dq-orange transition-colors hover:text-dq-orange/80"
             >
               Contact us →

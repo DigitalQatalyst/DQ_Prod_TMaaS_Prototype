@@ -3,8 +3,7 @@ const OUTCOMES = [
     tag: "Cost",
     metric: "From $1k",
     metricLabel: "Low-cost starting point for transformation",
-    title:
-      "Enterprise transformation without enterprise-scale upfront investment.",
+    title: "Enterprise transformation without enterprise-scale upfront investment.",
     body: "Explore productized services with transparent pricing, start with a focused engagement and scale as outcomes prove out.",
   },
   {
@@ -32,9 +31,7 @@ const LandingOutcomesSection = () => {
     >
       <div className="mx-auto max-w-[1200px]">
         <div className="mb-12">
-          <p className="mb-4 dq-eyebrow">
-            Practical Outcomes
-          </p>
+          <p className="mb-4 dq-eyebrow">Practical Outcomes</p>
           <h2
             id="landing-outcomes-heading"
             className="text-4xl font-semibold tracking-tight text-dq-navy md:text-5xl"

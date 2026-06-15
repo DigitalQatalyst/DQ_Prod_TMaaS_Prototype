@@ -2,21 +2,30 @@
 
 import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { 
-  X, Send, Brain, Calendar, Package, FileText, 
-  MessageSquare, AlertCircle, ArrowRight, User, Clock
+import {
+  X,
+  Send,
+  Brain,
+  Calendar,
+  Package,
+  FileText,
+  MessageSquare,
+  AlertCircle,
+  ArrowRight,
+  User,
+  Clock,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { useAuth } from "@/contexts/AuthContext" // TODO: Task 9 — wire up context;
-import { 
-  mockUserProfile, 
-  mode01Templates, 
+import { useAuth } from "@/contexts/AuthContext"; // TODO: Task 9 — wire up context;
+import {
+  mockUserProfile,
+  mode01Templates,
   mode01IntentPatterns,
   mode01QuickActions,
   type UserProfile,
-  type UserEngagement
-} from "@/data/transactAI" // TODO: Task 9 — wire up data;
+  type UserEngagement,
+} from "@/data/transactAI"; // TODO: Task 9 — wire up data;
 
 interface TransactAIMode01Props {
   isOpen: boolean;
@@ -60,24 +69,25 @@ const TransactAIMode01 = ({ isOpen, onClose }: TransactAIMode01Props) => {
       setTimeout(() => {
         setUserProfile(mockUserProfile);
         setSessionInitialized(true);
-        
+
         // Send personalized greeting
-        const activeEngagements = mockUserProfile.engagements.filter(e => e.status !== "Completed");
-        const pendingActions = mockUserProfile.engagements
-          .flatMap(e => e.pendingActions || []);
-        
+        const activeEngagements = mockUserProfile.engagements.filter(
+          (e) => e.status !== "Completed"
+        );
+        const pendingActions = mockUserProfile.engagements.flatMap((e) => e.pendingActions || []);
+
         const greeting = mode01Templates.greeting.returning
           .replace("{name}", mockUserProfile.name.split(" ")[0] ?? mockUserProfile.name)
           .replace("{activeCount}", activeEngagements.length.toString())
           .replace("{pendingCount}", pendingActions.length.toString());
-        
+
         addAIMessage(
           greeting,
           [
             "Show my pending actions",
             "What's my next session?",
             "Summarize my engagements",
-            "Get recommendations"
+            "Get recommendations",
           ],
           { intent: "greeting" }
         );
@@ -85,16 +95,12 @@ const TransactAIMode01 = ({ isOpen, onClose }: TransactAIMode01Props) => {
     }
   }, [isOpen, sessionInitialized]);
 
-  const addAIMessage = (
-    content: string,
-    options?: string[],
-    metadata?: Message["metadata"]
-  ) => {
+  const addAIMessage = (content: string, options?: string[], metadata?: Message["metadata"]) => {
     setIsTyping(true);
-    
+
     // Simulate realistic response time
     const responseTime = Math.random() * 1000 + 600;
-    
+
     setTimeout(() => {
       setIsTyping(false);
       setMessages((prev) => [
@@ -124,53 +130,53 @@ const TransactAIMode01 = ({ isOpen, onClose }: TransactAIMode01Props) => {
   // Intent Classification
   const classifyIntent = (message: string): string => {
     const lowerMessage = message.toLowerCase();
-    
+
     // Check engagement queries
     for (const category of mode01IntentPatterns.engagementQuery) {
       if (category.pattern.test(lowerMessage)) {
         return category.intent;
       }
     }
-    
+
     // Check session queries
     for (const category of mode01IntentPatterns.sessionQuery) {
       if (category.pattern.test(lowerMessage)) {
         return category.intent;
       }
     }
-    
+
     // Check document queries
     for (const category of mode01IntentPatterns.documentQuery) {
       if (category.pattern.test(lowerMessage)) {
         return category.intent;
       }
     }
-    
+
     // Check advisory queries
     for (const category of mode01IntentPatterns.advisory) {
       if (category.pattern.test(lowerMessage)) {
         return category.intent;
       }
     }
-    
+
     // Check navigation queries
     for (const category of mode01IntentPatterns.navigation) {
       if (category.pattern.test(lowerMessage)) {
         return category.intent;
       }
     }
-    
+
     return "general_inquiry";
   };
 
   // Handle Engagement Status Query
   const handleEngagementStatus = () => {
     if (!userProfile) return;
-    
-    const activeEngagements = userProfile.engagements.filter(e => e.status !== "Completed");
-    
+
+    const activeEngagements = userProfile.engagements.filter((e) => e.status !== "Completed");
+
     let response = `Here's your current engagement status:\n\n`;
-    
+
     activeEngagements.forEach((eng, index) => {
       response += `${index + 1}. ${eng.name}\n`;
       response += `   • Status: ${eng.status}\n`;
@@ -181,7 +187,7 @@ const TransactAIMode01 = ({ isOpen, onClose }: TransactAIMode01Props) => {
       }
       response += `\n`;
     });
-    
+
     addAIMessage(
       response,
       ["Show pending actions", "View next sessions", "Get detailed status", "Ask something else"],
@@ -192,17 +198,17 @@ const TransactAIMode01 = ({ isOpen, onClose }: TransactAIMode01Props) => {
   // Handle Next Actions Query
   const handleNextActions = () => {
     if (!userProfile) return;
-    
+
     const allPendingActions: Array<{ engagement: string; action: string }> = [];
-    
-    userProfile.engagements.forEach(eng => {
+
+    userProfile.engagements.forEach((eng) => {
       if (eng.pendingActions) {
-        eng.pendingActions.forEach(action => {
+        eng.pendingActions.forEach((action) => {
           allPendingActions.push({ engagement: eng.name, action });
         });
       }
     });
-    
+
     if (allPendingActions.length === 0) {
       addAIMessage(
         "Great news! You don't have any pending actions at the moment. All your engagements are on track.",
@@ -211,19 +217,24 @@ const TransactAIMode01 = ({ isOpen, onClose }: TransactAIMode01Props) => {
       );
       return;
     }
-    
+
     let response = `You have ${allPendingActions.length} pending action(s):\n\n`;
-    
+
     allPendingActions.forEach((item, index) => {
       response += `${index + 1}. ${item.action}\n`;
       response += `   (${item.engagement})\n\n`;
     });
-    
+
     response += `Would you like help with any of these?`;
-    
+
     addAIMessage(
       response,
-      ["Help with first action", "View all engagements", "Contact delivery lead", "Ask something else"],
+      [
+        "Help with first action",
+        "View all engagements",
+        "Contact delivery lead",
+        "Ask something else",
+      ],
       { intent: "next_actions" }
     );
   };
@@ -231,11 +242,11 @@ const TransactAIMode01 = ({ isOpen, onClose }: TransactAIMode01Props) => {
   // Handle Upcoming Sessions Query
   const handleUpcomingSessions = () => {
     if (!userProfile) return;
-    
+
     const upcomingSessions = userProfile.upcomingSessions
-      .filter(s => s.status === "Scheduled")
+      .filter((s) => s.status === "Scheduled")
       .slice(0, 3);
-    
+
     if (upcomingSessions.length === 0) {
       addAIMessage(
         "You don't have any upcoming sessions scheduled at the moment.",
@@ -244,20 +255,25 @@ const TransactAIMode01 = ({ isOpen, onClose }: TransactAIMode01Props) => {
       );
       return;
     }
-    
+
     let response = `Your upcoming sessions:\n\n`;
-    
+
     upcomingSessions.forEach((session, index) => {
-      const engagement = userProfile.engagements.find(e => e.id === session.engagementId);
+      const engagement = userProfile.engagements.find((e) => e.id === session.engagementId);
       response += `${index + 1}. ${session.title}\n`;
       response += `   • Date: ${session.date} at ${session.time}\n`;
       response += `   • Type: ${session.type}\n`;
       response += `   • Engagement: ${engagement?.name || "Unknown"}\n\n`;
     });
-    
+
     addAIMessage(
       response,
-      ["Prepare for next session", "View all sessions", "Reschedule a session", "Ask something else"],
+      [
+        "Prepare for next session",
+        "View all sessions",
+        "Reschedule a session",
+        "Ask something else",
+      ],
       { intent: "upcoming_sessions" }
     );
   };
@@ -265,24 +281,26 @@ const TransactAIMode01 = ({ isOpen, onClose }: TransactAIMode01Props) => {
   // Handle Engagement Summary
   const handleEngagementSummary = () => {
     if (!userProfile) return;
-    
-    const activeEngagements = userProfile.engagements.filter(e => e.status !== "Completed");
-    const totalProgress = activeEngagements.reduce((sum, e) => sum + e.progress, 0) / activeEngagements.length;
-    const pendingActionsCount = userProfile.engagements
-      .flatMap(e => e.pendingActions || []).length;
-    
+
+    const activeEngagements = userProfile.engagements.filter((e) => e.status !== "Completed");
+    const totalProgress =
+      activeEngagements.reduce((sum, e) => sum + e.progress, 0) / activeEngagements.length;
+    const pendingActionsCount = userProfile.engagements.flatMap(
+      (e) => e.pendingActions || []
+    ).length;
+
     let response = `Here's your transformation journey summary:\n\n`;
     response += `📊 Overall Progress: ${Math.round(totalProgress)}%\n`;
     response += `📦 Active Engagements: ${activeEngagements.length}\n`;
     response += `⚠️ Pending Actions: ${pendingActionsCount}\n`;
-    response += `📅 Upcoming Sessions: ${userProfile.upcomingSessions.filter(s => s.status === "Scheduled").length}\n\n`;
-    
+    response += `📅 Upcoming Sessions: ${userProfile.upcomingSessions.filter((s) => s.status === "Scheduled").length}\n\n`;
+
     response += `Your engagements span across:\n`;
-    const towers = [...new Set(activeEngagements.map(e => e.tower))];
-    towers.forEach(tower => {
+    const towers = [...new Set(activeEngagements.map((e) => e.tower))];
+    towers.forEach((tower) => {
       response += `• ${tower}\n`;
     });
-    
+
     addAIMessage(
       response,
       ["View detailed status", "Show pending actions", "Get recommendations", "Ask something else"],
@@ -293,43 +311,50 @@ const TransactAIMode01 = ({ isOpen, onClose }: TransactAIMode01Props) => {
   // Handle Recommendations
   const handleRecommendations = () => {
     if (!userProfile) return;
-    
+
     const recommendations: string[] = [];
-    
+
     // Check for pending actions
-    const pendingActionsCount = userProfile.engagements
-      .flatMap(e => e.pendingActions || []).length;
+    const pendingActionsCount = userProfile.engagements.flatMap(
+      (e) => e.pendingActions || []
+    ).length;
     if (pendingActionsCount > 0) {
-      recommendations.push(`Complete your ${pendingActionsCount} pending action(s) to keep engagements on track`);
+      recommendations.push(
+        `Complete your ${pendingActionsCount} pending action(s) to keep engagements on track`
+      );
     }
-    
+
     // Check for low progress engagements
-    const lowProgressEngagements = userProfile.engagements.filter(e => e.progress < 40 && e.status !== "Completed");
+    const lowProgressEngagements = userProfile.engagements.filter(
+      (e) => e.progress < 40 && e.status !== "Completed"
+    );
     if (lowProgressEngagements.length > 0 && lowProgressEngagements[0]) {
-      recommendations.push(`Focus on accelerating progress in ${lowProgressEngagements[0].name} (${lowProgressEngagements[0].progress}% complete)`);
+      recommendations.push(
+        `Focus on accelerating progress in ${lowProgressEngagements[0].name} (${lowProgressEngagements[0].progress}% complete)`
+      );
     }
-    
+
     // Check for upcoming sessions
-    const nextSession = userProfile.upcomingSessions.find(s => s.status === "Scheduled");
+    const nextSession = userProfile.upcomingSessions.find((s) => s.status === "Scheduled");
     if (nextSession) {
       recommendations.push(`Prepare for your upcoming ${nextSession.title} on ${nextSession.date}`);
     }
-    
+
     // Check for documents pending review
-    const pendingDocs = userProfile.documents.filter(d => d.status === "Pending Review");
+    const pendingDocs = userProfile.documents.filter((d) => d.status === "Pending Review");
     if (pendingDocs.length > 0) {
       recommendations.push(`Follow up on ${pendingDocs.length} document(s) pending review`);
     }
-    
+
     if (recommendations.length === 0) {
       recommendations.push("You're doing great! All engagements are on track.");
     }
-    
+
     let response = `Based on your current status, here are my recommendations:\n\n`;
     recommendations.forEach((rec, index) => {
       response += `${index + 1}. ${rec}\n\n`;
     });
-    
+
     addAIMessage(
       response,
       ["Show pending actions", "View next session", "Contact delivery lead", "Ask something else"],
@@ -340,19 +365,19 @@ const TransactAIMode01 = ({ isOpen, onClose }: TransactAIMode01Props) => {
   // Handle Contact Delivery Lead
   const handleContactLead = () => {
     if (!userProfile) return;
-    
-    const activeEngagements = userProfile.engagements.filter(e => e.status !== "Completed");
-    const leads = [...new Set(activeEngagements.map(e => e.deliveryLead))];
-    
+
+    const activeEngagements = userProfile.engagements.filter((e) => e.status !== "Completed");
+    const leads = [...new Set(activeEngagements.map((e) => e.deliveryLead))];
+
     let response = `Your delivery lead(s):\n\n`;
-    leads.forEach(lead => {
-      const engagements = activeEngagements.filter(e => e.deliveryLead === lead);
+    leads.forEach((lead) => {
+      const engagements = activeEngagements.filter((e) => e.deliveryLead === lead);
       response += `${lead}\n`;
-      response += `Managing: ${engagements.map(e => e.name).join(", ")}\n\n`;
+      response += `Managing: ${engagements.map((e) => e.name).join(", ")}\n\n`;
     });
-    
+
     response += `I can help you draft a message or you can navigate to your inbox to contact them directly.`;
-    
+
     addAIMessage(
       response,
       ["Go to Inbox", "Draft a message", "View engagement details", "Ask something else"],
@@ -363,18 +388,16 @@ const TransactAIMode01 = ({ isOpen, onClose }: TransactAIMode01Props) => {
   const handleUserMessage = (message: string) => {
     addUserMessage(message);
     setInput("");
-    
+
     if (!userProfile) {
-      addAIMessage(
-        "I'm still loading your profile data. Please wait a moment...",
-        [],
-        { intent: "loading" }
-      );
+      addAIMessage("I'm still loading your profile data. Please wait a moment...", [], {
+        intent: "loading",
+      });
       return;
     }
-    
+
     const intent = classifyIntent(message);
-    
+
     switch (intent) {
       case "engagement_status":
         handleEngagementStatus();
@@ -400,7 +423,7 @@ const TransactAIMode01 = ({ isOpen, onClose }: TransactAIMode01Props) => {
       case "document_status":
         addAIMessage(
           `You have ${userProfile.documents.length} documents:\n\n` +
-          userProfile.documents.map(d => `• ${d.name} - ${d.status}`).join("\n"),
+            userProfile.documents.map((d) => `• ${d.name} - ${d.status}`).join("\n"),
           ["View all documents", "Upload new document", "Ask something else"],
           { intent: "document_status" }
         );
@@ -415,7 +438,12 @@ const TransactAIMode01 = ({ isOpen, onClose }: TransactAIMode01Props) => {
       default:
         addAIMessage(
           "I can help you with:\n\n• Engagement status and progress\n• Pending actions and next steps\n• Upcoming sessions\n• Document status\n• Recommendations\n• Contacting your delivery team\n\nWhat would you like to know?",
-          ["Show my pending actions", "What's my next session?", "Summarize my engagements", "Get recommendations"],
+          [
+            "Show my pending actions",
+            "What's my next session?",
+            "Summarize my engagements",
+            "Get recommendations",
+          ],
           { intent: "fallback" }
         );
     }
@@ -438,7 +466,7 @@ const TransactAIMode01 = ({ isOpen, onClose }: TransactAIMode01Props) => {
       "View all sessions": handleUpcomingSessions,
       "Prepare for next session": handleUpcomingSessions,
     };
-    
+
     // Navigation options
     if (option === "Go to Inbox") {
       window.location.href = "/dashboard/inbox";
@@ -460,7 +488,7 @@ const TransactAIMode01 = ({ isOpen, onClose }: TransactAIMode01Props) => {
       window.location.href = "/dashboard/profile";
       return;
     }
-    
+
     const handler = optionMap[option];
     if (handler) {
       addUserMessage(option);
@@ -494,21 +522,20 @@ const TransactAIMode01 = ({ isOpen, onClose }: TransactAIMode01Props) => {
               <Brain size={16} className="text-white" />
             </div>
             <div>
-              <h2 className="text-sm font-semibold text-foreground">
-                Transact.AI Mode 01
-              </h2>
-              <p className="text-xs text-muted-foreground">
-                Personal Transformation Advisor
-              </p>
+              <h2 className="text-sm font-semibold text-foreground">Transact.AI Mode 01</h2>
+              <p className="text-xs text-muted-foreground">Personal Transformation Advisor</p>
             </div>
           </div>
           <div className="flex items-center gap-2">
-            <Badge variant="outline" className="text-xs bg-primary/10 text-primary border-primary/20">
+            <Badge
+              variant="outline"
+              className="text-xs bg-primary/10 text-primary border-primary/20"
+            >
               Post-Login
             </Badge>
             {userProfile && (
               <Badge variant="secondary" className="text-xs">
-                {userProfile.engagements.filter(e => e.status !== "Completed").length} Active
+                {userProfile.engagements.filter((e) => e.status !== "Completed").length} Active
               </Badge>
             )}
             <button
@@ -539,7 +566,7 @@ const TransactAIMode01 = ({ isOpen, onClose }: TransactAIMode01Props) => {
                   }`}
                 >
                   <p className="whitespace-pre-line text-sm leading-relaxed">{message.content}</p>
-                  
+
                   {/* Quick Reply Options */}
                   {message.options && (
                     <div className="mt-3 flex flex-wrap gap-2">
@@ -581,7 +608,7 @@ const TransactAIMode01 = ({ isOpen, onClose }: TransactAIMode01Props) => {
               </div>
             </motion.div>
           )}
-          
+
           <div ref={messagesEndRef} />
         </div>
 

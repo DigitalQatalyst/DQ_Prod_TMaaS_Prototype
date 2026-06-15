@@ -21,11 +21,7 @@ import { featureFlags } from "@/lib/featureFlags";
 import { Button } from "@/components/ui/button";
 import DiagnoseDialog from "@/components/features/dashboard/DiagnoseDialog";
 
-export default function ServiceDetailPageClient({
-  params,
-}: {
-  params: Promise<{ slug: string }>;
-}) {
+export default function ServiceDetailPageClient({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = use(params);
   const router = useRouter();
   const [isDialogOpen, setIsDialogOpen] = useState(false);
@@ -36,10 +32,8 @@ export default function ServiceDetailPageClient({
   const service = detail?.service;
 
   const isAdvisoryService = service?.serviceType === "advisory";
-  const isDesignService =
-    service && ["design", "ai_design"].includes(service.serviceType);
-  const isDeployService =
-    service && ["deploy", "ai_deploy"].includes(service.serviceType);
+  const isDesignService = service && ["design", "ai_design"].includes(service.serviceType);
+  const isDeployService = service && ["deploy", "ai_deploy"].includes(service.serviceType);
 
   if (isLoading && !service) {
     return (
@@ -105,10 +99,7 @@ export default function ServiceDetailPageClient({
 
       <div className="relative overflow-hidden">
         <div className="relative px-5 pb-12 pt-20 md:px-8 md:pb-14 md:pt-24 lg:px-10">
-          <div
-            className="pointer-events-none absolute inset-0 z-0 overflow-hidden"
-            aria-hidden
-          >
+          <div className="pointer-events-none absolute inset-0 z-0 overflow-hidden" aria-hidden>
             <MeshSection variant="heroLight" grid className="h-full min-h-full">
               <span />
             </MeshSection>
@@ -119,7 +110,9 @@ export default function ServiceDetailPageClient({
               primaryCtaLabel={packageCta.label}
               onPrimaryCta={handlePrimaryCta}
               onStartOnboarding={handleStartOnboarding}
-              {...(pdpContent?.packageHighlights !== undefined && { packageHighlights: pdpContent.packageHighlights })}
+              {...(pdpContent?.packageHighlights !== undefined && {
+                packageHighlights: pdpContent.packageHighlights,
+              })}
             />
           </div>
         </div>

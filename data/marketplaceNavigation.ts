@@ -43,8 +43,7 @@ export const marketplaceServiceTypes = [
   { id: "manage", label: MARKETPLACE_SERVICE_TYPE_LABELS.manage },
 ] as const;
 
-export type MarketplaceCollectionId =
-  (typeof marketplaceCapabilities)[number]["id"];
+export type MarketplaceCollectionId = (typeof marketplaceCapabilities)[number]["id"];
 
 export const marketplaceCollectionIds = [
   "all",
@@ -53,9 +52,9 @@ export const marketplaceCollectionIds = [
 
 export const marketplaceCategoryLabels: Record<string, string> = {
   all: "All categories",
-  ...Object.fromEntries(marketplaceCapabilities.map(c => [c.id, c.label]))
+  ...Object.fromEntries(marketplaceCapabilities.map((c) => [c.id, c.label])),
 };
 
 export const marketplaceServiceTypeLabels: Record<string, string> = Object.fromEntries(
-  marketplaceServiceTypes.map(t => [t.id, t.label])
+  marketplaceServiceTypes.map((t) => [t.id, t.label])
 ) as Record<string, string>;

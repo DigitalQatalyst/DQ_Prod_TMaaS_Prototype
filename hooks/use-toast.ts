@@ -103,7 +103,7 @@ export const reducer = (state: State, action: Action): State => {
                 ...t,
                 open: false,
               }
-            : t,
+            : t
         ),
       };
     }
@@ -179,7 +179,10 @@ function useToast() {
   return {
     ...state,
     toast,
-    dismiss: (toastId?: string) => dispatch(toastId !== undefined ? { type: "DISMISS_TOAST", toastId } : { type: "DISMISS_TOAST" }),
+    dismiss: (toastId?: string) =>
+      dispatch(
+        toastId !== undefined ? { type: "DISMISS_TOAST", toastId } : { type: "DISMISS_TOAST" }
+      ),
   };
 }
 

@@ -49,9 +49,13 @@ export default function SignInPageClient() {
 
         <p className="mt-6 text-center text-xs text-muted-foreground">
           By signing in, you agree to our{" "}
-          <a href="/legal/terms" className="underline">Terms of Service</a>{" "}
+          <a href="/legal/terms" className="underline">
+            Terms of Service
+          </a>{" "}
           and{" "}
-          <a href="/legal/privacy" className="underline">Privacy Policy</a>
+          <a href="/legal/privacy" className="underline">
+            Privacy Policy
+          </a>
         </p>
       </div>
     </div>

@@ -24,21 +24,21 @@ export interface FeatureFlags {
 }
 
 const PAGE_FLAGS: (keyof FeatureFlags)[] = [
-  'homepage',
-  'marketplace',
-  'serviceDetail',
-  'contactUs',
-  'explore',
-  'alternateLanding',
-  'landingV1',
-  'legal',
+  "homepage",
+  "marketplace",
+  "serviceDetail",
+  "contactUs",
+  "explore",
+  "alternateLanding",
+  "landingV1",
+  "legal",
 ];
 
 const ROUTE_PRIORITY: { flag: keyof FeatureFlags; path: string }[] = [
-  { flag: 'homepage', path: '/' },
-  { flag: 'marketplace', path: '/marketplace' },
-  { flag: 'serviceDetail', path: '/marketplace' },
-  { flag: 'contactUs', path: '/contact' },
+  { flag: "homepage", path: "/" },
+  { flag: "marketplace", path: "/marketplace" },
+  { flag: "serviceDetail", path: "/marketplace" },
+  { flag: "contactUs", path: "/contact" },
 ];
 
 // MVP defaults, only the four launch features enabled
@@ -105,5 +105,5 @@ export const getFirstEnabledRoute = (): string => {
   for (const { flag, path } of ROUTE_PRIORITY) {
     if (featureFlags.isEnabled(flag)) return path;
   }
-  return '/';
+  return "/";
 };

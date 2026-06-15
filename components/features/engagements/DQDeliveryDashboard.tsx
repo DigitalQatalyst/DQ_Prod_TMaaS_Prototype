@@ -1,6 +1,6 @@
 "use client";
 
-import Link from "next/link"
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import {
   ArrowRight,
@@ -25,8 +25,8 @@ import {
   portfolioHealthMetrics,
   governanceAlerts,
   type PortfolioHealth,
-} from "@/data/mockPortfolioEngagements" // TODO: Task 9 — wire up data;
-import { useAuth } from "@/contexts/AuthContext" // TODO: Task 9 — wire up context;
+} from "@/data/mockPortfolioEngagements"; // TODO: Task 9 — wire up data;
+import { useAuth } from "@/contexts/AuthContext"; // TODO: Task 9 — wire up context;
 
 const healthBadgeClass = (health: PortfolioHealth) => {
   if (health === "green") return "bg-green-50 text-green-700 border-green-200";
@@ -36,10 +36,30 @@ const healthBadgeClass = (health: PortfolioHealth) => {
 
 const metricCards = [
   { key: "total", label: "Total", value: portfolioHealthMetrics.total, accent: "text-navy-950" },
-  { key: "onTrack", label: "(Green)", value: portfolioHealthMetrics.onTrack, accent: "text-green-600" },
-  { key: "atRisk", label: "(Amber)", value: portfolioHealthMetrics.atRisk, accent: "text-amber-600" },
-  { key: "critical", label: "(Red)", value: portfolioHealthMetrics.critical, accent: "text-red-600" },
-  { key: "completed", label: "Completed", value: portfolioHealthMetrics.completed, accent: "text-slate-600" },
+  {
+    key: "onTrack",
+    label: "(Green)",
+    value: portfolioHealthMetrics.onTrack,
+    accent: "text-green-600",
+  },
+  {
+    key: "atRisk",
+    label: "(Amber)",
+    value: portfolioHealthMetrics.atRisk,
+    accent: "text-amber-600",
+  },
+  {
+    key: "critical",
+    label: "(Red)",
+    value: portfolioHealthMetrics.critical,
+    accent: "text-red-600",
+  },
+  {
+    key: "completed",
+    label: "Completed",
+    value: portfolioHealthMetrics.completed,
+    accent: "text-slate-600",
+  },
 ] as const;
 
 export const DQDeliveryDashboard = () => {
@@ -95,7 +115,9 @@ export const DQDeliveryDashboard = () => {
                 </div>
                 <div>
                   <p className="text-sm font-bold text-red-900 mb-1">Why is attention required?</p>
-                  <p className="text-sm text-red-800/90 leading-relaxed">{governanceAlerts.criticalSummary}</p>
+                  <p className="text-sm text-red-800/90 leading-relaxed">
+                    {governanceAlerts.criticalSummary}
+                  </p>
                 </div>
               </CardContent>
             </Card>
@@ -122,8 +144,8 @@ export const DQDeliveryDashboard = () => {
                 </div>
               ) : (
                 attentionEngagements.map((project) => (
-                  <div 
-                    key={project.id} 
+                  <div
+                    key={project.id}
                     className="p-4 hover:bg-amber-50/30 cursor-pointer transition-colors flex items-center justify-between gap-4"
                     onClick={() => router.push(`/dashboard/engagement/${project.id}`)}
                   >
@@ -136,10 +158,19 @@ export const DQDeliveryDashboard = () => {
                         )}
                         <p className="font-semibold text-sm text-navy-950">{project.name}</p>
                       </div>
-                      <p className="text-[10px] text-gray-500">{project.organization} · Lead: {project.lead}</p>
+                      <p className="text-[10px] text-gray-500">
+                        {project.organization} · Lead: {project.lead}
+                      </p>
                     </div>
                     <div className="text-right flex flex-col items-end gap-2">
-                      <Badge variant="outline" className={project.health === "red" ? "border-red-200 bg-red-50 text-red-700 text-[10px]" : "border-amber-200 bg-amber-50 text-amber-700 text-[10px]"}>
+                      <Badge
+                        variant="outline"
+                        className={
+                          project.health === "red"
+                            ? "border-red-200 bg-red-50 text-red-700 text-[10px]"
+                            : "border-amber-200 bg-amber-50 text-amber-700 text-[10px]"
+                        }
+                      >
                         {project.healthLabel}
                       </Badge>
                       {project.blockedItems > 0 && (
@@ -165,7 +196,10 @@ export const DQDeliveryDashboard = () => {
                 <div key={item.id} className="p-4">
                   <div className="flex items-start justify-between gap-2 mb-1">
                     <p className="text-xs font-semibold text-navy-950 leading-snug">{item.label}</p>
-                    <Badge variant="outline" className="text-[9px] shrink-0 bg-red-50 text-red-700 border-red-200">
+                    <Badge
+                      variant="outline"
+                      className="text-[9px] shrink-0 bg-red-50 text-red-700 border-red-200"
+                    >
                       {item.severity}
                     </Badge>
                   </div>
@@ -223,7 +257,10 @@ export const DQDeliveryDashboard = () => {
             <CardContent className="pt-0 space-y-3">
               <div className="p-4">
                 {governanceAlerts.weeklyFocus.map((item, i) => (
-                  <div key={i} className="flex items-start justify-between gap-3 p-3 mt-2 rounded-xl border border-navy-50 bg-slate-50/50">
+                  <div
+                    key={i}
+                    className="flex items-start justify-between gap-3 p-3 mt-2 rounded-xl border border-navy-50 bg-slate-50/50"
+                  >
                     <div>
                       <p className="text-sm font-semibold text-navy-950">{item.label}</p>
                       <p className="text-xs text-gray-500">{item.engagement}</p>

@@ -10,9 +10,7 @@ const HeroDashboardMockup = () => {
   return (
     <div className="relative mx-auto w-full max-w-[520px] lg:max-w-none">
       <div className="relative lg:[perspective:1200px] lg:[perspective-origin:50%_50%]">
-        <div
-          className="relative rounded-2xl border border-gray-200 bg-white p-3 lg:[transform:rotateY(-8deg)_rotateX(4deg)] lg:[transform-style:preserve-3d]"
-        >
+        <div className="relative rounded-2xl border border-gray-200 bg-white p-3 lg:[transform:rotateY(-8deg)_rotateX(4deg)] lg:[transform-style:preserve-3d]">
           <div className="overflow-hidden rounded-xl bg-[#0a1628]">
             <div className="flex">
               <div className="hidden w-[52px] shrink-0 border-r border-white/10 bg-[#060f1f] py-4 sm:block">
@@ -72,9 +70,7 @@ const HeroDashboardMockup = () => {
                         key={service.name}
                         className="flex items-center justify-between gap-2 rounded-md border border-white/[0.06] bg-white/[0.02] px-2.5 py-2"
                       >
-                        <span className="truncate text-[11px] text-white/80">
-                          {service.name}
-                        </span>
+                        <span className="truncate text-[11px] text-white/80">{service.name}</span>
                         <span className="shrink-0 font-mono text-[8px] uppercase tracking-wider text-dq-orange">
                           {service.category}
                         </span>

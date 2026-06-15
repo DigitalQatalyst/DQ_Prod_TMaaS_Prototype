@@ -10,7 +10,8 @@ export const mockEngagement = {
   forecastEndDate: "2026-03-15",
   actualProgress: 65,
   plannedProgress: 70,
-  visionStatement: "Establish a resilient, future-ready enterprise architecture that aligns IT investments with DEWA's strategic business goals and accelerates digital transformation.",
+  visionStatement:
+    "Establish a resilient, future-ready enterprise architecture that aligns IT investments with DEWA's strategic business goals and accelerates digital transformation.",
 };
 
 export const mockKRIs = [
@@ -37,7 +38,7 @@ export const mockKRIs = [
     current: "18%",
     status: "On Track",
     outcomeEvidence: "SonarQube & Cloud Cost Optimization Report",
-  }
+  },
 ];
 
 export const mockMilestones = [
@@ -100,7 +101,7 @@ export const mockMilestones = [
     progress: 0,
     health: "On Track",
     outcomeMapping: ["KRI-02", "KRI-03"],
-  }
+  },
 ];
 
 export const mockDeliverables = [
@@ -115,9 +116,23 @@ export const mockDeliverables = [
     description: "Formal charter defining objectives, scope, and governance.",
     completionProgress: 100,
     tasks: [
-      { id: "T-101", name: "Stakeholder Alignment", status: "Done", progress: 100, owner: "Maria Santos", externalLink: "https://jira.dq.com/T-101" },
-      { id: "T-102", name: "Charter Sign-off", status: "Done", progress: 100, owner: "David Kumar", externalLink: "https://jira.dq.com/T-102" }
-    ]
+      {
+        id: "T-101",
+        name: "Stakeholder Alignment",
+        status: "Done",
+        progress: 100,
+        owner: "Maria Santos",
+        externalLink: "https://jira.dq.com/T-101",
+      },
+      {
+        id: "T-102",
+        name: "Charter Sign-off",
+        status: "Done",
+        progress: 100,
+        owner: "David Kumar",
+        externalLink: "https://jira.dq.com/T-102",
+      },
+    ],
   },
   {
     id: "D2",
@@ -130,9 +145,23 @@ export const mockDeliverables = [
     description: "Detailed target state architecture diagrams.",
     completionProgress: 60,
     tasks: [
-      { id: "T-103", name: "Integration Patterns Design", status: "In Progress", progress: 80, owner: "James Chen", externalLink: "https://jira.dq.com/T-103" },
-      { id: "T-104", name: "Security Architecture Review", status: "Blocked", progress: 30, owner: "Alex Johnson", externalLink: "https://jira.dq.com/T-104" }
-    ]
+      {
+        id: "T-103",
+        name: "Integration Patterns Design",
+        status: "In Progress",
+        progress: 80,
+        owner: "James Chen",
+        externalLink: "https://jira.dq.com/T-103",
+      },
+      {
+        id: "T-104",
+        name: "Security Architecture Review",
+        status: "Blocked",
+        progress: 30,
+        owner: "Alex Johnson",
+        externalLink: "https://jira.dq.com/T-104",
+      },
+    ],
   },
   {
     id: "D3",
@@ -145,9 +174,16 @@ export const mockDeliverables = [
     description: "Operational procedures and practice guidelines.",
     completionProgress: 0,
     tasks: [
-      { id: "T-105", name: "Draft Playbook", status: "To Do", progress: 0, owner: "Rayyan Basha", externalLink: "https://jira.dq.com/T-105" }
-    ]
-  }
+      {
+        id: "T-105",
+        name: "Draft Playbook",
+        status: "To Do",
+        progress: 0,
+        owner: "Rayyan Basha",
+        externalLink: "https://jira.dq.com/T-105",
+      },
+    ],
+  },
 ];
 
 export const mockRisks = [
@@ -160,7 +196,7 @@ export const mockRisks = [
     owner: "James Chen",
     identifiedDate: "2026-02-01",
     dueDate: "2026-02-28",
-  }
+  },
 ];
 
 export const mockIssues = [
@@ -173,7 +209,7 @@ export const mockIssues = [
     owner: "Alex Johnson",
     identifiedDate: "2026-02-20",
     dueDate: "2026-02-25",
-  }
+  },
 ];
 
 export const mockDependencies = [
@@ -185,7 +221,7 @@ export const mockDependencies = [
     status: "Pending",
     owner: "James Chen",
     dueDate: "2026-02-28",
-  }
+  },
 ];
 
 export const mockAssumptions = [
@@ -196,7 +232,7 @@ export const mockAssumptions = [
     status: "Valid",
     owner: "Rayyan Basha",
     dueDate: "2026-03-15",
-  }
+  },
 ];
 
 export const mockStakeholders = [
@@ -258,7 +294,7 @@ export const mockContractChanges = [
     requestedBy: "DQ",
     value: 0,
     attachments: 1,
-  }
+  },
 ];
 
 export const mockContractData = {
@@ -274,7 +310,12 @@ export const mockContractData = {
 
 const milestonePaymentById: Record<
   number,
-  { value: number; status: "Paid" | "Pending" | "Invoiced" | "Partially Paid"; paidAmount: number; outstandingAmount: number }
+  {
+    value: number;
+    status: "Paid" | "Pending" | "Invoiced" | "Partially Paid";
+    paidAmount: number;
+    outstandingAmount: number;
+  }
 > = {
   1: { value: 38775, status: "Paid", paidAmount: 38775, outstandingAmount: 0 },
   2: { value: 38775, status: "Invoiced", paidAmount: 0, outstandingAmount: 38775 },
@@ -318,14 +359,42 @@ export const mockCommercialDocuments = [
     description: "Signed Change Request for Cloud Assessment",
     documentType: "Change",
     link: "#",
-  }
+  },
 ];
 
 export const mockTeamMembers = [
-  { id: "TM001", name: "Rayyan Basha", role: "Delivery Lead", avatar: "RB", allocation: 100, assignments: { deliverables: 0, tasks: 2, raid: 1 } },
-  { id: "TM002", name: "James Chen", role: "Solution Architect", avatar: "JC", allocation: 80, assignments: { deliverables: 2, tasks: 5, raid: 2 } },
-  { id: "TM003", name: "Maria Santos", role: "Technical Lead", avatar: "MS", allocation: 100, assignments: { deliverables: 1, tasks: 3, raid: 0 } },
-  { id: "TM004", name: "Alex Johnson", role: "Security SME", avatar: "AJ", allocation: 50, assignments: { deliverables: 0, tasks: 1, raid: 1 } },
+  {
+    id: "TM001",
+    name: "Rayyan Basha",
+    role: "Delivery Lead",
+    avatar: "RB",
+    allocation: 100,
+    assignments: { deliverables: 0, tasks: 2, raid: 1 },
+  },
+  {
+    id: "TM002",
+    name: "James Chen",
+    role: "Solution Architect",
+    avatar: "JC",
+    allocation: 80,
+    assignments: { deliverables: 2, tasks: 5, raid: 2 },
+  },
+  {
+    id: "TM003",
+    name: "Maria Santos",
+    role: "Technical Lead",
+    avatar: "MS",
+    allocation: 100,
+    assignments: { deliverables: 1, tasks: 3, raid: 0 },
+  },
+  {
+    id: "TM004",
+    name: "Alex Johnson",
+    role: "Security SME",
+    avatar: "AJ",
+    allocation: 50,
+    assignments: { deliverables: 0, tasks: 1, raid: 1 },
+  },
 ];
 
 export const mockSessions = [
@@ -336,5 +405,5 @@ export const mockSessions = [
     time: "10:00 AM - 12:00 PM",
     type: "Workshop",
     status: "Scheduled",
-  }
+  },
 ];

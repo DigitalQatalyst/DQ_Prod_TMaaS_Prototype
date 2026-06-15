@@ -1,11 +1,6 @@
-import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-} from "@/components/ui/dialog";
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { HealthIndicatorsList } from "@/components/features/engagements/HealthIndicatorsList";
-import type { IndicatorNavigationTarget } from "@/data/engagementHealthIndicators" // TODO: Task 9 — wire up data;
+import type { IndicatorNavigationTarget } from "@/data/engagementHealthIndicators"; // TODO: Task 9 — wire up data;
 
 interface HealthIndicatorModalProps {
   open: boolean;
@@ -29,7 +24,8 @@ export const HealthIndicatorModal = ({
         <DialogHeader>
           <DialogTitle className="text-xl">Automated Project Status</DialogTitle>
           <p className="text-sm text-muted-foreground mt-1">
-            Status is never set manually. Use View on any indicator to open the relevant workspace tab.
+            Status is never set manually. Use View on any indicator to open the relevant workspace
+            tab.
           </p>
         </DialogHeader>
 

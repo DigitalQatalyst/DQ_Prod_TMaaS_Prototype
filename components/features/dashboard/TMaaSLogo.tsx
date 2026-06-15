@@ -9,7 +9,8 @@ interface TMaaSLogoProps {
 
 export function TMaaSLogo({ className }: TMaaSLogoProps) {
   return (
-    <Link href="/"
+    <Link
+      href="/"
       className={`flex items-center gap-3 transition-opacity hover:opacity-90 ${className ?? ""}`}
     >
       <Image src={dqLogoOrange} alt={PLATFORM_NAME} className="h-7 w-auto shrink-0" height={28} />

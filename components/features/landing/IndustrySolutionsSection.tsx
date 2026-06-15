@@ -1,7 +1,7 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { marketplaceEconomySectors } from "@/data/marketplaceNavigation" // TODO: Task 9 — wire up data;
+import { marketplaceEconomySectors } from "@/data/marketplaceNavigation"; // TODO: Task 9 — wire up data;
 import { ArrowRight } from "lucide-react";
 import {
   Carousel,
@@ -43,14 +43,13 @@ const IndustrySolutionsSection = () => {
     <section className="border-t border-gray-100 bg-gray-50 px-5 py-24 md:px-8 lg:px-10">
       <div className="relative mx-auto max-w-[1200px]">
         <div className="pr-24">
-          <p className="dq-eyebrow">
-            Industries
-          </p>
+          <p className="dq-eyebrow">Industries</p>
           <h2 className="mt-4 text-4xl font-semibold tracking-tight text-dq-navy md:text-5xl">
             Industry Solutions
           </h2>
           <p className="mt-4 max-w-2xl text-base leading-relaxed text-gray-600">
-            Discover tailored services aligned to the specific requirements and workflows of your industry.
+            Discover tailored services aligned to the specific requirements and workflows of your
+            industry.
           </p>
         </div>
 

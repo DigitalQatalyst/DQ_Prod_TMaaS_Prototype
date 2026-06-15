@@ -8,7 +8,7 @@ import {
   getHealthStatusBadgeClass,
   type EngagementHealthIndicator,
   type IndicatorNavigationTarget,
-} from "@/data/engagementHealthIndicators" // TODO: Task 9 — wire up data;
+} from "@/data/engagementHealthIndicators"; // TODO: Task 9 — wire up data;
 
 const getStatusIcon = (status: string) => {
   if (status === "green") return <CheckCircle2 size={16} className="text-green-600" />;
@@ -41,11 +41,16 @@ const IndicatorRow = ({
       <div className="min-w-0 flex-1">
         <div className="flex items-center gap-2 flex-wrap">
           {variant === "modal" && getStatusIcon(ind.status)}
-          <p className={`font-semibold text-navy-950 ${variant === "overview" ? "text-sm" : "text-base"}`}>
+          <p
+            className={`font-semibold text-navy-950 ${variant === "overview" ? "text-sm" : "text-base"}`}
+          >
             {ind.name}
           </p>
           {variant === "modal" && (
-            <Badge variant="outline" className={`capitalize ${getHealthStatusBadgeClass(ind.status)}`}>
+            <Badge
+              variant="outline"
+              className={`capitalize ${getHealthStatusBadgeClass(ind.status)}`}
+            >
               {ind.status}
             </Badge>
           )}
@@ -58,7 +63,9 @@ const IndicatorRow = ({
           {ind.currentReason}
         </p>
         {variant === "modal" && (
-          <p className="text-[10px] text-gray-500 italic border-l-2 pl-2 border-gray-200 mt-2">{ind.logic}</p>
+          <p className="text-[10px] text-gray-500 italic border-l-2 pl-2 border-gray-200 mt-2">
+            {ind.logic}
+          </p>
         )}
       </div>
 
@@ -88,12 +95,20 @@ const IndicatorRow = ({
   </div>
 );
 
-export const HealthIndicatorsList = ({ variant = "overview", onNavigate }: HealthIndicatorsListProps) => {
+export const HealthIndicatorsList = ({
+  variant = "overview",
+  onNavigate,
+}: HealthIndicatorsListProps) => {
   if (variant === "modal") {
     return (
       <div className="space-y-4 max-h-[60vh] overflow-y-auto pr-2">
         {engagementHealthIndicators.map((ind) => (
-          <IndicatorRow key={ind.id} ind={ind} variant="modal" {...(onNavigate ? { onNavigate } : {})} />
+          <IndicatorRow
+            key={ind.id}
+            ind={ind}
+            variant="modal"
+            {...(onNavigate ? { onNavigate } : {})}
+          />
         ))}
       </div>
     );
@@ -102,7 +117,12 @@ export const HealthIndicatorsList = ({ variant = "overview", onNavigate }: Healt
   return (
     <div className="divide-y divide-border">
       {engagementHealthIndicators.map((ind) => (
-        <IndicatorRow key={ind.id} ind={ind} variant="overview" {...(onNavigate ? { onNavigate } : {})} />
+        <IndicatorRow
+          key={ind.id}
+          ind={ind}
+          variant="overview"
+          {...(onNavigate ? { onNavigate } : {})}
+        />
       ))}
     </div>
   );

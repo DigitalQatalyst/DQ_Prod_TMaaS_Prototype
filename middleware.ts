@@ -37,9 +37,7 @@ export function middleware(request: NextRequest) {
   }
 
   // Auth guard for all protected routes
-  const isProtected = PROTECTED_PREFIXES.some((prefix) =>
-    pathname.startsWith(prefix)
-  );
+  const isProtected = PROTECTED_PREFIXES.some((prefix) => pathname.startsWith(prefix));
   if (isProtected && !hasSession(request)) {
     return NextResponse.redirect(new URL("/sign-in", request.url));
   }

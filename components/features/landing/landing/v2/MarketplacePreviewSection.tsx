@@ -1,13 +1,6 @@
 import Link from "next/link";
-import {
-  ArrowRight,
-  Monitor,
-  Workflow,
-  Shield,
-  BarChart2,
-  type LucideIcon,
-} from "lucide-react";
-import { marketplaceCoreCapabilities } from "@/data/marketplaceNavigation" // TODO: Task 9 — wire up data;
+import { ArrowRight, Monitor, Workflow, Shield, BarChart2, type LucideIcon } from "lucide-react";
+import { marketplaceCoreCapabilities } from "@/data/marketplaceNavigation"; // TODO: Task 9 — wire up data;
 
 const CATEGORY_ICONS: Record<string, LucideIcon> = {
   experience: Monitor,
@@ -17,31 +10,23 @@ const CATEGORY_ICONS: Record<string, LucideIcon> = {
 };
 
 const CATEGORY_DESCRIPTIONS: Record<string, string> = {
-  experience:
-    "Customer portals, apps, and digital experiences built to scale.",
-  operations:
-    "Workflows and automation that help teams work smarter.",
-  security:
-    "Cloud, security, and DevOps for compliant enterprise delivery.",
+  experience: "Customer portals, apps, and digital experiences built to scale.",
+  operations: "Workflows and automation that help teams work smarter.",
+  security: "Cloud, security, and DevOps for compliant enterprise delivery.",
   ai: "Data, analytics, and AI services that turn insight into action.",
 };
 
 const MarketplacePreviewSection = () => {
   return (
-    <section
-      id="marketplace-preview"
-      className="bg-gray-50 px-5 py-24 md:px-8 lg:px-10"
-    >
+    <section id="marketplace-preview" className="bg-gray-50 px-5 py-24 md:px-8 lg:px-10">
       <div className="mx-auto max-w-[1200px]">
-        <p className="mb-4 dq-eyebrow">
-          The marketplace
-        </p>
+        <p className="mb-4 dq-eyebrow">The marketplace</p>
         <h2 className="mb-4 max-w-2xl text-4xl font-semibold tracking-tight text-dq-navy md:text-5xl">
           Browse digital transformation services by category.
         </h2>
         <p className="mb-12 max-w-xl text-lg text-gray-600">
-          Four capability areas. One catalogue. Pick what matters most and
-          explore ready-to-launch services.
+          Four capability areas. One catalogue. Pick what matters most and explore ready-to-launch
+          services.
         </p>
 
         <div className="grid gap-6 md:grid-cols-2">
@@ -73,7 +58,8 @@ const MarketplacePreviewSection = () => {
         </div>
 
         <div className="mt-10 text-center">
-          <Link href="/marketplace"
+          <Link
+            href="/marketplace"
             className="inline-flex items-center gap-2 text-sm font-semibold text-dq-navy transition-colors hover:text-dq-navy/70"
           >
             View all 100+ services

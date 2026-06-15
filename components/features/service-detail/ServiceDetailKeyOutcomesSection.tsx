@@ -6,9 +6,7 @@ interface ServiceDetailKeyOutcomesSectionProps {
 }
 
 function outcomeItemClass(index: number): string {
-  const classes = [
-    "flex min-w-0 flex-col px-6 py-8 sm:px-8 lg:px-8 lg:py-0",
-  ];
+  const classes = ["flex min-w-0 flex-col px-6 py-8 sm:px-8 lg:px-8 lg:py-0"];
 
   if (index === 0) {
     classes.push("pt-0");
@@ -35,9 +33,7 @@ function outcomeItemClass(index: number): string {
   return classes.join(" ");
 }
 
-export function ServiceDetailKeyOutcomesSection({
-  service,
-}: ServiceDetailKeyOutcomesSectionProps) {
+export function ServiceDetailKeyOutcomesSection({ service }: ServiceDetailKeyOutcomesSectionProps) {
   const keyOutcomes = getKeyOutcomes(service);
 
   return (

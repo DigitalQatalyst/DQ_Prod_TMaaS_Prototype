@@ -256,13 +256,11 @@ function buildContext(service: ServiceProduct): FaqContext {
     solutionKey,
     domain: getSolutionDomainPhrase(service.standardName),
     serviceType: service.serviceType,
-    serviceTypeLabel:
-      marketplaceServiceTypeLabels[service.serviceType] ?? service.serviceType,
+    serviceTypeLabel: marketplaceServiceTypeLabels[service.serviceType] ?? service.serviceType,
     duration: service.duration,
     price: service.price,
     implementationModel: service.implementationModel,
-    capability:
-      COLLECTION_CAPABILITY[service.collection] ?? COLLECTION_CAPABILITY["experience"]!,
+    capability: COLLECTION_CAPABILITY[service.collection] ?? COLLECTION_CAPABILITY["experience"]!,
   };
 }
 
@@ -270,11 +268,10 @@ export function buildServiceFaqsContent(service: ServiceProduct): ServiceFaqsCon
   const ctx = buildContext(service);
   const intro = `Key questions about the ${ctx.solution} ${ctx.serviceTypeLabel.toLowerCase()} service.`;
 
-  const faqs = [
-    buildPrimaryFaq(ctx),
-    ...buildSecondaryFaqs(ctx),
-    getStartedFaq(ctx),
-  ].slice(0, MAX_FAQS);
+  const faqs = [buildPrimaryFaq(ctx), ...buildSecondaryFaqs(ctx), getStartedFaq(ctx)].slice(
+    0,
+    MAX_FAQS
+  );
 
   return { intro, faqs };
 }

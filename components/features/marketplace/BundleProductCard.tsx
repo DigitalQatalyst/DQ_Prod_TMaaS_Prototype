@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { Package } from "lucide-react";
-import type { ServiceBundle } from "@/data/bundles" // TODO: Task 9 — wire up data;
+import type { ServiceBundle } from "@/data/bundles"; // TODO: Task 9 — wire up data;
 
 type BundleProductCardProps = {
   bundle: ServiceBundle;
@@ -21,9 +21,7 @@ const BundleProductCard = ({ bundle }: BundleProductCardProps) => {
             {bundle.servicesIncludedCount} Services Included
           </span>
         </div>
-        <h3 className="text-sm font-semibold leading-snug text-dq-navy">
-          {bundle.title}
-        </h3>
+        <h3 className="text-sm font-semibold leading-snug text-dq-navy">{bundle.title}</h3>
         <p className="mt-1.5 line-clamp-2 text-xs leading-relaxed text-gray-500">
           {bundle.outcomeStatement}
         </p>

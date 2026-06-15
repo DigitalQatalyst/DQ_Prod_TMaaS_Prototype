@@ -7,7 +7,6 @@ import type { CollectionCopyOverrides } from "./types";
  * Keyed by variant id. See ./types.ts for the field contract and voice rules.
  */
 export const experience2Copy: CollectionCopyOverrides = {
-
   // -----------------------------------------------------------------------
   // CRM Solutions (ids 31-36)
   // -----------------------------------------------------------------------
@@ -1131,7 +1130,8 @@ export const experience2Copy: CollectionCopyOverrides = {
           "AI-assisted pricing works best where there is sufficient historical transaction data with outcome labels. The use-case scoring phase determines whether your data supports this. Simpler applications, such as configuration assistance or win-probability scoring, often have lower data requirements.",
       },
       {
-        question: "How do you ensure AI pricing recommendations do not override commercial authority?",
+        question:
+          "How do you ensure AI pricing recommendations do not override commercial authority?",
         answer:
           "The workflow designs define explicit human authority boundaries. AI produces recommendations; approval and override controls remain with authorised roles. This is a core design requirement, not an option.",
       },
@@ -1288,7 +1288,8 @@ export const experience2Copy: CollectionCopyOverrides = {
           "The monitoring dashboard surfaces acceptance rates and accuracy metrics in near-real time. If performance falls below agreed thresholds, the operations runbook covers the investigation and response procedure, including model rollback.",
       },
       {
-        question: "Can AI recommendations be limited to specific product lines or deal sizes initially?",
+        question:
+          "Can AI recommendations be limited to specific product lines or deal sizes initially?",
         answer:
           "Yes. Staged rollout by product category or deal value threshold is the standard approach, allowing the team to build confidence before broader deployment.",
       },
@@ -1358,7 +1359,8 @@ export const experience2Copy: CollectionCopyOverrides = {
           "Pricing rule and product catalogue updates are included within the managed service. The DigitalQatalyst team tests changes in a staging environment and validates pricing accuracy before promoting to production.",
       },
       {
-        question: "Can the managed service cover integration maintenance if a connected system changes?",
+        question:
+          "Can the managed service cover integration maintenance if a connected system changes?",
         answer:
           "Yes. Integration maintenance for connected CRM, ERP, and contract systems is included within the service scope. Major re-integrations caused by third-party platform changes are assessed and agreed separately.",
       },
@@ -1968,7 +1970,8 @@ export const experience2Copy: CollectionCopyOverrides = {
     faqIntro: "Questions about the IT operations and service desk design engagement.",
     faqs: [
       {
-        question: "Does the design cover both reactive incident management and proactive problem management?",
+        question:
+          "Does the design cover both reactive incident management and proactive problem management?",
         answer:
           "Yes. Problem management process design, including root-cause analysis workflows and known error management, is included alongside the reactive incident procedures.",
       },

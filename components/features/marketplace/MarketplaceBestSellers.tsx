@@ -2,7 +2,7 @@ import ServiceProductCard from "@/components/features/marketplace/ServiceProduct
 import type { ServiceProduct } from "@/lib/types/serviceProduct";
 import { getRemixedName } from "@/lib/serviceProductUtils";
 import { useBestSellers } from "@/lib/hooks/useCatalog";
-import { marketplaceCategoryLabels } from "@/data/marketplaceNavigation" // TODO: Task 9 — wire up data;
+import { marketplaceCategoryLabels } from "@/data/marketplaceNavigation"; // TODO: Task 9 — wire up data;
 import {
   Carousel,
   CarouselContent,
@@ -16,10 +16,7 @@ type MarketplaceBestSellersProps = {
   selectedIndustry: string;
 };
 
-const MarketplaceBestSellers = ({
-  activeTab,
-  selectedIndustry,
-}: MarketplaceBestSellersProps) => {
+const MarketplaceBestSellers = ({ activeTab, selectedIndustry }: MarketplaceBestSellersProps) => {
   const collection = activeTab === "all" ? "all" : activeTab;
   const { data: bestSellers = [] } = useBestSellers(collection, 6);
 
@@ -62,10 +59,7 @@ const MarketplaceBestSellers = ({
 
         <CarouselContent className="-ml-4 mt-8 pt-2 pb-2">
           {bestSellers.map((service: ServiceProduct) => (
-            <CarouselItem
-              key={service.id}
-              className="basis-[85%] pl-4 sm:basis-1/2 md:basis-1/3"
-            >
+            <CarouselItem key={service.id} className="basis-[85%] pl-4 sm:basis-1/2 md:basis-1/3">
               <ServiceProductCard
                 service={service}
                 variant="grid"

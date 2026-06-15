@@ -9,13 +9,7 @@ export type WhyItMattersContent = {
   after: { eyebrow: string; title: string; items: WhyItMattersStateItem[] };
 };
 
-type ServiceTypeKey =
-  | "advisory"
-  | "design"
-  | "ai_design"
-  | "deploy"
-  | "ai_deploy"
-  | "manage";
+type ServiceTypeKey = "advisory" | "design" | "ai_design" | "deploy" | "ai_deploy" | "manage";
 
 type TypeBlock = {
   problemParagraph: string;
@@ -296,10 +290,7 @@ const SOLUTION_PROFILES: Record<string, SolutionProfile> = {
           "Inconsistent campaign design",
           "Publishing workflows and governance vary by team and platform."
         ),
-        gap(
-          "Operational ambiguity",
-          "Teams lack playbooks and specs to run programmes at scale."
-        ),
+        gap("Operational ambiguity", "Teams lack playbooks and specs to run programmes at scale."),
       ],
       outcomes: [
         gap(
@@ -471,10 +462,7 @@ const SOLUTION_PROFILES: Record<string, SolutionProfile> = {
         ),
       ],
       outcomes: [
-        gap(
-          "Cross-channel priorities",
-          "You know which journeys and integrations to fix first."
-        ),
+        gap("Cross-channel priorities", "You know which journeys and integrations to fix first."),
         gap(
           "Ranked experience backlog",
           "Gaps are ordered for design, platform, and investment decisions."
@@ -698,10 +686,7 @@ const SOLUTION_PROFILES: Record<string, SolutionProfile> = {
           "Governance gaps",
           "Discount rules, product bundles, and approvals lack clear controls."
         ),
-        gap(
-          "Build ambiguity",
-          "Platform teams lack specs for CRM, ERP, and document integration."
-        ),
+        gap("Build ambiguity", "Platform teams lack specs for CRM, ERP, and document integration."),
       ],
       outcomes: [
         gap(
@@ -796,10 +781,7 @@ const SOLUTION_PROFILES: Record<string, SolutionProfile> = {
           "Tool sprawl",
           "Collaboration happens across disconnected apps with no shared workflow model."
         ),
-        gap(
-          "Uneven adoption",
-          "Teams use platforms differently, reducing productivity gains."
-        ),
+        gap("Uneven adoption", "Teams use platforms differently, reducing productivity gains."),
         gap(
           "Unclear productivity signals",
           "Leaders lack evidence on where friction costs time and decision quality."
@@ -828,10 +810,7 @@ const SOLUTION_PROFILES: Record<string, SolutionProfile> = {
           "Tool sprawl",
           "Collaboration happens across disconnected apps with no shared workflow model."
         ),
-        gap(
-          "Uneven adoption",
-          "Teams use platforms differently, reducing productivity gains."
-        ),
+        gap("Uneven adoption", "Teams use platforms differently, reducing productivity gains."),
         gap(
           "Build ambiguity",
           "Delivery teams lack journey maps, standards, and specs to implement with confidence."
@@ -873,10 +852,7 @@ const SOLUTION_PROFILES: Record<string, SolutionProfile> = {
         ),
       ],
       outcomes: [
-        gap(
-          "Process-led priorities",
-          "You know which workflows to automate or redesign first."
-        ),
+        gap("Process-led priorities", "You know which workflows to automate or redesign first."),
         gap(
           "Ranked automation backlog",
           "Candidates are ordered by impact, feasibility, and dependency."
@@ -895,10 +871,7 @@ const SOLUTION_PROFILES: Record<string, SolutionProfile> = {
           "Undefined workflow models",
           "Triggers, approvals, and exceptions are not designed before build."
         ),
-        gap(
-          "Integration gaps",
-          "Systems of record lack clear APIs, events, and data contracts."
-        ),
+        gap("Integration gaps", "Systems of record lack clear APIs, events, and data contracts."),
         gap(
           "Governance ambiguity",
           "Teams lack controls for monitoring, audit, and change management."
@@ -940,10 +913,7 @@ const SOLUTION_PROFILES: Record<string, SolutionProfile> = {
         ),
       ],
       outcomes: [
-        gap(
-          "Operational priority map",
-          "You know which processes and systems to improve first."
-        ),
+        gap("Operational priority map", "You know which processes and systems to improve first."),
         gap(
           "Ranked transformation backlog",
           "Gaps are ordered for design, technology, and investment."
@@ -1033,10 +1003,7 @@ const SOLUTION_PROFILES: Record<string, SolutionProfile> = {
           "Data and integration gaps",
           "Systems of record do not exchange information with clear contracts."
         ),
-        gap(
-          "Programme ambiguity",
-          "Delivery teams lack specs for phased rollout and governance."
-        ),
+        gap("Programme ambiguity", "Delivery teams lack specs for phased rollout and governance."),
       ],
       outcomes: [
         gap(
@@ -1177,10 +1144,7 @@ const SOLUTION_PROFILES: Record<string, SolutionProfile> = {
           "Aligned ERP processes",
           "Workflows reflect how finance and operations need to run at scale."
         ),
-        gap(
-          "Consistent data standards",
-          "Master data and integration rules are defined upfront."
-        ),
+        gap("Consistent data standards", "Master data and integration rules are defined upfront."),
         gap(
           "Implementation-ready specs",
           "Teams receive artefacts that reduce rework during ERP delivery."
@@ -1202,10 +1166,7 @@ const SOLUTION_PROFILES: Record<string, SolutionProfile> = {
           "Capacity blind spots",
           "Leaders cannot forecast demand against available skills and hours."
         ),
-        gap(
-          "Compliance risk",
-          "Labour rules and roster policies are applied inconsistently."
-        ),
+        gap("Compliance risk", "Labour rules and roster policies are applied inconsistently."),
       ],
       outcomes: [
         gap(
@@ -1265,10 +1226,7 @@ const SOLUTION_PROFILES: Record<string, SolutionProfile> = {
           "Inconsistent data quality",
           "Reports conflict because definitions and ownership are unclear."
         ),
-        gap(
-          "Governance gaps",
-          "Access, lineage, and stewardship are informal or absent."
-        ),
+        gap("Governance gaps", "Access, lineage, and stewardship are informal or absent."),
         gap(
           "Platform scaling risk",
           "Pipelines and architecture cannot support analytics or AI at scale."
@@ -1311,10 +1269,7 @@ const SOLUTION_PROFILES: Record<string, SolutionProfile> = {
           "Aligned platform designs",
           "Architecture reflects analytics, AI, and operational data needs."
         ),
-        gap(
-          "Governance standards",
-          "Ownership, quality, and access rules are defined upfront."
-        ),
+        gap("Governance standards", "Ownership, quality, and access rules are defined upfront."),
         gap(
           "Implementation-ready specs",
           "Engineering receives artefacts that accelerate platform delivery."
@@ -1368,20 +1323,14 @@ const SOLUTION_PROFILES: Record<string, SolutionProfile> = {
           "Semantic model gaps",
           "Self-service and enterprise reporting pull from inconsistent logic."
         ),
-        gap(
-          "Delivery ambiguity",
-          "Teams lack specs for dashboards, alerts, and data products."
-        ),
+        gap("Delivery ambiguity", "Teams lack specs for dashboards, alerts, and data products."),
       ],
       outcomes: [
         gap(
           "Aligned analytics designs",
           "Metrics and models reflect how leaders actually make decisions."
         ),
-        gap(
-          "Consistent semantic standards",
-          "Definitions and governance rules are set upfront."
-        ),
+        gap("Consistent semantic standards", "Definitions and governance rules are set upfront."),
         gap(
           "Implementation-ready specs",
           "Analytics teams receive artefacts that accelerate trusted reporting."
@@ -1417,10 +1366,7 @@ const SOLUTION_PROFILES: Record<string, SolutionProfile> = {
           "Prioritised delivery roadmap",
           "Use cases are ordered by value, feasibility, and risk."
         ),
-        gap(
-          "Investment clarity",
-          "Your leaders can fund governed production capabilities first."
-        ),
+        gap("Investment clarity", "Your leaders can fund governed production capabilities first."),
       ],
     },
     design: {
@@ -1435,16 +1381,10 @@ const SOLUTION_PROFILES: Record<string, SolutionProfile> = {
           "Missing guardrails",
           "Human oversight, monitoring, and safety controls are not designed in."
         ),
-        gap(
-          "Integration ambiguity",
-          "Teams lack specs for data, APIs, and operational handover."
-        ),
+        gap("Integration ambiguity", "Teams lack specs for data, APIs, and operational handover."),
       ],
       outcomes: [
-        gap(
-          "Validated AI designs",
-          "Use cases include workflow, data, and governance detail."
-        ),
+        gap("Validated AI designs", "Use cases include workflow, data, and governance detail."),
         gap(
           "Responsible control standards",
           "Safety and compliance requirements are defined upfront."
@@ -1512,10 +1452,7 @@ const SOLUTION_PROFILES: Record<string, SolutionProfile> = {
           "Designed governance models",
           "Forums, roles, and decision paths are clear and actionable."
         ),
-        gap(
-          "Consistent standards",
-          "Architecture and control requirements are defined upfront."
-        ),
+        gap("Consistent standards", "Architecture and control requirements are defined upfront."),
         gap(
           "Implementation-ready specs",
           "Platform teams receive artefacts that accelerate governed delivery."
@@ -1710,10 +1647,7 @@ function sectorOperationsProfile(
           "Integration gaps",
           "Field, ERP, and customer systems lack clear data and event contracts."
         ),
-        gap(
-          "Rollout ambiguity",
-          "Teams lack specs to pilot and scale changes across sites."
-        ),
+        gap("Rollout ambiguity", "Teams lack specs to pilot and scale changes across sites."),
       ],
       outcomes: [
         gap(
@@ -1860,10 +1794,7 @@ function fallbackProfile(key: string): SolutionProfile {
           "Siloed decisions",
           "Stakeholders work from different assumptions and incomplete evidence."
         ),
-        gap(
-          "Slow progress",
-          "Good ideas stall before they become funded, governed delivery."
-        ),
+        gap("Slow progress", "Good ideas stall before they become funded, governed delivery."),
       ],
       outcomes: [
         gap(
@@ -1883,13 +1814,25 @@ function fallbackProfile(key: string): SolutionProfile {
     design: {
       problemParagraph: `Many organisations plan ${label.toLowerCase()} changes without aligned designs, standards, or build-ready specifications. This design engagement turns goals into user-centred designs and implementation-ready artefacts.`,
       gaps: [
-        gap("Undefined direction", "Target workflows and experiences are unclear for stakeholders."),
+        gap(
+          "Undefined direction",
+          "Target workflows and experiences are unclear for stakeholders."
+        ),
         gap("Inconsistent standards", "Teams apply different patterns without shared governance."),
-        gap("Build ambiguity", "Delivery teams lack specifications needed to implement with confidence."),
+        gap(
+          "Build ambiguity",
+          "Delivery teams lack specifications needed to implement with confidence."
+        ),
       ],
       outcomes: [
-        gap("Aligned designs", "Workflows and experiences reflect how teams and users actually work."),
-        gap("Consistent standards", "UX, integration, and governance requirements are defined upfront."),
+        gap(
+          "Aligned designs",
+          "Workflows and experiences reflect how teams and users actually work."
+        ),
+        gap(
+          "Consistent standards",
+          "UX, integration, and governance requirements are defined upfront."
+        ),
         gap(
           "Implementation-ready specs",
           "Build teams receive artefacts that reduce rework and accelerate delivery."

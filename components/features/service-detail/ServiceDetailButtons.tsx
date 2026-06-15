@@ -1,11 +1,6 @@
 import type { ButtonHTMLAttributes } from "react";
 import { cn } from "@/lib/utils";
-import {
-  btnPrimary,
-  btnPrimaryOnDark,
-  btnSecondary,
-  btnSecondaryOnDark,
-} from "@/lib/brandAccent";
+import { btnPrimary, btnPrimaryOnDark, btnSecondary, btnSecondaryOnDark } from "@/lib/brandAccent";
 
 type ServiceDetailButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
   fullWidth?: boolean;
@@ -18,11 +13,7 @@ export function ServiceDetailPrimaryButton({
   ...props
 }: ServiceDetailButtonProps) {
   return (
-    <button
-      type="button"
-      className={cn(btnPrimary, fullWidth && "w-full", className)}
-      {...props}
-    >
+    <button type="button" className={cn(btnPrimary, fullWidth && "w-full", className)} {...props}>
       {children}
     </button>
   );
@@ -35,11 +26,7 @@ export function ServiceDetailSecondaryButton({
   ...props
 }: ServiceDetailButtonProps) {
   return (
-    <button
-      type="button"
-      className={cn(btnSecondary, fullWidth && "w-full", className)}
-      {...props}
-    >
+    <button type="button" className={cn(btnSecondary, fullWidth && "w-full", className)} {...props}>
       {children}
     </button>
   );

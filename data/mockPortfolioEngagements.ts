@@ -94,22 +94,61 @@ export const governanceAlerts = {
   criticalSummary:
     "IT GPRC is Critical: Dependencies Met is red (blocked task T-104 and open RAID dependency D001 past due). Progress vs Schedule is amber due to an overdue deliverable.",
   blocked: [
-    { id: "T-104", label: "Security Architecture Review", engagement: "IT GPRC", type: "Blocked task" },
-    { id: "D001", label: "Enterprise architecture standards", engagement: "IT GPRC", type: "RAID dependency" },
+    {
+      id: "T-104",
+      label: "Security Architecture Review",
+      engagement: "IT GPRC",
+      type: "Blocked task",
+    },
+    {
+      id: "D001",
+      label: "Enterprise architecture standards",
+      engagement: "IT GPRC",
+      type: "RAID dependency",
+    },
   ],
   overdue: [
-    { id: "D2", label: "Target Architecture Blueprint", engagement: "IT GPRC", dueDate: "2026-03-01" },
+    {
+      id: "D2",
+      label: "Target Architecture Blueprint",
+      engagement: "IT GPRC",
+      dueDate: "2026-03-01",
+    },
   ],
   krisAtRisk: [
-    { id: "KRI-02", label: "Time-to-Market for New Capabilities", engagement: "IT GPRC", current: "-12%", target: "-20%" },
+    {
+      id: "KRI-02",
+      label: "Time-to-Market for New Capabilities",
+      engagement: "IT GPRC",
+      current: "-12%",
+      target: "-20%",
+    },
   ],
   escalations: [
-    { id: "R001", label: "Delayed stakeholder approvals", engagement: "IT GPRC", severity: "Critical" },
-    { id: "I001", label: "Missing security clearance for production APIs", engagement: "IT GPRC", severity: "High" },
+    {
+      id: "R001",
+      label: "Delayed stakeholder approvals",
+      engagement: "IT GPRC",
+      severity: "Critical",
+    },
+    {
+      id: "I001",
+      label: "Missing security clearance for production APIs",
+      engagement: "IT GPRC",
+      severity: "High",
+    },
   ],
   weeklyFocus: [
-    { label: "Digital GRC Design Summary milestone review", engagement: "IT GPRC", date: "2026-03-01" },
+    {
+      label: "Digital GRC Design Summary milestone review",
+      engagement: "IT GPRC",
+      date: "2026-03-01",
+    },
     { label: "Architecture Blueprint Review session", engagement: "IT GPRC", date: "2026-02-28" },
-    { label: "Resolve blocked security architecture task", engagement: "IT GPRC", date: "This week" },
+    {
+      label: "Resolve blocked security architecture task",
+      engagement: "IT GPRC",
+      date: "This week",
+    },
   ],
 };

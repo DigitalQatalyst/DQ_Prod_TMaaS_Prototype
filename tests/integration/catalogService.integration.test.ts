@@ -24,7 +24,9 @@ function mockExtrasTables(variantId = SAMPLE_LISTING_ROW.variant_id) {
       count: 1,
     },
     product_features: {
-      data: [{ variant_id: variantId, feature_text: "Dedicated TMaaS specialist team", sort_order: 0 }],
+      data: [
+        { variant_id: variantId, feature_text: "Dedicated TMaaS specialist team", sort_order: 0 },
+      ],
       error: null,
     },
     product_tags: {
@@ -139,7 +141,12 @@ describe("catalogService Supabase integration", () => {
           }
           if (state.filters.variant_id__in) {
             return {
-              data: [{ variant_id: SAMPLE_LISTING_ROW.variant_id, product_id: SAMPLE_LISTING_ROW.product_id }],
+              data: [
+                {
+                  variant_id: SAMPLE_LISTING_ROW.variant_id,
+                  product_id: SAMPLE_LISTING_ROW.product_id,
+                },
+              ],
               error: null,
             };
           }
@@ -275,7 +282,12 @@ describe("catalogService Supabase integration", () => {
           }
           if (state.filters.variant_id__in) {
             return {
-              data: [{ variant_id: SAMPLE_LISTING_ROW.variant_id, product_id: SAMPLE_LISTING_ROW.product_id }],
+              data: [
+                {
+                  variant_id: SAMPLE_LISTING_ROW.variant_id,
+                  product_id: SAMPLE_LISTING_ROW.product_id,
+                },
+              ],
               error: null,
             };
           }
@@ -332,10 +344,34 @@ describe("catalogService Supabase integration", () => {
   it("ranks services by popularity within a collection", async () => {
     const { pickTopServicesByPopularity } = await import("@/services/catalogService");
     const services = [
-      { ...initialServices[0], id: 1, collection: "ai" as const, popularityRank: 10, serviceType: "advisory" as const },
-      { ...initialServices[0], id: 2, collection: "ai" as const, popularityRank: 50, serviceType: "design" as const },
-      { ...initialServices[0], id: 3, collection: "experience" as const, popularityRank: 99, serviceType: "advisory" as const },
-      { ...initialServices[0], id: 4, collection: "ai" as const, popularityRank: 5, serviceType: "bundle" as const },
+      {
+        ...initialServices[0],
+        id: 1,
+        collection: "ai" as const,
+        popularityRank: 10,
+        serviceType: "advisory" as const,
+      },
+      {
+        ...initialServices[0],
+        id: 2,
+        collection: "ai" as const,
+        popularityRank: 50,
+        serviceType: "design" as const,
+      },
+      {
+        ...initialServices[0],
+        id: 3,
+        collection: "experience" as const,
+        popularityRank: 99,
+        serviceType: "advisory" as const,
+      },
+      {
+        ...initialServices[0],
+        id: 4,
+        collection: "ai" as const,
+        popularityRank: 5,
+        serviceType: "bundle" as const,
+      },
     ];
 
     const topAi = pickTopServicesByPopularity(services, "ai", 2);

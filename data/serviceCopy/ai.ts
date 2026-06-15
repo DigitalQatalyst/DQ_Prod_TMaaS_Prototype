@@ -7,7 +7,6 @@ import type { CollectionCopyOverrides } from "./types";
  * Enterprise AI & Automation (115-120).
  */
 export const aiCopy: CollectionCopyOverrides = {
-
   // -------------------------------------------------------------------------
   // ENTERPRISE DATA PLATFORM (ids 103-108)
   // -------------------------------------------------------------------------
@@ -55,8 +54,7 @@ export const aiCopy: CollectionCopyOverrides = {
       "Covers architecture, data quality, lineage, and governance in a single engagement",
       "Output calibrated for both technical leads and executive sponsors",
     ],
-    faqIntro:
-      "Common questions about the Enterprise Data Platform assessment.",
+    faqIntro: "Common questions about the Enterprise Data Platform assessment.",
     faqs: [
       {
         question: "What do you review during the assessment?",
@@ -136,8 +134,7 @@ export const aiCopy: CollectionCopyOverrides = {
       "Governance design integrated into the architecture, not bolted on afterwards",
       "Build plan ready to hand directly to your delivery squads",
     ],
-    faqIntro:
-      "Common questions about the Enterprise Data Platform design engagement.",
+    faqIntro: "Common questions about the Enterprise Data Platform design engagement.",
     faqs: [
       {
         question: "Do you design for a specific cloud provider or technology stack?",
@@ -217,8 +214,7 @@ export const aiCopy: CollectionCopyOverrides = {
       "Ethics and responsibility considerations built into each workflow design",
       "Specifications include monitoring and drift detection from the outset",
     ],
-    faqIntro:
-      "Common questions about the Enterprise Data Platform AI design engagement.",
+    faqIntro: "Common questions about the Enterprise Data Platform AI design engagement.",
     faqs: [
       {
         question: "How do you decide which AI use cases to prioritise?",
@@ -293,8 +289,7 @@ export const aiCopy: CollectionCopyOverrides = {
       "Parallel running period built in to confirm data fidelity before full cutover",
       "Runbooks and handover materials produced as part of the engagement, not as an afterthought",
     ],
-    faqIntro:
-      "Common questions about the Enterprise Data Platform deployment engagement.",
+    faqIntro: "Common questions about the Enterprise Data Platform deployment engagement.",
     faqs: [
       {
         question: "What does the knowledge transfer programme involve in practice?",
@@ -369,8 +364,7 @@ export const aiCopy: CollectionCopyOverrides = {
       "Rollback capability tested and confirmed before any model goes live in production",
       "Handover includes retraining triggers and a model lifecycle management guide",
     ],
-    faqIntro:
-      "Common questions about the Enterprise Data Platform AI deployment engagement.",
+    faqIntro: "Common questions about the Enterprise Data Platform AI deployment engagement.",
     faqs: [
       {
         question: "What does model drift monitoring look like?",
@@ -444,8 +438,7 @@ export const aiCopy: CollectionCopyOverrides = {
       "Monthly quality reporting gives leadership a consistent view of platform health",
       "Optimisation reviews prevent cost and performance drift over time",
     ],
-    faqIntro:
-      "Common questions about the Enterprise Data Platform managed service.",
+    faqIntro: "Common questions about the Enterprise Data Platform managed service.",
     faqs: [
       {
         question: "What SLAs apply to the managed service?",
@@ -523,8 +516,7 @@ export const aiCopy: CollectionCopyOverrides = {
       "Decision-gap register connects BI improvements directly to business outcomes",
       "No commitment to further work required to receive the full findings pack",
     ],
-    faqIntro:
-      "Common questions about the Business Intelligence and Analytics assessment.",
+    faqIntro: "Common questions about the Business Intelligence and Analytics assessment.",
     faqs: [
       {
         question: "Which BI tools do you review?",
@@ -599,8 +591,7 @@ export const aiCopy: CollectionCopyOverrides = {
       "Semantic layer design prevents the metric fragmentation that plagues large BI estates",
       "Specifications include self-service analytics requirements alongside governed reports",
     ],
-    faqIntro:
-      "Common questions about the Business Intelligence and Analytics design engagement.",
+    faqIntro: "Common questions about the Business Intelligence and Analytics design engagement.",
     faqs: [
       {
         question: "What is a semantic layer and why does it matter for BI?",
@@ -902,8 +893,7 @@ export const aiCopy: CollectionCopyOverrides = {
       "Monthly quality reporting gives leadership a consistent view of analytics environment health",
       "Governed change management prevents the metric drift that erodes report credibility over time",
     ],
-    faqIntro:
-      "Common questions about the Business Intelligence and Analytics managed service.",
+    faqIntro: "Common questions about the Business Intelligence and Analytics managed service.",
     faqs: [
       {
         question: "What counts as an incident under the managed service?",
@@ -981,11 +971,11 @@ export const aiCopy: CollectionCopyOverrides = {
       "Responsible AI and ethics assessment included, not a separate engagement",
       "No commitment to build required to receive the full findings and roadmap",
     ],
-    faqIntro:
-      "Common questions about the Enterprise AI and Automation assessment.",
+    faqIntro: "Common questions about the Enterprise AI and Automation assessment.",
     faqs: [
       {
-        question: "Do we need to have AI projects already underway to benefit from this assessment?",
+        question:
+          "Do we need to have AI projects already underway to benefit from this assessment?",
         answer:
           "No. This assessment is designed for organisations at the start of their AI journey. It is equally valuable if you have existing AI experiments that need structure and prioritisation.",
       },
@@ -1057,8 +1047,7 @@ export const aiCopy: CollectionCopyOverrides = {
       "Governance and override controls designed in, not retrofitted after the build",
       "Adoption plan included so your people are ready when the technology goes live",
     ],
-    faqIntro:
-      "Common questions about the Enterprise AI and Automation design engagement.",
+    faqIntro: "Common questions about the Enterprise AI and Automation design engagement.",
     faqs: [
       {
         question: "How much involvement does our team need during the design phase?",
@@ -1133,8 +1122,7 @@ export const aiCopy: CollectionCopyOverrides = {
       "Responsible AI requirements specified at design time, not discovered during a post-launch audit",
       "Compliance mapping covers your sector-specific obligations so your legal and risk teams can review before build begins",
     ],
-    faqIntro:
-      "Common questions about the Enterprise AI and Automation AI design engagement.",
+    faqIntro: "Common questions about the Enterprise AI and Automation AI design engagement.",
     faqs: [
       {
         question: "How is this different from the standard design engagement?",
@@ -1157,7 +1145,8 @@ export const aiCopy: CollectionCopyOverrides = {
           "Share your candidate AI use cases or your AI opportunity assessment with the DigitalQatalyst team. We will confirm scope, assess your starting position, and propose an engagement plan.",
       },
     ],
-    audience: "CIOs, heads of AI and data science, enterprise architects, and risk and compliance leads",
+    audience:
+      "CIOs, heads of AI and data science, enterprise architects, and risk and compliance leads",
     industryRelevance:
       "Organisations in financial services, insurance, healthcare, and the public sector where AI adoption requires regulatory compliance, explainability, and robust governance before any model goes live",
     businessImpact:
@@ -1209,8 +1198,7 @@ export const aiCopy: CollectionCopyOverrides = {
       "Change management and user training included in the deployment scope",
       "Operational runbooks written as part of the engagement, ready before the first incident",
     ],
-    faqIntro:
-      "Common questions about the Enterprise AI and Automation deployment engagement.",
+    faqIntro: "Common questions about the Enterprise AI and Automation deployment engagement.",
     faqs: [
       {
         question: "How do you manage integration with legacy systems?",
@@ -1285,8 +1273,7 @@ export const aiCopy: CollectionCopyOverrides = {
       "Audit logging and traceability configured to meet your governance and regulatory requirements",
       "Retraining and lifecycle management procedures handed over with the deployment, not documented later",
     ],
-    faqIntro:
-      "Common questions about the Enterprise AI and Automation AI deployment engagement.",
+    faqIntro: "Common questions about the Enterprise AI and Automation AI deployment engagement.",
     faqs: [
       {
         question: "What is a shadow period and why does it matter?",
@@ -1309,7 +1296,8 @@ export const aiCopy: CollectionCopyOverrides = {
           "Share your completed AI design specifications with the DigitalQatalyst team. We will confirm infrastructure requirements, validate the governance controls to implement, and agree a deployment schedule.",
       },
     ],
-    audience: "CIOs, heads of AI and data science, enterprise architects, and risk and compliance leads",
+    audience:
+      "CIOs, heads of AI and data science, enterprise architects, and risk and compliance leads",
     industryRelevance:
       "Organisations in financial services, insurance, healthcare, and the public sector deploying AI capabilities where auditability, governance, and responsible operation are regulatory or board-level requirements",
     businessImpact:
@@ -1360,8 +1348,7 @@ export const aiCopy: CollectionCopyOverrides = {
       "Proactive retraining management prevents the silent accuracy decay that makes AI untrustworthy over time",
       "Governance compliance reporting gives your risk and audit teams the evidence they need each quarter",
     ],
-    faqIntro:
-      "Common questions about the Enterprise AI and Automation managed service.",
+    faqIntro: "Common questions about the Enterprise AI and Automation managed service.",
     faqs: [
       {
         question: "What SLAs apply to AI model incidents?",
@@ -1374,7 +1361,8 @@ export const aiCopy: CollectionCopyOverrides = {
           "Retraining triggers are defined in the handover documentation from the deployment engagement. The DigitalQatalyst team monitors the agreed drift and performance thresholds and initiates retraining when a trigger is met, following the validated retraining procedure.",
       },
       {
-        question: "What happens when a regulation changes and affects our AI governance requirements?",
+        question:
+          "What happens when a regulation changes and affects our AI governance requirements?",
         answer:
           "Regulatory changes relevant to your AI capabilities are flagged in the quarterly governance review. The DigitalQatalyst team will assess the impact on your current controls and recommend changes, which are then handled as a managed change request.",
       },

@@ -29,9 +29,7 @@ const LandingHeroSection = () => {
         <div className="min-w-0">
           <p className="animate-fade-in-up dq-eyebrow">{PLATFORM_DESCRIPTOR}</p>
 
-          <h1
-            className={`animate-fade-in-up animation-delay-100 mt-5 ${landingHeroHeading}`}
-          >
+          <h1 className={`animate-fade-in-up animation-delay-100 mt-5 ${landingHeroHeading}`}>
             <span className="block">{PLATFORM_HERO_HEADLINE_PRIMARY}</span>
             <span className="block text-dq-orange">{PLATFORM_HERO_HEADLINE_ACCENT}</span>
           </h1>
@@ -48,29 +46,20 @@ const LandingHeroSection = () => {
 
           <div className="animate-fade-in-up animation-delay-300 mt-4 flex flex-col items-stretch gap-3 sm:flex-row sm:items-center">
             {featureFlags.isEnabled("contactUs") ? (
-              <Link href={buildLaunchAdvisoryContactPath()}
+              <Link
+                href={buildLaunchAdvisoryContactPath()}
                 className={cn(btnPrimary, "group w-full sm:w-auto")}
               >
                 {LAUNCH_ADVISORY_CTA_LABEL}
-                <ArrowRight
-                  size={16}
-                  className="transition group-hover:translate-x-0.5"
-                />
+                <ArrowRight size={16} className="transition group-hover:translate-x-0.5" />
               </Link>
             ) : (
-              <Link href="/marketplace"
-                className={cn(btnPrimary, "group w-full sm:w-auto")}
-              >
+              <Link href="/marketplace" className={cn(btnPrimary, "group w-full sm:w-auto")}>
                 {NAV_BROWSE_MARKETPLACE_LABEL}
-                <ArrowRight
-                  size={16}
-                  className="transition group-hover:translate-x-0.5"
-                />
+                <ArrowRight size={16} className="transition group-hover:translate-x-0.5" />
               </Link>
             )}
-            <Link href="/marketplace"
-              className={cn(btnSecondary, "w-full sm:w-auto")}
-            >
+            <Link href="/marketplace" className={cn(btnSecondary, "w-full sm:w-auto")}>
               {NAV_BROWSE_MARKETPLACE_LABEL}
             </Link>
           </div>

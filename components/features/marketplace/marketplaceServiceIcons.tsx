@@ -31,9 +31,6 @@ const collectionIcons: Record<string, LucideIcon> = {
   bundles: Layers,
 };
 
-export function getServiceIcon(
-  collection: string,
-  serviceType: string
-): LucideIcon {
+export function getServiceIcon(collection: string, serviceType: string): LucideIcon {
   return serviceTypeIcons[serviceType] ?? collectionIcons[collection] ?? Globe;
 }

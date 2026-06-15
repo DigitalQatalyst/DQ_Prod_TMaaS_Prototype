@@ -1,8 +1,8 @@
 @import "tailwindcss";
 
 @theme {
-  --color-dq-navy: #030F35;
-  --color-dq-orange: #FB5535;
+  --color-dq-navy: #030f35;
+  --color-dq-orange: #fb5535;
   --font-sans: "Plus Jakarta Sans", sans-serif;
   --font-mono: "JetBrains Mono", monospace;
   /* Map shadcn/ui semantic CSS vars to Tailwind 4 color tokens */
@@ -119,30 +119,30 @@
     /* ── DQ Design System palette (subset for TMaaS landing) ─────────────── */
     /* OKLCH values ported from dq_corp_web reference */
     --navy-950: oklch(0.12 0.082 264);
-    --navy-900: oklch(0.14 0.100 264);
-    --navy-800: oklch(0.18 0.120 264);
-    --navy-700: oklch(0.22 0.140 264);
+    --navy-900: oklch(0.14 0.1 264);
+    --navy-800: oklch(0.18 0.12 264);
+    --navy-700: oklch(0.22 0.14 264);
     --navy-600: oklch(0.28 0.155 264);
-    --navy-500: oklch(0.35 0.160 264);
-    --navy-400: oklch(0.48 0.130 264);
-    --navy-300: oklch(0.63 0.090 264);
+    --navy-500: oklch(0.35 0.16 264);
+    --navy-400: oklch(0.48 0.13 264);
+    --navy-300: oklch(0.63 0.09 264);
     --navy-200: oklch(0.78 0.055 264);
     --navy-100: oklch(0.92 0.025 264);
     --navy-50: oklch(0.96 0.012 264);
 
-    --orange-950: oklch(0.30 0.140 29);
-    --orange-900: oklch(0.40 0.165 29);
-    --orange-800: oklch(0.48 0.190 29);
+    --orange-950: oklch(0.3 0.14 29);
+    --orange-900: oklch(0.4 0.165 29);
+    --orange-800: oklch(0.48 0.19 29);
     --orange-700: oklch(0.56 0.208 29);
     --orange-600: oklch(0.62 0.208 29);
     /* TMaaS accent */
-    --dq-orange-500: #FB5535;
+    --dq-orange-500: #fb5535;
     --orange-500: var(--dq-orange-500);
-    --orange-400: oklch(0.70 0.190 29);
-    --orange-300: oklch(0.80 0.135 29);
-    --orange-200: oklch(0.88 0.080 29);
-    --orange-100: oklch(0.94 0.040 29);
-    --orange-50: oklch(0.97 0.020 29);
+    --orange-400: oklch(0.7 0.19 29);
+    --orange-300: oklch(0.8 0.135 29);
+    --orange-200: oklch(0.88 0.08 29);
+    --orange-100: oklch(0.94 0.04 29);
+    --orange-50: oklch(0.97 0.02 29);
 
     --gray-950: oklch(0.18 0.01 264);
     --gray-900: oklch(0.24 0.01 264);
@@ -152,44 +152,30 @@
     --gray-500: oklch(0.62 0.01 264);
     --gray-400: oklch(0.72 0.01 264);
     --gray-300: oklch(0.82 0.01 264);
-    --gray-200: oklch(0.90 0.01 264);
+    --gray-200: oklch(0.9 0.01 264);
     --gray-100: oklch(0.95 0.01 264);
     --gray-50: oklch(0.98 0.005 264);
 
     /* Corp web brand tokens */
-    --dq-navy: #030F35;
-    --dq-orange: #FB5535;
+    --dq-navy: #030f35;
+    --dq-orange: #fb5535;
 
     /* Mesh / glow tokens (aligned with DQ_CORPWEB_PROTOTYPE) */
     --mesh-hero-light: linear-gradient(
       135deg,
       oklch(0.98 0.006 264) 0%,
       oklch(0.96 0.012 264 / 0.8) 35%,
-      oklch(0.97 0.010 30 / 0.35) 65%,
+      oklch(0.97 0.01 30 / 0.35) 65%,
       oklch(0.99 0.004 264) 100%
     );
-    --mesh-hero-dark: radial-gradient(
-        ellipse 80% 60% at 20% 40%,
-        oklch(0.25 0.06 264 / 0.8),
-        transparent 70%
-      ),
-      radial-gradient(
-        ellipse 60% 50% at 80% 60%,
-        oklch(0.22 0.04 264 / 0.6),
-        transparent 70%
-      ),
+    --mesh-hero-dark:
+      radial-gradient(ellipse 80% 60% at 20% 40%, oklch(0.25 0.06 264 / 0.8), transparent 70%),
+      radial-gradient(ellipse 60% 50% at 80% 60%, oklch(0.22 0.04 264 / 0.6), transparent 70%),
       oklch(0.12 0.045 264);
-    --mesh-cta-orange: radial-gradient(
-        ellipse 50% 40% at 30% 50%,
-        oklch(0.58 0.22 22 / 0.28),
-        transparent 55%
-      ),
-      radial-gradient(
-        ellipse 40% 50% at 75% 25%,
-        oklch(0.45 0.18 20 / 0.18),
-        transparent 55%
-      ),
-      oklch(0.10 0.040 264);
+    --mesh-cta-orange:
+      radial-gradient(ellipse 50% 40% at 30% 50%, oklch(0.58 0.22 22 / 0.28), transparent 55%),
+      radial-gradient(ellipse 40% 50% at 75% 25%, oklch(0.45 0.18 20 / 0.18), transparent 55%),
+      oklch(0.1 0.04 264);
 
     --glow-orange-md: 0 0 40px oklch(0.65 0.208 29 / 0.35), 0 0 80px oklch(0.65 0.208 29 / 0.15);
     --glow-navy-md: 0 0 40px oklch(0.25 0.06 264 / 0.3), 0 8px 32px oklch(0.12 0.045 264 / 0.25);
@@ -197,8 +183,8 @@
 
     --surface-glass-light: oklch(1 0 0 / 0.65);
     --surface-glass-dark: oklch(1 0 0 / 0.06);
-    --surface-glass-border-light: oklch(0.86 0.010 264 / 0.55);
-    --surface-glass-border-dark: oklch(1 0 0 / 0.10);
+    --surface-glass-border-light: oklch(0.86 0.01 264 / 0.55);
+    --surface-glass-border-dark: oklch(1 0 0 / 0.1);
     --blur-md: 16px;
   }
 }
@@ -215,10 +201,18 @@
 
   body {
     @apply bg-background text-foreground font-sans antialiased;
-    font-feature-settings: "kern" 1, "liga" 1, "calt" 1;
+    font-feature-settings:
+      "kern" 1,
+      "liga" 1,
+      "calt" 1;
   }
 
-  h1, h2, h3, h4, h5, h6 {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
     @apply font-semibold text-dq-navy;
   }
 }
@@ -266,7 +260,7 @@
 
   .marquee-mask {
     -webkit-mask-image: linear-gradient(90deg, transparent, black 10%, black 90%, transparent);
-            mask-image: linear-gradient(90deg, transparent, black 10%, black 90%, transparent);
+    mask-image: linear-gradient(90deg, transparent, black 10%, black 90%, transparent);
   }
 
   .surface-glass-light {
@@ -283,8 +277,12 @@
     -webkit-backdrop-filter: blur(var(--blur-md)) saturate(140%);
   }
 
-  .glow-orange { box-shadow: var(--glow-orange-md); }
-  .glow-navy { box-shadow: var(--glow-navy-md); }
+  .glow-orange {
+    box-shadow: var(--glow-orange-md);
+  }
+  .glow-navy {
+    box-shadow: var(--glow-navy-md);
+  }
 
   .dq-eyebrow {
     @apply font-mono text-[11px] uppercase tracking-[0.2em] text-dq-orange;
@@ -328,18 +326,36 @@
 
 /* Fade-in-up entry animation */
 @keyframes fadeInUp {
-  from { opacity: 0; transform: translateY(20px); }
-  to { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 .animate-fade-in-up {
   animation: fadeInUp 0.7s ease-out both;
 }
-.animation-delay-100 { animation-delay: 0.1s; }
-.animation-delay-200 { animation-delay: 0.2s; }
-.animation-delay-300 { animation-delay: 0.3s; }
-.animation-delay-500 { animation-delay: 0.5s; }
+.animation-delay-100 {
+  animation-delay: 0.1s;
+}
+.animation-delay-200 {
+  animation-delay: 0.2s;
+}
+.animation-delay-300 {
+  animation-delay: 0.3s;
+}
+.animation-delay-500 {
+  animation-delay: 0.5s;
+}
 
 @keyframes dq-marquee {
-  from { transform: translateX(0); }
-  to { transform: translateX(-50%); }
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
 }

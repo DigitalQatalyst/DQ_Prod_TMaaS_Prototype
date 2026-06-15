@@ -40,7 +40,10 @@ const SOLUTION_DOMAIN: Record<string, string> = {
 };
 
 function stripEmDash(text: string): string {
-  return text.replace(/\s*—\s*/g, ", ").replace(/\s+/g, " ").trim();
+  return text
+    .replace(/\s*—\s*/g, ", ")
+    .replace(/\s+/g, " ")
+    .trim();
 }
 
 export function resolveSolutionKey(standardName: string): string {
@@ -63,8 +66,7 @@ export function getSolutionDomainPhrase(standardName: string): string {
 
 function domainPerformClause(domain: string): string {
   const needsPlural =
-    domain.includes(" and ") ||
-    /\b(apps|services|operations|channels|campaigns)\b/i.test(domain);
+    domain.includes(" and ") || /\b(apps|services|operations|channels|campaigns)\b/i.test(domain);
   return needsPlural ? `${domain} perform today` : `${domain} performs today`;
 }
 
@@ -91,8 +93,7 @@ const HERO_TYPE_LEAD: Record<string, string> = {
 
 export function buildVariantHeroDescription(service: ServiceProduct): string {
   const solution = getDisplayProductName(service.standardName);
-  const stageLabel =
-    MARKETPLACE_SERVICE_TYPE_LABELS[service.serviceType] ?? service.badge;
+  const stageLabel = MARKETPLACE_SERVICE_TYPE_LABELS[service.serviceType] ?? service.badge;
   const typeLead = HERO_TYPE_LEAD[service.serviceType] ?? HERO_TYPE_LEAD.advisory;
   const why = buildWhyItMattersContent(service);
   const scope = restateProblemParagraph(why.problemParagraph);
@@ -125,4 +126,3 @@ export function buildVariantPositioning(service: ServiceProduct): string {
   const builder = POSITIONING_BY_TYPE[service.serviceType] ?? POSITIONING_BY_TYPE["advisory"]!;
   return stripEmDash(builder(domain));
 }
-

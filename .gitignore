@@ -12,6 +12,10 @@ dist
 dist-ssr
 *.local
 
+# Next.js build output
+.next/
+out/
+
 # Local Supabase CLI state, seeds, and migrations (managed outside this repo)
 /supabase/
 

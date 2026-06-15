@@ -77,9 +77,7 @@ export type MarketplaceCatalogFilters = {
 function compareServices(a: ServiceProduct, b: ServiceProduct, sortBy: MarketplaceSortBy): number {
   if (sortBy === "popular") return b.popularityRank - a.popularityRank;
   if (sortBy === "price-low") {
-    return (
-      parseInt(a.price.replace(/[$,]/g, ""), 10) - parseInt(b.price.replace(/[$,]/g, ""), 10)
-    );
+    return parseInt(a.price.replace(/[$,]/g, ""), 10) - parseInt(b.price.replace(/[$,]/g, ""), 10);
   }
   if (sortBy === "fastest") {
     return parseInt(a.duration, 10) - parseInt(b.duration, 10);
@@ -103,8 +101,7 @@ export function filterCatalogServices(
   } = filters;
 
   const excludeIds = new Set(excludeVariantIds);
-  const wantsMultiOnly =
-    selectedIncluded.includes("multi") && !selectedIncluded.includes("single");
+  const wantsMultiOnly = selectedIncluded.includes("multi") && !selectedIncluded.includes("single");
   const wantsSingleOnly =
     selectedIncluded.includes("single") && !selectedIncluded.includes("multi");
   const activeSector = selectedSectors.length > 0 ? selectedSectors[0] : "all";

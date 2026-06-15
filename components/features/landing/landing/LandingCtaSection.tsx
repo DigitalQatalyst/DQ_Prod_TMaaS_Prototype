@@ -17,19 +17,15 @@ const LandingCtaSection = () => {
           backgroundImage:
             "linear-gradient(to right, rgba(255,255,255,0.06) 1px, transparent 1px), linear-gradient(to bottom, rgba(255,255,255,0.06) 1px, transparent 1px)",
           backgroundSize: "64px 64px",
-          maskImage:
-            "radial-gradient(ellipse 60% 50% at 50% 50%, black 40%, transparent 80%)",
+          maskImage: "radial-gradient(ellipse 60% 50% at 50% 50%, black 40%, transparent 80%)",
         }}
       />
 
       <div className="relative mx-auto max-w-[720px]">
-        <p className="dq-eyebrow-on-dark mb-4">
-          Ready to Begin
-        </p>
+        <p className="dq-eyebrow-on-dark mb-4">Ready to Begin</p>
 
         <h2 className="text-balance text-4xl font-semibold leading-[1.05] tracking-tight text-white md:text-5xl">
-          Deploy your transformation -{" "}
-          <span className="text-dq-orange">in weeks, not months.</span>
+          Deploy your transformation - <span className="text-dq-orange">in weeks, not months.</span>
         </h2>
 
         <p className="mx-auto mt-5 max-w-md text-[15px] leading-relaxed text-white/60">
@@ -37,15 +33,11 @@ const LandingCtaSection = () => {
         </p>
 
         <div className="mt-8 flex flex-wrap justify-center gap-3">
-          <Link href="/marketplace"
-            className={cn(btnPrimaryOnDark, "px-7")}
-          >
+          <Link href="/marketplace" className={cn(btnPrimaryOnDark, "px-7")}>
             Explore Marketplace
             <ArrowRight size={15} />
           </Link>
-          <Link href="/contact"
-            className={cn(btnSecondaryOnDark, "px-7")}
-          >
+          <Link href="/contact" className={cn(btnSecondaryOnDark, "px-7")}>
             Contact Us
           </Link>
         </div>

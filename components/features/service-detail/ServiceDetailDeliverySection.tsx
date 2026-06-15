@@ -64,10 +64,7 @@ function StepCircle({
         "flex items-center justify-center rounded-full border-2 font-mono font-bold",
         isDesktop ? "mb-5 h-14 w-14 text-lg" : "h-12 w-12 text-base",
         active
-          ? cn(
-              "border-dq-orange bg-dq-orange text-white",
-              isDesktop && "shadow-lg"
-            )
+          ? cn("border-dq-orange bg-dq-orange text-white", isDesktop && "shadow-lg")
           : "border-gray-200 bg-white text-dq-navy"
       )}
     >
@@ -81,14 +78,14 @@ function HorizontalDeliveryStepper({ steps }: { steps: DeliveryStep[] }) {
   return (
     <>
       <div className="relative hidden lg:block">
-        <div
-          className="absolute left-[3%] right-[3%] top-[28px] h-px bg-gray-200"
-          aria-hidden
-        />
+        <div className="absolute left-[3%] right-[3%] top-[28px] h-px bg-gray-200" aria-hidden />
         <div className={cn("relative grid gap-4", stepperGridClass(steps.length))}>
           {steps.map((item) => (
             <div key={item.step} className="flex flex-col items-start">
-              <StepCircle step={item.step} {...(item.active !== undefined ? { active: item.active } : {})} />
+              <StepCircle
+                step={item.step}
+                {...(item.active !== undefined ? { active: item.active } : {})}
+              />
               <h3 className="mb-2 text-sm font-semibold text-dq-navy">{item.title}</h3>
               <p className="text-[14px] leading-relaxed text-gray-600">{item.body}</p>
             </div>
@@ -100,7 +97,11 @@ function HorizontalDeliveryStepper({ steps }: { steps: DeliveryStep[] }) {
         {steps.map((item, index) => (
           <div key={item.step} className="flex gap-4">
             <div className="flex shrink-0 flex-col items-center">
-              <StepCircle step={item.step} {...(item.active !== undefined ? { active: item.active } : {})} size="mobile" />
+              <StepCircle
+                step={item.step}
+                {...(item.active !== undefined ? { active: item.active } : {})}
+                size="mobile"
+              />
               {index < steps.length - 1 ? (
                 <div className="my-2 w-px flex-1 bg-gray-200" aria-hidden />
               ) : null}
@@ -162,9 +163,7 @@ function TimelineEffortGrid({
   );
 }
 
-export function ServiceDetailDeliverySection({
-  process,
-}: ServiceDetailDeliverySectionProps) {
+export function ServiceDetailDeliverySection({ process }: ServiceDetailDeliverySectionProps) {
   const { steps, totalDuration } = process;
 
   return (

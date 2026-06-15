@@ -7,19 +7,22 @@ const features = [
   {
     icon: Layers,
     title: "Blueprint-Driven Design",
-    description: "Proven frameworks and ready blueprints replace consultant reports with executable specifications.",
+    description:
+      "Proven frameworks and ready blueprints replace consultant reports with executable specifications.",
     benefits: ["Industry-standard specs", "Pre-defined templates", "Digital repository"],
   },
   {
     icon: Brain,
     title: "AI-Augmented Build",
-    description: "Digital Twin outputs drive AI-accelerated builds based on proven marketplace platforms.",
+    description:
+      "Digital Twin outputs drive AI-accelerated builds based on proven marketplace platforms.",
     benefits: ["Proven platforms", "Accelerated delivery", "Reduced rework"],
   },
   {
     icon: RefreshCw,
     title: "Continuous Sync",
-    description: "Design and build stay synchronized through continuous sense → design → transform cycles.",
+    description:
+      "Design and build stay synchronized through continuous sense → design → transform cycles.",
     benefits: ["Live specifications", "Adaptive architecture", "Reduced ambiguity"],
   },
 ];
@@ -38,12 +41,11 @@ const DT2Section = () => {
             DT 2.0
           </span>
           <h2 className="mt-4 text-3xl font-bold text-foreground md:text-4xl">
-            Transformation{" "}
-            <span className="text-gradient-brand">re-invented</span>
+            Transformation <span className="text-gradient-brand">re-invented</span>
           </h2>
           <p className="mt-4 text-base leading-relaxed text-muted-foreground">
-            We've re-invented the technology acquisition lifecycle for the Digital and AI era. No more slideware-just
-            executable, architecture-backed transformation.
+            We've re-invented the technology acquisition lifecycle for the Digital and AI era. No
+            more slideware-just executable, architecture-backed transformation.
           </p>
         </motion.div>
 

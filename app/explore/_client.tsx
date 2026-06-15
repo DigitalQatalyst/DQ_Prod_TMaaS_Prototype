@@ -1,6 +1,20 @@
 "use client";
 
-import { Search, PenTool, Rocket, TrendingUp, Brain, BookOpen, HelpCircle, Layers, Cloud, Server, Cog, Briefcase, ArrowRight } from "lucide-react";
+import {
+  Search,
+  PenTool,
+  Rocket,
+  TrendingUp,
+  Brain,
+  BookOpen,
+  HelpCircle,
+  Layers,
+  Cloud,
+  Server,
+  Cog,
+  Briefcase,
+  ArrowRight,
+} from "lucide-react";
 import Navbar from "@/components/foundation/navigation/Navbar";
 import Footer from "@/components/features/landing/Footer";
 import MeshSection from "@/components/features/landing/MeshSection";
@@ -10,28 +24,73 @@ const marketplaces = [
   {
     phase: "Discern",
     icon: Search,
-    description: "Identify context, assess capabilities, and translate problems into transformation signals.",
+    description:
+      "Identify context, assess capabilities, and translate problems into transformation signals.",
     items: [
-      { icon: Brain, name: "TMaaS AI", description: "AI-powered problem resolution and service recommendations", href: "#diagnose", badge: "AI-Powered", comingSoon: false },
-      { icon: BookOpen, name: "TMaaS Knowledge Centre", description: "Best practices, guides, and transformation resources", href: "/knowledge", badge: "Resources", comingSoon: false },
-      { icon: HelpCircle, name: "TMaaS FAQs", description: "Common questions and answers about transformation services", href: "/faqs", badge: "Support", comingSoon: false },
+      {
+        icon: Brain,
+        name: "TMaaS AI",
+        description: "AI-powered problem resolution and service recommendations",
+        href: "#diagnose",
+        badge: "AI-Powered",
+        comingSoon: false,
+      },
+      {
+        icon: BookOpen,
+        name: "TMaaS Knowledge Centre",
+        description: "Best practices, guides, and transformation resources",
+        href: "/knowledge",
+        badge: "Resources",
+        comingSoon: false,
+      },
+      {
+        icon: HelpCircle,
+        name: "TMaaS FAQs",
+        description: "Common questions and answers about transformation services",
+        href: "/faqs",
+        badge: "Support",
+        comingSoon: false,
+      },
     ],
   },
   {
     phase: "Design",
     icon: PenTool,
-    description: "Convert insights into structured strategies, architectures, and actionable blueprints.",
+    description:
+      "Convert insights into structured strategies, architectures, and actionable blueprints.",
     items: [
-      { icon: Layers, name: "Design Services", description: "Strategic architecture and transformation blueprints", href: "/marketplace?tab=design", badge: "Architecture", comingSoon: false },
+      {
+        icon: Layers,
+        name: "Design Services",
+        description: "Strategic architecture and transformation blueprints",
+        href: "/marketplace?tab=design",
+        badge: "Architecture",
+        comingSoon: false,
+      },
     ],
   },
   {
     phase: "Deploy",
     icon: Rocket,
-    description: "Execute initiatives using predefined blueprints with built-in tracking and governance.",
+    description:
+      "Execute initiatives using predefined blueprints with built-in tracking and governance.",
     items: [
-      { icon: Cloud, name: "SaaS Deploy Services", description: "Cloud-based implementation services", href: "/marketplace?tab=deploy-saas", badge: "Cloud", comingSoon: false },
-      { icon: Server, name: "On-Prem Deploy Services", description: "On-premise deployment and implementation", href: "/marketplace?tab=deploy-onprem", badge: "On-Premise", comingSoon: true },
+      {
+        icon: Cloud,
+        name: "SaaS Deploy Services",
+        description: "Cloud-based implementation services",
+        href: "/marketplace?tab=deploy-saas",
+        badge: "Cloud",
+        comingSoon: false,
+      },
+      {
+        icon: Server,
+        name: "On-Prem Deploy Services",
+        description: "On-premise deployment and implementation",
+        href: "/marketplace?tab=deploy-onprem",
+        badge: "On-Premise",
+        comingSoon: true,
+      },
     ],
   },
   {
@@ -39,9 +98,30 @@ const marketplaces = [
     icon: TrendingUp,
     description: "Enable adoption, optimize outcomes, and support continuous improvement.",
     items: [
-      { icon: Cog, name: "Managed Platform Services", description: "Ongoing platform management and optimization", href: "/drive/managed-services", badge: "Managed", comingSoon: true },
-      { icon: Briefcase, name: "BPaaS Services", description: "Business Process as a Service solutions", href: "/drive/bpaas", badge: "BPaaS", comingSoon: true },
-      { icon: Brain, name: "AI Agents", description: "Intelligent automation and AI-powered agents", href: "/drive/ai-agents", badge: "AI", comingSoon: true },
+      {
+        icon: Cog,
+        name: "Managed Platform Services",
+        description: "Ongoing platform management and optimization",
+        href: "/drive/managed-services",
+        badge: "Managed",
+        comingSoon: true,
+      },
+      {
+        icon: Briefcase,
+        name: "BPaaS Services",
+        description: "Business Process as a Service solutions",
+        href: "/drive/bpaas",
+        badge: "BPaaS",
+        comingSoon: true,
+      },
+      {
+        icon: Brain,
+        name: "AI Agents",
+        description: "Intelligent automation and AI-powered agents",
+        href: "/drive/ai-agents",
+        badge: "AI",
+        comingSoon: true,
+      },
     ],
   },
 ];
@@ -114,8 +194,12 @@ export default function ExplorePageClient() {
                               {item.badge}
                             </span>
                           </div>
-                          <h3 className="mb-2 text-lg font-semibold tracking-tight text-navy-950">{item.name}</h3>
-                          <p className="mb-4 text-sm leading-relaxed text-gray-600">{item.description}</p>
+                          <h3 className="mb-2 text-lg font-semibold tracking-tight text-navy-950">
+                            {item.name}
+                          </h3>
+                          <p className="mb-4 text-sm leading-relaxed text-gray-600">
+                            {item.description}
+                          </p>
                           <div className="inline-flex items-center gap-2 rounded-full border border-navy-100 bg-white/60 px-4 py-2 text-xs font-semibold text-gray-700">
                             Coming Soon
                           </div>
@@ -142,10 +226,15 @@ export default function ExplorePageClient() {
                           <h3 className="mb-2 text-lg font-semibold tracking-tight text-navy-950 transition-colors group-hover:text-orange-600">
                             {item.name}
                           </h3>
-                          <p className="mb-4 text-sm leading-relaxed text-gray-600">{item.description}</p>
+                          <p className="mb-4 text-sm leading-relaxed text-gray-600">
+                            {item.description}
+                          </p>
                           <div className="flex items-center gap-2 text-sm font-semibold text-orange-600">
                             <span>Explore</span>
-                            <ArrowRight size={16} className="transition-transform group-hover:translate-x-1" />
+                            <ArrowRight
+                              size={16}
+                              className="transition-transform group-hover:translate-x-1"
+                            />
                           </div>
                         </a>
                       )}
@@ -164,7 +253,8 @@ export default function ExplorePageClient() {
             Not sure where to start?
           </h2>
           <p className="mt-4 text-base leading-relaxed text-gray-600">
-            Use our AI-powered Diagnose tool to identify the right services for your transformation needs.
+            Use our AI-powered Diagnose tool to identify the right services for your transformation
+            needs.
           </p>
           <button
             onClick={handleDiagnoseClick}

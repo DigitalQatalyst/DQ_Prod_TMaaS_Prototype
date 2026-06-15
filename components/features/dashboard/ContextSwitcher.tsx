@@ -13,7 +13,7 @@ import {
   CreditCard,
   Headphones,
 } from "lucide-react";
-import { useAuth, type UserRole } from "@/contexts/AuthContext" // TODO: Task 9 — wire up context;
+import { useAuth, type UserRole } from "@/contexts/AuthContext"; // TODO: Task 9 — wire up context;
 import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
@@ -114,9 +114,7 @@ const ContextSwitcher = ({
   ];
 
   const currentLabel =
-    effectiveStage === "marketing"
-      ? "Exploring"
-      : roleMeta[user.role]?.label ?? "Dashboard";
+    effectiveStage === "marketing" ? "Exploring" : (roleMeta[user.role]?.label ?? "Dashboard");
 
   const triggerClassName =
     effectiveStage === "marketing"
@@ -147,8 +145,7 @@ const ContextSwitcher = ({
               {user.avatar}
             </span>
             <span className="hidden min-w-0 truncate text-sm text-navy-950/60 sm:inline">
-              Viewing as:{" "}
-              <span className="font-semibold text-navy-950">{user.name}</span>
+              Viewing as: <span className="font-semibold text-navy-950">{user.name}</span>
               <span className="text-navy-950/50">, {user.roleTitle}</span>
             </span>
             <ChevronDown size={16} className="shrink-0 text-navy-950/40" />
@@ -165,7 +162,10 @@ const ContextSwitcher = ({
           </Button>
         )}
       </DropdownMenuTrigger>
-      <DropdownMenuContent align="end" className="w-[280px] border-navy-100 bg-white/95 backdrop-blur-xl">
+      <DropdownMenuContent
+        align="end"
+        className="w-[280px] border-navy-100 bg-white/95 backdrop-blur-xl"
+      >
         {usePillTrigger && (
           <>
             <DropdownMenuLabel>
@@ -206,4 +206,3 @@ const ContextSwitcher = ({
 };
 
 export default ContextSwitcher;
-

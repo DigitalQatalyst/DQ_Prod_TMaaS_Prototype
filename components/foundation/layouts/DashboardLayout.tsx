@@ -69,9 +69,7 @@ const getClientNavigationItems = (organization: string) => [
   },
   {
     group: "ORGANIZATION",
-    items: [
-      { name: "Team", icon: Users, path: "/dashboard/org-admin", badge: null },
-    ],
+    items: [{ name: "Team", icon: Users, path: "/dashboard/org-admin", badge: null }],
   },
   {
     group: "SETTINGS & SUPPORT",
@@ -265,9 +263,11 @@ const DashboardLayout = ({ children }: DashboardLayoutProps) => {
 
         <div className="flex h-full flex-col">
           {/* Logo Container */}
-          <div className={`flex h-16 items-center border-b border-navy-100/60 px-6 ${
-            sidebarCollapsed ? "justify-center" : "justify-between"
-          }`}>
+          <div
+            className={`flex h-16 items-center border-b border-navy-100/60 px-6 ${
+              sidebarCollapsed ? "justify-center" : "justify-between"
+            }`}
+          >
             {sidebarCollapsed ? (
               <Link
                 href="/"
@@ -285,25 +285,34 @@ const DashboardLayout = ({ children }: DashboardLayoutProps) => {
                 <span className="grid h-7 w-7 place-items-center rounded-md bg-orange-500 text-white shadow-[var(--glow-orange-sm)]">
                   <span className="font-mono text-[11px] font-bold">DQ</span>
                 </span>
-                <span className="text-orange-500 font-heading text-lg">
-                  TMaaS
-                </span>
+                <span className="text-orange-500 font-heading text-lg">TMaaS</span>
               </Link>
             )}
           </div>
 
           {/* Organization Selector - Only for Client Role */}
-          {user.role === 'client' && (
+          {user.role === "client" && (
             <div className="border-b border-navy-100/60 p-4">
               {sidebarCollapsed ? (
                 <div className="flex justify-center py-1">
                   <Select value={selectedOrg} onValueChange={handleOrgChange}>
                     <SelectTrigger className="border border-navy-100/50 bg-white/40 hover:bg-white text-navy-950 focus:ring-[#FB5535] rounded-xl hover:border-navy-200/50 transition-all shadow-sm h-9 w-9 p-0 flex items-center justify-center">
-                      <Building2 size={16} className="text-[#030F35]/50 hover:text-[#FB5535] transition-colors" />
+                      <Building2
+                        size={16}
+                        className="text-[#030F35]/50 hover:text-[#FB5535] transition-colors"
+                      />
                     </SelectTrigger>
-                    <SelectContent side="right" sideOffset={12} className="border-navy-100 bg-white/95 backdrop-blur-xl">
+                    <SelectContent
+                      side="right"
+                      sideOffset={12}
+                      className="border-navy-100 bg-white/95 backdrop-blur-xl"
+                    >
                       {mockOrganizations.map((org) => (
-                        <SelectItem key={org.id} value={org.id} className="focus:bg-[#FB5535]/5 focus:text-[#FB5535]">
+                        <SelectItem
+                          key={org.id}
+                          value={org.id}
+                          className="focus:bg-[#FB5535]/5 focus:text-[#FB5535]"
+                        >
                           {org.name}
                         </SelectItem>
                       ))}
@@ -321,7 +330,11 @@ const DashboardLayout = ({ children }: DashboardLayoutProps) => {
                     </SelectTrigger>
                     <SelectContent className="border-navy-100 bg-white/95 backdrop-blur-xl">
                       {mockOrganizations.map((org) => (
-                        <SelectItem key={org.id} value={org.id} className="focus:bg-[#FB5535]/5 focus:text-[#FB5535]">
+                        <SelectItem
+                          key={org.id}
+                          value={org.id}
+                          className="focus:bg-[#FB5535]/5 focus:text-[#FB5535]"
+                        >
                           {org.name}
                         </SelectItem>
                       ))}
@@ -357,7 +370,10 @@ const DashboardLayout = ({ children }: DashboardLayoutProps) => {
                           className="group block"
                         >
                           <motion.div
-                            whileHover={{ scale: sidebarCollapsed ? 1.05 : 1, x: sidebarCollapsed ? 0 : 2 }}
+                            whileHover={{
+                              scale: sidebarCollapsed ? 1.05 : 1,
+                              x: sidebarCollapsed ? 0 : 2,
+                            }}
                             className={`flex items-center transition-all duration-200 ${
                               sidebarCollapsed
                                 ? `mx-auto flex h-10 w-10 items-center justify-center rounded-xl transition-all duration-200 ${
@@ -372,9 +388,14 @@ const DashboardLayout = ({ children }: DashboardLayoutProps) => {
                                   }`
                             }`}
                           >
-                            <Icon size={18} className={`transition-colors duration-200 ${
-                              active ? "text-[#FB5535]" : "text-navy-950/60 group-hover:text-[#FB5535]"
-                            }`} />
+                            <Icon
+                              size={18}
+                              className={`transition-colors duration-200 ${
+                                active
+                                  ? "text-[#FB5535]"
+                                  : "text-navy-950/60 group-hover:text-[#FB5535]"
+                              }`}
+                            />
                             {!sidebarCollapsed && (
                               <>
                                 <span className="flex-1 text-sm">{item.name}</span>
@@ -409,7 +430,9 @@ const DashboardLayout = ({ children }: DashboardLayoutProps) => {
       )}
 
       {/* Main Content */}
-      <div className={`flex-1 transition-all duration-300 ${sidebarCollapsed ? "lg:ml-20" : "lg:ml-72"}`}>
+      <div
+        className={`flex-1 transition-all duration-300 ${sidebarCollapsed ? "lg:ml-20" : "lg:ml-72"}`}
+      >
         {/* Top Bar */}
         <header className="sticky top-0 z-20 flex h-16 items-center gap-3 border-b border-navy-100/60 bg-white/80 px-4 backdrop-blur-xl backdrop-saturate-150 lg:gap-4 lg:px-6">
           <Button
@@ -451,9 +474,7 @@ const DashboardLayout = ({ children }: DashboardLayoutProps) => {
         </header>
 
         {/* Page Content */}
-        <main className="h-[calc(100vh-4rem)] overflow-y-auto p-6">
-          {children}
-        </main>
+        <main className="h-[calc(100vh-4rem)] overflow-y-auto p-6">{children}</main>
 
         {/* Transact.AI Mode 01 Floating Button with Tooltip */}
         <div className="fixed bottom-6 right-6 z-30 flex flex-col items-end gap-2">
@@ -476,7 +497,9 @@ const DashboardLayout = ({ children }: DashboardLayoutProps) => {
                     <Brain size={14} className="text-white" />
                   </div>
                   <div>
-                    <p className="text-sm font-medium text-foreground">Need help with your projects?</p>
+                    <p className="text-sm font-medium text-foreground">
+                      Need help with your projects?
+                    </p>
                     <p className="mt-1 text-xs text-muted-foreground">
                       Chat with Transact.AI for personalized guidance on your transformation journey
                     </p>

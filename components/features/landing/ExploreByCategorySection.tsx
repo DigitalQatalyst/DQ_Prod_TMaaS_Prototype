@@ -2,7 +2,7 @@
 
 import { useRouter } from "next/navigation";
 import { ArrowRight, Layout, Settings, Shield, Cpu } from "lucide-react";
-import { marketplaceCapabilities } from "@/data/marketplaceNavigation" // TODO: Task 9 — wire up data;
+import { marketplaceCapabilities } from "@/data/marketplaceNavigation"; // TODO: Task 9 — wire up data;
 
 const ExploreByCategorySection = () => {
   const router = useRouter();
@@ -41,9 +41,7 @@ const ExploreByCategorySection = () => {
   return (
     <section className="border-t border-gray-100 bg-white px-5 py-24 md:px-8 lg:px-10">
       <div className="mx-auto max-w-[1200px]">
-        <p className="dq-eyebrow">
-          Categories
-        </p>
+        <p className="dq-eyebrow">Categories</p>
         <h2 className="mt-4 text-center text-4xl font-semibold tracking-tight text-dq-navy md:text-left md:text-5xl">
           Explore by Category
         </h2>

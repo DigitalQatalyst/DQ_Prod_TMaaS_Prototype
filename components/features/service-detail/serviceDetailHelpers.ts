@@ -2,7 +2,7 @@ import {
   marketplaceCategoryLabels,
   marketplaceGoals,
   marketplaceServiceTypeLabels,
-} from "@/data/marketplaceNavigation" // TODO: Task 9 — wire up data;
+} from "@/data/marketplaceNavigation"; // TODO: Task 9 — wire up data;
 import { formatPriceDisplay } from "@/lib/serviceProductUtils";
 import type { ServiceProduct } from "@/lib/types/serviceProduct";
 
@@ -16,10 +16,7 @@ export const marketplaceCategoryShortLabels: Record<string, string> = {
   bundles: "Bundles",
 };
 
-export const collectionAccent: Record<
-  string,
-  { badge: string; icon: string; iconBg: string }
-> = {
+export const collectionAccent: Record<string, { badge: string; icon: string; iconBg: string }> = {
   experience: {
     badge: "text-dq-navy",
     icon: "text-dq-navy",
@@ -83,10 +80,7 @@ export interface OverviewContent {
   audienceDescription: string;
 }
 
-const AUDIENCE_BY_COLLECTION_TYPE: Record<
-  string,
-  Partial<Record<string, string>>
-> = {
+const AUDIENCE_BY_COLLECTION_TYPE: Record<string, Partial<Record<string, string>>> = {
   experience: {
     advisory:
       "Organisations looking to strengthen their digital presence, improve user experience, and drive business outcomes.",
@@ -167,9 +161,7 @@ const AUDIENCE_FRAMING: Record<string, (solution: string) => string> = {
     `Organisations pursuing end-to-end ${solution} transformation with coordinated specialist teams and a single engagement point.`,
 };
 
-const goalLabelById = Object.fromEntries(
-  marketplaceGoals.map((goal) => [goal.id, goal.label])
-);
+const goalLabelById = Object.fromEntries(marketplaceGoals.map((goal) => [goal.id, goal.label]));
 
 const KEY_FEATURES_BY_TYPE: Record<string, readonly string[]> = {
   advisory: [
@@ -329,8 +321,7 @@ function buildOverviewClosing(service: ServiceProduct): string {
 
 function buildOverviewAudience(service: ServiceProduct): string {
   const solution = getServiceSolutionName(service.standardName);
-  const collectionAudience =
-    AUDIENCE_BY_COLLECTION_TYPE[service.collection]?.[service.serviceType];
+  const collectionAudience = AUDIENCE_BY_COLLECTION_TYPE[service.collection]?.[service.serviceType];
 
   if (collectionAudience) {
     return collectionAudience;
@@ -404,79 +395,68 @@ const DESCRIPTION_PREFIX_PATTERNS = [
 
 type OutcomeDescriptionBuilder = (solution: string, theme: string) => string;
 
-const OUTCOME_DESCRIPTION_BUILDERS: Record<string, readonly OutcomeDescriptionBuilder[]> =
-  {
-    advisory: [
-      (solution, theme) =>
-        `Surface gaps and prioritise improvements across ${theme} through your ${solution} assessment.`,
-      (solution, theme) =>
-        `Identify friction points and opportunity areas in ${theme} with expert-led evaluation.`,
-      (solution, theme) =>
-        `Translate findings on ${theme} into executive-ready recommendations.`,
-      (solution, theme) =>
-        `Build a stronger foundation for ${theme} to inform strategy and investment.`,
-    ],
-    design: [
-      (solution, theme) =>
-        `Shape ${theme} into user-centred experiences within your ${solution} scope.`,
-      (solution, theme) =>
-        `Align ${theme} to brand and governance standards for ${solution}.`,
-      (solution, theme) =>
-        `Deliver implementation-ready specifications for ${theme} your teams can execute.`,
-      (solution, theme) =>
-        `Accelerate delivery decisions on ${theme} with clear scope and priorities.`,
-    ],
-    ai_design: [
-      (solution, theme) =>
-        `Validate AI use cases for ${theme} within your ${solution} context.`,
-      (solution, theme) =>
-        `Design responsible workflows and guardrails for ${theme} before build begins.`,
-      (solution, theme) =>
-        `Create proof-of-value assets for ${theme} that de-risk AI investment.`,
-      (solution, theme) =>
-        `Prepare deployment-ready specifications for ${theme} aligned to governance.`,
-    ],
-    deploy: [
-      (solution, theme) =>
-        `Build and deploy production-ready ${theme} as part of your ${solution} rollout.`,
-      (solution, theme) =>
-        `Complete quality assurance and validation for ${theme} ahead of go-live.`,
-      (solution, theme) =>
-        `Integrate ${theme} with platform, security, and governance requirements.`,
-      (solution, theme) =>
-        `Transfer knowledge on ${theme} to support long-term operation.`,
-    ],
-    ai_deploy: [
-      (solution, theme) =>
-        `Deploy ${theme} into production with monitoring and orchestration built in.`,
-      (solution, theme) =>
-        `Implement safety, auditability, and compliance controls for ${theme}.`,
-      (solution, theme) =>
-        `Validate performance and reliability of ${theme} at scale.`,
-      (solution, theme) =>
-        `Hand over operational runbooks for ${theme} to your internal teams.`,
-    ],
-    manage: [
-      (solution, theme) =>
-        `Maintain SLA-backed operations for ${theme} across your ${solution} environment.`,
-      (solution, theme) =>
-        `Continuously optimise ${theme} through proactive monitoring and improvement.`,
-      (solution, theme) =>
-        `Govern lifecycle changes to ${theme} with structured reporting and reviews.`,
-      (solution, theme) =>
-        `Evolve ${theme} in line with business priorities and service expectations.`,
-    ],
-    bundle: [
-      (solution, theme) =>
-        `Coordinate ${theme} across advisory, design, and delivery within ${solution}.`,
-      (solution, theme) =>
-        `Integrate specialist teams and reporting for ${theme} under one engagement.`,
-      (solution, theme) =>
-        `Achieve bundled efficiency on ${theme} without sacrificing governance oversight.`,
-      (solution, theme) =>
-        `Accelerate end-to-end progress on ${theme} with a single point of contact.`,
-    ],
-  };
+const OUTCOME_DESCRIPTION_BUILDERS: Record<string, readonly OutcomeDescriptionBuilder[]> = {
+  advisory: [
+    (solution, theme) =>
+      `Surface gaps and prioritise improvements across ${theme} through your ${solution} assessment.`,
+    (solution, theme) =>
+      `Identify friction points and opportunity areas in ${theme} with expert-led evaluation.`,
+    (solution, theme) => `Translate findings on ${theme} into executive-ready recommendations.`,
+    (solution, theme) =>
+      `Build a stronger foundation for ${theme} to inform strategy and investment.`,
+  ],
+  design: [
+    (solution, theme) =>
+      `Shape ${theme} into user-centred experiences within your ${solution} scope.`,
+    (solution, theme) => `Align ${theme} to brand and governance standards for ${solution}.`,
+    (solution, theme) =>
+      `Deliver implementation-ready specifications for ${theme} your teams can execute.`,
+    (solution, theme) =>
+      `Accelerate delivery decisions on ${theme} with clear scope and priorities.`,
+  ],
+  ai_design: [
+    (solution, theme) => `Validate AI use cases for ${theme} within your ${solution} context.`,
+    (solution, theme) =>
+      `Design responsible workflows and guardrails for ${theme} before build begins.`,
+    (solution, theme) => `Create proof-of-value assets for ${theme} that de-risk AI investment.`,
+    (solution, theme) =>
+      `Prepare deployment-ready specifications for ${theme} aligned to governance.`,
+  ],
+  deploy: [
+    (solution, theme) =>
+      `Build and deploy production-ready ${theme} as part of your ${solution} rollout.`,
+    (solution, theme) => `Complete quality assurance and validation for ${theme} ahead of go-live.`,
+    (solution, theme) => `Integrate ${theme} with platform, security, and governance requirements.`,
+    (solution, theme) => `Transfer knowledge on ${theme} to support long-term operation.`,
+  ],
+  ai_deploy: [
+    (solution, theme) =>
+      `Deploy ${theme} into production with monitoring and orchestration built in.`,
+    (solution, theme) => `Implement safety, auditability, and compliance controls for ${theme}.`,
+    (solution, theme) => `Validate performance and reliability of ${theme} at scale.`,
+    (solution, theme) => `Hand over operational runbooks for ${theme} to your internal teams.`,
+  ],
+  manage: [
+    (solution, theme) =>
+      `Maintain SLA-backed operations for ${theme} across your ${solution} environment.`,
+    (solution, theme) =>
+      `Continuously optimise ${theme} through proactive monitoring and improvement.`,
+    (solution, theme) =>
+      `Govern lifecycle changes to ${theme} with structured reporting and reviews.`,
+    (solution, theme) =>
+      `Evolve ${theme} in line with business priorities and service expectations.`,
+  ],
+  bundle: [
+    (solution, theme) =>
+      `Coordinate ${theme} across advisory, design, and delivery within ${solution}.`,
+    (solution, theme) =>
+      `Integrate specialist teams and reporting for ${theme} under one engagement.`,
+    (solution, theme) =>
+      `Achieve bundled efficiency on ${theme} without sacrificing governance oversight.`,
+    (solution, theme) =>
+      `Accelerate end-to-end progress on ${theme} with a single point of contact.`,
+  ],
+};
 
 const THEME_TAIL_PATTERNS = [
   /\s+aligned to business goals$/i,
@@ -549,21 +529,15 @@ function getDistinctiveFeatureThemes(service: ServiceProduct): string[] {
 
 function buildOutcomeTitle(theme: string, serviceType: string, index: number): string {
   const shortTheme = normalizeTheme(theme);
-  const verbs =
-    (OUTCOME_TITLE_VERBS[serviceType] ?? OUTCOME_TITLE_VERBS.advisory)!;
+  const verbs = (OUTCOME_TITLE_VERBS[serviceType] ?? OUTCOME_TITLE_VERBS.advisory)!;
   const verb = verbs[index % verbs.length] ?? "";
   return `${verb} ${capitalizeTheme(shortTheme)}`;
 }
 
-function buildOutcomeDescription(
-  service: ServiceProduct,
-  theme: string,
-  index: number
-): string {
+function buildOutcomeDescription(service: ServiceProduct, theme: string, index: number): string {
   const solution = getServiceSolutionName(service.standardName);
   const shortTheme = normalizeTheme(theme);
-  const builders =
-    (OUTCOME_DESCRIPTION_BUILDERS[service.serviceType] ??
+  const builders = (OUTCOME_DESCRIPTION_BUILDERS[service.serviceType] ??
     OUTCOME_DESCRIPTION_BUILDERS.advisory)!;
   const builder = builders[index % builders.length];
 
@@ -584,9 +558,7 @@ export function getKeyOutcomes(service: ServiceProduct): KeyOutcome[] {
 
   const paddedThemes = [...uniqueThemes];
   if (paddedThemes.length < 4) {
-    paddedThemes.push(
-      normalizeTheme(getServiceSolutionName(service.standardName))
-    );
+    paddedThemes.push(normalizeTheme(getServiceSolutionName(service.standardName)));
   }
   if (paddedThemes.length < 4) {
     paddedThemes.push("service outcomes");
@@ -613,41 +585,13 @@ export function getKeyFeatures(service: ServiceProduct): string[] {
 }
 
 const HERO_HIGHLIGHTS_BY_TYPE: Record<string, readonly string[]> = {
-  advisory: [
-    "Expert-led assessment",
-    "Actionable insights",
-    "Aligned to governance",
-  ],
-  design: [
-    "User-centric design",
-    "Brand-aligned systems",
-    "Governance-aligned delivery",
-  ],
-  ai_design: [
-    "AI use-case validation",
-    "Responsible AI guardrails",
-    "Deployment-ready specs",
-  ],
-  deploy: [
-    "Production-ready build",
-    "Quality assurance",
-    "Knowledge transfer",
-  ],
-  ai_deploy: [
-    "AI capability deployment",
-    "Safety controls",
-    "Operational handover",
-  ],
-  manage: [
-    "SLA-backed operations",
-    "Continuous optimisation",
-    "Lifecycle governance",
-  ],
-  bundle: [
-    "End-to-end coverage",
-    "Unified governance",
-    "Coordinated specialists",
-  ],
+  advisory: ["Expert-led assessment", "Actionable insights", "Aligned to governance"],
+  design: ["User-centric design", "Brand-aligned systems", "Governance-aligned delivery"],
+  ai_design: ["AI use-case validation", "Responsible AI guardrails", "Deployment-ready specs"],
+  deploy: ["Production-ready build", "Quality assurance", "Knowledge transfer"],
+  ai_deploy: ["AI capability deployment", "Safety controls", "Operational handover"],
+  manage: ["SLA-backed operations", "Continuous optimisation", "Lifecycle governance"],
+  bundle: ["End-to-end coverage", "Unified governance", "Coordinated specialists"],
 };
 
 export function getHeroHighlights(service: ServiceProduct): string[] {
@@ -742,10 +686,7 @@ const DELIVERABLES_BY_TYPE: Record<string, readonly string[]> = {
   ],
 };
 
-const DELIVERABLE_DESCRIPTIONS_BY_TYPE: Record<
-  string,
-  Record<string, string>
-> = {
+const DELIVERABLE_DESCRIPTIONS_BY_TYPE: Record<string, Record<string, string>> = {
   advisory: {
     "Current-State Assessment":
       "Evaluates your organisation's present capabilities, maturity, and constraints across the engagement scope.",
@@ -808,9 +749,7 @@ const DELIVERABLE_DESCRIPTIONS_BY_TYPE: Record<
   },
 };
 
-export function getDeliverablesForService(
-  service: ServiceProduct
-): readonly string[] {
+export function getDeliverablesForService(service: ServiceProduct): readonly string[] {
   const titles = DELIVERABLES_BY_TYPE[service.serviceType];
   if (titles?.length) {
     return titles.slice(0, MAX_DELIVERABLES);
@@ -818,10 +757,7 @@ export function getDeliverablesForService(
   return DELIVERABLES_BY_TYPE.advisory ?? [];
 }
 
-function buildDeliverableDescription(
-  service: ServiceProduct,
-  title: string
-): string {
+function buildDeliverableDescription(service: ServiceProduct, title: string): string {
   const byType = DELIVERABLE_DESCRIPTIONS_BY_TYPE[service.serviceType];
   if (byType?.[title]) {
     return byType[title];
@@ -831,12 +767,11 @@ function buildDeliverableDescription(
   return `Supports your ${solution} engagement with structured insight and actionable detail on ${title.toLowerCase()}.`;
 }
 
-export function getDeliverablesSummaryContent(
-  service: ServiceProduct
-): DeliverablesSummaryContent {
+export function getDeliverablesSummaryContent(service: ServiceProduct): DeliverablesSummaryContent {
   const paragraphs =
-    (DELIVERABLES_SUMMARY_BY_TYPE[service.serviceType] ??
-    DELIVERABLES_SUMMARY_BY_TYPE.advisory) ?? [];
+    DELIVERABLES_SUMMARY_BY_TYPE[service.serviceType] ??
+    DELIVERABLES_SUMMARY_BY_TYPE.advisory ??
+    [];
 
   return {
     paragraphs: [...paragraphs],
@@ -875,8 +810,7 @@ export interface ServiceMetadataRow {
 
 export function getServiceMetadata(service: ServiceProduct): ServiceMetadataRow[] {
   const isBundle = service.serviceType === "bundle";
-  const serviceTypeLabel =
-    marketplaceServiceTypeLabels[service.serviceType] ?? service.serviceType;
+  const serviceTypeLabel = marketplaceServiceTypeLabels[service.serviceType] ?? service.serviceType;
 
   return [
     {
@@ -964,8 +898,7 @@ export function getRelatedServices(
   const solution = getServiceSolutionName(service.standardName);
   const siblings = catalog.filter(
     (candidate) =>
-      candidate.id !== service.id &&
-      getServiceSolutionName(candidate.standardName) === solution
+      candidate.id !== service.id && getServiceSolutionName(candidate.standardName) === solution
   );
 
   if (service.serviceType !== "bundle") {

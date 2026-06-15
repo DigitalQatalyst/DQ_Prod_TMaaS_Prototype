@@ -160,10 +160,7 @@ function BeforeAfterComparison({
 
       {/* Desktop: row-aligned grid with original column padding */}
       <div className="relative hidden lg:grid lg:grid-cols-2 lg:gap-y-3">
-        <div
-          aria-hidden
-          className="pointer-events-none absolute inset-0 grid grid-cols-2"
-        >
+        <div aria-hidden className="pointer-events-none absolute inset-0 grid grid-cols-2">
           <div className="border-r border-gray-200 bg-gradient-to-b from-gray-50/90 to-white" />
           <div className="bg-gradient-to-b from-orange-50/50 to-white" />
         </div>
@@ -240,12 +237,8 @@ export function ServiceDetailWhyItMattersTab({
           Why This Service Matters
         </h2>
         <div className="mt-6 space-y-5">
-          <p className="text-base font-medium leading-[1.7] text-dq-navy">
-            {content.hook}
-          </p>
-          <p className="text-base leading-[1.7] text-[#667085]">
-            {content.problemParagraph}
-          </p>
+          <p className="text-base font-medium leading-[1.7] text-dq-navy">{content.hook}</p>
+          <p className="text-base leading-[1.7] text-[#667085]">{content.problemParagraph}</p>
         </div>
       </section>
 

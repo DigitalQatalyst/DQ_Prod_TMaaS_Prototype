@@ -9,7 +9,8 @@ const exploreCards = [
     category: "Discern",
     icon: Brain,
     title: "Diagnose & Learn",
-    description: "Use AI to identify transformation opportunities or explore our knowledge centre for best practices and guides.",
+    description:
+      "Use AI to identify transformation opportunities or explore our knowledge centre for best practices and guides.",
     links: [
       { label: "TMaaS AI", href: "/explore#diagnose" },
       { label: "Knowledge Centre", href: "/explore#knowledge" },
@@ -19,7 +20,8 @@ const exploreCards = [
     category: "Design + Deploy",
     icon: Rocket,
     title: "Services Marketplace",
-    description: "Browse architecture-backed transformation services across all four towers. From strategy to execution.",
+    description:
+      "Browse architecture-backed transformation services across all four towers. From strategy to execution.",
     links: [
       { label: "Design Services", href: "/explore#design" },
       { label: "Deploy Services", href: "/explore#deploy" },
@@ -29,10 +31,9 @@ const exploreCards = [
     category: "Drive",
     icon: HeartHandshake,
     title: "Support Services",
-    description: "Ensure adoption, optimize outcomes, and drive continuous improvement with expert support.",
-    links: [
-      { label: "View Support Services", href: "/explore#drive" },
-    ],
+    description:
+      "Ensure adoption, optimize outcomes, and drive continuous improvement with expert support.",
+    links: [{ label: "View Support Services", href: "/explore#drive" }],
   },
 ];
 
@@ -50,11 +51,11 @@ const ExploreSection = () => {
             Explore TMaaS
           </span>
           <h2 className="mt-4 text-3xl font-bold text-foreground md:text-5xl">
-            Explore TMaaS{" "}
-            <span className="text-gradient-brand">marketplaces</span>
+            Explore TMaaS <span className="text-gradient-brand">marketplaces</span>
           </h2>
           <p className="mt-5 text-base text-muted-foreground md:text-lg">
-            Whether you're diagnosing problems, browsing services, or seeking ongoing support-we've got you covered.
+            Whether you're diagnosing problems, browsing services, or seeking ongoing support-we've
+            got you covered.
           </p>
         </motion.div>
 
@@ -72,7 +73,7 @@ const ExploreSection = () => {
                 <card.icon size={14} />
                 {card.category}
               </div>
-              
+
               <h3 className="mt-4 text-xl font-semibold text-foreground">{card.title}</h3>
               <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
                 {card.description}
@@ -86,7 +87,10 @@ const ExploreSection = () => {
                     className="group/link flex items-center justify-between rounded-lg border border-border bg-accent/50 px-4 py-2.5 text-sm text-foreground transition-colors hover:border-primary/40 hover:bg-accent"
                   >
                     <span>{link.label}</span>
-                    <ArrowRight size={14} className="text-muted-foreground transition-transform group-hover/link:translate-x-0.5" />
+                    <ArrowRight
+                      size={14}
+                      className="text-muted-foreground transition-transform group-hover/link:translate-x-0.5"
+                    />
                   </a>
                 ))}
               </div>

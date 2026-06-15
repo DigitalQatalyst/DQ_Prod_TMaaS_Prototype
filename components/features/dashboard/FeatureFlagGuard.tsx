@@ -1,6 +1,6 @@
-import React from 'react';
-import { redirect } from 'next/navigation';
-import { featureFlags, type FeatureFlags } from '@/lib/featureFlags';
+import React from "react";
+import { redirect } from "next/navigation";
+import { featureFlags, type FeatureFlags } from "@/lib/featureFlags";
 
 interface FeatureFlagGuardProps {
   feature: keyof FeatureFlags;
@@ -57,9 +57,7 @@ export function DisabledFeaturePlaceholder({
           </svg>
         </div>
         <div>
-          <h3 className="mb-2 text-lg font-medium text-gray-900">
-            Feature Temporarily Disabled
-          </h3>
+          <h3 className="mb-2 text-lg font-medium text-gray-900">Feature Temporarily Disabled</h3>
           <p className="text-sm text-gray-600">
             {message ||
               `The ${featureName} feature is currently disabled and will be available in a future release.`}

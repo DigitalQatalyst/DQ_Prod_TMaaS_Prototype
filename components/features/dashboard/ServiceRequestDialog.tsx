@@ -2,12 +2,7 @@
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-} from "@/components/ui/dialog";
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Checkbox } from "@/components/ui/checkbox";
@@ -28,7 +23,7 @@ import {
   Building2,
 } from "lucide-react";
 import { Input } from "@/components/ui/input";
-import Link from "next/link"
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 
 interface ServiceRequestDialogProps {
@@ -102,16 +97,10 @@ const ServiceRequestDialog = ({ open, onOpenChange, service }: ServiceRequestDia
             {[1, 2, 3].map((s) => (
               <div key={s} className="flex items-center">
                 <div
-                  className={`h-2 w-2 rounded-full ${
-                    s <= step ? "bg-primary" : "bg-border"
-                  }`}
+                  className={`h-2 w-2 rounded-full ${s <= step ? "bg-primary" : "bg-border"}`}
                 ></div>
                 {s < 3 && (
-                  <div
-                    className={`h-0.5 w-8 ${
-                      s < step ? "bg-primary" : "bg-border"
-                    }`}
-                  ></div>
+                  <div className={`h-0.5 w-8 ${s < step ? "bg-primary" : "bg-border"}`}></div>
                 )}
               </div>
             ))}
@@ -133,7 +122,7 @@ const ServiceRequestDialog = ({ open, onOpenChange, service }: ServiceRequestDia
             >
               <div>
                 <h3 className="mb-4 text-lg font-semibold text-foreground">Service Summary</h3>
-                
+
                 <div className="rounded-xl border border-border bg-accent/30 p-6">
                   <div className="mb-4 flex items-start justify-between">
                     <div>
@@ -142,7 +131,9 @@ const ServiceRequestDialog = ({ open, onOpenChange, service }: ServiceRequestDia
                         <Badge variant="secondary">{service.category}</Badge>
                         <Badge variant="outline">{service.type}</Badge>
                         {service.deliveryModel && (
-                          <Badge className="bg-blue-500/10 text-blue-700">{service.deliveryModel}</Badge>
+                          <Badge className="bg-blue-500/10 text-blue-700">
+                            {service.deliveryModel}
+                          </Badge>
                         )}
                       </div>
                     </div>
@@ -160,7 +151,9 @@ const ServiceRequestDialog = ({ open, onOpenChange, service }: ServiceRequestDia
                     </div>
 
                     <div>
-                      <p className="mb-2 text-sm font-medium text-muted-foreground">Capability Areas</p>
+                      <p className="mb-2 text-sm font-medium text-muted-foreground">
+                        Capability Areas
+                      </p>
                       <div className="flex flex-wrap gap-2">
                         {service.capabilities.map((cap) => (
                           <span
@@ -203,13 +196,14 @@ const ServiceRequestDialog = ({ open, onOpenChange, service }: ServiceRequestDia
                 {/* Required Inputs Section */}
                 <div className="mt-6">
                   <h3 className="mb-4 text-lg font-semibold text-foreground">Required Inputs</h3>
-                  
+
                   <div className="mb-4 rounded-lg bg-blue-500/10 p-4">
                     <div className="flex gap-3">
                       <FileText size={20} className="mt-0.5 shrink-0 text-blue-600" />
                       <div>
                         <p className="text-sm font-medium text-foreground">
-                          To initiate this service, you'll need to provide specific inputs as outlined below.
+                          To initiate this service, you'll need to provide specific inputs as
+                          outlined below.
                         </p>
                       </div>
                     </div>
@@ -223,7 +217,11 @@ const ServiceRequestDialog = ({ open, onOpenChange, service }: ServiceRequestDia
                       },
                       {
                         title: "Enterprise Assets",
-                        items: ["Business capabilities", "Data architecture", "Application portfolio"],
+                        items: [
+                          "Business capabilities",
+                          "Data architecture",
+                          "Application portfolio",
+                        ],
                       },
                       {
                         title: "Experience Assets",
@@ -234,11 +232,19 @@ const ServiceRequestDialog = ({ open, onOpenChange, service }: ServiceRequestDia
                         items: ["Roadmaps", "Active initiatives", "Requirements"],
                       },
                     ].map((category) => (
-                      <div key={category.title} className="rounded-lg border border-border bg-card p-4">
-                        <h4 className="mb-2 font-semibold text-sm text-foreground">{category.title}</h4>
+                      <div
+                        key={category.title}
+                        className="rounded-lg border border-border bg-card p-4"
+                      >
+                        <h4 className="mb-2 font-semibold text-sm text-foreground">
+                          {category.title}
+                        </h4>
                         <ul className="space-y-1">
                           {category.items.map((item) => (
-                            <li key={item} className="flex items-center gap-2 text-sm text-muted-foreground">
+                            <li
+                              key={item}
+                              className="flex items-center gap-2 text-sm text-muted-foreground"
+                            >
                               <div className="h-1 w-1 rounded-full bg-primary"></div>
                               {item}
                             </li>
@@ -252,8 +258,9 @@ const ServiceRequestDialog = ({ open, onOpenChange, service }: ServiceRequestDia
                     <div className="flex gap-3">
                       <Clock size={20} className="mt-0.5 shrink-0 text-muted-foreground" />
                       <p className="text-sm text-foreground">
-                        <strong>Timeline:</strong> Delivery will commence within 3-5 business days following
-                        confirmation that required inputs meet minimum completeness standards.
+                        <strong>Timeline:</strong> Delivery will commence within 3-5 business days
+                        following confirmation that required inputs meet minimum completeness
+                        standards.
                       </p>
                     </div>
                   </div>
@@ -280,8 +287,8 @@ const ServiceRequestDialog = ({ open, onOpenChange, service }: ServiceRequestDia
                 <div className="mb-6 rounded-xl border border-border bg-card p-6">
                   <h4 className="mb-3 font-semibold text-foreground">Input Quality & Evaluation</h4>
                   <p className="mb-4 text-sm leading-relaxed text-muted-foreground">
-                    To ensure successful service delivery, DQ will evaluate the completeness and quality of
-                    submitted inputs against defined criteria.
+                    To ensure successful service delivery, DQ will evaluate the completeness and
+                    quality of submitted inputs against defined criteria.
                   </p>
 
                   <div className="space-y-3">
@@ -290,7 +297,8 @@ const ServiceRequestDialog = ({ open, onOpenChange, service }: ServiceRequestDia
                       <div>
                         <p className="text-sm font-medium text-foreground">Minimum Threshold</p>
                         <p className="text-sm text-muted-foreground">
-                          Service initiation requires at least 75% completeness against defined criteria.
+                          Service initiation requires at least 75% completeness against defined
+                          criteria.
                         </p>
                       </div>
                     </div>
@@ -300,8 +308,8 @@ const ServiceRequestDialog = ({ open, onOpenChange, service }: ServiceRequestDia
                       <div>
                         <p className="text-sm font-medium text-foreground">Evaluation Process</p>
                         <p className="text-sm text-muted-foreground">
-                          Your assigned delivery lead will review submitted inputs within 2 business days and
-                          provide feedback if additional information is needed.
+                          Your assigned delivery lead will review submitted inputs within 2 business
+                          days and provide feedback if additional information is needed.
                         </p>
                       </div>
                     </div>
@@ -309,10 +317,13 @@ const ServiceRequestDialog = ({ open, onOpenChange, service }: ServiceRequestDia
                     <div className="flex items-start gap-3 rounded-lg bg-accent/30 p-4">
                       <User size={20} className="mt-0.5 shrink-0 text-blue-600" />
                       <div>
-                        <p className="text-sm font-medium text-foreground">Collaborative Approach</p>
+                        <p className="text-sm font-medium text-foreground">
+                          Collaborative Approach
+                        </p>
                         <p className="text-sm text-muted-foreground">
-                          If completeness threshold is not met, your delivery lead will work with you to
-                          identify and gather the necessary information before engagement commences.
+                          If completeness threshold is not met, your delivery lead will work with
+                          you to identify and gather the necessary information before engagement
+                          commences.
                         </p>
                       </div>
                     </div>
@@ -323,9 +334,10 @@ const ServiceRequestDialog = ({ open, onOpenChange, service }: ServiceRequestDia
                 <div className="mb-6 rounded-xl border border-primary/20 bg-primary/5 p-6">
                   <h4 className="mb-2 font-semibold text-foreground">Refund Policy</h4>
                   <p className="text-sm leading-relaxed text-foreground">
-                    If the engagement does not commence due to insufficient input completeness and you choose
-                    not to provide additional information, you may request a refund. The refund will be
-                    processed less a 5% administrative fee to cover evaluation and setup costs.
+                    If the engagement does not commence due to insufficient input completeness and
+                    you choose not to provide additional information, you may request a refund. The
+                    refund will be processed less a 5% administrative fee to cover evaluation and
+                    setup costs.
                   </p>
                 </div>
 
@@ -341,7 +353,8 @@ const ServiceRequestDialog = ({ open, onOpenChange, service }: ServiceRequestDia
                       htmlFor="inputs-acknowledged"
                       className="text-sm text-foreground cursor-pointer"
                     >
-                      I understand the required inputs and quality evaluation process for service delivery.
+                      I understand the required inputs and quality evaluation process for service
+                      delivery.
                     </label>
                   </div>
 
@@ -356,16 +369,18 @@ const ServiceRequestDialog = ({ open, onOpenChange, service }: ServiceRequestDia
                       className="text-sm text-foreground cursor-pointer"
                     >
                       I agree to the{" "}
-                      <Link href="/legal/terms" 
+                      <Link
+                        href="/legal/terms"
                         target="_blank"
                         className="text-primary hover:underline inline-flex items-center gap-1"
                         onClick={(e) => e.stopPropagation()}
                       >
                         Terms of Service
                         <ExternalLink size={12} />
-                      </Link>
-                      {" "}and{" "}
-                      <Link href="/legal/privacy" 
+                      </Link>{" "}
+                      and{" "}
+                      <Link
+                        href="/legal/privacy"
                         target="_blank"
                         className="text-primary hover:underline inline-flex items-center gap-1"
                         onClick={(e) => e.stopPropagation()}
@@ -393,7 +408,7 @@ const ServiceRequestDialog = ({ open, onOpenChange, service }: ServiceRequestDia
               <div>
                 <div className="mb-6 flex items-center justify-between">
                   <h3 className="text-lg font-semibold text-foreground">Payment</h3>
-                  
+
                   {/* Trust Signals - Security Badge */}
                   <div className="flex items-center gap-2 text-xs text-muted-foreground">
                     <Lock size={14} className="text-green-600" />
@@ -411,7 +426,8 @@ const ServiceRequestDialog = ({ open, onOpenChange, service }: ServiceRequestDia
                         Join 50+ organizations transforming with DQ
                       </p>
                       <p className="mt-1 text-xs text-muted-foreground">
-                        "DQ's strategic guidance helped us accelerate our digital transformation by 6 months." 
+                        "DQ's strategic guidance helped us accelerate our digital transformation by
+                        6 months."
                         <span className="font-medium">, CTO, Fortune 500 Energy Company</span>
                       </p>
                     </div>
@@ -468,7 +484,7 @@ const ServiceRequestDialog = ({ open, onOpenChange, service }: ServiceRequestDia
                         <span className="text-xs text-muted-foreground">256-bit SSL encrypted</span>
                       </div>
                     </div>
-                    
+
                     <div>
                       <label className="mb-2 block text-sm font-medium text-foreground">
                         Card Number <span className="text-destructive">*</span>
@@ -528,14 +544,20 @@ const ServiceRequestDialog = ({ open, onOpenChange, service }: ServiceRequestDia
                   <div className="mb-6 rounded-xl border border-border bg-card p-6">
                     <h4 className="mb-2 font-semibold text-foreground">Invoice Details</h4>
                     <p className="mb-4 text-sm text-muted-foreground">
-                      An invoice will be sent to your billing email. Payment is due within 30 days of invoice date.
+                      An invoice will be sent to your billing email. Payment is due within 30 days
+                      of invoice date.
                     </p>
                     <div className="rounded-lg bg-accent/50 p-3">
                       <div className="flex items-start gap-2">
                         <Clock size={16} className="mt-0.5 shrink-0 text-primary" />
                         <div className="text-xs text-muted-foreground">
-                          <p className="font-medium text-foreground">Typical approval: 1-2 business days</p>
-                          <p className="mt-1">We'll contact you if additional information is needed for credit approval.</p>
+                          <p className="font-medium text-foreground">
+                            Typical approval: 1-2 business days
+                          </p>
+                          <p className="mt-1">
+                            We'll contact you if additional information is needed for credit
+                            approval.
+                          </p>
                         </div>
                       </div>
                     </div>
@@ -548,7 +570,10 @@ const ServiceRequestDialog = ({ open, onOpenChange, service }: ServiceRequestDia
                     Billing Email <span className="text-destructive">*</span>
                   </label>
                   <div className="relative">
-                    <Mail size={18} className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground" />
+                    <Mail
+                      size={18}
+                      className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground"
+                    />
                     <Input
                       type="email"
                       placeholder="billing@company.com"
@@ -558,7 +583,7 @@ const ServiceRequestDialog = ({ open, onOpenChange, service }: ServiceRequestDia
                     />
                   </div>
                   <p className="mt-1.5 text-xs text-muted-foreground">
-                    {paymentMethod === "invoice" 
+                    {paymentMethod === "invoice"
                       ? "Invoice and order confirmation will be sent to this email"
                       : "Receipt and order confirmation will be sent to this email"}
                   </p>
@@ -567,10 +592,12 @@ const ServiceRequestDialog = ({ open, onOpenChange, service }: ServiceRequestDia
                 {/* Order Summary */}
                 <div className="rounded-xl border border-border bg-card p-6">
                   <h4 className="mb-4 font-semibold text-foreground">Order Summary</h4>
-                  
+
                   <div className="mb-4 space-y-2 border-b border-border pb-4">
                     <p className="text-sm font-medium text-foreground">{service.name}</p>
-                    <p className="text-xs text-muted-foreground">{service.type} • {service.duration}</p>
+                    <p className="text-xs text-muted-foreground">
+                      {service.type} • {service.duration}
+                    </p>
                   </div>
 
                   <div className="space-y-3">
@@ -619,7 +646,9 @@ const ServiceRequestDialog = ({ open, onOpenChange, service }: ServiceRequestDia
                   <div className="flex items-center gap-3">
                     <MessageCircle size={20} className="text-primary" />
                     <div>
-                      <p className="text-sm font-medium text-foreground">Questions about your order?</p>
+                      <p className="text-sm font-medium text-foreground">
+                        Questions about your order?
+                      </p>
                       <p className="text-xs text-muted-foreground">Our team is here to help</p>
                     </div>
                   </div>
@@ -631,7 +660,7 @@ const ServiceRequestDialog = ({ open, onOpenChange, service }: ServiceRequestDia
                 {/* Legal Disclaimer */}
                 <div className="mt-6 rounded-lg bg-accent/50 p-4">
                   <p className="text-xs text-muted-foreground">
-                    {paymentMethod === "card" 
+                    {paymentMethod === "card"
                       ? "By completing this order, you authorize DQ to charge the amount shown above to your card. Your payment is processed securely through Stripe with bank-level encryption."
                       : "By completing this order, you agree to pay the invoice amount within 30 days. You will receive an invoice at the email address provided."}
                   </p>
@@ -643,12 +672,7 @@ const ServiceRequestDialog = ({ open, onOpenChange, service }: ServiceRequestDia
 
         {/* Navigation */}
         <div className="flex items-center justify-between border-t border-border pt-6">
-          <Button
-            variant="outline"
-            onClick={handleBack}
-            disabled={step === 1}
-            className="gap-2"
-          >
+          <Button variant="outline" onClick={handleBack} disabled={step === 1} className="gap-2">
             <ArrowLeft size={16} />
             Back
           </Button>

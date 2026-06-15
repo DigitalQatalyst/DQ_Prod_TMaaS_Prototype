@@ -18,11 +18,7 @@ import { ClientMilestonesTab } from "@/components/features/engagements/ClientMil
 import { StatusReportsTab } from "@/components/features/engagements/StatusReportsTab";
 import type { RaidSubTab } from "@/data/engagementHealthIndicators";
 
-export default function EngagementDetailPage({
-  params,
-}: {
-  params: Promise<{ id: string }>;
-}) {
+export default function EngagementDetailPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = use(params);
   const { user } = useAuth();
   const [activeTab, setActiveTab] = useState("seven_keys");
@@ -54,19 +50,69 @@ export default function EngagementDetailPage({
           <TabsList className="w-full justify-start bg-transparent border-b border-border h-auto p-0 rounded-none overflow-x-auto overflow-y-hidden flex-nowrap">
             {isClient ? (
               <>
-                <TabsTrigger value="seven_keys" className="rounded-none border-b-2 border-transparent data-[state=active]:border-navy-900 data-[state=active]:bg-transparent data-[state=active]:shadow-none px-6 pb-3 text-sm font-semibold">Overview</TabsTrigger>
-                <TabsTrigger value="milestones" className="rounded-none border-b-2 border-transparent data-[state=active]:border-navy-900 data-[state=active]:bg-transparent data-[state=active]:shadow-none px-6 pb-3 text-sm font-semibold">Milestones</TabsTrigger>
-                <TabsTrigger value="status_reports" className="rounded-none border-b-2 border-transparent data-[state=active]:border-navy-900 data-[state=active]:bg-transparent data-[state=active]:shadow-none px-6 pb-3 text-sm font-semibold">Status Reports</TabsTrigger>
+                <TabsTrigger
+                  value="seven_keys"
+                  className="rounded-none border-b-2 border-transparent data-[state=active]:border-navy-900 data-[state=active]:bg-transparent data-[state=active]:shadow-none px-6 pb-3 text-sm font-semibold"
+                >
+                  Overview
+                </TabsTrigger>
+                <TabsTrigger
+                  value="milestones"
+                  className="rounded-none border-b-2 border-transparent data-[state=active]:border-navy-900 data-[state=active]:bg-transparent data-[state=active]:shadow-none px-6 pb-3 text-sm font-semibold"
+                >
+                  Milestones
+                </TabsTrigger>
+                <TabsTrigger
+                  value="status_reports"
+                  className="rounded-none border-b-2 border-transparent data-[state=active]:border-navy-900 data-[state=active]:bg-transparent data-[state=active]:shadow-none px-6 pb-3 text-sm font-semibold"
+                >
+                  Status Reports
+                </TabsTrigger>
               </>
             ) : (
               <>
-                <TabsTrigger value="overview" className="rounded-none border-b-2 border-transparent data-[state=active]:border-navy-900 data-[state=active]:bg-transparent data-[state=active]:shadow-none px-6 pb-3 text-sm font-semibold">Overview</TabsTrigger>
-                <TabsTrigger value="seven_keys" className="rounded-none border-b-2 border-transparent data-[state=active]:border-navy-900 data-[state=active]:bg-transparent data-[state=active]:shadow-none px-6 pb-3 text-sm font-semibold">Seven Keys</TabsTrigger>
-                <TabsTrigger value="delivery" className="rounded-none border-b-2 border-transparent data-[state=active]:border-navy-900 data-[state=active]:bg-transparent data-[state=active]:shadow-none px-6 pb-3 text-sm font-semibold">Delivery</TabsTrigger>
-                <TabsTrigger value="raid" className="rounded-none border-b-2 border-transparent data-[state=active]:border-navy-900 data-[state=active]:bg-transparent data-[state=active]:shadow-none px-6 pb-3 text-sm font-semibold">RAID</TabsTrigger>
-                <TabsTrigger value="commercials" className="rounded-none border-b-2 border-transparent data-[state=active]:border-navy-900 data-[state=active]:bg-transparent data-[state=active]:shadow-none px-6 pb-3 text-sm font-semibold">Commercials</TabsTrigger>
-                <TabsTrigger value="team" className="rounded-none border-b-2 border-transparent data-[state=active]:border-navy-900 data-[state=active]:bg-transparent data-[state=active]:shadow-none px-6 pb-3 text-sm font-semibold">Team</TabsTrigger>
-                <TabsTrigger value="stakeholders" className="rounded-none border-b-2 border-transparent data-[state=active]:border-navy-900 data-[state=active]:bg-transparent data-[state=active]:shadow-none px-6 pb-3 text-sm font-semibold">Stakeholders</TabsTrigger>
+                <TabsTrigger
+                  value="overview"
+                  className="rounded-none border-b-2 border-transparent data-[state=active]:border-navy-900 data-[state=active]:bg-transparent data-[state=active]:shadow-none px-6 pb-3 text-sm font-semibold"
+                >
+                  Overview
+                </TabsTrigger>
+                <TabsTrigger
+                  value="seven_keys"
+                  className="rounded-none border-b-2 border-transparent data-[state=active]:border-navy-900 data-[state=active]:bg-transparent data-[state=active]:shadow-none px-6 pb-3 text-sm font-semibold"
+                >
+                  Seven Keys
+                </TabsTrigger>
+                <TabsTrigger
+                  value="delivery"
+                  className="rounded-none border-b-2 border-transparent data-[state=active]:border-navy-900 data-[state=active]:bg-transparent data-[state=active]:shadow-none px-6 pb-3 text-sm font-semibold"
+                >
+                  Delivery
+                </TabsTrigger>
+                <TabsTrigger
+                  value="raid"
+                  className="rounded-none border-b-2 border-transparent data-[state=active]:border-navy-900 data-[state=active]:bg-transparent data-[state=active]:shadow-none px-6 pb-3 text-sm font-semibold"
+                >
+                  RAID
+                </TabsTrigger>
+                <TabsTrigger
+                  value="commercials"
+                  className="rounded-none border-b-2 border-transparent data-[state=active]:border-navy-900 data-[state=active]:bg-transparent data-[state=active]:shadow-none px-6 pb-3 text-sm font-semibold"
+                >
+                  Commercials
+                </TabsTrigger>
+                <TabsTrigger
+                  value="team"
+                  className="rounded-none border-b-2 border-transparent data-[state=active]:border-navy-900 data-[state=active]:bg-transparent data-[state=active]:shadow-none px-6 pb-3 text-sm font-semibold"
+                >
+                  Team
+                </TabsTrigger>
+                <TabsTrigger
+                  value="stakeholders"
+                  className="rounded-none border-b-2 border-transparent data-[state=active]:border-navy-900 data-[state=active]:bg-transparent data-[state=active]:shadow-none px-6 pb-3 text-sm font-semibold"
+                >
+                  Stakeholders
+                </TabsTrigger>
               </>
             )}
           </TabsList>
@@ -82,18 +128,30 @@ export default function EngagementDetailPage({
             </TabsContent>
             {isClient ? (
               <>
-                <TabsContent value="milestones" className="m-0"><ClientMilestonesTab /></TabsContent>
-                <TabsContent value="status_reports" className="m-0"><StatusReportsTab /></TabsContent>
+                <TabsContent value="milestones" className="m-0">
+                  <ClientMilestonesTab />
+                </TabsContent>
+                <TabsContent value="status_reports" className="m-0">
+                  <StatusReportsTab />
+                </TabsContent>
               </>
             ) : (
               <>
-                <TabsContent value="delivery" className="m-0"><DeliveryTab /></TabsContent>
+                <TabsContent value="delivery" className="m-0">
+                  <DeliveryTab />
+                </TabsContent>
                 <TabsContent value="raid" className="m-0">
                   <RaidTab activeSubTab={raidSubTab} onSubTabChange={setRaidSubTab} />
                 </TabsContent>
-                <TabsContent value="commercials" className="m-0"><CommercialsTab /></TabsContent>
-                <TabsContent value="team" className="m-0"><TeamTab /></TabsContent>
-                <TabsContent value="stakeholders" className="m-0"><StakeholdersTab /></TabsContent>
+                <TabsContent value="commercials" className="m-0">
+                  <CommercialsTab />
+                </TabsContent>
+                <TabsContent value="team" className="m-0">
+                  <TeamTab />
+                </TabsContent>
+                <TabsContent value="stakeholders" className="m-0">
+                  <StakeholdersTab />
+                </TabsContent>
               </>
             )}
           </div>

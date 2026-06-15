@@ -3,7 +3,10 @@ import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { useRegisterCatalogServices } from "@/contexts/CatalogContext";
 import { getCatalogPlaceholder } from "@/lib/catalogPlaceholder";
 import { CATALOG_QUERY_KEY } from "@/lib/catalogQueryKeys";
-import { filterCatalogServices, type MarketplaceCatalogFilters } from "@/lib/marketplaceCatalogFilters";
+import {
+  filterCatalogServices,
+  type MarketplaceCatalogFilters,
+} from "@/lib/marketplaceCatalogFilters";
 import {
   enrichCatalogListExtras,
   fetchCatalog,

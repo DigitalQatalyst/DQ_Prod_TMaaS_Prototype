@@ -69,9 +69,7 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
 
   const setQuantity = (serviceId: number, quantity: number) => {
     if (quantity <= 0) return removeItem(serviceId);
-    setItems((prev) =>
-      prev.map((i) => (i.serviceId === serviceId ? { ...i, quantity } : i))
-    );
+    setItems((prev) => prev.map((i) => (i.serviceId === serviceId ? { ...i, quantity } : i)));
   };
 
   const clearCart = () => setItems([]);

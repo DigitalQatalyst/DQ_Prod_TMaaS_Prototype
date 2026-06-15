@@ -20,10 +20,7 @@ import MarketplacePagination from "@/components/features/marketplace/Marketplace
 import ServiceProductCard from "@/components/features/marketplace/ServiceProductCard";
 import MeshSection from "@/components/features/landing/MeshSection";
 import { landingHeroHeading } from "@/lib/brandAccent";
-import {
-  marketplaceCategoryLabels,
-  marketplaceCollectionIds,
-} from "@/data/marketplaceNavigation";
+import { marketplaceCategoryLabels, marketplaceCollectionIds } from "@/data/marketplaceNavigation";
 import { useBestSellers, useMarketplaceListings } from "@/lib/hooks/useCatalog";
 import { getDisplayTitle } from "@/components/features/service-detail/serviceDetailHelpers";
 import { getRemixedName } from "@/lib/serviceProductUtils";
@@ -57,9 +54,7 @@ export default function MarketplacePageClient() {
     const collection = searchParams.get("collection");
     if (
       collection &&
-      marketplaceCollectionIds.includes(
-        collection as (typeof marketplaceCollectionIds)[number]
-      )
+      marketplaceCollectionIds.includes(collection as (typeof marketplaceCollectionIds)[number])
     ) {
       setActiveTab(collection);
     } else if (!collection) {
@@ -244,7 +239,6 @@ export default function MarketplacePageClient() {
 
   return (
     <div className="min-h-screen bg-background">
-
       <MeshSection
         variant="heroLight"
         grid
@@ -253,12 +247,10 @@ export default function MarketplacePageClient() {
         <div className="mx-auto flex min-h-[280px] max-w-4xl flex-col items-center justify-center text-center sm:min-h-[320px] md:min-h-[360px]">
           <p className="dq-eyebrow">Digital transformation marketplace</p>
           <h1 className={`mt-5 ${landingHeroHeading}`}>
-            Browse{" "}
-            <span className="text-dq-orange">transformation</span> services
+            Browse <span className="text-dq-orange">transformation</span> services
           </h1>
           <p className="mt-6 max-w-2xl text-lg leading-relaxed text-gray-600">
-            Explore 100+ transformation services across AI, experience,
-            operations, and security.
+            Explore 100+ transformation services across AI, experience, operations, and security.
           </p>
           <div className="relative mt-8 flex w-full max-w-2xl items-center">
             <Search className="absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-400" />
@@ -304,16 +296,11 @@ export default function MarketplacePageClient() {
               </h2>
             )}
 
-            <MarketplaceCategoryNav
-              activeTab={activeTab}
-              onTabChange={applyCollectionFilter}
-            />
+            <MarketplaceCategoryNav activeTab={activeTab} onTabChange={applyCollectionFilter} />
 
             <div className="mt-8 flex flex-col gap-6 lg:flex-row lg:items-start">
               <aside
-                className={`lg:w-[240px] shrink-0 ${
-                  sidebarOpen ? "block" : "hidden lg:block"
-                }`}
+                className={`lg:w-[240px] shrink-0 ${sidebarOpen ? "block" : "hidden lg:block"}`}
               >
                 <div className="lg:sticky lg:top-32">
                   <MarketplaceFilters
@@ -354,9 +341,7 @@ export default function MarketplacePageClient() {
                             {showingFrom}–{showingTo}
                           </span>{" "}
                           of{" "}
-                          <span className="font-semibold text-dq-navy">
-                            {catalogServicesCount}
-                          </span>{" "}
+                          <span className="font-semibold text-dq-navy">{catalogServicesCount}</span>{" "}
                           {catalogServicesCount === 1 ? "service" : "services"}
                         </>
                       )}
@@ -434,11 +419,7 @@ export default function MarketplacePageClient() {
 
                 {catalogServicesCount === 0 ? (
                   <div className="rounded-2xl border border-gray-200 bg-white p-12 text-center">
-                    <Search
-                      size={32}
-                      className="mx-auto mb-4 text-gray-300"
-                      strokeWidth={1.5}
-                    />
+                    <Search size={32} className="mx-auto mb-4 text-gray-300" strokeWidth={1.5} />
                     <h3 className="text-sm font-semibold text-dq-navy">No services match</h3>
                     <p className="mt-2 text-sm text-gray-500">
                       Try fewer filters or a different search term.
@@ -484,7 +465,6 @@ export default function MarketplacePageClient() {
           </div>
         </div>
       </section>
-
     </div>
   );
 }

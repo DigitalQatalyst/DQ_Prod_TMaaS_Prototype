@@ -42,9 +42,7 @@ describe("filterCatalogServices", () => {
       excludeVariantIds: [],
     });
 
-    const firstPageTypes = filtered
-      .slice(0, 6)
-      .map((service) => service.serviceType);
+    const firstPageTypes = filtered.slice(0, 6).map((service) => service.serviceType);
 
     expect(new Set(firstPageTypes).size).toBeGreaterThan(1);
     expect(firstPageTypes[0]).toBe("advisory");

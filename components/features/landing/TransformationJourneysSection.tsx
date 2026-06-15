@@ -2,18 +2,14 @@
 
 import { useMemo } from "react";
 import ServiceProductCard from "@/components/features/marketplace/ServiceProductCard";
-import { initialServices } from "@/data/services" // TODO: Task 9 — wire up data;
+import { initialServices } from "@/data/services"; // TODO: Task 9 — wire up data;
 import { useRouter } from "next/navigation";
 
 const TransformationJourneysSection = () => {
   const router = useRouter();
 
   const journeys = useMemo(() => {
-    const targetNames = [
-      "Design Services set",
-      "Deploy Services set",
-      "Managed Services set",
-    ];
+    const targetNames = ["Design Services set", "Deploy Services set", "Managed Services set"];
 
     return targetNames
       .map((name) => initialServices.find((s) => s.standardName === name))
@@ -27,14 +23,13 @@ const TransformationJourneysSection = () => {
       <div className="mx-auto max-w-[1200px]">
         <div className="mb-10 flex flex-col justify-between gap-6 md:flex-row md:items-end">
           <div className="max-w-2xl">
-            <p className="dq-eyebrow">
-              Bundles
-            </p>
+            <p className="dq-eyebrow">Bundles</p>
             <h2 className="mt-4 text-4xl font-semibold tracking-tight text-dq-navy md:text-5xl">
               Transformation Journeys
             </h2>
             <p className="mt-4 text-base leading-relaxed text-gray-600">
-              End-to-end service bundles designed to accelerate your digital transformation across design, implementation, and ongoing operations.
+              End-to-end service bundles designed to accelerate your digital transformation across
+              design, implementation, and ongoing operations.
             </p>
           </div>
           <button

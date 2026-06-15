@@ -1,8 +1,4 @@
-import {
-  sectionHeading,
-  serviceDetailSplitGrid,
-  serviceDetailSplitLead,
-} from "@/lib/brandAccent";
+import { sectionHeading, serviceDetailSplitGrid, serviceDetailSplitLead } from "@/lib/brandAccent";
 import type { PdpContent } from "@/lib/types/catalog";
 import { getOverviewContent, type ServiceProduct } from "./serviceDetailHelpers";
 
@@ -16,8 +12,7 @@ export function ServiceDetailAboutSection({ service, pdpContent }: ServiceDetail
   const paragraphs = pdpContent?.overviewParagraphs?.length
     ? pdpContent.overviewParagraphs
     : fallback.paragraphs;
-  const audienceDescription =
-    pdpContent?.audienceDescription ?? fallback.audienceDescription;
+  const audienceDescription = pdpContent?.audienceDescription ?? fallback.audienceDescription;
 
   return (
     <section aria-labelledby="about-service-heading">
@@ -28,10 +23,7 @@ export function ServiceDetailAboutSection({ service, pdpContent }: ServiceDetail
           </h2>
           <div className="mt-5 space-y-4">
             {paragraphs.map((paragraph) => (
-              <p
-                key={paragraph}
-                className="text-base leading-[1.7] text-[#667085]"
-              >
+              <p key={paragraph} className="text-base leading-[1.7] text-[#667085]">
                 {paragraph}
               </p>
             ))}

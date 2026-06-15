@@ -51,9 +51,7 @@ const Navbar = () => {
             {featureFlags.isEnabled("contextSwitcher") && (
               <ContextSwitcher stage="marketing" scrolled={false} />
             )}
-            {featureFlags.isEnabled("cart") && (
-              <CartNavButton className="h-9 w-9 shrink-0" />
-            )}
+            {featureFlags.isEnabled("cart") && <CartNavButton className="h-9 w-9 shrink-0" />}
             {featureFlags.isEnabled("auth") && (
               <>
                 <Link
@@ -132,10 +130,7 @@ const Navbar = () => {
               </Link>
             </>
           )}
-          <ExploreDigitalQatalystCta
-            className="mt-4 w-full"
-            showIcon={false}
-          />
+          <ExploreDigitalQatalystCta className="mt-4 w-full" showIcon={false} />
           {featureFlags.isEnabled("contactUs") && (
             <Link
               href="/contact"

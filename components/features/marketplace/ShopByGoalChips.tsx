@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { ArrowRight, Target } from "lucide-react";
-import { marketplaceGoals } from "@/data/marketplaceNavigation" // TODO: Task 9 — wire up data;
+import { marketplaceGoals } from "@/data/marketplaceNavigation"; // TODO: Task 9 — wire up data;
 
 type ShopByGoalChipsProps = {
   /** `link` = navigate via URL (homepage). `filter` = apply filter on marketplace page */

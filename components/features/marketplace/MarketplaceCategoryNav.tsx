@@ -1,23 +1,17 @@
 "use client";
 
-import { marketplaceCapabilities } from "@/data/marketplaceNavigation" // TODO: Task 9 — wire up data;
+import { marketplaceCapabilities } from "@/data/marketplaceNavigation"; // TODO: Task 9 — wire up data;
 
 const allTab = { id: "all", label: "All" };
 
-const tabs = [
-  allTab,
-  ...marketplaceCapabilities.map((c) => ({ id: c.id, label: c.label })),
-];
+const tabs = [allTab, ...marketplaceCapabilities.map((c) => ({ id: c.id, label: c.label }))];
 
 type MarketplaceCategoryNavProps = {
   activeTab: string;
   onTabChange: (tab: string) => void;
 };
 
-const MarketplaceCategoryNav = ({
-  activeTab,
-  onTabChange,
-}: MarketplaceCategoryNavProps) => {
+const MarketplaceCategoryNav = ({ activeTab, onTabChange }: MarketplaceCategoryNavProps) => {
   return (
     <div className="sticky top-16 z-30 bg-background">
       <nav

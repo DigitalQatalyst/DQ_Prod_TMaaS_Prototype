@@ -49,10 +49,7 @@ export interface ServiceProduct {
 // serviceProductUtils
 // ---------------------------------------------------------------------------
 
-export function getRemixedName(
-  service: ServiceProduct,
-  remixKey: string = "all"
-): string {
+export function getRemixedName(service: ServiceProduct, remixKey: string = "all"): string {
   if (remixKey === "all") return service.standardName;
   return service.remixName[remixKey] ?? service.standardName;
 }
@@ -171,10 +168,7 @@ function renameProductStem(stem: string): string {
   return PRODUCT_DISPLAY_RENAMES[stem] ?? stem;
 }
 
-function resolveServiceType(
-  standardName: string,
-  serviceType?: string
-): string | undefined {
+function resolveServiceType(standardName: string, serviceType?: string): string | undefined {
   if (serviceType) return serviceType;
   return parseStandardName(standardName).serviceType;
 }
@@ -199,37 +193,26 @@ function formatTitle(
   }
 
   const stage =
-    stageLabel ??
-    (serviceType ? CARD_STAGE_LABEL[serviceType] : variantSuffix) ??
-    variantSuffix;
+    stageLabel ?? (serviceType ? CARD_STAGE_LABEL[serviceType] : variantSuffix) ?? variantSuffix;
 
   if (!stage) return product;
   return `${product} - ${stage}`;
 }
 
-export function getMarketplaceCardTitle(
-  standardName: string,
-  serviceType?: string
-): string {
+export function getMarketplaceCardTitle(standardName: string, serviceType?: string): string {
   const type = resolveServiceType(standardName, serviceType);
   const stage = type ? CARD_STAGE_LABEL[type] : undefined;
   return formatTitle(standardName, type, stage, CARD_STAGE_LABEL["bundle"]);
 }
 
-export function getPdpDisplayTitle(
-  standardName: string,
-  serviceType?: string
-): string {
+export function getPdpDisplayTitle(standardName: string, serviceType?: string): string {
   const type = resolveServiceType(standardName, serviceType);
   const stage = type ? CARD_STAGE_LABEL[type] : undefined;
   return formatTitle(standardName, type, stage, PDP_BUNDLE_TITLE_STAGE);
 }
 
 /** @deprecated Use getPdpDisplayTitle or getMarketplaceCardTitle */
-export function getDisplayTitle(
-  standardName: string,
-  serviceType?: string
-): string {
+export function getDisplayTitle(standardName: string, serviceType?: string): string {
   return getPdpDisplayTitle(standardName, serviceType);
 }
 
@@ -259,16 +242,11 @@ const SERVICE_TYPE_INTERLEAVE_ORDER: ServiceTypeId[] = [
   "bundle",
 ];
 
-function compareWithinPopularityBucket(
-  a: ServiceProduct,
-  b: ServiceProduct
-): number {
+function compareWithinPopularityBucket(a: ServiceProduct, b: ServiceProduct): number {
   return b.popularityRank - a.popularityRank || a.id - b.id;
 }
 
-export function sortCatalogByPopularMix(
-  services: ServiceProduct[]
-): ServiceProduct[] {
+export function sortCatalogByPopularMix(services: ServiceProduct[]): ServiceProduct[] {
   const buckets = new Map<ServiceTypeId, ServiceProduct[]>();
 
   for (const type of SERVICE_TYPE_INTERLEAVE_ORDER) {
@@ -320,17 +298,10 @@ export type MarketplaceCatalogFilters = {
   excludeVariantIds?: number[];
 };
 
-function compareServices(
-  a: ServiceProduct,
-  b: ServiceProduct,
-  sortBy: MarketplaceSortBy
-): number {
+function compareServices(a: ServiceProduct, b: ServiceProduct, sortBy: MarketplaceSortBy): number {
   if (sortBy === "popular") return b.popularityRank - a.popularityRank;
   if (sortBy === "price-low") {
-    return (
-      parseInt(a.price.replace(/[$,]/g, ""), 10) -
-      parseInt(b.price.replace(/[$,]/g, ""), 10)
-    );
+    return parseInt(a.price.replace(/[$,]/g, ""), 10) - parseInt(b.price.replace(/[$,]/g, ""), 10);
   }
   if (sortBy === "fastest") {
     return parseInt(a.duration, 10) - parseInt(b.duration, 10);
@@ -354,8 +325,7 @@ export function filterCatalogServices(
   } = filters;
 
   const excludeIds = new Set(excludeVariantIds);
-  const wantsMultiOnly =
-    selectedIncluded.includes("multi") && !selectedIncluded.includes("single");
+  const wantsMultiOnly = selectedIncluded.includes("multi") && !selectedIncluded.includes("single");
   const wantsSingleOnly =
     selectedIncluded.includes("single") && !selectedIncluded.includes("multi");
   const activeSector = selectedSectors.length > 0 ? selectedSectors[0]! : "all";
@@ -382,20 +352,15 @@ export function filterCatalogServices(
       selectedCategories.length === 0 || selectedCategories.includes(pkg.collection);
 
     const matchesServiceType =
-      selectedServiceTypes.length === 0 ||
-      selectedServiceTypes.includes(pkg.serviceType);
+      selectedServiceTypes.length === 0 || selectedServiceTypes.includes(pkg.serviceType);
 
     const matchesSearch =
       searchQuery === "" ||
       pkg.standardName.toLowerCase().includes(searchQuery.toLowerCase()) ||
       pkg.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      getRemixedName(pkg, activeSector)
-        .toLowerCase()
-        .includes(searchQuery.toLowerCase()) ||
+      getRemixedName(pkg, activeSector).toLowerCase().includes(searchQuery.toLowerCase()) ||
       pkg.tags.some((tag) => tag.toLowerCase().includes(searchQuery.toLowerCase())) ||
-      pkg.features.some((feat) =>
-        feat.toLowerCase().includes(searchQuery.toLowerCase())
-      );
+      pkg.features.some((feat) => feat.toLowerCase().includes(searchQuery.toLowerCase()));
 
     return matchesCollection && matchesCategory && matchesServiceType && matchesSearch;
   });

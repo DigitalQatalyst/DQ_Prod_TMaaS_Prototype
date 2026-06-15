@@ -20,8 +20,7 @@ const CTASection = () => {
           viewport={{ once: true }}
           className="text-3xl font-bold text-navy-foreground md:text-5xl"
         >
-          Ready to transform{" "}
-          <span className="text-gradient-brand">differently?</span>
+          Ready to transform <span className="text-gradient-brand">differently?</span>
         </motion.h2>
         <motion.p
           initial={{ opacity: 0, y: 16 }}
@@ -30,8 +29,8 @@ const CTASection = () => {
           transition={{ delay: 0.1 }}
           className="mt-6 text-base text-navy-foreground/60 md:text-lg"
         >
-          Replace expensive consulting engagements with architecture-led, AI-powered
-          transformation. Start with your problem, not a contract.
+          Replace expensive consulting engagements with architecture-led, AI-powered transformation.
+          Start with your problem, not a contract.
         </motion.p>
         <motion.div
           initial={{ opacity: 0, y: 16 }}
@@ -40,11 +39,18 @@ const CTASection = () => {
           transition={{ delay: 0.2 }}
           className="mt-10 flex flex-col items-center gap-4 sm:flex-row sm:justify-center"
         >
-          <Button size="lg" className="rounded-full bg-gradient-brand px-8 text-base text-primary-foreground shadow-brand hover:opacity-90 gap-2">
+          <Button
+            size="lg"
+            className="rounded-full bg-gradient-brand px-8 text-base text-primary-foreground shadow-brand hover:opacity-90 gap-2"
+          >
             Start Free Assessment
             <ArrowRight size={16} />
           </Button>
-          <Button size="lg" variant="outline" className="rounded-full border-navy-light px-8 text-base text-navy-foreground hover:bg-navy-light">
+          <Button
+            size="lg"
+            variant="outline"
+            className="rounded-full border-navy-light px-8 text-base text-navy-foreground hover:bg-navy-light"
+          >
             Explore Marketplace
           </Button>
         </motion.div>

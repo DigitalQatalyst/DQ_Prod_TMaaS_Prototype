@@ -1,13 +1,6 @@
 import Link from "next/link";
-import {
-  ArrowRight,
-  Monitor,
-  Workflow,
-  Shield,
-  BarChart2,
-  type LucideIcon,
-} from "lucide-react";
-import { marketplaceCoreCapabilities } from "@/data/marketplaceNavigation" // TODO: Task 9 — wire up data;
+import { ArrowRight, Monitor, Workflow, Shield, BarChart2, type LucideIcon } from "lucide-react";
+import { marketplaceCoreCapabilities } from "@/data/marketplaceNavigation"; // TODO: Task 9 — wire up data;
 
 const CATEGORY_ICONS: Record<string, LucideIcon> = {
   experience: Monitor,
@@ -28,10 +21,7 @@ const CATEGORY_DESCRIPTIONS: Record<string, string> = {
 
 const OfferingsSection = () => {
   return (
-    <section
-      id="offerings"
-      className="bg-gray-50 px-5 py-24 md:px-8 lg:px-10"
-    >
+    <section id="offerings" className="bg-gray-50 px-5 py-24 md:px-8 lg:px-10">
       <div className="mx-auto max-w-[1200px]">
         <p className="mb-4 font-mono text-[11px] uppercase tracking-[0.2em] text-dq-orange">
           Service Categories
@@ -55,9 +45,7 @@ const OfferingsSection = () => {
                 </div>
                 <div className="flex-1">
                   <h3 className="mb-1 text-lg font-semibold text-dq-navy">{label}</h3>
-                  <p className="text-[15px] text-gray-600">
-                    {CATEGORY_DESCRIPTIONS[id]}
-                  </p>
+                  <p className="text-[15px] text-gray-600">{CATEGORY_DESCRIPTIONS[id]}</p>
                 </div>
                 <ArrowRight
                   size={20}

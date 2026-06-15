@@ -52,9 +52,7 @@ async function loadStaticDeployModules(standardName: string): Promise<DeployModu
   const baseNameMatch = standardName.match(/^(.*?)\s*\(/);
   if (baseNameMatch) {
     const baseName = baseNameMatch[1]!;
-    const matchingKey = Object.keys(deployModulesData).find((key) =>
-      key.startsWith(baseName)
-    );
+    const matchingKey = Object.keys(deployModulesData).find((key) => key.startsWith(baseName));
     if (matchingKey) return deployModulesData[matchingKey] ?? [];
   }
   return [];
@@ -204,9 +202,7 @@ export function pickTopServicesByPopularity(
   limit: number,
   { excludeBundles = true }: { excludeBundles?: boolean } = {}
 ): ServiceProduct[] {
-  let pool = excludeBundles
-    ? services.filter((s) => s.serviceType !== "bundle")
-    : services;
+  let pool = excludeBundles ? services.filter((s) => s.serviceType !== "bundle") : services;
   if (collection !== "all") {
     pool = pool.filter((s) => s.collection === collection);
   }
@@ -253,12 +249,27 @@ async function fetchVariantExtras(variantIds: number[]) {
 
   const [featuresRes, tagsRes, contentRes, remixRes, milestonesRes, bundleRes, categoryRes] =
     await Promise.all([
-      supabase.from("product_features").select("variant_id, feature_text, sort_order").in("variant_id", variantIds),
+      supabase
+        .from("product_features")
+        .select("variant_id, feature_text, sort_order")
+        .in("variant_id", variantIds),
       supabase.from("product_tags").select("variant_id, tag_name").in("variant_id", variantIds),
-      supabase.from("product_content").select("variant_id, description, positioning").in("variant_id", variantIds),
-      supabase.from("variant_sector_titles").select("variant_id, sector_category_id, title").in("variant_id", variantIds),
-      supabase.from("product_timeline_milestones").select("variant_id, milestone_text, sort_order").in("variant_id", variantIds),
-      supabase.from("bundle_items").select("bundle_variant_id, included_variant_id, sort_order").in("bundle_variant_id", variantIds),
+      supabase
+        .from("product_content")
+        .select("variant_id, description, positioning")
+        .in("variant_id", variantIds),
+      supabase
+        .from("variant_sector_titles")
+        .select("variant_id, sector_category_id, title")
+        .in("variant_id", variantIds),
+      supabase
+        .from("product_timeline_milestones")
+        .select("variant_id, milestone_text, sort_order")
+        .in("variant_id", variantIds),
+      supabase
+        .from("bundle_items")
+        .select("bundle_variant_id, included_variant_id, sort_order")
+        .in("bundle_variant_id", variantIds),
       supabase
         .from("marketplace_listings_view")
         .select("variant_id, product_id")
@@ -355,7 +366,8 @@ function mapRowToServiceProduct(
     price: row.price_display ?? "Pricing on request",
     duration: row.duration_display,
     popularityRank: row.popularity_score,
-    deliveryComplexity: (row.delivery_complexity ?? "medium") as ServiceProduct["deliveryComplexity"],
+    deliveryComplexity: (row.delivery_complexity ??
+      "medium") as ServiceProduct["deliveryComplexity"],
     badge: row.badge ?? "",
     audience: row.audience ?? "",
     industryRelevance: row.industry_relevance ?? "",
@@ -418,8 +430,7 @@ export async function fetchCatalogPage(params: CatalogListParams): Promise<Catal
     excludeVariantIds = [],
   } = params;
 
-  const wantsMultiOnly =
-    selectedIncluded.includes("multi") && !selectedIncluded.includes("single");
+  const wantsMultiOnly = selectedIncluded.includes("multi") && !selectedIncluded.includes("single");
   const wantsSingleOnly =
     selectedIncluded.includes("single") && !selectedIncluded.includes("multi");
 
@@ -562,9 +573,9 @@ async function fetchPdpContent(variantId: number): Promise<PdpContent | undefine
   const schemaNotReady = (message: string | undefined) =>
     Boolean(
       message &&
-        (/does not exist/i.test(message) ||
-          /relation .* does not exist/i.test(message) ||
-          /column .* does not exist/i.test(message))
+      (/does not exist/i.test(message) ||
+        /relation .* does not exist/i.test(message) ||
+        /column .* does not exist/i.test(message))
     );
 
   if (contentRes.error) {
@@ -668,12 +679,9 @@ export async function fetchServiceDetail(id: number): Promise<ServiceDetailPaylo
   ]);
 
   const enrichedService =
-    pdpContent?.heroSummary != null
-      ? { ...service, description: pdpContent.heroSummary }
-      : service;
+    pdpContent?.heroSummary != null ? { ...service, description: pdpContent.heroSummary } : service;
 
   const payload: ServiceDetailPayload = { service: enrichedService, deployModules };
   if (pdpContent) payload.pdpContent = pdpContent;
   return payload;
 }
-

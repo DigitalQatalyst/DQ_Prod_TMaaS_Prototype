@@ -7,7 +7,8 @@ const props = [
   {
     icon: Brain,
     title: "Architecture-Led",
-    description: "Every recommendation is grounded in enterprise architecture, not PowerPoint decks.",
+    description:
+      "Every recommendation is grounded in enterprise architecture, not PowerPoint decks.",
   },
   {
     icon: Zap,
@@ -17,12 +18,14 @@ const props = [
   {
     icon: DollarSign,
     title: "Lower Barrier to Entry",
-    description: "No six-figure consulting retainers. Enterprise transformation at a fraction of the cost.",
+    description:
+      "No six-figure consulting retainers. Enterprise transformation at a fraction of the cost.",
   },
   {
     icon: Layers,
     title: "Modular Delivery",
-    description: "Pick what you need. Every service is scoped, measurable, and independently deployable.",
+    description:
+      "Pick what you need. Every service is scoped, measurable, and independently deployable.",
   },
   {
     icon: Shield,
@@ -69,7 +72,9 @@ const ValuePropsSection = () => {
                   <prop.icon size={18} className="text-primary" />
                 </div>
                 <h3 className="text-lg font-semibold text-foreground">{prop.title}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{prop.description}</p>
+                <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+                  {prop.description}
+                </p>
               </div>
             ))}
           </div>

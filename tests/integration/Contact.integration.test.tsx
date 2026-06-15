@@ -12,8 +12,18 @@ vi.mock("next/navigation", () => ({
 
 // Mock next/link to render as plain <a> tags in tests
 vi.mock("next/link", () => ({
-  default: ({ href, children, ...props }: { href: string; children: React.ReactNode; [key: string]: unknown }) => (
-    <a href={href} {...props}>{children}</a>
+  default: ({
+    href,
+    children,
+    ...props
+  }: {
+    href: string;
+    children: React.ReactNode;
+    [key: string]: unknown;
+  }) => (
+    <a href={href} {...props}>
+      {children}
+    </a>
   ),
 }));
 
@@ -132,9 +142,7 @@ describe("Contact integration", () => {
   });
 
   it("prefills service enquiry context and hides routing questions", async () => {
-    renderContact(
-      "service=AI%20Readiness%20Assessment&type=advisory&collection=ai&intent=quote"
-    );
+    renderContact("service=AI%20Readiness%20Assessment&type=advisory&collection=ai&intent=quote");
 
     expect(screen.getByText("Service enquiry")).toBeInTheDocument();
     expect(screen.getByText("AI Readiness Assessment")).toBeInTheDocument();
@@ -147,9 +155,7 @@ describe("Contact integration", () => {
   });
 
   it("submits a service enquiry without asking for interest or need", async () => {
-    renderContact(
-      "service=AI%20Readiness%20Assessment&type=advisory&collection=ai&intent=quote"
-    );
+    renderContact("service=AI%20Readiness%20Assessment&type=advisory&collection=ai&intent=quote");
     fillRequiredFields({
       interest: "",
       need: "",

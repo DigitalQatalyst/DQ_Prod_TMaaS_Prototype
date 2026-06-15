@@ -28,9 +28,7 @@ describe("contactFormPrefill", () => {
         } as Parameters<typeof buildContactPath>[0],
         "quote"
       )
-    ).toBe(
-      "/contact?service=AI+Readiness+Assessment&type=advisory&collection=ai&intent=quote"
-    );
+    ).toBe("/contact?service=AI+Readiness+Assessment&type=advisory&collection=ai&intent=quote");
   });
 
   it("returns enquiry defaults for assess services", () => {

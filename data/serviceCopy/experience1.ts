@@ -6,7 +6,6 @@ import type { CollectionCopyOverrides } from "./types";
  * Keyed by variant id. See ./types.ts for the field contract and voice rules.
  */
 export const experience1Copy: CollectionCopyOverrides = {
-
   // -----------------------------------------------------------------------
   // ONLINE WEB PRESENCE (ids 1-6)
   // -----------------------------------------------------------------------
@@ -1814,7 +1813,8 @@ export const experience1Copy: CollectionCopyOverrides = {
           "The DigitalQatalyst team coordinates with your facilities teams and approved vendors for on-site faults. Remote resolution is attempted first to minimise wait times.",
       },
       {
-        question: "What is the escalation path during a major incident affecting multiple locations?",
+        question:
+          "What is the escalation path during a major incident affecting multiple locations?",
         answer:
           "A major incident protocol is agreed during onboarding. The DigitalQatalyst team activates the protocol and provides hourly updates until resolution.",
       },

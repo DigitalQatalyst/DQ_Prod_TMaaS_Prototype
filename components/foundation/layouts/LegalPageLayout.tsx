@@ -141,7 +141,9 @@ export function LegalPageLayout({ eyebrow, title, subtitle, lastUpdated, section
                   <h2 className="mb-4 text-xl font-semibold tracking-tight text-dq-navy">
                     {s.heading}
                   </h2>
-                  <div className="space-y-3">{s.body.map((para, i) => renderParagraph(para, i))}</div>
+                  <div className="space-y-3">
+                    {s.body.map((para, i) => renderParagraph(para, i))}
+                  </div>
                 </div>
               ))}
             </div>

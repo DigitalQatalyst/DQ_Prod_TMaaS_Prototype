@@ -8,11 +8,7 @@ import {
 
 const WhyTmaasSection = () => {
   return (
-    <MeshSection
-      id="why"
-      variant="heroDark"
-      className="px-5 py-24 text-white md:px-8 lg:px-10"
-    >
+    <MeshSection id="why" variant="heroDark" className="px-5 py-24 text-white md:px-8 lg:px-10">
       <div
         aria-hidden
         className="absolute inset-0 -z-10 opacity-20"
@@ -20,8 +16,7 @@ const WhyTmaasSection = () => {
           backgroundImage:
             "linear-gradient(to right, rgba(255,255,255,0.06) 1px, transparent 1px), linear-gradient(to bottom, rgba(255,255,255,0.06) 1px, transparent 1px)",
           backgroundSize: "64px 64px",
-          maskImage:
-            "radial-gradient(ellipse 60% 50% at 50% 50%, black 40%, transparent 80%)",
+          maskImage: "radial-gradient(ellipse 60% 50% at 50% 50%, black 40%, transparent 80%)",
         }}
       />
 
@@ -42,9 +37,7 @@ const WhyTmaasSection = () => {
               <div className="mb-5 flex h-10 w-10 items-center justify-center rounded-xl bg-dq-orange/10 text-dq-orange">
                 <Icon size={22} />
               </div>
-              <h3 className="mb-3 text-xl font-semibold tracking-tight text-white">
-                {title}
-              </h3>
+              <h3 className="mb-3 text-xl font-semibold tracking-tight text-white">{title}</h3>
               <p className="text-[15px] leading-relaxed text-white/60">{body}</p>
             </div>
           ))}

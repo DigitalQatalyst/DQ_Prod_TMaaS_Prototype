@@ -9,8 +9,7 @@ export type ChallengeCard = {
 
 export const CHALLENGE_EYEBROW = "The challenge";
 
-export const CHALLENGE_HEADLINE =
-  "Digital transformation is slow, costly, and hard to scale";
+export const CHALLENGE_HEADLINE = "Digital transformation is slow, costly, and hard to scale";
 
 export const CHALLENGE_CARDS: ChallengeCard[] = [
   {

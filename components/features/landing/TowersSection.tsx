@@ -8,35 +8,47 @@ const towers = [
     icon: Globe,
     title: "Digital Experience",
     subtitle: "Customer journeys & channels",
-    description: "Transform how customers interact with your organisation across every digital touchpoint.",
+    description:
+      "Transform how customers interact with your organisation across every digital touchpoint.",
     examples: ["Customer onboarding", "Omnichannel", "Service portals", "Digital marketing"],
   },
   {
     icon: Users,
     title: "Digital Workspace",
     subtitle: "Internal tools & productivity",
-    description: "Modernise how your teams work with intelligent platforms, governance, and collaboration tools.",
-    examples: ["Intranet & collaboration", "GPRC & compliance", "Core business systems", "Backoffice support"],
+    description:
+      "Modernise how your teams work with intelligent platforms, governance, and collaboration tools.",
+    examples: [
+      "Intranet & collaboration",
+      "GPRC & compliance",
+      "Core business systems",
+      "Backoffice support",
+    ],
   },
   {
     icon: Database,
     title: "Data & Intelligence",
     subtitle: "Analytics, AI & decisions",
-    description: "Unlock the value of your data with modern analytics, AI capabilities, and decision intelligence.",
+    description:
+      "Unlock the value of your data with modern analytics, AI capabilities, and decision intelligence.",
     examples: ["Data platforms", "Business intelligence", "AI/ML", "Data governance"],
   },
   {
     icon: ShieldCheck,
     title: "SecDevOps",
     subtitle: "Security & platform engineering",
-    description: "Build secure, scalable, and automated foundations for continuous delivery and operations.",
+    description:
+      "Build secure, scalable, and automated foundations for continuous delivery and operations.",
     examples: ["Security posture", "DevOps maturity", "Platform engineering", "Automation"],
   },
 ];
 
 const TowersSection = () => {
   return (
-    <section id="solutions" className="bg-gradient-to-b from-background to-accent/30 py-24 lg:py-32">
+    <section
+      id="solutions"
+      className="bg-gradient-to-b from-background to-accent/30 py-24 lg:py-32"
+    >
       <div className="mx-auto max-w-6xl px-6">
         <motion.div
           initial={{ opacity: 0, y: 16 }}
@@ -74,10 +86,15 @@ const TowersSection = () => {
                   <p className="text-xs font-medium text-primary">{tower.subtitle}</p>
                 </div>
               </div>
-              <p className="mt-4 text-sm leading-relaxed text-muted-foreground">{tower.description}</p>
+              <p className="mt-4 text-sm leading-relaxed text-muted-foreground">
+                {tower.description}
+              </p>
               <div className="mt-5 flex flex-wrap gap-2">
                 {tower.examples.map((ex) => (
-                  <span key={ex} className="rounded-full border border-border bg-accent px-3 py-1 text-xs text-muted-foreground">
+                  <span
+                    key={ex}
+                    className="rounded-full border border-border bg-accent px-3 py-1 text-xs text-muted-foreground"
+                  >
                     {ex}
                   </span>
                 ))}

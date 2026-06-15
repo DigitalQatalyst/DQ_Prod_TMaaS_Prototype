@@ -9,7 +9,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import { useCatalogData } from "@/contexts/CatalogContext" // TODO: Task 9 — wire up context;
+import { useCatalogData } from "@/contexts/CatalogContext"; // TODO: Task 9 — wire up context;
 import type { PdpContent } from "@/lib/types/catalog";
 import {
   BUNDLE_INCLUSION_LINE,
@@ -64,17 +64,12 @@ function DeliverablesSection({
         {items.map((item, index) => (
           <li key={item.title} className="py-4">
             <div className="flex flex-col gap-2 sm:flex-row sm:items-start sm:gap-6">
-              <span
-                aria-hidden
-                className="shrink-0 font-mono text-sm font-semibold text-dq-orange"
-              >
+              <span aria-hidden className="shrink-0 font-mono text-sm font-semibold text-dq-orange">
                 {String(index + 1).padStart(2, "0")}
               </span>
               <div className="min-w-0 flex-1">
                 <p className="text-sm font-medium text-dq-navy">{item.title}</p>
-                <p className="mt-1 text-sm leading-[1.65] text-[#667085]">
-                  {item.description}
-                </p>
+                <p className="mt-1 text-sm leading-[1.65] text-[#667085]">{item.description}</p>
               </div>
             </div>
           </li>
@@ -88,10 +83,7 @@ function BundleIncludedSection({ service }: { service: ServiceProduct }) {
   const router = useRouter();
   const catalog = useCatalogData();
 
-  if (
-    service.serviceType !== "bundle" ||
-    !service.relatedServices?.length
-  ) {
+  if (service.serviceType !== "bundle" || !service.relatedServices?.length) {
     return null;
   }
 
@@ -157,8 +149,7 @@ function ModulesApplicationsSection({
         Modules &amp; Applications
       </h2>
       <p className="mt-2 text-sm leading-relaxed text-[#667085]">
-        Target architecture and functional components implemented during the
-        build phase.
+        Target architecture and functional components implemented during the build phase.
       </p>
       <Accordion type="single" collapsible className="mt-6 space-y-3">
         {deployModules.map((module, idx) => (
@@ -173,10 +164,7 @@ function ModulesApplicationsSection({
             <AccordionContent className="border-t border-gray-100 pb-1 pt-4">
               <ul className="grid gap-x-6 gap-y-2 sm:grid-cols-2">
                 {module.features.map((feature) => (
-                  <li
-                    key={feature}
-                    className="flex items-start gap-2.5 text-sm text-[#667085]"
-                  >
+                  <li key={feature} className="flex items-start gap-2.5 text-sm text-[#667085]">
                     <span
                       className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-dq-orange"
                       aria-hidden
@@ -220,9 +208,7 @@ export function ServiceDetailWhatYouReceiveTab({
         deliverables={deliverables}
         pdpContent={pdpContent}
       />
-      {isDeployService && (
-        <ModulesApplicationsSection deployModules={deployModules} />
-      )}
+      {isDeployService && <ModulesApplicationsSection deployModules={deployModules} />}
     </div>
   );
 }

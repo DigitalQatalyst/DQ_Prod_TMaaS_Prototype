@@ -7,7 +7,6 @@ import type { CollectionCopyOverrides } from "./types";
  * Keyed by variant id. See ./types.ts for the field contract and voice rules.
  */
 export const bundlesCopy: CollectionCopyOverrides = {
-
   // ─── 203: Online Web Presence ────────────────────────────────────────────
 
   203: {
@@ -28,7 +27,8 @@ export const bundlesCopy: CollectionCopyOverrides = {
       "Weeks 17-20: AI capability deployment, monitoring configuration, and controlled launch",
       "Weeks 21-24: Managed service activation, first optimisation cycle, and performance review",
     ],
-    audience: "Chief Marketing Officers, Heads of Digital, and CX leaders accountable for online revenue and brand",
+    audience:
+      "Chief Marketing Officers, Heads of Digital, and CX leaders accountable for online revenue and brand",
     industryRelevance:
       "B2B and B2C organisations where the website is a primary channel for lead generation, customer acquisition, or service delivery",
     businessImpact:
@@ -84,7 +84,8 @@ export const bundlesCopy: CollectionCopyOverrides = {
       "Weeks 18-21: AI feature deployment, performance monitoring setup, and App Store submission",
       "Weeks 22-24: Managed service activation, first update cycle, and adoption reporting",
     ],
-    audience: "Digital Product Directors, Heads of Mobile, and Operations leaders accountable for field or customer-facing mobile services",
+    audience:
+      "Digital Product Directors, Heads of Mobile, and Operations leaders accountable for field or customer-facing mobile services",
     industryRelevance:
       "Organisations with mobile-first customer journeys, field workforce apps, or employee self-service tools across retail, logistics, healthcare, and professional services",
     businessImpact:
@@ -112,7 +113,8 @@ export const bundlesCopy: CollectionCopyOverrides = {
       "Weeks 17-20: AI capability deployment, monitoring setup, and phased location rollout",
       "Weeks 21-24: Managed operations activation, device fleet management, and performance review cadence",
     ],
-    audience: "Operations Directors, Heads of Retail or Branch Networks, and Facilities leaders responsible for in-person service performance",
+    audience:
+      "Operations Directors, Heads of Retail or Branch Networks, and Facilities leaders responsible for in-person service performance",
     industryRelevance:
       "Organisations operating branches, retail stores, clinics, service centres, venues, or hospitality environments where physical and digital experience must work together",
     businessImpact:
@@ -140,7 +142,8 @@ export const bundlesCopy: CollectionCopyOverrides = {
       "Weeks 18-21: AI personalisation deployment, consent framework activation, and experience tuning",
       "Weeks 22-24: Managed service start, first optimisation review, and experience quality baseline",
     ],
-    audience: "Chief Experience Officers, Heads of Digital Product, and Marketing leaders responsible for customer or employee experience strategy",
+    audience:
+      "Chief Experience Officers, Heads of Digital Product, and Marketing leaders responsible for customer or employee experience strategy",
     industryRelevance:
       "Consumer brands, financial services providers, and large employers where experience consistency across digital, physical, and assisted channels is a competitive differentiator",
     businessImpact:
@@ -168,7 +171,8 @@ export const bundlesCopy: CollectionCopyOverrides = {
       "Weeks 17-20: AI workflow deployment, sales enablement activation, and controlled go-live",
       "Weeks 21-24: Managed operations start, adoption monitoring, and first optimisation cycle",
     ],
-    audience: "Chief Revenue Officers, Sales Directors, VP of Marketing, and Customer Service leaders accountable for pipeline, revenue, and retention",
+    audience:
+      "Chief Revenue Officers, Sales Directors, VP of Marketing, and Customer Service leaders accountable for pipeline, revenue, and retention",
     industryRelevance:
       "B2B organisations managing structured sales cycles, B2C businesses with subscription or account models, and service organisations tracking relationship portfolios",
     businessImpact:
@@ -196,7 +200,8 @@ export const bundlesCopy: CollectionCopyOverrides = {
       "Weeks 17-20: AI activation deployment, attribution setup, and first live campaign",
       "Weeks 21-24: Managed service start, monthly reporting cycle, and optimisation roadmap",
     ],
-    audience: "Chief Marketing Officers, Heads of Marketing Operations, and Growth leaders accountable for demand generation and marketing ROI",
+    audience:
+      "Chief Marketing Officers, Heads of Marketing Operations, and Growth leaders accountable for demand generation and marketing ROI",
     industryRelevance:
       "Organisations scaling paid, owned, and earned marketing channels where data-driven targeting and campaign automation are necessary to maintain efficiency at volume",
     businessImpact:
@@ -224,7 +229,8 @@ export const bundlesCopy: CollectionCopyOverrides = {
       "Weeks 17-20: AI recommendation deployment, pricing engine activation, and controlled go-live",
       "Weeks 21-24: Managed service start, quote performance monitoring, and first optimisation cycle",
     ],
-    audience: "Chief Revenue Officers, Commercial Directors, and Sales Operations leaders accountable for win rates and pricing discipline",
+    audience:
+      "Chief Revenue Officers, Commercial Directors, and Sales Operations leaders accountable for win rates and pricing discipline",
     industryRelevance:
       "Manufacturers, technology vendors, professional services firms, and distributors with complex pricing, product configuration, or multi-stakeholder approval requirements",
     businessImpact:
@@ -252,7 +258,8 @@ export const bundlesCopy: CollectionCopyOverrides = {
       "Weeks 17-20: AI capability deployment, agent training, controlled launch, and hypercare",
       "Weeks 21-24: Managed service activation, CSAT baseline, and first optimisation review",
     ],
-    audience: "VP of Customer Success, Heads of Customer Service, and CX leaders accountable for retention and service cost",
+    audience:
+      "VP of Customer Success, Heads of Customer Service, and CX leaders accountable for retention and service cost",
     industryRelevance:
       "Subscription businesses, SaaS providers, consumer services organisations, and any company where customer retention is tied directly to support quality",
     businessImpact:
@@ -280,7 +287,8 @@ export const bundlesCopy: CollectionCopyOverrides = {
       "Weeks 17-20: AI feature deployment, adoption programme launch, and controlled go-live",
       "Weeks 21-24: Managed service start, adoption metrics baseline, and first quarterly capability review",
     ],
-    audience: "Chief People Officers, Heads of IT, and Internal Communications leaders accountable for employee productivity and digital ways of working",
+    audience:
+      "Chief People Officers, Heads of IT, and Internal Communications leaders accountable for employee productivity and digital ways of working",
     industryRelevance:
       "Organisations with distributed, hybrid, or knowledge-intensive workforces where collaboration quality and information accessibility directly affect productivity and retention",
     businessImpact:
@@ -308,7 +316,8 @@ export const bundlesCopy: CollectionCopyOverrides = {
       "Weeks 17-20: AI automation deployment, monitoring configuration, and phased process cutover",
       "Weeks 21-24: Managed operations start, exception monitoring, throughput reporting, and optimisation backlog",
     ],
-    audience: "Chief Operating Officers, Heads of Transformation, and Business Process Owners accountable for operational efficiency and throughput",
+    audience:
+      "Chief Operating Officers, Heads of Transformation, and Business Process Owners accountable for operational efficiency and throughput",
     industryRelevance:
       "Organisations with high-volume, rule-based, or approval-heavy processes across finance, HR, operations, procurement, and customer service",
     businessImpact:
@@ -336,7 +345,8 @@ export const bundlesCopy: CollectionCopyOverrides = {
       "Weeks 18-21: AI deployment, operational team training, controlled cutover, and hypercare",
       "Weeks 22-24: Managed operations activation, domain KPI baseline, and first performance review",
     ],
-    audience: "Business Unit heads, Domain Operations Directors, and specialist function leaders where generic platforms have failed to deliver operational fit",
+    audience:
+      "Business Unit heads, Domain Operations Directors, and specialist function leaders where generic platforms have failed to deliver operational fit",
     industryRelevance:
       "Legal operations, research and laboratory environments, specialised financial services functions, engineering and technical operations, and regulated professional services",
     businessImpact:
@@ -364,7 +374,8 @@ export const bundlesCopy: CollectionCopyOverrides = {
       "Weeks 18-21: AI capability deployment, leadership dashboard activation, and controlled rollout",
       "Weeks 22-24: Managed operations start, monthly reporting cycle, and first operating model review",
     ],
-    audience: "Chief Operating Officers, Strategy and Transformation Directors, and enterprise leaders accountable for cross-functional coordination and operational performance",
+    audience:
+      "Chief Operating Officers, Strategy and Transformation Directors, and enterprise leaders accountable for cross-functional coordination and operational performance",
     industryRelevance:
       "Large and complex organisations where operational silos, inconsistent reporting, or slow decision-making are reducing execution effectiveness at enterprise scale",
     businessImpact:
@@ -392,7 +403,8 @@ export const bundlesCopy: CollectionCopyOverrides = {
       "Weeks 17-20: AI monitoring deployment, alert tuning, parallel-run validation, and go-live",
       "Weeks 21-24: Managed compliance operations start, first monthly report, and quarterly control testing schedule",
     ],
-    audience: "Chief Risk Officers, Heads of Compliance, Internal Audit Directors, and Legal and Regulatory Affairs leaders",
+    audience:
+      "Chief Risk Officers, Heads of Compliance, Internal Audit Directors, and Legal and Regulatory Affairs leaders",
     industryRelevance:
       "Regulated organisations in financial services, healthcare, government contracting, energy, and any business preparing for certification or under active regulatory scrutiny",
     businessImpact:
@@ -420,7 +432,8 @@ export const bundlesCopy: CollectionCopyOverrides = {
       "Weeks 19-22: AI capability deployment, cutover preparation, parallel-run, and controlled go-live",
       "Weeks 23-24: Managed ERP operations activation, hypercare, and first performance reporting cycle",
     ],
-    audience: "Chief Financial Officers, Heads of Finance Transformation, Procurement Directors, and HR leaders accountable for core enterprise operations",
+    audience:
+      "Chief Financial Officers, Heads of Finance Transformation, Procurement Directors, and HR leaders accountable for core enterprise operations",
     industryRelevance:
       "Manufacturing, distribution, professional services, and public sector organisations where ERP is the operational backbone for finance, procurement, and workforce management",
     businessImpact:
@@ -448,7 +461,8 @@ export const bundlesCopy: CollectionCopyOverrides = {
       "Weeks 17-20: AI forecasting deployment, schedule generation testing, and phased workforce rollout",
       "Weeks 21-24: Managed service activation, schedule accuracy monitoring, and first optimisation cycle",
     ],
-    audience: "HR Directors, Workforce Planning leads, and Operations leaders responsible for scheduling, labour cost, and frontline productivity",
+    audience:
+      "HR Directors, Workforce Planning leads, and Operations leaders responsible for scheduling, labour cost, and frontline productivity",
     industryRelevance:
       "Retail, logistics, healthcare, hospitality, manufacturing, and any organisation managing shift-based, field, or distributed workforces where scheduling accuracy directly affects service quality and labour cost",
     businessImpact:
@@ -476,7 +490,8 @@ export const bundlesCopy: CollectionCopyOverrides = {
       "Weeks 18-21: AI workload environment deployment, data catalogue publication, and controlled go-live",
       "Weeks 22-24: Managed data operations activation, pipeline monitoring, and first data quality review cycle",
     ],
-    audience: "Chief Data Officers, CIOs, Data Architecture leads, and Analytics leaders accountable for data platform strategy and enterprise reporting",
+    audience:
+      "Chief Data Officers, CIOs, Data Architecture leads, and Analytics leaders accountable for data platform strategy and enterprise reporting",
     industryRelevance:
       "Data-intensive organisations in financial services, healthcare, retail, and operations sectors where data quality, lineage, and governance directly affect regulatory compliance and commercial decision-making",
     businessImpact:
@@ -504,7 +519,8 @@ export const bundlesCopy: CollectionCopyOverrides = {
       "Weeks 16-19: AI narrative and anomaly detection deployment, management report pack testing, go-live",
       "Weeks 20-24: Managed analytics activation, adoption tracking, and first quarterly leadership review",
     ],
-    audience: "Finance Directors, Strategy leads, Chief Data Officers, and executive sponsors accountable for management reporting and operational performance visibility",
+    audience:
+      "Finance Directors, Strategy leads, Chief Data Officers, and executive sponsors accountable for management reporting and operational performance visibility",
     industryRelevance:
       "Organisations across all sectors where leadership decisions rely on enterprise data, and where inconsistent metrics, slow reporting, or poor data quality are reducing decision confidence",
     businessImpact:
@@ -532,7 +548,8 @@ export const bundlesCopy: CollectionCopyOverrides = {
       "Weeks 18-21: Governed production deployment, safety control activation, monitoring setup, and launch",
       "Weeks 22-24: Managed AI operations activation, model performance review, and first retraining cycle",
     ],
-    audience: "Chief AI Officers, CEOs, CIOs, and Transformation Directors accountable for enterprise AI strategy and responsible adoption",
+    audience:
+      "Chief AI Officers, CEOs, CIOs, and Transformation Directors accountable for enterprise AI strategy and responsible adoption",
     industryRelevance:
       "Organisations across financial services, healthcare, operations, and professional services ready to move beyond AI pilots to governed, production-scale AI operations",
     businessImpact:
@@ -560,7 +577,8 @@ export const bundlesCopy: CollectionCopyOverrides = {
       "Weeks 18-21: AI analytics deployment, architecture review board activation, and go-live",
       "Weeks 22-24: Managed governance operations start, monthly portfolio reporting, and architecture review cadence",
     ],
-    audience: "Chief Information Officers, Enterprise Architecture leads, PMO Directors, and Technology Portfolio leaders",
+    audience:
+      "Chief Information Officers, Enterprise Architecture leads, PMO Directors, and Technology Portfolio leaders",
     industryRelevance:
       "Organisations managing complex multi-platform technology portfolios, significant vendor ecosystems, or active enterprise architecture programmes across any sector",
     businessImpact:
@@ -588,7 +606,8 @@ export const bundlesCopy: CollectionCopyOverrides = {
       "Weeks 17-20: AI tool deployment, release gate enforcement, production monitoring setup, and go-live",
       "Weeks 21-24: Managed DevSecOps operations start, DORA metric baseline, and first optimisation cycle",
     ],
-    audience: "Chief Technology Officers, Engineering Directors, DevOps leads, and Security leaders accountable for delivery speed, software quality, and production security",
+    audience:
+      "Chief Technology Officers, Engineering Directors, DevOps leads, and Security leaders accountable for delivery speed, software quality, and production security",
     industryRelevance:
       "Software product companies, digital platform operators, financial services technology teams, and any organisation where software delivery velocity and production security are both board-level concerns",
     businessImpact:
@@ -616,7 +635,8 @@ export const bundlesCopy: CollectionCopyOverrides = {
       "Weeks 16-19: AI capability deployment, first-line automation activation, and controlled go-live",
       "Weeks 20-24: Managed IT service operations start, SLA baseline, and first optimisation review",
     ],
-    audience: "Chief Information Officers, IT Operations Directors, and Service Desk leaders accountable for employee productivity and IT service reliability",
+    audience:
+      "Chief Information Officers, IT Operations Directors, and Service Desk leaders accountable for employee productivity and IT service reliability",
     industryRelevance:
       "Organisations of any sector where IT service quality affects employee productivity, and where growing headcount or platform complexity is straining existing support capacity",
     businessImpact:
@@ -644,7 +664,8 @@ export const bundlesCopy: CollectionCopyOverrides = {
       "Weeks 17-20: AI agronomic model deployment, alert configuration, seasonal monitoring setup, and go-live",
       "Weeks 21-24: Managed farming operations activation, first seasonal review, and yield data baseline",
     ],
-    audience: "Agribusiness Chief Operating Officers, Farm Operations Directors, and Agricultural Technology leaders",
+    audience:
+      "Agribusiness Chief Operating Officers, Farm Operations Directors, and Agricultural Technology leaders",
     industryRelevance:
       "Commercial farming enterprises, food production businesses, agribusiness cooperatives, and agricultural technology providers across arable, horticultural, and livestock operations",
     businessImpact:
@@ -672,7 +693,8 @@ export const bundlesCopy: CollectionCopyOverrides = {
       "Weeks 18-21: AI model deployment, predictive alert configuration, production monitoring setup, and phased go-live",
       "Weeks 22-24: Managed plant operations activation, OEE baseline, and first quarterly optimisation review",
     ],
-    audience: "Manufacturing Directors, Plant Managers, and Operations leaders accountable for production throughput, quality, and asset performance",
+    audience:
+      "Manufacturing Directors, Plant Managers, and Operations leaders accountable for production throughput, quality, and asset performance",
     industryRelevance:
       "Discrete and process manufacturers, industrial operators, food and beverage producers, and automotive and aerospace component suppliers undertaking Industry 4.0 transformation",
     businessImpact:
@@ -700,7 +722,8 @@ export const bundlesCopy: CollectionCopyOverrides = {
       "Weeks 18-21: AI failure prediction deployment, work order automation, monitoring setup, and go-live",
       "Weeks 22-24: Managed infrastructure operations activation, maintenance schedule baseline, and first performance review",
     ],
-    audience: "Asset Management Directors, Infrastructure Operations leaders, and Facilities or Utilities executives accountable for asset reliability and maintenance cost",
+    audience:
+      "Asset Management Directors, Infrastructure Operations leaders, and Facilities or Utilities executives accountable for asset reliability and maintenance cost",
     industryRelevance:
       "Utilities, transport authorities, energy operators, real estate portfolio managers, and asset-intensive industrial operators where asset reliability and regulatory compliance are operational priorities",
     businessImpact:
@@ -728,7 +751,8 @@ export const bundlesCopy: CollectionCopyOverrides = {
       "Weeks 18-21: AI capability deployment, security accreditation, accessibility audit, and controlled launch",
       "Weeks 22-24: Managed government service operations start, first citizen satisfaction measurement, and performance baseline",
     ],
-    audience: "Digital Government Directors, Ministry CIOs, Agency Operations leaders, and Transformation Secretaries accountable for public service delivery",
+    audience:
+      "Digital Government Directors, Ministry CIOs, Agency Operations leaders, and Transformation Secretaries accountable for public service delivery",
     industryRelevance:
       "National and local government ministries, regulatory agencies, public authorities, and publicly funded service organisations transforming citizen-facing or internal government operations",
     businessImpact:
@@ -756,7 +780,8 @@ export const bundlesCopy: CollectionCopyOverrides = {
       "Weeks 16-19: AI pricing and personalisation deployment, guest communication activation, and controlled go-live",
       "Weeks 20-24: Managed hospitality operations activation, guest satisfaction baseline, and first revenue review",
     ],
-    audience: "Hotel General Managers, Heads of Operations, Revenue Directors, and Guest Experience leaders accountable for occupancy, RevPAR, and guest satisfaction",
+    audience:
+      "Hotel General Managers, Heads of Operations, Revenue Directors, and Guest Experience leaders accountable for occupancy, RevPAR, and guest satisfaction",
     industryRelevance:
       "Hotels, resorts, serviced residences, venue operators, and tourism businesses where guest experience quality and revenue optimisation are both operational and commercial priorities",
     businessImpact:
@@ -784,7 +809,8 @@ export const bundlesCopy: CollectionCopyOverrides = {
       "Weeks 17-20: AI merchandising deployment, promotion engine activation, and controlled launch",
       "Weeks 21-24: Managed retail operations activation, inventory accuracy baseline, and first trading performance review",
     ],
-    audience: "Chief Retail Officers, Heads of Commerce, Store Operations Directors, and Supply Chain leaders accountable for sales performance and stock accuracy",
+    audience:
+      "Chief Retail Officers, Heads of Commerce, Store Operations Directors, and Supply Chain leaders accountable for sales performance and stock accuracy",
     industryRelevance:
       "Physical and omnichannel retailers, grocery operators, fashion and lifestyle brands, and marketplace businesses where inventory accuracy and customer engagement are critical to trading performance",
     businessImpact:
@@ -812,7 +838,8 @@ export const bundlesCopy: CollectionCopyOverrides = {
       "Weeks 16-19: AI scheduling deployment, route optimisation activation, and controlled go-live",
       "Weeks 20-24: Managed service operations activation, first-time fix baseline, and scheduling optimisation cycle",
     ],
-    audience: "Service Operations Directors, Field Service Managers, and Customer Experience leaders accountable for service delivery quality and operational cost",
+    audience:
+      "Service Operations Directors, Field Service Managers, and Customer Experience leaders accountable for service delivery quality and operational cost",
     industryRelevance:
       "Field service organisations, maintenance and repair providers, professional services firms, facilities management companies, and any organisation where technician scheduling and on-site service quality affect customer retention",
     businessImpact:
@@ -840,7 +867,8 @@ export const bundlesCopy: CollectionCopyOverrides = {
       "Weeks 18-21: AI optimisation deployment, tracking activation, monitoring setup, and phased go-live",
       "Weeks 22-24: Managed logistics operations activation, network performance baseline, and first monthly review",
     ],
-    audience: "Supply Chain Directors, Heads of Logistics, Fulfilment Operations leaders, and COOs accountable for delivery performance and logistics cost",
+    audience:
+      "Supply Chain Directors, Heads of Logistics, Fulfilment Operations leaders, and COOs accountable for delivery performance and logistics cost",
     industryRelevance:
       "3PL providers, e-commerce fulfilment operators, distributors, manufacturers with outbound logistics operations, and importers where delivery performance and inventory accuracy are competitive differentiators",
     businessImpact:
@@ -868,7 +896,8 @@ export const bundlesCopy: CollectionCopyOverrides = {
       "Weeks 16-19: AI recommendation deployment, appointment optimisation activation, and controlled go-live",
       "Weeks 20-24: Managed wellness operations activation, client retention baseline, and first quarterly review",
     ],
-    audience: "Clinic Directors, Wellness Operations leaders, and Practice Managers accountable for client outcomes, retention, and practitioner productivity",
+    audience:
+      "Clinic Directors, Wellness Operations leaders, and Practice Managers accountable for client outcomes, retention, and practitioner productivity",
     industryRelevance:
       "Wellness centres, physiotherapy and allied health clinics, preventive health providers, fitness and lifestyle operators, and mental health service organisations",
     businessImpact:
@@ -895,7 +924,8 @@ export const bundlesCopy: CollectionCopyOverrides = {
       "Phase 3: Cross-domain analysis, priority synthesis, and roadmap drafting",
       "Phase 4: Leadership playback, investment alignment, and roadmap sign-off",
     ],
-    audience: "Chief Executives, Strategy Directors, Transformation Sponsors, and Executive leadership teams making investment decisions across multiple transformation domains",
+    audience:
+      "Chief Executives, Strategy Directors, Transformation Sponsors, and Executive leadership teams making investment decisions across multiple transformation domains",
     industryRelevance:
       "Organisations at a strategic inflection point across any sector, where multiple transformation opportunities are competing for leadership attention and investment priority",
     businessImpact:
@@ -922,7 +952,8 @@ export const bundlesCopy: CollectionCopyOverrides = {
       "Phase 3: Cross-domain integration design, architecture review, and specification alignment",
       "Phase 4: Stakeholder sign-off, delivery backlog handover, and build-readiness confirmation",
     ],
-    audience: "Heads of Digital and Technology, Delivery Sponsors, Product Directors, and Programme leaders accountable for solution design quality across multiple workstreams",
+    audience:
+      "Heads of Digital and Technology, Delivery Sponsors, Product Directors, and Programme leaders accountable for solution design quality across multiple workstreams",
     industryRelevance:
       "Organisations with concurrent transformation workstreams across digital, operational, or data domains that need coordinated design rather than separately managed design projects",
     businessImpact:
@@ -949,7 +980,8 @@ export const bundlesCopy: CollectionCopyOverrides = {
       "Phase 3: Integrated testing, cross-capability UAT, and launch readiness confirmation",
       "Phase 4: Phased go-live, hypercare, and operational handover across all deployed capabilities",
     ],
-    audience: "Programme Directors, Delivery Sponsors, and Technology leaders accountable for delivering multiple simultaneous transformation capabilities",
+    audience:
+      "Programme Directors, Delivery Sponsors, and Technology leaders accountable for delivering multiple simultaneous transformation capabilities",
     industryRelevance:
       "Organisations with active transformation portfolios across digital, data, operational, or automation domains where separate project delivery is creating coordination overhead and integration risk",
     businessImpact:
@@ -976,12 +1008,12 @@ export const bundlesCopy: CollectionCopyOverrides = {
       "Phase 3: First optimisation cycle, cross-capability improvement identification, and service review",
       "Ongoing: Monthly performance reporting, continuous monitoring, and quarterly optimisation across all capabilities",
     ],
-    audience: "Chief Operating Officers, Service Owners, IT Directors, and Transformation leaders accountable for the sustained performance of deployed digital and operational capabilities",
+    audience:
+      "Chief Operating Officers, Service Owners, IT Directors, and Transformation leaders accountable for the sustained performance of deployed digital and operational capabilities",
     industryRelevance:
       "Organisations with multiple live TMaaS capabilities that want a coordinated managed service approach rather than a growing portfolio of separately contracted support arrangements",
     businessImpact:
       "Reduces the management overhead of operating multiple deployed capabilities, improves cross-capability performance through coordinated optimisation, and provides leadership with a single consolidated view of operational health across the transformation portfolio.",
     tags: ["bundle", "end-to-end", "managed-services", "service-operations"],
   },
-
 };

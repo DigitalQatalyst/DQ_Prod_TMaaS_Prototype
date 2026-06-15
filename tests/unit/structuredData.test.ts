@@ -36,20 +36,17 @@ describe("structuredData", () => {
     const data = buildHomeStructuredData();
     const graph = data["@graph"] as Record<string, unknown>[];
 
-    expect(graph).toHaveLength(2);
+    expect(graph).toHaveLength(3);
     expect(graph[0]?.["@type"]).toBe("Organization");
     expect(graph[1]?.["@type"]).toBe("WebSite");
     expect(graph[1]?.potentialAction).toMatchObject({
       "@type": "SearchAction",
     });
+    expect(graph[2]?.["@type"]).toBe("SoftwareApplication");
   });
 
   it("builds Service, Offer, and BreadcrumbList for service detail", () => {
-    const data = buildServiceStructuredData(
-      sampleService,
-      "AI Readiness - Assess",
-      "/service/42"
-    );
+    const data = buildServiceStructuredData(sampleService, "AI Readiness - Assess", "/service/42");
     const graph = data["@graph"] as Record<string, unknown>[];
     const service = graph.find((node) => node["@type"] === "Service");
 

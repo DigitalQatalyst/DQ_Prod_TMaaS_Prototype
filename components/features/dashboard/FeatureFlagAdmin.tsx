@@ -1,8 +1,8 @@
 "use client";
 
-import { useState } from 'react';
-import { featureFlags, getEnabledPages, type FeatureFlags } from '@/lib/featureFlags';
-import { Settings, ToggleLeft, ToggleRight, RefreshCw, EyeOff } from 'lucide-react';
+import { useState } from "react";
+import { featureFlags, getEnabledPages, type FeatureFlags } from "@/lib/featureFlags";
+import { Settings, ToggleLeft, ToggleRight, RefreshCw, EyeOff } from "lucide-react";
 
 export function FeatureFlagAdmin() {
   const [isOpen, setIsOpen] = useState(false);
@@ -35,21 +35,21 @@ export function FeatureFlagAdmin() {
     window.location.reload();
   };
 
-  if (process.env.NODE_ENV !== 'development' && window.location.hostname !== 'localhost') {
+  if (process.env.NODE_ENV !== "development" && window.location.hostname !== "localhost") {
     return null;
   }
 
   const groupedFlags = {
-    'MVP Pages': ['homepage', 'marketplace', 'serviceDetail', 'contactUs'],
-    'Additional Pages': ['explore', 'alternateLanding', 'landingV1', 'legal'],
+    "MVP Pages": ["homepage", "marketplace", "serviceDetail", "contactUs"],
+    "Additional Pages": ["explore", "alternateLanding", "landingV1", "legal"],
     Features: [
-      'cart',
-      'chatAssistant',
-      'auth',
-      'onboarding',
-      'dashboard',
-      'butlerDemo',
-      'contextSwitcher',
+      "cart",
+      "chatAssistant",
+      "auth",
+      "onboarding",
+      "dashboard",
+      "butlerDemo",
+      "contextSwitcher",
     ],
   };
 
@@ -68,10 +68,7 @@ export function FeatureFlagAdmin() {
           <div className="bg-purple-600 p-4 text-white">
             <div className="flex items-center justify-between">
               <h3 className="font-semibold">Feature Flags</h3>
-              <button
-                onClick={() => setIsOpen(false)}
-                className="text-purple-200 hover:text-white"
-              >
+              <button onClick={() => setIsOpen(false)} className="text-purple-200 hover:text-white">
                 <EyeOff size={16} />
               </button>
             </div>
@@ -113,7 +110,7 @@ export function FeatureFlagAdmin() {
                       <span className="text-sm">{flag}</span>
                       <button
                         onClick={() => toggleFlag(flag as keyof FeatureFlags)}
-                        className={`transition-colors ${flags[flag as keyof FeatureFlags] ? 'text-green-600' : 'text-gray-400'}`}
+                        className={`transition-colors ${flags[flag as keyof FeatureFlags] ? "text-green-600" : "text-gray-400"}`}
                       >
                         {flags[flag as keyof FeatureFlags] ? (
                           <ToggleRight size={20} />
@@ -130,7 +127,7 @@ export function FeatureFlagAdmin() {
             <div className="border-t border-gray-200 pt-4">
               <div className="text-xs text-gray-600">
                 <p>Enabled pages: {getEnabledPages().length}</p>
-                <p>Enabled: {getEnabledPages().join(', ') || 'none'}</p>
+                <p>Enabled: {getEnabledPages().join(", ") || "none"}</p>
               </div>
             </div>
           </div>

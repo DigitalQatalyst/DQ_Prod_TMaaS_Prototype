@@ -44,8 +44,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [user, setUser] = useState<User>(defaultUser);
 
   const setUserRole = (role: UserRole) => setUser((u) => ({ ...u, role }));
-  const setUserOrganization = (organization: string) =>
-    setUser((u) => ({ ...u, organization }));
+  const setUserOrganization = (organization: string) => setUser((u) => ({ ...u, organization }));
 
   return (
     <AuthContext.Provider value={{ user, setUserRole, setUserOrganization }}>

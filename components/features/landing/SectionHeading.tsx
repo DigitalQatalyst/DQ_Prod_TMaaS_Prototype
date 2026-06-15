@@ -23,18 +23,10 @@ export default function SectionHeading({
         className
       )}
     >
-      {kicker ? (
-        <p className="dq-eyebrow mb-4">
-          {kicker}
-        </p>
-      ) : null}
-      <div className="text-4xl font-semibold tracking-tight text-dq-navy md:text-5xl">
-        {title}
-      </div>
+      {kicker ? <p className="dq-eyebrow mb-4">{kicker}</p> : null}
+      <div className="text-4xl font-semibold tracking-tight text-dq-navy md:text-5xl">{title}</div>
       {description ? (
-        <div className="mt-4 text-base leading-relaxed text-gray-600">
-          {description}
-        </div>
+        <div className="mt-4 text-base leading-relaxed text-gray-600">{description}</div>
       ) : null}
     </div>
   );

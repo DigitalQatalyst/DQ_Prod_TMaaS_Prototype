@@ -7,19 +7,16 @@ import {
 
 describe("marketplaceDisplayLabels", () => {
   it("renames product stems and applies stage labels on cards", () => {
-    expect(
-      getMarketplaceCardTitle("Mobile Apps (High-Impact) - Assess", "advisory")
-    ).toBe("Mobile Apps & Services - Assess");
+    expect(getMarketplaceCardTitle("Mobile Apps (High-Impact) - Assess", "advisory")).toBe(
+      "Mobile Apps & Services - Assess"
+    );
+
+    expect(getMarketplaceCardTitle("Online Web Presence (High-Impact) - Managed", "manage")).toBe(
+      "Online Web Presence - Managed Service"
+    );
 
     expect(
-      getMarketplaceCardTitle("Online Web Presence (High-Impact) - Managed", "manage")
-    ).toBe("Online Web Presence - Managed Service");
-
-    expect(
-      getMarketplaceCardTitle(
-        "CRM Solutions (High-Impact) - Transformation Bundle",
-        "bundle"
-      )
+      getMarketplaceCardTitle("CRM Solutions (High-Impact) - Transformation Bundle", "bundle")
     ).toBe("CRM & Customer Relationship - End-to-end bundle");
   });
 
@@ -43,8 +40,8 @@ describe("marketplaceDisplayLabels", () => {
   });
 
   it("strips High-Impact when title is passed via displayName override", () => {
-    expect(
-      getMarketplaceCardTitle("Online Web Presence (High-Impact) - Assess", "advisory")
-    ).toBe("Online Web Presence - Assess");
+    expect(getMarketplaceCardTitle("Online Web Presence (High-Impact) - Assess", "advisory")).toBe(
+      "Online Web Presence - Assess"
+    );
   });
 });

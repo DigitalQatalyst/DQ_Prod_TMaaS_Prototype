@@ -24,8 +24,7 @@ const spaceGrotesk = Space_Grotesk({
 export const metadata: Metadata = {
   metadataBase: new URL("https://tmaas.digitalqatalyst.com"),
   title: "TMaaS | Digital Qatalyst",
-  description:
-    "Technology Management as a Service marketplace by Digital Qatalyst.",
+  description: "Technology Management as a Service marketplace by Digital Qatalyst.",
   openGraph: {
     title: "TMaaS | Digital Qatalyst",
     description: "Technology Management as a Service marketplace by Digital Qatalyst.",
@@ -34,11 +33,7 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html
       lang="en"

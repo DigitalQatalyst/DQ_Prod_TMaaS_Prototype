@@ -80,8 +80,8 @@ export const mockUserProfile: UserProfile = {
       recentActivity: [
         "Initial discovery session completed",
         "Customer journey mapping in progress",
-        "Stakeholder interviews scheduled"
-      ]
+        "Stakeholder interviews scheduled",
+      ],
     },
     {
       id: "eng-002",
@@ -97,12 +97,12 @@ export const mockUserProfile: UserProfile = {
       recentActivity: [
         "Technical architecture approved",
         "Vendor selection completed",
-        "Awaiting security requirements document"
+        "Awaiting security requirements document",
       ],
       pendingActions: [
         "Submit security requirements document",
-        "Review and approve integration architecture"
-      ]
+        "Review and approve integration architecture",
+      ],
     },
     {
       id: "eng-003",
@@ -118,9 +118,9 @@ export const mockUserProfile: UserProfile = {
       recentActivity: [
         "Current state assessment completed",
         "Data governance framework drafted",
-        "Stakeholder alignment session held"
-      ]
-    }
+        "Stakeholder alignment session held",
+      ],
+    },
   ],
   upcomingSessions: [
     {
@@ -130,7 +130,7 @@ export const mockUserProfile: UserProfile = {
       date: "2026-03-18",
       time: "10:00 AM",
       type: "Virtual Workshop",
-      status: "Scheduled"
+      status: "Scheduled",
     },
     {
       id: "session-002",
@@ -139,7 +139,7 @@ export const mockUserProfile: UserProfile = {
       date: "2026-03-20",
       time: "2:00 PM",
       type: "Collaborative Session",
-      status: "Scheduled"
+      status: "Scheduled",
     },
     {
       id: "session-003",
@@ -148,8 +148,8 @@ export const mockUserProfile: UserProfile = {
       date: "2026-03-25",
       time: "11:00 AM",
       type: "Virtual Workshop",
-      status: "Scheduled"
-    }
+      status: "Scheduled",
+    },
   ],
   documents: [
     {
@@ -158,7 +158,7 @@ export const mockUserProfile: UserProfile = {
       type: "Requirements Document",
       engagementId: "eng-002",
       uploadedDate: "2026-03-10",
-      status: "Pending Review"
+      status: "Pending Review",
     },
     {
       id: "doc-002",
@@ -166,34 +166,39 @@ export const mockUserProfile: UserProfile = {
       type: "Deliverable",
       engagementId: "eng-001",
       uploadedDate: "2026-03-12",
-      status: "Approved"
-    }
+      status: "Approved",
+    },
   ],
   preferences: {
     communicationStyle: "detailed",
-    focusAreas: ["Customer Experience", "Digital Transformation", "Data Governance"]
-  }
+    focusAreas: ["Customer Experience", "Digital Transformation", "Data Governance"],
+  },
 };
 
 // Conversation Templates for Mode 01
 export const mode01Templates = {
   greeting: {
     new: "Hi {name}! I'm Transact.AI Mode 01, your personal transformation advisor. I've reviewed your profile and current engagements. How can I help you today?",
-    returning: "Welcome back, {name}! I see you have {activeCount} active engagements and {pendingCount} pending actions. What would you like to focus on?"
+    returning:
+      "Welcome back, {name}! I see you have {activeCount} active engagements and {pendingCount} pending actions. What would you like to focus on?",
   },
-  
+
   contextAware: {
-    engagementStatus: "You're currently working on {engagementName} ({progress}% complete). Your next milestone is {nextMilestone}.",
-    pendingActions: "I notice you have {count} pending actions across your engagements. Would you like me to walk you through them?",
-    upcomingSessions: "You have {count} sessions coming up in the next 7 days. Your next one is {sessionTitle} on {date}.",
-    recentActivity: "Recent activity on {engagementName}: {activity}"
+    engagementStatus:
+      "You're currently working on {engagementName} ({progress}% complete). Your next milestone is {nextMilestone}.",
+    pendingActions:
+      "I notice you have {count} pending actions across your engagements. Would you like me to walk you through them?",
+    upcomingSessions:
+      "You have {count} sessions coming up in the next 7 days. Your next one is {sessionTitle} on {date}.",
+    recentActivity: "Recent activity on {engagementName}: {activity}",
   },
-  
+
   recommendations: {
     nextSteps: "Based on your current progress, I recommend focusing on: {recommendations}",
     resources: "Here are some resources that might help with {topic}: {resources}",
-    escalation: "This looks like something your delivery lead {leadName} should review. Would you like me to help you draft a message?"
-  }
+    escalation:
+      "This looks like something your delivery lead {leadName} should review. Would you like me to help you draft a message?",
+  },
 };
 
 // Intent Patterns for Mode 01 (Post-Login Context)
@@ -202,31 +207,31 @@ export const mode01IntentPatterns = {
     { pattern: /status|progress|how.*going|update/i, intent: "engagement_status" },
     { pattern: /next.*step|what.*do|action|task/i, intent: "next_actions" },
     { pattern: /when.*complete|timeline|deadline|finish/i, intent: "timeline_query" },
-    { pattern: /who.*lead|contact.*team|delivery.*lead/i, intent: "team_contact" }
+    { pattern: /who.*lead|contact.*team|delivery.*lead/i, intent: "team_contact" },
   ],
-  
+
   sessionQuery: [
     { pattern: /session|meeting|workshop|when.*next/i, intent: "upcoming_sessions" },
     { pattern: /reschedule|change.*time|move.*session/i, intent: "session_management" },
-    { pattern: /prepare|what.*bring|agenda/i, intent: "session_preparation" }
+    { pattern: /prepare|what.*bring|agenda/i, intent: "session_preparation" },
   ],
-  
+
   documentQuery: [
     { pattern: /document|file|upload|submit/i, intent: "document_status" },
     { pattern: /pending.*review|waiting.*approval/i, intent: "approval_status" },
-    { pattern: /template|example|sample/i, intent: "document_template" }
+    { pattern: /template|example|sample/i, intent: "document_template" },
   ],
-  
+
   advisory: [
     { pattern: /recommend|suggest|advice|should.*do/i, intent: "advisory_recommendation" },
     { pattern: /best.*practice|how.*to|guide/i, intent: "advisory_guidance" },
-    { pattern: /similar|other.*client|example/i, intent: "advisory_examples" }
+    { pattern: /similar|other.*client|example/i, intent: "advisory_examples" },
   ],
-  
+
   navigation: [
     { pattern: /show.*me|where.*find|navigate|go.*to/i, intent: "platform_navigation" },
-    { pattern: /how.*use|feature|function/i, intent: "platform_help" }
-  ]
+    { pattern: /how.*use|feature|function/i, intent: "platform_help" },
+  ],
 };
 
 // Quick Actions for Mode 01
@@ -235,36 +240,36 @@ export const mode01QuickActions = [
     id: "view-pending",
     label: "Show my pending actions",
     category: "engagement",
-    icon: "AlertCircle"
+    icon: "AlertCircle",
   },
   {
     id: "next-session",
     label: "What's my next session?",
     category: "session",
-    icon: "Calendar"
+    icon: "Calendar",
   },
   {
     id: "engagement-summary",
     label: "Summarize my engagements",
     category: "engagement",
-    icon: "Package"
+    icon: "Package",
   },
   {
     id: "contact-lead",
     label: "Contact my delivery lead",
     category: "team",
-    icon: "MessageSquare"
+    icon: "MessageSquare",
   },
   {
     id: "document-status",
     label: "Check document status",
     category: "document",
-    icon: "FileText"
+    icon: "FileText",
   },
   {
     id: "recommendations",
     label: "Get recommendations",
     category: "advisory",
-    icon: "Lightbulb"
-  }
+    icon: "Lightbulb",
+  },
 ];

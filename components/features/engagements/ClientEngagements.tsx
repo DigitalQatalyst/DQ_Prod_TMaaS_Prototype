@@ -5,18 +5,11 @@ import { useState } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { 
-  ArrowRight,
-  Search,
-  Filter,
-  SearchX,
-  Activity,
-  Package
-} from "lucide-react";
+import { ArrowRight, Search, Filter, SearchX, Activity, Package } from "lucide-react";
 import Link from "next/link";
 import { Input } from "@/components/ui/input";
-import { useAuth } from "@/contexts/AuthContext" // TODO: Task 9 — wire up context;
-import { mockPortfolioEngagements } from "@/data/mockPortfolioEngagements" // TODO: Task 9 — wire up data;
+import { useAuth } from "@/contexts/AuthContext"; // TODO: Task 9 — wire up context;
+import { mockPortfolioEngagements } from "@/data/mockPortfolioEngagements"; // TODO: Task 9 — wire up data;
 
 const ClientEngagements = () => {
   const { user } = useAuth();
@@ -29,33 +22,43 @@ const ClientEngagements = () => {
   );
 
   const filteredServices = organizationServices.filter((service) => {
-    const matchesSearch = 
-      service.name.toLowerCase().includes(searchQuery.toLowerCase()) || 
+    const matchesSearch =
+      service.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
       service.id.toLowerCase().includes(searchQuery.toLowerCase());
     const matchesStatus = statusFilter === "All Statuses" || service.status === statusFilter;
-    
+
     return matchesSearch && matchesStatus;
   });
 
   const hasFilters = searchQuery !== "" || statusFilter !== "All Statuses";
 
   const getStatusColor = (status: string) => {
-    switch(status) {
-      case "In Delivery": return "default";
-      case "Awaiting Client Input": return "secondary";
-      case "Awaiting Payment": return "secondary";
-      case "Delivered": return "outline";
-      default: return "default";
+    switch (status) {
+      case "In Delivery":
+        return "default";
+      case "Awaiting Client Input":
+        return "secondary";
+      case "Awaiting Payment":
+        return "secondary";
+      case "Delivered":
+        return "outline";
+      default:
+        return "default";
     }
   };
 
   const getHealthColor = (healthLabel: string) => {
-    switch(healthLabel) {
-      case "On Track": return "bg-green-500";
-      case "At Risk": return "bg-orange-500";
-      case "Critical": return "bg-red-500";
-      case "Pending": return "bg-gray-400";
-      default: return "bg-gray-500";
+    switch (healthLabel) {
+      case "On Track":
+        return "bg-green-500";
+      case "At Risk":
+        return "bg-orange-500";
+      case "Critical":
+        return "bg-red-500";
+      case "Pending":
+        return "bg-gray-400";
+      default:
+        return "bg-gray-500";
     }
   };
 
@@ -73,7 +76,7 @@ const ClientEngagements = () => {
         <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
           <div className="relative w-full max-w-sm">
             <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
-            <Input 
+            <Input
               type="text"
               placeholder="Search by name or reference..."
               value={searchQuery}
@@ -81,12 +84,12 @@ const ClientEngagements = () => {
               className="pl-9"
             />
           </div>
-          
+
           <div className="flex items-center gap-3">
             <div className="flex items-center gap-2 rounded-md border border-input bg-transparent px-3 py-1 shadow-sm">
               <Activity className="h-4 w-4 text-muted-foreground" />
-              <select 
-                value={statusFilter} 
+              <select
+                value={statusFilter}
                 onChange={(e) => setStatusFilter(e.target.value)}
                 className="bg-transparent text-sm font-medium outline-none text-foreground"
               >
@@ -112,7 +115,8 @@ const ClientEngagements = () => {
               </div>
               <h3 className="mb-1 text-lg font-semibold text-foreground">No active projects</h3>
               <p className="text-sm text-muted-foreground max-w-md">
-                You don't have any active projects at the moment. Check Service Orders for your current projects.
+                You don't have any active projects at the moment. Check Service Orders for your
+                current projects.
               </p>
               <Link href="/dashboard/customer/orders">
                 <Button className="mt-6 gap-2">
@@ -131,8 +135,8 @@ const ClientEngagements = () => {
               <p className="text-sm text-muted-foreground">
                 We couldn't find any services matching your current filters.
               </p>
-              <Button 
-                variant="outline" 
+              <Button
+                variant="outline"
                 className="mt-6"
                 onClick={() => {
                   setSearchQuery("");
@@ -145,7 +149,11 @@ const ClientEngagements = () => {
           ) : (
             filteredServices.map((service) => {
               return (
-                <Link key={service.id} href={`/dashboard/engagement/${service.id}`} className="block">
+                <Link
+                  key={service.id}
+                  href={`/dashboard/engagement/${service.id}`}
+                  className="block"
+                >
                   <Card className="transition-all hover:border-primary/50 hover:shadow-md cursor-pointer">
                     <CardContent className="p-5">
                       <div className="flex flex-col flex-wrap gap-4 sm:flex-row sm:items-center sm:justify-between">
@@ -163,7 +171,11 @@ const ClientEngagements = () => {
                             <div className="mt-1.5 flex items-center gap-2 text-sm text-muted-foreground">
                               <span>Lead: {service.lead}</span>
                               <span className="h-1 w-1 rounded-full bg-border" />
-                              <span className={service.blockedItems > 0 ? "text-red-500 font-medium" : ""}>
+                              <span
+                                className={
+                                  service.blockedItems > 0 ? "text-red-500 font-medium" : ""
+                                }
+                              >
                                 Blocked Items: {service.blockedItems}
                               </span>
                             </div>
@@ -175,12 +187,12 @@ const ClientEngagements = () => {
                           <div className="flex items-center gap-3">
                             <span className="flex items-center gap-1.5 text-xs font-medium">
                               Health:
-                              <div className={`h-2 w-2 rounded-full ${getHealthColor(service.healthLabel)}`} />
+                              <div
+                                className={`h-2 w-2 rounded-full ${getHealthColor(service.healthLabel)}`}
+                              />
                               <span className="text-muted-foreground">{service.healthLabel}</span>
                             </span>
-                            <Badge variant={getStatusColor(service.status)}>
-                              {service.status}
-                            </Badge>
+                            <Badge variant={getStatusColor(service.status)}>{service.status}</Badge>
                           </div>
                           <div className="hidden sm:flex h-8 w-8 items-center justify-center rounded-full bg-accent/50 text-muted-foreground">
                             <ArrowRight size={16} />

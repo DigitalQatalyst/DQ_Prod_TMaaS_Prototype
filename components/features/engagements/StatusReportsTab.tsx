@@ -7,7 +7,12 @@ export const StatusReportsTab = () => {
     { id: 1, title: "Weekly Status Report - Week 12", date: "May 28, 2026", status: "Published" },
     { id: 2, title: "Weekly Status Report - Week 11", date: "May 21, 2026", status: "Published" },
     { id: 3, title: "Weekly Status Report - Week 10", date: "May 14, 2026", status: "Published" },
-    { id: 4, title: "Monthly Executive Summary - April", date: "May 01, 2026", status: "Published" },
+    {
+      id: 4,
+      title: "Monthly Executive Summary - April",
+      date: "May 01, 2026",
+      status: "Published",
+    },
     { id: 5, title: "Weekly Status Report - Week 09", date: "May 07, 2026", status: "Published" },
   ];
 
@@ -18,7 +23,9 @@ export const StatusReportsTab = () => {
           <FileText size={20} className="text-navy-950" />
           Status Reports
         </h3>
-        <p className="text-sm text-gray-500">Access and download your weekly delivery status reports.</p>
+        <p className="text-sm text-gray-500">
+          Access and download your weekly delivery status reports.
+        </p>
       </div>
 
       <div className="grid gap-4">
@@ -43,7 +50,11 @@ export const StatusReportsTab = () => {
                   <Eye size={14} />
                   <span className="hidden sm:inline">View</span>
                 </Button>
-                <Button variant="outline" size="sm" className="h-8 gap-2 text-navy-950 border-navy-200 hover:bg-navy-50">
+                <Button
+                  variant="outline"
+                  size="sm"
+                  className="h-8 gap-2 text-navy-950 border-navy-200 hover:bg-navy-50"
+                >
                   <Download size={14} />
                   <span className="hidden sm:inline">Download</span>
                 </Button>

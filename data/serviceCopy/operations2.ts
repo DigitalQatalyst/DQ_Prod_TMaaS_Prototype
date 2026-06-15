@@ -7,7 +7,6 @@ import type { CollectionCopyOverrides } from "./types";
  * Keyed by variant id. See ./types.ts for the field contract and voice rules.
  */
 export const operations2Copy: CollectionCopyOverrides = {
-
   // -----------------------------------------------------------------------
   // WORKFORCE MANAGEMENT (ids 97-102)
   // -----------------------------------------------------------------------
@@ -29,10 +28,26 @@ export const operations2Copy: CollectionCopyOverrides = {
       "Day 5: Findings playback, roadmap walkthrough, and next-step agreement",
     ],
     deliverables: [
-      { title: "Workforce maturity scorecard", description: "Ratings across scheduling accuracy, labour visibility, coordination tools, and compliance controls, with evidence for each score." },
-      { title: "Gap and friction register", description: "Documented breakdowns in scheduling, attendance tracking, and cross-team coordination, ranked by business impact." },
-      { title: "Prioritised improvement roadmap", description: "Sequenced actions with named owners, effort estimates, and dependencies so your team knows what to tackle first." },
-      { title: "Stakeholder briefing pack", description: "A concise summary of findings and recommended investment for HR, finance, and operations leadership." },
+      {
+        title: "Workforce maturity scorecard",
+        description:
+          "Ratings across scheduling accuracy, labour visibility, coordination tools, and compliance controls, with evidence for each score.",
+      },
+      {
+        title: "Gap and friction register",
+        description:
+          "Documented breakdowns in scheduling, attendance tracking, and cross-team coordination, ranked by business impact.",
+      },
+      {
+        title: "Prioritised improvement roadmap",
+        description:
+          "Sequenced actions with named owners, effort estimates, and dependencies so your team knows what to tackle first.",
+      },
+      {
+        title: "Stakeholder briefing pack",
+        description:
+          "A concise summary of findings and recommended investment for HR, finance, and operations leadership.",
+      },
     ],
     packageHighlights: [
       "Fixed-scope assessment with no obligation to proceed",
@@ -41,15 +56,37 @@ export const operations2Copy: CollectionCopyOverrides = {
     ],
     faqIntro: "Key questions about the workforce management assessment.",
     faqs: [
-      { question: "What workforce models does this cover?", answer: "Distributed, shift-based, field, frontline, and knowledge worker models. The DigitalQatalyst team confirms which apply to your organisation during scoping." },
-      { question: "Do you need access to our scheduling or HR systems?", answer: "We review configuration and reporting outputs rather than live data. Any access required is read-only and agreed in advance." },
-      { question: "What do we get at the end?", answer: "A maturity scorecard, a gap and friction register, a prioritised improvement roadmap, and a stakeholder briefing pack." },
-      { question: "How long does the assessment take?", answer: "One week from kick-off to findings delivery, assuming stakeholders are available for interviews in the first two days." },
-      { question: "How do we get started?", answer: "Request a consultation. The DigitalQatalyst team will confirm scope, workforce categories in scope, and key stakeholders before work begins." },
+      {
+        question: "What workforce models does this cover?",
+        answer:
+          "Distributed, shift-based, field, frontline, and knowledge worker models. The DigitalQatalyst team confirms which apply to your organisation during scoping.",
+      },
+      {
+        question: "Do you need access to our scheduling or HR systems?",
+        answer:
+          "We review configuration and reporting outputs rather than live data. Any access required is read-only and agreed in advance.",
+      },
+      {
+        question: "What do we get at the end?",
+        answer:
+          "A maturity scorecard, a gap and friction register, a prioritised improvement roadmap, and a stakeholder briefing pack.",
+      },
+      {
+        question: "How long does the assessment take?",
+        answer:
+          "One week from kick-off to findings delivery, assuming stakeholders are available for interviews in the first two days.",
+      },
+      {
+        question: "How do we get started?",
+        answer:
+          "Request a consultation. The DigitalQatalyst team will confirm scope, workforce categories in scope, and key stakeholders before work begins.",
+      },
     ],
     audience: "HR directors, workforce planning managers, and head-of-operations roles",
-    industryRelevance: "Organisations managing distributed, shift-based, field, frontline, or knowledge workforces across any sector",
-    businessImpact: "Surfaces the scheduling gaps and visibility gaps costing the most time and money, so investment goes to the fixes with the greatest return.",
+    industryRelevance:
+      "Organisations managing distributed, shift-based, field, frontline, or knowledge workforces across any sector",
+    businessImpact:
+      "Surfaces the scheduling gaps and visibility gaps costing the most time and money, so investment goes to the fixes with the greatest return.",
     tags: ["workforce-planning", "scheduling", "hr-operations"],
   },
 
@@ -70,10 +107,26 @@ export const operations2Copy: CollectionCopyOverrides = {
       "Week 4: Final blueprint review, adoption planning, and build-readiness sign-off",
     ],
     deliverables: [
-      { title: "Workforce journey maps", description: "End-to-end flows for each role: how managers create rosters, how workers view and swap shifts, and how exceptions are handled." },
-      { title: "Scheduling and rostering specification", description: "Rules, constraints, and business logic documented so development or configuration teams can build without interpretation." },
-      { title: "Integration design", description: "Data flows, field mappings, and API or file-exchange patterns for every connected system including payroll and HRIS." },
-      { title: "Adoption and change plan", description: "Phased rollout approach, training requirements by role, and success metrics to track uptake after launch." },
+      {
+        title: "Workforce journey maps",
+        description:
+          "End-to-end flows for each role: how managers create rosters, how workers view and swap shifts, and how exceptions are handled.",
+      },
+      {
+        title: "Scheduling and rostering specification",
+        description:
+          "Rules, constraints, and business logic documented so development or configuration teams can build without interpretation.",
+      },
+      {
+        title: "Integration design",
+        description:
+          "Data flows, field mappings, and API or file-exchange patterns for every connected system including payroll and HRIS.",
+      },
+      {
+        title: "Adoption and change plan",
+        description:
+          "Phased rollout approach, training requirements by role, and success metrics to track uptake after launch.",
+      },
     ],
     packageHighlights: [
       "Design-only engagement: no build commitment required",
@@ -82,14 +135,33 @@ export const operations2Copy: CollectionCopyOverrides = {
     ],
     faqIntro: "Key questions about the workforce management design engagement.",
     faqs: [
-      { question: "Does the design tie us to a specific platform?", answer: "No. The DigitalQatalyst team designs to your requirements first. Platform selection is informed by the design, not the other way around." },
-      { question: "What if we already have a platform in place?", answer: "We design around it, documenting configuration changes, integration updates, and any gaps the current platform cannot close." },
-      { question: "How do frontline workers feed into the design?", answer: "We include representative users in journey workshops to ensure scheduling and communication flows work for the people using them daily." },
-      { question: "How do we get started?", answer: "Contact the DigitalQatalyst team to confirm the workforce categories in scope and the systems we need to design around before the engagement begins." },
+      {
+        question: "Does the design tie us to a specific platform?",
+        answer:
+          "No. The DigitalQatalyst team designs to your requirements first. Platform selection is informed by the design, not the other way around.",
+      },
+      {
+        question: "What if we already have a platform in place?",
+        answer:
+          "We design around it, documenting configuration changes, integration updates, and any gaps the current platform cannot close.",
+      },
+      {
+        question: "How do frontline workers feed into the design?",
+        answer:
+          "We include representative users in journey workshops to ensure scheduling and communication flows work for the people using them daily.",
+      },
+      {
+        question: "How do we get started?",
+        answer:
+          "Contact the DigitalQatalyst team to confirm the workforce categories in scope and the systems we need to design around before the engagement begins.",
+      },
     ],
-    audience: "HR directors, workforce planning managers, and operations leaders sponsoring workforce platform programmes",
-    industryRelevance: "Organisations managing distributed, shift-based, field, frontline, or knowledge workforces across any sector",
-    businessImpact: "Removes ambiguity before build begins, cutting configuration rework and speeding time to a working scheduling and visibility capability.",
+    audience:
+      "HR directors, workforce planning managers, and operations leaders sponsoring workforce platform programmes",
+    industryRelevance:
+      "Organisations managing distributed, shift-based, field, frontline, or knowledge workforces across any sector",
+    businessImpact:
+      "Removes ambiguity before build begins, cutting configuration rework and speeding time to a working scheduling and visibility capability.",
     tags: ["workforce-planning", "scheduling", "hr-operations"],
   },
 
@@ -110,10 +182,26 @@ export const operations2Copy: CollectionCopyOverrides = {
       "Week 4: Deployment specification sign-off and build-readiness confirmation",
     ],
     deliverables: [
-      { title: "AI use-case feasibility register", description: "Each candidate use case scored against data availability, technical complexity, and business value, with a go or no-go recommendation." },
-      { title: "Data readiness report", description: "Gaps in training data, labelling, and integration coverage that must be closed before model development can begin." },
-      { title: "Responsible workforce AI workflows", description: "Designed flows for approved use cases including human override points, fairness constraints, and worker-facing explainability." },
-      { title: "Deployment and monitoring specification", description: "Model selection guidance, performance thresholds, drift detection triggers, and retraining schedules for production readiness." },
+      {
+        title: "AI use-case feasibility register",
+        description:
+          "Each candidate use case scored against data availability, technical complexity, and business value, with a go or no-go recommendation.",
+      },
+      {
+        title: "Data readiness report",
+        description:
+          "Gaps in training data, labelling, and integration coverage that must be closed before model development can begin.",
+      },
+      {
+        title: "Responsible workforce AI workflows",
+        description:
+          "Designed flows for approved use cases including human override points, fairness constraints, and worker-facing explainability.",
+      },
+      {
+        title: "Deployment and monitoring specification",
+        description:
+          "Model selection guidance, performance thresholds, drift detection triggers, and retraining schedules for production readiness.",
+      },
     ],
     packageHighlights: [
       "Validates feasibility before any build investment is committed",
@@ -122,14 +210,32 @@ export const operations2Copy: CollectionCopyOverrides = {
     ],
     faqIntro: "Key questions about the workforce management AI design engagement.",
     faqs: [
-      { question: "Which AI use cases are typically in scope?", answer: "Demand-based auto-rostering, absence and attrition prediction, shift-swap optimisation, and fatigue or compliance flagging are the most common starting points." },
-      { question: "What if our workforce data is incomplete?", answer: "The data readiness report identifies exactly what is missing. Many organisations begin with narrower use cases while filling data gaps in parallel." },
-      { question: "How do you address fairness in scheduling AI?", answer: "Fairness constraints, protected-attribute exclusions, and worker-facing explanations are built into the workflow design, not added later." },
-      { question: "How do we get started?", answer: "Book a consultation with the DigitalQatalyst team to identify your highest-value AI use cases and confirm your current data landscape." },
+      {
+        question: "Which AI use cases are typically in scope?",
+        answer:
+          "Demand-based auto-rostering, absence and attrition prediction, shift-swap optimisation, and fatigue or compliance flagging are the most common starting points.",
+      },
+      {
+        question: "What if our workforce data is incomplete?",
+        answer:
+          "The data readiness report identifies exactly what is missing. Many organisations begin with narrower use cases while filling data gaps in parallel.",
+      },
+      {
+        question: "How do you address fairness in scheduling AI?",
+        answer:
+          "Fairness constraints, protected-attribute exclusions, and worker-facing explanations are built into the workflow design, not added later.",
+      },
+      {
+        question: "How do we get started?",
+        answer:
+          "Book a consultation with the DigitalQatalyst team to identify your highest-value AI use cases and confirm your current data landscape.",
+      },
     ],
     audience: "HR directors, workforce planning managers, and heads of people analytics",
-    industryRelevance: "Organisations managing large or complex workforces where scheduling, forecasting, or absence management creates material operational cost",
-    businessImpact: "Prevents wasted AI investment by confirming feasibility and data readiness before build, and produces responsible designs that can go to production without rework.",
+    industryRelevance:
+      "Organisations managing large or complex workforces where scheduling, forecasting, or absence management creates material operational cost",
+    businessImpact:
+      "Prevents wasted AI investment by confirming feasibility and data readiness before build, and produces responsible designs that can go to production without rework.",
     tags: ["workforce-ai", "scheduling", "predictive-analytics"],
   },
 
@@ -151,10 +257,26 @@ export const operations2Copy: CollectionCopyOverrides = {
       "Weeks 11-12: Controlled go-live, hypercare, and operational handover",
     ],
     deliverables: [
-      { title: "Configured workforce management platform", description: "Production-ready scheduling, rostering, time tracking, and communication setup tested against your approved specifications." },
-      { title: "Integration test evidence pack", description: "Test cases, execution results, and defect closure confirmation for every connected system including payroll and HRIS." },
-      { title: "User acceptance sign-off", description: "Documented UAT results from managers, schedulers, and frontline representatives confirming the platform meets operational requirements." },
-      { title: "Operational handover kit", description: "Administrator guides, support escalation paths, known-issues register, and a 30-day post-launch review schedule." },
+      {
+        title: "Configured workforce management platform",
+        description:
+          "Production-ready scheduling, rostering, time tracking, and communication setup tested against your approved specifications.",
+      },
+      {
+        title: "Integration test evidence pack",
+        description:
+          "Test cases, execution results, and defect closure confirmation for every connected system including payroll and HRIS.",
+      },
+      {
+        title: "User acceptance sign-off",
+        description:
+          "Documented UAT results from managers, schedulers, and frontline representatives confirming the platform meets operational requirements.",
+      },
+      {
+        title: "Operational handover kit",
+        description:
+          "Administrator guides, support escalation paths, known-issues register, and a 30-day post-launch review schedule.",
+      },
     ],
     packageHighlights: [
       "Structured 12-week deployment with milestone-gated progress",
@@ -163,14 +285,33 @@ export const operations2Copy: CollectionCopyOverrides = {
     ],
     faqIntro: "Key questions about the workforce management deployment.",
     faqs: [
-      { question: "What happens if integration testing uncovers gaps in the design?", answer: "The DigitalQatalyst team documents and triages each gap. Minor issues are resolved within the deployment. Scope changes are raised with the project sponsor before proceeding." },
-      { question: "How are frontline workers involved in UAT?", answer: "We recruit representative workers from each shift category to test scheduling, shift-swap, and notification flows in a pre-production environment." },
-      { question: "What does hypercare include?", answer: "Daily monitoring, prioritised defect fixes, and a dedicated point of contact for your operations team through the first two to four weeks of live operation." },
-      { question: "How do we get started?", answer: "Contact the DigitalQatalyst team to confirm the platform, integration scope, and cutover constraints before planning begins." },
+      {
+        question: "What happens if integration testing uncovers gaps in the design?",
+        answer:
+          "The DigitalQatalyst team documents and triages each gap. Minor issues are resolved within the deployment. Scope changes are raised with the project sponsor before proceeding.",
+      },
+      {
+        question: "How are frontline workers involved in UAT?",
+        answer:
+          "We recruit representative workers from each shift category to test scheduling, shift-swap, and notification flows in a pre-production environment.",
+      },
+      {
+        question: "What does hypercare include?",
+        answer:
+          "Daily monitoring, prioritised defect fixes, and a dedicated point of contact for your operations team through the first two to four weeks of live operation.",
+      },
+      {
+        question: "How do we get started?",
+        answer:
+          "Contact the DigitalQatalyst team to confirm the platform, integration scope, and cutover constraints before planning begins.",
+      },
     ],
-    audience: "HR directors, workforce planning managers, operations leaders, and IT project managers",
-    industryRelevance: "Organisations managing distributed, shift-based, field, frontline, or knowledge workforces implementing or replacing a workforce management platform",
-    businessImpact: "Delivers a fully integrated, tested workforce management platform that reduces scheduling errors and gives operations leaders accurate labour visibility from day one.",
+    audience:
+      "HR directors, workforce planning managers, operations leaders, and IT project managers",
+    industryRelevance:
+      "Organisations managing distributed, shift-based, field, frontline, or knowledge workforces implementing or replacing a workforce management platform",
+    businessImpact:
+      "Delivers a fully integrated, tested workforce management platform that reduces scheduling errors and gives operations leaders accurate labour visibility from day one.",
     tags: ["workforce-planning", "scheduling", "hr-operations"],
   },
 
@@ -192,10 +333,26 @@ export const operations2Copy: CollectionCopyOverrides = {
       "Weeks 11-12: Governance handover, monitoring setup confirmation, and retraining schedule agreement",
     ],
     deliverables: [
-      { title: "Production AI deployment", description: "Approved models live in your workforce management platform with data pipelines, override controls, and logging in place." },
-      { title: "Model performance dashboard", description: "Real-time view of scheduling accuracy, forecast error rates, fairness indicators, and alert thresholds for your operations team." },
-      { title: "Override and escalation playbook", description: "Step-by-step procedures for managers when AI recommendations need to be overridden, and when to escalate to the DigitalQatalyst team." },
-      { title: "AI governance handover pack", description: "Model cards, data lineage documentation, retraining schedule, and accountability assignments for ongoing responsible operation." },
+      {
+        title: "Production AI deployment",
+        description:
+          "Approved models live in your workforce management platform with data pipelines, override controls, and logging in place.",
+      },
+      {
+        title: "Model performance dashboard",
+        description:
+          "Real-time view of scheduling accuracy, forecast error rates, fairness indicators, and alert thresholds for your operations team.",
+      },
+      {
+        title: "Override and escalation playbook",
+        description:
+          "Step-by-step procedures for managers when AI recommendations need to be overridden, and when to escalate to the DigitalQatalyst team.",
+      },
+      {
+        title: "AI governance handover pack",
+        description:
+          "Model cards, data lineage documentation, retraining schedule, and accountability assignments for ongoing responsible operation.",
+      },
     ],
     packageHighlights: [
       "Phased rollout from pilot cohort to full workforce",
@@ -204,14 +361,33 @@ export const operations2Copy: CollectionCopyOverrides = {
     ],
     faqIntro: "Key questions about the workforce management AI deployment.",
     faqs: [
-      { question: "What happens if a model starts performing poorly after launch?", answer: "Monitoring dashboards alert the DigitalQatalyst team and your operations leads. Retraining or rollback procedures are defined in the governance handover pack." },
-      { question: "Can managers override AI scheduling recommendations?", answer: "Yes. Override workflows are embedded in the scheduling tool. All overrides are logged for quality review and model improvement." },
-      { question: "How do you handle regulatory requirements around automated workforce decisions?", answer: "Accountability, explainability, and human oversight controls are designed into the deployment. We confirm applicable obligations during scoping." },
-      { question: "How do we get started?", answer: "Contact the DigitalQatalyst team with your approved AI design specification to plan the production environment and pilot cohort." },
+      {
+        question: "What happens if a model starts performing poorly after launch?",
+        answer:
+          "Monitoring dashboards alert the DigitalQatalyst team and your operations leads. Retraining or rollback procedures are defined in the governance handover pack.",
+      },
+      {
+        question: "Can managers override AI scheduling recommendations?",
+        answer:
+          "Yes. Override workflows are embedded in the scheduling tool. All overrides are logged for quality review and model improvement.",
+      },
+      {
+        question: "How do you handle regulatory requirements around automated workforce decisions?",
+        answer:
+          "Accountability, explainability, and human oversight controls are designed into the deployment. We confirm applicable obligations during scoping.",
+      },
+      {
+        question: "How do we get started?",
+        answer:
+          "Contact the DigitalQatalyst team with your approved AI design specification to plan the production environment and pilot cohort.",
+      },
     ],
-    audience: "HR directors, heads of people analytics, workforce planning managers, and operations IT leads",
-    industryRelevance: "Organisations with complex shift, field, or frontline workforces where scheduling and forecasting automation creates measurable efficiency gains",
-    businessImpact: "Reduces scheduling overhead, improves shift fill rates, and gives HR leaders accurate demand forecasts, with governance controls that maintain worker trust and regulatory compliance.",
+    audience:
+      "HR directors, heads of people analytics, workforce planning managers, and operations IT leads",
+    industryRelevance:
+      "Organisations with complex shift, field, or frontline workforces where scheduling and forecasting automation creates measurable efficiency gains",
+    businessImpact:
+      "Reduces scheduling overhead, improves shift fill rates, and gives HR leaders accurate demand forecasts, with governance controls that maintain worker trust and regulatory compliance.",
     tags: ["workforce-ai", "scheduling", "predictive-analytics"],
   },
 
@@ -232,10 +408,26 @@ export const operations2Copy: CollectionCopyOverrides = {
       "Ongoing: Monthly performance reviews, quarterly optimisation sessions, and annual roadmap refresh",
     ],
     deliverables: [
-      { title: "Monthly performance report", description: "Scheduling fill rates, overtime trends, absenteeism patterns, and system health metrics with commentary and recommended actions." },
-      { title: "Incident and change log", description: "Transparent record of all incidents, configuration changes, and SLA performance across the reporting period." },
-      { title: "Quarterly optimisation review", description: "Analysis of workforce trends, platform capability gaps, and prioritised improvement actions for the next quarter." },
-      { title: "Annual workforce management roadmap", description: "Forward-looking plan covering platform updates, capability additions, and structural changes needed to support business growth." },
+      {
+        title: "Monthly performance report",
+        description:
+          "Scheduling fill rates, overtime trends, absenteeism patterns, and system health metrics with commentary and recommended actions.",
+      },
+      {
+        title: "Incident and change log",
+        description:
+          "Transparent record of all incidents, configuration changes, and SLA performance across the reporting period.",
+      },
+      {
+        title: "Quarterly optimisation review",
+        description:
+          "Analysis of workforce trends, platform capability gaps, and prioritised improvement actions for the next quarter.",
+      },
+      {
+        title: "Annual workforce management roadmap",
+        description:
+          "Forward-looking plan covering platform updates, capability additions, and structural changes needed to support business growth.",
+      },
     ],
     packageHighlights: [
       "SLA-backed operations with defined incident response times",
@@ -244,14 +436,33 @@ export const operations2Copy: CollectionCopyOverrides = {
     ],
     faqIntro: "Key questions about the workforce management managed service.",
     faqs: [
-      { question: "What is covered under the managed service?", answer: "Platform monitoring, incident response, configuration changes, monthly reporting, and quarterly optimisation reviews. Scope is confirmed in the service agreement." },
-      { question: "What SLAs apply?", answer: "Response and resolution times are agreed during onboarding based on the criticality of your scheduling operations. Typical targets range from 4-hour response for critical incidents to next-business-day for low-priority items." },
-      { question: "Can we add new workforce categories or locations over time?", answer: "Yes. Configuration updates for new sites, roles, or scheduling rules are included within agreed change volumes. Larger changes are scoped and priced separately." },
-      { question: "How do we get started?", answer: "Contact the DigitalQatalyst team to confirm the platform in scope, current configuration baseline, and SLA requirements before the service agreement is drafted." },
+      {
+        question: "What is covered under the managed service?",
+        answer:
+          "Platform monitoring, incident response, configuration changes, monthly reporting, and quarterly optimisation reviews. Scope is confirmed in the service agreement.",
+      },
+      {
+        question: "What SLAs apply?",
+        answer:
+          "Response and resolution times are agreed during onboarding based on the criticality of your scheduling operations. Typical targets range from 4-hour response for critical incidents to next-business-day for low-priority items.",
+      },
+      {
+        question: "Can we add new workforce categories or locations over time?",
+        answer:
+          "Yes. Configuration updates for new sites, roles, or scheduling rules are included within agreed change volumes. Larger changes are scoped and priced separately.",
+      },
+      {
+        question: "How do we get started?",
+        answer:
+          "Contact the DigitalQatalyst team to confirm the platform in scope, current configuration baseline, and SLA requirements before the service agreement is drafted.",
+      },
     ],
-    audience: "HR directors, operations leaders, and workforce planning managers running live workforce management platforms",
-    industryRelevance: "Organisations managing distributed, shift-based, field, frontline, or knowledge workforces that require consistent scheduling accuracy and operational visibility",
-    businessImpact: "Maintains scheduling accuracy and labour visibility as the workforce grows, reduces operational overhead on internal IT teams, and surfaces optimisation opportunities before they become problems.",
+    audience:
+      "HR directors, operations leaders, and workforce planning managers running live workforce management platforms",
+    industryRelevance:
+      "Organisations managing distributed, shift-based, field, frontline, or knowledge workforces that require consistent scheduling accuracy and operational visibility",
+    businessImpact:
+      "Maintains scheduling accuracy and labour visibility as the workforce grows, reduces operational overhead on internal IT teams, and surfaces optimisation opportunities before they become problems.",
     tags: ["workforce-planning", "scheduling", "managed-service"],
   },
 
@@ -276,10 +487,26 @@ export const operations2Copy: CollectionCopyOverrides = {
       "Day 5: Findings playback, risk-ranked roadmap presentation, and next-step agreement",
     ],
     deliverables: [
-      { title: "DevSecOps maturity assessment", description: "Ratings across pipeline automation, security integration, test coverage, and release reliability, with evidence and specific gaps for each dimension." },
-      { title: "Security control gap report", description: "Missing or misconfigured controls in SAST, DAST, dependency scanning, secrets detection, and container security, ranked by exploitability." },
-      { title: "Delivery velocity baseline", description: "Current lead time, deployment frequency, change failure rate, and mean time to restore, with analysis of the pipeline stages causing the most drag." },
-      { title: "Prioritised remediation roadmap", description: "Sequenced actions addressing the highest-risk gaps first, with effort estimates and the expected improvement in release quality and speed." },
+      {
+        title: "DevSecOps maturity assessment",
+        description:
+          "Ratings across pipeline automation, security integration, test coverage, and release reliability, with evidence and specific gaps for each dimension.",
+      },
+      {
+        title: "Security control gap report",
+        description:
+          "Missing or misconfigured controls in SAST, DAST, dependency scanning, secrets detection, and container security, ranked by exploitability.",
+      },
+      {
+        title: "Delivery velocity baseline",
+        description:
+          "Current lead time, deployment frequency, change failure rate, and mean time to restore, with analysis of the pipeline stages causing the most drag.",
+      },
+      {
+        title: "Prioritised remediation roadmap",
+        description:
+          "Sequenced actions addressing the highest-risk gaps first, with effort estimates and the expected improvement in release quality and speed.",
+      },
     ],
     packageHighlights: [
       "Fixed-scope assessment with findings delivered within one week",
@@ -288,14 +515,32 @@ export const operations2Copy: CollectionCopyOverrides = {
     ],
     faqIntro: "Key questions about the DevSecOps automation assessment.",
     faqs: [
-      { question: "Which pipelines and platforms does the assessment cover?", answer: "Any CI/CD toolchain: GitHub Actions, GitLab CI, Jenkins, Azure DevOps, and others. The DigitalQatalyst team confirms scope during the initial scoping call." },
-      { question: "Do you need access to our source code?", answer: "We review pipeline configuration, scan results, and deployment logs. Source code access is not required unless specific vulnerability patterns need tracing." },
-      { question: "What do we get at the end?", answer: "A maturity assessment, a security control gap report, a velocity baseline, and a prioritised remediation roadmap." },
-      { question: "How do we get started?", answer: "Request a consultation. The DigitalQatalyst team will confirm which pipelines and teams are in scope before work begins." },
+      {
+        question: "Which pipelines and platforms does the assessment cover?",
+        answer:
+          "Any CI/CD toolchain: GitHub Actions, GitLab CI, Jenkins, Azure DevOps, and others. The DigitalQatalyst team confirms scope during the initial scoping call.",
+      },
+      {
+        question: "Do you need access to our source code?",
+        answer:
+          "We review pipeline configuration, scan results, and deployment logs. Source code access is not required unless specific vulnerability patterns need tracing.",
+      },
+      {
+        question: "What do we get at the end?",
+        answer:
+          "A maturity assessment, a security control gap report, a velocity baseline, and a prioritised remediation roadmap.",
+      },
+      {
+        question: "How do we get started?",
+        answer:
+          "Request a consultation. The DigitalQatalyst team will confirm which pipelines and teams are in scope before work begins.",
+      },
     ],
     audience: "CTOs, heads of engineering, DevOps leads, and application security managers",
-    industryRelevance: "Organisations building, integrating, or operating digital platforms and software products across any sector",
-    businessImpact: "Identifies the pipeline bottlenecks and security gaps costing the most release velocity and audit risk, so remediation effort goes where it returns the greatest improvement.",
+    industryRelevance:
+      "Organisations building, integrating, or operating digital platforms and software products across any sector",
+    businessImpact:
+      "Identifies the pipeline bottlenecks and security gaps costing the most release velocity and audit risk, so remediation effort goes where it returns the greatest improvement.",
     tags: ["devsecops", "ci-cd", "pipeline-security"],
   },
 
@@ -316,10 +561,26 @@ export const operations2Copy: CollectionCopyOverrides = {
       "Week 4: Blueprint review, developer experience validation, and build-readiness sign-off",
     ],
     deliverables: [
-      { title: "Pipeline architecture blueprint", description: "End-to-end design of your CI/CD stages including trigger logic, parallelisation, caching strategy, and failure-handling patterns." },
-      { title: "Security toolchain specification", description: "Tools, scan configurations, threshold policies, and integration patterns for every security gate in the pipeline." },
-      { title: "Workflow and governance design", description: "Branch strategy, environment promotion rules, approval gates, and audit trail requirements documented for implementation." },
-      { title: "Developer adoption plan", description: "Training approach, inner-loop tooling recommendations, and rollout phasing to minimise disruption to active delivery teams." },
+      {
+        title: "Pipeline architecture blueprint",
+        description:
+          "End-to-end design of your CI/CD stages including trigger logic, parallelisation, caching strategy, and failure-handling patterns.",
+      },
+      {
+        title: "Security toolchain specification",
+        description:
+          "Tools, scan configurations, threshold policies, and integration patterns for every security gate in the pipeline.",
+      },
+      {
+        title: "Workflow and governance design",
+        description:
+          "Branch strategy, environment promotion rules, approval gates, and audit trail requirements documented for implementation.",
+      },
+      {
+        title: "Developer adoption plan",
+        description:
+          "Training approach, inner-loop tooling recommendations, and rollout phasing to minimise disruption to active delivery teams.",
+      },
     ],
     packageHighlights: [
       "Design-only engagement: no build commitment required",
@@ -328,13 +589,27 @@ export const operations2Copy: CollectionCopyOverrides = {
     ],
     faqIntro: "Key questions about the DevSecOps automation design engagement.",
     faqs: [
-      { question: "Can we keep our existing CI/CD platform?", answer: "Yes. The design is built around your current toolchain wherever it meets requirements. Replacements are only recommended where existing tools create unresolvable gaps." },
-      { question: "How do you balance security controls with developer speed?", answer: "Security gates are designed to run in parallel where possible and block only on critical findings. The developer experience plan ensures controls add minimal friction to the inner loop." },
-      { question: "How do we get started?", answer: "Contact the DigitalQatalyst team to share your current pipeline inventory and confirm which teams and platforms are in scope for the design." },
+      {
+        question: "Can we keep our existing CI/CD platform?",
+        answer:
+          "Yes. The design is built around your current toolchain wherever it meets requirements. Replacements are only recommended where existing tools create unresolvable gaps.",
+      },
+      {
+        question: "How do you balance security controls with developer speed?",
+        answer:
+          "Security gates are designed to run in parallel where possible and block only on critical findings. The developer experience plan ensures controls add minimal friction to the inner loop.",
+      },
+      {
+        question: "How do we get started?",
+        answer:
+          "Contact the DigitalQatalyst team to share your current pipeline inventory and confirm which teams and platforms are in scope for the design.",
+      },
     ],
     audience: "CTOs, heads of engineering, DevOps leads, and platform engineering teams",
-    industryRelevance: "Organisations building or scaling digital platforms where release speed and security assurance are both business priorities",
-    businessImpact: "Produces a complete, build-ready DevSecOps blueprint that accelerates implementation and avoids the rework caused by designing security controls after pipelines are built.",
+    industryRelevance:
+      "Organisations building or scaling digital platforms where release speed and security assurance are both business priorities",
+    businessImpact:
+      "Produces a complete, build-ready DevSecOps blueprint that accelerates implementation and avoids the rework caused by designing security controls after pipelines are built.",
     tags: ["devsecops", "ci-cd", "pipeline-security"],
   },
 
@@ -355,10 +630,26 @@ export const operations2Copy: CollectionCopyOverrides = {
       "Week 4: Deployment specification sign-off and build-readiness confirmation",
     ],
     deliverables: [
-      { title: "AI use-case feasibility register", description: "Each candidate scored on data availability, toolchain compatibility, and expected quality or velocity improvement, with a clear go or no-go recommendation." },
-      { title: "Pipeline signal readiness report", description: "Assessment of existing telemetry, scan outputs, and historical data quality against the inputs each AI model requires." },
-      { title: "Responsible DevSecOps AI workflows", description: "Designed flows for approved use cases with human review gates, confidence thresholds, and audit logging at every decision point." },
-      { title: "Deployment and monitoring specification", description: "Model selection guidance, performance baselines, drift detection thresholds, and feedback loop design for production use." },
+      {
+        title: "AI use-case feasibility register",
+        description:
+          "Each candidate scored on data availability, toolchain compatibility, and expected quality or velocity improvement, with a clear go or no-go recommendation.",
+      },
+      {
+        title: "Pipeline signal readiness report",
+        description:
+          "Assessment of existing telemetry, scan outputs, and historical data quality against the inputs each AI model requires.",
+      },
+      {
+        title: "Responsible DevSecOps AI workflows",
+        description:
+          "Designed flows for approved use cases with human review gates, confidence thresholds, and audit logging at every decision point.",
+      },
+      {
+        title: "Deployment and monitoring specification",
+        description:
+          "Model selection guidance, performance baselines, drift detection thresholds, and feedback loop design for production use.",
+      },
     ],
     packageHighlights: [
       "Confirms feasibility before any AI build spend is committed",
@@ -367,14 +658,33 @@ export const operations2Copy: CollectionCopyOverrides = {
     ],
     faqIntro: "Key questions about the DevSecOps AI design engagement.",
     faqs: [
-      { question: "Which AI use cases are most commonly explored?", answer: "AI-assisted code review, ML-based vulnerability prioritisation, predictive test selection to reduce pipeline duration, and anomaly detection on deployment telemetry." },
-      { question: "What if our pipeline telemetry is incomplete?", answer: "The signal readiness report identifies specific gaps. Organisations often start with lower-data-demand use cases while building telemetry coverage in parallel." },
-      { question: "How do you ensure AI recommendations do not block releases incorrectly?", answer: "Confidence thresholds, human override gates, and fallback logic are designed into every workflow so false positives never silently block deployments." },
-      { question: "How do we get started?", answer: "Book a consultation with the DigitalQatalyst team to identify your highest-value AI use cases and share current pipeline telemetry and toolchain details." },
+      {
+        question: "Which AI use cases are most commonly explored?",
+        answer:
+          "AI-assisted code review, ML-based vulnerability prioritisation, predictive test selection to reduce pipeline duration, and anomaly detection on deployment telemetry.",
+      },
+      {
+        question: "What if our pipeline telemetry is incomplete?",
+        answer:
+          "The signal readiness report identifies specific gaps. Organisations often start with lower-data-demand use cases while building telemetry coverage in parallel.",
+      },
+      {
+        question: "How do you ensure AI recommendations do not block releases incorrectly?",
+        answer:
+          "Confidence thresholds, human override gates, and fallback logic are designed into every workflow so false positives never silently block deployments.",
+      },
+      {
+        question: "How do we get started?",
+        answer:
+          "Book a consultation with the DigitalQatalyst team to identify your highest-value AI use cases and share current pipeline telemetry and toolchain details.",
+      },
     ],
-    audience: "CTOs, heads of engineering, DevOps leads, and application security managers exploring AI-assisted delivery",
-    industryRelevance: "Organisations with mature CI/CD pipelines looking to apply AI to accelerate release cycles and improve security signal quality",
-    businessImpact: "Prevents wasted AI investment by validating feasibility before build, and produces responsible workflow designs that improve release quality without introducing uncontrolled automation risk.",
+    audience:
+      "CTOs, heads of engineering, DevOps leads, and application security managers exploring AI-assisted delivery",
+    industryRelevance:
+      "Organisations with mature CI/CD pipelines looking to apply AI to accelerate release cycles and improve security signal quality",
+    businessImpact:
+      "Prevents wasted AI investment by validating feasibility before build, and produces responsible workflow designs that improve release quality without introducing uncontrolled automation risk.",
     tags: ["devsecops-ai", "pipeline-security", "ci-cd"],
   },
 
@@ -396,10 +706,26 @@ export const operations2Copy: CollectionCopyOverrides = {
       "Week 12: Hypercare, incident monitoring, and operational handover",
     ],
     deliverables: [
-      { title: "Production DevSecOps pipeline", description: "Fully configured CI/CD pipeline with security gates, test automation, environment promotion, and deployment controls live in your production environment." },
-      { title: "Security gate validation report", description: "Evidence that each security control is running correctly, policies are enforced, and critical findings are blocking promotion as designed." },
-      { title: "Engineering onboarding kit", description: "Pipeline documentation, developer quick-start guide, and runbooks for common operations and incident scenarios." },
-      { title: "Operational handover pack", description: "Support contacts, escalation paths, known-issues register, and a 30-day post-launch review schedule." },
+      {
+        title: "Production DevSecOps pipeline",
+        description:
+          "Fully configured CI/CD pipeline with security gates, test automation, environment promotion, and deployment controls live in your production environment.",
+      },
+      {
+        title: "Security gate validation report",
+        description:
+          "Evidence that each security control is running correctly, policies are enforced, and critical findings are blocking promotion as designed.",
+      },
+      {
+        title: "Engineering onboarding kit",
+        description:
+          "Pipeline documentation, developer quick-start guide, and runbooks for common operations and incident scenarios.",
+      },
+      {
+        title: "Operational handover pack",
+        description:
+          "Support contacts, escalation paths, known-issues register, and a 30-day post-launch review schedule.",
+      },
     ],
     packageHighlights: [
       "Structured 12-week deployment with milestone-gated progress",
@@ -408,14 +734,32 @@ export const operations2Copy: CollectionCopyOverrides = {
     ],
     faqIntro: "Key questions about the DevSecOps automation deployment.",
     faqs: [
-      { question: "Can we run the new pipeline alongside existing pipelines during transition?", answer: "Yes. The deployment plan includes a parallel-run period where both pipelines operate so teams can validate the new configuration before cutting over." },
-      { question: "How do security policies get agreed before implementation?", answer: "The DigitalQatalyst team runs a policy alignment session in the first two weeks with engineering and security stakeholders to agree scan thresholds and blocking rules." },
-      { question: "What happens if a security control creates too many false positives?", answer: "Policy tuning is included within the deployment scope. Thresholds are adjusted iteratively during the integration testing phase before go-live." },
-      { question: "How do we get started?", answer: "Contact the DigitalQatalyst team with your approved pipeline design to plan toolchain access, environment scope, and team onboarding schedule." },
+      {
+        question: "Can we run the new pipeline alongside existing pipelines during transition?",
+        answer:
+          "Yes. The deployment plan includes a parallel-run period where both pipelines operate so teams can validate the new configuration before cutting over.",
+      },
+      {
+        question: "How do security policies get agreed before implementation?",
+        answer:
+          "The DigitalQatalyst team runs a policy alignment session in the first two weeks with engineering and security stakeholders to agree scan thresholds and blocking rules.",
+      },
+      {
+        question: "What happens if a security control creates too many false positives?",
+        answer:
+          "Policy tuning is included within the deployment scope. Thresholds are adjusted iteratively during the integration testing phase before go-live.",
+      },
+      {
+        question: "How do we get started?",
+        answer:
+          "Contact the DigitalQatalyst team with your approved pipeline design to plan toolchain access, environment scope, and team onboarding schedule.",
+      },
     ],
     audience: "CTOs, heads of engineering, DevOps leads, and platform engineering teams",
-    industryRelevance: "Organisations building or operating digital platforms where release speed, security assurance, and operational reliability are business priorities",
-    businessImpact: "Delivers a production-ready DevSecOps pipeline that reduces deployment lead time, cuts defect escape rates, and gives security teams confidence that controls are enforced consistently on every release.",
+    industryRelevance:
+      "Organisations building or operating digital platforms where release speed, security assurance, and operational reliability are business priorities",
+    businessImpact:
+      "Delivers a production-ready DevSecOps pipeline that reduces deployment lead time, cuts defect escape rates, and gives security teams confidence that controls are enforced consistently on every release.",
     tags: ["devsecops", "ci-cd", "pipeline-security"],
   },
 
@@ -437,10 +781,26 @@ export const operations2Copy: CollectionCopyOverrides = {
       "Weeks 11-12: Governance handover, monitoring confirmation, and retraining schedule agreement",
     ],
     deliverables: [
-      { title: "Production AI pipeline capabilities", description: "Approved models live in your CI/CD pipeline with telemetry ingestion, result logging, and developer-facing interfaces active." },
-      { title: "Model performance dashboard", description: "Real-time view of recommendation accuracy, false-positive rates, pipeline duration impact, and alert thresholds for your platform team." },
-      { title: "Override and feedback playbook", description: "Developer procedures for overriding AI recommendations, submitting false-positive reports, and escalating model quality concerns." },
-      { title: "AI governance handover pack", description: "Model cards, telemetry lineage, retraining schedule, and accountability assignments for ongoing responsible operation." },
+      {
+        title: "Production AI pipeline capabilities",
+        description:
+          "Approved models live in your CI/CD pipeline with telemetry ingestion, result logging, and developer-facing interfaces active.",
+      },
+      {
+        title: "Model performance dashboard",
+        description:
+          "Real-time view of recommendation accuracy, false-positive rates, pipeline duration impact, and alert thresholds for your platform team.",
+      },
+      {
+        title: "Override and feedback playbook",
+        description:
+          "Developer procedures for overriding AI recommendations, submitting false-positive reports, and escalating model quality concerns.",
+      },
+      {
+        title: "AI governance handover pack",
+        description:
+          "Model cards, telemetry lineage, retraining schedule, and accountability assignments for ongoing responsible operation.",
+      },
     ],
     packageHighlights: [
       "Phased rollout from pilot teams to full engineering organisation",
@@ -449,14 +809,33 @@ export const operations2Copy: CollectionCopyOverrides = {
     ],
     faqIntro: "Key questions about the DevSecOps AI deployment.",
     faqs: [
-      { question: "How do developers interact with AI recommendations in the pipeline?", answer: "Recommendations appear in pull request comments or pipeline dashboards, with one-click override and a mandatory reason field that feeds the model's improvement loop." },
-      { question: "What happens if AI vulnerability prioritisation produces too many false positives?", answer: "Threshold adjustment is included in the deployment. The monitoring dashboard surfaces false-positive rates, and the DigitalQatalyst team tunes thresholds before full rollout." },
-      { question: "How do you maintain model accuracy as the codebase evolves?", answer: "Retraining triggers and schedules are defined in the governance handover pack. Model drift alerts notify the DigitalQatalyst team and your platform leads when retraining is needed." },
-      { question: "How do we get started?", answer: "Contact the DigitalQatalyst team with your approved AI design specification to plan the production environment, telemetry access, and pilot team selection." },
+      {
+        question: "How do developers interact with AI recommendations in the pipeline?",
+        answer:
+          "Recommendations appear in pull request comments or pipeline dashboards, with one-click override and a mandatory reason field that feeds the model's improvement loop.",
+      },
+      {
+        question:
+          "What happens if AI vulnerability prioritisation produces too many false positives?",
+        answer:
+          "Threshold adjustment is included in the deployment. The monitoring dashboard surfaces false-positive rates, and the DigitalQatalyst team tunes thresholds before full rollout.",
+      },
+      {
+        question: "How do you maintain model accuracy as the codebase evolves?",
+        answer:
+          "Retraining triggers and schedules are defined in the governance handover pack. Model drift alerts notify the DigitalQatalyst team and your platform leads when retraining is needed.",
+      },
+      {
+        question: "How do we get started?",
+        answer:
+          "Contact the DigitalQatalyst team with your approved AI design specification to plan the production environment, telemetry access, and pilot team selection.",
+      },
     ],
     audience: "CTOs, heads of engineering, DevOps leads, and application security managers",
-    industryRelevance: "Organisations with mature DevSecOps pipelines where AI-assisted quality and security tooling can deliver measurable velocity and risk improvements",
-    businessImpact: "Reduces pipeline duration through smarter test selection, improves vulnerability fix rates through accurate prioritisation, and maintains human oversight at every AI decision point.",
+    industryRelevance:
+      "Organisations with mature DevSecOps pipelines where AI-assisted quality and security tooling can deliver measurable velocity and risk improvements",
+    businessImpact:
+      "Reduces pipeline duration through smarter test selection, improves vulnerability fix rates through accurate prioritisation, and maintains human oversight at every AI decision point.",
     tags: ["devsecops-ai", "pipeline-security", "ci-cd"],
   },
 
@@ -477,10 +856,26 @@ export const operations2Copy: CollectionCopyOverrides = {
       "Ongoing: Monthly delivery and security reports, quarterly optimisation sessions, and annual pipeline roadmap",
     ],
     deliverables: [
-      { title: "Monthly delivery and security report", description: "DORA metrics, security finding volumes and age, policy exception counts, and pipeline health summary with recommended actions." },
-      { title: "Incident and change log", description: "Transparent record of pipeline incidents, policy changes, and SLA performance across each reporting period." },
-      { title: "Quarterly pipeline optimisation review", description: "Analysis of stage durations, flaky test trends, and security tool false-positive rates, with prioritised improvement actions." },
-      { title: "Annual pipeline roadmap", description: "Forward-looking plan covering toolchain updates, new security integrations, and scalability improvements to support engineering growth." },
+      {
+        title: "Monthly delivery and security report",
+        description:
+          "DORA metrics, security finding volumes and age, policy exception counts, and pipeline health summary with recommended actions.",
+      },
+      {
+        title: "Incident and change log",
+        description:
+          "Transparent record of pipeline incidents, policy changes, and SLA performance across each reporting period.",
+      },
+      {
+        title: "Quarterly pipeline optimisation review",
+        description:
+          "Analysis of stage durations, flaky test trends, and security tool false-positive rates, with prioritised improvement actions.",
+      },
+      {
+        title: "Annual pipeline roadmap",
+        description:
+          "Forward-looking plan covering toolchain updates, new security integrations, and scalability improvements to support engineering growth.",
+      },
     ],
     packageHighlights: [
       "SLA-backed operations with defined incident response times",
@@ -489,14 +884,33 @@ export const operations2Copy: CollectionCopyOverrides = {
     ],
     faqIntro: "Key questions about the DevSecOps automation managed service.",
     faqs: [
-      { question: "What is covered under the managed service?", answer: "Pipeline monitoring, incident response, policy and configuration updates, monthly reporting, and quarterly optimisation. Full scope is confirmed in the service agreement." },
-      { question: "Can you manage pipelines across multiple cloud environments?", answer: "Yes. Multi-cloud and hybrid pipeline environments are in scope. The DigitalQatalyst team confirms the environment inventory during onboarding." },
-      { question: "How are security policy changes handled when compliance requirements change?", answer: "Policy update requests are assessed, implemented in a staging pipeline, validated, and promoted to production within the agreed change management process." },
-      { question: "How do we get started?", answer: "Contact the DigitalQatalyst team to confirm the pipelines, toolchains, and SLA requirements in scope before the service agreement is drafted." },
+      {
+        question: "What is covered under the managed service?",
+        answer:
+          "Pipeline monitoring, incident response, policy and configuration updates, monthly reporting, and quarterly optimisation. Full scope is confirmed in the service agreement.",
+      },
+      {
+        question: "Can you manage pipelines across multiple cloud environments?",
+        answer:
+          "Yes. Multi-cloud and hybrid pipeline environments are in scope. The DigitalQatalyst team confirms the environment inventory during onboarding.",
+      },
+      {
+        question: "How are security policy changes handled when compliance requirements change?",
+        answer:
+          "Policy update requests are assessed, implemented in a staging pipeline, validated, and promoted to production within the agreed change management process.",
+      },
+      {
+        question: "How do we get started?",
+        answer:
+          "Contact the DigitalQatalyst team to confirm the pipelines, toolchains, and SLA requirements in scope before the service agreement is drafted.",
+      },
     ],
-    audience: "CTOs, heads of engineering, DevOps leads, and platform engineering teams running production delivery pipelines",
-    industryRelevance: "Organisations operating digital platforms where continuous delivery speed and security assurance are operational requirements",
-    businessImpact: "Maintains delivery velocity and security posture as the engineering organisation scales, reduces platform team toil on pipeline maintenance, and surfaces optimisation opportunities before they compound.",
+    audience:
+      "CTOs, heads of engineering, DevOps leads, and platform engineering teams running production delivery pipelines",
+    industryRelevance:
+      "Organisations operating digital platforms where continuous delivery speed and security assurance are operational requirements",
+    businessImpact:
+      "Maintains delivery velocity and security posture as the engineering organisation scales, reduces platform team toil on pipeline maintenance, and surfaces optimisation opportunities before they compound.",
     tags: ["devsecops", "ci-cd", "managed-service"],
   },
 
@@ -521,10 +935,26 @@ export const operations2Copy: CollectionCopyOverrides = {
       "Day 5: Findings presentation, prioritised roadmap walkthrough, and next-step agreement",
     ],
     deliverables: [
-      { title: "Farming operations maturity scorecard", description: "Ratings across yield tracking, resource management, planning accuracy, and equipment utilisation, with evidence and specific gaps." },
-      { title: "Operational gap register", description: "Documented gaps in crop monitoring, irrigation scheduling, input management, and harvest coordination, ranked by cost and yield impact." },
-      { title: "Prioritised improvement roadmap", description: "Sequenced actions with owners, effort estimates, and dependencies your operations team can act on from the first season." },
-      { title: "Leadership briefing pack", description: "A concise summary of findings and recommended investment for agribusiness and farm operations leadership." },
+      {
+        title: "Farming operations maturity scorecard",
+        description:
+          "Ratings across yield tracking, resource management, planning accuracy, and equipment utilisation, with evidence and specific gaps.",
+      },
+      {
+        title: "Operational gap register",
+        description:
+          "Documented gaps in crop monitoring, irrigation scheduling, input management, and harvest coordination, ranked by cost and yield impact.",
+      },
+      {
+        title: "Prioritised improvement roadmap",
+        description:
+          "Sequenced actions with owners, effort estimates, and dependencies your operations team can act on from the first season.",
+      },
+      {
+        title: "Leadership briefing pack",
+        description:
+          "A concise summary of findings and recommended investment for agribusiness and farm operations leadership.",
+      },
     ],
     packageHighlights: [
       "Fixed-scope assessment delivered within one week",
@@ -533,14 +963,33 @@ export const operations2Copy: CollectionCopyOverrides = {
     ],
     faqIntro: "Key questions about the farming operations assessment.",
     faqs: [
-      { question: "What farming models does the assessment cover?", answer: "Broadacre cropping, horticulture, livestock, and mixed operations. The DigitalQatalyst team confirms the applicable model during scoping." },
-      { question: "Do you need access to our farm management systems?", answer: "We review system outputs and operational records rather than live data. Any access required is read-only and agreed in advance." },
-      { question: "What do we get at the end?", answer: "A maturity scorecard, an operational gap register, a prioritised improvement roadmap, and a leadership briefing pack." },
-      { question: "How do we get started?", answer: "Request a consultation. The DigitalQatalyst team will confirm the farming operation type, geographic scope, and key stakeholders before work begins." },
+      {
+        question: "What farming models does the assessment cover?",
+        answer:
+          "Broadacre cropping, horticulture, livestock, and mixed operations. The DigitalQatalyst team confirms the applicable model during scoping.",
+      },
+      {
+        question: "Do you need access to our farm management systems?",
+        answer:
+          "We review system outputs and operational records rather than live data. Any access required is read-only and agreed in advance.",
+      },
+      {
+        question: "What do we get at the end?",
+        answer:
+          "A maturity scorecard, an operational gap register, a prioritised improvement roadmap, and a leadership briefing pack.",
+      },
+      {
+        question: "How do we get started?",
+        answer:
+          "Request a consultation. The DigitalQatalyst team will confirm the farming operation type, geographic scope, and key stakeholders before work begins.",
+      },
     ],
-    audience: "Agribusiness executives, farm operations managers, and heads of agricultural production",
-    industryRelevance: "Agribusiness, food production, crop operations, and agricultural service providers pursuing digital and operational improvement",
-    businessImpact: "Surfaces the yield tracking and resource efficiency gaps costing the most per season, so investment goes to the improvements with the clearest return.",
+    audience:
+      "Agribusiness executives, farm operations managers, and heads of agricultural production",
+    industryRelevance:
+      "Agribusiness, food production, crop operations, and agricultural service providers pursuing digital and operational improvement",
+    businessImpact:
+      "Surfaces the yield tracking and resource efficiency gaps costing the most per season, so investment goes to the improvements with the clearest return.",
     tags: ["agribusiness", "precision-agriculture", "farm-operations"],
   },
 
@@ -561,10 +1010,26 @@ export const operations2Copy: CollectionCopyOverrides = {
       "Week 4: Final blueprint review, adoption planning, and build-readiness sign-off",
     ],
     deliverables: [
-      { title: "Field operations workflow maps", description: "End-to-end flows covering crop monitoring, resource scheduling, exception handling, and harvest coordination across all relevant roles." },
-      { title: "Resource scheduling specification", description: "Irrigation, input application, and equipment allocation rules documented for configuration or development teams." },
-      { title: "Integration design", description: "Data flows and API patterns for farm management systems, sensor networks, weather data providers, and logistics platforms." },
-      { title: "Seasonal adoption plan", description: "Phased rollout timed to your crop calendar, with training requirements by role and success metrics to track uptake." },
+      {
+        title: "Field operations workflow maps",
+        description:
+          "End-to-end flows covering crop monitoring, resource scheduling, exception handling, and harvest coordination across all relevant roles.",
+      },
+      {
+        title: "Resource scheduling specification",
+        description:
+          "Irrigation, input application, and equipment allocation rules documented for configuration or development teams.",
+      },
+      {
+        title: "Integration design",
+        description:
+          "Data flows and API patterns for farm management systems, sensor networks, weather data providers, and logistics platforms.",
+      },
+      {
+        title: "Seasonal adoption plan",
+        description:
+          "Phased rollout timed to your crop calendar, with training requirements by role and success metrics to track uptake.",
+      },
     ],
     packageHighlights: [
       "Design-only engagement: no platform commitment required",
@@ -573,13 +1038,28 @@ export const operations2Copy: CollectionCopyOverrides = {
     ],
     faqIntro: "Key questions about the farming operations design engagement.",
     faqs: [
-      { question: "Does the design work with our existing farm management system?", answer: "Yes. The DigitalQatalyst team designs around your current platform, documenting configuration changes and integration updates needed to close operational gaps." },
-      { question: "How are field operators involved in the design?", answer: "Field supervisors and operators are included in workflow workshops to ensure monitoring and scheduling flows work in practice, not just on paper." },
-      { question: "How do we get started?", answer: "Contact the DigitalQatalyst team to confirm the farming operation model, the systems in scope, and the seasonal timeline constraints before the engagement begins." },
+      {
+        question: "Does the design work with our existing farm management system?",
+        answer:
+          "Yes. The DigitalQatalyst team designs around your current platform, documenting configuration changes and integration updates needed to close operational gaps.",
+      },
+      {
+        question: "How are field operators involved in the design?",
+        answer:
+          "Field supervisors and operators are included in workflow workshops to ensure monitoring and scheduling flows work in practice, not just on paper.",
+      },
+      {
+        question: "How do we get started?",
+        answer:
+          "Contact the DigitalQatalyst team to confirm the farming operation model, the systems in scope, and the seasonal timeline constraints before the engagement begins.",
+      },
     ],
-    audience: "Agribusiness executives, farm operations managers, and agricultural technology programme leads",
-    industryRelevance: "Agribusiness, food production, crop operations, and agricultural service providers investing in operational platforms",
-    businessImpact: "Removes ambiguity before platform configuration begins, reducing rework and ensuring the solution works across seasonal cycles and field conditions.",
+    audience:
+      "Agribusiness executives, farm operations managers, and agricultural technology programme leads",
+    industryRelevance:
+      "Agribusiness, food production, crop operations, and agricultural service providers investing in operational platforms",
+    businessImpact:
+      "Removes ambiguity before platform configuration begins, reducing rework and ensuring the solution works across seasonal cycles and field conditions.",
     tags: ["agribusiness", "precision-agriculture", "farm-operations"],
   },
 
@@ -600,10 +1080,26 @@ export const operations2Copy: CollectionCopyOverrides = {
       "Week 4: Deployment specification sign-off and build-readiness confirmation",
     ],
     deliverables: [
-      { title: "Agricultural AI use-case feasibility register", description: "Each candidate scored on data availability, model complexity, and expected yield or cost improvement, with a clear go or no-go recommendation." },
-      { title: "Farm data readiness report", description: "Gaps in sensor coverage, imagery resolution, historical data depth, and integration availability that must be addressed before model development." },
-      { title: "Responsible farming AI workflows", description: "Designed flows for approved use cases with agronomist review points, confidence display for field operators, and documented override procedures." },
-      { title: "Deployment and monitoring specification", description: "Model selection guidance, performance thresholds, seasonal retraining triggers, and field-level monitoring requirements for production use." },
+      {
+        title: "Agricultural AI use-case feasibility register",
+        description:
+          "Each candidate scored on data availability, model complexity, and expected yield or cost improvement, with a clear go or no-go recommendation.",
+      },
+      {
+        title: "Farm data readiness report",
+        description:
+          "Gaps in sensor coverage, imagery resolution, historical data depth, and integration availability that must be addressed before model development.",
+      },
+      {
+        title: "Responsible farming AI workflows",
+        description:
+          "Designed flows for approved use cases with agronomist review points, confidence display for field operators, and documented override procedures.",
+      },
+      {
+        title: "Deployment and monitoring specification",
+        description:
+          "Model selection guidance, performance thresholds, seasonal retraining triggers, and field-level monitoring requirements for production use.",
+      },
     ],
     packageHighlights: [
       "Validates feasibility before any AI build investment is committed",
@@ -612,14 +1108,32 @@ export const operations2Copy: CollectionCopyOverrides = {
     ],
     faqIntro: "Key questions about the farming operations AI design engagement.",
     faqs: [
-      { question: "Which AI use cases are most commonly explored?", answer: "Yield forecasting by field and variety, variable-rate irrigation scheduling, early pest and disease detection from imagery, and harvest timing optimisation." },
-      { question: "What if our sensor and imagery coverage is incomplete?", answer: "The data readiness report identifies specific gaps. Many operations start with yield forecasting using historical records while sensor networks are expanded in parallel." },
-      { question: "How do agronomists interact with AI recommendations?", answer: "Agronomist review gates are designed into every workflow with confidence displays and one-click override capability so field expertise always has the final say." },
-      { question: "How do we get started?", answer: "Book a consultation with the DigitalQatalyst team to identify your highest-value AI use cases and share your current data landscape and sensor coverage." },
+      {
+        question: "Which AI use cases are most commonly explored?",
+        answer:
+          "Yield forecasting by field and variety, variable-rate irrigation scheduling, early pest and disease detection from imagery, and harvest timing optimisation.",
+      },
+      {
+        question: "What if our sensor and imagery coverage is incomplete?",
+        answer:
+          "The data readiness report identifies specific gaps. Many operations start with yield forecasting using historical records while sensor networks are expanded in parallel.",
+      },
+      {
+        question: "How do agronomists interact with AI recommendations?",
+        answer:
+          "Agronomist review gates are designed into every workflow with confidence displays and one-click override capability so field expertise always has the final say.",
+      },
+      {
+        question: "How do we get started?",
+        answer:
+          "Book a consultation with the DigitalQatalyst team to identify your highest-value AI use cases and share your current data landscape and sensor coverage.",
+      },
     ],
     audience: "Agribusiness executives, heads of agronomy, and farm operations technology leads",
-    industryRelevance: "Large-scale crop, horticulture, and mixed farming operations with sufficient data infrastructure to support AI model development",
-    businessImpact: "Prevents wasted investment by confirming data readiness before build, and produces responsible workflow designs that improve yield and reduce input costs without replacing agronomist judgement.",
+    industryRelevance:
+      "Large-scale crop, horticulture, and mixed farming operations with sufficient data infrastructure to support AI model development",
+    businessImpact:
+      "Prevents wasted investment by confirming data readiness before build, and produces responsible workflow designs that improve yield and reduce input costs without replacing agronomist judgement.",
     tags: ["precision-agriculture", "agricultural-ai", "farm-operations"],
   },
 
@@ -641,10 +1155,26 @@ export const operations2Copy: CollectionCopyOverrides = {
       "Week 12: Controlled go-live, hypercare, and operational handover",
     ],
     deliverables: [
-      { title: "Configured farming operations platform", description: "Production-ready crop monitoring, resource scheduling, and logistics coordination capability tested against approved specifications." },
-      { title: "Integration test evidence pack", description: "Test cases, results, and defect closure evidence for every connected system including farm management software, IoT networks, and logistics platforms." },
-      { title: "Field acceptance sign-off", description: "Documented UAT results from farm managers and field operators confirming the platform meets operational requirements across all relevant workflows." },
-      { title: "Operational handover kit", description: "Administrator guides, seasonal configuration checklist, support escalation paths, and a 30-day post-launch review schedule." },
+      {
+        title: "Configured farming operations platform",
+        description:
+          "Production-ready crop monitoring, resource scheduling, and logistics coordination capability tested against approved specifications.",
+      },
+      {
+        title: "Integration test evidence pack",
+        description:
+          "Test cases, results, and defect closure evidence for every connected system including farm management software, IoT networks, and logistics platforms.",
+      },
+      {
+        title: "Field acceptance sign-off",
+        description:
+          "Documented UAT results from farm managers and field operators confirming the platform meets operational requirements across all relevant workflows.",
+      },
+      {
+        title: "Operational handover kit",
+        description:
+          "Administrator guides, seasonal configuration checklist, support escalation paths, and a 30-day post-launch review schedule.",
+      },
     ],
     packageHighlights: [
       "Structured 12-week deployment with milestone-gated progress",
@@ -653,14 +1183,34 @@ export const operations2Copy: CollectionCopyOverrides = {
     ],
     faqIntro: "Key questions about the farming operations deployment.",
     faqs: [
-      { question: "How do you handle seasonal timing constraints for go-live?", answer: "The deployment plan maps milestones to your crop calendar. The DigitalQatalyst team avoids scheduling critical testing or go-live activities during planting or harvest peaks." },
-      { question: "What happens if sensor data quality issues are found during integration testing?", answer: "Data quality issues are documented, triaged, and resolved within the deployment scope where possible. Issues requiring infrastructure changes are escalated to the project sponsor." },
-      { question: "How are field operators trained on the new platform?", answer: "Role-specific training is included in the deployment plan, with field-accessible guides and refresher support available during the hypercare period." },
-      { question: "How do we get started?", answer: "Contact the DigitalQatalyst team to confirm the platform, integration scope, and seasonal calendar constraints before deployment planning begins." },
+      {
+        question: "How do you handle seasonal timing constraints for go-live?",
+        answer:
+          "The deployment plan maps milestones to your crop calendar. The DigitalQatalyst team avoids scheduling critical testing or go-live activities during planting or harvest peaks.",
+      },
+      {
+        question:
+          "What happens if sensor data quality issues are found during integration testing?",
+        answer:
+          "Data quality issues are documented, triaged, and resolved within the deployment scope where possible. Issues requiring infrastructure changes are escalated to the project sponsor.",
+      },
+      {
+        question: "How are field operators trained on the new platform?",
+        answer:
+          "Role-specific training is included in the deployment plan, with field-accessible guides and refresher support available during the hypercare period.",
+      },
+      {
+        question: "How do we get started?",
+        answer:
+          "Contact the DigitalQatalyst team to confirm the platform, integration scope, and seasonal calendar constraints before deployment planning begins.",
+      },
     ],
-    audience: "Agribusiness executives, farm operations managers, and agricultural technology programme leads",
-    industryRelevance: "Agribusiness, food production, and crop operations organisations implementing or replacing farm management and field monitoring platforms",
-    businessImpact: "Delivers a fully integrated, tested farming operations platform that improves yield visibility and resource scheduling accuracy from the first full season of use.",
+    audience:
+      "Agribusiness executives, farm operations managers, and agricultural technology programme leads",
+    industryRelevance:
+      "Agribusiness, food production, and crop operations organisations implementing or replacing farm management and field monitoring platforms",
+    businessImpact:
+      "Delivers a fully integrated, tested farming operations platform that improves yield visibility and resource scheduling accuracy from the first full season of use.",
     tags: ["agribusiness", "farm-operations", "precision-agriculture"],
   },
 
@@ -682,10 +1232,26 @@ export const operations2Copy: CollectionCopyOverrides = {
       "Weeks 11-12: Governance handover, monitoring confirmation, and retraining schedule agreement",
     ],
     deliverables: [
-      { title: "Production farming AI capabilities", description: "Approved models live in your farm management environment with data pipelines, result logging, and field-facing interfaces active." },
-      { title: "Field performance monitoring dashboard", description: "Real-time view of model recommendation accuracy, agronomist override rates, and yield or resource efficiency impact by field." },
-      { title: "Agronomist override playbook", description: "Procedures for accepting, overriding, and providing feedback on AI recommendations, with escalation steps for model quality concerns." },
-      { title: "AI governance handover pack", description: "Model cards, data lineage documentation, seasonal retraining schedule, and accountability assignments for ongoing responsible operation." },
+      {
+        title: "Production farming AI capabilities",
+        description:
+          "Approved models live in your farm management environment with data pipelines, result logging, and field-facing interfaces active.",
+      },
+      {
+        title: "Field performance monitoring dashboard",
+        description:
+          "Real-time view of model recommendation accuracy, agronomist override rates, and yield or resource efficiency impact by field.",
+      },
+      {
+        title: "Agronomist override playbook",
+        description:
+          "Procedures for accepting, overriding, and providing feedback on AI recommendations, with escalation steps for model quality concerns.",
+      },
+      {
+        title: "AI governance handover pack",
+        description:
+          "Model cards, data lineage documentation, seasonal retraining schedule, and accountability assignments for ongoing responsible operation.",
+      },
     ],
     packageHighlights: [
       "Pilot field rollout before full farm deployment",
@@ -694,14 +1260,32 @@ export const operations2Copy: CollectionCopyOverrides = {
     ],
     faqIntro: "Key questions about the farming operations AI deployment.",
     faqs: [
-      { question: "How do agronomists override AI recommendations in the field?", answer: "Override controls are accessible in the field management interface and mobile tools. All overrides are logged and feed the model's seasonal improvement cycle." },
-      { question: "How do seasonal changes affect model accuracy?", answer: "Retraining schedules are designed around your crop calendar. The monitoring dashboard surfaces accuracy drift, and the DigitalQatalyst team initiates retraining at agreed trigger points." },
-      { question: "What happens during extreme weather or unusual growing conditions?", answer: "Confidence thresholds lower when input data falls outside training ranges, prompting agronomist review rather than automated recommendations in edge cases." },
-      { question: "How do we get started?", answer: "Contact the DigitalQatalyst team with your approved AI design specification to plan the production environment, pilot field selection, and data pipeline configuration." },
+      {
+        question: "How do agronomists override AI recommendations in the field?",
+        answer:
+          "Override controls are accessible in the field management interface and mobile tools. All overrides are logged and feed the model's seasonal improvement cycle.",
+      },
+      {
+        question: "How do seasonal changes affect model accuracy?",
+        answer:
+          "Retraining schedules are designed around your crop calendar. The monitoring dashboard surfaces accuracy drift, and the DigitalQatalyst team initiates retraining at agreed trigger points.",
+      },
+      {
+        question: "What happens during extreme weather or unusual growing conditions?",
+        answer:
+          "Confidence thresholds lower when input data falls outside training ranges, prompting agronomist review rather than automated recommendations in edge cases.",
+      },
+      {
+        question: "How do we get started?",
+        answer:
+          "Contact the DigitalQatalyst team with your approved AI design specification to plan the production environment, pilot field selection, and data pipeline configuration.",
+      },
     ],
     audience: "Agribusiness executives, heads of agronomy, and farm operations technology leads",
-    industryRelevance: "Large-scale crop, horticulture, and mixed farming operations with data infrastructure in place to support AI model deployment",
-    businessImpact: "Improves yield through better forecasting and resource scheduling, reduces input waste through precision application, and keeps agronomist expertise central to every operational decision.",
+    industryRelevance:
+      "Large-scale crop, horticulture, and mixed farming operations with data infrastructure in place to support AI model deployment",
+    businessImpact:
+      "Improves yield through better forecasting and resource scheduling, reduces input waste through precision application, and keeps agronomist expertise central to every operational decision.",
     tags: ["precision-agriculture", "agricultural-ai", "farm-operations"],
   },
 
@@ -722,10 +1306,26 @@ export const operations2Copy: CollectionCopyOverrides = {
       "Ongoing: Monthly performance reports, seasonal configuration updates, and annual capability review",
     ],
     deliverables: [
-      { title: "Monthly farming operations report", description: "Yield tracking accuracy, resource consumption versus plan, equipment utilisation, and system health metrics with commentary and recommended actions." },
-      { title: "Incident and change log", description: "Transparent record of system incidents, configuration changes, and SLA performance for each reporting period." },
-      { title: "Seasonal configuration update", description: "Platform updates reflecting new crop programmes, field boundary changes, or equipment additions before each new season begins." },
-      { title: "Annual operations roadmap", description: "Forward-looking plan covering platform capability additions, data quality improvements, and structural changes aligned to the farming business plan." },
+      {
+        title: "Monthly farming operations report",
+        description:
+          "Yield tracking accuracy, resource consumption versus plan, equipment utilisation, and system health metrics with commentary and recommended actions.",
+      },
+      {
+        title: "Incident and change log",
+        description:
+          "Transparent record of system incidents, configuration changes, and SLA performance for each reporting period.",
+      },
+      {
+        title: "Seasonal configuration update",
+        description:
+          "Platform updates reflecting new crop programmes, field boundary changes, or equipment additions before each new season begins.",
+      },
+      {
+        title: "Annual operations roadmap",
+        description:
+          "Forward-looking plan covering platform capability additions, data quality improvements, and structural changes aligned to the farming business plan.",
+      },
     ],
     packageHighlights: [
       "SLA-backed operations with defined incident response times",
@@ -734,14 +1334,33 @@ export const operations2Copy: CollectionCopyOverrides = {
     ],
     faqIntro: "Key questions about the farming operations managed service.",
     faqs: [
-      { question: "What is covered under the managed service?", answer: "Platform monitoring, incident response, seasonal configuration updates, monthly reporting, and annual optimisation reviews. Full scope is confirmed in the service agreement." },
-      { question: "How are configuration updates timed around the crop calendar?", answer: "The DigitalQatalyst team schedules all configuration changes outside critical planting and harvest windows, confirmed with operations leads at the start of each season." },
-      { question: "Can the service scale as we add new farms or crops?", answer: "Yes. Additional farms, fields, or crop programmes are onboarded under the service. Large structural changes are scoped and priced separately." },
-      { question: "How do we get started?", answer: "Contact the DigitalQatalyst team to confirm the platform in scope, the current configuration baseline, and the seasonal calendar before the service agreement is drafted." },
+      {
+        question: "What is covered under the managed service?",
+        answer:
+          "Platform monitoring, incident response, seasonal configuration updates, monthly reporting, and annual optimisation reviews. Full scope is confirmed in the service agreement.",
+      },
+      {
+        question: "How are configuration updates timed around the crop calendar?",
+        answer:
+          "The DigitalQatalyst team schedules all configuration changes outside critical planting and harvest windows, confirmed with operations leads at the start of each season.",
+      },
+      {
+        question: "Can the service scale as we add new farms or crops?",
+        answer:
+          "Yes. Additional farms, fields, or crop programmes are onboarded under the service. Large structural changes are scoped and priced separately.",
+      },
+      {
+        question: "How do we get started?",
+        answer:
+          "Contact the DigitalQatalyst team to confirm the platform in scope, the current configuration baseline, and the seasonal calendar before the service agreement is drafted.",
+      },
     ],
-    audience: "Agribusiness executives and farm operations managers running live farming management platforms",
-    industryRelevance: "Agribusiness, food production, and crop operations organisations that require consistent platform performance across seasonal cycles",
-    businessImpact: "Maintains yield tracking and resource management accuracy across seasons, reduces internal IT burden, and surfaces platform improvements before they affect operational performance.",
+    audience:
+      "Agribusiness executives and farm operations managers running live farming management platforms",
+    industryRelevance:
+      "Agribusiness, food production, and crop operations organisations that require consistent platform performance across seasonal cycles",
+    businessImpact:
+      "Maintains yield tracking and resource management accuracy across seasons, reduces internal IT burden, and surfaces platform improvements before they affect operational performance.",
     tags: ["agribusiness", "farm-operations", "managed-service"],
   },
 
@@ -766,10 +1385,26 @@ export const operations2Copy: CollectionCopyOverrides = {
       "Day 5: Findings presentation, prioritised roadmap walkthrough, and next-step agreement",
     ],
     deliverables: [
-      { title: "Manufacturing maturity scorecard", description: "Ratings across throughput management, quality control, downtime visibility, and production coordination, with evidence and specific gaps." },
-      { title: "OEE and downtime gap report", description: "Analysis of availability, performance, and quality losses across lines and shifts, with root-cause identification for the highest-impact losses." },
-      { title: "Prioritised improvement roadmap", description: "Sequenced actions with owners, effort estimates, and dependencies your plant team can execute within normal production schedules." },
-      { title: "Leadership briefing pack", description: "A concise summary of findings and recommended investment for plant, operations, and finance leadership." },
+      {
+        title: "Manufacturing maturity scorecard",
+        description:
+          "Ratings across throughput management, quality control, downtime visibility, and production coordination, with evidence and specific gaps.",
+      },
+      {
+        title: "OEE and downtime gap report",
+        description:
+          "Analysis of availability, performance, and quality losses across lines and shifts, with root-cause identification for the highest-impact losses.",
+      },
+      {
+        title: "Prioritised improvement roadmap",
+        description:
+          "Sequenced actions with owners, effort estimates, and dependencies your plant team can execute within normal production schedules.",
+      },
+      {
+        title: "Leadership briefing pack",
+        description:
+          "A concise summary of findings and recommended investment for plant, operations, and finance leadership.",
+      },
     ],
     packageHighlights: [
       "Fixed-scope assessment delivered within one week",
@@ -778,14 +1413,33 @@ export const operations2Copy: CollectionCopyOverrides = {
     ],
     faqIntro: "Key questions about the manufacturing operations assessment.",
     faqs: [
-      { question: "What types of manufacturing environments does the assessment cover?", answer: "Discrete, process, and mixed manufacturing. The DigitalQatalyst team confirms the applicable production model and equipment categories during scoping." },
-      { question: "Do you need to access our MES or ERP systems?", answer: "We review system-generated reports and operational records rather than live production systems. Any access required is read-only and agreed in advance." },
-      { question: "What do we get at the end?", answer: "A manufacturing maturity scorecard, an OEE and downtime gap report, a prioritised improvement roadmap, and a leadership briefing pack." },
-      { question: "How do we get started?", answer: "Request a consultation. The DigitalQatalyst team will confirm the plant scope, production environment type, and key stakeholders before work begins." },
+      {
+        question: "What types of manufacturing environments does the assessment cover?",
+        answer:
+          "Discrete, process, and mixed manufacturing. The DigitalQatalyst team confirms the applicable production model and equipment categories during scoping.",
+      },
+      {
+        question: "Do you need to access our MES or ERP systems?",
+        answer:
+          "We review system-generated reports and operational records rather than live production systems. Any access required is read-only and agreed in advance.",
+      },
+      {
+        question: "What do we get at the end?",
+        answer:
+          "A manufacturing maturity scorecard, an OEE and downtime gap report, a prioritised improvement roadmap, and a leadership briefing pack.",
+      },
+      {
+        question: "How do we get started?",
+        answer:
+          "Request a consultation. The DigitalQatalyst team will confirm the plant scope, production environment type, and key stakeholders before work begins.",
+      },
     ],
-    audience: "Plant managers, heads of manufacturing, operations directors, and continuous improvement leads",
-    industryRelevance: "Manufacturers, industrial operators, and production environments across discrete, process, and mixed manufacturing sectors",
-    businessImpact: "Surfaces the throughput and quality losses costing the most per shift, so improvement investment goes to the changes with the greatest return on production capacity.",
+    audience:
+      "Plant managers, heads of manufacturing, operations directors, and continuous improvement leads",
+    industryRelevance:
+      "Manufacturers, industrial operators, and production environments across discrete, process, and mixed manufacturing sectors",
+    businessImpact:
+      "Surfaces the throughput and quality losses costing the most per shift, so improvement investment goes to the changes with the greatest return on production capacity.",
     tags: ["manufacturing", "oee", "plant-operations"],
   },
 
@@ -806,10 +1460,26 @@ export const operations2Copy: CollectionCopyOverrides = {
       "Week 4: Final blueprint review, adoption planning, and build-readiness sign-off",
     ],
     deliverables: [
-      { title: "Production workflow maps", description: "End-to-end flows for scheduling, WIP tracking, shift handover, and exception management across all in-scope lines and work centres." },
-      { title: "Quality control specification", description: "Inspection point definitions, defect classification rules, and corrective action escalation flows documented for configuration teams." },
-      { title: "Maintenance scheduling specification", description: "Preventive and condition-based maintenance rules by equipment class, with production calendar integration logic." },
-      { title: "Plant adoption plan", description: "Line-by-line rollout sequence, operator training requirements, and success metrics to track uptake without disrupting production targets." },
+      {
+        title: "Production workflow maps",
+        description:
+          "End-to-end flows for scheduling, WIP tracking, shift handover, and exception management across all in-scope lines and work centres.",
+      },
+      {
+        title: "Quality control specification",
+        description:
+          "Inspection point definitions, defect classification rules, and corrective action escalation flows documented for configuration teams.",
+      },
+      {
+        title: "Maintenance scheduling specification",
+        description:
+          "Preventive and condition-based maintenance rules by equipment class, with production calendar integration logic.",
+      },
+      {
+        title: "Plant adoption plan",
+        description:
+          "Line-by-line rollout sequence, operator training requirements, and success metrics to track uptake without disrupting production targets.",
+      },
     ],
     packageHighlights: [
       "Design-only engagement: no MES or ERP commitment required",
@@ -818,13 +1488,28 @@ export const operations2Copy: CollectionCopyOverrides = {
     ],
     faqIntro: "Key questions about the manufacturing operations design engagement.",
     faqs: [
-      { question: "Does the design tie us to a specific MES platform?", answer: "No. The DigitalQatalyst team designs to your requirements first. Platform selection is informed by the design and your existing ERP landscape." },
-      { question: "How are operators involved in the design process?", answer: "Line operators and shift supervisors participate in workflow workshops to ensure designs reflect actual production conditions, not just management expectations." },
-      { question: "How do we get started?", answer: "Contact the DigitalQatalyst team to confirm the lines in scope, the MES and ERP platforms in use, and any production calendar constraints before the engagement begins." },
+      {
+        question: "Does the design tie us to a specific MES platform?",
+        answer:
+          "No. The DigitalQatalyst team designs to your requirements first. Platform selection is informed by the design and your existing ERP landscape.",
+      },
+      {
+        question: "How are operators involved in the design process?",
+        answer:
+          "Line operators and shift supervisors participate in workflow workshops to ensure designs reflect actual production conditions, not just management expectations.",
+      },
+      {
+        question: "How do we get started?",
+        answer:
+          "Contact the DigitalQatalyst team to confirm the lines in scope, the MES and ERP platforms in use, and any production calendar constraints before the engagement begins.",
+      },
     ],
-    audience: "Plant managers, heads of manufacturing, continuous improvement leads, and operations IT managers",
-    industryRelevance: "Manufacturers implementing or replacing MES platforms or improving production, quality, and maintenance workflow digitalisation",
-    businessImpact: "Removes specification ambiguity before MES configuration begins, reducing implementation rework and ensuring production, quality, and maintenance workflows are aligned before go-live.",
+    audience:
+      "Plant managers, heads of manufacturing, continuous improvement leads, and operations IT managers",
+    industryRelevance:
+      "Manufacturers implementing or replacing MES platforms or improving production, quality, and maintenance workflow digitalisation",
+    businessImpact:
+      "Removes specification ambiguity before MES configuration begins, reducing implementation rework and ensuring production, quality, and maintenance workflows are aligned before go-live.",
     tags: ["manufacturing", "oee", "plant-operations"],
   },
 
@@ -845,10 +1530,26 @@ export const operations2Copy: CollectionCopyOverrides = {
       "Week 4: Deployment specification sign-off and build-readiness confirmation",
     ],
     deliverables: [
-      { title: "Manufacturing AI use-case feasibility register", description: "Each candidate scored on sensor data availability, model complexity, and expected OEE or quality improvement, with a clear go or no-go recommendation." },
-      { title: "Plant data readiness report", description: "Gaps in sensor coverage, data labelling, MES integration, and historical quality records that must be resolved before model development." },
-      { title: "Responsible manufacturing AI workflows", description: "Designed flows for approved use cases with quality engineer review points, confidence displays for operators, and documented override procedures." },
-      { title: "Deployment and monitoring specification", description: "Model selection guidance, performance thresholds, production-aligned retraining triggers, and line-level monitoring requirements for production use." },
+      {
+        title: "Manufacturing AI use-case feasibility register",
+        description:
+          "Each candidate scored on sensor data availability, model complexity, and expected OEE or quality improvement, with a clear go or no-go recommendation.",
+      },
+      {
+        title: "Plant data readiness report",
+        description:
+          "Gaps in sensor coverage, data labelling, MES integration, and historical quality records that must be resolved before model development.",
+      },
+      {
+        title: "Responsible manufacturing AI workflows",
+        description:
+          "Designed flows for approved use cases with quality engineer review points, confidence displays for operators, and documented override procedures.",
+      },
+      {
+        title: "Deployment and monitoring specification",
+        description:
+          "Model selection guidance, performance thresholds, production-aligned retraining triggers, and line-level monitoring requirements for production use.",
+      },
     ],
     packageHighlights: [
       "Validates feasibility before any AI build investment is committed",
@@ -857,14 +1558,33 @@ export const operations2Copy: CollectionCopyOverrides = {
     ],
     faqIntro: "Key questions about the manufacturing operations AI design engagement.",
     faqs: [
-      { question: "Which AI use cases are most commonly explored?", answer: "Predictive maintenance from vibration and temperature data, AI-powered visual defect detection, demand-based scheduling optimisation, and OEE anomaly alerting." },
-      { question: "What if our sensor infrastructure is limited?", answer: "The data readiness report identifies the minimum sensor coverage needed for each use case. Many plants start with predictive maintenance on high-value equipment while expanding coverage." },
-      { question: "How do quality engineers interact with AI inspection recommendations?", answer: "AI inspection results appear alongside images in the quality workflow with confidence scores. Engineers can confirm, override, or escalate, with all decisions logged for audit." },
-      { question: "How do we get started?", answer: "Book a consultation with the DigitalQatalyst team to identify your highest-value AI use cases and share your current sensor, MES, and quality data landscape." },
+      {
+        question: "Which AI use cases are most commonly explored?",
+        answer:
+          "Predictive maintenance from vibration and temperature data, AI-powered visual defect detection, demand-based scheduling optimisation, and OEE anomaly alerting.",
+      },
+      {
+        question: "What if our sensor infrastructure is limited?",
+        answer:
+          "The data readiness report identifies the minimum sensor coverage needed for each use case. Many plants start with predictive maintenance on high-value equipment while expanding coverage.",
+      },
+      {
+        question: "How do quality engineers interact with AI inspection recommendations?",
+        answer:
+          "AI inspection results appear alongside images in the quality workflow with confidence scores. Engineers can confirm, override, or escalate, with all decisions logged for audit.",
+      },
+      {
+        question: "How do we get started?",
+        answer:
+          "Book a consultation with the DigitalQatalyst team to identify your highest-value AI use cases and share your current sensor, MES, and quality data landscape.",
+      },
     ],
-    audience: "Plant managers, heads of manufacturing, quality managers, and operations technology leads",
-    industryRelevance: "Manufacturers with sensor instrumentation and MES data in place, looking to apply AI to reduce downtime and improve quality outcomes",
-    businessImpact: "Prevents wasted AI investment by confirming data readiness before build, and produces responsible workflow designs that improve OEE and quality without removing operator and engineer oversight.",
+    audience:
+      "Plant managers, heads of manufacturing, quality managers, and operations technology leads",
+    industryRelevance:
+      "Manufacturers with sensor instrumentation and MES data in place, looking to apply AI to reduce downtime and improve quality outcomes",
+    businessImpact:
+      "Prevents wasted AI investment by confirming data readiness before build, and produces responsible workflow designs that improve OEE and quality without removing operator and engineer oversight.",
     tags: ["manufacturing-ai", "predictive-maintenance", "plant-operations"],
   },
 
@@ -886,10 +1606,26 @@ export const operations2Copy: CollectionCopyOverrides = {
       "Week 12: Controlled go-live, hypercare, and operational handover",
     ],
     deliverables: [
-      { title: "Configured manufacturing operations platform", description: "Production-ready MES with scheduling, WIP tracking, quality control, and maintenance modules configured and tested against approved specifications." },
-      { title: "Integration test evidence pack", description: "Test cases, execution results, and defect closure evidence for every connected system including ERP, SCADA, and maintenance management." },
-      { title: "Operator acceptance sign-off", description: "Documented UAT results from operators, supervisors, and quality staff confirming the platform meets production requirements across all lines." },
-      { title: "Operational handover kit", description: "Administrator guides, shift-change procedures, support escalation paths, and a 30-day post-launch review schedule." },
+      {
+        title: "Configured manufacturing operations platform",
+        description:
+          "Production-ready MES with scheduling, WIP tracking, quality control, and maintenance modules configured and tested against approved specifications.",
+      },
+      {
+        title: "Integration test evidence pack",
+        description:
+          "Test cases, execution results, and defect closure evidence for every connected system including ERP, SCADA, and maintenance management.",
+      },
+      {
+        title: "Operator acceptance sign-off",
+        description:
+          "Documented UAT results from operators, supervisors, and quality staff confirming the platform meets production requirements across all lines.",
+      },
+      {
+        title: "Operational handover kit",
+        description:
+          "Administrator guides, shift-change procedures, support escalation paths, and a 30-day post-launch review schedule.",
+      },
     ],
     packageHighlights: [
       "Structured 12-week deployment with milestone-gated progress",
@@ -898,14 +1634,34 @@ export const operations2Copy: CollectionCopyOverrides = {
     ],
     faqIntro: "Key questions about the manufacturing operations deployment.",
     faqs: [
-      { question: "How do you minimise disruption to production during deployment?", answer: "Configuration and integration work is done in a staging environment. Cutover is scheduled during planned maintenance windows and validated with a parallel-run period before full go-live." },
-      { question: "What happens if sensor or SCADA integration issues are discovered during testing?", answer: "Integration issues are documented and triaged. The DigitalQatalyst team resolves issues within deployment scope. Changes affecting production infrastructure are escalated for separate planning." },
-      { question: "How are shift workers trained without impacting production targets?", answer: "Training sessions are scheduled around shift patterns. Role-specific quick-reference guides are available on the shop floor from day one of go-live." },
-      { question: "How do we get started?", answer: "Contact the DigitalQatalyst team to confirm the MES platform, integration scope, and production calendar constraints before deployment planning begins." },
+      {
+        question: "How do you minimise disruption to production during deployment?",
+        answer:
+          "Configuration and integration work is done in a staging environment. Cutover is scheduled during planned maintenance windows and validated with a parallel-run period before full go-live.",
+      },
+      {
+        question:
+          "What happens if sensor or SCADA integration issues are discovered during testing?",
+        answer:
+          "Integration issues are documented and triaged. The DigitalQatalyst team resolves issues within deployment scope. Changes affecting production infrastructure are escalated for separate planning.",
+      },
+      {
+        question: "How are shift workers trained without impacting production targets?",
+        answer:
+          "Training sessions are scheduled around shift patterns. Role-specific quick-reference guides are available on the shop floor from day one of go-live.",
+      },
+      {
+        question: "How do we get started?",
+        answer:
+          "Contact the DigitalQatalyst team to confirm the MES platform, integration scope, and production calendar constraints before deployment planning begins.",
+      },
     ],
-    audience: "Plant managers, heads of manufacturing, operations IT managers, and continuous improvement leads",
-    industryRelevance: "Manufacturers implementing or replacing MES platforms across discrete, process, or mixed production environments",
-    businessImpact: "Delivers a fully integrated, tested manufacturing platform that improves production visibility, quality control accuracy, and maintenance scheduling from the first week of live operation.",
+    audience:
+      "Plant managers, heads of manufacturing, operations IT managers, and continuous improvement leads",
+    industryRelevance:
+      "Manufacturers implementing or replacing MES platforms across discrete, process, or mixed production environments",
+    businessImpact:
+      "Delivers a fully integrated, tested manufacturing platform that improves production visibility, quality control accuracy, and maintenance scheduling from the first week of live operation.",
     tags: ["manufacturing", "oee", "plant-operations"],
   },
 
@@ -927,10 +1683,26 @@ export const operations2Copy: CollectionCopyOverrides = {
       "Weeks 11-12: Governance handover, monitoring confirmation, and retraining schedule agreement",
     ],
     deliverables: [
-      { title: "Production manufacturing AI capabilities", description: "Approved models live in your plant environment with sensor data pipelines, alert logging, and operator and engineer-facing interfaces active." },
-      { title: "Plant performance monitoring dashboard", description: "Real-time view of model accuracy, maintenance prediction hit rates, visual inspection confidence, and production scheduling deviation by line." },
-      { title: "Engineer and operator override playbook", description: "Procedures for accepting, overriding, and feeding back on AI recommendations, with escalation steps for model quality concerns." },
-      { title: "AI governance handover pack", description: "Model cards, sensor data lineage, retraining schedule, and accountability assignments for ongoing responsible plant operation." },
+      {
+        title: "Production manufacturing AI capabilities",
+        description:
+          "Approved models live in your plant environment with sensor data pipelines, alert logging, and operator and engineer-facing interfaces active.",
+      },
+      {
+        title: "Plant performance monitoring dashboard",
+        description:
+          "Real-time view of model accuracy, maintenance prediction hit rates, visual inspection confidence, and production scheduling deviation by line.",
+      },
+      {
+        title: "Engineer and operator override playbook",
+        description:
+          "Procedures for accepting, overriding, and feeding back on AI recommendations, with escalation steps for model quality concerns.",
+      },
+      {
+        title: "AI governance handover pack",
+        description:
+          "Model cards, sensor data lineage, retraining schedule, and accountability assignments for ongoing responsible plant operation.",
+      },
     ],
     packageHighlights: [
       "Pilot line rollout before full plant deployment",
@@ -939,14 +1711,32 @@ export const operations2Copy: CollectionCopyOverrides = {
     ],
     faqIntro: "Key questions about the manufacturing operations AI deployment.",
     faqs: [
-      { question: "How do maintenance technicians interact with predictive maintenance alerts?", answer: "Alerts surface in the maintenance management system with confidence scores, recommended actions, and one-click override. All actions are logged for model improvement." },
-      { question: "What happens if a predictive maintenance model produces frequent false alarms?", answer: "False-alarm rates are tracked in the monitoring dashboard. The DigitalQatalyst team adjusts model thresholds during the pilot phase before full plant rollout." },
-      { question: "How is model accuracy maintained as equipment ages or is replaced?", answer: "Retraining triggers are defined in the governance handover pack. Equipment change events automatically flag affected models for review and retraining." },
-      { question: "How do we get started?", answer: "Contact the DigitalQatalyst team with your approved AI design specification to plan the production environment, sensor pipeline access, and pilot line selection." },
+      {
+        question: "How do maintenance technicians interact with predictive maintenance alerts?",
+        answer:
+          "Alerts surface in the maintenance management system with confidence scores, recommended actions, and one-click override. All actions are logged for model improvement.",
+      },
+      {
+        question: "What happens if a predictive maintenance model produces frequent false alarms?",
+        answer:
+          "False-alarm rates are tracked in the monitoring dashboard. The DigitalQatalyst team adjusts model thresholds during the pilot phase before full plant rollout.",
+      },
+      {
+        question: "How is model accuracy maintained as equipment ages or is replaced?",
+        answer:
+          "Retraining triggers are defined in the governance handover pack. Equipment change events automatically flag affected models for review and retraining.",
+      },
+      {
+        question: "How do we get started?",
+        answer:
+          "Contact the DigitalQatalyst team with your approved AI design specification to plan the production environment, sensor pipeline access, and pilot line selection.",
+      },
     ],
     audience: "Plant managers, heads of manufacturing, quality managers, and maintenance managers",
-    industryRelevance: "Manufacturers with sensor instrumentation and MES data infrastructure deploying AI to reduce unplanned downtime and improve quality outcomes",
-    businessImpact: "Reduces unplanned downtime through accurate maintenance prediction, cuts quality escape rates through consistent visual inspection, and improves scheduling efficiency, with engineer oversight maintained at every decision point.",
+    industryRelevance:
+      "Manufacturers with sensor instrumentation and MES data infrastructure deploying AI to reduce unplanned downtime and improve quality outcomes",
+    businessImpact:
+      "Reduces unplanned downtime through accurate maintenance prediction, cuts quality escape rates through consistent visual inspection, and improves scheduling efficiency, with engineer oversight maintained at every decision point.",
     tags: ["manufacturing-ai", "predictive-maintenance", "plant-operations"],
   },
 
@@ -967,10 +1757,26 @@ export const operations2Copy: CollectionCopyOverrides = {
       "Ongoing: Monthly OEE and quality reports, quarterly optimisation sessions, and annual plant roadmap",
     ],
     deliverables: [
-      { title: "Monthly manufacturing performance report", description: "OEE by line and shift, quality defect trends, maintenance adherence, and system health metrics with commentary and prioritised actions." },
-      { title: "Incident and change log", description: "Transparent record of system incidents, configuration changes, and SLA performance across each reporting period." },
-      { title: "Quarterly plant optimisation review", description: "Analysis of production bottlenecks, quality control gaps, and maintenance scheduling accuracy with prioritised improvement actions." },
-      { title: "Annual manufacturing technology roadmap", description: "Forward-looking plan covering platform upgrades, new production line integrations, and capability additions aligned to the plant business plan." },
+      {
+        title: "Monthly manufacturing performance report",
+        description:
+          "OEE by line and shift, quality defect trends, maintenance adherence, and system health metrics with commentary and prioritised actions.",
+      },
+      {
+        title: "Incident and change log",
+        description:
+          "Transparent record of system incidents, configuration changes, and SLA performance across each reporting period.",
+      },
+      {
+        title: "Quarterly plant optimisation review",
+        description:
+          "Analysis of production bottlenecks, quality control gaps, and maintenance scheduling accuracy with prioritised improvement actions.",
+      },
+      {
+        title: "Annual manufacturing technology roadmap",
+        description:
+          "Forward-looking plan covering platform upgrades, new production line integrations, and capability additions aligned to the plant business plan.",
+      },
     ],
     packageHighlights: [
       "SLA-backed operations with defined incident response times",
@@ -979,14 +1785,33 @@ export const operations2Copy: CollectionCopyOverrides = {
     ],
     faqIntro: "Key questions about the manufacturing operations managed service.",
     faqs: [
-      { question: "What is covered under the managed service?", answer: "Platform monitoring, incident response, configuration updates, monthly reporting, and quarterly optimisation reviews. Full scope is confirmed in the service agreement." },
-      { question: "How are configuration changes handled during production?", answer: "All configuration changes are tested in a staging environment and scheduled for production during planned maintenance windows, confirmed with plant leads in advance." },
-      { question: "Can the service scale to cover new production lines or sites?", answer: "Yes. New lines or sites are onboarded under the service. Large expansions are scoped and priced separately." },
-      { question: "How do we get started?", answer: "Contact the DigitalQatalyst team to confirm the platform scope, current configuration baseline, and production calendar before the service agreement is drafted." },
+      {
+        question: "What is covered under the managed service?",
+        answer:
+          "Platform monitoring, incident response, configuration updates, monthly reporting, and quarterly optimisation reviews. Full scope is confirmed in the service agreement.",
+      },
+      {
+        question: "How are configuration changes handled during production?",
+        answer:
+          "All configuration changes are tested in a staging environment and scheduled for production during planned maintenance windows, confirmed with plant leads in advance.",
+      },
+      {
+        question: "Can the service scale to cover new production lines or sites?",
+        answer:
+          "Yes. New lines or sites are onboarded under the service. Large expansions are scoped and priced separately.",
+      },
+      {
+        question: "How do we get started?",
+        answer:
+          "Contact the DigitalQatalyst team to confirm the platform scope, current configuration baseline, and production calendar before the service agreement is drafted.",
+      },
     ],
-    audience: "Plant managers, heads of manufacturing, and operations IT managers running live production management platforms",
-    industryRelevance: "Manufacturers requiring consistent MES performance, OEE visibility, and quality control accuracy across production operations",
-    businessImpact: "Maintains production visibility and quality control accuracy as operations scale, reduces IT overhead on platform maintenance, and surfaces throughput improvements before they impact production targets.",
+    audience:
+      "Plant managers, heads of manufacturing, and operations IT managers running live production management platforms",
+    industryRelevance:
+      "Manufacturers requiring consistent MES performance, OEE visibility, and quality control accuracy across production operations",
+    businessImpact:
+      "Maintains production visibility and quality control accuracy as operations scale, reduces IT overhead on platform maintenance, and surfaces throughput improvements before they impact production targets.",
     tags: ["manufacturing", "oee", "managed-service"],
   },
 
@@ -1011,10 +1836,26 @@ export const operations2Copy: CollectionCopyOverrides = {
       "Day 5: Findings presentation, prioritised roadmap walkthrough, and next-step agreement",
     ],
     deliverables: [
-      { title: "Infrastructure operations maturity scorecard", description: "Ratings across asset visibility, maintenance planning, field productivity, and service continuity controls, with evidence and specific gaps." },
-      { title: "Asset and maintenance gap report", description: "Documented gaps in condition monitoring, work order management, parts planning, and field scheduling, ranked by reliability and service risk." },
-      { title: "Prioritised improvement roadmap", description: "Sequenced actions with owners, effort estimates, and dependencies your operations team can act on within normal maintenance cycles." },
-      { title: "Leadership briefing pack", description: "A concise summary of findings and recommended investment for asset management and operations leadership." },
+      {
+        title: "Infrastructure operations maturity scorecard",
+        description:
+          "Ratings across asset visibility, maintenance planning, field productivity, and service continuity controls, with evidence and specific gaps.",
+      },
+      {
+        title: "Asset and maintenance gap report",
+        description:
+          "Documented gaps in condition monitoring, work order management, parts planning, and field scheduling, ranked by reliability and service risk.",
+      },
+      {
+        title: "Prioritised improvement roadmap",
+        description:
+          "Sequenced actions with owners, effort estimates, and dependencies your operations team can act on within normal maintenance cycles.",
+      },
+      {
+        title: "Leadership briefing pack",
+        description:
+          "A concise summary of findings and recommended investment for asset management and operations leadership.",
+      },
     ],
     packageHighlights: [
       "Fixed-scope assessment delivered within one week",
@@ -1023,14 +1864,33 @@ export const operations2Copy: CollectionCopyOverrides = {
     ],
     faqIntro: "Key questions about the infrastructure operations assessment.",
     faqs: [
-      { question: "What types of infrastructure assets does the assessment cover?", answer: "Utilities, transport, real estate, facilities, energy, and other asset-intensive environments. The DigitalQatalyst team confirms the asset classes in scope during scoping." },
-      { question: "Do you need access to our EAM or CMMS systems?", answer: "We review system-generated reports and asset records rather than live systems. Any access required is read-only and agreed in advance." },
-      { question: "What do we get at the end?", answer: "A maturity scorecard, an asset and maintenance gap report, a prioritised improvement roadmap, and a leadership briefing pack." },
-      { question: "How do we get started?", answer: "Request a consultation. The DigitalQatalyst team will confirm the asset classes in scope, operational environment type, and key stakeholders before work begins." },
+      {
+        question: "What types of infrastructure assets does the assessment cover?",
+        answer:
+          "Utilities, transport, real estate, facilities, energy, and other asset-intensive environments. The DigitalQatalyst team confirms the asset classes in scope during scoping.",
+      },
+      {
+        question: "Do you need access to our EAM or CMMS systems?",
+        answer:
+          "We review system-generated reports and asset records rather than live systems. Any access required is read-only and agreed in advance.",
+      },
+      {
+        question: "What do we get at the end?",
+        answer:
+          "A maturity scorecard, an asset and maintenance gap report, a prioritised improvement roadmap, and a leadership briefing pack.",
+      },
+      {
+        question: "How do we get started?",
+        answer:
+          "Request a consultation. The DigitalQatalyst team will confirm the asset classes in scope, operational environment type, and key stakeholders before work begins.",
+      },
     ],
-    audience: "Asset managers, heads of infrastructure operations, maintenance directors, and field operations leads",
-    industryRelevance: "Utilities, transport, real estate, facilities management, energy, and other asset-intensive operators",
-    businessImpact: "Surfaces the asset visibility and maintenance planning gaps creating the greatest reliability risk, so investment goes to the improvements with the most direct impact on service continuity.",
+    audience:
+      "Asset managers, heads of infrastructure operations, maintenance directors, and field operations leads",
+    industryRelevance:
+      "Utilities, transport, real estate, facilities management, energy, and other asset-intensive operators",
+    businessImpact:
+      "Surfaces the asset visibility and maintenance planning gaps creating the greatest reliability risk, so investment goes to the improvements with the most direct impact on service continuity.",
     tags: ["asset-management", "infrastructure", "maintenance-operations"],
   },
 
@@ -1051,10 +1911,26 @@ export const operations2Copy: CollectionCopyOverrides = {
       "Week 4: Final blueprint review, adoption planning, and build-readiness sign-off",
     ],
     deliverables: [
-      { title: "Asset lifecycle workflow maps", description: "End-to-end flows for inspection, condition recording, work order generation, field execution, and asset disposal across all in-scope asset classes." },
-      { title: "Maintenance scheduling specification", description: "Preventive and condition-based maintenance rules by asset class and criticality, with production calendar and regulatory compliance integration." },
-      { title: "Field operations specification", description: "Job scheduling logic, parts and materials management rules, and mobile completion recording requirements for field technicians." },
-      { title: "Operations adoption plan", description: "Technician training requirements, mobile tool rollout sequence, and success metrics to track field adoption without disrupting service continuity." },
+      {
+        title: "Asset lifecycle workflow maps",
+        description:
+          "End-to-end flows for inspection, condition recording, work order generation, field execution, and asset disposal across all in-scope asset classes.",
+      },
+      {
+        title: "Maintenance scheduling specification",
+        description:
+          "Preventive and condition-based maintenance rules by asset class and criticality, with production calendar and regulatory compliance integration.",
+      },
+      {
+        title: "Field operations specification",
+        description:
+          "Job scheduling logic, parts and materials management rules, and mobile completion recording requirements for field technicians.",
+      },
+      {
+        title: "Operations adoption plan",
+        description:
+          "Technician training requirements, mobile tool rollout sequence, and success metrics to track field adoption without disrupting service continuity.",
+      },
     ],
     packageHighlights: [
       "Design-only engagement: no EAM or field management commitment required",
@@ -1063,13 +1939,28 @@ export const operations2Copy: CollectionCopyOverrides = {
     ],
     faqIntro: "Key questions about the infrastructure operations design engagement.",
     faqs: [
-      { question: "Does the design work with our existing EAM or CMMS platform?", answer: "Yes. The DigitalQatalyst team designs around your current platform, documenting configuration changes and integration updates needed to close the operational gaps identified." },
-      { question: "How are field technicians involved in the design process?", answer: "Field technicians and supervisors participate in workflow workshops to ensure job scheduling, parts management, and mobile recording flows work in real operating conditions." },
-      { question: "How do we get started?", answer: "Contact the DigitalQatalyst team to confirm the asset classes in scope, the EAM and field management platforms in use, and any regulatory compliance requirements." },
+      {
+        question: "Does the design work with our existing EAM or CMMS platform?",
+        answer:
+          "Yes. The DigitalQatalyst team designs around your current platform, documenting configuration changes and integration updates needed to close the operational gaps identified.",
+      },
+      {
+        question: "How are field technicians involved in the design process?",
+        answer:
+          "Field technicians and supervisors participate in workflow workshops to ensure job scheduling, parts management, and mobile recording flows work in real operating conditions.",
+      },
+      {
+        question: "How do we get started?",
+        answer:
+          "Contact the DigitalQatalyst team to confirm the asset classes in scope, the EAM and field management platforms in use, and any regulatory compliance requirements.",
+      },
     ],
-    audience: "Asset managers, maintenance directors, field operations leads, and infrastructure IT programme managers",
-    industryRelevance: "Utilities, transport, real estate, facilities management, energy, and other asset-intensive organisations implementing or improving EAM or field management platforms",
-    businessImpact: "Removes specification ambiguity before EAM configuration begins, reducing implementation rework and ensuring maintenance, field, and asset lifecycle workflows are aligned before go-live.",
+    audience:
+      "Asset managers, maintenance directors, field operations leads, and infrastructure IT programme managers",
+    industryRelevance:
+      "Utilities, transport, real estate, facilities management, energy, and other asset-intensive organisations implementing or improving EAM or field management platforms",
+    businessImpact:
+      "Removes specification ambiguity before EAM configuration begins, reducing implementation rework and ensuring maintenance, field, and asset lifecycle workflows are aligned before go-live.",
     tags: ["asset-management", "infrastructure", "maintenance-operations"],
   },
 
@@ -1090,10 +1981,26 @@ export const operations2Copy: CollectionCopyOverrides = {
       "Week 4: Deployment specification sign-off and build-readiness confirmation",
     ],
     deliverables: [
-      { title: "Infrastructure AI use-case feasibility register", description: "Each candidate scored on sensor data availability, asset history quality, and expected reliability or cost improvement, with a clear go or no-go recommendation." },
-      { title: "Asset data readiness report", description: "Gaps in sensor coverage, inspection record completeness, maintenance history depth, and GIS data quality that must be addressed before model development." },
-      { title: "Responsible infrastructure AI workflows", description: "Designed flows for approved use cases with engineer review points, confidence displays for field technicians, and documented override procedures." },
-      { title: "Deployment and monitoring specification", description: "Model selection guidance, performance thresholds, asset-aligned retraining triggers, and fleet or portfolio-level monitoring requirements for production use." },
+      {
+        title: "Infrastructure AI use-case feasibility register",
+        description:
+          "Each candidate scored on sensor data availability, asset history quality, and expected reliability or cost improvement, with a clear go or no-go recommendation.",
+      },
+      {
+        title: "Asset data readiness report",
+        description:
+          "Gaps in sensor coverage, inspection record completeness, maintenance history depth, and GIS data quality that must be addressed before model development.",
+      },
+      {
+        title: "Responsible infrastructure AI workflows",
+        description:
+          "Designed flows for approved use cases with engineer review points, confidence displays for field technicians, and documented override procedures.",
+      },
+      {
+        title: "Deployment and monitoring specification",
+        description:
+          "Model selection guidance, performance thresholds, asset-aligned retraining triggers, and fleet or portfolio-level monitoring requirements for production use.",
+      },
     ],
     packageHighlights: [
       "Validates feasibility before any AI build investment is committed",
@@ -1102,14 +2009,33 @@ export const operations2Copy: CollectionCopyOverrides = {
     ],
     faqIntro: "Key questions about the infrastructure operations AI design engagement.",
     faqs: [
-      { question: "Which AI use cases are most commonly explored?", answer: "Predictive asset failure from sensor and maintenance history data, condition-based maintenance scheduling, field workforce route optimisation, and fault pattern detection across asset networks." },
-      { question: "What if our sensor coverage is limited to a subset of assets?", answer: "The data readiness report identifies the minimum coverage needed for each use case. Many organisations start with highest-criticality assets while expanding sensor coverage in parallel." },
-      { question: "How do field engineers interact with AI maintenance recommendations?", answer: "Recommendations appear in the field management mobile tool with confidence scores and recommended actions. Engineers can confirm, reschedule, or override, with all decisions logged." },
-      { question: "How do we get started?", answer: "Book a consultation with the DigitalQatalyst team to identify your highest-value AI use cases and share your current asset data, sensor, and maintenance record landscape." },
+      {
+        question: "Which AI use cases are most commonly explored?",
+        answer:
+          "Predictive asset failure from sensor and maintenance history data, condition-based maintenance scheduling, field workforce route optimisation, and fault pattern detection across asset networks.",
+      },
+      {
+        question: "What if our sensor coverage is limited to a subset of assets?",
+        answer:
+          "The data readiness report identifies the minimum coverage needed for each use case. Many organisations start with highest-criticality assets while expanding sensor coverage in parallel.",
+      },
+      {
+        question: "How do field engineers interact with AI maintenance recommendations?",
+        answer:
+          "Recommendations appear in the field management mobile tool with confidence scores and recommended actions. Engineers can confirm, reschedule, or override, with all decisions logged.",
+      },
+      {
+        question: "How do we get started?",
+        answer:
+          "Book a consultation with the DigitalQatalyst team to identify your highest-value AI use cases and share your current asset data, sensor, and maintenance record landscape.",
+      },
     ],
-    audience: "Asset managers, maintenance directors, heads of infrastructure operations, and operations technology leads",
-    industryRelevance: "Asset-intensive infrastructure operators with sensor data and maintenance histories sufficient to support AI model development",
-    businessImpact: "Prevents wasted AI investment by confirming data readiness before build, and produces responsible workflow designs that improve asset uptime and field efficiency without removing engineer oversight.",
+    audience:
+      "Asset managers, maintenance directors, heads of infrastructure operations, and operations technology leads",
+    industryRelevance:
+      "Asset-intensive infrastructure operators with sensor data and maintenance histories sufficient to support AI model development",
+    businessImpact:
+      "Prevents wasted AI investment by confirming data readiness before build, and produces responsible workflow designs that improve asset uptime and field efficiency without removing engineer oversight.",
     tags: ["infrastructure-ai", "asset-management", "predictive-maintenance"],
   },
 
@@ -1131,10 +2057,26 @@ export const operations2Copy: CollectionCopyOverrides = {
       "Week 12: Controlled go-live, hypercare, and operational handover",
     ],
     deliverables: [
-      { title: "Configured infrastructure operations platform", description: "Production-ready EAM with asset lifecycle management, maintenance scheduling, work order management, and field coordination configured and tested." },
-      { title: "Integration test evidence pack", description: "Test cases, results, and defect closure evidence for every connected system including GIS, sensor networks, finance, and regulatory reporting." },
-      { title: "Field acceptance sign-off", description: "Documented UAT results from technicians, supervisors, and asset managers confirming the platform meets operational requirements across all asset classes." },
-      { title: "Operational handover kit", description: "Administrator guides, field supervisor quick-start pack, support escalation paths, and a 30-day post-launch review schedule." },
+      {
+        title: "Configured infrastructure operations platform",
+        description:
+          "Production-ready EAM with asset lifecycle management, maintenance scheduling, work order management, and field coordination configured and tested.",
+      },
+      {
+        title: "Integration test evidence pack",
+        description:
+          "Test cases, results, and defect closure evidence for every connected system including GIS, sensor networks, finance, and regulatory reporting.",
+      },
+      {
+        title: "Field acceptance sign-off",
+        description:
+          "Documented UAT results from technicians, supervisors, and asset managers confirming the platform meets operational requirements across all asset classes.",
+      },
+      {
+        title: "Operational handover kit",
+        description:
+          "Administrator guides, field supervisor quick-start pack, support escalation paths, and a 30-day post-launch review schedule.",
+      },
     ],
     packageHighlights: [
       "Structured 12-week deployment with milestone-gated progress",
@@ -1143,14 +2085,33 @@ export const operations2Copy: CollectionCopyOverrides = {
     ],
     faqIntro: "Key questions about the infrastructure operations deployment.",
     faqs: [
-      { question: "How do you handle asset data migration from legacy CMMS systems?", answer: "Asset data migration is included in the deployment scope. The DigitalQatalyst team validates data completeness and asset hierarchy accuracy before cutover." },
-      { question: "What happens if GIS or sensor integration issues are found during testing?", answer: "Issues are documented and triaged. The DigitalQatalyst team resolves items within deployment scope. Infrastructure or network issues are escalated for separate planning." },
-      { question: "How are mobile tools rolled out to field technicians?", answer: "Mobile device and application setup is included in the deployment. Field training sessions are scheduled to minimise service disruption." },
-      { question: "How do we get started?", answer: "Contact the DigitalQatalyst team to confirm the EAM platform, integration scope, asset data migration requirements, and field team size before deployment planning begins." },
+      {
+        question: "How do you handle asset data migration from legacy CMMS systems?",
+        answer:
+          "Asset data migration is included in the deployment scope. The DigitalQatalyst team validates data completeness and asset hierarchy accuracy before cutover.",
+      },
+      {
+        question: "What happens if GIS or sensor integration issues are found during testing?",
+        answer:
+          "Issues are documented and triaged. The DigitalQatalyst team resolves items within deployment scope. Infrastructure or network issues are escalated for separate planning.",
+      },
+      {
+        question: "How are mobile tools rolled out to field technicians?",
+        answer:
+          "Mobile device and application setup is included in the deployment. Field training sessions are scheduled to minimise service disruption.",
+      },
+      {
+        question: "How do we get started?",
+        answer:
+          "Contact the DigitalQatalyst team to confirm the EAM platform, integration scope, asset data migration requirements, and field team size before deployment planning begins.",
+      },
     ],
-    audience: "Asset managers, maintenance directors, field operations leads, and infrastructure IT programme managers",
-    industryRelevance: "Utilities, transport, real estate, facilities, energy, and other asset-intensive operators implementing or replacing EAM or field management platforms",
-    businessImpact: "Delivers a fully integrated, field-tested infrastructure operations platform that improves asset visibility, maintenance scheduling accuracy, and field productivity from the first week of live operation.",
+    audience:
+      "Asset managers, maintenance directors, field operations leads, and infrastructure IT programme managers",
+    industryRelevance:
+      "Utilities, transport, real estate, facilities, energy, and other asset-intensive operators implementing or replacing EAM or field management platforms",
+    businessImpact:
+      "Delivers a fully integrated, field-tested infrastructure operations platform that improves asset visibility, maintenance scheduling accuracy, and field productivity from the first week of live operation.",
     tags: ["asset-management", "infrastructure", "maintenance-operations"],
   },
 
@@ -1172,10 +2133,26 @@ export const operations2Copy: CollectionCopyOverrides = {
       "Weeks 11-12: Governance handover, monitoring confirmation, and retraining schedule agreement",
     ],
     deliverables: [
-      { title: "Production infrastructure AI capabilities", description: "Approved models live in your EAM environment with sensor pipelines, prediction logging, and technician-facing recommendation interfaces active." },
-      { title: "Asset portfolio monitoring dashboard", description: "Real-time view of prediction accuracy, maintenance intervention hit rates, technician override rates, and field productivity impact by asset class." },
-      { title: "Engineer and technician override playbook", description: "Procedures for accepting, deferring, or overriding AI maintenance recommendations, with escalation steps for model quality concerns." },
-      { title: "AI governance handover pack", description: "Model cards, sensor data lineage, asset-aligned retraining schedule, and accountability assignments for ongoing responsible operation." },
+      {
+        title: "Production infrastructure AI capabilities",
+        description:
+          "Approved models live in your EAM environment with sensor pipelines, prediction logging, and technician-facing recommendation interfaces active.",
+      },
+      {
+        title: "Asset portfolio monitoring dashboard",
+        description:
+          "Real-time view of prediction accuracy, maintenance intervention hit rates, technician override rates, and field productivity impact by asset class.",
+      },
+      {
+        title: "Engineer and technician override playbook",
+        description:
+          "Procedures for accepting, deferring, or overriding AI maintenance recommendations, with escalation steps for model quality concerns.",
+      },
+      {
+        title: "AI governance handover pack",
+        description:
+          "Model cards, sensor data lineage, asset-aligned retraining schedule, and accountability assignments for ongoing responsible operation.",
+      },
     ],
     packageHighlights: [
       "Pilot asset class rollout before full portfolio deployment",
@@ -1184,14 +2161,33 @@ export const operations2Copy: CollectionCopyOverrides = {
     ],
     faqIntro: "Key questions about the infrastructure operations AI deployment.",
     faqs: [
-      { question: "How do field technicians receive AI maintenance recommendations?", answer: "Recommendations appear in the field management mobile tool with priority, confidence score, and recommended action. Technicians can accept, defer, or override with a reason captured for model improvement." },
-      { question: "What happens if a predictive failure model produces frequent false alerts?", answer: "False-alert rates are tracked in the monitoring dashboard. Threshold adjustments are made during the pilot phase before full portfolio rollout." },
-      { question: "How is model performance maintained as assets age or the network expands?", answer: "Retraining triggers are defined in the governance handover pack. Asset age events and new asset additions automatically flag affected models for review." },
-      { question: "How do we get started?", answer: "Contact the DigitalQatalyst team with your approved AI design specification to plan the production environment, sensor pipeline access, and pilot asset class selection." },
+      {
+        question: "How do field technicians receive AI maintenance recommendations?",
+        answer:
+          "Recommendations appear in the field management mobile tool with priority, confidence score, and recommended action. Technicians can accept, defer, or override with a reason captured for model improvement.",
+      },
+      {
+        question: "What happens if a predictive failure model produces frequent false alerts?",
+        answer:
+          "False-alert rates are tracked in the monitoring dashboard. Threshold adjustments are made during the pilot phase before full portfolio rollout.",
+      },
+      {
+        question: "How is model performance maintained as assets age or the network expands?",
+        answer:
+          "Retraining triggers are defined in the governance handover pack. Asset age events and new asset additions automatically flag affected models for review.",
+      },
+      {
+        question: "How do we get started?",
+        answer:
+          "Contact the DigitalQatalyst team with your approved AI design specification to plan the production environment, sensor pipeline access, and pilot asset class selection.",
+      },
     ],
-    audience: "Asset managers, maintenance directors, heads of infrastructure operations, and operations technology leads",
-    industryRelevance: "Asset-intensive infrastructure operators with sensor coverage and maintenance history data sufficient to support AI model production deployment",
-    businessImpact: "Reduces unplanned asset failures, cuts reactive maintenance costs, and improves field workforce productivity, with engineer and technician oversight maintained at every AI decision point.",
+    audience:
+      "Asset managers, maintenance directors, heads of infrastructure operations, and operations technology leads",
+    industryRelevance:
+      "Asset-intensive infrastructure operators with sensor coverage and maintenance history data sufficient to support AI model production deployment",
+    businessImpact:
+      "Reduces unplanned asset failures, cuts reactive maintenance costs, and improves field workforce productivity, with engineer and technician oversight maintained at every AI decision point.",
     tags: ["infrastructure-ai", "asset-management", "predictive-maintenance"],
   },
 
@@ -1212,10 +2208,26 @@ export const operations2Copy: CollectionCopyOverrides = {
       "Ongoing: Monthly asset health reports, quarterly optimisation sessions, and annual infrastructure roadmap",
     ],
     deliverables: [
-      { title: "Monthly asset health and maintenance report", description: "Planned versus reactive maintenance ratios, work order completion rates, asset condition trends, and system health metrics with recommended actions." },
-      { title: "Incident and change log", description: "Transparent record of platform incidents, configuration changes, and SLA performance across each reporting period." },
-      { title: "Quarterly infrastructure optimisation review", description: "Analysis of maintenance scheduling accuracy, field workforce productivity, and asset reliability trends with prioritised improvement actions." },
-      { title: "Annual infrastructure technology roadmap", description: "Forward-looking plan covering platform updates, new asset class integrations, and capability additions aligned to portfolio strategy and regulatory obligations." },
+      {
+        title: "Monthly asset health and maintenance report",
+        description:
+          "Planned versus reactive maintenance ratios, work order completion rates, asset condition trends, and system health metrics with recommended actions.",
+      },
+      {
+        title: "Incident and change log",
+        description:
+          "Transparent record of platform incidents, configuration changes, and SLA performance across each reporting period.",
+      },
+      {
+        title: "Quarterly infrastructure optimisation review",
+        description:
+          "Analysis of maintenance scheduling accuracy, field workforce productivity, and asset reliability trends with prioritised improvement actions.",
+      },
+      {
+        title: "Annual infrastructure technology roadmap",
+        description:
+          "Forward-looking plan covering platform updates, new asset class integrations, and capability additions aligned to portfolio strategy and regulatory obligations.",
+      },
     ],
     packageHighlights: [
       "SLA-backed operations with defined incident response times",
@@ -1224,14 +2236,33 @@ export const operations2Copy: CollectionCopyOverrides = {
     ],
     faqIntro: "Key questions about the infrastructure operations managed service.",
     faqs: [
-      { question: "What is covered under the managed service?", answer: "Platform monitoring, incident response, configuration updates, monthly reporting, and quarterly optimisation reviews. Full scope is confirmed in the service agreement." },
-      { question: "How are regulatory compliance updates to maintenance standards handled?", answer: "Compliance-driven configuration changes are assessed, implemented in a test environment, validated, and promoted to production within the agreed change management process." },
-      { question: "Can the service scale to cover additional asset classes or new sites?", answer: "Yes. New asset classes and sites are onboarded under the service. Large portfolio expansions are scoped and priced separately." },
-      { question: "How do we get started?", answer: "Contact the DigitalQatalyst team to confirm the EAM platform, asset portfolio scope, and SLA requirements before the service agreement is drafted." },
+      {
+        question: "What is covered under the managed service?",
+        answer:
+          "Platform monitoring, incident response, configuration updates, monthly reporting, and quarterly optimisation reviews. Full scope is confirmed in the service agreement.",
+      },
+      {
+        question: "How are regulatory compliance updates to maintenance standards handled?",
+        answer:
+          "Compliance-driven configuration changes are assessed, implemented in a test environment, validated, and promoted to production within the agreed change management process.",
+      },
+      {
+        question: "Can the service scale to cover additional asset classes or new sites?",
+        answer:
+          "Yes. New asset classes and sites are onboarded under the service. Large portfolio expansions are scoped and priced separately.",
+      },
+      {
+        question: "How do we get started?",
+        answer:
+          "Contact the DigitalQatalyst team to confirm the EAM platform, asset portfolio scope, and SLA requirements before the service agreement is drafted.",
+      },
     ],
-    audience: "Asset managers, maintenance directors, and infrastructure IT managers running live EAM and field management platforms",
-    industryRelevance: "Utilities, transport, real estate, facilities, energy, and other asset-intensive operators requiring consistent platform performance and regulatory compliance",
-    businessImpact: "Maintains asset visibility and maintenance scheduling accuracy as portfolios grow, reduces IT overhead on EAM maintenance, and surfaces reliability improvements before they affect service continuity.",
+    audience:
+      "Asset managers, maintenance directors, and infrastructure IT managers running live EAM and field management platforms",
+    industryRelevance:
+      "Utilities, transport, real estate, facilities, energy, and other asset-intensive operators requiring consistent platform performance and regulatory compliance",
+    businessImpact:
+      "Maintains asset visibility and maintenance scheduling accuracy as portfolios grow, reduces IT overhead on EAM maintenance, and surfaces reliability improvements before they affect service continuity.",
     tags: ["asset-management", "infrastructure", "managed-service"],
   },
 
@@ -1256,10 +2287,26 @@ export const operations2Copy: CollectionCopyOverrides = {
       "Day 5: Findings presentation, prioritised roadmap walkthrough, and next-step agreement",
     ],
     deliverables: [
-      { title: "Government operations maturity scorecard", description: "Ratings across citizen service delivery, back-office processing, cross-agency coordination, and transparency controls, with evidence and specific gaps." },
-      { title: "Service delivery gap report", description: "Documented process bottlenecks, coordination failures, and compliance control gaps ranked by citizen impact and operational risk." },
-      { title: "Prioritised improvement roadmap", description: "Sequenced actions with named owners, effort estimates, and dependencies your programme team can act on within normal governance cycles." },
-      { title: "Leadership and ministerial briefing pack", description: "A concise summary of findings and recommended investment for digital government and programme leadership." },
+      {
+        title: "Government operations maturity scorecard",
+        description:
+          "Ratings across citizen service delivery, back-office processing, cross-agency coordination, and transparency controls, with evidence and specific gaps.",
+      },
+      {
+        title: "Service delivery gap report",
+        description:
+          "Documented process bottlenecks, coordination failures, and compliance control gaps ranked by citizen impact and operational risk.",
+      },
+      {
+        title: "Prioritised improvement roadmap",
+        description:
+          "Sequenced actions with named owners, effort estimates, and dependencies your programme team can act on within normal governance cycles.",
+      },
+      {
+        title: "Leadership and ministerial briefing pack",
+        description:
+          "A concise summary of findings and recommended investment for digital government and programme leadership.",
+      },
     ],
     packageHighlights: [
       "Fixed-scope assessment delivered within one week",
@@ -1268,14 +2315,33 @@ export const operations2Copy: CollectionCopyOverrides = {
     ],
     faqIntro: "Key questions about the government operations assessment.",
     faqs: [
-      { question: "Which government functions does the assessment cover?", answer: "The scope is confirmed with your programme leads before engagement. Common areas include licensing, grants, permits, benefits processing, and case management." },
-      { question: "Do you need access to case management or citizen data systems?", answer: "We review process documentation and system outputs rather than live citizen data. Any access required is read-only, data-minimised, and agreed with your data governance lead in advance." },
-      { question: "What do we get at the end?", answer: "A maturity scorecard, a service delivery gap report, a prioritised improvement roadmap, and a leadership briefing pack." },
-      { question: "How do we get started?", answer: "Request a consultation. The DigitalQatalyst team will confirm the services and functions in scope, data access constraints, and key stakeholders before work begins." },
+      {
+        question: "Which government functions does the assessment cover?",
+        answer:
+          "The scope is confirmed with your programme leads before engagement. Common areas include licensing, grants, permits, benefits processing, and case management.",
+      },
+      {
+        question: "Do you need access to case management or citizen data systems?",
+        answer:
+          "We review process documentation and system outputs rather than live citizen data. Any access required is read-only, data-minimised, and agreed with your data governance lead in advance.",
+      },
+      {
+        question: "What do we get at the end?",
+        answer:
+          "A maturity scorecard, a service delivery gap report, a prioritised improvement roadmap, and a leadership briefing pack.",
+      },
+      {
+        question: "How do we get started?",
+        answer:
+          "Request a consultation. The DigitalQatalyst team will confirm the services and functions in scope, data access constraints, and key stakeholders before work begins.",
+      },
     ],
-    audience: "Digital government directors, programme leaders, heads of service delivery, and chief operating officers in public sector organisations",
-    industryRelevance: "Ministries, authorities, agencies, municipalities, and public service organisations pursuing digital and operational improvement",
-    businessImpact: "Surfaces the processing bottlenecks and coordination gaps reducing citizen service quality most, so investment goes to the improvements with the greatest public value return.",
+    audience:
+      "Digital government directors, programme leaders, heads of service delivery, and chief operating officers in public sector organisations",
+    industryRelevance:
+      "Ministries, authorities, agencies, municipalities, and public service organisations pursuing digital and operational improvement",
+    businessImpact:
+      "Surfaces the processing bottlenecks and coordination gaps reducing citizen service quality most, so investment goes to the improvements with the greatest public value return.",
     tags: ["digital-government", "citizen-services", "public-sector"],
   },
 
@@ -1296,10 +2362,26 @@ export const operations2Copy: CollectionCopyOverrides = {
       "Week 4: Final blueprint review, adoption planning, and build-readiness sign-off",
     ],
     deliverables: [
-      { title: "Citizen journey maps", description: "End-to-end service flows from initial application through processing, decision, notification, and appeals across all in-scope government services." },
-      { title: "Back-office workflow specification", description: "Approval queues, case assignment rules, compliance check procedures, and audit trail requirements documented for configuration and development teams." },
-      { title: "Cross-agency integration design", description: "Data sharing patterns, referral workflow logic, and privacy compliance controls for all inter-agency touchpoints in scope." },
-      { title: "Public sector adoption plan", description: "Phased rollout sequence with staff training requirements by role, accessibility compliance checklist, and service continuity plan during transition." },
+      {
+        title: "Citizen journey maps",
+        description:
+          "End-to-end service flows from initial application through processing, decision, notification, and appeals across all in-scope government services.",
+      },
+      {
+        title: "Back-office workflow specification",
+        description:
+          "Approval queues, case assignment rules, compliance check procedures, and audit trail requirements documented for configuration and development teams.",
+      },
+      {
+        title: "Cross-agency integration design",
+        description:
+          "Data sharing patterns, referral workflow logic, and privacy compliance controls for all inter-agency touchpoints in scope.",
+      },
+      {
+        title: "Public sector adoption plan",
+        description:
+          "Phased rollout sequence with staff training requirements by role, accessibility compliance checklist, and service continuity plan during transition.",
+      },
     ],
     packageHighlights: [
       "Design-only engagement: no platform commitment required",
@@ -1308,13 +2390,28 @@ export const operations2Copy: CollectionCopyOverrides = {
     ],
     faqIntro: "Key questions about the government operations design engagement.",
     faqs: [
-      { question: "How do you ensure the design meets accessibility obligations?", answer: "Accessibility requirements are incorporated from the first workshop. The DigitalQatalyst team aligns designs to the applicable standard, such as WCAG 2.1 AA, and documents compliance evidence." },
-      { question: "How are citizens involved in the design process?", answer: "Where the programme governance permits, representative citizen research or usability review is incorporated to validate that service journeys work for the intended audience." },
-      { question: "How do we get started?", answer: "Contact the DigitalQatalyst team to confirm the services and functions in scope, the platforms in use, and any procurement or governance constraints before the engagement begins." },
+      {
+        question: "How do you ensure the design meets accessibility obligations?",
+        answer:
+          "Accessibility requirements are incorporated from the first workshop. The DigitalQatalyst team aligns designs to the applicable standard, such as WCAG 2.1 AA, and documents compliance evidence.",
+      },
+      {
+        question: "How are citizens involved in the design process?",
+        answer:
+          "Where the programme governance permits, representative citizen research or usability review is incorporated to validate that service journeys work for the intended audience.",
+      },
+      {
+        question: "How do we get started?",
+        answer:
+          "Contact the DigitalQatalyst team to confirm the services and functions in scope, the platforms in use, and any procurement or governance constraints before the engagement begins.",
+      },
     ],
-    audience: "Digital government directors, programme leaders, heads of service design, and chief operating officers in public sector organisations",
-    industryRelevance: "Ministries, authorities, agencies, municipalities, and public service organisations designing or redesigning citizen-facing and back-office operations",
-    businessImpact: "Removes ambiguity before platform configuration begins, reducing delivery rework and ensuring citizen service journeys, back-office processes, and cross-agency integrations are aligned before build.",
+    audience:
+      "Digital government directors, programme leaders, heads of service design, and chief operating officers in public sector organisations",
+    industryRelevance:
+      "Ministries, authorities, agencies, municipalities, and public service organisations designing or redesigning citizen-facing and back-office operations",
+    businessImpact:
+      "Removes ambiguity before platform configuration begins, reducing delivery rework and ensuring citizen service journeys, back-office processes, and cross-agency integrations are aligned before build.",
     tags: ["digital-government", "citizen-services", "public-sector"],
   },
 
@@ -1335,10 +2432,26 @@ export const operations2Copy: CollectionCopyOverrides = {
       "Week 4: Deployment specification sign-off and build-readiness confirmation",
     ],
     deliverables: [
-      { title: "Government AI use-case feasibility register", description: "Each candidate scored on data availability, regulatory permissibility, and expected service quality or processing efficiency improvement, with a go or no-go recommendation." },
-      { title: "Government data readiness report", description: "Gaps in case management data quality, document classification coverage, and inter-agency sharing agreements that must be resolved before model development." },
-      { title: "Responsible government AI workflows", description: "Designed flows for approved use cases with case officer review points, citizen-facing explainability, appeal rights preserved, and audit logging at every decision point." },
-      { title: "Public sector AI deployment specification", description: "Model selection guidance, bias testing requirements, performance thresholds, audit log design, and accountability assignments aligned to applicable public sector AI policy." },
+      {
+        title: "Government AI use-case feasibility register",
+        description:
+          "Each candidate scored on data availability, regulatory permissibility, and expected service quality or processing efficiency improvement, with a go or no-go recommendation.",
+      },
+      {
+        title: "Government data readiness report",
+        description:
+          "Gaps in case management data quality, document classification coverage, and inter-agency sharing agreements that must be resolved before model development.",
+      },
+      {
+        title: "Responsible government AI workflows",
+        description:
+          "Designed flows for approved use cases with case officer review points, citizen-facing explainability, appeal rights preserved, and audit logging at every decision point.",
+      },
+      {
+        title: "Public sector AI deployment specification",
+        description:
+          "Model selection guidance, bias testing requirements, performance thresholds, audit log design, and accountability assignments aligned to applicable public sector AI policy.",
+      },
     ],
     packageHighlights: [
       "Validates feasibility and regulatory permissibility before any build investment",
@@ -1347,14 +2460,34 @@ export const operations2Copy: CollectionCopyOverrides = {
     ],
     faqIntro: "Key questions about the government operations AI design engagement.",
     faqs: [
-      { question: "Which AI use cases are most commonly explored in government?", answer: "Automated eligibility pre-screening, intelligent document classification, risk-based case prioritisation, and back-office processing queue optimisation are the most common starting points." },
-      { question: "How do you handle the legal and policy requirements for automated government decisions?", answer: "Accountability, explainability, and citizen appeal rights are designed into every workflow from the start. The DigitalQatalyst team confirms the applicable legal framework during scoping." },
-      { question: "What if citizen data cannot be used for AI model training?", answer: "Synthetic data, anonymised record sets, and privacy-preserving training techniques are explored during the data readiness phase. Use cases requiring live citizen data are flagged for separate legal review." },
-      { question: "How do we get started?", answer: "Book a consultation with the DigitalQatalyst team to identify your highest-value AI use cases and confirm data availability, legal constraints, and programme governance requirements." },
+      {
+        question: "Which AI use cases are most commonly explored in government?",
+        answer:
+          "Automated eligibility pre-screening, intelligent document classification, risk-based case prioritisation, and back-office processing queue optimisation are the most common starting points.",
+      },
+      {
+        question:
+          "How do you handle the legal and policy requirements for automated government decisions?",
+        answer:
+          "Accountability, explainability, and citizen appeal rights are designed into every workflow from the start. The DigitalQatalyst team confirms the applicable legal framework during scoping.",
+      },
+      {
+        question: "What if citizen data cannot be used for AI model training?",
+        answer:
+          "Synthetic data, anonymised record sets, and privacy-preserving training techniques are explored during the data readiness phase. Use cases requiring live citizen data are flagged for separate legal review.",
+      },
+      {
+        question: "How do we get started?",
+        answer:
+          "Book a consultation with the DigitalQatalyst team to identify your highest-value AI use cases and confirm data availability, legal constraints, and programme governance requirements.",
+      },
     ],
-    audience: "Digital government directors, heads of service delivery, data and AI ethics leads, and programme leaders in public sector organisations",
-    industryRelevance: "Ministries, authorities, agencies, and municipalities exploring AI to improve citizen service processing speed and decision support quality",
-    businessImpact: "Prevents wasted AI investment by confirming feasibility and regulatory permissibility before build, and produces responsible workflow designs that improve service processing without compromising citizen rights or public trust.",
+    audience:
+      "Digital government directors, heads of service delivery, data and AI ethics leads, and programme leaders in public sector organisations",
+    industryRelevance:
+      "Ministries, authorities, agencies, and municipalities exploring AI to improve citizen service processing speed and decision support quality",
+    businessImpact:
+      "Prevents wasted AI investment by confirming feasibility and regulatory permissibility before build, and produces responsible workflow designs that improve service processing without compromising citizen rights or public trust.",
     tags: ["digital-government", "government-ai", "citizen-services"],
   },
 
@@ -1376,10 +2509,26 @@ export const operations2Copy: CollectionCopyOverrides = {
       "Week 12: Controlled go-live, hypercare, and operational handover",
     ],
     deliverables: [
-      { title: "Configured government operations platform", description: "Production-ready citizen service portal, back-office case management, and cross-agency integration configured and tested against approved specifications." },
-      { title: "Integration test evidence pack", description: "Test cases, results, and defect closure evidence for every connected system including identity platforms, document management, and inter-agency data exchanges." },
-      { title: "Staff acceptance sign-off", description: "Documented UAT results from front-line staff, case officers, and supervisors confirming the platform meets service delivery requirements and accessibility obligations." },
-      { title: "Operational handover kit", description: "Administrator guides, service manager quick-start pack, support escalation paths, compliance audit trail documentation, and a 30-day post-launch review schedule." },
+      {
+        title: "Configured government operations platform",
+        description:
+          "Production-ready citizen service portal, back-office case management, and cross-agency integration configured and tested against approved specifications.",
+      },
+      {
+        title: "Integration test evidence pack",
+        description:
+          "Test cases, results, and defect closure evidence for every connected system including identity platforms, document management, and inter-agency data exchanges.",
+      },
+      {
+        title: "Staff acceptance sign-off",
+        description:
+          "Documented UAT results from front-line staff, case officers, and supervisors confirming the platform meets service delivery requirements and accessibility obligations.",
+      },
+      {
+        title: "Operational handover kit",
+        description:
+          "Administrator guides, service manager quick-start pack, support escalation paths, compliance audit trail documentation, and a 30-day post-launch review schedule.",
+      },
     ],
     packageHighlights: [
       "Structured 12-week deployment with milestone-gated progress",
@@ -1388,14 +2537,34 @@ export const operations2Copy: CollectionCopyOverrides = {
     ],
     faqIntro: "Key questions about the government operations deployment.",
     faqs: [
-      { question: "How do you handle legacy system migration within government environments?", answer: "Data migration plans are agreed with your data governance and records management leads. Migration is staged and validated before cutover to avoid service disruption." },
-      { question: "How is security clearance managed for team members working on the deployment?", answer: "The DigitalQatalyst team confirms security clearance requirements during scoping. Members working on sensitive environments are cleared or matched to the required level." },
-      { question: "What happens if integration testing reveals issues with a third-party government system?", answer: "Issues are documented and raised with the relevant system owner through your programme governance process. Workarounds are designed where the third-party timeline cannot be aligned." },
-      { question: "How do we get started?", answer: "Contact the DigitalQatalyst team to confirm the platform, integration scope, security requirements, and public sector procurement constraints before deployment planning begins." },
+      {
+        question: "How do you handle legacy system migration within government environments?",
+        answer:
+          "Data migration plans are agreed with your data governance and records management leads. Migration is staged and validated before cutover to avoid service disruption.",
+      },
+      {
+        question: "How is security clearance managed for team members working on the deployment?",
+        answer:
+          "The DigitalQatalyst team confirms security clearance requirements during scoping. Members working on sensitive environments are cleared or matched to the required level.",
+      },
+      {
+        question:
+          "What happens if integration testing reveals issues with a third-party government system?",
+        answer:
+          "Issues are documented and raised with the relevant system owner through your programme governance process. Workarounds are designed where the third-party timeline cannot be aligned.",
+      },
+      {
+        question: "How do we get started?",
+        answer:
+          "Contact the DigitalQatalyst team to confirm the platform, integration scope, security requirements, and public sector procurement constraints before deployment planning begins.",
+      },
     ],
-    audience: "Digital government directors, programme managers, heads of service delivery, and IT leads in public sector organisations",
-    industryRelevance: "Ministries, authorities, agencies, municipalities, and public service organisations implementing or modernising citizen-facing and back-office operations platforms",
-    businessImpact: "Delivers a fully integrated, tested government operations platform that improves citizen service processing speed and transparency, with compliance audit trails in place from go-live.",
+    audience:
+      "Digital government directors, programme managers, heads of service delivery, and IT leads in public sector organisations",
+    industryRelevance:
+      "Ministries, authorities, agencies, municipalities, and public service organisations implementing or modernising citizen-facing and back-office operations platforms",
+    businessImpact:
+      "Delivers a fully integrated, tested government operations platform that improves citizen service processing speed and transparency, with compliance audit trails in place from go-live.",
     tags: ["digital-government", "citizen-services", "public-sector"],
   },
 
@@ -1417,10 +2586,26 @@ export const operations2Copy: CollectionCopyOverrides = {
       "Weeks 11-12: Governance handover, bias monitoring confirmation, and accountability review schedule agreement",
     ],
     deliverables: [
-      { title: "Production government AI capabilities", description: "Approved models live in your government operations platform with data pipelines, decision logging, and case officer-facing recommendation interfaces active." },
-      { title: "Service performance monitoring dashboard", description: "Real-time view of model accuracy, case officer override rates, processing time improvement, and bias indicators by service line and demographic group." },
-      { title: "Case officer override and appeal playbook", description: "Procedures for accepting, overriding, and escalating AI recommendations, with citizen explanation and appeal right documentation for each service." },
-      { title: "Public sector AI governance handover pack", description: "Model cards, data lineage documentation, bias testing records, quarterly accountability review schedule, and accountability assignments for ongoing responsible operation." },
+      {
+        title: "Production government AI capabilities",
+        description:
+          "Approved models live in your government operations platform with data pipelines, decision logging, and case officer-facing recommendation interfaces active.",
+      },
+      {
+        title: "Service performance monitoring dashboard",
+        description:
+          "Real-time view of model accuracy, case officer override rates, processing time improvement, and bias indicators by service line and demographic group.",
+      },
+      {
+        title: "Case officer override and appeal playbook",
+        description:
+          "Procedures for accepting, overriding, and escalating AI recommendations, with citizen explanation and appeal right documentation for each service.",
+      },
+      {
+        title: "Public sector AI governance handover pack",
+        description:
+          "Model cards, data lineage documentation, bias testing records, quarterly accountability review schedule, and accountability assignments for ongoing responsible operation.",
+      },
     ],
     packageHighlights: [
       "Pilot service line rollout before full deployment",
@@ -1429,14 +2614,33 @@ export const operations2Copy: CollectionCopyOverrides = {
     ],
     faqIntro: "Key questions about the government operations AI deployment.",
     faqs: [
-      { question: "How do case officers override AI recommendations?", answer: "Override controls are built into the case management interface. All overrides are logged with a reason and reviewed in the quarterly accountability session." },
-      { question: "How do you monitor for bias in AI-assisted government decisions?", answer: "Demographic group outcome analysis runs continuously in the monitoring dashboard. Disparity alerts trigger immediate review and, where needed, model adjustment before the next processing cycle." },
-      { question: "What happens if AI recommendations are challenged through a citizen appeal?", answer: "Decision logs, model outputs, and case officer actions are retrievable through the audit trail to support the appeals process. The accountability playbook covers the specific steps for each service." },
-      { question: "How do we get started?", answer: "Contact the DigitalQatalyst team with your approved AI design specification to plan the production environment, data pipeline access, and pilot service line selection." },
+      {
+        question: "How do case officers override AI recommendations?",
+        answer:
+          "Override controls are built into the case management interface. All overrides are logged with a reason and reviewed in the quarterly accountability session.",
+      },
+      {
+        question: "How do you monitor for bias in AI-assisted government decisions?",
+        answer:
+          "Demographic group outcome analysis runs continuously in the monitoring dashboard. Disparity alerts trigger immediate review and, where needed, model adjustment before the next processing cycle.",
+      },
+      {
+        question: "What happens if AI recommendations are challenged through a citizen appeal?",
+        answer:
+          "Decision logs, model outputs, and case officer actions are retrievable through the audit trail to support the appeals process. The accountability playbook covers the specific steps for each service.",
+      },
+      {
+        question: "How do we get started?",
+        answer:
+          "Contact the DigitalQatalyst team with your approved AI design specification to plan the production environment, data pipeline access, and pilot service line selection.",
+      },
     ],
-    audience: "Digital government directors, heads of service delivery, AI ethics and data leads, and programme managers in public sector organisations",
-    industryRelevance: "Ministries, authorities, agencies, and municipalities with approved AI use cases ready to move from design to production deployment",
-    businessImpact: "Reduces processing times for high-volume citizen services, improves consistency of eligibility and classification decisions, and maintains public trust through transparent accountability controls and auditable decision records.",
+    audience:
+      "Digital government directors, heads of service delivery, AI ethics and data leads, and programme managers in public sector organisations",
+    industryRelevance:
+      "Ministries, authorities, agencies, and municipalities with approved AI use cases ready to move from design to production deployment",
+    businessImpact:
+      "Reduces processing times for high-volume citizen services, improves consistency of eligibility and classification decisions, and maintains public trust through transparent accountability controls and auditable decision records.",
     tags: ["digital-government", "government-ai", "citizen-services"],
   },
 
@@ -1457,10 +2661,26 @@ export const operations2Copy: CollectionCopyOverrides = {
       "Ongoing: Monthly service performance reports, quarterly optimisation sessions, and annual capability roadmap",
     ],
     deliverables: [
-      { title: "Monthly government service performance report", description: "Processing times, case resolution rates, citizen satisfaction indicators, compliance control status, and system health metrics with recommended actions." },
-      { title: "Incident and change log", description: "Transparent record of platform incidents, policy-driven configuration changes, and SLA performance across each reporting period." },
-      { title: "Quarterly service optimisation review", description: "Analysis of processing backlogs, case management bottlenecks, and compliance control gaps with prioritised improvement actions." },
-      { title: "Annual government technology roadmap", description: "Forward-looking plan covering platform updates, new service integrations, and capability additions aligned to digital government strategy and legislative obligations." },
+      {
+        title: "Monthly government service performance report",
+        description:
+          "Processing times, case resolution rates, citizen satisfaction indicators, compliance control status, and system health metrics with recommended actions.",
+      },
+      {
+        title: "Incident and change log",
+        description:
+          "Transparent record of platform incidents, policy-driven configuration changes, and SLA performance across each reporting period.",
+      },
+      {
+        title: "Quarterly service optimisation review",
+        description:
+          "Analysis of processing backlogs, case management bottlenecks, and compliance control gaps with prioritised improvement actions.",
+      },
+      {
+        title: "Annual government technology roadmap",
+        description:
+          "Forward-looking plan covering platform updates, new service integrations, and capability additions aligned to digital government strategy and legislative obligations.",
+      },
     ],
     packageHighlights: [
       "SLA-backed operations with response times appropriate for public services",
@@ -1469,14 +2689,35 @@ export const operations2Copy: CollectionCopyOverrides = {
     ],
     faqIntro: "Key questions about the government operations managed service.",
     faqs: [
-      { question: "What is covered under the managed service?", answer: "Platform monitoring, incident response, policy-driven configuration updates, monthly reporting, and quarterly optimisation reviews. Full scope is confirmed in the service agreement." },
-      { question: "How quickly can configuration changes be made when policy or legislation changes?", answer: "The DigitalQatalyst team assesses change impact, agrees a timeline with your programme lead, and implements within your change management process. Emergency legislative changes are handled under a priority change procedure." },
-      { question: "Can the service support new citizen-facing services added to the platform over time?", answer: "Yes. New services are onboarded under the managed service. Services requiring significant new configuration or integration are scoped and priced separately." },
-      { question: "How do we get started?", answer: "Contact the DigitalQatalyst team to confirm the platform scope, current service inventory, SLA requirements, and compliance obligations before the service agreement is drafted." },
+      {
+        question: "What is covered under the managed service?",
+        answer:
+          "Platform monitoring, incident response, policy-driven configuration updates, monthly reporting, and quarterly optimisation reviews. Full scope is confirmed in the service agreement.",
+      },
+      {
+        question:
+          "How quickly can configuration changes be made when policy or legislation changes?",
+        answer:
+          "The DigitalQatalyst team assesses change impact, agrees a timeline with your programme lead, and implements within your change management process. Emergency legislative changes are handled under a priority change procedure.",
+      },
+      {
+        question:
+          "Can the service support new citizen-facing services added to the platform over time?",
+        answer:
+          "Yes. New services are onboarded under the managed service. Services requiring significant new configuration or integration are scoped and priced separately.",
+      },
+      {
+        question: "How do we get started?",
+        answer:
+          "Contact the DigitalQatalyst team to confirm the platform scope, current service inventory, SLA requirements, and compliance obligations before the service agreement is drafted.",
+      },
     ],
-    audience: "Digital government directors, programme managers, and service delivery leads running live government operations platforms",
-    industryRelevance: "Ministries, authorities, agencies, municipalities, and public service organisations requiring consistent platform performance, regulatory compliance, and citizen service continuity",
-    businessImpact: "Maintains citizen service processing speed and compliance control accuracy as policy and demand evolve, reduces internal IT burden on platform maintenance, and surfaces service quality improvements before they affect citizen outcomes.",
+    audience:
+      "Digital government directors, programme managers, and service delivery leads running live government operations platforms",
+    industryRelevance:
+      "Ministries, authorities, agencies, municipalities, and public service organisations requiring consistent platform performance, regulatory compliance, and citizen service continuity",
+    businessImpact:
+      "Maintains citizen service processing speed and compliance control accuracy as policy and demand evolve, reduces internal IT burden on platform maintenance, and surfaces service quality improvements before they affect citizen outcomes.",
     tags: ["digital-government", "citizen-services", "managed-service"],
   },
 };

@@ -91,15 +91,29 @@ function Field({
       >
         <span>
           {label}
-          {required && <span aria-hidden="true" className="ml-0.5 text-red-600">*</span>}
+          {required && (
+            <span aria-hidden="true" className="ml-0.5 text-red-600">
+              *
+            </span>
+          )}
         </span>
         {optional && (
-          <span className="text-[10px] font-normal normal-case tracking-normal text-gray-400">Optional</span>
+          <span className="text-[10px] font-normal normal-case tracking-normal text-gray-400">
+            Optional
+          </span>
         )}
       </label>
       {enhanced}
-      {hint && !error && <p id={`${id}-hint`} className="mt-1.5 text-[12px] text-gray-500">{hint}</p>}
-      {error && <p id={`${id}-error`} className="mt-1.5 text-[12px] text-red-600" role="alert">{error}</p>}
+      {hint && !error && (
+        <p id={`${id}-hint`} className="mt-1.5 text-[12px] text-gray-500">
+          {hint}
+        </p>
+      )}
+      {error && (
+        <p id={`${id}-error`} className="mt-1.5 text-[12px] text-red-600" role="alert">
+          {error}
+        </p>
+      )}
     </div>
   );
 }
@@ -130,8 +144,10 @@ export default function ContactPageClient() {
     if (!form.firstName.trim()) next.firstName = "First name is required";
     if (!form.lastName.trim()) next.lastName = "Last name is required";
     if (!form.email.trim()) next.email = "Work email is required";
-    else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email)) next.email = "Enter a valid work email";
-    if (form.phone.trim() && !PHONE_REGEX.test(form.phone.trim())) next.phone = "Enter a valid phone number";
+    else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email))
+      next.email = "Enter a valid work email";
+    if (form.phone.trim() && !PHONE_REGEX.test(form.phone.trim()))
+      next.phone = "Enter a valid phone number";
     if (!form.organisation.trim()) next.organisation = "Organisation is required";
     if (form.role.trim().length > MAX_ROLE_LEN) next.role = "Role must be 150 characters or fewer";
     if (!serviceEnquiry && !launchAdvisoryEnquiry) {
@@ -163,7 +179,9 @@ export default function ContactPageClient() {
     } catch (error) {
       setStatus("idle");
       setSubmitError(
-        error instanceof Error ? error.message : "Submission failed, please try again or email us directly."
+        error instanceof Error
+          ? error.message
+          : "Submission failed, please try again or email us directly."
       );
     }
   };
@@ -177,9 +195,18 @@ export default function ContactPageClient() {
   };
 
   const privacyLink = featureFlags.isEnabled("legal") ? (
-    <Link href="/legal/privacy" className="underline transition-colors hover:text-dq-orange">Privacy Policy</Link>
+    <Link href="/legal/privacy" className="underline transition-colors hover:text-dq-orange">
+      Privacy Policy
+    </Link>
   ) : (
-    <a href="https://digitalqatalyst.com/privacy" target="_blank" rel="noopener noreferrer" className="underline transition-colors hover:text-dq-orange">Privacy Policy</a>
+    <a
+      href="https://digitalqatalyst.com/privacy"
+      target="_blank"
+      rel="noopener noreferrer"
+      className="underline transition-colors hover:text-dq-orange"
+    >
+      Privacy Policy
+    </a>
   );
 
   return (
@@ -192,15 +219,24 @@ export default function ContactPageClient() {
               <div className="mx-auto mb-6 flex h-16 w-16 items-center justify-center rounded-full bg-[#ECFDF3]">
                 <Check size={32} className="text-green-600" strokeWidth={2.5} />
               </div>
-              <h1 className="mb-3 text-2xl font-semibold tracking-tight text-dq-navy md:text-3xl">We&apos;ve got your request</h1>
+              <h1 className="mb-3 text-2xl font-semibold tracking-tight text-dq-navy md:text-3xl">
+                We&apos;ve got your request
+              </h1>
               <p className="mx-auto mb-8 max-w-md text-[15px] leading-relaxed text-gray-600">
                 A DQ advisor will review your message and get back to you within 2 business days.
               </p>
               <div className="flex flex-col justify-center gap-3 sm:flex-row">
-                <button type="button" onClick={resetForm} className="rounded-full border border-gray-200 px-6 py-2.5 text-[15px] font-semibold text-dq-navy outline-none transition-colors hover:border-dq-navy hover:text-dq-navy">
+                <button
+                  type="button"
+                  onClick={resetForm}
+                  className="rounded-full border border-gray-200 px-6 py-2.5 text-[15px] font-semibold text-dq-navy outline-none transition-colors hover:border-dq-navy hover:text-dq-navy"
+                >
                   Submit another request
                 </button>
-                <Link href="/" className="rounded-full bg-dq-navy px-6 py-2.5 text-[15px] font-semibold text-white outline-none transition-colors hover:bg-[#020A24]">
+                <Link
+                  href="/"
+                  className="rounded-full bg-dq-navy px-6 py-2.5 text-[15px] font-semibold text-white outline-none transition-colors hover:bg-[#020A24]"
+                >
                   Back to home
                 </Link>
               </div>
@@ -214,12 +250,15 @@ export default function ContactPageClient() {
             style={{ background: "var(--mesh-hero-light)" }}
           >
             <div className="mx-auto max-w-[1120px]">
-              <p className="mb-4 max-w-2xl text-[15px] font-medium leading-relaxed text-gray-600">{PLATFORM_CONTACT_LINE}</p>
+              <p className="mb-4 max-w-2xl text-[15px] font-medium leading-relaxed text-gray-600">
+                {PLATFORM_CONTACT_LINE}
+              </p>
               <h1 className="mb-5 max-w-2xl text-balance text-4xl font-semibold tracking-tight text-dq-navy md:text-5xl">
                 Tell us what you need. We&apos;ll help you get started.
               </h1>
               <p className="max-w-xl text-[15px] leading-relaxed text-gray-600 md:text-[16px]">
-                Every message is reviewed by a DQ advisor who will match you to the right services and next steps.
+                Every message is reviewed by a DQ advisor who will match you to the right services
+                and next steps.
               </p>
             </div>
           </section>
@@ -227,63 +266,167 @@ export default function ContactPageClient() {
           <section className="bg-white px-5 py-10 md:px-8 md:py-14 lg:px-10 lg:py-16">
             <div className="mx-auto grid max-w-[1120px] gap-8 lg:grid-cols-12">
               <div className="lg:col-span-8">
-                <form onSubmit={handleSubmit} noValidate className="rounded-xl bg-gray-50 p-5 sm:p-6 md:p-8 lg:p-10">
+                <form
+                  onSubmit={handleSubmit}
+                  noValidate
+                  className="rounded-xl bg-gray-50 p-5 sm:p-6 md:p-8 lg:p-10"
+                >
                   <div className="space-y-7">
                     <div className="grid gap-4 sm:grid-cols-2">
                       <Field id="firstName" label="First Name" required error={errors.firstName}>
-                        <input id="firstName" type="text" autoComplete="given-name" value={form.firstName} onChange={(e) => setField("firstName", e.target.value)} className={inputClass(errors.firstName)} />
+                        <input
+                          id="firstName"
+                          type="text"
+                          autoComplete="given-name"
+                          value={form.firstName}
+                          onChange={(e) => setField("firstName", e.target.value)}
+                          className={inputClass(errors.firstName)}
+                        />
                       </Field>
                       <Field id="lastName" label="Last Name" required error={errors.lastName}>
-                        <input id="lastName" type="text" autoComplete="family-name" value={form.lastName} onChange={(e) => setField("lastName", e.target.value)} className={inputClass(errors.lastName)} />
+                        <input
+                          id="lastName"
+                          type="text"
+                          autoComplete="family-name"
+                          value={form.lastName}
+                          onChange={(e) => setField("lastName", e.target.value)}
+                          className={inputClass(errors.lastName)}
+                        />
                       </Field>
                     </div>
 
                     <div className="grid gap-4 sm:grid-cols-2">
                       <Field id="email" label="Work Email" required error={errors.email}>
-                        <input id="email" type="email" autoComplete="email" placeholder="you@company.com" value={form.email} onChange={(e) => setField("email", e.target.value)} className={inputClass(errors.email)} />
+                        <input
+                          id="email"
+                          type="email"
+                          autoComplete="email"
+                          placeholder="you@company.com"
+                          value={form.email}
+                          onChange={(e) => setField("email", e.target.value)}
+                          className={inputClass(errors.email)}
+                        />
                       </Field>
                       <Field id="phone" label="Phone Number" optional error={errors.phone}>
-                        <input id="phone" type="tel" autoComplete="tel" placeholder="+971 XX XXX XXXX" maxLength={20} value={form.phone} onChange={(e) => setField("phone", e.target.value)} className={inputClass(errors.phone)} />
+                        <input
+                          id="phone"
+                          type="tel"
+                          autoComplete="tel"
+                          placeholder="+971 XX XXX XXXX"
+                          maxLength={20}
+                          value={form.phone}
+                          onChange={(e) => setField("phone", e.target.value)}
+                          className={inputClass(errors.phone)}
+                        />
                       </Field>
                     </div>
 
-                    <Field id="organisation" label="Organisation" required error={errors.organisation}>
-                      <input id="organisation" type="text" autoComplete="organization" value={form.organisation} onChange={(e) => setField("organisation", e.target.value)} className={inputClass(errors.organisation)} />
+                    <Field
+                      id="organisation"
+                      label="Organisation"
+                      required
+                      error={errors.organisation}
+                    >
+                      <input
+                        id="organisation"
+                        type="text"
+                        autoComplete="organization"
+                        value={form.organisation}
+                        onChange={(e) => setField("organisation", e.target.value)}
+                        className={inputClass(errors.organisation)}
+                      />
                     </Field>
 
                     <Field id="role" label="Role / Title" optional error={errors.role}>
-                      <input id="role" type="text" autoComplete="organization-title" placeholder="e.g. Director of Digital Transformation" maxLength={MAX_ROLE_LEN} value={form.role} onChange={(e) => setField("role", e.target.value)} className={inputClass(errors.role)} />
+                      <input
+                        id="role"
+                        type="text"
+                        autoComplete="organization-title"
+                        placeholder="e.g. Director of Digital Transformation"
+                        maxLength={MAX_ROLE_LEN}
+                        value={form.role}
+                        onChange={(e) => setField("role", e.target.value)}
+                        className={inputClass(errors.role)}
+                      />
                     </Field>
 
                     {launchAdvisoryEnquiry ? (
                       <div className="rounded-xl border border-dq-orange/20 bg-orange-50/40 px-4 py-4">
-                        <p className="text-[10px] font-semibold uppercase tracking-[0.16em] text-dq-orange">Launch offer</p>
-                        <p className="mt-1 text-base font-semibold text-dq-navy">{LAUNCH_ADVISORY_HEADLINE}</p>
+                        <p className="text-[10px] font-semibold uppercase tracking-[0.16em] text-dq-orange">
+                          Launch offer
+                        </p>
+                        <p className="mt-1 text-base font-semibold text-dq-navy">
+                          {LAUNCH_ADVISORY_HEADLINE}
+                        </p>
                       </div>
                     ) : serviceEnquiry ? (
                       <div className="rounded-xl border border-gray-200 bg-white px-4 py-4">
-                        <p className="text-[10px] font-semibold uppercase tracking-[0.16em] text-gray-400">Service enquiry</p>
-                        <p className="mt-1 text-base font-semibold text-dq-navy">{serviceEnquiry.service}</p>
+                        <p className="text-[10px] font-semibold uppercase tracking-[0.16em] text-gray-400">
+                          Service enquiry
+                        </p>
+                        <p className="mt-1 text-base font-semibold text-dq-navy">
+                          {serviceEnquiry.service}
+                        </p>
                       </div>
                     ) : (
                       <div className="grid gap-4 sm:grid-cols-2">
-                        <Field id="interest" label="What are you exploring?" required error={errors.interest}>
-                          <select id="interest" value={form.interest} onChange={(e) => setField("interest", e.target.value)} className={inputClass(errors.interest)}>
+                        <Field
+                          id="interest"
+                          label="What are you exploring?"
+                          required
+                          error={errors.interest}
+                        >
+                          <select
+                            id="interest"
+                            value={form.interest}
+                            onChange={(e) => setField("interest", e.target.value)}
+                            className={inputClass(errors.interest)}
+                          >
                             <option value="">Select an area…</option>
-                            {CONTACT_INTEREST_OPTIONS.map((opt) => <option key={opt} value={opt}>{opt}</option>)}
+                            {CONTACT_INTEREST_OPTIONS.map((opt) => (
+                              <option key={opt} value={opt}>
+                                {opt}
+                              </option>
+                            ))}
                           </select>
                         </Field>
-                        <Field id="need" label="What do you need from DQ?" required error={errors.need}>
-                          <select id="need" value={form.need} onChange={(e) => setField("need", e.target.value)} className={inputClass(errors.need)}>
+                        <Field
+                          id="need"
+                          label="What do you need from DQ?"
+                          required
+                          error={errors.need}
+                        >
+                          <select
+                            id="need"
+                            value={form.need}
+                            onChange={(e) => setField("need", e.target.value)}
+                            className={inputClass(errors.need)}
+                          >
                             <option value="">Select a need…</option>
-                            {CONTACT_NEED_OPTIONS.map((opt) => <option key={opt} value={opt}>{opt}</option>)}
+                            {CONTACT_NEED_OPTIONS.map((opt) => (
+                              <option key={opt} value={opt}>
+                                {opt}
+                              </option>
+                            ))}
                           </select>
                         </Field>
                       </div>
                     )}
 
-                    <Field id="message" label="Your Message" required error={errors.message} hint="Share your goals, challenges, or timeline so we can help faster.">
-                      <textarea id="message" rows={5} value={form.message} onChange={(e) => setField("message", e.target.value)} className={`${inputClass(errors.message)} min-h-[120px] resize-y`} />
+                    <Field
+                      id="message"
+                      label="Your Message"
+                      required
+                      error={errors.message}
+                      hint="Share your goals, challenges, or timeline so we can help faster."
+                    >
+                      <textarea
+                        id="message"
+                        rows={5}
+                        value={form.message}
+                        onChange={(e) => setField("message", e.target.value)}
+                        className={`${inputClass(errors.message)} min-h-[120px] resize-y`}
+                      />
                     </Field>
 
                     <div>
@@ -297,33 +440,64 @@ export default function ContactPageClient() {
                           onChange={(e) => setField("consent", e.target.checked)}
                           className="mt-0.5 h-4 w-4 shrink-0 rounded border-gray-300 text-dq-navy focus:ring-dq-orange"
                         />
-                        <span className={`text-[13px] leading-relaxed transition-colors ${errors.consent ? "text-red-600" : "text-gray-500"}`}>
-                          I agree to the processing of my data for this consultation request, in accordance with the {privacyLink}.
+                        <span
+                          className={`text-[13px] leading-relaxed transition-colors ${errors.consent ? "text-red-600" : "text-gray-500"}`}
+                        >
+                          I agree to the processing of my data for this consultation request, in
+                          accordance with the {privacyLink}.
                         </span>
                       </label>
-                      {errors.consent && <p className="ml-1 mt-1.5 text-[12px] text-red-600" role="alert">{errors.consent}</p>}
+                      {errors.consent && (
+                        <p className="ml-1 mt-1.5 text-[12px] text-red-600" role="alert">
+                          {errors.consent}
+                        </p>
+                      )}
                     </div>
 
-                    <div className="absolute -left-[9999px] h-0 w-0 overflow-hidden" aria-hidden="true">
+                    <div
+                      className="absolute -left-[9999px] h-0 w-0 overflow-hidden"
+                      aria-hidden="true"
+                    >
                       <label htmlFor="website">Website</label>
-                      <input id="website" type="text" name="website" tabIndex={-1} autoComplete="off" value={honeypot} onChange={(e) => setHoneypot(e.target.value)} />
+                      <input
+                        id="website"
+                        type="text"
+                        name="website"
+                        tabIndex={-1}
+                        autoComplete="off"
+                        value={honeypot}
+                        onChange={(e) => setHoneypot(e.target.value)}
+                      />
                     </div>
 
                     {submitError && (
-                      <p className="rounded-lg border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700" role="alert">{submitError}</p>
+                      <p
+                        className="rounded-lg border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700"
+                        role="alert"
+                      >
+                        {submitError}
+                      </p>
                     )}
 
                     <div className="flex flex-col-reverse gap-3 sm:flex-row sm:items-center sm:justify-between">
-                      <p className="text-center text-[12px] text-gray-500 sm:text-left"><span className="text-red-600">*</span> Required fields.</p>
+                      <p className="text-center text-[12px] text-gray-500 sm:text-left">
+                        <span className="text-red-600">*</span> Required fields.
+                      </p>
                       <button
                         type="submit"
                         disabled={status === "loading"}
                         className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-dq-orange px-6 py-3 text-[15px] font-semibold text-white outline-none transition-colors hover:bg-[#E04020] disabled:cursor-not-allowed disabled:opacity-80 sm:w-auto"
                       >
                         {status === "loading" ? (
-                          <><Loader2 size={16} className="animate-spin" />Submitting…</>
+                          <>
+                            <Loader2 size={16} className="animate-spin" />
+                            Submitting…
+                          </>
                         ) : (
-                          <>Send request<ArrowRight size={16} /></>
+                          <>
+                            Send request
+                            <ArrowRight size={16} />
+                          </>
                         )}
                       </button>
                     </div>
@@ -332,7 +506,9 @@ export default function ContactPageClient() {
               </div>
 
               <aside className="border-t border-gray-100 px-1 pt-8 lg:col-span-4 lg:border-t-0 lg:pt-0">
-                <p className="mb-4 text-[10px] font-semibold uppercase tracking-[0.16em] text-gray-400">What happens next</p>
+                <p className="mb-4 text-[10px] font-semibold uppercase tracking-[0.16em] text-gray-400">
+                  What happens next
+                </p>
                 <p className="mb-5 text-[13px] leading-relaxed text-gray-500">
                   A DQ advisor reads every message and connects you to the right services.
                 </p>
@@ -341,11 +517,20 @@ export default function ContactPageClient() {
                   Expect a response within 2 business days.
                 </div>
                 <div className="mt-6 border-t border-gray-100 pt-5">
-                  <p className="mb-4 text-[10px] font-semibold uppercase tracking-[0.16em] text-gray-400">Reach us</p>
-                  <a href="https://share.google/9pVW35F4st9j56xt4" target="_blank" rel="noopener noreferrer" className="group mb-4 flex items-start gap-2.5">
+                  <p className="mb-4 text-[10px] font-semibold uppercase tracking-[0.16em] text-gray-400">
+                    Reach us
+                  </p>
+                  <a
+                    href="https://share.google/9pVW35F4st9j56xt4"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="group mb-4 flex items-start gap-2.5"
+                  >
                     <MapPin size={13} className="mt-0.5 shrink-0 text-dq-navy" />
                     <div className="border-l border-dq-navy/25 pl-2.5">
-                      <p className="text-[13px] font-medium leading-snug text-dq-navy">708, Opal Tower</p>
+                      <p className="text-[13px] font-medium leading-snug text-dq-navy">
+                        708, Opal Tower
+                      </p>
                       <p className="mt-0.5 text-[12px] text-gray-500">Business Bay, Dubai, UAE</p>
                     </div>
                   </a>
@@ -353,14 +538,20 @@ export default function ContactPageClient() {
                     <Phone size={13} className="shrink-0 text-gray-400" />
                     <span className="text-[13px] text-gray-600">+971 4 266 6169</span>
                   </a>
-                  <a href="mailto:info@digitalqatalyst.com" className="mt-0.5 flex items-center gap-2.5 py-1">
+                  <a
+                    href="mailto:info@digitalqatalyst.com"
+                    className="mt-0.5 flex items-center gap-2.5 py-1"
+                  >
                     <Mail size={13} className="shrink-0 text-gray-400" />
                     <span className="text-[13px] text-gray-600">info@digitalqatalyst.com</span>
                   </a>
                 </div>
                 {featureFlags.isEnabled("marketplace") && (
                   <div className="mt-6">
-                    <Link href="/marketplace" className="inline-flex items-center gap-1 text-[13px] font-semibold text-dq-navy hover:text-[#E04020]">
+                    <Link
+                      href="/marketplace"
+                      className="inline-flex items-center gap-1 text-[13px] font-semibold text-dq-navy hover:text-[#E04020]"
+                    >
                       Not sure where to start? Browse services <ArrowRight size={13} />
                     </Link>
                   </div>

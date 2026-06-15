@@ -68,20 +68,14 @@ export function parseServiceContactParams(
   };
 }
 
-export function mapServiceToInterest(
-  collection?: string,
-  serviceType?: string
-): ContactInterest {
+export function mapServiceToInterest(collection?: string, serviceType?: string): ContactInterest {
   if (serviceType === "advisory" || collection === "strategy") {
     return "Transformation Strategy & Advisory";
   }
   return "Digital Platform & Architecture";
 }
 
-export function mapServiceToNeed(
-  serviceType?: string,
-  intent?: string
-): ContactNeed {
+export function mapServiceToNeed(serviceType?: string, intent?: string): ContactNeed {
   switch (serviceType) {
     case "advisory":
     case "manage":
@@ -107,11 +101,7 @@ export function buildServiceEnquiryMessage(
   if (serviceType === "bundle") {
     return `I would like to request a proposal for: ${serviceName}`;
   }
-  if (
-    serviceType === "advisory" ||
-    serviceType === "design" ||
-    serviceType === "ai_design"
-  ) {
+  if (serviceType === "advisory" || serviceType === "design" || serviceType === "ai_design") {
     return `I'd like to get started with: ${serviceName}`;
   }
   if (intent === "consultation" || serviceType === "manage") {
@@ -120,10 +110,7 @@ export function buildServiceEnquiryMessage(
   return `I would like to request a quote for: ${serviceName}`;
 }
 
-export function buildContactPath(
-  service: ServiceProduct,
-  intent: ContactEnquiryIntent
-): string {
+export function buildContactPath(service: ServiceProduct, intent: ContactEnquiryIntent): string {
   const params = new URLSearchParams({
     service: service.standardName,
     type: service.serviceType,

@@ -1,7 +1,7 @@
 "use client";
 
 import { ShoppingCart } from "lucide-react";
-import { useCart } from "@/contexts/CartContext" // TODO: Task 9 — wire up context;
+import { useCart } from "@/contexts/CartContext"; // TODO: Task 9 — wire up context;
 import { Button } from "@/components/ui/button";
 
 const CartNavButton = ({ className }: { className?: string }) => {

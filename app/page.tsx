@@ -7,8 +7,7 @@ export const metadata: Metadata = {
     "Digital Qatalyst's marketplace for technology management services. Browse 200+ services across AI, cloud, data, and digital transformation.",
   openGraph: {
     title: "TMaaS | Technology Management as a Service",
-    description:
-      "Digital Qatalyst's marketplace for technology management services.",
+    description: "Digital Qatalyst's marketplace for technology management services.",
     images: ["/og-image.png"],
     type: "website",
   },

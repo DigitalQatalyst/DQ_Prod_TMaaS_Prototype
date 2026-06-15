@@ -6,14 +6,10 @@ import {
   marketplaceCoreCapabilities,
   marketplaceServiceTypes,
   marketplaceEconomySectors,
-} from "@/data/marketplaceNavigation" // TODO: Task 9 — wire up data;
+} from "@/data/marketplaceNavigation"; // TODO: Task 9 — wire up data;
 import { Checkbox } from "@/components/ui/checkbox";
 import { Label } from "@/components/ui/label";
-import {
-  Collapsible,
-  CollapsibleContent,
-  CollapsibleTrigger,
-} from "@/components/ui/collapsible";
+import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
 import { ChevronDown, SlidersHorizontal } from "lucide-react";
 
 interface MarketplaceFiltersProps {
@@ -117,9 +113,7 @@ const MarketplaceFilters = ({
           onClick={onClearAll}
           disabled={!showClearAll}
           className={`text-xs font-medium transition ${
-            showClearAll
-              ? "text-dq-navy hover:text-dq-navy/80"
-              : "cursor-default text-gray-300"
+            showClearAll ? "text-dq-navy hover:text-dq-navy/80" : "cursor-default text-gray-300"
           }`}
         >
           Reset all

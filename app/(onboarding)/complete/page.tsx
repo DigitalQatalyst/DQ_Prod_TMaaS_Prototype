@@ -18,7 +18,9 @@ export default function OnboardingCompletePage() {
           <h1 className="text-3xl font-bold text-foreground">
             Welcome to <span className="text-gradient-brand">TMaaS</span>!
           </h1>
-          <p className="mt-3 text-lg text-muted-foreground">Your organisation has been successfully set up</p>
+          <p className="mt-3 text-lg text-muted-foreground">
+            Your organisation has been successfully set up
+          </p>
 
           <div className="my-8 rounded-xl bg-accent/50 p-6">
             <div className="flex items-center justify-center gap-2">
@@ -29,7 +31,9 @@ export default function OnboardingCompletePage() {
 
           <div className="mb-8">
             <h2 className="mb-4 text-lg font-semibold text-foreground">What&apos;s Next?</h2>
-            <p className="text-sm text-muted-foreground">Choose how you&apos;d like to begin your transformation journey</p>
+            <p className="text-sm text-muted-foreground">
+              Choose how you&apos;d like to begin your transformation journey
+            </p>
           </div>
 
           <div className="grid gap-4 md:grid-cols-2">
@@ -69,7 +73,11 @@ export default function OnboardingCompletePage() {
             </div>
           </div>
 
-          <Button onClick={() => router.push("/dashboard/overview")} variant="outline" className="mt-6">
+          <Button
+            onClick={() => router.push("/dashboard/overview")}
+            variant="outline"
+            className="mt-6"
+          >
             Go to Dashboard
           </Button>
         </div>

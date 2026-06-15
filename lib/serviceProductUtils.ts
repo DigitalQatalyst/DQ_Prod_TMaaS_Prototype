@@ -1,9 +1,6 @@
 import type { ServiceProduct } from "@/lib/types/serviceProduct";
 
-export function getRemixedName(
-  service: ServiceProduct,
-  remixKey: string = "all"
-): string {
+export function getRemixedName(service: ServiceProduct, remixKey: string = "all"): string {
   if (remixKey === "all") return service.standardName;
   return service.remixName[remixKey] ?? service.standardName;
 }

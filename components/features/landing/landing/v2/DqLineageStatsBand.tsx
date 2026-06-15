@@ -43,9 +43,7 @@ const DqLineageStatsBand = () => {
               <p className="mb-3 text-2xl font-semibold tracking-tight">
                 Built on a decade of transformation delivery.
               </p>
-              <p className="text-[15px] leading-relaxed text-white/75">
-                {PLATFORM_LINEAGE_LINE}
-              </p>
+              <p className="text-[15px] leading-relaxed text-white/75">{PLATFORM_LINEAGE_LINE}</p>
             </div>
             <a
               href={DQ_CORP_WEB_URL}

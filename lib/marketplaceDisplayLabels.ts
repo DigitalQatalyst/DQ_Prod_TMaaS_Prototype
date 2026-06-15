@@ -124,19 +124,14 @@ function formatTitle(
   }
 
   const stage =
-    stageLabel ??
-    (serviceType ? CARD_STAGE_LABEL[serviceType] : variantSuffix) ??
-    variantSuffix;
+    stageLabel ?? (serviceType ? CARD_STAGE_LABEL[serviceType] : variantSuffix) ?? variantSuffix;
 
   if (!stage) return product;
   return `${product} - ${stage}`;
 }
 
 /** Marketplace cards, shelves, and list rows. */
-export function getMarketplaceCardTitle(
-  standardName: string,
-  serviceType?: string
-): string {
+export function getMarketplaceCardTitle(standardName: string, serviceType?: string): string {
   const type = resolveServiceType(standardName, serviceType);
   const stage = type ? CARD_STAGE_LABEL[type] : undefined;
   return formatTitle(standardName, type, stage, CARD_STAGE_LABEL.bundle);

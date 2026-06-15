@@ -1,10 +1,6 @@
 "use client";
 
-import {
-  motion,
-  useMotionValue,
-  useSpring,
-} from "framer-motion";
+import { motion, useMotionValue, useSpring } from "framer-motion";
 import { useEffect, useMemo, useRef, useState } from "react";
 import Link from "next/link";
 
@@ -132,13 +128,7 @@ function HeroSpotlight() {
   );
 }
 
-function Reveal({
-  children,
-  delay = 0,
-}: {
-  children: React.ReactNode;
-  delay?: number;
-}) {
+function Reveal({ children, delay = 0 }: { children: React.ReactNode; delay?: number }) {
   return (
     <motion.span
       className="inline-block"
@@ -172,15 +162,12 @@ function TopNav() {
         style={
           scrolled
             ? {
-                boxShadow:
-                  "0 1px 0 rgba(3,15,53,0.04), 0 8px 24px rgba(3,15,53,0.06)",
+                boxShadow: "0 1px 0 rgba(3,15,53,0.04), 0 8px 24px rgba(3,15,53,0.06)",
               }
             : undefined
         }
       >
-        <Link href="/"
-          className="flex items-center gap-2 font-semibold tracking-tight"
-        >
+        <Link href="/" className="flex items-center gap-2 font-semibold tracking-tight">
           <span className="grid h-7 w-7 place-items-center rounded-md bg-navy-950 text-white">
             <span className="font-mono text-[11px] font-bold">DQ</span>
           </span>
@@ -202,12 +189,14 @@ function TopNav() {
         </nav>
 
         <div className="flex items-center gap-2">
-          <Link href="/sign-in"
+          <Link
+            href="/sign-in"
             className="hidden text-sm text-gray-700 hover:text-navy-950 sm:block"
           >
             Sign in
           </Link>
-          <Link href="/marketplace"
+          <Link
+            href="/marketplace"
             className="group inline-flex items-center gap-1.5 rounded-full bg-navy-950 px-4 py-2 text-sm font-medium text-white transition hover:bg-navy-800"
           >
             Explore services
@@ -236,8 +225,7 @@ function Hero() {
           backgroundImage:
             "linear-gradient(to right, oklch(0.86 0.010 264 / 0.5) 1px, transparent 1px), linear-gradient(to bottom, oklch(0.86 0.010 264 / 0.5) 1px, transparent 1px)",
           backgroundSize: "56px 56px",
-          maskImage:
-            "radial-gradient(ellipse 70% 50% at 50% 30%, black 40%, transparent 80%)",
+          maskImage: "radial-gradient(ellipse 70% 50% at 50% 30%, black 40%, transparent 80%)",
         }}
       />
       <HeroSpotlight />
@@ -286,9 +274,8 @@ function Hero() {
           transition={{ delay: 0.5, duration: 0.6 }}
           className="mt-8 max-w-xl text-lg leading-relaxed text-gray-600"
         >
-          TMaaS is an execution layer for digital transformation, a marketplace
-          of certified pods that diagnose, design, deliver, and operate the
-          change with measurable outcome SLAs.
+          TMaaS is an execution layer for digital transformation, a marketplace of certified pods
+          that diagnose, design, deliver, and operate the change with measurable outcome SLAs.
         </motion.p>
 
         <motion.div
@@ -297,7 +284,8 @@ function Hero() {
           transition={{ delay: 0.65, duration: 0.6 }}
           className="mt-10 flex flex-wrap items-center gap-3"
         >
-          <Link href="/marketplace"
+          <Link
+            href="/marketplace"
             className="group relative inline-flex items-center gap-2 overflow-hidden rounded-full bg-navy-950 px-6 py-3.5 text-sm font-semibold text-white transition"
             style={{ boxShadow: "var(--glow-navy-md)" }}
           >
@@ -306,7 +294,8 @@ function Hero() {
             <Icon.arrow className="relative h-4 w-4 transition group-hover:translate-x-1" />
           </Link>
 
-          <Link href="/butler-demo"
+          <Link
+            href="/butler-demo"
             className="inline-flex items-center gap-2 rounded-full border border-navy-200 bg-white/60 px-6 py-3.5 text-sm font-semibold text-navy-950 backdrop-blur transition hover:border-navy-300 hover:bg-white"
           >
             <Icon.spark className="h-4 w-4 text-orange-500" />
@@ -359,12 +348,8 @@ function Hero() {
                           {m.k}
                         </div>
                         <div className="mt-1.5 flex items-end gap-2">
-                          <div className="text-2xl font-semibold text-white">
-                            {m.v}
-                          </div>
-                          <div className="mb-1 text-[10px] text-white/40">
-                            /100
-                          </div>
+                          <div className="text-2xl font-semibold text-white">{m.v}</div>
+                          <div className="mb-1 text-[10px] text-white/40">/100</div>
                         </div>
                         <div className="mt-2 h-1 overflow-hidden rounded-full bg-white/10">
                           <motion.div
@@ -408,18 +393,20 @@ function Hero() {
                       Next step
                     </div>
                     <div className="mt-2 text-sm text-white/80">
-                      Start with an assessment pod to baseline readiness and
-                      prioritise your first 90 days.
+                      Start with an assessment pod to baseline readiness and prioritise your first
+                      90 days.
                     </div>
                     <div className="mt-4 flex items-center gap-3">
-                      <Link href="/marketplace"
+                      <Link
+                        href="/marketplace"
                         className="inline-flex items-center gap-2 rounded-full bg-orange-500 px-4 py-2 text-xs font-semibold text-white transition hover:bg-orange-400"
                         style={{ boxShadow: "var(--glow-orange-md)" }}
                       >
                         View pods
                         <Icon.arrow className="h-3.5 w-3.5" />
                       </Link>
-                      <Link href="/explore"
+                      <Link
+                        href="/explore"
                         className="text-xs font-semibold text-white/70 hover:text-white"
                       >
                         Read the approach
@@ -477,15 +464,12 @@ function Pods() {
             >
               Four pods.
               <br />
-              <span className="text-gray-400">
-                One operating rhythm for transformation.
-              </span>
+              <span className="text-gray-400">One operating rhythm for transformation.</span>
             </h2>
           </div>
           <p className="max-w-md text-gray-600 md:justify-self-end">
-            TMaaS turns transformation into a repeatable operating system, with
-            weekly cadence, evidence-based decisions, and delivery artifacts you
-            can ship.
+            TMaaS turns transformation into a repeatable operating system, with weekly cadence,
+            evidence-based decisions, and delivery artifacts you can ship.
           </p>
         </div>
 
@@ -555,20 +539,21 @@ function Outcomes() {
             .
           </h2>
           <p className="mt-6 max-w-xl text-white/70">
-            Every pod is backed by a scorecard, readiness, delivery, adoption,
-            and value metrics, so leadership can steer the programme with
-            evidence.
+            Every pod is backed by a scorecard, readiness, delivery, adoption, and value metrics, so
+            leadership can steer the programme with evidence.
           </p>
 
           <div className="mt-10 flex flex-wrap gap-3">
-            <Link href="/dashboard/overview"
+            <Link
+              href="/dashboard/overview"
               className="group inline-flex items-center gap-2 rounded-full bg-orange-500 px-6 py-3.5 text-sm font-semibold text-white transition hover:bg-orange-400"
               style={{ boxShadow: "var(--glow-orange-md)" }}
             >
               View a sample dashboard
               <Icon.arrow className="h-4 w-4 transition group-hover:translate-x-1" />
             </Link>
-            <Link href="/explore"
+            <Link
+              href="/explore"
               className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-6 py-3.5 text-sm font-semibold text-white/85 backdrop-blur transition hover:bg-white/10"
             >
               Read the playbook
@@ -595,16 +580,11 @@ function Outcomes() {
               d: "Scorecards + telemetry steer investment to what’s working.",
             },
           ].map((row) => (
-            <div
-              key={row.k}
-              className="rounded-2xl border border-white/10 bg-white/5 p-5"
-            >
+            <div key={row.k} className="rounded-2xl border border-white/10 bg-white/5 p-5">
               <div className="font-mono text-[11px] uppercase tracking-[0.2em] text-orange-300">
                 {row.k}
               </div>
-              <div className="mt-2 text-lg font-semibold tracking-tight">
-                {row.v}
-              </div>
+              <div className="mt-2 text-lg font-semibold tracking-tight">{row.v}</div>
               <div className="mt-2 text-sm text-white/70">{row.d}</div>
             </div>
           ))}
@@ -635,12 +615,13 @@ function CTA() {
               Baseline. Blueprint. Build.
             </h2>
             <p className="mt-5 text-gray-600">
-              Begin with a short assessment pod, align on a 90‑day blueprint,
-              then deploy delivery pods with outcome SLAs and telemetry.
+              Begin with a short assessment pod, align on a 90‑day blueprint, then deploy delivery
+              pods with outcome SLAs and telemetry.
             </p>
 
             <div className="mt-8 flex flex-wrap gap-3">
-              <Link href="/marketplace"
+              <Link
+                href="/marketplace"
                 className="group inline-flex items-center gap-2 rounded-full bg-navy-950 px-6 py-3.5 text-sm font-semibold text-white transition hover:bg-navy-900"
                 style={{ boxShadow: "var(--glow-navy-md)" }}
               >
@@ -663,16 +644,11 @@ function CTA() {
               { n: "02", t: "Blueprint pod", d: "Backlog + architecture + owners." },
               { n: "03", t: "Delivery pod(s)", d: "Ship increments with telemetry." },
             ].map((c) => (
-              <div
-                key={c.n}
-                className="rounded-2xl border border-navy-100 bg-white p-6"
-              >
+              <div key={c.n} className="rounded-2xl border border-navy-100 bg-white p-6">
                 <div className="font-mono text-[11px] uppercase tracking-[0.2em] text-orange-600">
                   Step {c.n}
                 </div>
-                <div className="mt-2 text-lg font-semibold tracking-tight text-navy-950">
-                  {c.t}
-                </div>
+                <div className="mt-2 text-lg font-semibold tracking-tight text-navy-950">{c.t}</div>
                 <div className="mt-2 text-sm text-gray-600">{c.d}</div>
               </div>
             ))}
@@ -703,9 +679,7 @@ function FAQ() {
     <section id="faq" className="border-t border-navy-100 bg-white py-24">
       <div className="mx-auto max-w-7xl px-6">
         <div className="mb-10 max-w-2xl">
-          <div className="font-mono text-xs uppercase tracking-[0.2em] text-orange-600">
-            FAQ
-          </div>
+          <div className="font-mono text-xs uppercase tracking-[0.2em] text-orange-600">FAQ</div>
           <h2
             className="mt-3 tracking-tight text-navy-950"
             style={{ fontSize: "1.875rem", fontWeight: 650, lineHeight: 1.2 }}
@@ -716,10 +690,7 @@ function FAQ() {
 
         <div className="grid gap-4 md:grid-cols-3">
           {items.map((it) => (
-            <div
-              key={it.q}
-              className="rounded-2xl border border-navy-100 bg-white p-7"
-            >
+            <div key={it.q} className="rounded-2xl border border-navy-100 bg-white p-7">
               <div className="text-sm font-semibold text-navy-950">{it.q}</div>
               <div className="mt-3 text-sm text-gray-600">{it.a}</div>
             </div>
@@ -745,8 +716,8 @@ function Footer() {
               </span>
             </div>
             <p className="mt-4 max-w-sm text-sm text-gray-600">
-              Execution pods for digital transformation, built around measurable
-              outcomes and an evidence-led operating rhythm.
+              Execution pods for digital transformation, built around measurable outcomes and an
+              evidence-led operating rhythm.
             </p>
           </div>
 
@@ -826,4 +797,3 @@ export default function TMaaSHomepage() {
     </div>
   );
 }
-

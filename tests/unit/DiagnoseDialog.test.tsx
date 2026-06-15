@@ -35,12 +35,8 @@ describe("DiagnoseDialog", () => {
       vi.runAllTimers();
     });
 
-    expect(
-      screen.getByRole("heading", { name: /TMaaS AI Butler/i })
-    ).toBeInTheDocument();
-    expect(
-      screen.getByPlaceholderText("How can I assist you today?")
-    ).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: /TMaaS AI Butler/i })).toBeInTheDocument();
+    expect(screen.getByPlaceholderText("How can I assist you today?")).toBeInTheDocument();
   });
 
   it("uses the exact Anthony contact email in the escalation mock", () => {

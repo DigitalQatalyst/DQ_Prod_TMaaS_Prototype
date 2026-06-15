@@ -23,9 +23,7 @@ const LandingHeroSection = () => {
         <div>
           <p className="animate-fade-in-up dq-eyebrow">{PLATFORM_DESCRIPTOR}</p>
 
-          <h1
-            className={`animate-fade-in-up animation-delay-100 mt-5 ${landingHeroHeading}`}
-          >
+          <h1 className={`animate-fade-in-up animation-delay-100 mt-5 ${landingHeroHeading}`}>
             <span className="block">{PLATFORM_HERO_HEADLINE_PRIMARY}</span>
             <span className="block text-dq-orange">{PLATFORM_HERO_HEADLINE_ACCENT}</span>
           </h1>
@@ -35,18 +33,11 @@ const LandingHeroSection = () => {
           </p>
 
           <div className="animate-fade-in-up animation-delay-300 mt-6 flex flex-col items-stretch gap-3 sm:flex-row sm:items-center">
-            <Link href="/marketplace"
-              className={cn(btnPrimary, "group w-full sm:w-auto")}
-            >
+            <Link href="/marketplace" className={cn(btnPrimary, "group w-full sm:w-auto")}>
               {NAV_BROWSE_MARKETPLACE_LABEL}
-              <ArrowRight
-                size={16}
-                className="transition group-hover:translate-x-0.5"
-              />
+              <ArrowRight size={16} className="transition group-hover:translate-x-0.5" />
             </Link>
-            <Link href="/contact"
-              className={cn(btnSecondary, "w-full sm:w-auto")}
-            >
+            <Link href="/contact" className={cn(btnSecondary, "w-full sm:w-auto")}>
               Talk to our team
             </Link>
           </div>

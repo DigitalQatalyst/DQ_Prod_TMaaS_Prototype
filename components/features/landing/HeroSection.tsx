@@ -13,7 +13,10 @@ const suggestions = [
   { label: "Improve customer experience", prompt: "I want to improve customer experience" },
   { label: "Modernize operations", prompt: "Modernize our digital operations" },
   { label: "Build transformation roadmap", prompt: "Build Transformation Roadmap" },
-  { label: "Accelerate digital delivery", prompt: "Accelerate digital delivery across the organization" },
+  {
+    label: "Accelerate digital delivery",
+    prompt: "Accelerate digital delivery across the organization",
+  },
   { label: "Deploy with specialists", prompt: "Deploy with Certified Specialists" },
 ];
 
@@ -68,9 +71,7 @@ const HeroSection = () => {
             <textarea
               id="butler-prompt"
               value={problem}
-              onChange={(e) =>
-                setProblem(e.target.value.slice(0, MAX_PROMPT_LENGTH))
-              }
+              onChange={(e) => setProblem(e.target.value.slice(0, MAX_PROMPT_LENGTH))}
               onKeyDown={handleKeyDown}
               placeholder="Describe your business challenge and Butler will guide you to the right services."
               rows={4}
@@ -78,16 +79,14 @@ const HeroSection = () => {
             />
 
             <div className="flex items-center justify-between gap-3 border-t border-gray-100 px-3 py-2.5">
-              <Link href="/marketplace"
+              <Link
+                href="/marketplace"
                 className="text-xs font-medium text-gray-500 transition-colors hover:text-dq-orange"
               >
                 Browse marketplace
               </Link>
               <div className="flex items-center gap-2.5">
-                <span
-                  className="text-xs tabular-nums text-gray-400"
-                  aria-live="polite"
-                >
+                <span className="text-xs tabular-nums text-gray-400" aria-live="polite">
                   {problem.length} / {MAX_PROMPT_LENGTH}
                 </span>
                 <button
@@ -104,8 +103,8 @@ const HeroSection = () => {
           </div>
 
           <p className="mt-3 text-center text-[11px] leading-relaxed text-gray-400">
-            By using Butler, you agree that your prompt may be processed to recommend
-            TMaaS services. Do not submit confidential data.
+            By using Butler, you agree that your prompt may be processed to recommend TMaaS
+            services. Do not submit confidential data.
           </p>
         </div>
 
@@ -118,11 +117,7 @@ const HeroSection = () => {
                 onClick={() => openWithPrompt(item.prompt)}
                 className="inline-flex items-center gap-1.5 rounded-full border border-gray-200 bg-white/60 px-3.5 py-2 text-xs font-medium text-dq-navy backdrop-blur-sm transition-all duration-300 hover:border-dq-orange hover:bg-white hover:shadow-md"
               >
-                <Bot
-                  size={12}
-                  className="shrink-0 text-dq-orange"
-                  strokeWidth={2}
-                />
+                <Bot size={12} className="shrink-0 text-dq-orange" strokeWidth={2} />
                 {item.label}
               </button>
             ))}

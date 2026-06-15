@@ -1,13 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import {
-  ArrowRight,
-  MessageSquareCode,
-  Settings2,
-  Bot,
-  Workflow,
-} from "lucide-react";
+import { ArrowRight, MessageSquareCode, Settings2, Bot, Workflow } from "lucide-react";
 
 const steps = [
   {
@@ -56,8 +50,8 @@ const HowItWorksSection = () => {
             From goal to live capability
           </h2>
           <p className="mt-4 text-base leading-relaxed text-gray-600">
-            Browse packages, configure what you need, and deploy with a delivery
-            model you can track.
+            Browse packages, configure what you need, and deploy with a delivery model you can
+            track.
           </p>
         </div>
 
@@ -77,12 +71,8 @@ const HowItWorksSection = () => {
                     {String(index + 1).padStart(2, "0")}
                   </span>
                 </div>
-                <h3 className="mt-4 text-sm font-semibold text-dq-navy">
-                  {step.title}
-                </h3>
-                <p className="mt-1.5 text-sm leading-relaxed text-gray-500">
-                  {step.desc}
-                </p>
+                <h3 className="mt-4 text-sm font-semibold text-dq-navy">{step.title}</h3>
+                <p className="mt-1.5 text-sm leading-relaxed text-gray-500">{step.desc}</p>
               </li>
             );
           })}
@@ -91,23 +81,19 @@ const HowItWorksSection = () => {
         <div className="mt-12 border-t border-gray-100 pt-10">
           <div className="grid grid-cols-3 gap-4 md:gap-0 md:divide-x md:divide-gray-100">
             {proofPoints.map((point) => (
-              <div
-                key={point.label}
-                className="text-center first:md:pl-0 last:md:pr-0 md:px-8"
-              >
+              <div key={point.label} className="text-center first:md:pl-0 last:md:pr-0 md:px-8">
                 <p className="text-2xl font-semibold tracking-tight text-dq-navy md:text-3xl">
                   {point.value}
                 </p>
-                <p className="mt-1 text-xs font-medium text-gray-500 md:text-sm">
-                  {point.label}
-                </p>
+                <p className="mt-1 text-xs font-medium text-gray-500 md:text-sm">{point.label}</p>
               </div>
             ))}
           </div>
         </div>
 
         <div className="mt-10 flex flex-col gap-3 sm:flex-row sm:items-center">
-          <Link href="/marketplace"
+          <Link
+            href="/marketplace"
             className="group relative inline-flex h-11 items-center justify-center gap-2 overflow-hidden rounded-full bg-dq-navy px-6 text-sm font-semibold text-white transition"
             style={{ boxShadow: "var(--glow-navy-md)" }}
           >

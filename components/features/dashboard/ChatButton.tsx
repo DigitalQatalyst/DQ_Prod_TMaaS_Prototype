@@ -31,14 +31,14 @@ const ChatButton = () => {
         icon: Brain,
         title: "New to TMaaS?",
         description: "Chat with our AI to learn about our platform and find the right services",
-        cta: "Get Started"
+        cta: "Get Started",
       };
     } else {
       return {
         icon: Search,
         title: "Need service recommendations?",
         description: "Let our AI help you find the perfect transformation services for your needs",
-        cta: "Get Recommendations"
+        cta: "Get Recommendations",
       };
     }
   };
@@ -59,9 +59,9 @@ const ChatButton = () => {
       setIsOpen(true);
       setShowTooltip(false);
     };
-    
-    window.addEventListener('openDiagnoseAI', handleOpenDiagnose);
-    return () => window.removeEventListener('openDiagnoseAI', handleOpenDiagnose);
+
+    window.addEventListener("openDiagnoseAI", handleOpenDiagnose);
+    return () => window.removeEventListener("openDiagnoseAI", handleOpenDiagnose);
   }, []);
 
   // Show tooltip again when stage changes (but only briefly)
@@ -98,9 +98,7 @@ const ChatButton = () => {
                 </div>
                 <div>
                   <p className="text-sm font-medium text-foreground">{tooltipContent.title}</p>
-                  <p className="mt-1 text-xs text-muted-foreground">
-                    {tooltipContent.description}
-                  </p>
+                  <p className="mt-1 text-xs text-muted-foreground">{tooltipContent.description}</p>
                   <button
                     onClick={() => {
                       setIsOpen(true);
@@ -134,12 +132,14 @@ const ChatButton = () => {
           ) : (
             <Search size={24} className="text-primary-foreground" />
           )}
-          
+
           {/* Pulse animation - more subtle for advisory stage */}
-          <span className={`absolute inset-0 rounded-full bg-gradient-brand opacity-75 ${
-            currentStage === "concierge" ? "animate-ping" : "animate-pulse"
-          }`}></span>
-          
+          <span
+            className={`absolute inset-0 rounded-full bg-gradient-brand opacity-75 ${
+              currentStage === "concierge" ? "animate-ping" : "animate-pulse"
+            }`}
+          ></span>
+
           {/* Stage indicator */}
           <div className="absolute -top-1 -right-1 flex h-5 w-5 items-center justify-center rounded-full bg-navy text-xs font-bold text-white">
             {currentStage === "concierge" ? "0" : "1"}

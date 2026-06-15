@@ -32,9 +32,7 @@ const SolutionSection = () => {
   return (
     <section className="bg-white px-5 py-24 md:px-8 lg:px-10">
       <div className="mx-auto max-w-[1200px]">
-        <p className="mb-4 dq-eyebrow">
-          The Marketplace Model
-        </p>
+        <p className="mb-4 dq-eyebrow">The Marketplace Model</p>
         <h2 className="mb-16 text-4xl font-semibold tracking-tight text-dq-navy md:text-5xl">
           Three steps to the right services.
         </h2>
@@ -45,16 +43,11 @@ const SolutionSection = () => {
               <div className="mb-3 font-mono text-7xl font-bold leading-none text-dq-navy/[0.15]">
                 {num}
               </div>
-              <p className="dq-micro-label mb-1.5">
-                {suite}
-              </p>
-              <h3 className="mb-3 text-xl font-semibold tracking-tight text-dq-navy">
-                {title}
-              </h3>
-              <p className="mb-4 flex-1 text-[14px] leading-relaxed text-gray-600">
-                {body}
-              </p>
-              <Link href={href}
+              <p className="dq-micro-label mb-1.5">{suite}</p>
+              <h3 className="mb-3 text-xl font-semibold tracking-tight text-dq-navy">{title}</h3>
+              <p className="mb-4 flex-1 text-[14px] leading-relaxed text-gray-600">{body}</p>
+              <Link
+                href={href}
                 className="mt-auto inline-flex items-center gap-1 text-sm font-semibold text-dq-navy transition-all hover:gap-2"
               >
                 {linkLabel} <ArrowRight size={14} />

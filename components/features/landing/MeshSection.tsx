@@ -34,11 +34,8 @@ export default function MeshSection({
         className="absolute inset-0 -z-10"
         style={{ background: meshVar(variant) }}
       />
-      {grid ? (
-        <div aria-hidden className="absolute inset-0 -z-10 hero-grid opacity-40" />
-      ) : null}
+      {grid ? <div aria-hidden className="absolute inset-0 -z-10 hero-grid opacity-40" /> : null}
       {children}
     </section>
   );
 }
-

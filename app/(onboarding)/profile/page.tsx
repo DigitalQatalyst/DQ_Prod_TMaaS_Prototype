@@ -35,7 +35,8 @@ export default function OnboardingProfilePage() {
           <div className="mb-6">
             <h1 className="text-2xl font-bold text-foreground">Complete Your Profile</h1>
             <p className="mt-2 text-sm text-muted-foreground">
-              We&apos;ve pre-filled some information from your Microsoft account. Please review and complete your profile.
+              We&apos;ve pre-filled some information from your Microsoft account. Please review and
+              complete your profile.
             </p>
           </div>
 
@@ -45,8 +46,18 @@ export default function OnboardingProfilePage() {
                 First Name <span className="text-destructive">*</span>
               </label>
               <div className="relative">
-                <User size={18} className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground" />
-                <Input type="text" placeholder="First name" value={firstName} onChange={(e) => setFirstName(e.target.value)} className="pl-10" required />
+                <User
+                  size={18}
+                  className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground"
+                />
+                <Input
+                  type="text"
+                  placeholder="First name"
+                  value={firstName}
+                  onChange={(e) => setFirstName(e.target.value)}
+                  className="pl-10"
+                  required
+                />
               </div>
             </div>
 
@@ -55,8 +66,18 @@ export default function OnboardingProfilePage() {
                 Last Name <span className="text-destructive">*</span>
               </label>
               <div className="relative">
-                <User size={18} className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground" />
-                <Input type="text" placeholder="Last name" value={lastName} onChange={(e) => setLastName(e.target.value)} className="pl-10" required />
+                <User
+                  size={18}
+                  className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground"
+                />
+                <Input
+                  type="text"
+                  placeholder="Last name"
+                  value={lastName}
+                  onChange={(e) => setLastName(e.target.value)}
+                  className="pl-10"
+                  required
+                />
               </div>
             </div>
 
@@ -65,8 +86,18 @@ export default function OnboardingProfilePage() {
                 Phone Number <span className="text-destructive">*</span>
               </label>
               <div className="relative">
-                <Phone size={18} className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground" />
-                <Input type="tel" placeholder="+1 (555) 000-0000" value={phone} onChange={(e) => setPhone(e.target.value)} className="pl-10" required />
+                <Phone
+                  size={18}
+                  className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground"
+                />
+                <Input
+                  type="tel"
+                  placeholder="+1 (555) 000-0000"
+                  value={phone}
+                  onChange={(e) => setPhone(e.target.value)}
+                  className="pl-10"
+                  required
+                />
               </div>
             </div>
 

@@ -3,27 +3,34 @@
 import { useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
-import { 
-  mockContractData, 
-  mockPaymentMilestones, 
+import {
+  mockContractData,
+  mockPaymentMilestones,
   mockContractChanges,
-  mockCommercialDocuments
-} from "@/data/mockEngagementDetails" // TODO: Task 9 — wire up data;
-import { 
-  DollarSign, 
-  FileSignature, 
-  Edit3, 
-  Download, 
-  FileText, 
+  mockCommercialDocuments,
+} from "@/data/mockEngagementDetails"; // TODO: Task 9 — wire up data;
+import {
+  DollarSign,
+  FileSignature,
+  Edit3,
+  Download,
+  FileText,
   Paperclip,
   Calendar,
   Layers,
   Archive,
   Plus,
-  Eye
+  Eye,
 } from "lucide-react";
 
 const paymentStatusBadgeClass = (status: string) => {
@@ -54,15 +61,23 @@ const changeStatusBadgeClass = (status: string) => {
 
 const documentTypeBadgeClass = (type: string) => {
   switch (type) {
-    case "Contract": return "bg-navy-50 text-navy-700 border-navy-200";
-    case "Invoice": return "bg-green-50 text-green-700 border-green-200";
-    case "Change": return "bg-amber-50 text-amber-700 border-amber-200";
-    default: return "bg-slate-50 text-slate-700 border-slate-200";
+    case "Contract":
+      return "bg-navy-50 text-navy-700 border-navy-200";
+    case "Invoice":
+      return "bg-green-50 text-green-700 border-green-200";
+    case "Change":
+      return "bg-amber-50 text-amber-700 border-amber-200";
+    default:
+      return "bg-slate-50 text-slate-700 border-slate-200";
   }
 };
 
 const formatCurrency = (amount: number, currency: string) => {
-  return new Intl.NumberFormat('en-US', { style: 'currency', currency: currency, maximumFractionDigits: 0 }).format(amount);
+  return new Intl.NumberFormat("en-US", {
+    style: "currency",
+    currency: currency,
+    maximumFractionDigits: 0,
+  }).format(amount);
 };
 
 export const CommercialsTab = () => {
@@ -70,17 +85,20 @@ export const CommercialsTab = () => {
 
   const handleEditStatus = () => {
     // Mocking an edit interaction for the prototype
-    const newValue = window.prompt("Update Total Contract Value:", contractData.contractValue.toString());
+    const newValue = window.prompt(
+      "Update Total Contract Value:",
+      contractData.contractValue.toString()
+    );
     if (newValue && !isNaN(Number(newValue))) {
       setContractData({ ...contractData, contractValue: Number(newValue) });
     }
   };
 
-  const receivedPercentage = Math.round((contractData.receivedAmount / contractData.contractValue) * 100) || 0;
+  const receivedPercentage =
+    Math.round((contractData.receivedAmount / contractData.contractValue) * 100) || 0;
 
   return (
     <div className="space-y-10">
-      
       {/* SECTION 1: Contract Status Card */}
       <section className="space-y-4">
         <div className="flex justify-between items-end">
@@ -91,7 +109,12 @@ export const CommercialsTab = () => {
             </h3>
             <p className="text-sm text-gray-500">High-level financial summary of the engagement.</p>
           </div>
-          <Button variant="outline" size="sm" onClick={handleEditStatus} className="gap-2 text-navy-700">
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={handleEditStatus}
+            className="gap-2 text-navy-700"
+          >
             <Edit3 size={14} /> Edit Summary
           </Button>
         </div>
@@ -100,15 +123,24 @@ export const CommercialsTab = () => {
           <CardContent className="p-0">
             <div className="flex flex-wrap lg:flex-nowrap divide-y lg:divide-y-0 lg:divide-x divide-navy-100/60">
               <div className="p-6 flex-1 min-w-[200px]">
-                <p className="text-[10px] font-bold text-gray-400 uppercase tracking-wider mb-2">Total Value</p>
+                <p className="text-[10px] font-bold text-gray-400 uppercase tracking-wider mb-2">
+                  Total Value
+                </p>
                 <p className="text-3xl font-bold text-navy-950 mb-3 tracking-tight">
                   {formatCurrency(contractData.contractValue, contractData.currency)}
                 </p>
-                <Badge variant="outline" className="bg-slate-50 text-slate-700 border-slate-200 font-mono text-xs">{contractData.contractNumber}</Badge>
+                <Badge
+                  variant="outline"
+                  className="bg-slate-50 text-slate-700 border-slate-200 font-mono text-xs"
+                >
+                  {contractData.contractNumber}
+                </Badge>
               </div>
-              
+
               <div className="p-6 flex-1 min-w-[150px]">
-                <p className="text-[10px] font-bold text-gray-400 uppercase tracking-wider mb-2">Signed Date</p>
+                <p className="text-[10px] font-bold text-gray-400 uppercase tracking-wider mb-2">
+                  Signed Date
+                </p>
                 <p className="font-semibold text-navy-950 flex items-center gap-2 text-base">
                   <Calendar size={16} className="text-gray-400" />
                   {contractData.signedDate}
@@ -116,7 +148,9 @@ export const CommercialsTab = () => {
               </div>
 
               <div className="p-6 flex-1 min-w-[150px]">
-                <p className="text-[10px] font-bold text-gray-400 uppercase tracking-wider mb-2">Active Changes</p>
+                <p className="text-[10px] font-bold text-gray-400 uppercase tracking-wider mb-2">
+                  Active Changes
+                </p>
                 <p className="font-semibold text-navy-950 flex items-center gap-2 text-base">
                   <Layers size={16} className="text-gray-400" />
                   {contractData.numberOfChanges}
@@ -124,21 +158,29 @@ export const CommercialsTab = () => {
               </div>
 
               <div className="p-6 flex-1 min-w-[150px]">
-                <p className="text-[10px] font-bold text-gray-400 uppercase tracking-wider mb-2">Invoiced</p>
+                <p className="text-[10px] font-bold text-gray-400 uppercase tracking-wider mb-2">
+                  Invoiced
+                </p>
                 <p className="font-semibold text-navy-950 text-base">
                   {formatCurrency(contractData.invoicedAmount, contractData.currency)}
                 </p>
               </div>
 
               <div className="p-6 flex-1 min-w-[200px]">
-                <p className="text-[10px] font-bold text-gray-400 uppercase tracking-wider mb-2">Received</p>
+                <p className="text-[10px] font-bold text-gray-400 uppercase tracking-wider mb-2">
+                  Received
+                </p>
                 <div className="flex items-end justify-between mb-2">
                   <p className="font-semibold text-green-600 text-base">
                     {formatCurrency(contractData.receivedAmount, contractData.currency)}
                   </p>
                   <span className="text-xs font-bold text-gray-500">{receivedPercentage}%</span>
                 </div>
-                <Progress value={receivedPercentage} className="h-1.5 bg-gray-100" indicatorClassName="bg-green-500" />
+                <Progress
+                  value={receivedPercentage}
+                  className="h-1.5 bg-gray-100"
+                  indicatorClassName="bg-green-500"
+                />
               </div>
             </div>
           </CardContent>
@@ -153,9 +195,14 @@ export const CommercialsTab = () => {
               <DollarSign size={20} className="text-navy-950" />
               Payment Milestones
             </h3>
-            <p className="text-sm text-gray-500">Tracking financial delivery against the contract.</p>
+            <p className="text-sm text-gray-500">
+              Tracking financial delivery against the contract.
+            </p>
           </div>
-          <Button size="sm" className="gap-2 bg-navy-950 hover:bg-navy-900 text-white rounded-xl shadow-sm">
+          <Button
+            size="sm"
+            className="gap-2 bg-navy-950 hover:bg-navy-900 text-white rounded-xl shadow-sm"
+          >
             <Plus size={14} /> Add Milestone
           </Button>
         </div>
@@ -191,7 +238,9 @@ export const CommercialsTab = () => {
                     {formatCurrency(pm.paidAmount ?? 0, contractData.currency)}
                   </TableCell>
                   <TableCell className="text-sm font-medium text-amber-600">
-                    {(pm.outstandingAmount ?? 0) > 0 ? formatCurrency(pm.outstandingAmount ?? 0, contractData.currency) : "-"}
+                    {(pm.outstandingAmount ?? 0) > 0
+                      ? formatCurrency(pm.outstandingAmount ?? 0, contractData.currency)
+                      : "-"}
                   </TableCell>
                   <TableCell className="text-sm font-medium text-navy-950">
                     {pm.contractDate}
@@ -211,9 +260,14 @@ export const CommercialsTab = () => {
               <FileSignature size={20} className="text-navy-950" />
               Contract Changes
             </h3>
-            <p className="text-sm text-gray-500">Track changes impacting scope, timelines, or budget.</p>
+            <p className="text-sm text-gray-500">
+              Track changes impacting scope, timelines, or budget.
+            </p>
           </div>
-          <Button size="sm" className="gap-2 bg-navy-950 hover:bg-navy-900 text-white rounded-xl shadow-sm">
+          <Button
+            size="sm"
+            className="gap-2 bg-navy-950 hover:bg-navy-900 text-white rounded-xl shadow-sm"
+          >
             <Plus size={14} /> Add Change
           </Button>
         </div>
@@ -231,7 +285,7 @@ export const CommercialsTab = () => {
               </TableRow>
             </TableHeader>
             <TableBody>
-              {mockContractChanges.map(cc => (
+              {mockContractChanges.map((cc) => (
                 <TableRow key={cc.id} className="hover:bg-slate-50/50 group">
                   <TableCell>
                     <div className="font-semibold text-navy-950 mb-1">
@@ -247,15 +301,22 @@ export const CommercialsTab = () => {
                   </TableCell>
                   <TableCell>
                     <div className="flex gap-1 flex-wrap">
-                      {cc.milestonesAffected.map(m => (
-                        <Badge key={m} variant="outline" className="text-[10px] bg-slate-50 text-slate-600 border-slate-200">
+                      {cc.milestonesAffected.map((m) => (
+                        <Badge
+                          key={m}
+                          variant="outline"
+                          className="text-[10px] bg-slate-50 text-slate-600 border-slate-200"
+                        >
                           {m}
                         </Badge>
                       ))}
                     </div>
                   </TableCell>
                   <TableCell>
-                    <Badge variant="outline" className="bg-slate-50 text-slate-700 border-slate-200">
+                    <Badge
+                      variant="outline"
+                      className="bg-slate-50 text-slate-700 border-slate-200"
+                    >
                       {cc.requestedBy}
                     </Badge>
                   </TableCell>
@@ -266,7 +327,7 @@ export const CommercialsTab = () => {
                     {cc.attachments > 0 ? (
                       <Button variant="ghost" size="sm" className="text-navy-600 h-8 px-2">
                         <Paperclip size={14} className="mr-1.5" />
-                        {cc.attachments} File{cc.attachments > 1 ? 's' : ''}
+                        {cc.attachments} File{cc.attachments > 1 ? "s" : ""}
                       </Button>
                     ) : (
                       <span className="text-xs text-gray-400 mr-3">-</span>
@@ -287,9 +348,14 @@ export const CommercialsTab = () => {
               <Archive size={20} className="text-navy-950" />
               Commercial Documents
             </h3>
-            <p className="text-sm text-gray-500">Repository for executed commercial agreements and invoices.</p>
+            <p className="text-sm text-gray-500">
+              Repository for executed commercial agreements and invoices.
+            </p>
           </div>
-          <Button size="sm" className="gap-2 bg-navy-950 hover:bg-navy-900 text-white rounded-xl shadow-sm">
+          <Button
+            size="sm"
+            className="gap-2 bg-navy-950 hover:bg-navy-900 text-white rounded-xl shadow-sm"
+          >
             <Plus size={14} /> Upload Document
           </Button>
         </div>
@@ -304,7 +370,7 @@ export const CommercialsTab = () => {
               </TableRow>
             </TableHeader>
             <TableBody>
-              {mockCommercialDocuments.map(doc => (
+              {mockCommercialDocuments.map((doc) => (
                 <TableRow key={doc.id} className="hover:bg-slate-50/50">
                   <TableCell>
                     <div className="flex items-start gap-3">
@@ -323,7 +389,11 @@ export const CommercialsTab = () => {
                     </Badge>
                   </TableCell>
                   <TableCell className="text-right">
-                    <Button variant="ghost" size="sm" className="text-navy-600 hover:text-navy-950 hover:bg-navy-50 h-8">
+                    <Button
+                      variant="ghost"
+                      size="sm"
+                      className="text-navy-600 hover:text-navy-950 hover:bg-navy-50 h-8"
+                    >
                       <Eye size={14} className="mr-2" />
                       View
                     </Button>
@@ -341,7 +411,6 @@ export const CommercialsTab = () => {
           </Table>
         </Card>
       </section>
-
     </div>
   );
 };

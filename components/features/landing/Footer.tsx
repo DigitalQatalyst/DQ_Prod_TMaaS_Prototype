@@ -1,16 +1,15 @@
 import Link from "next/link";
 import { Linkedin, Twitter, Youtube } from "lucide-react";
 import TMaaSLogo from "@/components/features/landing/TMaaSLogo";
-import {
-  NAV_BROWSE_MARKETPLACE_LABEL,
-  PLATFORM_HERO_SUBCOPY,
-} from "@/lib/brandLinks";
+import { NAV_BROWSE_MARKETPLACE_LABEL, PLATFORM_HERO_SUBCOPY } from "@/lib/brandLinks";
 import { featureFlags } from "@/lib/featureFlags";
 
 const CORP_WEB_BASE = "https://www.digitalqatalyst.com";
 
 const Footer = () => {
-  const privacyHref = featureFlags.isEnabled("legal") ? "/legal/privacy" : `${CORP_WEB_BASE}/privacy`;
+  const privacyHref = featureFlags.isEnabled("legal")
+    ? "/legal/privacy"
+    : `${CORP_WEB_BASE}/privacy`;
   const termsHref = featureFlags.isEnabled("legal") ? "/legal/terms" : `${CORP_WEB_BASE}/terms`;
   const legalIsInternal = featureFlags.isEnabled("legal");
 
@@ -70,8 +69,7 @@ const Footer = () => {
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-2 text-[14px] text-gray-600 transition-colors hover:text-dq-orange"
                 >
-                  <Twitter size={14} />
-                  X
+                  <Twitter size={14} />X
                 </a>
               </li>
               <li>

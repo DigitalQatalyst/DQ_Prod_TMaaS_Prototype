@@ -31,9 +31,7 @@ const ClientOutcomesSection = () => {
     >
       <div className="mx-auto max-w-[1200px]">
         <div className="mb-12">
-          <p className="mb-4 dq-eyebrow">
-            Results
-          </p>
+          <p className="mb-4 dq-eyebrow">Results</p>
           <h2
             id="client-outcomes-heading"
             className="text-4xl font-semibold tracking-tight text-dq-navy md:text-5xl"

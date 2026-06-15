@@ -8,7 +8,9 @@ const hasLiveSupabase = Boolean(
   (process.env["NEXT_PUBLIC_SUPABASE_URL"] ?? process.env["VITE_SUPABASE_URL"]) &&
   (process.env["NEXT_PUBLIC_SUPABASE_ANON_KEY"] ?? process.env["VITE_SUPABASE_ANON_KEY"]) &&
   !(
-    (process.env["NEXT_PUBLIC_SUPABASE_ANON_KEY"] ?? process.env["VITE_SUPABASE_ANON_KEY"]) ?? ""
+    process.env["NEXT_PUBLIC_SUPABASE_ANON_KEY"] ??
+    process.env["VITE_SUPABASE_ANON_KEY"] ??
+    ""
   ).includes("your-anon-key")
 );
 
@@ -39,9 +41,8 @@ describe.skipIf(!hasLiveSupabase)("Supabase live catalog integration", () => {
   });
 
   it("fetches a mapped catalog from Supabase", async () => {
-    const { fetchCatalogFromSupabase, shouldUseSupabaseCatalog } = await import(
-      "@/services/catalogService"
-    );
+    const { fetchCatalogFromSupabase, shouldUseSupabaseCatalog } =
+      await import("@/services/catalogService");
 
     expect(shouldUseSupabaseCatalog()).toBe(true);
 

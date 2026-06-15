@@ -21,9 +21,7 @@ export default function SplitSectionHeader({
       )}
     >
       <div>
-        <p className="mb-4 dq-eyebrow">
-          {kicker}
-        </p>
+        <p className="mb-4 dq-eyebrow">{kicker}</p>
         <h2
           className={cn(
             "text-4xl font-semibold tracking-tight md:text-5xl",

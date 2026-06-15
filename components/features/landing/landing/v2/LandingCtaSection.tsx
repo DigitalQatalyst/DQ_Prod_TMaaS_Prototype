@@ -26,8 +26,7 @@ const LandingCtaSection = () => {
           backgroundImage:
             "linear-gradient(to right, rgba(255,255,255,0.06) 1px, transparent 1px), linear-gradient(to bottom, rgba(255,255,255,0.06) 1px, transparent 1px)",
           backgroundSize: "64px 64px",
-          maskImage:
-            "radial-gradient(ellipse 60% 50% at 50% 50%, black 40%, transparent 80%)",
+          maskImage: "radial-gradient(ellipse 60% 50% at 50% 50%, black 40%, transparent 80%)",
         }}
       />
 
@@ -40,8 +39,7 @@ const LandingCtaSection = () => {
             LAUNCH_ADVISORY_HEADLINE
           ) : (
             <>
-              Find your next service{" "}
-              <span className="text-dq-orange">in the marketplace.</span>
+              Find your next service <span className="text-dq-orange">in the marketplace.</span>
             </>
           )}
         </h2>
@@ -54,23 +52,20 @@ const LandingCtaSection = () => {
 
         <div className="mt-8 flex flex-col items-stretch gap-3 sm:flex-row sm:flex-wrap sm:items-center sm:justify-center">
           {featureFlags.isEnabled("contactUs") ? (
-            <Link href={buildLaunchAdvisoryContactPath()}
+            <Link
+              href={buildLaunchAdvisoryContactPath()}
               className={cn(btnPrimaryOnDark, "w-full px-7 sm:w-auto")}
             >
               {LAUNCH_ADVISORY_CTA_LABEL}
               <ArrowRight size={15} />
             </Link>
           ) : (
-            <Link href="/marketplace"
-              className={cn(btnPrimaryOnDark, "w-full px-7 sm:w-auto")}
-            >
+            <Link href="/marketplace" className={cn(btnPrimaryOnDark, "w-full px-7 sm:w-auto")}>
               {NAV_BROWSE_MARKETPLACE_LABEL}
               <ArrowRight size={15} />
             </Link>
           )}
-          <Link href="/marketplace"
-            className={cn(btnSecondaryOnDark, "w-full px-7 sm:w-auto")}
-          >
+          <Link href="/marketplace" className={cn(btnSecondaryOnDark, "w-full px-7 sm:w-auto")}>
             {NAV_BROWSE_MARKETPLACE_LABEL}
           </Link>
         </div>

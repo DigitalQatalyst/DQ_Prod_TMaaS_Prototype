@@ -7,7 +7,6 @@ import type { CollectionCopyOverrides } from "./types";
  * Keyed by variant id. See ./types.ts for the field contract and voice rules.
  */
 export const operations1Copy: CollectionCopyOverrides = {
-
   // -----------------------------------------------------------------------
   // DIGITAL WORKPLACE (ids 55-60)
   // -----------------------------------------------------------------------
@@ -244,8 +243,7 @@ export const operations1Copy: CollectionCopyOverrides = {
   58: {
     description:
       "Get your Microsoft 365 digital workplace environment built, integrated, and adopted, covering SharePoint intranet, Teams governance, and the structured adoption programme your employees need to shift their working habits, delivered across twelve weeks.",
-    positioning:
-      "Get your digital workplace built, tested, and adopted, not just switched on.",
+    positioning: "Get your digital workplace built, tested, and adopted, not just switched on.",
     features: [
       "SharePoint intranet built to the approved information architecture with page templates, navigation, and content migration",
       "Microsoft Teams governance configuration covering naming policies, channel templates, guest access, and lifecycle management",
@@ -972,7 +970,8 @@ export const operations1Copy: CollectionCopyOverrides = {
           "Field service management, asset and facilities operations, quality management, supply chain execution, and other domain-specific functions. The DigitalQatalyst team confirms fit during the scoping call.",
       },
       {
-        question: "Can you assess a function that uses a niche or legacy system we built internally?",
+        question:
+          "Can you assess a function that uses a niche or legacy system we built internally?",
         answer:
           "Yes. The assessment is focused on the operational function, not just commercial platforms. Custom and legacy systems are reviewed as part of the tooling analysis.",
       },
@@ -987,7 +986,8 @@ export const operations1Copy: CollectionCopyOverrides = {
           "Book a scoping call with the DigitalQatalyst team to confirm the operational function in scope, the stakeholders to involve, and any documentation to prepare in advance.",
       },
     ],
-    audience: "Business Unit Directors, Domain Operations Managers, and functional leads in specialist operational roles",
+    audience:
+      "Business Unit Directors, Domain Operations Managers, and functional leads in specialist operational roles",
     industryRelevance:
       "Organisations with domain-specific operational functions where generic enterprise platforms do not fully fit, including field service, quality management, facilities, and supply chain execution",
     businessImpact:
@@ -1047,7 +1047,8 @@ export const operations1Copy: CollectionCopyOverrides = {
           "Yes. The DigitalQatalyst team designs to the platform your function uses, whether a leading field service tool, a bespoke case management system, or a sector-specific application.",
       },
       {
-        question: "How do you capture what operational staff actually need versus what management thinks they need?",
+        question:
+          "How do you capture what operational staff actually need versus what management thinks they need?",
         answer:
           "Week one includes structured sessions with front-line operational staff. Their task walkthroughs and friction points directly shape the to-be design.",
       },
@@ -1062,7 +1063,8 @@ export const operations1Copy: CollectionCopyOverrides = {
           "Contact the DigitalQatalyst team with details of your operational function and the platform in scope. They will confirm the week-one workshop schedule and participants.",
       },
     ],
-    audience: "Business Unit Directors, Domain Operations Managers, and functional leads in specialist operational roles",
+    audience:
+      "Business Unit Directors, Domain Operations Managers, and functional leads in specialist operational roles",
     industryRelevance:
       "Organisations whose specialist functions, field service, quality management, facilities, or supply chain execution, are constrained by poorly configured or poorly integrated operational systems",
     businessImpact:
@@ -1127,7 +1129,8 @@ export const operations1Copy: CollectionCopyOverrides = {
           "The data readiness report identifies exactly what needs to improve and in what order. Some use cases can proceed with targeted data remediation; others may need to wait.",
       },
       {
-        question: "Are there safety or regulatory considerations for AI in our operational function?",
+        question:
+          "Are there safety or regulatory considerations for AI in our operational function?",
         answer:
           "Domain-specific risk is assessed in week two. Where regulatory or safety considerations apply, the DigitalQatalyst team incorporates them into the responsible AI framework for each use case.",
       },
@@ -1137,7 +1140,8 @@ export const operations1Copy: CollectionCopyOverrides = {
           "Contact the DigitalQatalyst team with details of your operational function and the processes you think could benefit from AI. They will confirm scope and the week-one workshop schedule.",
       },
     ],
-    audience: "Business Unit Directors, Domain Operations Managers, and functional leads in specialist operational roles",
+    audience:
+      "Business Unit Directors, Domain Operations Managers, and functional leads in specialist operational roles",
     industryRelevance:
       "Organisations in asset-intensive industries, manufacturing, utilities, field service, and logistics where operational AI can drive predictive and autonomous decision-making",
     businessImpact:
@@ -1212,7 +1216,8 @@ export const operations1Copy: CollectionCopyOverrides = {
           "Provide your approved design specification and the DigitalQatalyst team will confirm environment access, data migration scope, and the sprint-one schedule.",
       },
     ],
-    audience: "Business Unit Directors, Domain Operations Managers, and functional leads in specialist operational roles",
+    audience:
+      "Business Unit Directors, Domain Operations Managers, and functional leads in specialist operational roles",
     industryRelevance:
       "Organisations deploying or reconfiguring specialist operational platforms in field service, quality management, asset management, or case and workflow management",
     businessImpact:
@@ -1267,7 +1272,8 @@ export const operations1Copy: CollectionCopyOverrides = {
     faqIntro: "Questions about deploying AI into specialist operational functions.",
     faqs: [
       {
-        question: "How do you validate that AI predictions are accurate enough for our operational context?",
+        question:
+          "How do you validate that AI predictions are accurate enough for our operational context?",
         answer:
           "The pilot phase runs the model against real operational scenarios with monitoring against agreed accuracy thresholds. The DigitalQatalyst team does not move to full production until those thresholds are met.",
       },
@@ -1287,7 +1293,8 @@ export const operations1Copy: CollectionCopyOverrides = {
           "Share your AI design specifications and the DigitalQatalyst team will confirm the pilot cohort, data pipeline requirements, and the governance prerequisites needed to begin.",
       },
     ],
-    audience: "Business Unit Directors, Domain Operations Managers, and functional leads in specialist operational roles",
+    audience:
+      "Business Unit Directors, Domain Operations Managers, and functional leads in specialist operational roles",
     industryRelevance:
       "Asset-intensive industries, manufacturing, utilities, field service operations, and logistics where AI-driven prediction and routing can measurably improve operational throughput",
     businessImpact:
@@ -1361,7 +1368,8 @@ export const operations1Copy: CollectionCopyOverrides = {
           "Contact the DigitalQatalyst team with your current system documentation. They will complete a health baseline audit before the first SLA period begins.",
       },
     ],
-    audience: "Business Unit Directors, Domain Operations Managers, and functional leads in specialist operational roles",
+    audience:
+      "Business Unit Directors, Domain Operations Managers, and functional leads in specialist operational roles",
     industryRelevance:
       "Organisations with live specialist operational platforms in field service, quality management, asset management, or case handling that need ongoing expert support without building an in-house team",
     businessImpact:
@@ -1494,7 +1502,8 @@ export const operations1Copy: CollectionCopyOverrides = {
     faqIntro: "Questions about the Enterprise Operations design engagement.",
     faqs: [
       {
-        question: "Does the design engagement cover organisation design as well as process and technology?",
+        question:
+          "Does the design engagement cover organisation design as well as process and technology?",
         answer:
           "The primary focus is process and technology design. Operating model decisions that affect team structure and reporting lines are flagged but formal organisation design is a separate workstream.",
       },
@@ -1579,7 +1588,8 @@ export const operations1Copy: CollectionCopyOverrides = {
           "Explainability requirements are defined in the responsible AI framework for each use case. Where decisions affect employees, suppliers, or customers, the framework specifies how explanations are generated and made available.",
       },
       {
-        question: "Our enterprise data is spread across multiple ERPs and data warehouses. Can AI still work?",
+        question:
+          "Our enterprise data is spread across multiple ERPs and data warehouses. Can AI still work?",
         answer:
           "The data readiness report maps exactly what is available, where quality issues exist, and what integration work is needed. Some use cases can proceed with targeted data remediation; others may need to wait.",
       },
@@ -1644,7 +1654,8 @@ export const operations1Copy: CollectionCopyOverrides = {
     faqIntro: "Questions about the Enterprise Operations deployment engagement.",
     faqs: [
       {
-        question: "How do you manage cross-functional stakeholder alignment during a twelve-week build?",
+        question:
+          "How do you manage cross-functional stakeholder alignment during a twelve-week build?",
         answer:
           "The sprint plan includes fortnightly review sessions with cross-functional business owners. Change impact is tracked and communicated as configuration decisions are made.",
       },
@@ -2026,7 +2037,8 @@ export const operations1Copy: CollectionCopyOverrides = {
           "Accounts payable matching, invoice exception detection, cash flow forecasting, and spend category classification are the most commonly deployed. The DigitalQatalyst team validates which are appropriate for your ERP data and processes.",
       },
       {
-        question: "How do you address the audit trail requirements for AI-driven financial decisions?",
+        question:
+          "How do you address the audit trail requirements for AI-driven financial decisions?",
         answer:
           "Every AI action in a finance context is designed with a full audit record: the input data, model version, output, confidence score, and any human review action. This is specified in the control framework deliverable.",
       },
@@ -2181,7 +2193,8 @@ export const operations1Copy: CollectionCopyOverrides = {
           "The AI forecast runs as a complementary input, not a replacement for treasury models. The integration design confirms how the two outputs are presented to the finance team.",
       },
       {
-        question: "Can the AI be switched off for a specific invoice type or supplier without affecting everything else?",
+        question:
+          "Can the AI be switched off for a specific invoice type or supplier without affecting everything else?",
         answer:
           "Yes. Inclusion rules are configured at a granular level so the finance team can exclude specific transaction types, suppliers, or currency categories from AI processing.",
       },

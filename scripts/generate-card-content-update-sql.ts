@@ -56,9 +56,7 @@ for (const s of services) {
     );
   });
   s.tags?.forEach((t) => {
-    lines.push(
-      `INSERT INTO product_tags (variant_id, tag_name) VALUES (${s.id}, '${esc(t)}');`
-    );
+    lines.push(`INSERT INTO product_tags (variant_id, tag_name) VALUES (${s.id}, '${esc(t)}');`);
   });
   s.timelineMilestones?.forEach((m, i) => {
     lines.push(

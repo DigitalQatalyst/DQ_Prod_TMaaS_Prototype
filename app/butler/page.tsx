@@ -45,10 +45,31 @@ const performanceMetrics = [
 ];
 
 const demoScenarios = [
-  { title: "New Visitor - Platform Learning", stage: "concierge" as const, description: "User asks 'What is TMaaS?' and gets comprehensive platform explanation", example: "User: 'What is TMaaS?'\nTMaaS AI: Explains 4D Framework with routing options" },
-  { title: "Service Discovery - Enterprise", stage: "advisory" as const, description: "Enterprise user gets qualified and receives personalized recommendations", example: "User: 'I need transformation help'\nTMaaS AI: Qualifies org type → Recommends services" },
-  { title: "FAQ Resolution", stage: "concierge" as const, description: "Common questions answered from knowledge base", example: "User: 'How much does it cost?'\nTMaaS AI: Provides pricing breakdown with links" },
-  { title: "Escalation Handling", stage: "advisory" as const, description: "After 3 unresolved queries, offers human expert connection", example: "After 3 unclear responses → Offers expert consultation" },
+  {
+    title: "New Visitor - Platform Learning",
+    stage: "concierge" as const,
+    description: "User asks 'What is TMaaS?' and gets comprehensive platform explanation",
+    example: "User: 'What is TMaaS?'\nTMaaS AI: Explains 4D Framework with routing options",
+  },
+  {
+    title: "Service Discovery - Enterprise",
+    stage: "advisory" as const,
+    description: "Enterprise user gets qualified and receives personalized recommendations",
+    example:
+      "User: 'I need transformation help'\nTMaaS AI: Qualifies org type → Recommends services",
+  },
+  {
+    title: "FAQ Resolution",
+    stage: "concierge" as const,
+    description: "Common questions answered from knowledge base",
+    example: "User: 'How much does it cost?'\nTMaaS AI: Provides pricing breakdown with links",
+  },
+  {
+    title: "Escalation Handling",
+    stage: "advisory" as const,
+    description: "After 3 unresolved queries, offers human expert connection",
+    example: "After 3 unclear responses → Offers expert consultation",
+  },
 ];
 
 export default function ButlerPage() {
@@ -62,10 +83,14 @@ export default function ButlerPage() {
             TMaaS AI <span className="text-gradient-brand">Prototype</span>
           </h1>
           <p className="mt-4 text-lg leading-relaxed text-muted-foreground">
-            Conversational AI assistant for TMaaS platform with Stage 0 (Concierge) and Stage 1 (Advisory) functionality
+            Conversational AI assistant for TMaaS platform with Stage 0 (Concierge) and Stage 1
+            (Advisory) functionality
           </p>
           <div className="mt-8 flex flex-wrap justify-center gap-4">
-            <Button onClick={() => setIsDialogOpen(true)} className="gap-2 bg-gradient-brand text-primary-foreground shadow-brand hover:opacity-90">
+            <Button
+              onClick={() => setIsDialogOpen(true)}
+              className="gap-2 bg-gradient-brand text-primary-foreground shadow-brand hover:opacity-90"
+            >
               <Brain size={20} />
               Try Stage 0 (Concierge)
             </Button>
@@ -81,7 +106,9 @@ export default function ButlerPage() {
         <div className="mx-auto max-w-7xl px-6">
           <div className="mb-12 text-center">
             <h2 className="text-3xl font-bold text-foreground">TMaaS AI Capabilities</h2>
-            <p className="mt-4 text-muted-foreground">Two-stage conversational AI designed for different user journey phases</p>
+            <p className="mt-4 text-muted-foreground">
+              Two-stage conversational AI designed for different user journey phases
+            </p>
           </div>
           <div className="grid gap-8 md:grid-cols-2">
             {features.map((feature) => {
@@ -90,7 +117,9 @@ export default function ButlerPage() {
                 <Card key={feature.stage} className="h-full">
                   <CardHeader>
                     <div className="flex items-center gap-3">
-                      <div className={`flex h-12 w-12 items-center justify-center rounded-xl ${feature.bgColor}`}>
+                      <div
+                        className={`flex h-12 w-12 items-center justify-center rounded-xl ${feature.bgColor}`}
+                      >
                         <Icon size={24} className={feature.color} />
                       </div>
                       <div>
@@ -157,9 +186,16 @@ export default function ButlerPage() {
                 </CardHeader>
                 <CardContent>
                   <div className="rounded-lg bg-accent/50 p-4">
-                    <pre className="whitespace-pre-wrap text-sm text-muted-foreground">{scenario.example}</pre>
+                    <pre className="whitespace-pre-wrap text-sm text-muted-foreground">
+                      {scenario.example}
+                    </pre>
                   </div>
-                  <Button onClick={() => setIsDialogOpen(true)} variant="outline" size="sm" className="mt-4 w-full">
+                  <Button
+                    onClick={() => setIsDialogOpen(true)}
+                    variant="outline"
+                    size="sm"
+                    className="mt-4 w-full"
+                  >
                     Try This Scenario
                   </Button>
                 </CardContent>

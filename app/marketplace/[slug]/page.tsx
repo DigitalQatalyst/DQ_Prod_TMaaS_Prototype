@@ -13,7 +13,10 @@ export async function generateMetadata({
   const detail = !isNaN(id) ? await fetchServiceDetail(id) : undefined;
   const title = detail?.service
     ? getDisplayTitle(detail.service.standardName, detail.service.serviceType)
-    : slug.split("-").map((w) => w.charAt(0).toUpperCase() + w.slice(1)).join(" ");
+    : slug
+        .split("-")
+        .map((w) => w.charAt(0).toUpperCase() + w.slice(1))
+        .join(" ");
 
   return {
     title: `${title} | TMaaS`,
@@ -27,10 +30,6 @@ export async function generateMetadata({
   };
 }
 
-export default function ServiceDetailPage({
-  params,
-}: {
-  params: Promise<{ slug: string }>;
-}) {
+export default function ServiceDetailPage({ params }: { params: Promise<{ slug: string }> }) {
   return <ServiceDetailPageClient params={params} />;
 }

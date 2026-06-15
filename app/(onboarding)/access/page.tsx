@@ -37,49 +37,80 @@ export default function OnboardingAccessPage() {
         <div className="rounded-2xl border border-border bg-card p-8 shadow-card">
           <div className="mb-8 text-center">
             <h1 className="text-2xl font-bold text-foreground">Organisation Access</h1>
-            <p className="mt-2 text-sm text-muted-foreground">Join an existing organisation or create a new one</p>
+            <p className="mt-2 text-sm text-muted-foreground">
+              Join an existing organisation or create a new one
+            </p>
           </div>
 
           <div className="grid gap-6 md:grid-cols-2">
             <div
               onClick={() => setSelectedOption("join")}
               className={`cursor-pointer rounded-xl border-2 p-6 transition-all ${
-                selectedOption === "join" ? "border-primary bg-primary/5" : "border-border bg-accent/30 hover:border-primary/50"
+                selectedOption === "join"
+                  ? "border-primary bg-primary/5"
+                  : "border-border bg-accent/30 hover:border-primary/50"
               }`}
             >
               <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-blue-500/10">
                 <Key size={24} className="text-blue-600" />
               </div>
-              <h3 className="mb-2 text-lg font-semibold text-foreground">Join Existing Organisation</h3>
-              <p className="text-sm text-muted-foreground">Use an invite code to join your team&apos;s organisation</p>
+              <h3 className="mb-2 text-lg font-semibold text-foreground">
+                Join Existing Organisation
+              </h3>
+              <p className="text-sm text-muted-foreground">
+                Use an invite code to join your team&apos;s organisation
+              </p>
             </div>
 
             <div
               onClick={() => setSelectedOption("create")}
               className={`cursor-pointer rounded-xl border-2 p-6 transition-all ${
-                selectedOption === "create" ? "border-primary bg-primary/5" : "border-border bg-accent/30 hover:border-primary/50"
+                selectedOption === "create"
+                  ? "border-primary bg-primary/5"
+                  : "border-border bg-accent/30 hover:border-primary/50"
               }`}
             >
               <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-purple-500/10">
                 <Plus size={24} className="text-purple-600" />
               </div>
-              <h3 className="mb-2 text-lg font-semibold text-foreground">Create New Organisation</h3>
-              <p className="text-sm text-muted-foreground">Set up a new organisation and become the admin</p>
+              <h3 className="mb-2 text-lg font-semibold text-foreground">
+                Create New Organisation
+              </h3>
+              <p className="text-sm text-muted-foreground">
+                Set up a new organisation and become the admin
+              </p>
             </div>
           </div>
 
           {selectedOption === "join" && (
-            <form onSubmit={handleJoinOrganisation} className="mt-6 space-y-4 border-t border-border pt-6">
+            <form
+              onSubmit={handleJoinOrganisation}
+              className="mt-6 space-y-4 border-t border-border pt-6"
+            >
               <div>
                 <label className="mb-2 block text-sm font-medium text-foreground">
                   Organisation Invite Code <span className="text-destructive">*</span>
                 </label>
                 <div className="relative">
-                  <Key size={18} className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground" />
-                  <Input type="text" placeholder="Enter invite code (e.g., STC2024)" value={inviteCode} onChange={(e) => setInviteCode(e.target.value)} className="pl-10 font-mono uppercase" required />
+                  <Key
+                    size={18}
+                    className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground"
+                  />
+                  <Input
+                    type="text"
+                    placeholder="Enter invite code (e.g., STC2024)"
+                    value={inviteCode}
+                    onChange={(e) => setInviteCode(e.target.value)}
+                    className="pl-10 font-mono uppercase"
+                    required
+                  />
                 </div>
               </div>
-              <Button type="submit" className="w-full gap-2 bg-gradient-brand shadow-brand" size="lg">
+              <Button
+                type="submit"
+                className="w-full gap-2 bg-gradient-brand shadow-brand"
+                size="lg"
+              >
                 Join Organisation <ArrowRight size={18} />
               </Button>
             </form>
@@ -87,7 +118,11 @@ export default function OnboardingAccessPage() {
 
           {selectedOption === "create" && (
             <div className="mt-6 border-t border-border pt-6">
-              <Button onClick={() => router.push("/onboarding/organisation")} className="w-full gap-2 bg-gradient-brand shadow-brand" size="lg">
+              <Button
+                onClick={() => router.push("/onboarding/organisation")}
+                className="w-full gap-2 bg-gradient-brand shadow-brand"
+                size="lg"
+              >
                 Create Organisation <ArrowRight size={18} />
               </Button>
             </div>

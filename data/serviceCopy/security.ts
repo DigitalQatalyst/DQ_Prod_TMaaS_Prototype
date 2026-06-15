@@ -50,8 +50,7 @@ export const securityCopy: CollectionCopyOverrides = {
       "Framework-aligned to ISO 27001, NIST CSF, SOC 2, or your target standard",
       "Board-ready findings delivered before the engagement closes",
     ],
-    faqIntro:
-      "Common questions about the Governance, Risk and Compliance assessment.",
+    faqIntro: "Common questions about the Governance, Risk and Compliance assessment.",
     faqs: [
       {
         question: "Which compliance frameworks do you assess against?",
@@ -79,7 +78,8 @@ export const securityCopy: CollectionCopyOverrides = {
           "Request a consultation. The DigitalQatalyst team will confirm scope, target framework, and stakeholders before any work begins.",
       },
     ],
-    audience: "CISOs, risk and compliance officers, heads of internal audit, and legal and regulatory affairs leaders",
+    audience:
+      "CISOs, risk and compliance officers, heads of internal audit, and legal and regulatory affairs leaders",
     industryRelevance:
       "Regulated organisations in financial services, healthcare, government, and any business preparing for certification or facing audit scrutiny",
     businessImpact:
@@ -130,8 +130,7 @@ export const securityCopy: CollectionCopyOverrides = {
       "Build-ready specifications so deployment begins without rework",
       "Adoption plan included to accelerate stakeholder uptake",
     ],
-    faqIntro:
-      "Key questions about the Governance, Risk and Compliance design engagement.",
+    faqIntro: "Key questions about the Governance, Risk and Compliance design engagement.",
     faqs: [
       {
         question: "Do we need to have completed an assessment first?",
@@ -159,7 +158,8 @@ export const securityCopy: CollectionCopyOverrides = {
           "Book a scoping call. The DigitalQatalyst team will review your objectives and any existing assessment findings before the engagement kicks off.",
       },
     ],
-    audience: "CISOs, risk and compliance officers, heads of internal audit, and legal and regulatory affairs leaders",
+    audience:
+      "CISOs, risk and compliance officers, heads of internal audit, and legal and regulatory affairs leaders",
     industryRelevance:
       "Regulated organisations in financial services, healthcare, government, and any business preparing for certification or facing audit scrutiny",
     businessImpact:
@@ -210,8 +210,7 @@ export const securityCopy: CollectionCopyOverrides = {
       "Responsible AI assessment built into every specification",
       "Guardrails and human-in-the-loop controls defined from the outset",
     ],
-    faqIntro:
-      "Key questions about AI design for Governance, Risk and Compliance.",
+    faqIntro: "Key questions about AI design for Governance, Risk and Compliance.",
     faqs: [
       {
         question: "What kinds of AI use cases typically emerge in GRC?",
@@ -239,7 +238,8 @@ export const securityCopy: CollectionCopyOverrides = {
           "Contact the DigitalQatalyst team to arrange a scoping call covering your current GRC tooling, data landscape, and AI objectives.",
       },
     ],
-    audience: "CISOs, risk and compliance officers, heads of internal audit, and legal and regulatory affairs leaders",
+    audience:
+      "CISOs, risk and compliance officers, heads of internal audit, and legal and regulatory affairs leaders",
     industryRelevance:
       "Regulated organisations in financial services, healthcare, government, and any business preparing for certification or facing audit scrutiny",
     businessImpact:
@@ -291,8 +291,7 @@ export const securityCopy: CollectionCopyOverrides = {
       "Testing evidence pack suitable for internal audit and regulator review",
       "Hypercare period included so operations teams are not left unsupported at go-live",
     ],
-    faqIntro:
-      "Key questions about deploying a Governance, Risk and Compliance capability.",
+    faqIntro: "Key questions about deploying a Governance, Risk and Compliance capability.",
     faqs: [
       {
         question: "Which GRC platforms can you deploy and configure?",
@@ -320,7 +319,8 @@ export const securityCopy: CollectionCopyOverrides = {
           "Provide your design specification or assessment findings and the DigitalQatalyst team will scope the deployment timeline and resource requirements within five working days.",
       },
     ],
-    audience: "CISOs, risk and compliance officers, heads of internal audit, and legal and regulatory affairs leaders",
+    audience:
+      "CISOs, risk and compliance officers, heads of internal audit, and legal and regulatory affairs leaders",
     industryRelevance:
       "Regulated organisations in financial services, healthcare, government, and any business preparing for certification or facing audit scrutiny",
     businessImpact:
@@ -372,8 +372,7 @@ export const securityCopy: CollectionCopyOverrides = {
       "Guardrails and human-in-the-loop controls configured to your risk tolerance",
       "Operations training ensures your team owns and can govern the AI capability",
     ],
-    faqIntro:
-      "Key questions about AI deployment for Governance, Risk and Compliance.",
+    faqIntro: "Key questions about AI deployment for Governance, Risk and Compliance.",
     faqs: [
       {
         question: "What AI use cases can you put into production for GRC?",
@@ -381,7 +380,8 @@ export const securityCopy: CollectionCopyOverrides = {
           "Continuous control monitoring, transaction anomaly detection, regulatory change classification, and AI-assisted policy review are the most common production deployments. The DigitalQatalyst team works from your validated AI design specifications.",
       },
       {
-        question: "How do you ensure the AI does not make compliance decisions without human review?",
+        question:
+          "How do you ensure the AI does not make compliance decisions without human review?",
         answer:
           "Human-in-the-loop checkpoints are configured before deployment. High-risk alerts always route to a named reviewer before any action is taken. Guardrail logic is documented and auditable.",
       },
@@ -401,7 +401,8 @@ export const securityCopy: CollectionCopyOverrides = {
           "Share your AI design specifications and the DigitalQatalyst team will confirm readiness, environment requirements, and the deployment timeline within one week.",
       },
     ],
-    audience: "CISOs, risk and compliance officers, heads of internal audit, and legal and regulatory affairs leaders",
+    audience:
+      "CISOs, risk and compliance officers, heads of internal audit, and legal and regulatory affairs leaders",
     industryRelevance:
       "Regulated organisations in financial services, healthcare, government, and any business preparing for certification or facing audit scrutiny",
     businessImpact:
@@ -453,8 +454,7 @@ export const securityCopy: CollectionCopyOverrides = {
       "Monthly board-ready compliance reports and quarterly audit evidence packs included",
       "Proactive regulatory change monitoring so you are not caught off-guard by new obligations",
     ],
-    faqIntro:
-      "Key questions about the Governance, Risk and Compliance managed service.",
+    faqIntro: "Key questions about the Governance, Risk and Compliance managed service.",
     faqs: [
       {
         question: "What is included in the monthly service?",
@@ -482,7 +482,8 @@ export const securityCopy: CollectionCopyOverrides = {
           "The DigitalQatalyst team runs a two-week onboarding to establish baselines, confirm SLAs, and connect monitoring tooling before steady-state operations begin.",
       },
     ],
-    audience: "CISOs, risk and compliance officers, heads of internal audit, and legal and regulatory affairs leaders",
+    audience:
+      "CISOs, risk and compliance officers, heads of internal audit, and legal and regulatory affairs leaders",
     industryRelevance:
       "Regulated organisations in financial services, healthcare, government, and any business preparing for certification or facing audit scrutiny",
     businessImpact:
@@ -535,8 +536,7 @@ export const securityCopy: CollectionCopyOverrides = {
       "Covers portfolio, architecture, vendor, and delivery governance in a single engagement",
       "Board-ready improvement roadmap delivered before the engagement closes",
     ],
-    faqIntro:
-      "Common questions about the Technology Governance assessment.",
+    faqIntro: "Common questions about the Technology Governance assessment.",
     faqs: [
       {
         question: "What does the maturity model cover?",
@@ -564,12 +564,18 @@ export const securityCopy: CollectionCopyOverrides = {
           "Request a consultation with the DigitalQatalyst team. We confirm scope, maturity model, and stakeholder availability before the engagement begins.",
       },
     ],
-    audience: "CIOs, heads of enterprise architecture, PMO directors, and technology portfolio leaders",
+    audience:
+      "CIOs, heads of enterprise architecture, PMO directors, and technology portfolio leaders",
     industryRelevance:
       "Organisations managing complex technology portfolios, multi-vendor environments, or enterprise architecture programmes across any sector",
     businessImpact:
       "Identifies the governance gaps creating the greatest delivery risk and cost exposure, so improvement investment is targeted rather than spread across lower-priority activities.",
-    tags: ["technology-governance", "enterprise-architecture", "portfolio-management", "IT-governance"],
+    tags: [
+      "technology-governance",
+      "enterprise-architecture",
+      "portfolio-management",
+      "IT-governance",
+    ],
   },
 
   122: {
@@ -615,8 +621,7 @@ export const securityCopy: CollectionCopyOverrides = {
       "Architecture review board and portfolio governance ready to implement",
       "Adoption plan included so governance changes embed without stalling delivery",
     ],
-    faqIntro:
-      "Key questions about designing a Technology Governance operating model.",
+    faqIntro: "Key questions about designing a Technology Governance operating model.",
     faqs: [
       {
         question: "Do we need an assessment before starting the design?",
@@ -644,12 +649,18 @@ export const securityCopy: CollectionCopyOverrides = {
           "Book a scoping call with the DigitalQatalyst team. We review your current governance maturity, objectives, and any existing documentation before confirming the design scope.",
       },
     ],
-    audience: "CIOs, heads of enterprise architecture, PMO directors, and technology portfolio leaders",
+    audience:
+      "CIOs, heads of enterprise architecture, PMO directors, and technology portfolio leaders",
     industryRelevance:
       "Organisations managing complex technology portfolios, multi-vendor environments, or enterprise architecture programmes across any sector",
     businessImpact:
       "Reduces delivery failure rates and misaligned investment by establishing clear decision rights and governance processes, cutting the time spent on escalations and unstructured architecture exceptions.",
-    tags: ["technology-governance", "operating-model", "enterprise-architecture", "portfolio-governance"],
+    tags: [
+      "technology-governance",
+      "operating-model",
+      "enterprise-architecture",
+      "portfolio-governance",
+    ],
   },
 
   123: {
@@ -695,8 +706,7 @@ export const securityCopy: CollectionCopyOverrides = {
       "Responsible AI assessment included for every prioritised use case",
       "Deployment specifications prevent rework when the build phase begins",
     ],
-    faqIntro:
-      "Key questions about AI design for Technology Governance.",
+    faqIntro: "Key questions about AI design for Technology Governance.",
     faqs: [
       {
         question: "What AI use cases apply to technology governance?",
@@ -724,7 +734,8 @@ export const securityCopy: CollectionCopyOverrides = {
           "Request a consultation with the DigitalQatalyst team. We will review your current governance tooling, data landscape, and AI objectives before confirming the scope.",
       },
     ],
-    audience: "CIOs, heads of enterprise architecture, PMO directors, and technology portfolio leaders",
+    audience:
+      "CIOs, heads of enterprise architecture, PMO directors, and technology portfolio leaders",
     industryRelevance:
       "Organisations managing complex technology portfolios, multi-vendor environments, or enterprise architecture programmes across any sector",
     businessImpact:
@@ -776,8 +787,7 @@ export const securityCopy: CollectionCopyOverrides = {
       "First governance reporting cycle completed before handover closes",
       "Training and runbooks ensure your team operates independently from go-live",
     ],
-    faqIntro:
-      "Key questions about deploying a Technology Governance operating model.",
+    faqIntro: "Key questions about deploying a Technology Governance operating model.",
     faqs: [
       {
         question: "Which governance platforms can you configure?",
@@ -805,7 +815,8 @@ export const securityCopy: CollectionCopyOverrides = {
           "Share your governance design specification and the DigitalQatalyst team will scope the deployment in detail and confirm the timeline within five working days.",
       },
     ],
-    audience: "CIOs, heads of enterprise architecture, PMO directors, and technology portfolio leaders",
+    audience:
+      "CIOs, heads of enterprise architecture, PMO directors, and technology portfolio leaders",
     industryRelevance:
       "Organisations managing complex technology portfolios, multi-vendor environments, or enterprise architecture programmes across any sector",
     businessImpact:
@@ -857,8 +868,7 @@ export const securityCopy: CollectionCopyOverrides = {
       "Every material AI recommendation requires human approval before action is taken",
       "Operations training ensures your team governs the AI, not the other way around",
     ],
-    faqIntro:
-      "Key questions about AI deployment for Technology Governance.",
+    faqIntro: "Key questions about AI deployment for Technology Governance.",
     faqs: [
       {
         question: "Which AI use cases can you put into production for technology governance?",
@@ -886,7 +896,8 @@ export const securityCopy: CollectionCopyOverrides = {
           "Share your AI design specifications and the DigitalQatalyst team will confirm environment readiness, integration requirements, and the deployment schedule within one week.",
       },
     ],
-    audience: "CIOs, heads of enterprise architecture, PMO directors, and technology portfolio leaders",
+    audience:
+      "CIOs, heads of enterprise architecture, PMO directors, and technology portfolio leaders",
     industryRelevance:
       "Organisations managing complex technology portfolios, multi-vendor environments, or enterprise architecture programmes across any sector",
     businessImpact:
@@ -938,8 +949,7 @@ export const securityCopy: CollectionCopyOverrides = {
       "Monthly portfolio reports and quarterly architecture reviews included as standard",
       "Proactive regulatory and technology change monitoring keeps governance current",
     ],
-    faqIntro:
-      "Key questions about the Technology Governance managed service.",
+    faqIntro: "Key questions about the Technology Governance managed service.",
     faqs: [
       {
         question: "What does the monthly managed service include?",
@@ -957,7 +967,8 @@ export const securityCopy: CollectionCopyOverrides = {
           "Yes. Scope and reporting are reviewed quarterly. Changes to portfolio scope, new governance domains, or revised strategic priorities are incorporated through a change request without disrupting ongoing operations.",
       },
       {
-        question: "How do you handle a governance escalation or investment decision under time pressure?",
+        question:
+          "How do you handle a governance escalation or investment decision under time pressure?",
         answer:
           "The DigitalQatalyst team provides named points of contact for escalations. Response SLAs are defined by issue severity. For investment decisions, the team can produce targeted analysis within agreed timescales to support the decision-making process.",
       },
@@ -967,7 +978,8 @@ export const securityCopy: CollectionCopyOverrides = {
           "The DigitalQatalyst team runs a two-week onboarding to establish governance baselines, confirm SLAs, connect monitoring tooling, and set the governance calendar before steady-state operations begin.",
       },
     ],
-    audience: "CIOs, heads of enterprise architecture, PMO directors, and technology portfolio leaders",
+    audience:
+      "CIOs, heads of enterprise architecture, PMO directors, and technology portfolio leaders",
     industryRelevance:
       "Organisations managing complex technology portfolios, multi-vendor environments, or enterprise architecture programmes across any sector",
     businessImpact:

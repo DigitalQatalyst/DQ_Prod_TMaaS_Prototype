@@ -2,7 +2,7 @@
 
 import { ArrowRight, Bot, Check, CheckCircle2, ShoppingCart } from "lucide-react";
 import { toast } from "sonner";
-import { useCart } from "@/contexts/CartContext" // TODO: Task 9 — wire up context;
+import { useCart } from "@/contexts/CartContext"; // TODO: Task 9 — wire up context;
 import { featureFlags } from "@/lib/featureFlags";
 import { cn } from "@/lib/utils";
 import { ServiceDetailPrimaryButton } from "./ServiceDetailButtons";
@@ -35,8 +35,7 @@ export function ServicePackageCard({
   packageHighlights,
   className,
 }: ServicePackageCardProps) {
-  const features =
-    packageHighlights?.length ? packageHighlights : DEFAULT_PACKAGE_FEATURES;
+  const features = packageHighlights?.length ? packageHighlights : DEFAULT_PACKAGE_FEATURES;
   const { addItem, hasItem, openCart } = useCart();
 
   return (
@@ -51,11 +50,7 @@ export function ServicePackageCard({
       <ul className="mt-6 space-y-3 border-t border-gray-100 pt-6">
         {features.map((item) => (
           <li key={item} className="flex items-start gap-2.5 text-sm text-gray-700">
-            <CheckCircle2
-              size={16}
-              className="mt-0.5 shrink-0 text-dq-orange"
-              aria-hidden
-            />
+            <CheckCircle2 size={16} className="mt-0.5 shrink-0 text-dq-orange" aria-hidden />
             {item}
           </li>
         ))}
@@ -63,16 +58,9 @@ export function ServicePackageCard({
 
       <div className="mt-6">
         {service.serviceType === "bundle" || !featureFlags.isEnabled("cart") ? (
-          <ServiceDetailPrimaryButton
-            fullWidth
-            className="group"
-            onClick={onPrimaryCta}
-          >
+          <ServiceDetailPrimaryButton fullWidth className="group" onClick={onPrimaryCta}>
             {primaryCtaLabel}
-            <ArrowRight
-              size={16}
-              className="transition group-hover:translate-x-0.5"
-            />
+            <ArrowRight size={16} className="transition group-hover:translate-x-0.5" />
           </ServiceDetailPrimaryButton>
         ) : (
           <div className="space-y-2.5">

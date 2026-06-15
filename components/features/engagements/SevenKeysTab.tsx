@@ -3,18 +3,55 @@
 import { useState } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogDescription,
+} from "@/components/ui/dialog";
 import {
   engagementHealthIndicators,
   getHealthStatusBadgeClass,
   type IndicatorNavigationTarget,
   type EngagementHealthIndicator,
   type HealthStatus,
-} from "@/data/engagementHealthIndicators" // TODO: Task 9 — wire up data;
-import { TrendingUp, TrendingDown, Minus, Clock, ShieldAlert, ArrowRight, Activity, Info, ChevronRight, CheckCircle2, AlertCircle, XCircle, Cpu, UserCog, Pencil } from "lucide-react";
+} from "@/data/engagementHealthIndicators"; // TODO: Task 9 — wire up data;
+import {
+  TrendingUp,
+  TrendingDown,
+  Minus,
+  Clock,
+  ShieldAlert,
+  ArrowRight,
+  Activity,
+  Info,
+  ChevronRight,
+  CheckCircle2,
+  AlertCircle,
+  XCircle,
+  Cpu,
+  UserCog,
+  Pencil,
+} from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from "recharts";
+import {
+  LineChart,
+  Line,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+  ResponsiveContainer,
+} from "recharts";
 
 interface SevenKeysTabProps {
   onNavigateToIndicator: (target: IndicatorNavigationTarget) => void;
@@ -29,8 +66,14 @@ const getTrendIcon = (trend: string) => {
 
 const generateMockTrendData = (status: string, trend: string, range: string) => {
   const baseValue = status === "green" ? 3 : status === "amber" ? 2 : 1;
-  const prevValue = trend === "improving" ? baseValue - 1 : trend === "deteriorating" ? baseValue + 1 : baseValue;
-  const oldestValue = trend === "improving" ? baseValue - 1 : trend === "deteriorating" ? Math.min(baseValue + 2, 3) : baseValue;
+  const prevValue =
+    trend === "improving" ? baseValue - 1 : trend === "deteriorating" ? baseValue + 1 : baseValue;
+  const oldestValue =
+    trend === "improving"
+      ? baseValue - 1
+      : trend === "deteriorating"
+        ? Math.min(baseValue + 2, 3)
+        : baseValue;
 
   const clamp = (v: number) => Math.max(1, Math.min(3, v));
 
@@ -71,7 +114,10 @@ const generateMockTrendData = (status: string, trend: string, range: string) => 
 };
 
 // ─── RAG Option Card ─────────────────────────────────────────────────────────
-const ragConfig: Record<HealthStatus, { icon: React.ReactNode; border: string; selectedBg: string; labelColor: string; bullet: string }> = {
+const ragConfig: Record<
+  HealthStatus,
+  { icon: React.ReactNode; border: string; selectedBg: string; labelColor: string; bullet: string }
+> = {
   green: {
     icon: <CheckCircle2 size={18} className="text-green-600" />,
     border: "border-green-200 hover:border-green-400",
@@ -117,7 +163,8 @@ const ManualRagSelector = ({ indicator, currentStatus, onSelect }: ManualRagSele
       </div>
 
       <p className="text-xs text-gray-500 leading-relaxed -mt-2">
-        Select the RAG status that best reflects current stakeholder engagement using the criteria below. Your selection is recorded and timestamped.
+        Select the RAG status that best reflects current stakeholder engagement using the criteria
+        below. Your selection is recorded and timestamped.
       </p>
 
       {/* RAG option cards */}
@@ -137,16 +184,19 @@ const ManualRagSelector = ({ indicator, currentStatus, onSelect }: ManualRagSele
               <div className="flex items-center gap-2 mb-3">
                 {cfg.icon}
                 <span className={`font-bold text-sm ${cfg.labelColor}`}>
-                  {criterion.status.charAt(0).toUpperCase() + criterion.status.slice(1)}, {criterion.label}
+                  {criterion.status.charAt(0).toUpperCase() + criterion.status.slice(1)},{" "}
+                  {criterion.label}
                 </span>
                 {isSelected && (
-                  <span className={`ml-auto text-[10px] font-bold uppercase tracking-widest px-2 py-0.5 rounded-full ${
-                    criterion.status === "green"
-                      ? "bg-green-100 text-green-700"
-                      : criterion.status === "amber"
-                      ? "bg-amber-100 text-amber-700"
-                      : "bg-red-100 text-red-700"
-                  }`}>
+                  <span
+                    className={`ml-auto text-[10px] font-bold uppercase tracking-widest px-2 py-0.5 rounded-full ${
+                      criterion.status === "green"
+                        ? "bg-green-100 text-green-700"
+                        : criterion.status === "amber"
+                          ? "bg-amber-100 text-amber-700"
+                          : "bg-red-100 text-red-700"
+                    }`}
+                  >
                     Selected
                   </span>
                 )}
@@ -175,8 +225,12 @@ const ManualRagSelector = ({ indicator, currentStatus, onSelect }: ManualRagSele
 
 // ─── Main Component ───────────────────────────────────────────────────────────
 export const SevenKeysTab = ({ onNavigateToIndicator, isClient = false }: SevenKeysTabProps) => {
-  const [indicators, setIndicators] = useState<EngagementHealthIndicator[]>(engagementHealthIndicators);
-  const [selectedIndicator, setSelectedIndicator] = useState<EngagementHealthIndicator | null>(null);
+  const [indicators, setIndicators] = useState<EngagementHealthIndicator[]>(
+    engagementHealthIndicators
+  );
+  const [selectedIndicator, setSelectedIndicator] = useState<EngagementHealthIndicator | null>(
+    null
+  );
   const [timeRange, setTimeRange] = useState("30d");
 
   const handleRowClick = (indicator: EngagementHealthIndicator) => {
@@ -199,7 +253,16 @@ export const SevenKeysTab = ({ onNavigateToIndicator, isClient = false }: SevenK
         : ind
     );
     setIndicators(updated as EngagementHealthIndicator[]);
-    setSelectedIndicator((prev) => prev ? { ...prev, status, lastTransition: new Date().toISOString().split("T")[0], timeInState: "Just now" } as EngagementHealthIndicator : null);
+    setSelectedIndicator((prev) =>
+      prev
+        ? ({
+            ...prev,
+            status,
+            lastTransition: new Date().toISOString().split("T")[0],
+            timeInState: "Just now",
+          } as EngagementHealthIndicator)
+        : null
+    );
   };
 
   const handleNavigate = (target: IndicatorNavigationTarget) => {
@@ -257,21 +320,32 @@ export const SevenKeysTab = ({ onNavigateToIndicator, isClient = false }: SevenK
                   className="cursor-pointer hover:bg-slate-50 transition-colors group"
                 >
                   <TableCell>
-                    <div className="font-semibold text-navy-950 group-hover:text-navy-700 transition-colors">{ind.name}</div>
+                    <div className="font-semibold text-navy-950 group-hover:text-navy-700 transition-colors">
+                      {ind.name}
+                    </div>
                   </TableCell>
                   <TableCell>
                     {ind.inputMode === "manual" ? (
-                      <Badge variant="outline" className="bg-blue-50 text-blue-700 border-blue-200 gap-1 text-[11px]">
+                      <Badge
+                        variant="outline"
+                        className="bg-blue-50 text-blue-700 border-blue-200 gap-1 text-[11px]"
+                      >
                         <UserCog size={11} /> Manual
                       </Badge>
                     ) : (
-                      <Badge variant="outline" className="bg-slate-50 text-slate-500 border-slate-200 gap-1 text-[11px]">
+                      <Badge
+                        variant="outline"
+                        className="bg-slate-50 text-slate-500 border-slate-200 gap-1 text-[11px]"
+                      >
                         <Cpu size={11} /> Auto
                       </Badge>
                     )}
                   </TableCell>
                   <TableCell>
-                    <Badge variant="outline" className={`capitalize ${getHealthStatusBadgeClass(ind.status)}`}>
+                    <Badge
+                      variant="outline"
+                      className={`capitalize ${getHealthStatusBadgeClass(ind.status)}`}
+                    >
                       {ind.status}
                     </Badge>
                   </TableCell>
@@ -291,7 +365,11 @@ export const SevenKeysTab = ({ onNavigateToIndicator, isClient = false }: SevenK
                     {ind.lastTransition}
                   </TableCell>
                   <TableCell className="text-right">
-                    <Button variant="ghost" size="sm" className="text-navy-600 font-semibold group-hover:bg-navy-50 group-hover:text-navy-900">
+                    <Button
+                      variant="ghost"
+                      size="sm"
+                      className="text-navy-600 font-semibold group-hover:bg-navy-50 group-hover:text-navy-900"
+                    >
                       {ind.inputMode === "manual" && !isClient ? (
                         <>
                           <Pencil size={13} className="mr-1" /> Update
@@ -311,18 +389,29 @@ export const SevenKeysTab = ({ onNavigateToIndicator, isClient = false }: SevenK
       </section>
 
       {/* ── DETAIL DIALOG ───────────────────────────────────────── */}
-      <Dialog open={!!selectedIndicator} onOpenChange={(open) => !open && setSelectedIndicator(null)}>
+      <Dialog
+        open={!!selectedIndicator}
+        onOpenChange={(open) => !open && setSelectedIndicator(null)}
+      >
         <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto">
           <DialogHeader className="pb-4 border-b border-border">
             <div className="flex items-center gap-3 flex-wrap">
-              <DialogTitle className="text-xl font-bold text-navy-950">{selectedIndicator?.name}</DialogTitle>
+              <DialogTitle className="text-xl font-bold text-navy-950">
+                {selectedIndicator?.name}
+              </DialogTitle>
               {selectedIndicator && (
-                <Badge variant="outline" className={`capitalize ${getHealthStatusBadgeClass(selectedIndicator.status)}`}>
+                <Badge
+                  variant="outline"
+                  className={`capitalize ${getHealthStatusBadgeClass(selectedIndicator.status)}`}
+                >
                   {selectedIndicator.status}
                 </Badge>
               )}
               {selectedIndicator?.inputMode === "manual" && (
-                <Badge variant="outline" className="bg-blue-50 text-blue-700 border-blue-200 gap-1 text-[11px]">
+                <Badge
+                  variant="outline"
+                  className="bg-blue-50 text-blue-700 border-blue-200 gap-1 text-[11px]"
+                >
                   <UserCog size={11} /> Manually Assessed
                 </Badge>
               )}
@@ -334,7 +423,6 @@ export const SevenKeysTab = ({ onNavigateToIndicator, isClient = false }: SevenK
 
           {selectedIndicator && (
             <div className="space-y-8 mt-2">
-
               {/* ── MANUAL: RAG SELECTOR ────────────────────────────── */}
               {selectedIndicator.inputMode === "manual" && !isClient && (
                 <section className="space-y-3">
@@ -360,7 +448,9 @@ export const SevenKeysTab = ({ onNavigateToIndicator, isClient = false }: SevenK
 
                   {selectedIndicator.status === "green" ? (
                     <div className="bg-green-50/50 rounded-lg p-6 text-center border border-green-100">
-                      <p className="text-sm text-green-800 font-medium">All governance rules are currently passing.</p>
+                      <p className="text-sm text-green-800 font-medium">
+                        All governance rules are currently passing.
+                      </p>
                     </div>
                   ) : (
                     <div className="bg-slate-50 rounded-lg p-5 grid md:grid-cols-2 gap-6 text-sm border border-slate-100">
@@ -380,7 +470,10 @@ export const SevenKeysTab = ({ onNavigateToIndicator, isClient = false }: SevenK
                         </h4>
                         <ul className="space-y-3 text-navy-950">
                           {selectedIndicator.evidence.triggers.map((trigger, i) => (
-                            <li key={i} className="flex items-start justify-between gap-4 border-b border-slate-200/50 last:border-0 pb-3 last:pb-0">
+                            <li
+                              key={i}
+                              className="flex items-start justify-between gap-4 border-b border-slate-200/50 last:border-0 pb-3 last:pb-0"
+                            >
                               <div className="flex items-start gap-2">
                                 <div className="w-1.5 h-1.5 rounded-full bg-navy-400 shrink-0 mt-1.5" />
                                 <span className="flex-1 leading-snug">{trigger}</span>
@@ -411,7 +504,9 @@ export const SevenKeysTab = ({ onNavigateToIndicator, isClient = false }: SevenK
                   </h3>
                   <div className="bg-slate-50 border-slate-200 border rounded-lg p-4 flex gap-3 items-start">
                     <Info size={16} className="text-slate-500 shrink-0 mt-0.5" />
-                    <p className="text-sm text-navy-900 leading-relaxed">{selectedIndicator.currentReason}</p>
+                    <p className="text-sm text-navy-900 leading-relaxed">
+                      {selectedIndicator.currentReason}
+                    </p>
                   </div>
                 </section>
               )}
@@ -425,7 +520,9 @@ export const SevenKeysTab = ({ onNavigateToIndicator, isClient = false }: SevenK
                   </h3>
                   <div className="bg-amber-50/50 border-amber-100 border rounded-lg p-4 flex gap-3 items-start">
                     <Info size={16} className="text-amber-600 shrink-0 mt-0.5" />
-                    <p className="text-sm text-amber-900 leading-relaxed">{selectedIndicator.currentReason}</p>
+                    <p className="text-sm text-amber-900 leading-relaxed">
+                      {selectedIndicator.currentReason}
+                    </p>
                   </div>
                 </section>
               )}
@@ -435,7 +532,9 @@ export const SevenKeysTab = ({ onNavigateToIndicator, isClient = false }: SevenK
                 <section>
                   <div className="bg-amber-50/50 border-amber-100 border rounded-lg p-4 flex gap-3 items-start">
                     <Info size={16} className="text-amber-600 shrink-0 mt-0.5" />
-                    <p className="text-sm text-amber-900 leading-relaxed">{selectedIndicator.currentReason}</p>
+                    <p className="text-sm text-amber-900 leading-relaxed">
+                      {selectedIndicator.currentReason}
+                    </p>
                   </div>
                 </section>
               )}
@@ -455,10 +554,18 @@ export const SevenKeysTab = ({ onNavigateToIndicator, isClient = false }: SevenK
                         size="sm"
                         onClick={() => setTimeRange(r)}
                         className={`h-7 text-xs px-3 rounded-sm ${
-                          timeRange === r ? "bg-white shadow-sm font-medium" : "text-gray-500 font-normal hover:text-navy-950"
+                          timeRange === r
+                            ? "bg-white shadow-sm font-medium"
+                            : "text-gray-500 font-normal hover:text-navy-950"
                         }`}
                       >
-                        {r === "all" ? "All Time" : r === "7d" ? "7 Days" : r === "30d" ? "30 Days" : "90 Days"}
+                        {r === "all"
+                          ? "All Time"
+                          : r === "7d"
+                            ? "7 Days"
+                            : r === "30d"
+                              ? "30 Days"
+                              : "90 Days"}
                       </Button>
                     ))}
                   </div>
@@ -467,25 +574,50 @@ export const SevenKeysTab = ({ onNavigateToIndicator, isClient = false }: SevenK
                   <div className={`w-full ${!isClient ? "md:w-2/3" : ""} h-48`}>
                     <ResponsiveContainer width="100%" height="100%">
                       <LineChart
-                        data={generateMockTrendData(selectedIndicator.status, selectedIndicator.trend, timeRange)}
+                        data={generateMockTrendData(
+                          selectedIndicator.status,
+                          selectedIndicator.trend,
+                          timeRange
+                        )}
                         margin={{ top: 5, right: 20, bottom: 5, left: -20 }}
                       >
                         <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#e2e8f0" />
-                        <XAxis dataKey="date" axisLine={false} tickLine={false} tick={{ fontSize: 12, fill: "#64748b" }} />
+                        <XAxis
+                          dataKey="date"
+                          axisLine={false}
+                          tickLine={false}
+                          tick={{ fontSize: 12, fill: "#64748b" }}
+                        />
                         <YAxis
                           domain={[1, 3]}
                           ticks={[1, 2, 3]}
                           axisLine={false}
                           tickLine={false}
                           tick={{ fontSize: 12, fill: "#64748b" }}
-                          tickFormatter={(val) => (val === 3 ? "Green" : val === 2 ? "Amber" : "Red")}
+                          tickFormatter={(val) =>
+                            val === 3 ? "Green" : val === 2 ? "Amber" : "Red"
+                          }
                         />
                         <Tooltip
-                          formatter={(value: number) => [value === 3 ? "Green" : value === 2 ? "Amber" : "Red", "Status"]}
+                          formatter={(value: number) => [
+                            value === 3 ? "Green" : value === 2 ? "Amber" : "Red",
+                            "Status",
+                          ]}
                           labelStyle={{ color: "#0f172a" }}
-                          contentStyle={{ borderRadius: "8px", border: "1px solid #e2e8f0", boxShadow: "0 4px 6px -1px rgb(0 0 0 / 0.1)" }}
+                          contentStyle={{
+                            borderRadius: "8px",
+                            border: "1px solid #e2e8f0",
+                            boxShadow: "0 4px 6px -1px rgb(0 0 0 / 0.1)",
+                          }}
                         />
-                        <Line type="stepAfter" dataKey="score" stroke="#0f172a" strokeWidth={2} dot={{ r: 4, fill: "#0f172a" }} activeDot={{ r: 6 }} />
+                        <Line
+                          type="stepAfter"
+                          dataKey="score"
+                          stroke="#0f172a"
+                          strokeWidth={2}
+                          dot={{ r: 4, fill: "#0f172a" }}
+                          activeDot={{ r: 6 }}
+                        />
                       </LineChart>
                     </ResponsiveContainer>
                   </div>
@@ -511,7 +643,6 @@ export const SevenKeysTab = ({ onNavigateToIndicator, isClient = false }: SevenK
                   )}
                 </div>
               </section>
-
             </div>
           )}
         </DialogContent>

@@ -4,9 +4,9 @@ import type { MouseEvent } from "react";
 import Link from "next/link";
 import { ArrowRight, Check, ShoppingCart, TrendingUp } from "lucide-react";
 import { toast } from "sonner";
-import { useCart } from "@/contexts/CartContext" // TODO: Task 9 — wire up context;
-import { useCatalogData } from "@/contexts/CatalogContext" // TODO: Task 9 — wire up context;
-import { marketplaceCategoryLabels } from "@/data/marketplaceNavigation" // TODO: Task 9 — wire up data;
+import { useCart } from "@/contexts/CartContext"; // TODO: Task 9 — wire up context;
+import { useCatalogData } from "@/contexts/CatalogContext"; // TODO: Task 9 — wire up context;
+import { marketplaceCategoryLabels } from "@/data/marketplaceNavigation"; // TODO: Task 9 — wire up data;
 import { featureFlags } from "@/lib/featureFlags";
 import { formatPriceDisplay } from "@/lib/serviceProductUtils";
 import { getServiceIcon } from "@/components/features/marketplace/marketplaceServiceIcons";
@@ -55,10 +55,7 @@ const ServiceProductCard = ({
   featured = false,
   variant = "grid",
 }: ServiceProductCardProps) => {
-  const title = getMarketplaceCardTitle(
-    displayName ?? service.standardName,
-    service.serviceType
-  );
+  const title = getMarketplaceCardTitle(displayName ?? service.standardName, service.serviceType);
   const categoryLabel = marketplaceCategoryLabels[service.collection] ?? service.collection;
   const detailUrl = `/marketplace/${service.id}`;
   const canViewDetail = featureFlags.isEnabled("serviceDetail");
@@ -76,9 +73,7 @@ const ServiceProductCard = ({
           <span className={CATEGORY_LABEL_CLASS} title={categoryLabel}>
             {categoryLabel}
           </span>
-          <h3 className="mt-1.5 text-[15px] font-semibold leading-snug text-dq-navy">
-            {title}
-          </h3>
+          <h3 className="mt-1.5 text-[15px] font-semibold leading-snug text-dq-navy">{title}</h3>
           <p className={`mt-1.5 text-sm leading-snug ${DESCRIPTION_CLAMP}`}>
             {service.description}
           </p>
@@ -99,7 +94,8 @@ const ServiceProductCard = ({
     return (
       <article className="h-full">
         {canViewDetail ? (
-          <Link href={detailUrl}
+          <Link
+            href={detailUrl}
             className={cn("group/card flex items-start gap-5 p-5", CARD_SURFACE_CLASS)}
             aria-label={`View service: ${title}`}
           >
@@ -199,7 +195,8 @@ const ServiceProductCard = ({
         )}
 
         {canViewDetail ? (
-          <Link href={detailUrl}
+          <Link
+            href={detailUrl}
             className={cn(
               "group/card flex min-h-0 flex-1 flex-col p-6 text-left",
               CARD_SURFACE_CLASS,
@@ -316,92 +313,93 @@ const FullServiceProductCard = ({
       {canUseCart && <div className="absolute top-3 right-3">{cartButton}</div>}
 
       {canViewDetail ? (
-      <Link href={detailUrl} className={`flex min-w-0 flex-1 flex-col group/card ${canUseCart ? "pr-10" : ""}`}>
-        <div className="mb-3 flex flex-wrap items-center gap-2">
-          <span className="rounded bg-slate-100 px-2 py-0.5 text-[9px] font-semibold uppercase tracking-wide text-slate-600">
-            {categoryLabel}
-          </span>
-          {service.badge && (
-            <span className="rounded border border-orange-100 bg-orange-50 px-2 py-0.5 text-[9px] font-semibold uppercase tracking-wide text-orange-700">
-              {service.badge}
+        <Link
+          href={detailUrl}
+          className={`flex min-w-0 flex-1 flex-col group/card ${canUseCart ? "pr-10" : ""}`}
+        >
+          <div className="mb-3 flex flex-wrap items-center gap-2">
+            <span className="rounded bg-slate-100 px-2 py-0.5 text-[9px] font-semibold uppercase tracking-wide text-slate-600">
+              {categoryLabel}
             </span>
-          )}
-        </div>
-        <h3 className="text-[15px] font-semibold leading-snug text-dq-navy">
-          {title}
-        </h3>
-        <p className={`mt-2 text-xs leading-relaxed ${DESCRIPTION_CLAMP}`}>
-          {service.description}
-        </p>
-        <div className="mt-4 border-t border-slate-100 pt-3">
-          <ul className="space-y-1.5">
-            {service.features.slice(0, 3).map((feat) => (
-              <li
-                key={feat}
-                className="flex items-start gap-2 text-[11px] leading-tight text-gray-600"
-              >
-                <span className="mt-1.5 h-1 w-1 shrink-0 rounded-full bg-gray-400" />
-                {feat}
-              </li>
-            ))}
-          </ul>
-        </div>
-        <p className="mt-auto pt-4 text-sm text-dq-navy">
-          <span className="font-bold">{priceLabel}</span>
-          <span className="text-gray-400"> · {service.duration}</span>
-          <span className="ml-2 text-xs font-medium text-gray-500">
-            View details
-          </span>
-        </p>
-        {relatedServiceName && (
-          <div className="mt-3 border-t border-slate-100 pt-3">
-            <p className="text-[10px] text-gray-500">
-              <span className="font-semibold text-navy-950">Often paired with:</span> {relatedServiceName}
-            </p>
+            {service.badge && (
+              <span className="rounded border border-orange-100 bg-orange-50 px-2 py-0.5 text-[9px] font-semibold uppercase tracking-wide text-orange-700">
+                {service.badge}
+              </span>
+            )}
           </div>
-        )}
-      </Link>
+          <h3 className="text-[15px] font-semibold leading-snug text-dq-navy">{title}</h3>
+          <p className={`mt-2 text-xs leading-relaxed ${DESCRIPTION_CLAMP}`}>
+            {service.description}
+          </p>
+          <div className="mt-4 border-t border-slate-100 pt-3">
+            <ul className="space-y-1.5">
+              {service.features.slice(0, 3).map((feat) => (
+                <li
+                  key={feat}
+                  className="flex items-start gap-2 text-[11px] leading-tight text-gray-600"
+                >
+                  <span className="mt-1.5 h-1 w-1 shrink-0 rounded-full bg-gray-400" />
+                  {feat}
+                </li>
+              ))}
+            </ul>
+          </div>
+          <p className="mt-auto pt-4 text-sm text-dq-navy">
+            <span className="font-bold">{priceLabel}</span>
+            <span className="text-gray-400"> · {service.duration}</span>
+            <span className="ml-2 text-xs font-medium text-gray-500">View details</span>
+          </p>
+          {relatedServiceName && (
+            <div className="mt-3 border-t border-slate-100 pt-3">
+              <p className="text-[10px] text-gray-500">
+                <span className="font-semibold text-navy-950">Often paired with:</span>{" "}
+                {relatedServiceName}
+              </p>
+            </div>
+          )}
+        </Link>
       ) : (
-      <div className={`flex min-w-0 flex-1 flex-col ${canUseCart ? "pr-10" : ""}`}>
-        <div className="mb-3 flex flex-wrap items-center gap-2">
-          <span className="rounded bg-slate-100 px-2 py-0.5 text-[9px] font-semibold uppercase tracking-wide text-slate-600">
-            {categoryLabel}
-          </span>
-          {service.badge && (
-            <span className="rounded border border-orange-100 bg-orange-50 px-2 py-0.5 text-[9px] font-semibold uppercase tracking-wide text-orange-700">
-              {service.badge}
+        <div className={`flex min-w-0 flex-1 flex-col ${canUseCart ? "pr-10" : ""}`}>
+          <div className="mb-3 flex flex-wrap items-center gap-2">
+            <span className="rounded bg-slate-100 px-2 py-0.5 text-[9px] font-semibold uppercase tracking-wide text-slate-600">
+              {categoryLabel}
             </span>
+            {service.badge && (
+              <span className="rounded border border-orange-100 bg-orange-50 px-2 py-0.5 text-[9px] font-semibold uppercase tracking-wide text-orange-700">
+                {service.badge}
+              </span>
+            )}
+          </div>
+          <h3 className="text-[15px] font-semibold leading-snug text-dq-navy">{title}</h3>
+          <p className={`mt-2 text-xs leading-relaxed ${DESCRIPTION_CLAMP}`}>
+            {service.description}
+          </p>
+          <div className="mt-4 border-t border-slate-100 pt-3">
+            <ul className="space-y-1.5">
+              {service.features.slice(0, 3).map((feat) => (
+                <li
+                  key={feat}
+                  className="flex items-start gap-2 text-[11px] leading-tight text-gray-600"
+                >
+                  <span className="mt-1.5 h-1 w-1 shrink-0 rounded-full bg-gray-400" />
+                  {feat}
+                </li>
+              ))}
+            </ul>
+          </div>
+          <p className="mt-auto pt-4 text-sm text-dq-navy">
+            <span className="font-bold">{priceLabel}</span>
+            <span className="text-gray-400"> · {service.duration}</span>
+          </p>
+          {relatedServiceName && (
+            <div className="mt-3 border-t border-slate-100 pt-3">
+              <p className="text-[10px] text-gray-500">
+                <span className="font-semibold text-navy-950">Often paired with:</span>{" "}
+                {relatedServiceName}
+              </p>
+            </div>
           )}
         </div>
-        <h3 className="text-[15px] font-semibold leading-snug text-dq-navy">{title}</h3>
-        <p className={`mt-2 text-xs leading-relaxed ${DESCRIPTION_CLAMP}`}>
-          {service.description}
-        </p>
-        <div className="mt-4 border-t border-slate-100 pt-3">
-          <ul className="space-y-1.5">
-            {service.features.slice(0, 3).map((feat) => (
-              <li
-                key={feat}
-                className="flex items-start gap-2 text-[11px] leading-tight text-gray-600"
-              >
-                <span className="mt-1.5 h-1 w-1 shrink-0 rounded-full bg-gray-400" />
-                {feat}
-              </li>
-            ))}
-          </ul>
-        </div>
-        <p className="mt-auto pt-4 text-sm text-dq-navy">
-          <span className="font-bold">{priceLabel}</span>
-          <span className="text-gray-400"> · {service.duration}</span>
-        </p>
-        {relatedServiceName && (
-          <div className="mt-3 border-t border-slate-100 pt-3">
-            <p className="text-[10px] text-gray-500">
-              <span className="font-semibold text-navy-950">Often paired with:</span> {relatedServiceName}
-            </p>
-          </div>
-        )}
-      </div>
       )}
     </article>
   );

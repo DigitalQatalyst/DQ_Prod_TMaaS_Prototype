@@ -72,7 +72,8 @@ export function ServiceDetailTabs({
             Delivery steps for this service are tailored during scoping.{" "}
             {featureFlags.isEnabled("contactUs") ? (
               <>
-                <Link href="/contact"
+                <Link
+                  href="/contact"
                   className="font-semibold text-dq-navy underline decoration-dq-navy/30 underline-offset-2 transition-colors hover:text-dq-orange hover:decoration-dq-orange"
                 >
                   Talk to our team
