@@ -9,10 +9,7 @@ import { fileURLToPath } from "node:url";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const root = path.resolve(__dirname, "..");
-const migrationPath = path.join(
-  root,
-  "supabase/migrations/20250610000008_seed_full_catalog.sql"
-);
+const migrationPath = path.join(root, "supabase/migrations/20250610000008_seed_full_catalog.sql");
 const seedPath = path.join(root, "supabase/seed-data.sql");
 
 const header = `-- Seed: full marketplace catalog (35 products, 221 product_variants)

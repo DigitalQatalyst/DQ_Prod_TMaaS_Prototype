@@ -15,9 +15,8 @@ import { applyCardCopyOverride } from "../src/data/serviceCopy";
 
 const seedAll = process.env.SEED_ALL === "true";
 const curatedIdSet = new Set<number>(CURATED_SERVICE_IDS);
-const servicesToSeed = (seedAll
-  ? initialServices
-  : initialServices.filter((s) => curatedIdSet.has(s.id))
+const servicesToSeed = (
+  seedAll ? initialServices : initialServices.filter((s) => curatedIdSet.has(s.id))
 ).map(applyCardCopyOverride);
 
 const VARIANT_SUFFIX_RE =
@@ -152,7 +151,9 @@ for (const service of servicesToSeed) {
     );
   });
   service.tags?.forEach((t) => {
-    lines.push(`INSERT INTO product_tags (variant_id, tag_name) VALUES (${service.id}, '${esc(t)}');`);
+    lines.push(
+      `INSERT INTO product_tags (variant_id, tag_name) VALUES (${service.id}, '${esc(t)}');`
+    );
   });
   service.timelineMilestones?.forEach((m, i) => {
     lines.push(
@@ -168,9 +169,7 @@ for (const service of servicesToSeed) {
 
 for (const service of servicesToSeed) {
   if (service.serviceType !== "bundle" || !service.relatedServices?.length) continue;
-  const included = service.relatedServices.filter((id) =>
-    seedAll ? true : curatedIdSet.has(id)
-  );
+  const included = service.relatedServices.filter((id) => (seedAll ? true : curatedIdSet.has(id)));
   included.forEach((includedId, i) => {
     lines.push(
       `INSERT INTO bundle_items (bundle_variant_id, included_variant_id, sort_order) VALUES (${service.id}, ${includedId}, ${i}) ON CONFLICT DO NOTHING;`
@@ -193,13 +192,16 @@ for (const service of servicesToSeed) {
   });
 }
 
-const collections = ["all", ...marketplaceCapabilities.map((c) => c.id).filter((id) => id !== "bundles")];
+const collections = [
+  "all",
+  ...marketplaceCapabilities.map((c) => c.id).filter((id) => id !== "bundles"),
+];
 for (const collection of collections) {
-    const pool = (
-      collection === "all"
-        ? [...servicesToSeed]
-        : servicesToSeed.filter((s) => s.collection === collection)
-    ).filter((s) => s.serviceType !== "bundle");
+  const pool = (
+    collection === "all"
+      ? [...servicesToSeed]
+      : servicesToSeed.filter((s) => s.collection === collection)
+  ).filter((s) => s.serviceType !== "bundle");
   const top = pool.sort((a, b) => b.popularityRank - a.popularityRank).slice(0, 4);
   top.forEach((s, rank) => {
     const listingId = variantToListing.get(s.id);

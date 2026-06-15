@@ -5,10 +5,7 @@
 import { getVariantCopyOverride } from "../../src/data/serviceCopy";
 import { buildServiceFaqsContent } from "../../src/lib/serviceFaqsCopy";
 import { buildWhyItMattersContent } from "../../src/lib/whyItMattersCopy";
-import {
-  buildVariantHeroDescription,
-  buildVariantPositioning,
-} from "../../src/lib/variantSeoCopy";
+import { buildVariantHeroDescription, buildVariantPositioning } from "../../src/lib/variantSeoCopy";
 import type { ServiceProduct } from "../../src/types/serviceProduct";
 
 export type DeliverableItem = { title: string; description: string };
@@ -42,7 +39,10 @@ export type GeneratedPdpContent = {
 };
 
 function stripEmDash(text: string): string {
-  return text.replace(/\s*—\s*/g, ", ").replace(/\s+/g, " ").trim();
+  return text
+    .replace(/\s*—\s*/g, ", ")
+    .replace(/\s+/g, " ")
+    .trim();
 }
 
 function solutionKey(standardName: string): string {
@@ -95,12 +95,7 @@ const DELIVERABLE_TITLES: Record<string, string[]> = {
     "Responsible AI guardrails",
     "Deployment specifications",
   ],
-  deploy: [
-    "Configured build",
-    "Integration and testing",
-    "Go-live readiness",
-    "Handover pack",
-  ],
+  deploy: ["Configured build", "Integration and testing", "Go-live readiness", "Handover pack"],
   ai_deploy: [
     "Production deployment",
     "Monitoring and controls",
@@ -116,11 +111,7 @@ const DELIVERABLE_TITLES: Record<string, string[]> = {
 };
 
 const PACKAGE_HIGHLIGHTS: Record<string, string[]> = {
-  advisory: [
-    "Fixed discovery scope",
-    "Executive-ready findings",
-    "No obligation to proceed",
-  ],
+  advisory: ["Fixed discovery scope", "Executive-ready findings", "No obligation to proceed"],
   design: [
     "Workshop-led discovery",
     "Implementation-ready specifications",
@@ -131,21 +122,9 @@ const PACKAGE_HIGHLIGHTS: Record<string, string[]> = {
     "Responsible workflow design",
     "Deployment-ready specifications",
   ],
-  deploy: [
-    "Phased implementation",
-    "QA and handover included",
-    "SLA-backed delivery",
-  ],
-  ai_deploy: [
-    "Production AI deployment",
-    "Monitoring and safety controls",
-    "Operational handover",
-  ],
-  manage: [
-    "Monthly SLA-backed service",
-    "Continuous optimisation",
-    "Dedicated specialist team",
-  ],
+  deploy: ["Phased implementation", "QA and handover included", "SLA-backed delivery"],
+  ai_deploy: ["Production AI deployment", "Monitoring and safety controls", "Operational handover"],
+  manage: ["Monthly SLA-backed service", "Continuous optimisation", "Dedicated specialist team"],
 };
 
 function buildDeliverablesSummary(service: ServiceProduct): string[] {

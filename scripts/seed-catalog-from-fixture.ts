@@ -127,7 +127,10 @@ async function main() {
   ];
 
   for (const table of tables) {
-    const { error } = await supabase.from(table).delete().neq("id", "00000000-0000-0000-0000-000000000000");
+    const { error } = await supabase
+      .from(table)
+      .delete()
+      .neq("id", "00000000-0000-0000-0000-000000000000");
     if (error && !error.message.includes("Could not find")) {
       // UUID tables need different delete - use gt on serial
     }
@@ -161,7 +164,14 @@ async function main() {
       sort_order: i,
       is_facetable: true,
     })),
-    { id: "bundles", parent_id: null, label: "Bundles", category_type: "navigation", sort_order: 99, is_facetable: false },
+    {
+      id: "bundles",
+      parent_id: null,
+      label: "Bundles",
+      category_type: "navigation",
+      sort_order: 99,
+      is_facetable: false,
+    },
     ...marketplaceEconomySectors.map((s, i) => ({
       id: s.id,
       parent_id: null,
@@ -303,9 +313,9 @@ async function main() {
     }
 
     if (service.tags?.length) {
-      const { error: tagError } = await supabase.from("product_tags").insert(
-        service.tags.map((tag_name) => ({ variant_id: service.id, tag_name }))
-      );
+      const { error: tagError } = await supabase
+        .from("product_tags")
+        .insert(service.tags.map((tag_name) => ({ variant_id: service.id, tag_name })));
       if (tagError) throw tagError;
     }
 
@@ -376,7 +386,10 @@ async function main() {
   }
 
   console.log("Seeding best-seller placements...");
-  const collections = ["all", ...marketplaceCapabilities.map((c) => c.id).filter((id) => id !== "bundles")];
+  const collections = [
+    "all",
+    ...marketplaceCapabilities.map((c) => c.id).filter((id) => id !== "bundles"),
+  ];
   for (const collection of collections) {
     const pool =
       collection === "all"

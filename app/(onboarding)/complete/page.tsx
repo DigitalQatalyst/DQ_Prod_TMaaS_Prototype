@@ -1,0 +1,91 @@
+"use client";
+
+import { useRouter } from "next/navigation";
+import { Bot, CheckCircle2, Package, ArrowRight } from "lucide-react";
+import { Button } from "@/components/ui/button";
+
+export default function OnboardingCompletePage() {
+  const router = useRouter();
+
+  return (
+    <div className="flex min-h-screen items-center justify-center bg-gradient-to-br from-accent/30 to-background px-6">
+      <div className="w-full max-w-2xl text-center">
+        <div className="mx-auto mb-6 flex h-20 w-20 items-center justify-center rounded-full bg-green-500/10">
+          <CheckCircle2 size={48} className="text-green-600" />
+        </div>
+
+        <div className="rounded-2xl border border-border bg-card p-8 shadow-card">
+          <h1 className="text-3xl font-bold text-foreground">
+            Welcome to <span className="text-gradient-brand">TMaaS</span>!
+          </h1>
+          <p className="mt-3 text-lg text-muted-foreground">
+            Your organisation has been successfully set up
+          </p>
+
+          <div className="my-8 rounded-xl bg-accent/50 p-6">
+            <div className="flex items-center justify-center gap-2">
+              <div className="h-2 w-2 rounded-full bg-green-500"></div>
+              <span className="text-sm font-medium text-foreground">You&apos;re all set!</span>
+            </div>
+          </div>
+
+          <div className="mb-8">
+            <h2 className="mb-4 text-lg font-semibold text-foreground">What&apos;s Next?</h2>
+            <p className="text-sm text-muted-foreground">
+              Choose how you&apos;d like to begin your transformation journey
+            </p>
+          </div>
+
+          <div className="grid gap-4 md:grid-cols-2">
+            <div
+              onClick={() => {
+                window.dispatchEvent(new CustomEvent("openDiagnoseAI"));
+                router.push("/dashboard/overview");
+              }}
+              className="cursor-pointer rounded-xl border-2 border-border bg-gradient-to-br from-blue-500/10 to-purple-500/10 p-6 text-left transition-all hover:border-primary hover:shadow-elevated"
+            >
+              <div className="mb-3 flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-brand">
+                <Bot size={24} className="text-primary-foreground" />
+              </div>
+              <h3 className="mb-2 text-lg font-semibold text-foreground">Start with AI</h3>
+              <p className="mb-4 text-sm text-muted-foreground">
+                Describe your transformation challenge and get personalized service recommendations
+              </p>
+              <div className="flex items-center gap-2 text-sm font-medium text-primary">
+                Launch TMaaS AI <ArrowRight size={16} />
+              </div>
+            </div>
+
+            <div
+              onClick={() => router.push("/marketplace")}
+              className="cursor-pointer rounded-xl border-2 border-border bg-gradient-to-br from-green-500/10 to-blue-500/10 p-6 text-left transition-all hover:border-primary hover:shadow-elevated"
+            >
+              <div className="mb-3 flex h-12 w-12 items-center justify-center rounded-xl bg-green-500/20">
+                <Package size={24} className="text-green-600" />
+              </div>
+              <h3 className="mb-2 text-lg font-semibold text-foreground">Explore Marketplace</h3>
+              <p className="mb-4 text-sm text-muted-foreground">
+                Browse our catalog of design and deployment services across all four towers
+              </p>
+              <div className="flex items-center gap-2 text-sm font-medium text-primary">
+                View Services <ArrowRight size={16} />
+              </div>
+            </div>
+          </div>
+
+          <Button
+            onClick={() => router.push("/dashboard/overview")}
+            variant="outline"
+            className="mt-6"
+          >
+            Go to Dashboard
+          </Button>
+        </div>
+
+        <p className="mt-6 text-xs text-muted-foreground">
+          You can update your organisation profile anytime from Settings
+        </p>
+      </div>
+    </div>
+  );
+}

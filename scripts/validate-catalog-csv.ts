@@ -4,12 +4,7 @@
  */
 import path from "path";
 import { fileURLToPath } from "url";
-import {
-  catalogDir,
-  readCsv,
-  PRODUCT_CSV_HEADERS,
-  VARIANT_CSV_HEADERS,
-} from "./catalog-csv-utils";
+import { catalogDir, readCsv, PRODUCT_CSV_HEADERS, VARIANT_CSV_HEADERS } from "./catalog-csv-utils";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const REPO_ROOT = path.resolve(__dirname, "..");
@@ -131,9 +126,7 @@ function main() {
     for (let i = 0; i < positions.length; i++) {
       for (let j = i + 1; j < positions.length; j++) {
         if (tokenOverlap(positions[i], positions[j]) > 0.8) {
-          warnings.push(
-            `High positioning overlap (${type}): variants may still read as templated`
-          );
+          warnings.push(`High positioning overlap (${type}): variants may still read as templated`);
           break;
         }
       }
