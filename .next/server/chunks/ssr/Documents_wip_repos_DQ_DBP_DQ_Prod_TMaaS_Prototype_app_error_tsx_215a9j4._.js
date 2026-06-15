@@ -1,3 +1,0 @@
-module.exports=[55310,a=>{"use strict";var b=a.i(83535);a.s(["default",0,function({error:a,reset:c}){return(0,b.jsxs)("div",{className:"flex min-h-screen flex-col items-center justify-center gap-4",children:[(0,b.jsx)("h2",{className:"text-xl font-semibold",children:"Something went wrong"}),(0,b.jsx)("button",{onClick:c,className:"rounded bg-dq-orange px-4 py-2 text-white",children:"Try again"})]})}])}];
-
-//# sourceMappingURL=Documents_wip_repos_DQ_DBP_DQ_Prod_TMaaS_Prototype_app_error_tsx_215a9j4._.js.map

@@ -1,3 +1,0 @@
-module.exports=[66634,a=>{"use strict";var b=a.i(69505);a.s(["default",0,function(){return(0,b.jsx)("div",{className:"flex min-h-screen items-center justify-center",children:(0,b.jsx)("div",{className:"h-8 w-8 animate-spin rounded-full border-4 border-dq-orange border-t-transparent"})})}])},32538,a=>{a.n(a.i(66634))}];
-
-//# sourceMappingURL=Documents_wip_repos_DQ_DBP_DQ_Prod_TMaaS_Prototype_app_loading_tsx_1xcm4gh._.js.map
