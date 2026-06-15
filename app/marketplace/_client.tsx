@@ -12,8 +12,6 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import LandingNavbar from "@/components/features/landing/landing/LandingNavbar";
-import Footer from "@/components/features/landing/Footer";
 import MarketplaceCategoryNav from "@/components/features/marketplace/MarketplaceCategoryNav";
 import MarketplaceFilters from "@/components/features/marketplace/MarketplaceFilters";
 import MarketplaceBestSellers from "@/components/features/marketplace/MarketplaceBestSellers";
@@ -246,7 +244,6 @@ export default function MarketplacePageClient() {
 
   return (
     <div className="min-h-screen bg-background">
-      <LandingNavbar />
 
       <MeshSection
         variant="heroLight"
@@ -488,7 +485,6 @@ export default function MarketplacePageClient() {
         </div>
       </section>
 
-      <Footer />
     </div>
   );
 }
