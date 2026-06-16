@@ -31,7 +31,9 @@ All other routes redirect to the first enabled page. Navigation links and global
 | `explore` | `/explore` | off |
 | `alternateLanding` | `/home` | off |
 | `landingV1` | `/landing-v1` (corp-mirror alternate) | on |
-| `legal` | `/legal/*` | off |
+| `legal` | `/legal` (hub), `/legal/faq` | off |
+
+**Note:** `/legal/privacy` and `/legal/terms` are always public for MVP and are **not** gated by the `legal` flag.
 
 ### Features
 

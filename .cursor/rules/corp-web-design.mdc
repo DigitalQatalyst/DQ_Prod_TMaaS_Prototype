@@ -25,7 +25,7 @@ Marketing pages (`/`, `/marketplace`, `/service/:id`) share the **DQ corp web de
 - Hero backgrounds: `MeshSection` with `hero-grid` overlay and mesh CSS vars from `index.css`
 - Footer section labels: `font-mono text-[10px] uppercase tracking-[0.18em] text-gray-400`
 - Footer link columns: **Explore** (Marketplace, Talk to our team, flag-gated), **Follow Us** (LinkedIn, X, YouTube, Explore DigitalQatalyst external link). No separate DQ column.
-- Footer bottom bar: Privacy and Terms link to in-app `/legal/privacy` and `/legal/terms` when `legal` flag is enabled; otherwise external corp web URLs
+- Footer bottom bar: Privacy and Terms always link in-app to `/legal/privacy` and `/legal/terms` (MVP). The `legal` flag gates only the `/legal` hub and `/legal/faq`.
 - Footer and hero descriptions use `PLATFORM_NAME_EXPANDED` / expanded copy: **Transformation Management as a Service (TMaaS)** via `brandLinks.ts`
 - Service count copy is **100+** everywhere (not 50+ or 200+); typical start time is **<1 day** (not 4 wks)
 - Corp web links use `https://www.digitalqatalyst.com` base URL; TMaaS product link label is **Marketplace** (not "Design & Deploy Services")
