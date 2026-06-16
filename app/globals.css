@@ -361,91 +361,21 @@
 }
 
 /*
- * Brand component classes (unlayered — beats @layer utilities in Tailwind v4).
- * Chrome on macOS can fail to paint link/button fills when transition-colors is
- * combined with bg utilities on <a> tags; use explicit backgrounds and only
- * transition non-color properties.
+ * Anchor CTA paint (unlayered). Chrome/macOS ignores custom classes on <a> unless
+ * the selector includes the element type; pair with Tailwind layout utilities in btnPrimary.
+ * Do not use transition-colors on link CTAs.
  */
-.dq-btn-primary,
-.dq-btn-primary:link,
-.dq-btn-primary:visited {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
-  border-radius: 9999px;
-  padding: 0.875rem 1.5rem;
-  font-size: 0.875rem;
-  font-weight: 600;
-  line-height: 1.25rem;
+a.dq-cta-primary,
+a.dq-cta-primary:link,
+a.dq-cta-primary:visited {
   color: #ffffff;
   background-color: #fb5535;
-  box-shadow: var(--glow-orange-md);
-  transition-property: box-shadow, transform;
-  transition-duration: 150ms;
-  transition-timing-function: ease;
-  -webkit-transform: translateZ(0);
-  transform: translateZ(0);
 }
 
-.dq-btn-primary:hover,
-.dq-btn-primary:focus-visible {
+a.dq-cta-primary:hover,
+a.dq-cta-primary:focus-visible {
   color: #ffffff;
   background-color: #e04020;
-}
-
-.dq-btn-primary-on-dark,
-.dq-btn-primary-on-dark:link,
-.dq-btn-primary-on-dark:visited {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
-  border-radius: 9999px;
-  padding: 0.875rem 1.5rem;
-  font-size: 0.875rem;
-  font-weight: 600;
-  line-height: 1.25rem;
-  color: #ffffff;
-  background-color: #fb5535;
-  transition-property: box-shadow, transform;
-  transition-duration: 150ms;
-  transition-timing-function: ease;
-  -webkit-transform: translateZ(0);
-  transform: translateZ(0);
-}
-
-.dq-btn-primary-on-dark:hover,
-.dq-btn-primary-on-dark:focus-visible {
-  color: #ffffff;
-  background-color: #e04020;
-}
-
-.dq-btn-navy,
-.dq-btn-navy:link,
-.dq-btn-navy:visited {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
-  overflow: hidden;
-  border-radius: 9999px;
-  padding: 0.875rem 1.5rem;
-  font-size: 0.875rem;
-  font-weight: 600;
-  line-height: 1.25rem;
-  color: #ffffff;
-  background-color: #030f35;
-  box-shadow: var(--glow-navy-md);
-  transition-property: box-shadow, transform;
-  transition-duration: 150ms;
-  transition-timing-function: ease;
-}
-
-.dq-btn-navy:hover,
-.dq-btn-navy:focus-visible {
-  color: #ffffff;
-  background-color: #030f35;
 }
 
 .bg-dq-orange {
