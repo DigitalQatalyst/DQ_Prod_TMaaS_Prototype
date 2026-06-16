@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import { featureFlags, isLegalHubPath } from "@/lib/featureFlags";
 
 function hasSession(request: NextRequest): boolean {
   const token = request.cookies.get("session_token")?.value;
@@ -40,6 +41,11 @@ export function middleware(request: NextRequest) {
   const isProtected = PROTECTED_PREFIXES.some((prefix) => pathname.startsWith(prefix));
   if (isProtected && !hasSession(request)) {
     return NextResponse.redirect(new URL("/sign-in", request.url));
+  }
+
+  // Legal hub + FAQ are post-MVP; privacy and terms remain public
+  if (isLegalHubPath(pathname) && !featureFlags.isEnabled("legal")) {
+    return NextResponse.redirect(new URL("/", request.url));
   }
 
   return response;
