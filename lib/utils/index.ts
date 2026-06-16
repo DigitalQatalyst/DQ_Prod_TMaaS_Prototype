@@ -22,7 +22,7 @@ export const eyebrowOnDark = eyebrow;
 export const microLabel = "font-mono text-[10px] uppercase tracking-[0.18em] text-dq-orange";
 
 export const landingHeroHeading =
-  "text-balance text-[2.75rem] font-semibold leading-[1.0] tracking-[-0.03em] text-dq-navy sm:text-6xl md:text-7xl lg:text-8xl";
+  "dq-landing-hero-heading font-semibold text-dq-navy";
 
 export const sectionHeading = "text-xl font-semibold tracking-tight text-dq-navy";
 

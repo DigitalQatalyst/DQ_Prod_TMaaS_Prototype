@@ -359,3 +359,45 @@
     transform: translateX(-50%);
   }
 }
+
+/*
+ * Brand paint fallbacks (unlayered — beats @layer utilities in Tailwind v4).
+ * Chrome on macOS can fail to paint bg/text utilities that rely only on @theme
+ * CSS variables; literal hex/rem values here match DQ_CORPWEB_PROTOTYPE tokens.
+ */
+.bg-dq-orange {
+  background-color: #fb5535;
+}
+
+.bg-dq-navy {
+  background-color: #030f35;
+}
+
+.group-hover\:bg-dq-orange:is(:where(.group):hover *) {
+  background-color: #fb5535;
+}
+
+.dq-landing-hero-heading {
+  font-size: 2.75rem;
+  line-height: 1;
+  letter-spacing: -0.03em;
+  text-wrap: balance;
+}
+
+@media (min-width: 40rem) {
+  .dq-landing-hero-heading {
+    font-size: 3.75rem;
+  }
+}
+
+@media (min-width: 48rem) {
+  .dq-landing-hero-heading {
+    font-size: 4.5rem;
+  }
+}
+
+@media (min-width: 64rem) {
+  .dq-landing-hero-heading {
+    font-size: 6rem;
+  }
+}

@@ -20,7 +20,7 @@ export const microLabel = "font-mono text-[10px] uppercase tracking-[0.18em] tex
 
 /** Landing hero h1, matches DQ_CORPWEB_PROTOTYPE `Home.tsx` HeroSection */
 export const landingHeroHeading =
-  "text-balance text-[2.75rem] font-semibold leading-[1.0] tracking-[-0.03em] text-dq-navy sm:text-6xl md:text-7xl lg:text-8xl";
+  "dq-landing-hero-heading font-semibold text-dq-navy";
 
 /**
  * In-page section h2, corp web content card title scale

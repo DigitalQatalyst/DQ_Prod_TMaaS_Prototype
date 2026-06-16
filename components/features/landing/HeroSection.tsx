@@ -53,7 +53,7 @@ const HeroSection = () => {
           AI Mode
         </p>
 
-        <h1 className="animate-fade-in-up animation-delay-200 mt-4 text-balance text-[2.75rem] font-semibold leading-[1.0] tracking-[-0.03em] text-dq-navy sm:text-6xl md:text-7xl lg:text-8xl">
+        <h1 className="animate-fade-in-up animation-delay-200 mt-4 dq-landing-hero-heading font-semibold text-dq-navy">
           <span className="block">Find the right</span>
           <span className="block text-dq-orange">transformation services</span>
           <span className="block sm:whitespace-nowrap">for your business</span>
