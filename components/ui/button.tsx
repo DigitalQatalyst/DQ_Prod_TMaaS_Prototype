@@ -9,7 +9,7 @@ const buttonVariants = cva(
   {
     variants: {
       variant: {
-        default: "dq-btn-primary",
+        default: "bg-[#FB5535] text-white shadow-sm hover:bg-[#E04020] glow-orange",
         destructive: "bg-destructive text-destructive-foreground hover:bg-destructive/90",
         outline: "border border-navy-200 bg-transparent hover:bg-navy-50 text-navy-950",
         secondary: "bg-navy-100 text-navy-950 hover:bg-navy-200",

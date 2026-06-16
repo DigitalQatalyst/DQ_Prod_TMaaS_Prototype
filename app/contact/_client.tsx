@@ -477,7 +477,7 @@ export default function ContactPageClient() {
                       <button
                         type="submit"
                         disabled={status === "loading"}
-                        className="dq-btn-primary w-full outline-none disabled:cursor-not-allowed disabled:opacity-80 sm:w-auto"
+                        className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-[#FB5535] px-6 py-3 text-[15px] font-semibold text-white outline-none hover:bg-[#E04020] disabled:cursor-not-allowed disabled:opacity-80 sm:w-auto"
                       >
                         {status === "loading" ? (
                           <>
