@@ -1,4 +1,8 @@
 export const DQ_CORP_WEB_URL = "https://digitalqatalyst.com";
+export const DQ_CORP_WEB_ABOUT_URL = "https://www.digitalqatalyst.com/about";
+
+export const FOOTER_ABOUT_DQ_LABEL = "About DigitalQatalyst";
+export const FOOTER_EXPLORE_DQ_LABEL = "Explore DigitalQatalyst";
 
 /** Customer-facing product brand (logo, hero, titles). */
 export const PLATFORM_NAME = "TMaaS";

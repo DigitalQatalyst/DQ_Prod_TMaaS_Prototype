@@ -1,17 +1,30 @@
 import Link from "next/link";
 import { Linkedin, Twitter, Youtube } from "lucide-react";
 import TMaaSLogo from "@/components/features/landing/TMaaSLogo";
-import { NAV_BROWSE_MARKETPLACE_LABEL, PLATFORM_HERO_SUBCOPY } from "@/lib/brandLinks";
+import {
+  DQ_CORP_WEB_ABOUT_URL,
+  DQ_CORP_WEB_URL,
+  FOOTER_ABOUT_DQ_LABEL,
+  FOOTER_EXPLORE_DQ_LABEL,
+  NAV_BROWSE_MARKETPLACE_LABEL,
+  PLATFORM_HERO_SUBCOPY,
+} from "@/lib/brandLinks";
 import { featureFlags } from "@/lib/featureFlags";
 
-const CORP_WEB_BASE = "https://www.digitalqatalyst.com";
+const footerColumnLabelClass =
+  "mb-4 font-mono text-[10px] uppercase tracking-[0.18em] text-gray-400";
+
+const footerLinkClass = "transition-colors hover:text-dq-orange";
+
+const footerExternalLinkClass =
+  "inline-flex items-center gap-2 text-[14px] text-gray-600 transition-colors hover:text-dq-orange";
 
 const Footer = () => {
   return (
     <footer className="border-t border-gray-100 bg-white px-5 pb-8 pt-14 md:px-8 lg:px-10">
       <div className="mx-auto max-w-[1200px]">
-        <div className="mb-12 grid grid-cols-1 gap-10 md:grid-cols-[1fr_auto_auto] md:gap-16">
-          <div className="space-y-4">
+        <div className="mb-12 grid grid-cols-1 gap-10 md:grid-cols-2 lg:grid-cols-[1fr_auto_auto_auto] lg:gap-16">
+          <div className="space-y-4 md:col-span-2 lg:col-span-1">
             <TMaaSLogo />
             <p className="max-w-[320px] text-[14px] leading-relaxed text-gray-500">
               {PLATFORM_HERO_SUBCOPY}
@@ -19,20 +32,18 @@ const Footer = () => {
           </div>
 
           <div>
-            <p className="mb-4 font-mono text-[10px] uppercase tracking-[0.18em] text-gray-400">
-              Explore
-            </p>
+            <p className={footerColumnLabelClass}>Explore</p>
             <ul className="space-y-2.5 text-[14px] text-gray-600">
               {featureFlags.isEnabled("marketplace") && (
                 <li>
-                  <Link href="/marketplace" className="transition-colors hover:text-dq-orange">
+                  <Link href="/marketplace" className={footerLinkClass}>
                     {NAV_BROWSE_MARKETPLACE_LABEL}
                   </Link>
                 </li>
               )}
               {featureFlags.isEnabled("contactUs") && (
                 <li>
-                  <Link href="/contact" className="transition-colors hover:text-dq-orange">
+                  <Link href="/contact" className={footerLinkClass}>
                     Talk to our team
                   </Link>
                 </li>
@@ -41,16 +52,40 @@ const Footer = () => {
           </div>
 
           <div>
-            <p className="mb-4 font-mono text-[10px] uppercase tracking-[0.18em] text-gray-400">
-              Follow Us
-            </p>
+            <p className={footerColumnLabelClass}>Company</p>
+            <ul className="space-y-2.5 text-[14px] text-gray-600">
+              <li>
+                <a
+                  href={DQ_CORP_WEB_ABOUT_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={footerExternalLinkClass}
+                >
+                  {FOOTER_ABOUT_DQ_LABEL}
+                </a>
+              </li>
+              <li>
+                <a
+                  href={DQ_CORP_WEB_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={footerExternalLinkClass}
+                >
+                  {FOOTER_EXPLORE_DQ_LABEL}
+                </a>
+              </li>
+            </ul>
+          </div>
+
+          <div>
+            <p className={footerColumnLabelClass}>Follow us</p>
             <ul className="space-y-2.5">
               <li>
                 <a
                   href="https://www.linkedin.com/company/digitalqatalyst"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 text-[14px] text-gray-600 transition-colors hover:text-dq-orange"
+                  className={footerExternalLinkClass}
                 >
                   <Linkedin size={14} />
                   LinkedIn
@@ -61,7 +96,7 @@ const Footer = () => {
                   href="https://x.com/digitalqatalyst"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 text-[14px] text-gray-600 transition-colors hover:text-dq-orange"
+                  className={footerExternalLinkClass}
                 >
                   <Twitter size={14} />X
                 </a>
@@ -71,20 +106,10 @@ const Footer = () => {
                   href="https://www.youtube.com/@digitalqatalyst"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 text-[14px] text-gray-600 transition-colors hover:text-dq-orange"
+                  className={footerExternalLinkClass}
                 >
                   <Youtube size={14} />
                   YouTube
-                </a>
-              </li>
-              <li>
-                <a
-                  href={CORP_WEB_BASE}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 text-[14px] text-gray-600 transition-colors hover:text-dq-orange"
-                >
-                  Explore DigitalQatalyst
                 </a>
               </li>
             </ul>

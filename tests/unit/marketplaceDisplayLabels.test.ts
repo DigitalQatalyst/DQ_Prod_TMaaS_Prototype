@@ -33,6 +33,16 @@ describe("marketplaceDisplayLabels", () => {
     );
   });
 
+  it("does not duplicate End-to-end bundle when DB variant_name already uses that label", () => {
+    expect(
+      getMarketplaceCardTitle("Online Web Presence (High-Impact) - End-to-end bundle", "bundle")
+    ).toBe("Online Web Presence - End-to-end bundle");
+
+    expect(
+      getMarketplaceCardTitle("Mobile Apps (High-Impact) - End-to-end bundle", "bundle")
+    ).toBe("Mobile Apps & Services - End-to-end bundle");
+  });
+
   it("renames flexible set bundles without duplicating suffix", () => {
     expect(getMarketplaceCardTitle("Advisory Set - Advisory Set", "bundle")).toBe(
       "Flexible Advisory Package"
