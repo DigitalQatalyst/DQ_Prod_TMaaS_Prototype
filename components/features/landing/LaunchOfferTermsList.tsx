@@ -29,7 +29,7 @@ const LaunchOfferTermsList = ({
         href={LAUNCH_ADVISORY_TERMS_PATH}
         className="inline-block text-[13px] font-medium text-dq-orange transition-colors hover:text-dq-navy"
       >
-        {LAUNCH_ADVISORY_TERMS_LINK_LABEL} →
+        {LAUNCH_ADVISORY_TERMS_LINK_LABEL}
       </Link>
     )}
   </div>

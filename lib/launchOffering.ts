@@ -22,10 +22,10 @@ export const LAUNCH_ADVISORY_TERMS = [
 
 export const LAUNCH_ADVISORY_TERMS_PATH = "/legal/launch-offer";
 
-export const LAUNCH_ADVISORY_TERMS_LINK_LABEL = "terms";
+export const LAUNCH_ADVISORY_TERMS_LINK_LABEL = "See terms";
 
 export const LAUNCH_ADVISORY_TERMS_FOOTNOTE =
-  "Offer valid for requests raised by the end of June 2026 and subject to change without notice. One free advisory service per enterprise. Restrictions apply. See ";
+  "Offer valid for requests raised by the end of June 2026. One free advisory service per enterprise.";
 
 export function buildLaunchAdvisoryContactPath(): string {
   const params = new URLSearchParams({
