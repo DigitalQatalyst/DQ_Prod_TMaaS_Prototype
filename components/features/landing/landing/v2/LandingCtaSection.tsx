@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
+import LaunchOfferTermsFootnote from "@/components/features/landing/LaunchOfferTermsFootnote";
 import MeshSection from "@/components/features/landing/MeshSection";
 import { NAV_BROWSE_MARKETPLACE_LABEL } from "@/lib/brandLinks";
 import {
@@ -50,24 +51,27 @@ const LandingCtaSection = () => {
             : "Browse on your own and find the right service for your next step."}
         </p>
 
-        <div className="mt-8 flex flex-col items-stretch gap-3 sm:flex-row sm:flex-wrap sm:items-center sm:justify-center">
-          {featureFlags.isEnabled("contactUs") ? (
-            <Link
-              href={buildLaunchAdvisoryContactPath()}
-              className={cn(btnPrimaryOnDark, "w-full px-7 sm:w-auto")}
-            >
-              {LAUNCH_ADVISORY_CTA_LABEL}
-              <ArrowRight size={15} />
-            </Link>
-          ) : (
-            <Link href="/marketplace" className={cn(btnPrimaryOnDark, "w-full px-7 sm:w-auto")}>
+        <div className="mt-8 flex flex-col items-center gap-3">
+          <div className="flex w-full flex-col items-stretch gap-3 sm:flex-row sm:flex-wrap sm:items-center sm:justify-center">
+            {featureFlags.isEnabled("contactUs") ? (
+              <Link
+                href={buildLaunchAdvisoryContactPath()}
+                className={cn(btnPrimaryOnDark, "w-full px-7 sm:w-auto")}
+              >
+                {LAUNCH_ADVISORY_CTA_LABEL}
+                <ArrowRight size={15} />
+              </Link>
+            ) : (
+              <Link href="/marketplace" className={cn(btnPrimaryOnDark, "w-full px-7 sm:w-auto")}>
+                {NAV_BROWSE_MARKETPLACE_LABEL}
+                <ArrowRight size={15} />
+              </Link>
+            )}
+            <Link href="/marketplace" className={cn(btnSecondaryOnDark, "w-full px-7 sm:w-auto")}>
               {NAV_BROWSE_MARKETPLACE_LABEL}
-              <ArrowRight size={15} />
             </Link>
-          )}
-          <Link href="/marketplace" className={cn(btnSecondaryOnDark, "w-full px-7 sm:w-auto")}>
-            {NAV_BROWSE_MARKETPLACE_LABEL}
-          </Link>
+          </div>
+          {featureFlags.isEnabled("contactUs") && <LaunchOfferTermsFootnote />}
         </div>
       </div>
     </MeshSection>

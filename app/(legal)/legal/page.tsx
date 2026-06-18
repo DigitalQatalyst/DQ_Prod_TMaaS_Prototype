@@ -2,7 +2,8 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { Search, FileText, Shield, HelpCircle, Scale, ChevronRight } from "lucide-react";
+import { Search, FileText, Shield, HelpCircle, Scale, ChevronRight, Gift } from "lucide-react";
+import { LAUNCH_ADVISORY_TERMS_PATH } from "@/lib/launchOffering";
 
 interface LegalCategory {
   icon: typeof FileText;
@@ -34,6 +35,13 @@ const legalCategories: LegalCategory[] = [
     description: "Common questions about our legal terms and policies",
     path: "/legal/faq",
     color: "bg-purple-100 text-purple-600",
+  },
+  {
+    icon: Gift,
+    title: "June Launch Offer Terms",
+    description: "Conditions for the complimentary advisory service promotion",
+    path: LAUNCH_ADVISORY_TERMS_PATH,
+    color: "bg-orange-100 text-dq-orange",
   },
 ];
 

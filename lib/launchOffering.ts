@@ -12,7 +12,20 @@ export const LAUNCH_ADVISORY_HEADLINE =
   "Your first advisory service is on us.";
 
 export const LAUNCH_ADVISORY_SUBCOPY =
-  "Choose one advisory service from our catalog. Practical guidance for the business areas you choose. Register by 30 June. Terms apply.";
+  "Choose one advisory service from our catalog. Practical guidance for the business areas you choose.";
+
+export const LAUNCH_ADVISORY_TERMS = [
+  "Requests must be submitted by 30 June 2026.",
+  "One free advisory service per enterprise.",
+  "Service scope and delivery are subject to mutual agreement.",
+] as const;
+
+export const LAUNCH_ADVISORY_TERMS_PATH = "/legal/launch-offer";
+
+export const LAUNCH_ADVISORY_TERMS_LINK_LABEL = "Offer terms";
+
+export const LAUNCH_ADVISORY_TERMS_FOOTNOTE_HINT =
+  "One per enterprise · Submit by 30 June";
 
 export function buildLaunchAdvisoryContactPath(): string {
   const params = new URLSearchParams({
