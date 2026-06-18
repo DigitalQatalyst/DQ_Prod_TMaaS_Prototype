@@ -56,7 +56,7 @@ const faqs = [
 
 const FAQSection = () => {
   return (
-    <section className="border-t border-gray-100 bg-gray-50 px-5 py-24 md:px-8 lg:px-10">
+    <section className="border-t border-gray-100 bg-gray-50 px-5 pb-24 pt-20 md:px-8 md:pb-24 md:pt-24 lg:px-10">
       <div className="mx-auto max-w-[1200px]">
         <motion.div
           initial={{ opacity: 0, y: 16 }}

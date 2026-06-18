@@ -60,7 +60,7 @@ export default function LaunchOfferTermsPage() {
   return (
     <div className="min-h-screen bg-white">
       <LandingNavbar />
-      <main className="pt-20">
+      <main>
         <LegalPageLayout
           eyebrow="Promotional offer"
           title="June launch offer terms"

@@ -1,22 +1,23 @@
 import Link from "next/link";
 import {
-  LAUNCH_ADVISORY_TERMS_FOOTNOTE_HINT,
+  LAUNCH_ADVISORY_TERMS_FOOTNOTE,
   LAUNCH_ADVISORY_TERMS_LINK_LABEL,
   LAUNCH_ADVISORY_TERMS_PATH,
 } from "@/lib/launchOffering";
 
 const LaunchOfferTermsFootnote = () => (
-  <p className="mt-5 text-[11px] leading-relaxed text-white/45">
+  <p className="mx-auto mt-5 max-w-lg text-left text-[10px] leading-relaxed text-white/40 sm:text-center">
+    <span aria-hidden className="text-white/50">
+      *
+    </span>
+    {LAUNCH_ADVISORY_TERMS_FOOTNOTE}
     <Link
       href={LAUNCH_ADVISORY_TERMS_PATH}
-      className="underline decoration-white/25 underline-offset-2 transition-colors hover:text-white/70 hover:decoration-white/50"
+      className="underline decoration-white/20 underline-offset-2 transition-colors hover:text-white/60 hover:decoration-white/40"
     >
       {LAUNCH_ADVISORY_TERMS_LINK_LABEL}
     </Link>
-    <span aria-hidden className="mx-1.5 text-white/25">
-      ·
-    </span>
-    {LAUNCH_ADVISORY_TERMS_FOOTNOTE_HINT}
+    .
   </p>
 );
 

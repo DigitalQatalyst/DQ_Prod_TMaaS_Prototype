@@ -72,7 +72,7 @@ export function LegalPageLayout({ eyebrow, title, subtitle, lastUpdated, section
   return (
     <div className="flex flex-col">
       <section
-        className="px-5 pb-14 pt-14 md:px-8 md:pb-16 md:pt-16 lg:px-10"
+        className="px-5 pb-14 pt-20 md:px-8 md:pb-16 md:pt-24 lg:px-10"
         style={{ background: "var(--mesh-hero-light)" }}
       >
         <div className="mx-auto max-w-[1200px]">

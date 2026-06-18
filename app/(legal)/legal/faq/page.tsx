@@ -12,7 +12,7 @@ export default function FaqPage() {
   return (
     <div className="min-h-screen bg-white">
       <LandingNavbar />
-      <main className="pt-20">
+      <main>
         <FAQSection />
       </main>
       <Footer />

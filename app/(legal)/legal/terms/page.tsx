@@ -111,7 +111,7 @@ export default function TermsPage() {
   return (
     <div className="min-h-screen bg-white">
       <LandingNavbar />
-      <main className="pt-20">
+      <main>
         <LegalPageLayout
           eyebrow="Legal"
           title="Terms of Use"
