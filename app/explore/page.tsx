@@ -1,4 +1,6 @@
 import type { Metadata } from "next";
+import { FeatureFlagGuard } from "@/components/features/dashboard/FeatureFlagGuard";
+import { getFirstEnabledRoute } from "@/lib/featureFlags";
 import ExplorePageClient from "./_client";
 
 export const metadata: Metadata = {
@@ -8,5 +10,9 @@ export const metadata: Metadata = {
 };
 
 export default function ExplorePage() {
-  return <ExplorePageClient />;
+  return (
+    <FeatureFlagGuard feature="explore" redirectTo={getFirstEnabledRoute()}>
+      <ExplorePageClient />
+    </FeatureFlagGuard>
+  );
 }
