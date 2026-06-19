@@ -203,6 +203,18 @@ Match `ServiceDetailWhyItMattersTab.tsx` + `whyItMattersContent.ts`:
 - Use `rounded-xl` + `border-navy-100` for marketing cards when corp web pattern applies
 - Change page logic/routing when doing styling-only alignment work
 
+## [SECTION: MVP Feature Flag Route Gating]
+
+Non-MVP App Router pages must be gated in the route `page.tsx` server component with `FeatureFlagGuard` and `redirectTo={getFirstEnabledRoute()}`. Hiding nav links or UI alone is not sufficient.
+
+| Route | Flag |
+|-------|------|
+| `/cart` | `cart` |
+| `/butler` | `butlerDemo` |
+
+- Keep interactive page content in `app/<route>/_client.tsx`; `page.tsx` stays a server component wrapper.
+- When adding a new non-MVP route, wrap it the same way and document the flag in `docs/FEATURE_FLAGS.md`.
+
 ## [SECTION: Marketplace Catalog Conventions]
 
 - `useMarketplaceListings` must load the **full catalog once** via `useCatalog()` and apply `filterCatalogServices()` + pagination in memory.
