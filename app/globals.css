@@ -215,6 +215,27 @@
   h6 {
     @apply font-semibold text-dq-navy;
   }
+
+  /* Hand pointer on all clickable controls (Tailwind preflight omits this on buttons). */
+  a[href]:not([aria-disabled="true"]),
+  button:not(:disabled):not([aria-disabled="true"]),
+  [role="button"]:not([aria-disabled="true"]),
+  [role="tab"]:not([aria-disabled="true"]):not(:disabled),
+  [role="checkbox"]:not([aria-disabled="true"]):not(:disabled),
+  [role="radio"]:not([aria-disabled="true"]):not(:disabled),
+  [role="switch"]:not([aria-disabled="true"]):not(:disabled),
+  [role="menuitem"]:not([aria-disabled="true"]),
+  [role="menuitemcheckbox"]:not([aria-disabled="true"]),
+  [role="menuitemradio"]:not([aria-disabled="true"]),
+  label[for],
+  summary {
+    cursor: pointer;
+  }
+
+  :disabled,
+  [aria-disabled="true"] {
+    cursor: not-allowed;
+  }
 }
 
 @layer utilities {

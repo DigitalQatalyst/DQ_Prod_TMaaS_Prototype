@@ -1,0 +1,15 @@
+---
+description: Pointer cursor on interactive UI elements
+globs: app/**/*,components/**/*,lib/brandAccent.ts,lib/utils/index.ts
+alwaysApply: false
+---
+
+# Interactive cursor (`cursor: pointer`)
+
+- Global base styles in `app/globals.css` set `cursor: pointer` on `a[href]`, `button`, Radix roles (`tab`, `checkbox`, `switch`, etc.), `label[for]`, and `summary`. Do not remove this layer.
+- Shared primitives (`components/ui/button.tsx`, `tabs.tsx`, `toggle.tsx`, `accordion.tsx`, `checkbox.tsx`, `radio-group.tsx`, `select.tsx` trigger) must include `cursor-pointer` and `disabled:cursor-not-allowed` where applicable.
+- Brand CTA tokens in `lib/brandAccent.ts` (`btnPrimary`, `btnSecondary`, `linkAction`, `linkMuted`, etc.) must include `cursor-pointer` because many are applied to `<Link>` or raw `<button>` elements outside the `Button` component.
+- `cardInteractive` is hover-only styling; pointer comes from wrapping `<Link>` / `<a>` (global base), not from the card token itself.
+- Menu list items (`SelectItem`, `DropdownMenuItem`, etc.) intentionally use `cursor-default` per shadcn/Radix patterns — do not change those.
+- Non-interactive `div`/`span` with `onClick` must add `cursor-pointer` (or `role="button"`) explicitly.
+- Informational landing cards (e.g. challenge pain cards on dark mesh) may use subtle border/background hover but must **not** use `cursor-pointer` unless they navigate or trigger an action.

@@ -22,7 +22,7 @@ interface Message {
   links?: Array<{
     text: string;
     url: string;
-    icon?: React.ComponentType<{ className?: string; size?: number }>;
+    icon?: React.ComponentType<{ className?: string; size?: number | string }>;
   }>;
   isHandoff?: boolean;
   teamMember?: {
@@ -70,6 +70,7 @@ const DiagnoseDialog = ({ isOpen, onClose, initialProblem = "" }: DiagnoseDialog
 
   useEffect(() => {
     if (isOpen && messages.length === 0) {
+      // Initial greeting - no chips inside dialog
       setTimeout(() => {
         // eslint-disable-next-line react-hooks/immutability
         addAIMessage(
@@ -81,6 +82,7 @@ const DiagnoseDialog = ({ isOpen, onClose, initialProblem = "" }: DiagnoseDialog
 
   useEffect(() => {
     if (isOpen && initialProblem && messages.length === 1) {
+      // Auto-submit initial problem - treat it as a chip click
       setTimeout(() => {
         // eslint-disable-next-line react-hooks/immutability
         handleOptionClick(initialProblem);
