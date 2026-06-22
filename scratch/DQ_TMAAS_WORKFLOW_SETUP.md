@@ -45,6 +45,7 @@ git remote add deploy https://github.com/DQ-Superuser/DQ-TMaaS.git
 ```
 
 Verify:
+
 ```bash
 git remote -v
 # origin   https://github.com/DigitalQatalyst/DQ_Prod_TMaaS_Prototype.git
@@ -64,12 +65,12 @@ git push deploy main:main --force
 
 ## 3. Branch Structure
 
-| Branch | Purpose |
-|--------|---------|
-| `develop` | Active development — all feature branches merge here |
-| `staging` | Pre-production verification — PRs from develop |
-| `main` | Production-ready — push to deploy repo triggers live deploy |
-| `claude/<feature>-sharavi` | Claude Code feature branches |
+| Branch                     | Purpose                                                     |
+| -------------------------- | ----------------------------------------------------------- |
+| `develop`                  | Active development — all feature branches merge here        |
+| `staging`                  | Pre-production verification — PRs from develop              |
+| `main`                     | Production-ready — push to deploy repo triggers live deploy |
+| `claude/<feature>-sharavi` | Claude Code feature branches                                |
 
 ---
 
@@ -99,10 +100,10 @@ git checkout develop
 
 ## 5. Commit Author Emails
 
-| Repo | Required email | Name |
-|------|---------------|------|
+| Repo                                              | Required email                  | Name    |
+| ------------------------------------------------- | ------------------------------- | ------- |
 | `DigitalQatalyst/DQ_Prod_TMaaS_Prototype` (build) | `dq.demo.a@digitalqatalyst.com` | Sharavi |
-| `DQ-Superuser/DQ-TMaaS` (deploy) | `superuser@digitalqatalyst.com` | Sharavi |
+| `DQ-Superuser/DQ-TMaaS` (deploy)                  | `superuser@digitalqatalyst.com` | Sharavi |
 
 Always set explicitly with `-c user.email=` — do not rely on local git config.
 
@@ -119,16 +120,20 @@ git push deploy main:main --force
 ## 6. CI Workflows (already configured)
 
 ### `.github/workflows/ci.yml`
+
 Runs on PRs to `main` and `staging`:
+
 - TypeScript typecheck (`tsc --noEmit`)
 - ESLint (`npm run lint`)
 - Unit tests (`npm test`)
 
 ### `.github/workflows/branch-protection.yml`
+
 Blocks direct pushes to `main`. Valid branch prefixes for PRs:
 `feature/`, `bugfix/`, `hotfix/`, `release/`, `fix/`, `chore/`, `claude/`, `staging`
 
-### `.github/workflows/deploy.yml` *(added — inactive until deploy repo is created)*
+### `.github/workflows/deploy.yml` _(added — inactive until deploy repo is created)_
+
 Runs on push to `main` in the build repo. Pushes `main` to the deploy repo using a deploy key stored in GitHub Secrets. See section 7.
 
 ---
@@ -155,28 +160,28 @@ The `deploy.yml` workflow (already added to this repo) will then push automatica
 
 All env vars live in the Vercel project dashboard. After reconnecting Vercel to the deploy repo, re-enter them. Current variables required (check Vercel dashboard for current values):
 
-| Variable | Purpose |
-|----------|---------|
-| `NEXT_PUBLIC_SUPABASE_URL` | Supabase project URL |
-| `NEXT_PUBLIC_SUPABASE_ANON_KEY` | Supabase anon key |
-| `SUPABASE_SERVICE_ROLE_KEY` | Supabase service role (server-side only) |
-| `TURNSTILE_SECRET_KEY` | Cloudflare Turnstile secret |
-| `NEXT_PUBLIC_TURNSTILE_SITE_KEY` | Cloudflare Turnstile site key |
+| Variable                         | Purpose                                  |
+| -------------------------------- | ---------------------------------------- |
+| `NEXT_PUBLIC_SUPABASE_URL`       | Supabase project URL                     |
+| `NEXT_PUBLIC_SUPABASE_ANON_KEY`  | Supabase anon key                        |
+| `SUPABASE_SERVICE_ROLE_KEY`      | Supabase service role (server-side only) |
+| `TURNSTILE_SECRET_KEY`           | Cloudflare Turnstile secret              |
+| `NEXT_PUBLIC_TURNSTILE_SITE_KEY` | Cloudflare Turnstile site key            |
 
-*(Add others as discovered — run `vercel env pull .env.local` once Vercel CLI is installed to get the full list)*
+_(Add others as discovered — run `vercel env pull .env.local` once Vercel CLI is installed to get the full list)_
 
 ---
 
 ## 9. What's Already Done vs. Pending
 
-| Item | Status |
-|------|--------|
-| Branch structure (main/staging/develop) | ✅ Done |
-| CI workflow (ci.yml) | ✅ Done |
-| branch-protection.yml (fixed) | ✅ Done |
-| deploy.yml skeleton | ✅ Done (inactive) |
-| Deploy repo created (`DQ-Superuser/DQ-TMaaS`) | ⏳ Manual step |
-| Vercel reconnected to deploy repo | ⏳ After deploy repo created |
-| `deploy` git remote added locally | ⏳ After deploy repo created |
-| Initial push to deploy repo | ⏳ After remote added |
-| Deploy key wired for auto-deploy | ⏳ Optional, after deploy repo |
+| Item                                          | Status                         |
+| --------------------------------------------- | ------------------------------ |
+| Branch structure (main/staging/develop)       | ✅ Done                        |
+| CI workflow (ci.yml)                          | ✅ Done                        |
+| branch-protection.yml (fixed)                 | ✅ Done                        |
+| deploy.yml skeleton                           | ✅ Done (inactive)             |
+| Deploy repo created (`DQ-Superuser/DQ-TMaaS`) | ⏳ Manual step                 |
+| Vercel reconnected to deploy repo             | ⏳ After deploy repo created   |
+| `deploy` git remote added locally             | ⏳ After deploy repo created   |
+| Initial push to deploy repo                   | ⏳ After remote added          |
+| Deploy key wired for auto-deploy              | ⏳ Optional, after deploy repo |

@@ -3,6 +3,7 @@
 > **Archive copy.** Canonical active spec: `landing-page-prototype-shell.md` (v1). Product IA evolution: `landing-page-prototype-shell-v2-product-ia.md`.
 
 ## 1. Platform Context
+
 - Platform: DQ Digital Experience Platform (DXP)
 - Type: Generalised
 - Prototype Stage: Feature Specific
@@ -15,6 +16,7 @@
   - Ensure visual alignment with DigitalQatalyst / TMaaS brand and design system.
 
 ## 2. Build Approach & References
+
 - Mode: New Build
 - Reference Builds (Internal): DQ_CORPWEB_PROTOTYPE (mesh backgrounds, corp web tokens)
 - Reference Builds (External): N/A
@@ -22,6 +24,7 @@
 - Input Documents: 26.05_tmaas_complete_brs_v2.md (F-S0-01 Landing Page Experience), FEATURE_FLAGS.md, implemented landing components under `src/components/site/landing/`
 
 ## 3. DevOps
+
 - Prototype Tool: React / Vite (local prototype repo)
 - Prototype Repo: DQ_Prod_TMaaS_Prototype
 - Prototype Link: <fill after deploy>
@@ -29,6 +32,7 @@
 ## 4. Specification
 
 ### 4.1 Brand & Visual System
+
 - Design System Reference: TMaaS Corp Web Tokens (aligned with DQ_CORPWEB_PROTOTYPE)
 - Colours:
   - Primary accent: DQ Orange `#FB5535` (hover: `#E04020`)
@@ -55,6 +59,7 @@
 - Logo: TMaaS logo component, left-aligned in top bar; links to `/`
 
 ### 4.2 Layout Shell
+
 - Viewport target: Desktop-first, responsive from mobile through 1440px+
 - Top bar (Landing Navbar): 64px (`h-16`), sticky, white background, bottom border Gray 100
   - Left: Logo + primary nav links (desktop `lg+`)
@@ -65,11 +70,13 @@
 - Scroll anchors: `#offerings`, `#outcomes` (section IDs for in-page / footer deep links)
 
 ### 4.3 Personas
-| # | Name | Role | Landing Page | Nav Scope |
-|---|------|------|-------------|-----------|
-| 1 | Exploring User | Unregistered / anonymous visitor | `/` | Public routes only: Landing, Marketplace (if enabled), Contact Us (if enabled) |
+
+| #   | Name           | Role                             | Landing Page | Nav Scope                                                                      |
+| --- | -------------- | -------------------------------- | ------------ | ------------------------------------------------------------------------------ |
+| 1   | Exploring User | Unregistered / anonymous visitor | `/`          | Public routes only: Landing, Marketplace (if enabled), Contact Us (if enabled) |
 
 ### 4.4 Navigation Structure
+
 - Global (feature-flag controlled)
   - Logo → `/`
   - Marketplace → `/marketplace` (flag: `marketplace`)
@@ -79,25 +86,27 @@
 - Mobile: Hamburger opens full-screen overlay menu below header with the same flag-filtered links
 
 ### 4.5 Feature Specification
+
 - Screens in scope this iteration: `/` (route flag: `homepage`)
 - Demo Storyline: Unauthenticated visitor lands on the homepage, scans value proposition sections, and navigates to the Marketplace or Contact Us to continue their journey
 - Components per screen:
 
-| Screen | Components | Primary Action | States Required |
-|--------|------------|----------------|-----------------|
-| `/` | Landing Navbar | Navigate / open mobile menu | Default / Mobile menu open / Active route highlight |
-| `/` | Hero Section | Primary CTA → Marketplace; Secondary CTA → Contact | Default (animated entrance) |
-| `/` | Hero Dashboard Mockup | N/A (decorative) | Default |
-| `/` | Trusted By Section | N/A | Default (marquee animation) |
-| `/` | Challenge Section | N/A | Default |
-| `/` | Solution Section (3-step model) | Per-step link → Marketplace or Contact | Default / Hover on links |
-| `/` | Offerings Section | Card click → Marketplace | Default / Hover / Focus-visible |
-| `/` | Outcomes Section | N/A | Default / Card hover |
-| `/` | Stats Section | N/A | Default |
-| `/` | Closing CTA Section | Primary CTA → Marketplace; Secondary CTA → Contact | Default |
-| `/` | Footer | External DQ links; internal flag-gated links | Default |
+| Screen | Components                      | Primary Action                                     | States Required                                     |
+| ------ | ------------------------------- | -------------------------------------------------- | --------------------------------------------------- |
+| `/`    | Landing Navbar                  | Navigate / open mobile menu                        | Default / Mobile menu open / Active route highlight |
+| `/`    | Hero Section                    | Primary CTA → Marketplace; Secondary CTA → Contact | Default (animated entrance)                         |
+| `/`    | Hero Dashboard Mockup           | N/A (decorative)                                   | Default                                             |
+| `/`    | Trusted By Section              | N/A                                                | Default (marquee animation)                         |
+| `/`    | Challenge Section               | N/A                                                | Default                                             |
+| `/`    | Solution Section (3-step model) | Per-step link → Marketplace or Contact             | Default / Hover on links                            |
+| `/`    | Offerings Section               | Card click → Marketplace                           | Default / Hover / Focus-visible                     |
+| `/`    | Outcomes Section                | N/A                                                | Default / Card hover                                |
+| `/`    | Stats Section                   | N/A                                                | Default                                             |
+| `/`    | Closing CTA Section             | Primary CTA → Marketplace; Secondary CTA → Contact | Default                                             |
+| `/`    | Footer                          | External DQ links; internal flag-gated links       | Default                                             |
 
 #### 4.5.1 Hero Section
+
 - Layout: Two-column grid on `lg+` (copy left, mockup right); single column stacked on smaller viewports
 - Content structure (no fixed copy):
   - Eyebrow label (mono, accent)
@@ -107,16 +116,19 @@
 - Visual: `MeshSection` variant `heroLight` with grid overlay
 
 #### 4.5.2 Hero Dashboard Mockup
+
 - Decorative 3D-perspective card simulating a marketplace catalogue UI
 - Contains: sidebar icon rail, header with mono label + title, three mini stat tiles, featured service list (3 items), goal filter chips (3 items)
 - Non-interactive in prototype; no navigation on click
 
 #### 4.5.3 Trusted By Section
+
 - Eyebrow label centred above marquee
 - Horizontally scrolling logo strip (organisation names as text placeholders; duplicated for seamless loop)
 - Hover: individual logo text darkens to navy
 
 #### 4.5.4 Challenge Section
+
 - Visual: `MeshSection` variant `heroDark` with subtle grid mask overlay
 - Content structure:
   - Eyebrow label
@@ -127,6 +139,7 @@
 - Card style: glass border (`white/10`), semi-transparent background, icon in accent-tinted container
 
 #### 4.5.5 Solution Section (TMaaS Model)
+
 - White background section
 - Eyebrow + section headline
 - Three step columns (`sm`: 2-col, `lg`: 3-col), each containing:
@@ -137,6 +150,7 @@
   - Text link with arrow → Marketplace (steps 1–2) or Contact (step 3)
 
 #### 4.5.6 Offerings Section
+
 - Background: Gray 50; `id="offerings"`
 - Eyebrow + section headline
 - Grid of five clickable cards (`md`: 2-col, `lg`: 3-col) — each card: icon, category title, short description, trailing arrow
@@ -144,6 +158,7 @@
 - Hover: border accent, shadow lift, icon container inverts to accent fill
 
 #### 4.5.7 Outcomes Section
+
 - Background: Gray 50; `id="outcomes"`
 - Eyebrow + section headline
 - Three outcome cards (`md`: 3-col), each containing:
@@ -154,6 +169,7 @@
 - Hover: border accent, shadow, metric colour shifts to accent
 
 #### 4.5.8 Stats Section
+
 - White background
 - Four stat blocks in a row (`md`: 4-col), each with:
   - Left accent border (4px orange)
@@ -161,6 +177,7 @@
   - Short descriptor label
 
 #### 4.5.9 Closing CTA Section
+
 - Visual: `MeshSection` variant `ctaOrange` with grid mask overlay; centred content, max-width ~720px
 - Content structure:
   - Eyebrow label
@@ -169,6 +186,7 @@
   - Dual CTAs: primary filled → Marketplace; secondary ghost/outline → Contact
 
 #### 4.5.10 Footer (shared)
+
 - Brand column: logo + one-line product descriptor
 - Link columns (flag-gated where noted):
   - External DigitalQatalyst links (always)
@@ -180,6 +198,7 @@
 ## 5. User Journeys
 
 ### 5.1 Primary Flow
+
 1. Exploring User navigates to `/`
 2. Page renders landing navbar and scrollable section stack
 3. User reads hero value proposition and views dashboard mockup
@@ -188,12 +207,14 @@
 6. User may alternatively click Contact CTA at any exposed point → navigates to `/contact`
 
 ### 5.2 Alternate Flows
+
 - User clicks an offerings card → `/marketplace`
 - User clicks solution step links → `/marketplace` or `/contact` per step
 - User clicks footer Marketplace or Contact link → respective route
 - User opens mobile menu → selects a visible link → menu closes, navigates
 
 ### 5.3 Edge Cases
+
 - `homepage` flag disabled → route redirects to first enabled route per `getFirstEnabledRoute()`
 - `marketplace` flag disabled → Marketplace nav link, hero/CTA primary buttons, offerings cards, solution steps 1–2 links, and footer marketplace link hidden or route-guarded
 - `contactUs` flag disabled → all Contact CTAs hidden
@@ -201,33 +222,35 @@
 - Decorative mockup and marquee content are not keyboard-interactive targets
 
 ## 6. Fixture Data
-| Entity | ID | Field 1 | Field 2 | Field 3 | Links to |
-|--------|----|---------|---------|---------|----------|
-| TrustLogo | TL-001 | Display name (org placeholder) | — | — | Marquee strip |
-| TrustLogo | TL-002 | Display name (org placeholder) | — | — | Marquee strip |
-| ChallengeCard | CC-001 | Icon: FileX | Card title slot | Card body slot | Challenge section |
-| ChallengeCard | CC-002 | Icon: Layers | Card title slot | Card body slot | Challenge section |
-| ChallengeCard | CC-003 | Icon: Unlink | Card title slot | Card body slot | Challenge section |
-| SolutionStep | SS-001 | Step: 01 / Discover suite | Destination: `/marketplace` | — | Solution section |
-| SolutionStep | SS-002 | Step: 02 / Evaluate suite | Destination: `/marketplace` | — | Solution section |
-| SolutionStep | SS-003 | Step: 03 / Engage suite | Destination: `/contact` | — | Solution section |
-| OfferingCard | OC-001 | Icon: Monitor | Category slot | `/marketplace` | Offerings section |
-| OfferingCard | OC-002 | Icon: Workflow | Category slot | `/marketplace` | Offerings section |
-| OfferingCard | OC-003 | Icon: Shield | Category slot | `/marketplace` | Offerings section |
-| OfferingCard | OC-004 | Icon: BarChart2 | Category slot | `/marketplace` | Offerings section |
-| OfferingCard | OC-005 | Icon: Package | Category slot | `/marketplace` | Offerings section |
-| OutcomeCard | OC-OUT-001 | Tag: Cost | Metric + descriptor slots | — | Outcomes section |
-| OutcomeCard | OC-OUT-002 | Tag: Speed | Metric + descriptor slots | — | Outcomes section |
-| OutcomeCard | OC-OUT-003 | Tag: Success | Metric + descriptor slots | — | Outcomes section |
-| StatBlock | ST-001 | Value slot | Label slot | — | Stats section |
-| StatBlock | ST-002 | Value slot | Label slot | — | Stats section |
-| StatBlock | ST-003 | Value slot | Label slot | — | Stats section |
-| StatBlock | ST-004 | Value slot | Label slot | — | Stats section |
-| MockupFeaturedService | MFS-001 | Service name slot | Category tag slot | — | Hero mockup |
-| MockupFeaturedService | MFS-002 | Service name slot | Category tag slot | — | Hero mockup |
-| MockupFeaturedService | MFS-003 | Service name slot | Category tag slot | — | Hero mockup |
+
+| Entity                | ID         | Field 1                        | Field 2                     | Field 3        | Links to          |
+| --------------------- | ---------- | ------------------------------ | --------------------------- | -------------- | ----------------- |
+| TrustLogo             | TL-001     | Display name (org placeholder) | —                           | —              | Marquee strip     |
+| TrustLogo             | TL-002     | Display name (org placeholder) | —                           | —              | Marquee strip     |
+| ChallengeCard         | CC-001     | Icon: FileX                    | Card title slot             | Card body slot | Challenge section |
+| ChallengeCard         | CC-002     | Icon: Layers                   | Card title slot             | Card body slot | Challenge section |
+| ChallengeCard         | CC-003     | Icon: Unlink                   | Card title slot             | Card body slot | Challenge section |
+| SolutionStep          | SS-001     | Step: 01 / Discover suite      | Destination: `/marketplace` | —              | Solution section  |
+| SolutionStep          | SS-002     | Step: 02 / Evaluate suite      | Destination: `/marketplace` | —              | Solution section  |
+| SolutionStep          | SS-003     | Step: 03 / Engage suite        | Destination: `/contact`     | —              | Solution section  |
+| OfferingCard          | OC-001     | Icon: Monitor                  | Category slot               | `/marketplace` | Offerings section |
+| OfferingCard          | OC-002     | Icon: Workflow                 | Category slot               | `/marketplace` | Offerings section |
+| OfferingCard          | OC-003     | Icon: Shield                   | Category slot               | `/marketplace` | Offerings section |
+| OfferingCard          | OC-004     | Icon: BarChart2                | Category slot               | `/marketplace` | Offerings section |
+| OfferingCard          | OC-005     | Icon: Package                  | Category slot               | `/marketplace` | Offerings section |
+| OutcomeCard           | OC-OUT-001 | Tag: Cost                      | Metric + descriptor slots   | —              | Outcomes section  |
+| OutcomeCard           | OC-OUT-002 | Tag: Speed                     | Metric + descriptor slots   | —              | Outcomes section  |
+| OutcomeCard           | OC-OUT-003 | Tag: Success                   | Metric + descriptor slots   | —              | Outcomes section  |
+| StatBlock             | ST-001     | Value slot                     | Label slot                  | —              | Stats section     |
+| StatBlock             | ST-002     | Value slot                     | Label slot                  | —              | Stats section     |
+| StatBlock             | ST-003     | Value slot                     | Label slot                  | —              | Stats section     |
+| StatBlock             | ST-004     | Value slot                     | Label slot                  | —              | Stats section     |
+| MockupFeaturedService | MFS-001    | Service name slot              | Category tag slot           | —              | Hero mockup       |
+| MockupFeaturedService | MFS-002    | Service name slot              | Category tag slot           | —              | Hero mockup       |
+| MockupFeaturedService | MFS-003    | Service name slot              | Category tag slot           | —              | Hero mockup       |
 
 ## 7. Shared Components
+
 - **LandingNavbar**: Sticky 64px header; flag-filtered links; mobile overlay menu; focus rings on interactive elements
 - **MeshSection**: Reusable section wrapper with `heroLight` / `heroDark` / `ctaOrange` backgrounds and optional grid
 - **TMaaSLogo**: Brand mark, links to `/`
@@ -242,7 +265,9 @@
 - **Footer**: Multi-column link grid with external and flag-gated internal routes
 
 ## 8. Scope
+
 ### In Scope
+
 - Full `/` landing page layout and visual design
 - All ten content sections plus navbar and footer
 - Navigation to Marketplace and Contact Us
@@ -252,6 +277,7 @@
 - Marquee animation on trust section
 
 ### Out of Scope
+
 - Alternate landing at `/home` (flag: `alternateLanding`)
 - AI chat assistant on landing (flag: `chatAssistant` — footer link only when enabled)
 - Log in, Get Started, and all authentication flows (`/sign-in`, `auth` flag)
@@ -262,6 +288,7 @@
 - Form submission (handled on Contact Us page)
 
 ## 9. Assumptions
+
 - Only Exploring Users (unauthenticated) access the landing page in MVP
 - Navbar and mobile menu do not expose Log in or Get Started in MVP
 - `homepage` flag is on by default alongside `marketplace` and `contactUs`
@@ -271,6 +298,7 @@
 - No API calls originate from the landing page itself
 
 ## 10. Prototype Build Prompt
+
 ```
 Build a high-fidelity clickable prototype of the TMaaS Landing Page — a public shell for Exploring Users at route `/`.
 

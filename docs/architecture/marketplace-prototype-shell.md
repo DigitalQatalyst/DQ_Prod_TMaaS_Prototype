@@ -1,6 +1,7 @@
 # Feature: Marketplace Page — Feature Specific
 
 ## 1. Platform Context
+
 - Platform: DQ Digital Experience Platform (DXP)
 - Type: Generalised
 - Prototype Stage: Feature Specific
@@ -13,6 +14,7 @@
   - Ensure visual alignment with DigitalQatalyst / TMaaS brand and design system.
 
 ## 2. Build Approach & References
+
 - Mode: New Build
 - Reference Builds (Internal): DQ_CORPWEB_PROTOTYPE (mesh backgrounds, corp web tokens), Landing Page spec (`landing-page-prototype-shell.md`)
 - Reference Builds (External): N/A
@@ -20,6 +22,7 @@
 - Input Documents: 26.05_tmaas_complete_brs_v2.md (F-S1-01 Transformation Marketplace, F-S1-02 Service Blueprint Catalogue), FEATURE_FLAGS.md, `src/pages/Marketplace.tsx`, `src/data/marketplaceNavigation.ts`, `src/data/services.ts`
 
 ## 3. DevOps
+
 - Prototype Tool: React / Vite (local prototype repo)
 - Prototype Repo: DQ_Prod_TMaaS_Prototype
 - Prototype Link: <fill after deploy>
@@ -27,6 +30,7 @@
 ## 4. Specification
 
 ### 4.1 Brand & Visual System
+
 - Design System Reference: TMaaS Corp Web Tokens (aligned with DQ_CORPWEB_PROTOTYPE)
 - Colours:
   - Primary accent: DQ Orange `#FB5535` (hover: `#E04020`)
@@ -51,6 +55,7 @@
 - Logo: TMaaS logo via shared `LandingNavbar`; links to `/`
 
 ### 4.2 Layout Shell
+
 - Viewport target: Desktop-first, responsive from mobile through 1440px+
 - Top bar: Shared `LandingNavbar` — 64px sticky, white, bottom border Gray 100
   - Left: Logo + Marketplace nav link (active state on `/marketplace`)
@@ -61,11 +66,13 @@
 - Scroll anchor: `#catalog-grid` with `scroll-mt-32` offset for sticky headers
 
 ### 4.3 Personas
-| # | Name | Role | Landing Page | Nav Scope |
-|---|------|------|-------------|-----------|
-| 1 | Exploring User | Unregistered / anonymous visitor | `/marketplace` | Public routes only: Landing (if enabled), Marketplace, Service Detail (if enabled), Contact Us (if enabled) |
+
+| #   | Name           | Role                             | Landing Page   | Nav Scope                                                                                                   |
+| --- | -------------- | -------------------------------- | -------------- | ----------------------------------------------------------------------------------------------------------- |
+| 1   | Exploring User | Unregistered / anonymous visitor | `/marketplace` | Public routes only: Landing (if enabled), Marketplace, Service Detail (if enabled), Contact Us (if enabled) |
 
 ### 4.4 Navigation Structure
+
 - Global (feature-flag controlled)
   - Logo → `/`
   - Marketplace → `/marketplace` (flag: `marketplace`; active on this page)
@@ -78,24 +85,26 @@
 - Deep link behaviour: Valid `collection` param sets active tab and scrolls to catalogue grid
 
 ### 4.5 Feature Specification
+
 - Screens in scope this iteration: `/marketplace` (route flag: `marketplace`)
 - Demo Storyline: Exploring User arrives from Landing Page or direct URL, searches or filters the service catalogue, browses best sellers and paginated results, and opens a Service Detail page to learn more
 - Components per screen:
 
-| Screen | Components | Primary Action | States Required |
-|--------|------------|----------------|-----------------|
-| `/marketplace` | Landing Navbar | Navigate / open mobile menu | Default / Mobile menu open / Marketplace active |
-| `/marketplace` | Page Hero | Search input filters catalogue | Default / Search active / Clear search |
-| `/marketplace` | Best Sellers Carousel | Card click → Service Detail | Default / Hidden when filters active or Bundles tab |
-| `/marketplace` | Category Tab Nav | Switch collection filter | Default / Active tab / Sticky below navbar |
-| `/marketplace` | Filter Sidebar | Refine catalogue | Default / Collapsed (mobile) / Expanded (mobile) / Sticky (desktop) |
-| `/marketplace` | Results Toolbar | Sort + view mode toggle | Default / Grid view / List view |
-| `/marketplace` | Active Filter Chips | Remove individual filters | Default / One or more chips / Clear all |
-| `/marketplace` | Service Catalogue Grid/List | Card click → Service Detail | Default / Empty / Paginated |
-| `/marketplace` | Pagination | Change page | Default / First / Middle / Last / Hidden (≤1 page) |
-| `/marketplace` | Footer | External and flag-gated links | Default |
+| Screen         | Components                  | Primary Action                 | States Required                                                     |
+| -------------- | --------------------------- | ------------------------------ | ------------------------------------------------------------------- |
+| `/marketplace` | Landing Navbar              | Navigate / open mobile menu    | Default / Mobile menu open / Marketplace active                     |
+| `/marketplace` | Page Hero                   | Search input filters catalogue | Default / Search active / Clear search                              |
+| `/marketplace` | Best Sellers Carousel       | Card click → Service Detail    | Default / Hidden when filters active or Bundles tab                 |
+| `/marketplace` | Category Tab Nav            | Switch collection filter       | Default / Active tab / Sticky below navbar                          |
+| `/marketplace` | Filter Sidebar              | Refine catalogue               | Default / Collapsed (mobile) / Expanded (mobile) / Sticky (desktop) |
+| `/marketplace` | Results Toolbar             | Sort + view mode toggle        | Default / Grid view / List view                                     |
+| `/marketplace` | Active Filter Chips         | Remove individual filters      | Default / One or more chips / Clear all                             |
+| `/marketplace` | Service Catalogue Grid/List | Card click → Service Detail    | Default / Empty / Paginated                                         |
+| `/marketplace` | Pagination                  | Change page                    | Default / First / Middle / Last / Hidden (≤1 page)                  |
+| `/marketplace` | Footer                      | External and flag-gated links  | Default                                                             |
 
 #### 4.5.1 Page Hero
+
 - Visual: Centred content on `heroLight` mesh with grid; max-width ~768px
 - Content structure (no fixed copy):
   - Eyebrow label (mono, accent)
@@ -108,6 +117,7 @@
   - Resets pagination to page 1 on change
 
 #### 4.5.2 Best Sellers Section
+
 - Visibility: Shown only when no refinement filters are active AND active tab is not Bundles
 - Content structure:
   - Eyebrow label (mono, accent)
@@ -119,6 +129,7 @@
 - Catalogue deduplication: Best-seller IDs are excluded from the main grid below to avoid duplicates
 
 #### 4.5.3 Category Tab Navigation
+
 - Sticky below navbar (`top-16`, z-30)
 - Tabs: All + five capability collections (four service categories + Bundles)
 - Horizontal scroll on narrow viewports
@@ -130,6 +141,7 @@
   - `bundles` — only items with `serviceType: bundle`
 
 #### 4.5.4 Filter Sidebar
+
 - Panel: White card, rounded, bordered, shadow; sticky at `top-32` on desktop
 - Header row: Reset-all control (disabled when no filters active) + filter icon
 - Collapsible sections (checkbox groups):
@@ -144,6 +156,7 @@
 - Mobile: Hidden by default; toggled via Filters button in results toolbar; full-width Reset button at panel bottom when filters active
 
 #### 4.5.5 Results Toolbar
+
 - Left cluster:
   - Mobile Filters toggle (`< lg`)
   - Result count line: “Showing X–Y of Z services” (or zero state copy slots)
@@ -152,11 +165,13 @@
   - View mode toggle: Grid (default) | List (icon buttons with `aria-pressed`)
 
 #### 4.5.6 Active Filter Chips
+
 - Rendered when any collection tab (non-all), sidebar filter, or search query is active
 - Each chip: label slot + remove (X) — clicking removes that filter
 - Clear all link resets all filters, search, sort, collection tab, and URL params
 
 #### 4.5.7 Service Product Card (catalogue)
+
 - Variants used on this page: `grid` | `list` | `shelf` (best sellers only)
 - Card content structure (no fixed copy):
   - Collection/category tag (mono)
@@ -170,11 +185,13 @@
 - Primary action: Navigate to `/service/:id` when `serviceDetail` flag enabled; non-linking static card when disabled
 
 #### 4.5.8 Empty State
+
 - Shown when filtered catalogue length is zero
 - Content structure: search icon, heading slot, helper text slot, Reset filters button
 - Action: Clears all filters and search
 
 #### 4.5.9 Pagination
+
 - Page size: 15 services per page
 - Resets to page 1 when any filter, search, sort, or tab changes
 - Clamps current page if results shrink
@@ -184,15 +201,17 @@
 - Page change scrolls to `#catalog-grid`
 
 #### 4.5.10 Sort Logic
-| Sort key | Behaviour |
-|----------|-----------|
-| popular | Descending `popularityRank` |
-| fastest | Ascending parsed `duration` |
+
+| Sort key  | Behaviour                        |
+| --------- | -------------------------------- |
+| popular   | Descending `popularityRank`      |
+| fastest   | Ascending parsed `duration`      |
 | price-low | Ascending parsed numeric `price` |
 
 ## 5. User Journeys
 
 ### 5.1 Primary Flow
+
 1. Exploring User navigates to `/marketplace` (from Landing Page CTA, navbar, or direct URL)
 2. User views page hero and optional best sellers carousel
 3. User browses category tabs or enters a search term
@@ -202,6 +221,7 @@
 7. User may use navbar Contact CTA to switch to enquiry flow
 
 ### 5.2 Alternate Flows
+
 - User lands with `?collection=<id>` → tab pre-selected, catalogue scrolled into view
 - User lands with `?q=<term>` → search field pre-filled, catalogue filtered
 - User removes individual filter chips without clearing all
@@ -211,6 +231,7 @@
 - User paginates through large result sets
 
 ### 5.3 Edge Cases
+
 - `marketplace` flag disabled → route redirects to first enabled route
 - `serviceDetail` flag disabled → cards render without navigation link or arrow affordance
 - No results after filtering → empty state with reset action
@@ -220,24 +241,26 @@
 - Pagination previous/next disabled at first/last page
 
 ## 6. Fixture Data
-| Entity | ID | Field 1 | Field 2 | Field 3 | Links to |
-|--------|----|---------|---------|---------|----------|
-| ServiceCatalogue | SC-001 | Source: `initialServices` array | ~50+ service records | — | Catalogue grid |
-| MarketplaceCapability | MC-001 | id: `experience` | label slot | collection filter | Category nav + filters |
-| MarketplaceCapability | MC-002 | id: `operations` | label slot | collection filter | Category nav + filters |
-| MarketplaceCapability | MC-003 | id: `security` | label slot | collection filter | Category nav + filters |
-| MarketplaceCapability | MC-004 | id: `ai` | label slot | collection filter | Category nav + filters |
-| MarketplaceCapability | MC-005 | id: `bundles` | label slot | bundle-only tab | Category nav |
-| EconomySector | ES-001 | id: `farming-4-0` | label slot | remix key | Sector filter |
-| EconomySector | ES-002 | id: `plant-4-0` | label slot | remix key | Sector filter |
-| ServiceType | ST-001 | id: `advisory` | label slot | type filter | Filter sidebar |
-| ServiceType | ST-002 | id: `design` | label slot | type filter | Filter sidebar |
-| ServiceType | ST-003 | id: `deploy` | label slot | type filter | Filter sidebar |
-| ServiceRecord | SR-001 | id: numeric | standardName slot | collection + serviceType + popularityRank | `/service/:id` |
-| ServiceRecord | SR-002 | id: numeric | remixName map (sector keys) | price + duration slots | Display name remix |
-| BestSellerSet | BS-001 | Top N by popularityRank | N = 6 carousel / 4 dedup set | — | Best sellers + grid exclusion |
+
+| Entity                | ID     | Field 1                         | Field 2                      | Field 3                                   | Links to                      |
+| --------------------- | ------ | ------------------------------- | ---------------------------- | ----------------------------------------- | ----------------------------- |
+| ServiceCatalogue      | SC-001 | Source: `initialServices` array | ~50+ service records         | —                                         | Catalogue grid                |
+| MarketplaceCapability | MC-001 | id: `experience`                | label slot                   | collection filter                         | Category nav + filters        |
+| MarketplaceCapability | MC-002 | id: `operations`                | label slot                   | collection filter                         | Category nav + filters        |
+| MarketplaceCapability | MC-003 | id: `security`                  | label slot                   | collection filter                         | Category nav + filters        |
+| MarketplaceCapability | MC-004 | id: `ai`                        | label slot                   | collection filter                         | Category nav + filters        |
+| MarketplaceCapability | MC-005 | id: `bundles`                   | label slot                   | bundle-only tab                           | Category nav                  |
+| EconomySector         | ES-001 | id: `farming-4-0`               | label slot                   | remix key                                 | Sector filter                 |
+| EconomySector         | ES-002 | id: `plant-4-0`                 | label slot                   | remix key                                 | Sector filter                 |
+| ServiceType           | ST-001 | id: `advisory`                  | label slot                   | type filter                               | Filter sidebar                |
+| ServiceType           | ST-002 | id: `design`                    | label slot                   | type filter                               | Filter sidebar                |
+| ServiceType           | ST-003 | id: `deploy`                    | label slot                   | type filter                               | Filter sidebar                |
+| ServiceRecord         | SR-001 | id: numeric                     | standardName slot            | collection + serviceType + popularityRank | `/service/:id`                |
+| ServiceRecord         | SR-002 | id: numeric                     | remixName map (sector keys)  | price + duration slots                    | Display name remix            |
+| BestSellerSet         | BS-001 | Top N by popularityRank         | N = 6 carousel / 4 dedup set | —                                         | Best sellers + grid exclusion |
 
 ## 7. Shared Components
+
 - **LandingNavbar**: Same as Landing Page; Marketplace link active on this route
 - **MeshSection**: `heroLight` variant for page hero
 - **Footer**: Shared site footer with flag-gated links
@@ -253,7 +276,9 @@
 - **EmptyStatePanel**: Zero-results message and reset CTA
 
 ## 8. Scope
+
 ### In Scope
+
 - Full `/marketplace` page layout and visual design
 - Page hero with live search filtering
 - Category tab navigation with URL sync
@@ -270,6 +295,7 @@
 - Responsive layout (mobile filter drawer, sticky tab bar)
 
 ### Out of Scope
+
 - Log in, Get Started, and all authentication flows (`/sign-in`, `auth` flag)
 - Cart, add-to-cart, and checkout (`cart` flag, F-S1-04)
 - AI service recommendations (F-S1-03)
@@ -283,6 +309,7 @@
 - Writing search query back to URL on keystroke
 
 ## 9. Assumptions
+
 - Only Exploring Users (unauthenticated) access the marketplace in MVP
 - Navbar and mobile menu do not expose Log in or Get Started in MVP
 - `marketplace`, `serviceDetail`, and `contactUs` flags are on by default for MVP
@@ -293,6 +320,7 @@
 - Footer external links open in a new tab with `rel="noopener noreferrer"`
 
 ## 10. Prototype Build Prompt
+
 ```
 Build a high-fidelity clickable prototype of the TMaaS Marketplace Page — a DXP feature-specific shell for Exploring Users at route `/marketplace` (Stage 01).
 

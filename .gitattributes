@@ -1,0 +1,13 @@
+# Enforce LF for all text files; prevents CRLF from breaking Prettier on Linux CI
+* text=auto eol=lf
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.ico binary
+*.webp binary
+*.woff binary
+*.woff2 binary
+*.ttf binary
+*.eot binary
+*.svg text eol=lf

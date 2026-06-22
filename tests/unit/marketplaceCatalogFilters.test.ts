@@ -59,7 +59,9 @@ describe("filterCatalogServices", () => {
       tags: [...(initialServices[0]!.tags ?? []), farmingTag],
     };
     const catalogWithFarming = [...initialServices, farmingService];
-    const farmingServices = catalogWithFarming.filter((service) => service.tags.includes(farmingTag));
+    const farmingServices = catalogWithFarming.filter((service) =>
+      service.tags.includes(farmingTag)
+    );
 
     const filtered = filterCatalogServices(catalogWithFarming, {
       activeTab: "all",

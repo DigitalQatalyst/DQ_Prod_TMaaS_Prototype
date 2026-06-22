@@ -50,8 +50,8 @@ Vercel will show you a CNAME or A record to add.
 
 #### 4. Add DNS record (Cloudflare or registrar)
 
-| Type | Name | Value |
-|------|------|-------|
+| Type  | Name   | Value                  |
+| ----- | ------ | ---------------------- |
 | CNAME | `apps` | `cname.vercel-dns.com` |
 
 Or if Vercel gives an A record, use that instead.
@@ -59,6 +59,7 @@ Or if Vercel gives an A record, use that instead.
 #### 5. Verify
 
 Once DNS propagates (minutes on Cloudflare, up to 48h elsewhere):
+
 - `https://apps.digitalqatalyst.com/tmaas` → TMaaS home
 - `https://apps.digitalqatalyst.com` → 404 (expected — no root app yet)
 

@@ -3,6 +3,7 @@
 > **Draft duplicate.** Not yet implemented. Active build follows v1: `landing-page-prototype-shell.md`. Archive: `landing-page-prototype-shell-v1-corp-mirror.md`.
 
 ## 1. Platform Context
+
 - Platform: DQ Digital Experience Platform (DXP)
 - Type: Generalised
 - Prototype Stage: Feature Specific
@@ -15,6 +16,7 @@
   - Share DQ parent-brand tokens and components while presenting a **product landing**, not a corp-web homepage reskin.
 
 ## 2. Build Approach & References
+
 - Mode: Evolution (IA revision from v1 corp-mirror layout)
 - Reference Builds (Internal):
   - **Design system:** `DQ_CORPWEB_PROTOTYPE` (tokens, mesh, buttons, cards, footer patterns)
@@ -24,28 +26,31 @@
 - Input Documents: 26.05_tmaas_complete_brs_v2.md (F-S0-01), FEATURE_FLAGS.md, landing components under `src/components/site/landing/`
 
 ### 2.1 Design Strategy — Branded House
-| Layer | Align with corp web? | Notes |
-|-------|---------------------|-------|
-| Tokens (colour, type, spacing, radii) | **Yes** | DQ Orange, DQ Navy, Plus Jakarta Sans, mesh vars |
-| Components (buttons, cards, mesh, marquee) | **Yes** | Reuse `MeshSection`, pill CTAs, glass cards |
-| Page section stack | **No** | Product journey, not corp credibility homepage |
-| Hero visual & primary CTA | **No** | Marketplace mockup; orange primary CTA |
-| Corp-only sections (team, FAQ, framework, ecosystem grid) | **No** | Remain on `DQ_CORPWEB_PROTOTYPE` only |
+
+| Layer                                                     | Align with corp web? | Notes                                            |
+| --------------------------------------------------------- | -------------------- | ------------------------------------------------ |
+| Tokens (colour, type, spacing, radii)                     | **Yes**              | DQ Orange, DQ Navy, Plus Jakarta Sans, mesh vars |
+| Components (buttons, cards, mesh, marquee)                | **Yes**              | Reuse `MeshSection`, pill CTAs, glass cards      |
+| Page section stack                                        | **No**               | Product journey, not corp credibility homepage   |
+| Hero visual & primary CTA                                 | **No**               | Marketplace mockup; orange primary CTA           |
+| Corp-only sections (team, FAQ, framework, ecosystem grid) | **No**               | Remain on `DQ_CORPWEB_PROTOTYPE` only            |
 
 ### 2.2 Section Order Change (v1 → v2)
-| v1 (corp-mirror) | v2 (product IA) | Rationale |
-|------------------|-----------------|-----------|
-| Hero | Hero (enhanced) | Add product badge + optional DQ lineage link |
-| Trusted By | Marketplace Preview | Lead with product capability before social proof |
-| Challenge | Trusted By (compact) | Social proof supports, does not open, the story |
-| Solution | Why TMaaS | Single dark problem section; product-framed pains |
-| Offerings | How It Works | TMaaS journey (Discover → Evaluate → Engage) |
-| Outcomes | Service Categories | Marketplace category entry points |
-| Stats | Client Outcomes | Product-specific proof metrics |
-| Closing CTA | DQ Lineage + Stats band | Parent trust without duplicating corp homepage |
-| — | Closing CTA | Marketplace-led conversion |
+
+| v1 (corp-mirror) | v2 (product IA)         | Rationale                                         |
+| ---------------- | ----------------------- | ------------------------------------------------- |
+| Hero             | Hero (enhanced)         | Add product badge + optional DQ lineage link      |
+| Trusted By       | Marketplace Preview     | Lead with product capability before social proof  |
+| Challenge        | Trusted By (compact)    | Social proof supports, does not open, the story   |
+| Solution         | Why TMaaS               | Single dark problem section; product-framed pains |
+| Offerings        | How It Works            | TMaaS journey (Discover → Evaluate → Engage)      |
+| Outcomes         | Service Categories      | Marketplace category entry points                 |
+| Stats            | Client Outcomes         | Product-specific proof metrics                    |
+| Closing CTA      | DQ Lineage + Stats band | Parent trust without duplicating corp homepage    |
+| —                | Closing CTA             | Marketplace-led conversion                        |
 
 ## 3. DevOps
+
 - Prototype Tool: React / Vite (local prototype repo)
 - Prototype Repo: DQ_Prod_TMaaS_Prototype
 - Prototype Link: <fill after deploy>
@@ -53,6 +58,7 @@
 ## 4. Specification
 
 ### 4.1 Brand & Visual System
+
 - Design System Reference: DQ Corp Web Tokens (shared with `DQ_CORPWEB_PROTOTYPE`)
 - Product differentiation (within shared system):
   - TMaaS logo in navbar; optional mono product code badge in hero (`TMaaS · Managed Transformation`)
@@ -84,6 +90,7 @@
 - Logo: TMaaS logo component, left-aligned in top bar; links to `/`
 
 ### 4.2 Layout Shell
+
 - Viewport target: Desktop-first, responsive from mobile through 1440px+
 - Top bar (Landing Navbar): 64px (`h-16`), sticky, white background, bottom border Gray 100
   - Left: Logo + primary nav links (desktop `lg+`)
@@ -95,11 +102,13 @@
 - Scroll anchors: `#marketplace-preview`, `#how-it-works`, `#categories`, `#outcomes`
 
 ### 4.3 Personas
-| # | Name | Role | Landing Page | Nav Scope |
-|---|------|------|-------------|-----------|
-| 1 | Exploring User | Unregistered / anonymous visitor | `/` | Public routes only: Landing, Marketplace (if enabled), Contact Us (if enabled) |
+
+| #   | Name           | Role                             | Landing Page | Nav Scope                                                                      |
+| --- | -------------- | -------------------------------- | ------------ | ------------------------------------------------------------------------------ |
+| 1   | Exploring User | Unregistered / anonymous visitor | `/`          | Public routes only: Landing, Marketplace (if enabled), Contact Us (if enabled) |
 
 ### 4.4 Navigation Structure
+
 - Global (feature-flag controlled)
   - Logo → `/`
   - Marketplace → `/marketplace` (flag: `marketplace`)
@@ -109,26 +118,28 @@
 - Mobile: Hamburger opens full-screen overlay menu below header with the same flag-filtered links
 
 ### 4.5 Feature Specification
+
 - Screens in scope this iteration: `/` (route flag: `homepage`)
 - Demo Storyline: Visitor lands on TMaaS product homepage, sees the marketplace proposition immediately, understands why TMaaS exists and how the journey works, browses service categories, reviews outcomes, and converts via Marketplace or Contact
 - Components per screen:
 
-| Screen | Components | Primary Action | States Required |
-|--------|------------|----------------|-----------------|
-| `/` | Landing Navbar | Navigate / open mobile menu | Default / Mobile menu open / Active route highlight |
-| `/` | Hero Section | Primary CTA → Marketplace; Secondary CTA → Contact | Default (animated entrance) |
-| `/` | Hero Dashboard Mockup | N/A (decorative) | Default |
-| `/` | Marketplace Preview Section | Category chip or card → Marketplace | Default / Hover / Focus-visible |
-| `/` | Trusted By Section | N/A | Default (marquee animation) |
-| `/` | Why TMaaS Section | Inline link → Marketplace | Default |
-| `/` | How It Works Section | Per-step link → Marketplace or Contact | Default / Hover on links |
-| `/` | Service Categories Section | Card click → Marketplace | Default / Hover / Focus-visible |
-| `/` | Client Outcomes Section | N/A | Default / Card hover |
-| `/` | DQ Lineage + Stats Band | External link → DQ corp site | Default |
-| `/` | Closing CTA Section | Primary CTA → Marketplace; Secondary CTA → Contact | Default |
-| `/` | Footer | External DQ links; internal flag-gated links | Default |
+| Screen | Components                  | Primary Action                                     | States Required                                     |
+| ------ | --------------------------- | -------------------------------------------------- | --------------------------------------------------- |
+| `/`    | Landing Navbar              | Navigate / open mobile menu                        | Default / Mobile menu open / Active route highlight |
+| `/`    | Hero Section                | Primary CTA → Marketplace; Secondary CTA → Contact | Default (animated entrance)                         |
+| `/`    | Hero Dashboard Mockup       | N/A (decorative)                                   | Default                                             |
+| `/`    | Marketplace Preview Section | Category chip or card → Marketplace                | Default / Hover / Focus-visible                     |
+| `/`    | Trusted By Section          | N/A                                                | Default (marquee animation)                         |
+| `/`    | Why TMaaS Section           | Inline link → Marketplace                          | Default                                             |
+| `/`    | How It Works Section        | Per-step link → Marketplace or Contact             | Default / Hover on links                            |
+| `/`    | Service Categories Section  | Card click → Marketplace                           | Default / Hover / Focus-visible                     |
+| `/`    | Client Outcomes Section     | N/A                                                | Default / Card hover                                |
+| `/`    | DQ Lineage + Stats Band     | External link → DQ corp site                       | Default                                             |
+| `/`    | Closing CTA Section         | Primary CTA → Marketplace; Secondary CTA → Contact | Default                                             |
+| `/`    | Footer                      | External DQ links; internal flag-gated links       | Default                                             |
 
 #### 4.5.1 Hero Section
+
 - Layout: Two-column grid on `lg+` (copy left, mockup right); single column stacked on smaller viewports
 - Content structure (no fixed copy):
   - Product badge row: mono code + status chip (e.g. `TMaaS · Live`); pattern from corp web `ProductBadgeRow`
@@ -140,11 +151,13 @@
 - Visual: `MeshSection` variant `heroLight` with grid overlay
 
 #### 4.5.2 Hero Dashboard Mockup
+
 - Decorative 3D-perspective card simulating a marketplace catalogue UI
 - Contains: sidebar icon rail, header with mono label + title, three mini stat tiles, featured service list (3 items), goal filter chips (3 items)
 - Non-interactive in prototype; no navigation on click
 
 #### 4.5.3 Marketplace Preview Section (`#marketplace-preview`)
+
 - Background: Gray 50
 - Purpose: Show product substance before generic trust — **TMaaS-specific; no corp web equivalent**
 - Eyebrow + section headline (marketplace-led)
@@ -154,6 +167,7 @@
 - Hover: border accent, subtle shadow lift
 
 #### 4.5.4 Trusted By Section
+
 - Compact band: white background, border-y Gray 100
 - Eyebrow label centred above marquee
 - Horizontally scrolling logo strip (org name placeholders; duplicated for seamless loop)
@@ -161,6 +175,7 @@
 - Positioned **after** marketplace preview so trust reinforces product credibility
 
 #### 4.5.5 Why TMaaS Section (`#why`)
+
 - Visual: `MeshSection` variant `heroDark` with subtle grid mask overlay — **only dark narrative section on page**
 - Content structure:
   - Eyebrow label (product-framed; not corp "Why DQ exists" copy)
@@ -172,6 +187,7 @@
 - Replaces v1 separate Challenge section; does not duplicate corp web Problem section copy
 
 #### 4.5.6 How It Works Section (`#how-it-works`)
+
 - White background section
 - Eyebrow: `The TMaaS Journey` (or equivalent product label)
 - Section headline: journey-oriented, not methodology-oriented (contrast corp web "The DQ Method")
@@ -184,6 +200,7 @@
 - Optional: horizontal connector line between steps on `lg+` (corp web pattern acceptable here as shared component vocabulary)
 
 #### 4.5.7 Service Categories Section (`#categories`)
+
 - Background: Gray 50
 - Eyebrow + section headline
 - Grid of five clickable cards (`md`: 2-col, `lg`: 3-col) — each card: icon, category title, short description, trailing arrow
@@ -192,6 +209,7 @@
 - Renamed from v1 "Offerings" to signal marketplace taxonomy, not corp "Capabilities"
 
 #### 4.5.8 Client Outcomes Section (`#outcomes`)
+
 - Background: white
 - Eyebrow + section headline (client/programme outcomes, not corp case-study placeholders)
 - Three outcome cards (`md`: 3-col), each containing:
@@ -202,6 +220,7 @@
 - Hover: border accent, shadow, metric colour shifts to accent
 
 #### 4.5.9 DQ Lineage + Stats Band
+
 - Background: Gray 50
 - Two-column layout on `lg+`; stacked on mobile
 - **Left — Product stats:** four stat blocks (`md`: 2×2 or 4-col), each with left accent border (4px orange), large value, short descriptor — metrics must be TMaaS/programme-specific, not copied corp homepage stats
@@ -212,6 +231,7 @@
 - Replaces v1 standalone Stats section; avoids a separate stats band that mirrors corp web section 8 verbatim
 
 #### 4.5.10 Closing CTA Section
+
 - Visual: `MeshSection` variant `ctaOrange` with grid mask overlay; centred content, max-width ~720px
 - Content structure:
   - Eyebrow label
@@ -220,6 +240,7 @@
   - Dual CTAs: primary filled orange → Marketplace; secondary ghost/outline → Contact
 
 #### 4.5.11 Footer (shared)
+
 - Brand column: logo + one-line product descriptor
 - Link columns (flag-gated where noted):
   - External DigitalQatalyst links (always)
@@ -231,6 +252,7 @@
 ## 5. User Journeys
 
 ### 5.1 Primary Flow
+
 1. Exploring User navigates to `/`
 2. Page renders navbar and hero with marketplace mockup and product badge
 3. User scans marketplace preview categories and trusts marquee
@@ -241,6 +263,7 @@
 8. User may alternatively click Contact CTA → `/contact`
 
 ### 5.2 Alternate Flows
+
 - User clicks marketplace preview tile/chip → `/marketplace`
 - User clicks service category card → `/marketplace`
 - User clicks How It Works step links → `/marketplace` or `/contact` per step
@@ -248,6 +271,7 @@
 - User opens mobile menu → selects link → menu closes, navigates
 
 ### 5.3 Edge Cases
+
 - `homepage` flag disabled → route redirects to first enabled route per `getFirstEnabledRoute()`
 - `marketplace` flag disabled → Marketplace nav, hero/CTA primary buttons, marketplace preview, category cards, journey steps 1–2 links, and footer marketplace link hidden or route-guarded
 - `contactUs` flag disabled → all Contact CTAs hidden
@@ -255,37 +279,39 @@
 - Decorative mockup and marquee content are not keyboard-interactive targets
 
 ## 6. Fixture Data
-| Entity | ID | Field 1 | Field 2 | Field 3 | Links to |
-|--------|----|---------|---------|---------|----------|
-| TrustLogo | TL-001 | Display name (org placeholder) | — | — | Marquee strip |
-| TrustLogo | TL-002 | Display name (org placeholder) | — | — | Marquee strip |
-| MarketplaceCategory | MC-001 | Icon slot | Category label | Service count placeholder | Marketplace preview |
-| MarketplaceCategory | MC-002 | Icon slot | Category label | Service count placeholder | Marketplace preview |
-| MarketplaceCategory | MC-003 | Icon slot | Category label | Service count placeholder | Marketplace preview |
-| MarketplaceCategory | MC-004 | Icon slot | Category label | Service count placeholder | Marketplace preview |
-| WhyCard | WC-001 | Icon: Search | Card title slot | Card body slot | Why TMaaS section |
-| WhyCard | WC-002 | Icon: Scale | Card title slot | Card body slot | Why TMaaS section |
-| WhyCard | WC-003 | Icon: Handshake | Card title slot | Card body slot | Why TMaaS section |
-| JourneyStep | JS-001 | Step: 01 / Discover | Destination: `/marketplace` | — | How It Works section |
-| JourneyStep | JS-002 | Step: 02 / Evaluate | Destination: `/marketplace` | — | How It Works section |
-| JourneyStep | JS-003 | Step: 03 / Engage | Destination: `/contact` | — | How It Works section |
-| CategoryCard | CC-001 | Icon: Monitor | Category slot | `/marketplace` | Service Categories section |
-| CategoryCard | CC-002 | Icon: Workflow | Category slot | `/marketplace` | Service Categories section |
-| CategoryCard | CC-003 | Icon: Shield | Category slot | `/marketplace` | Service Categories section |
-| CategoryCard | CC-004 | Icon: BarChart2 | Category slot | `/marketplace` | Service Categories section |
-| CategoryCard | CC-005 | Icon: Package | Category slot | `/marketplace` | Service Categories section |
-| OutcomeCard | OC-OUT-001 | Tag: Cost | Metric + descriptor slots | — | Client Outcomes section |
-| OutcomeCard | OC-OUT-002 | Tag: Speed | Metric + descriptor slots | — | Client Outcomes section |
-| OutcomeCard | OC-OUT-003 | Tag: Success | Metric + descriptor slots | — | Client Outcomes section |
-| StatBlock | ST-001 | Value slot | Label slot | — | DQ Lineage + Stats band |
-| StatBlock | ST-002 | Value slot | Label slot | — | DQ Lineage + Stats band |
-| StatBlock | ST-003 | Value slot | Label slot | — | DQ Lineage + Stats band |
-| StatBlock | ST-004 | Value slot | Label slot | — | DQ Lineage + Stats band |
-| MockupFeaturedService | MFS-001 | Service name slot | Category tag slot | — | Hero mockup |
-| MockupFeaturedService | MFS-002 | Service name slot | Category tag slot | — | Hero mockup |
-| MockupFeaturedService | MFS-003 | Service name slot | Category tag slot | — | Hero mockup |
+
+| Entity                | ID         | Field 1                        | Field 2                     | Field 3                   | Links to                   |
+| --------------------- | ---------- | ------------------------------ | --------------------------- | ------------------------- | -------------------------- |
+| TrustLogo             | TL-001     | Display name (org placeholder) | —                           | —                         | Marquee strip              |
+| TrustLogo             | TL-002     | Display name (org placeholder) | —                           | —                         | Marquee strip              |
+| MarketplaceCategory   | MC-001     | Icon slot                      | Category label              | Service count placeholder | Marketplace preview        |
+| MarketplaceCategory   | MC-002     | Icon slot                      | Category label              | Service count placeholder | Marketplace preview        |
+| MarketplaceCategory   | MC-003     | Icon slot                      | Category label              | Service count placeholder | Marketplace preview        |
+| MarketplaceCategory   | MC-004     | Icon slot                      | Category label              | Service count placeholder | Marketplace preview        |
+| WhyCard               | WC-001     | Icon: Search                   | Card title slot             | Card body slot            | Why TMaaS section          |
+| WhyCard               | WC-002     | Icon: Scale                    | Card title slot             | Card body slot            | Why TMaaS section          |
+| WhyCard               | WC-003     | Icon: Handshake                | Card title slot             | Card body slot            | Why TMaaS section          |
+| JourneyStep           | JS-001     | Step: 01 / Discover            | Destination: `/marketplace` | —                         | How It Works section       |
+| JourneyStep           | JS-002     | Step: 02 / Evaluate            | Destination: `/marketplace` | —                         | How It Works section       |
+| JourneyStep           | JS-003     | Step: 03 / Engage              | Destination: `/contact`     | —                         | How It Works section       |
+| CategoryCard          | CC-001     | Icon: Monitor                  | Category slot               | `/marketplace`            | Service Categories section |
+| CategoryCard          | CC-002     | Icon: Workflow                 | Category slot               | `/marketplace`            | Service Categories section |
+| CategoryCard          | CC-003     | Icon: Shield                   | Category slot               | `/marketplace`            | Service Categories section |
+| CategoryCard          | CC-004     | Icon: BarChart2                | Category slot               | `/marketplace`            | Service Categories section |
+| CategoryCard          | CC-005     | Icon: Package                  | Category slot               | `/marketplace`            | Service Categories section |
+| OutcomeCard           | OC-OUT-001 | Tag: Cost                      | Metric + descriptor slots   | —                         | Client Outcomes section    |
+| OutcomeCard           | OC-OUT-002 | Tag: Speed                     | Metric + descriptor slots   | —                         | Client Outcomes section    |
+| OutcomeCard           | OC-OUT-003 | Tag: Success                   | Metric + descriptor slots   | —                         | Client Outcomes section    |
+| StatBlock             | ST-001     | Value slot                     | Label slot                  | —                         | DQ Lineage + Stats band    |
+| StatBlock             | ST-002     | Value slot                     | Label slot                  | —                         | DQ Lineage + Stats band    |
+| StatBlock             | ST-003     | Value slot                     | Label slot                  | —                         | DQ Lineage + Stats band    |
+| StatBlock             | ST-004     | Value slot                     | Label slot                  | —                         | DQ Lineage + Stats band    |
+| MockupFeaturedService | MFS-001    | Service name slot              | Category tag slot           | —                         | Hero mockup                |
+| MockupFeaturedService | MFS-002    | Service name slot              | Category tag slot           | —                         | Hero mockup                |
+| MockupFeaturedService | MFS-003    | Service name slot              | Category tag slot           | —                         | Hero mockup                |
 
 ## 7. Shared Components
+
 - **LandingNavbar**: Sticky 64px header; flag-filtered links; mobile overlay menu; focus rings
 - **ProductBadgeRow** (new): Mono product code + status chip; hero only
 - **MeshSection**: Reusable section wrapper with `heroLight` / `heroDark` / `ctaOrange` backgrounds and optional grid
@@ -303,17 +329,20 @@
 - **Footer**: Multi-column link grid with external and flag-gated internal routes
 
 ### 7.1 Component Migration (v1 → v2)
-| v1 component | v2 action |
-|--------------|-----------|
-| `ChallengeSection` | Rename/reframe → `WhyTmaasSection` (product copy, single dark section) |
-| `SolutionSection` | Rename → `HowItWorksSection` (journey labels) |
-| `OfferingsSection` | Rename → `ServiceCategoriesSection` (`#categories`) |
-| `LandingOutcomesSection` | Keep; anchor `#outcomes` |
-| `StatsSection` | Merge into `DqLineageStatsBand` |
-| — | **New:** `MarketplacePreviewSection`, `ProductBadgeRow`, `DqLineageCard` |
+
+| v1 component             | v2 action                                                                |
+| ------------------------ | ------------------------------------------------------------------------ |
+| `ChallengeSection`       | Rename/reframe → `WhyTmaasSection` (product copy, single dark section)   |
+| `SolutionSection`        | Rename → `HowItWorksSection` (journey labels)                            |
+| `OfferingsSection`       | Rename → `ServiceCategoriesSection` (`#categories`)                      |
+| `LandingOutcomesSection` | Keep; anchor `#outcomes`                                                 |
+| `StatsSection`           | Merge into `DqLineageStatsBand`                                          |
+| —                        | **New:** `MarketplacePreviewSection`, `ProductBadgeRow`, `DqLineageCard` |
 
 ## 8. Scope
+
 ### In Scope
+
 - Revised `/` landing page IA (v2 section order and product differentiation)
 - Eleven content sections plus navbar and footer
 - Navigation to Marketplace and Contact Us
@@ -326,6 +355,7 @@
 - Marquee animation on trust section
 
 ### Out of Scope
+
 - Alternate landing at `/home` (flag: `alternateLanding`)
 - Corp-web-only sections: Team, FAQ, Framework deep-dive, full product ecosystem grid
 - AI chat assistant on landing (flag: `chatAssistant` — footer link only when enabled)
@@ -338,6 +368,7 @@
 - Deep-linking marketplace preview tiles to filtered `/marketplace` views (future)
 
 ## 9. Assumptions
+
 - Only Exploring Users (unauthenticated) access the landing page in MVP
 - Navbar and mobile menu do not expose Log in or Get Started in MVP
 - `homepage` flag is on by default alongside `marketplace` and `contactUs`
@@ -348,6 +379,7 @@
 - No API calls originate from the landing page itself
 
 ## 10. Prototype Build Prompt
+
 ```
 Build a high-fidelity clickable prototype of the TMaaS Landing Page (v2 Product IA) — a public product landing for Exploring Users at route `/`.
 

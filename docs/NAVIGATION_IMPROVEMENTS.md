@@ -3,11 +3,13 @@
 ## Changes Implemented
 
 ### 1. Made TMaaS Logo Clickable (Navbar)
+
 **File**: `src/components/Navbar.tsx`
 
 **Change**: Wrapped the DQ TMaaS logo in an anchor tag that navigates to the home page.
 
 **Before**:
+
 ```tsx
 <div className="flex items-center gap-1.5">
   <span className="text-2xl font-bold text-foreground">DQ</span>
@@ -16,6 +18,7 @@
 ```
 
 **After**:
+
 ```tsx
 <a href="/" className="flex items-center gap-1.5 transition-opacity hover:opacity-80">
   <span className="text-2xl font-bold text-foreground">DQ</span>
@@ -28,15 +31,18 @@
 ---
 
 ### 2. Enhanced Footer with "Start with AI" Link
+
 **File**: `src/components/Footer.tsx`
 
 **Change**: Completely redesigned the footer to match the screenshot with four columns:
+
 - **Brand Column**: DQ TMaaS logo (clickable to home) + tagline
 - **Explore DigitalQatalyst**: Links to parent company resources
 - **Explore TMaaS**: Links including "Start with AI" that navigates to hero section
 - **Follow Us**: Social media links
 
 **Key Links Added**:
+
 - `About TMaaS` → `/explore`
 - `Start with AI` → `/#hero` (scrolls to hero section with embedded chat)
 - `Design & Deploy Services` → `/marketplace`
@@ -46,16 +52,19 @@
 ---
 
 ### 3. Added ID to Hero Section
+
 **File**: `src/components/HeroSection.tsx`
 
 **Change**: Added `id="hero"` to the hero section element.
 
 **Before**:
+
 ```tsx
 <section className="relative bg-gradient-to-br...">
 ```
 
 **After**:
+
 ```tsx
 <section id="hero" className="relative bg-gradient-to-br...">
 ```
@@ -67,17 +76,20 @@
 ## User Flow
 
 ### Flow 1: Logo Navigation
+
 1. User is on any page (Marketplace, Explore, Service Detail, etc.)
 2. User clicks the "DQ TMaaS" logo in the navbar
 3. User is taken to the home page (Index)
 
 ### Flow 2: Start with AI from Footer
+
 1. User scrolls to the footer on any page
 2. User clicks "Start with AI" under "Explore TMaaS"
 3. User is taken to the home page and scrolled to the hero section
 4. User sees the embedded Butler chat and can start interacting immediately
 
 ### Flow 3: Footer Brand Logo
+
 1. User clicks the "DQ TMaaS" logo in the footer
 2. User is taken to the home page
 
@@ -98,6 +110,7 @@
 ---
 
 ## Files Modified
+
 1. `src/components/Navbar.tsx` - Made logo clickable
 2. `src/components/Footer.tsx` - Complete redesign with proper navigation
 3. `src/components/HeroSection.tsx` - Added hero section ID for anchor navigation

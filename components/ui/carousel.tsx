@@ -95,7 +95,7 @@ const Carousel = React.forwardRef<
       return;
     }
 
-    onSelect(api);
+    React.startTransition(() => onSelect(api));
     api.on("reInit", onSelect);
     api.on("select", onSelect);
 

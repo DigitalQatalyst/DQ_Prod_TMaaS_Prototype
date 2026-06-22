@@ -8,6 +8,7 @@
 - Deploy: Vercel (standalone output)
 
 ## Route map
+
 - Public: `/`, `/explore`, `/marketplace`, `/marketplace/[slug]`, `/contact`, `/cart`, `/butler`
 - Auth: `/(auth)/sign-in`
 - Onboarding: `/(onboarding)/profile|organisation|access|complete`

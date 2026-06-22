@@ -185,6 +185,7 @@ DQ_Prod_TMaaS_Prototype/
 ## Task 1: Create the branch and archive root clutter
 
 **Files:**
+
 - Move: all root-level `*.md` implementation docs → `scratch/archive/`
 - Move: `butler_ai_spec_faithful_prototype.html`, `test-marketplace.tsx`, `check-page.mjs`, `generate_services.*`, `update_descriptions.*`, `update_prices.*` → `scratch/archive/`
 - Keep at root: `README.md`, `CLAUDE.md`, `AGENTS.md`, `package.json`, and all config files
@@ -235,6 +236,7 @@ rmdir specs
 ```bash
 ls -1 *.md *.json *.ts *.js *.html *.mjs 2>/dev/null | sort
 ```
+
 Expected: only `README.md`, `package.json`, `vite.config.ts`, `vitest.config.ts`, `tailwind.config.ts`, `eslint.config.js`, `postcss.config.js`, `vercel.json`, `components.json`, `tsconfig*.json`, `index.html`, `middleware.ts`
 
 - [ ] **Step 4: Commit**
@@ -248,6 +250,7 @@ git -c user.email="dq.demo.a@digitalqatalyst.com" -c user.name="Sharavi" commit 
 ## Task 2: Install Next.js and new dependencies
 
 **Files:**
+
 - Modify: `package.json`
 - Create: `next.config.ts`, `postcss.config.mjs`, `.prettierrc.json`, `eslint.config.mjs`, `vitest.setup.ts`
 - Delete: `vite.config.ts`, `tsconfig.app.json`, `tsconfig.node.json`
@@ -424,6 +427,7 @@ git -c user.email="dq.demo.a@digitalqatalyst.com" -c user.name="Sharavi" commit 
 ## Task 3: Initialise the AI rules (.ai/ structure)
 
 **Files:**
+
 - Create: `.ai/CLAUDE.md`, `.ai/AGENTS.md`, `.ai/PROJECT_AI_STANDARDS.md`, `.ai/context.md`, `.ai/.ai-version`
 - Create: `.ai/priming/priming-development-rules.md`, `priming-accepted-tech-stack.md`, `priming-target-architecture.md`, `priming-database-architecture.md`, `priming-nonfunctional-specs.md`
 - Create: `CLAUDE.md` (root alias), `AGENTS.md` (root alias)
@@ -458,6 +462,7 @@ mkdir -p .kiro/steering
 - Deploy: Vercel (standalone output)
 
 ## Route map
+
 - Public: `/`, `/explore`, `/marketplace`, `/marketplace/[slug]`, `/contact`, `/cart`, `/butler`
 - Auth: `/(auth)/sign-in`
 - Onboarding: `/(onboarding)/profile|organisation|access|complete`
@@ -472,6 +477,7 @@ mkdir -p .kiro/steering
 # PROJECT AI STANDARDS
 
 ## Core rules
+
 1. Follow Spec → Plan → Implement → Verify.
 2. Do not invent scope; ask when constraints are ambiguous.
 3. Prime with `.ai/priming/*` before substantial work.
@@ -484,12 +490,14 @@ mkdir -p .kiro/steering
 10. Complete discovered dependent fixes before marking done.
 
 ## Project constraints
+
 - Client tier only: business/domain logic belongs to Supabase/API layer.
 - Tests must live under `tests/` only.
 - Docs live under `docs/`; WIP goes to `scratch/`.
 - DQ brand: navy (`#030F35`) + orange (`#FB5535`). No sparkles icons.
 
 ## References
+
 - `.ai/AGENTS.md`
 - `.ai/context.md`
 - `.ai/priming/priming-development-rules.md`
@@ -501,17 +509,20 @@ mkdir -p .kiro/steering
 # AGENTS index
 
 ## Always read
+
 - `./PROJECT_AI_STANDARDS.md`
 - `./context.md`
 - `./priming/priming-development-rules.md`
 - `./priming/priming-target-architecture.md`
 
 ## Agent-determined
+
 - `./priming/priming-accepted-tech-stack.md`
 - `./priming/priming-database-architecture.md`
 - `./priming/priming-nonfunctional-specs.md`
 
 ## Scope-based references
+
 - `app/` work: Next.js App Router, route groups, RSC vs client components.
 - `components/foundation/` work: platform shell and shared boundary rules.
 - `lib/api/v1/` work: Supabase typed client and versioned contract discipline.
@@ -525,6 +536,7 @@ mkdir -p .kiro/steering
 Use this file as the repo entrypoint for Claude-compatible agents.
 
 Read in order:
+
 1. `./AGENTS.md`
 2. `./PROJECT_AI_STANDARDS.md`
 3. `./context.md`
@@ -537,34 +549,41 @@ Read in order:
 # Development Rules
 
 ## Plan-first
+
 Spec → Plan → Implement → Verify. Never implement without a plan for non-trivial changes.
 
 ## TypeScript
+
 - Strict mode; no `any`; interfaces for component props; typed event handlers.
 - Use `unknown` for truly unknown shapes, narrow with type guards.
 
 ## Naming
+
 - Components, types, interfaces: `PascalCase`
 - Functions, variables, hooks: `camelCase` (hooks prefixed `use`)
 - Constants: `UPPER_SNAKE_CASE`
 - Booleans: prefix `is`, `has`, `should`, `can`
 
 ## Components
+
 - Server Components by default in `app/`; add `"use client"` only when needed.
 - Feature components do not import from other feature directories.
 - Foundation components are shared across all features.
 
 ## Git
+
 - Conventional commits: `feat`, `fix`, `chore`, `docs`, `refactor`, `test`
 - Commit each successful change before moving to the next.
 - DQ deployment commits: `git -c user.email="dq.demo.a@digitalqatalyst.com" -c user.name="Sharavi" commit ...`
 
 ## Error handling
+
 - Fail fast; validate at boundaries (API routes, form submissions).
 - Never expose stack traces or internals in user-facing errors.
 - Use Next.js `error.tsx` for unexpected render errors.
 
 ## Testing
+
 - Tests live in `tests/unit/` and `tests/integration/`.
 - Test behaviour, not implementation.
 - Each public function/component has at least a smoke test.
@@ -576,34 +595,40 @@ Spec → Plan → Implement → Verify. Never implement without a plan for non-t
 # Accepted Tech Stack
 
 ## Core
+
 - **Framework:** Next.js 16 App Router
 - **Language:** TypeScript 5 strict
 - **Runtime:** Node.js 20+
 - **Package manager:** npm
 
 ## Styling
+
 - **CSS:** Tailwind CSS 4 (config via `globals.css`, no `tailwind.config.ts`)
 - **Components:** shadcn/ui base-nova style (RSC-enabled)
 - **Icons:** Lucide React
 - **Animations:** tw-animate-css + Framer Motion (existing animations)
 
 ## Data & State
+
 - **Database:** Supabase (PostgreSQL + RLS)
 - **Server state:** TanStack React Query v5
 - **Client state:** React Context (Auth, Cart, Catalog)
 - **Forms:** React Hook Form + Zod
 
 ## Testing
+
 - **Runner:** Vitest 4
 - **DOM:** React Testing Library + jsdom
 - **Assertions:** @testing-library/jest-dom
 
 ## Tooling
+
 - **Linting:** ESLint 9 + eslint-config-next + prettier
 - **Formatting:** Prettier 3
 - **Type checking:** tsc --noEmit
 
 ## Deployment
+
 - **Host:** Vercel (standalone Next.js output)
 - **CI trigger email:** dq.demo.a@digitalqatalyst.com
 ```
@@ -615,21 +640,25 @@ Spec → Plan → Implement → Verify. Never implement without a plan for non-t
 
 ## Layers
 ```
+
 Client tier (Next.js App Router, no business logic)
-  └── app/             Route handlers, layouts, pages (RSC by default)
-  └── components/      UI + feature components
-  └── lib/             Supabase client, hooks, utils, types
-  └── middleware.ts    Auth guards
+└── app/ Route handlers, layouts, pages (RSC by default)
+└── components/ UI + feature components
+└── lib/ Supabase client, hooks, utils, types
+└── middleware.ts Auth guards
 
 Supabase tier (PostgreSQL + RLS + PostgREST)
-  └── supabase/        Migrations, seed data
+└── supabase/ Migrations, seed data
+
 ```
 
 ## Component hierarchy
 ```
-components/foundation/   Shared across all features (nav, layout, auth, providers)
-components/features/     Feature-scoped (landing, marketplace, service-detail, etc.)
-components/ui/           shadcn/ui base primitives
+
+components/foundation/ Shared across all features (nav, layout, auth, providers)
+components/features/ Feature-scoped (landing, marketplace, service-detail, etc.)
+components/ui/ shadcn/ui base primitives
+
 ```
 
 ## Data flow
@@ -655,16 +684,19 @@ components/ui/           shadcn/ui base primitives
 # Database Architecture
 
 ## Supabase PostgreSQL
+
 - All schema changes via migrations in `supabase/migrations/`.
 - Types auto-generated in `lib/types/database.types.ts`.
 - Row Level Security (RLS) enforced at the database level.
 
 ## Client access
+
 - `lib/api/v1/client.ts` exports the typed Supabase client.
 - Use typed query helpers — never cast to `any` when reading Supabase results.
 - Server Components access Supabase via server-side client (no anon key exposure).
 
 ## Key tables (catalog)
+
 - Services, variants, pricing in the catalog schema.
 - Engagements, milestones, service orders in the delivery schema.
 - Users, organisations, roles in the auth/IAM schema.
@@ -676,21 +708,25 @@ components/ui/           shadcn/ui base primitives
 # Non-Functional Specifications
 
 ## Performance
+
 - Core Web Vitals: LCP < 2.5s, CLS < 0.1, INP < 200ms.
 - Marketplace and landing pages pre-rendered (SSG/ISR).
 - Dashboard pages server-rendered per request (SSR).
 
 ## Accessibility
+
 - WCAG 2.1 AA minimum.
 - Radix UI / shadcn/ui primitives handle keyboard and ARIA.
 - Colour contrast: DQ navy + white ≥ 7:1.
 
 ## Security
+
 - No secrets in client bundles — env vars prefixed `NEXT_PUBLIC_` only for safe values.
 - Contact form server-side validated before any external call.
 - Dashboard routes server-side session-checked in middleware.
 
 ## SEO
+
 - All public pages have canonical `<meta>` + OG tags via Next.js metadata API.
 - JSON-LD structured data on service detail pages.
 - `/sitemap.xml` and `/robots.txt` served from `public/`.
@@ -700,9 +736,11 @@ components/ui/           shadcn/ui base primitives
 
 ```markdown
 <!-- Generated from .ai/PROJECT_AI_STANDARDS.md -->
+
 When working in this repository, read `.ai/AGENTS.md` and `.ai/PROJECT_AI_STANDARDS.md` first.
 
 ## Core rules
+
 1. Follow Spec → Plan → Implement → Verify.
 2. Prime with `.ai/priming/*` before substantial work.
 3. Keep changes in scope and ask when ambiguous.
@@ -715,6 +753,7 @@ When working in this repository, read `.ai/AGENTS.md` and `.ai/PROJECT_AI_STANDA
 10. Complete linked task chains before concluding work.
 
 ## Project constraints
+
 - Route prefixes: `/discover` → `/explore`, `/workspace` → `/dashboard`.
 - Client tier only; domain logic belongs to Supabase/API layer.
 - Tests under `tests/`; docs under `docs/`; WIP under `scratch/`.
@@ -726,9 +765,11 @@ When working in this repository, read `.ai/AGENTS.md` and `.ai/PROJECT_AI_STANDA
 
 ```markdown
 <!-- Generated from .ai/PROJECT_AI_STANDARDS.md -->
+
 This repository is the TMaaS client-tier prototype using Next.js App Router, TypeScript strict mode, and route-grouped navigation.
 
 ## Core rules
+
 1. Follow Spec → Plan → Implement → Verify.
 2. Do not invent scope; ask when constraints are ambiguous.
 3. Prime with `.ai/priming/*` before substantial work.
@@ -741,11 +782,13 @@ This repository is the TMaaS client-tier prototype using Next.js App Router, Typ
 10. Complete discovered dependent fixes before marking done.
 
 ## Project constraints
+
 - Client tier only: no business logic in UI routes.
 - Tests live under `tests/` only.
 - Docs live under `docs/`; WIP goes to `scratch/`.
 
 ## References
+
 - `.ai/AGENTS.md`
 - `.ai/PROJECT_AI_STANDARDS.md`
 - `.ai/context.md`
@@ -792,6 +835,7 @@ This is the TMaaS client-tier prototype. Read `.ai/PROJECT_AI_STANDARDS.md` for 
 See `.ai/PROJECT_AI_STANDARDS.md` for the full rule set.
 
 Quick reference:
+
 - Strict TypeScript, no `any`
 - Next.js App Router, RSC by default
 - Tailwind 4 utility classes
@@ -822,6 +866,7 @@ git -c user.email="dq.demo.a@digitalqatalyst.com" -c user.name="Sharavi" commit 
 ## Task 4: Scaffold the Next.js app shell
 
 **Files:**
+
 - Create: `app/layout.tsx`, `app/page.tsx`, `app/globals.css`, `app/error.tsx`, `app/loading.tsx`, `app/not-found.tsx`
 - Create: `app/api/health/route.ts`
 - Migrate: `src/index.css` → `app/globals.css` (Tailwind 4 format)
@@ -835,8 +880,8 @@ Tailwind 4 uses a single `@import` — no `@tailwind base/components/utilities` 
 @import "tailwindcss";
 
 @theme {
-  --color-dq-navy: #030F35;
-  --color-dq-orange: #FB5535;
+  --color-dq-navy: #030f35;
+  --color-dq-orange: #fb5535;
   --font-sans: "Plus Jakarta Sans", sans-serif;
   --font-mono: "JetBrains Mono", monospace;
 }
@@ -979,6 +1024,7 @@ git -c user.email="dq.demo.a@digitalqatalyst.com" -c user.name="Sharavi" commit 
 ## Task 5: Set up lib/ layer
 
 **Files:**
+
 - Create: `lib/api/v1/client.ts`, `lib/api/v1/index.ts`
 - Create: `lib/auth/index.ts`
 - Create: `lib/config/index.ts`
@@ -1038,6 +1084,7 @@ export type { Database } from "./database.types";
 - [ ] **Step 6: Create `lib/utils/index.ts`**
 
 Read `src/lib/utils.ts` and copy its `cn` utility, plus collect the following from `src/lib/`:
+
 - `brandAccent.ts` content
 - `brandLinks.ts` content
 
@@ -1157,6 +1204,7 @@ mkdir -p "app/(auth)/sign-in"
 ```
 
 `app/(auth)/layout.tsx`:
+
 ```tsx
 export default function AuthLayout({ children }: { children: React.ReactNode }) {
   return <div className="min-h-screen bg-dq-navy">{children}</div>;
@@ -1164,6 +1212,7 @@ export default function AuthLayout({ children }: { children: React.ReactNode }) 
 ```
 
 `app/(auth)/sign-in/page.tsx`:
+
 ```tsx
 export default function SignInPage() {
   return <div>Sign In — TODO</div>;
@@ -1191,6 +1240,7 @@ mkdir -p app/explore app/marketplace/"[slug]" app/contact app/cart app/butler
 ```
 
 `app/marketplace/[slug]/page.tsx`:
+
 ```tsx
 export default function ServiceDetailPage({ params }: { params: { slug: string } }) {
   return <div>Service: {params.slug} — TODO</div>;
@@ -1212,6 +1262,7 @@ mkdir -p app/dashboard/dq/portfolio app/dashboard/dq/finance app/dashboard/dq/su
 ```
 
 `app/dashboard/layout.tsx`:
+
 ```tsx
 // Protected layout — session check enforced by middleware.ts
 export default function DashboardLayout({ children }: { children: React.ReactNode }) {
@@ -1230,7 +1281,7 @@ Read `api/contact.js` and port to Next.js Route Handler:
 import { NextRequest, NextResponse } from "next/server";
 
 export async function POST(request: NextRequest) {
-  const body = await request.json() as unknown;
+  const body = (await request.json()) as unknown;
   // Port validation logic from api/contact.js and api/contact-security.js
   // Return NextResponse.json({ success: true }) on success
   // Return NextResponse.json({ error: "..." }, { status: 400 }) on failure
@@ -1257,6 +1308,7 @@ git -c user.email="dq.demo.a@digitalqatalyst.com" -c user.name="Sharavi" commit 
 ## Task 7: Set up middleware and auth providers
 
 **Files:**
+
 - Create: `middleware.ts` (root)
 - Create: `components/foundation/providers/index.ts`, `components/foundation/providers/Providers.tsx`
 - Create: `components/foundation/auth/index.ts`
@@ -1330,7 +1382,7 @@ import { Providers } from "@/components/foundation/providers";
 // Inside RootLayout body:
 <body className="...">
   <Providers>{children}</Providers>
-</body>
+</body>;
 ```
 
 - [ ] **Step 5: Commit**
@@ -1344,6 +1396,7 @@ git -c user.email="dq.demo.a@digitalqatalyst.com" -c user.name="Sharavi" commit 
 ## Task 8: Migrate components to new structure
 
 **Files:**
+
 - Create: `components/foundation/navigation/Navbar.tsx`, `components/foundation/navigation/index.ts`
 - Create: `components/foundation/layouts/DashboardLayout.tsx`, `components/foundation/layouts/LegalPageLayout.tsx`, `components/foundation/layouts/index.ts`
 - Create: `components/foundation/seo/JsonLd.tsx`, `components/foundation/seo/index.ts`
@@ -1357,6 +1410,7 @@ npx shadcn@latest init
 ```
 
 When prompted:
+
 - Style: base-nova
 - Base color: neutral
 - CSS variables: yes
@@ -1381,6 +1435,7 @@ mkdir -p components/foundation/navigation
 ```
 
 Port each file, replacing:
+
 - React Router `<Link to="...">` → Next.js `<Link href="...">`
 - React Router `useNavigate` → `useRouter` from `next/navigation`
 - React Router `useLocation` → `usePathname` from `next/navigation`
@@ -1410,10 +1465,7 @@ Read `src/components/JsonLd.tsx` and port — this can be a pure RSC (no `"use c
 // components/foundation/seo/JsonLd.tsx
 export function JsonLd({ data }: { data: Record<string, unknown> }) {
   return (
-    <script
-      type="application/ld+json"
-      dangerouslySetInnerHTML={{ __html: JSON.stringify(data) }}
-    />
+    <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(data) }} />
   );
 }
 ```
@@ -1432,12 +1484,14 @@ mkdir -p components/features/dashboard
 ```
 
 For each directory:
+
 1. Copy relevant component files from `src/components/<domain>/`
 2. Swap all React Router APIs for Next.js equivalents
 3. Add `"use client"` to any component using hooks, event handlers, or browser APIs
 4. Create `index.ts` with barrel exports
 
 Mapping:
+
 - `src/components/site/` + `src/components/site/landing/` → `components/features/landing/`
 - `src/components/marketplace/` → `components/features/marketplace/`
 - `src/components/service-detail/` → `components/features/service-detail/`
@@ -1574,7 +1628,11 @@ Copy the title/description/OG values from the corresponding `src/lib/seoHead.ts`
 
 ```tsx
 // app/marketplace/[slug]/page.tsx
-export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
+export async function generateMetadata({
+  params,
+}: {
+  params: { slug: string };
+}): Promise<Metadata> {
   const { data } = await supabase
     .from("services")
     .select("name, description")
@@ -1606,6 +1664,7 @@ git -c user.email="dq.demo.a@digitalqatalyst.com" -c user.name="Sharavi" commit 
 ## Task 11: Migrate tests and delete src/
 
 **Files:**
+
 - Create: `tests/unit/` and `tests/integration/` (move from `src/`)
 - Delete: `src/` directory after all content is migrated
 
@@ -1663,6 +1722,7 @@ git -c user.email="dq.demo.a@digitalqatalyst.com" -c user.name="Sharavi" commit 
 ## Task 12: Update vercel.json and env config
 
 **Files:**
+
 - Modify: `vercel.json`
 - Modify: `.env.example`
 
@@ -1699,6 +1759,7 @@ git -c user.email="dq.demo.a@digitalqatalyst.com" -c user.name="Sharavi" commit 
 ## Task 13: Update docs and README
 
 **Files:**
+
 - Modify: `README.md`
 - Create: `docs/SETUP.md`, `docs/CHANGELOG.md`
 
@@ -1710,6 +1771,7 @@ git -c user.email="dq.demo.a@digitalqatalyst.com" -c user.name="Sharavi" commit 
 Technology Management as a Service marketplace by Digital Qatalyst.
 
 ## Stack
+
 - Next.js 16 · React 19 · TypeScript 5 (strict)
 - Tailwind CSS 4 · shadcn/ui (base-nova)
 - Supabase (PostgreSQL + RLS)
@@ -1717,23 +1779,26 @@ Technology Management as a Service marketplace by Digital Qatalyst.
 - Vercel (standalone)
 
 ## Development
+
 \`\`\`bash
 npm install
-cp .env.example .env.local  # fill in Supabase credentials
+cp .env.example .env.local # fill in Supabase credentials
 npm run dev
 \`\`\`
 
 ## Commands
-| Command | Description |
-|---------|-------------|
-| `npm run dev` | Start dev server |
-| `npm run build` | Production build |
-| `npm test` | Run tests |
+
+| Command             | Description                 |
+| ------------------- | --------------------------- |
+| `npm run dev`       | Start dev server            |
+| `npm run build`     | Production build            |
+| `npm test`          | Run tests                   |
 | `npm run typecheck` | Type-check without emitting |
-| `npm run lint` | Lint |
-| `npm run format` | Format with Prettier |
+| `npm run lint`      | Lint                        |
+| `npm run format`    | Format with Prettier        |
 
 ## AI Rules
+
 See `.ai/PROJECT_AI_STANDARDS.md` and `.ai/priming/` for agent context.
 ```
 
@@ -1743,26 +1808,32 @@ See `.ai/PROJECT_AI_STANDARDS.md` and `.ai/priming/` for agent context.
 # Setup Guide
 
 ## Prerequisites
+
 - Node.js 20+
 - npm 10+
 - Supabase project (or local Supabase via `supabase start`)
 
 ## Installation
+
 \`\`\`bash
 npm install
 cp .env.example .env.local
+
 # Fill NEXT_PUBLIC_SUPABASE_URL and NEXT_PUBLIC_SUPABASE_ANON_KEY
+
 \`\`\`
 
 ## Database
+
 \`\`\`bash
-npx supabase db push          # apply migrations
-npm run db:seed               # seed catalog data
+npx supabase db push # apply migrations
+npm run db:seed # seed catalog data
 \`\`\`
 
 ## Development
+
 \`\`\`bash
-npm run dev                   # http://localhost:3000
+npm run dev # http://localhost:3000
 \`\`\`
 ```
 
@@ -1777,6 +1848,7 @@ git -c user.email="dq.demo.a@digitalqatalyst.com" -c user.name="Sharavi" commit 
 ## Self-Review
 
 ### Spec coverage checklist
+
 - [x] Clean file tree — root clutter archived to `scratch/archive/` (Task 1)
 - [x] Next.js App Router — installed and configured (Task 2)
 - [x] Tailwind 4 — replaces Tailwind 3 (Task 2)
@@ -1794,10 +1866,12 @@ git -c user.email="dq.demo.a@digitalqatalyst.com" -c user.name="Sharavi" commit 
 - [x] Docs updated (Task 13)
 
 ### Placeholder scan
+
 - All tasks have concrete commands and code blocks.
 - Task 8 Step 5 says "copy relevant component files" — this is intentionally high-level because the file count is large; the mapping table specifies exactly which `src/` directories map to which `components/features/` directories. The engineer should read each source file and port it.
 
 ### Type consistency
+
 - `Database` type imported from `lib/types/database.types.ts` throughout
 - `supabase` client always imported from `@/lib/api/v1`
 - `cn` utility always from `@/lib/utils`
@@ -1808,6 +1882,7 @@ git -c user.email="dq.demo.a@digitalqatalyst.com" -c user.name="Sharavi" commit 
 ## Notes for executor
 
 1. **React Router → Next.js navigation swap** is the most pervasive change. Every `<Link to>`, `useNavigate`, `useLocation`, `useParams` must become the Next.js equivalent. A global grep before starting Task 8 is recommended:
+
    ```bash
    grep -r "react-router-dom" src/ --include="*.tsx" -l
    ```

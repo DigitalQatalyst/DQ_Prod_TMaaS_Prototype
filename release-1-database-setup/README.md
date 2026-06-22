@@ -6,15 +6,15 @@ Aligned with `workspace/dba-catalog-copy/handoff.md`.
 
 ## Apply order (migrations/)
 
-| # | File | Purpose |
-|---|------|---------|
-| 01–07 | `*_schema*.sql`, `pdp_content_extensions.sql` | Tables, views, search index, RLS |
-| 08 | `base_catalog_seed.sql` | Full catalog row structure (221 variants) |
-| 09 | `card_content.sql` | **Handoff** — unique card copy (UPDATE, idempotent) |
-| 10 | `pdp_content.sql` | **Handoff** — unique PDP copy (UPDATE, idempotent) |
-| 11 | `display_labels.sql` | Buyer-facing stage labels + product title renames |
-| 12 | `delivery_process.sql` | Assess / Managed How It Works lifecycles |
-| 13 | `featured_services.sql` | Homepage featured service rankings |
+| #     | File                                          | Purpose                                             |
+| ----- | --------------------------------------------- | --------------------------------------------------- |
+| 01–07 | `*_schema*.sql`, `pdp_content_extensions.sql` | Tables, views, search index, RLS                    |
+| 08    | `base_catalog_seed.sql`                       | Full catalog row structure (221 variants)           |
+| 09    | `card_content.sql`                            | **Handoff** — unique card copy (UPDATE, idempotent) |
+| 10    | `pdp_content.sql`                             | **Handoff** — unique PDP copy (UPDATE, idempotent)  |
+| 11    | `display_labels.sql`                          | Buyer-facing stage labels + product title renames   |
+| 12    | `delivery_process.sql`                        | Assess / Managed How It Works lifecycles            |
+| 13    | `featured_services.sql`                       | Homepage featured service rankings                  |
 
 ## Quick start
 
