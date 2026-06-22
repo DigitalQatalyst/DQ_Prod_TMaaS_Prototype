@@ -11,10 +11,11 @@ TMaaS (Transformation Management as a Service) marketplace prototype — Next.js
 
 ## [SECTION: Favicon / App Icons]
 
-- **Next.js App Router file-based metadata wins.** Put icons in `app/` (`favicon.ico`, `icon.png`, `apple-icon.png`). Do **not** rely on `metadata.icons` in `app/layout.tsx` alone — `app/favicon.ico` overrides it.
-- **Source asset:** `public/favicon.png` (DQ logo). Regenerate `app/favicon.ico` and `public/favicon.ico` from it when the logo changes; keep `app/icon.png` and `app/apple-icon.png` in sync.
-- **Remove stale assets:** delete legacy `public/favicon.svg` and old `app/favicon.ico` when replacing — browsers request `/favicon.ico` by default and cache aggressively.
-- **Verify:** `curl -s http://127.0.0.1:3000/ | grep -i 'rel="icon"'` should list hashed `/favicon.ico`, `/icon.png`, and `/apple-icon.png` routes.
+- **Next.js App Router file-based metadata wins.** Put icons in `app/` (`favicon.ico`, `icon.svg`, `apple-icon.png`). Do **not** rely on `metadata.icons` in `app/layout.tsx` alone — `app/favicon.ico` overrides it.
+- **Source asset:** `handoff/tmaas/favicon.svg` from `dq_brand_kit` (shared DQ mark). Copy to `app/icon.svg` and `public/favicon.svg`; regenerate PNG sizes (`favicon-16.png` … `favicon-512.png`) and `app/favicon.ico` / `public/favicon.ico` from it when the favicon changes; keep `app/apple-icon.png` (`favicon-180.png`) in sync.
+- **Product logos:** `public/brand/tmaas-logo.svg` (light surfaces) and `tmaas-logo-dark.svg` (dark surfaces). Nav uses the product lockup only — **do not** place the DQ monogram beside it (`TMaaSLogo.tsx`).
+- **Remove stale assets:** delete legacy `app/icon.png` and old favicon files when replacing — browsers request `/favicon.ico` by default and cache aggressively.
+- **Verify:** `curl -s http://127.0.0.1:3000/ | grep -i 'rel="icon"'` should list hashed `/favicon.ico`, `/icon.svg`, and `/apple-icon.png` routes.
 
 ## [SECTION: Database setup pack]
 
