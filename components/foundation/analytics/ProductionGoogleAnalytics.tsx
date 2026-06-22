@@ -1,8 +1,5 @@
 import Script from "next/script";
-import {
-  GA_MEASUREMENT_ID,
-  shouldLoadGoogleAnalytics,
-} from "@/lib/analytics/googleAnalytics";
+import { GA_MEASUREMENT_ID, shouldLoadGoogleAnalytics } from "@/lib/analytics/googleAnalytics";
 
 export function ProductionGoogleAnalytics() {
   if (!shouldLoadGoogleAnalytics()) {

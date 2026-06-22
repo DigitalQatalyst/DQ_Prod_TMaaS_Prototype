@@ -190,7 +190,9 @@ export default function MarketplacePageClient() {
   const totalPages = Math.max(1, Math.ceil(catalogServicesCount / PAGE_SIZE));
 
   useEffect(() => {
-    setCurrentPage(1);
+    startTransition(() => {
+      setCurrentPage(1);
+    });
   }, [
     activeTab,
     searchQuery,
@@ -202,7 +204,11 @@ export default function MarketplacePageClient() {
   ]);
 
   useEffect(() => {
-    if (currentPage > totalPages) setCurrentPage(totalPages);
+    if (currentPage > totalPages) {
+      startTransition(() => {
+        setCurrentPage(totalPages);
+      });
+    }
   }, [currentPage, totalPages]);
 
   const showingFrom = catalogServicesCount === 0 ? 0 : (currentPage - 1) * PAGE_SIZE + 1;
