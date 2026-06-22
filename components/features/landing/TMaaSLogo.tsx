@@ -1,28 +1,28 @@
 import Link from "next/link";
-import Image from "next/image";
-import dqLogoOrange from "@/assets/dq-logo-orange.png";
-import { PLATFORM_NAME } from "@/lib/brandLinks";
 
 interface TMaaSLogoProps {
   className?: string;
+  /** `light` = navy lockup on white surfaces; `dark` = white lockup on dark surfaces */
+  variant?: "light" | "dark";
 }
 
-export function TMaaSLogo({ className }: TMaaSLogoProps) {
+export function TMaaSLogo({ className, variant = "light" }: TMaaSLogoProps) {
+  const src =
+    variant === "dark" ? "/brand/tmaas-logo-dark.svg" : "/brand/tmaas-logo.svg";
+
   return (
     <Link
       href="/"
-      className={`flex items-center gap-3 transition-opacity hover:opacity-90 ${className ?? ""}`}
+      className={`inline-flex transition-opacity hover:opacity-90 ${className ?? ""}`}
     >
-      <Image
-        src={dqLogoOrange}
-        alt="Digital Qatalyst"
-        className="h-7 w-auto shrink-0"
-        height={28}
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img
+        src={src}
+        alt="TMaaS by DigitalQatalyst"
+        className="h-8 w-auto max-w-[min(100%,14rem)] shrink-0 sm:max-w-none"
+        width={213}
+        height={40}
       />
-      <span aria-hidden className="h-6 w-px shrink-0 bg-gray-200" />
-      <span className="max-w-[10.5rem] text-sm font-bold leading-tight text-dq-orange sm:max-w-none sm:text-base sm:leading-none">
-        {PLATFORM_NAME}
-      </span>
     </Link>
   );
 }
