@@ -24,7 +24,7 @@ export const metadata: Metadata = {
 
 export default function HomePage() {
   return (
-    <FeatureFlagGuard feature="homepage" redirectTo={getFirstEnabledRoute()}>
+    <FeatureFlagGuard feature="homepage" redirectTo={getFirstEnabledRoute("/")}>
       <div className="min-h-screen bg-white">
         <LandingNavbar />
         <main>
