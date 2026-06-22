@@ -1,7 +1,9 @@
 <!-- Generated from .ai/PROJECT_AI_STANDARDS.md -->
+
 This repository is the TMaaS client-tier prototype using Next.js App Router, TypeScript strict mode, and route-grouped navigation.
 
 ## Core rules
+
 1. Follow Spec → Plan → Implement → Verify.
 2. Do not invent scope; ask when constraints are ambiguous.
 3. Prime with `.ai/priming/*` before substantial work.
@@ -14,11 +16,13 @@ This repository is the TMaaS client-tier prototype using Next.js App Router, Typ
 10. Complete discovered dependent fixes before marking done.
 
 ## Project constraints
+
 - Client tier only: no business logic in UI routes.
 - Tests live under `tests/` only.
 - Docs live under `docs/`; WIP goes to `scratch/`.
 
 ## References
+
 - `.ai/AGENTS.md`
 - `.ai/PROJECT_AI_STANDARDS.md`
 - `.ai/context.md`

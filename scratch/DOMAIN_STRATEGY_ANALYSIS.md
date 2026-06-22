@@ -86,21 +86,22 @@ This is a simplification of Option 1 — same architecture, shorter URLs. Includ
 
 ### What leading B2B SaaS companies do
 
-| Company | Pattern | Example |
-|---------|---------|---------|
-| Salesforce | Product subdomains | `trailhead.salesforce.com`, `help.salesforce.com` |
-| HubSpot | Product subdomains | `app.hubspot.com`, `academy.hubspot.com`, `community.hubspot.com` |
-| Atlassian | Product subdomains | `jira.atlassian.com`, `confluence.atlassian.com` |
-| Google Workspace | Product subdomains | `mail.google.com`, `drive.google.com`, `docs.google.com` |
-| Microsoft 365 | Product subdomains | `teams.microsoft.com`, `outlook.live.com` |
-| Notion | Path-based (single app) | `notion.so/workspace/...` — single product, not comparable |
-| Linear | Subdomain per workspace | `linear.app` → `[team].linear.app` — multi-tenant, not comparable |
+| Company          | Pattern                 | Example                                                           |
+| ---------------- | ----------------------- | ----------------------------------------------------------------- |
+| Salesforce       | Product subdomains      | `trailhead.salesforce.com`, `help.salesforce.com`                 |
+| HubSpot          | Product subdomains      | `app.hubspot.com`, `academy.hubspot.com`, `community.hubspot.com` |
+| Atlassian        | Product subdomains      | `jira.atlassian.com`, `confluence.atlassian.com`                  |
+| Google Workspace | Product subdomains      | `mail.google.com`, `drive.google.com`, `docs.google.com`          |
+| Microsoft 365    | Product subdomains      | `teams.microsoft.com`, `outlook.live.com`                         |
+| Notion           | Path-based (single app) | `notion.so/workspace/...` — single product, not comparable        |
+| Linear           | Subdomain per workspace | `linear.app` → `[team].linear.app` — multi-tenant, not comparable |
 
 **The consistent pattern across enterprise SaaS:** subdomains for distinct products, paths for sections within a single product.
 
 ### When path-based is chosen
 
 Path-based product URLs (`example.com/product-a`) are typically seen in:
+
 - **Consumer web platforms** where SEO consolidation under one domain materially affects organic acquisition (e.g. Reddit, YouTube)
 - **Documentation sites** where all content is under one project (`docs.example.com/product-a/getting-started`)
 - **Single-page marketing sites** listing multiple offerings on one domain (not separate applications)
@@ -123,9 +124,9 @@ The only significant future consideration is **single sign-on** — when DQ intr
 
 ## Decision Required
 
-| Option | Infrastructure change | Code change | Recommended |
-|--------|-----------------------|-------------|-------------|
-| `tmaas.digitalqatalyst.com` (subdomains) | DNS record + Vercel domain | None | **Yes** |
-| `apps.digitalqatalyst.com/tmaas` (path-based) | DNS record + Vercel domain + gateway project | `basePath` in next.config.ts | No |
+| Option                                        | Infrastructure change                        | Code change                  | Recommended |
+| --------------------------------------------- | -------------------------------------------- | ---------------------------- | ----------- |
+| `tmaas.digitalqatalyst.com` (subdomains)      | DNS record + Vercel domain                   | None                         | **Yes**     |
+| `apps.digitalqatalyst.com/tmaas` (path-based) | DNS record + Vercel domain + gateway project | `basePath` in next.config.ts | No          |
 
 Approval to proceed with `tmaas.digitalqatalyst.com` and the subdomain pattern for all future DQ products?

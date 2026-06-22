@@ -252,7 +252,7 @@ export const DeliveryTab = () => {
           <CardHeader className="bg-slate-50/50 border-b border-navy-50">
             <CardTitle className="text-sm font-bold text-navy-900">Delivery Vision</CardTitle>
             <CardDescription className="text-sm text-navy-950 font-medium italic mt-1">
-              "{vision}"
+              &ldquo;{vision}&rdquo;
             </CardDescription>
           </CardHeader>
           <CardContent className="pt-6 grid gap-4 md:grid-cols-3">

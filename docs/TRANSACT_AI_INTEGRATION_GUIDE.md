@@ -25,6 +25,7 @@
 ## User Journey
 
 ### 1. Landing Page (Pre-Login)
+
 ```
 User visits TMaaS.com
     ↓
@@ -38,6 +39,7 @@ User clicks "Get Started" → Sign In
 ```
 
 ### 2. Dashboard (Post-Login)
+
 ```
 User signs in
     ↓
@@ -49,13 +51,14 @@ User clicks Mode 01 button
     ↓
 Mode 01 loads user profile (mock data)
     ↓
-Personalized greeting: "Welcome back, Sarah! 
+Personalized greeting: "Welcome back, Sarah!
 You have 3 active engagements and 2 pending actions."
 ```
 
 ## Integration Points
 
 ### 1. Dashboard Layout Component
+
 **File**: `src/components/DashboardLayout.tsx`
 
 ```typescript
@@ -71,25 +74,29 @@ const [transactAIOpen, setTransactAIOpen] = useState(false);
 </motion.button>
 
 // Dialog component
-<TransactAIMode01 
-  isOpen={transactAIOpen} 
-  onClose={() => setTransactAIOpen(false)} 
+<TransactAIMode01
+  isOpen={transactAIOpen}
+  onClose={() => setTransactAIOpen(false)}
 />
 ```
 
 ### 2. Mock Data Source
+
 **File**: `src/data/transactAI.ts`
 
 Contains:
+
 - `mockUserProfile` - Complete user profile with engagements
 - `mode01Templates` - Conversation templates
 - `mode01IntentPatterns` - Intent classification rules
 - `mode01QuickActions` - Quick action definitions
 
 ### 3. Mode 01 Component
+
 **File**: `src/components/TransactAIMode01.tsx`
 
 Key functions:
+
 - `classifyIntent()` - Determines user intent from message
 - `handleEngagementStatus()` - Shows engagement progress
 - `handleNextActions()` - Lists pending actions
@@ -125,6 +132,7 @@ User Interaction Loop:
 ## Example Conversations
 
 ### Scenario 1: Check Status
+
 ```
 User: "What's my status?"
 
@@ -134,13 +142,13 @@ Mode 01: "Here's your current engagement status:
    • Status: In Progress
    • Progress: 35%
    • Next Milestone: Architecture Workshop
-   
+
 2. Collaboration Platform Implementation
    • Status: Awaiting Inputs
    • Progress: 65%
    • Next Milestone: Design Review
    • Pending: 2 action(s)
-   
+
 3. Data Platform Modernisation
    • Status: In Progress
    • Progress: 30%
@@ -150,6 +158,7 @@ Mode 01: "Here's your current engagement status:
 ```
 
 ### Scenario 2: Pending Actions
+
 ```
 User: "What do I need to do?"
 
@@ -167,6 +176,7 @@ Would you like help with any of these?"
 ```
 
 ### Scenario 3: Recommendations
+
 ```
 User: "Give me recommendations"
 
@@ -186,6 +196,7 @@ Mode 01: "Based on your current status, here are my recommendations:
 ## Styling & Branding
 
 ### Color Scheme
+
 - **Primary Gradient**: Orange (#FF6B35) to Coral (#FF8C61) - TMaaS brand gradient
 - **Background**: Card background with border
 - **Text**: Foreground color with muted variants
@@ -193,12 +204,14 @@ Mode 01: "Based on your current status, here are my recommendations:
 - **Shadow**: Brand shadow with glow effect
 
 ### Visual Elements
+
 - **Icon**: Sparkles (representing AI intelligence)
 - **Badge**: "Post-Login" indicator with primary color
 - **Active Count**: Shows number of active engagements
 - **Typing Indicator**: Animated dots with "Analyzing your data..."
 
 ### Animations
+
 - **Entry**: Scale and fade in
 - **Exit**: Scale and fade out
 - **Hover**: Scale up (1.05x)
@@ -208,16 +221,19 @@ Mode 01: "Based on your current status, here are my recommendations:
 ## Responsive Design
 
 ### Desktop (1024px+)
+
 - Full-width dialog (max 672px)
 - Floating button bottom-right
 - Sidebar visible
 
 ### Tablet (768px - 1023px)
+
 - Adjusted dialog width
 - Floating button remains visible
 - Sidebar collapsible
 
 ### Mobile (< 768px)
+
 - Full-screen dialog
 - Floating button bottom-right
 - Sidebar hidden (hamburger menu)
@@ -263,6 +279,7 @@ Mode 01: "Based on your current status, here are my recommendations:
 ## Testing Scenarios
 
 ### Functional Tests
+
 - [ ] Open Mode 01 from Overview page
 - [ ] Open Mode 01 from Active Engagements page
 - [ ] Open Mode 01 from Calendar page
@@ -277,6 +294,7 @@ Mode 01: "Based on your current status, here are my recommendations:
 - [ ] Test send button
 
 ### Edge Cases
+
 - [ ] No pending actions
 - [ ] No upcoming sessions
 - [ ] All engagements completed
@@ -286,6 +304,7 @@ Mode 01: "Based on your current status, here are my recommendations:
 - [ ] Close during typing indicator
 
 ### Browser Compatibility
+
 - [ ] Chrome/Edge (Chromium)
 - [ ] Firefox
 - [ ] Safari
@@ -296,40 +315,39 @@ Mode 01: "Based on your current status, here are my recommendations:
 When ready to connect to real Supabase:
 
 1. **Replace Mock Data**
+
    ```typescript
    // Before (Mock)
    setUserProfile(mockUserProfile);
-   
+
    // After (Supabase)
    const { data, error } = await supabase
-     .from('user_profiles')
-     .select('*, engagements(*), sessions(*), documents(*)')
-     .eq('id', user.id)
+     .from("user_profiles")
+     .select("*, engagements(*), sessions(*), documents(*)")
+     .eq("id", user.id)
      .single();
-   
+
    setUserProfile(data);
    ```
 
 2. **Add Real-time Updates**
+
    ```typescript
    const subscription = supabase
-     .channel('user_updates')
-     .on('postgres_changes', 
-       { event: '*', schema: 'public', table: 'engagements' },
-       (payload) => {
-         // Update profile state
-       }
-     )
+     .channel("user_updates")
+     .on("postgres_changes", { event: "*", schema: "public", table: "engagements" }, (payload) => {
+       // Update profile state
+     })
      .subscribe();
    ```
 
 3. **Error Handling**
    ```typescript
    if (error) {
-     addAIMessage(
-       "I'm having trouble loading your profile. Please try again.",
-       ["Retry", "Contact Support"]
-     );
+     addAIMessage("I'm having trouble loading your profile. Please try again.", [
+       "Retry",
+       "Contact Support",
+     ]);
    }
    ```
 
@@ -353,15 +371,19 @@ When ready to connect to real Supabase:
 ### Common Issues
 
 **Issue**: Mode 01 button not appearing
+
 - **Solution**: Check DashboardLayout integration, verify z-index
 
 **Issue**: Profile not loading
+
 - **Solution**: Check mockUserProfile import, verify data structure
 
 **Issue**: Intent not recognized
+
 - **Solution**: Review mode01IntentPatterns, add new patterns if needed
 
 **Issue**: Quick replies not working
+
 - **Solution**: Check handleOptionClick mapping, verify navigation paths
 
 ### Future Enhancements

@@ -34,9 +34,7 @@ export const marketplaceEconomySectors = [
   { id: "wellness-4-0", label: "Wellness 4.0" },
 ] as const;
 
-export const marketplaceSectorIds = new Set(
-  marketplaceEconomySectors.map((sector) => sector.id)
-);
+export const marketplaceSectorIds = new Set(marketplaceEconomySectors.map((sector) => sector.id));
 
 export const marketplaceSectorLabels: Record<string, string> = Object.fromEntries(
   marketplaceEconomySectors.map((sector) => [sector.id, sector.label])

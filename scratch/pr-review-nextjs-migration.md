@@ -19,9 +19,9 @@ However, the branch has **10 confirmed high-severity issues** and **1 confirmed 
 
 ## 1. Critical Issues
 
-| # | File | Line | Issue | Impact |
-|---|------|------|-------|--------|
-| C1 | `vercel.json` | 14 | `script-src 'self' 'unsafe-inline'` in CSP header | Eliminates XSS protection entirely. Any inline script executes, defeating the purpose of the header. Static `vercel.json` headers cannot support nonces; the CSP must move into `middleware.ts` to allow per-request nonce injection via `NextResponse` headers and the Next.js script `nonce` prop. |
+| #   | File          | Line | Issue                                             | Impact                                                                                                                                                                                                                                                                                               |
+| --- | ------------- | ---- | ------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| C1  | `vercel.json` | 14   | `script-src 'self' 'unsafe-inline'` in CSP header | Eliminates XSS protection entirely. Any inline script executes, defeating the purpose of the header. Static `vercel.json` headers cannot support nonces; the CSP must move into `middleware.ts` to allow per-request nonce injection via `NextResponse` headers and the Next.js script `nonce` prop. |
 
 **Fix for C1:** Remove the CSP header from `vercel.json`. Add a `middleware.ts` function that generates a cryptographically random nonce per request (`crypto.randomUUID()` or `crypto.getRandomValues`), sets it on `<Script nonce={nonce}>` via `next/script`, and writes the header as `Content-Security-Policy: script-src 'self' 'nonce-{nonce}'`.
 
@@ -29,16 +29,16 @@ However, the branch has **10 confirmed high-severity issues** and **1 confirmed 
 
 ## 2. High-Severity Issues
 
-| # | File | Lines | Issue | Impact |
-|---|------|-------|-------|--------|
-| H1 | `middleware.ts` | 4, 18 | Auth guard only covers `/dashboard/:path*`; all other protected routes (`/settings`, `/profile`, `/admin`, non-health API routes) are unguarded | Unauthenticated access to any route outside `/dashboard` is possible with zero tooling |
-| H2 | `middleware.ts` | 4 | `hasSession` checks only that the `session_token` cookie key exists and is non-empty — no signature verification, expiry check, or server-side lookup | Any non-empty string in the cookie bypasses the guard; trivially exploitable |
-| H3 | *(no sign-in route)* | — | No code anywhere sets `session_token` with `HttpOnly`, `Secure`, or `SameSite` flags. The architectural intent is confirmed in plan/priming docs but no typed helper enforces secure attributes | When sign-in lands it will bake in an insecure cookie unless explicitly constrained |
-| H4 | `app/marketplace/_client.tsx` / `app/marketplace/page.tsx` | 38 / 11 | `useSearchParams()` called in client component rendered without a `<Suspense>` boundary | Hard build-time error: `useSearchParams() should be wrapped in a suspense boundary at page /marketplace` — entire route is broken |
-| H5 | `app/contact/_client.tsx` / `app/contact/page.tsx` | 108 / — | Same `useSearchParams()` without `<Suspense>` pattern as H4 | Same class of build-time error or forced dynamic rendering for `/contact` |
-| H6 | `app/marketplace/[slug]/_client.tsx` | 33 | `parseInt(slug \|\| "0", 10)` where `slug` is a kebab-case string like `ai-strategy-consulting` — `parseInt` returns `NaN` | Every marketplace service detail page renders "Service not found". Complete functional failure of the feature |
-| H7 | `app/marketplace/_client.tsx` | — | 494-line monolithic `"use client"` boundary includes `LandingNavbar`, `Footer`, hero section, and category nav — all static — pulling them into the client bundle | Blocks RSC streaming above-the-fold, inflates hydration payload, prevents Suspense streaming for static portions |
-| H8 | `lib/featureFlags.ts` / `lib/config/index.ts` | — | Verbatim duplicate `FeatureFlags` interface, `FeatureFlagService` class, `DEFAULT_FEATURE_FLAGS`, and all four helper exports. Two separate singleton instances exist in the module graph | Runtime mutations via one singleton are invisible to consumers of the other; divergent flag defaults silently possible |
+| #   | File                                                       | Lines   | Issue                                                                                                                                                                                           | Impact                                                                                                                            |
+| --- | ---------------------------------------------------------- | ------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------- |
+| H1  | `middleware.ts`                                            | 4, 18   | Auth guard only covers `/dashboard/:path*`; all other protected routes (`/settings`, `/profile`, `/admin`, non-health API routes) are unguarded                                                 | Unauthenticated access to any route outside `/dashboard` is possible with zero tooling                                            |
+| H2  | `middleware.ts`                                            | 4       | `hasSession` checks only that the `session_token` cookie key exists and is non-empty — no signature verification, expiry check, or server-side lookup                                           | Any non-empty string in the cookie bypasses the guard; trivially exploitable                                                      |
+| H3  | _(no sign-in route)_                                       | —       | No code anywhere sets `session_token` with `HttpOnly`, `Secure`, or `SameSite` flags. The architectural intent is confirmed in plan/priming docs but no typed helper enforces secure attributes | When sign-in lands it will bake in an insecure cookie unless explicitly constrained                                               |
+| H4  | `app/marketplace/_client.tsx` / `app/marketplace/page.tsx` | 38 / 11 | `useSearchParams()` called in client component rendered without a `<Suspense>` boundary                                                                                                         | Hard build-time error: `useSearchParams() should be wrapped in a suspense boundary at page /marketplace` — entire route is broken |
+| H5  | `app/contact/_client.tsx` / `app/contact/page.tsx`         | 108 / — | Same `useSearchParams()` without `<Suspense>` pattern as H4                                                                                                                                     | Same class of build-time error or forced dynamic rendering for `/contact`                                                         |
+| H6  | `app/marketplace/[slug]/_client.tsx`                       | 33      | `parseInt(slug \|\| "0", 10)` where `slug` is a kebab-case string like `ai-strategy-consulting` — `parseInt` returns `NaN`                                                                      | Every marketplace service detail page renders "Service not found". Complete functional failure of the feature                     |
+| H7  | `app/marketplace/_client.tsx`                              | —       | 494-line monolithic `"use client"` boundary includes `LandingNavbar`, `Footer`, hero section, and category nav — all static — pulling them into the client bundle                               | Blocks RSC streaming above-the-fold, inflates hydration payload, prevents Suspense streaming for static portions                  |
+| H8  | `lib/featureFlags.ts` / `lib/config/index.ts`              | —       | Verbatim duplicate `FeatureFlags` interface, `FeatureFlagService` class, `DEFAULT_FEATURE_FLAGS`, and all four helper exports. Two separate singleton instances exist in the module graph       | Runtime mutations via one singleton are invisible to consumers of the other; divergent flag defaults silently possible            |
 
 ### Fix Guidance
 
@@ -47,7 +47,7 @@ However, the branch has **10 confirmed high-severity issues** and **1 confirmed 
 ```ts
 // middleware.ts — illustrative
 export const config = {
-  matcher: ['/dashboard/:path*', '/settings/:path*', '/profile/:path*', '/admin/:path*'],
+  matcher: ["/dashboard/:path*", "/settings/:path*", "/profile/:path*", "/admin/:path*"],
 };
 
 async function validateSession(token: string): Promise<boolean> {
@@ -59,11 +59,11 @@ async function validateSession(token: string): Promise<boolean> {
 
 ```ts
 export function setSessionCookie(res: NextResponse, token: string) {
-  res.cookies.set('session_token', token, {
+  res.cookies.set("session_token", token, {
     httpOnly: true,
-    secure: process.env.NODE_ENV === 'production',
-    sameSite: 'lax',
-    path: '/',
+    secure: process.env.NODE_ENV === "production",
+    sameSite: "lax",
+    path: "/",
     maxAge: 60 * 60 * 24 * 7, // 7 days
   });
 }
@@ -73,7 +73,7 @@ export function setSessionCookie(res: NextResponse, token: string) {
 
 ```tsx
 // app/marketplace/page.tsx
-import { Suspense } from 'react';
+import { Suspense } from "react";
 export default function MarketplacePage() {
   return (
     <Suspense fallback={<MarketplaceSkeleton />}>
@@ -91,7 +91,7 @@ Apply the same pattern to `app/contact/page.tsx`.
 // Before
 const variantId = parseInt(slug || "0", 10);
 // After
-const serviceSlug = slug ?? '';
+const serviceSlug = slug ?? "";
 ```
 
 `useServiceDetail` should accept a string slug and query by slug, not by numeric ID.
@@ -104,25 +104,25 @@ const serviceSlug = slug ?? '';
 
 ## 3. Medium and Low Issues
 
-| # | Severity | File | Issue | Dimension |
-|---|----------|------|-------|-----------|
-| M1 | medium | `components/foundation/seo/JsonLd.tsx:9` | `dangerouslySetInnerHTML` with `JSON.stringify(data)` — `</script>` or Unicode line terminators in API-sourced data can break out of the script block | Security |
-| M2 | medium | `lib/api/v1/client.ts:4` | Module is dead code (zero importers) but if ever imported server-side it uses the anon key instead of service-role key | Security |
-| M3 | low | `app/api/health/route.ts:3` | No `Cache-Control: no-store` header; no rate limiting on public liveness endpoint | Security |
-| M4 | medium | `app/marketplace/[slug]/page.tsx:26` | Page export is not `async` but `generateMetadata` awaits `params` — inconsistency in Promise handling at the RSC boundary | Correctness |
-| M5 | low | `app/page.tsx:16` | `metadata` export declared mid-file between import blocks | Correctness |
-| M6 | medium | `app/marketplace/` | No `loading.tsx` for the marketplace route segment — root `app/loading.tsx` does not fire on client-side navigations to `/marketplace` | Performance |
-| M7 | medium | `components/foundation/providers/Providers.tsx:10` | Global `staleTime: 60_000` (1 min) for static catalog data causes unnecessary refetches and visible loading flicker | Performance |
-| M8 | medium | `app/layout.tsx:6` | Three Google Fonts loaded without explicit weight arrays — may load all available weights (100–900 kB extra) | Performance |
-| M9 | medium | `next.config.ts:3` | No `images.remotePatterns` — external image URLs (Supabase storage, CDN) will fail at runtime with no build-time warning | Performance |
-| M10 | medium | `components/features/landing/IndustrySolutionsSection.tsx:1` | Raw `<img>` tag instead of `next/image` — no WebP/AVIF, no lazy loading, no CLS prevention | Performance |
-| M11 | low | `app/marketplace/_client.tsx:37` | 30+ dashboard `page.tsx` files marked `"use client"` — server-shell pattern not applied to dashboard routes | Performance |
-| M12 | medium | `lib/catalog/index.ts:1` | 408-line file aggregates types, display labels, and filter logic; old flat files (`lib/marketplaceDisplayLabels.ts`, etc.) still exist alongside it — two competing source locations | Maintainability |
-| M13 | medium | `tests/unit/seoHead.test.ts:13` | Entire test file permanently skipped with `describe.skip`; no replacement tests for `lib/seo/index.ts` logic | Maintainability |
-| M14 | medium | `app/api/contact/route.ts:37` | `// TODO: send email via email provider / store in Supabase` — route accepts submissions but silently discards all data | Maintainability |
-| M15 | medium | `lib/api/v1/client.ts:1` | Dead code — zero importers; actual code still routes through untyped `lib/supabase.ts` with `VITE_*` env var fallbacks | Maintainability |
-| M16 | medium | `lib/supabase.ts` | Active Supabase client has `VITE_SUPABASE_URL` / `VITE_SUPABASE_ANON_KEY` fallbacks — these env vars are never defined in a Next.js environment, masking misconfiguration | Maintainability |
-| M17 | low | `.ai/AGENTS.md:1` | References `context.md` and priming files not verified to exist; no CI check to assert their presence | Maintainability |
+| #   | Severity | File                                                         | Issue                                                                                                                                                                                | Dimension       |
+| --- | -------- | ------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | --------------- |
+| M1  | medium   | `components/foundation/seo/JsonLd.tsx:9`                     | `dangerouslySetInnerHTML` with `JSON.stringify(data)` — `</script>` or Unicode line terminators in API-sourced data can break out of the script block                                | Security        |
+| M2  | medium   | `lib/api/v1/client.ts:4`                                     | Module is dead code (zero importers) but if ever imported server-side it uses the anon key instead of service-role key                                                               | Security        |
+| M3  | low      | `app/api/health/route.ts:3`                                  | No `Cache-Control: no-store` header; no rate limiting on public liveness endpoint                                                                                                    | Security        |
+| M4  | medium   | `app/marketplace/[slug]/page.tsx:26`                         | Page export is not `async` but `generateMetadata` awaits `params` — inconsistency in Promise handling at the RSC boundary                                                            | Correctness     |
+| M5  | low      | `app/page.tsx:16`                                            | `metadata` export declared mid-file between import blocks                                                                                                                            | Correctness     |
+| M6  | medium   | `app/marketplace/`                                           | No `loading.tsx` for the marketplace route segment — root `app/loading.tsx` does not fire on client-side navigations to `/marketplace`                                               | Performance     |
+| M7  | medium   | `components/foundation/providers/Providers.tsx:10`           | Global `staleTime: 60_000` (1 min) for static catalog data causes unnecessary refetches and visible loading flicker                                                                  | Performance     |
+| M8  | medium   | `app/layout.tsx:6`                                           | Three Google Fonts loaded without explicit weight arrays — may load all available weights (100–900 kB extra)                                                                         | Performance     |
+| M9  | medium   | `next.config.ts:3`                                           | No `images.remotePatterns` — external image URLs (Supabase storage, CDN) will fail at runtime with no build-time warning                                                             | Performance     |
+| M10 | medium   | `components/features/landing/IndustrySolutionsSection.tsx:1` | Raw `<img>` tag instead of `next/image` — no WebP/AVIF, no lazy loading, no CLS prevention                                                                                           | Performance     |
+| M11 | low      | `app/marketplace/_client.tsx:37`                             | 30+ dashboard `page.tsx` files marked `"use client"` — server-shell pattern not applied to dashboard routes                                                                          | Performance     |
+| M12 | medium   | `lib/catalog/index.ts:1`                                     | 408-line file aggregates types, display labels, and filter logic; old flat files (`lib/marketplaceDisplayLabels.ts`, etc.) still exist alongside it — two competing source locations | Maintainability |
+| M13 | medium   | `tests/unit/seoHead.test.ts:13`                              | Entire test file permanently skipped with `describe.skip`; no replacement tests for `lib/seo/index.ts` logic                                                                         | Maintainability |
+| M14 | medium   | `app/api/contact/route.ts:37`                                | `// TODO: send email via email provider / store in Supabase` — route accepts submissions but silently discards all data                                                              | Maintainability |
+| M15 | medium   | `lib/api/v1/client.ts:1`                                     | Dead code — zero importers; actual code still routes through untyped `lib/supabase.ts` with `VITE_*` env var fallbacks                                                               | Maintainability |
+| M16 | medium   | `lib/supabase.ts`                                            | Active Supabase client has `VITE_SUPABASE_URL` / `VITE_SUPABASE_ANON_KEY` fallbacks — these env vars are never defined in a Next.js environment, masking misconfiguration            | Maintainability |
+| M17 | low      | `.ai/AGENTS.md:1`                                            | References `context.md` and priming files not verified to exist; no CI check to assert their presence                                                                                | Maintainability |
 
 ### Key Suggestions
 

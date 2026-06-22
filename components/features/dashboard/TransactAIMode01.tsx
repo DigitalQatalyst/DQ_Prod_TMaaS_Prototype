@@ -17,6 +17,7 @@ import {
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import { useRouter } from "next/navigation";
 import { useAuth } from "@/contexts/AuthContext"; // TODO: Task 9 — wire up context;
 import {
   mockUserProfile,
@@ -41,12 +42,13 @@ interface Message {
     engagementId?: string;
     sessionId?: string;
     intent?: string;
-    contextData?: any;
+    contextData?: Record<string, unknown>;
   };
 }
 
 const TransactAIMode01 = ({ isOpen, onClose }: TransactAIMode01Props) => {
   const { user } = useAuth();
+  const router = useRouter();
   const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState("");
   const [isTyping, setIsTyping] = useState(false);
@@ -61,6 +63,27 @@ const TransactAIMode01 = ({ isOpen, onClose }: TransactAIMode01Props) => {
   useEffect(() => {
     scrollToBottom();
   }, [messages, isTyping]);
+
+  const addAIMessage = (content: string, options?: string[], metadata?: Message["metadata"]) => {
+    setIsTyping(true);
+
+    // Simulate realistic response time
+    const responseTime = Math.random() * 1000 + 600;
+
+    setTimeout(() => {
+      setIsTyping(false);
+      setMessages((prev) => [
+        ...prev,
+        {
+          id: Date.now().toString(),
+          type: "ai" as const,
+          content,
+          options,
+          metadata,
+        } as Message,
+      ]);
+    }, responseTime);
+  };
 
   // Initialize session - Load user profile from "Supabase" (mock data)
   useEffect(() => {
@@ -93,28 +116,8 @@ const TransactAIMode01 = ({ isOpen, onClose }: TransactAIMode01Props) => {
         );
       }, 800);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isOpen, sessionInitialized]);
-
-  const addAIMessage = (content: string, options?: string[], metadata?: Message["metadata"]) => {
-    setIsTyping(true);
-
-    // Simulate realistic response time
-    const responseTime = Math.random() * 1000 + 600;
-
-    setTimeout(() => {
-      setIsTyping(false);
-      setMessages((prev) => [
-        ...prev,
-        {
-          id: Date.now().toString(),
-          type: "ai" as const,
-          content,
-          options,
-          metadata,
-        } as Message,
-      ]);
-    }, responseTime);
-  };
 
   const addUserMessage = (content: string) => {
     setMessages((prev) => [
@@ -469,23 +472,23 @@ const TransactAIMode01 = ({ isOpen, onClose }: TransactAIMode01Props) => {
 
     // Navigation options
     if (option === "Go to Inbox") {
-      window.location.href = "/dashboard/inbox";
+      router.push("/dashboard/inbox");
       return;
     }
     if (option === "Active Engagements") {
-      window.location.href = "/dashboard/services";
+      router.push("/dashboard/services");
       return;
     }
     if (option === "Calendar") {
-      window.location.href = "/dashboard/calendar";
+      router.push("/dashboard/calendar");
       return;
     }
     if (option === "Documents") {
-      window.location.href = "/dashboard/documents";
+      router.push("/dashboard/documents");
       return;
     }
     if (option === "Organisation Profile") {
-      window.location.href = "/dashboard/profile";
+      router.push("/dashboard/profile");
       return;
     }
 

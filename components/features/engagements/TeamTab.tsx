@@ -70,21 +70,21 @@ export const TeamTab = () => {
                     className="flex items-center gap-1.5 bg-slate-50 px-2 py-1 rounded"
                   >
                     <Package size={12} className="text-gray-400" />{" "}
-                    {(member as any).assignments?.deliverables || 0}
+                    {member.assignments?.deliverables || 0}
                   </span>
                   <span
                     title="Tasks"
                     className="flex items-center gap-1.5 bg-slate-50 px-2 py-1 rounded"
                   >
                     <CheckSquare size={12} className="text-gray-400" />{" "}
-                    {(member as any).assignments?.tasks || 0}
+                    {member.assignments?.tasks || 0}
                   </span>
                   <span
                     title="RAID Items"
                     className="flex items-center gap-1.5 bg-slate-50 px-2 py-1 rounded"
                   >
                     <AlertTriangle size={12} className="text-gray-400" />{" "}
-                    {(member as any).assignments?.raid || 0}
+                    {member.assignments?.raid || 0}
                   </span>
                 </div>
                 <Dialog>

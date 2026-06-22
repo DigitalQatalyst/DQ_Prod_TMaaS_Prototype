@@ -8,8 +8,7 @@ export const LAUNCH_ADVISORY_NAV_CTA_LABEL = "Claim Your Free Advisory";
 
 export const LAUNCH_ADVISORY_EYEBROW = "Limited launch offer";
 
-export const LAUNCH_ADVISORY_HEADLINE =
-  "3 months of transformation advisory, free.";
+export const LAUNCH_ADVISORY_HEADLINE = "3 months of transformation advisory, free.";
 
 export const LAUNCH_ADVISORY_SUBCOPY =
   "Expert guidance from day one. No fee to get started. Terms apply.";

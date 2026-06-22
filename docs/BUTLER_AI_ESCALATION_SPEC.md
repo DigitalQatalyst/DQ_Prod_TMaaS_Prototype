@@ -15,9 +15,11 @@ Butler.AI implements a **two-path escalation system** that collects visitor cont
 ## Escalation Paths
 
 ### **Path 1: Direct Contact Request**
+
 **Trigger**: User clicks "Contact the team" option in FAQ responses
 
 **Entry Points**:
+
 - FAQ: "What is TMaaS?" → Options include "Contact the team"
 - FAQ: "What does it cost?" → Options include "Contact the team"
 - Any message with "Contact the team" chip
@@ -27,9 +29,11 @@ Butler.AI implements a **two-path escalation system** that collects visitor cont
 ---
 
 ### **Path 2: Automatic Escalation**
+
 **Trigger**: After 3 consecutive unresolved queries
 
 **Definition of "Unresolved Query"**:
+
 - User types free-text input that Butler cannot match to:
   - Known goal selection (4 transformation goals)
   - Journey stage selection (4 stages)
@@ -38,6 +42,7 @@ Butler.AI implements a **two-path escalation system** that collects visitor cont
   - Contact form responses (when form is active)
 
 **Escalation Counter Logic**:
+
 ```
 Query 1 (unresolved) → Counter = 1 → Show fallback with FAQ options
 Query 2 (unresolved) → Counter = 2 → Show fallback with FAQ options
@@ -45,12 +50,14 @@ Query 3 (unresolved) → Counter = 3 → Trigger escalation
 ```
 
 **Counter Reset Conditions**:
+
 - User clicks any FAQ option
 - User selects a goal or journey stage
 - User navigates to a service
 - Escalation is triggered (counter resets to 0)
 
 **Escalation Message**:
+
 ```
 "I wasn't able to find a clear answer for that. Would you like me to connect you with the TMaaS team?"
 
@@ -58,6 +65,7 @@ Query 3 (unresolved) → Counter = 3 → Trigger escalation
 ```
 
 **User Actions**:
+
 - Clicks "Contact the team" → Starts contact form (Step 1)
 - Clicks "Try asking something else" → Returns to normal conversation, counter resets
 
@@ -68,6 +76,7 @@ Query 3 (unresolved) → Counter = 3 → Trigger escalation
 ### **Step 1: Name Collection**
 
 **Butler Message**:
+
 ```
 "I'd be happy to connect you with our team. What's your name?"
 ```
@@ -83,6 +92,7 @@ Query 3 (unresolved) → Counter = 3 → Trigger escalation
 ### **Step 2: Email Collection**
 
 **Butler Message**:
+
 ```
 "Great! What's your email address?"
 ```
@@ -98,6 +108,7 @@ Query 3 (unresolved) → Counter = 3 → Trigger escalation
 ### **Step 3: Reason Collection**
 
 **Butler Message**:
+
 ```
 "Perfect! What would you like to discuss with our team?"
 ```
@@ -113,11 +124,13 @@ Query 3 (unresolved) → Counter = 3 → Trigger escalation
 ### **Step 4: Confirmation**
 
 **Butler Message**:
+
 ```
 "Thank you, [Name]! Our team will review your request and get back to you at [email] within 24 hours."
 ```
 
 **Variables**:
+
 - `[Name]`: User's name from Step 1
 - `[email]`: User's email from Step 2
 
@@ -130,6 +143,7 @@ Query 3 (unresolved) → Counter = 3 → Trigger escalation
 ## Data Capture & Logging
 
 ### **Contact Request Object**
+
 ```javascript
 {
   timestamp: "2026-04-14T13:45:30.123Z",
@@ -152,11 +166,13 @@ Query 3 (unresolved) → Counter = 3 → Trigger escalation
 ```
 
 ### **Console Logging** (Development)
+
 ```javascript
 console.log("📧 CONTACT REQUEST:", contactRequestObject);
 ```
 
 ### **Production Integration Points**
+
 - **CRM Integration**: POST to `/api/contact-requests`
 - **Email Notification**: Send to `support@digitalqatalyst.com`
 - **Slack Notification**: Post to `#tmaas-leads` channel
@@ -167,11 +183,13 @@ console.log("📧 CONTACT REQUEST:", contactRequestObject);
 ## User Experience Considerations
 
 ### **Form State Management**
+
 - Form state persists across messages
 - User cannot exit form mid-flow (must complete or refresh page)
 - Form data is stored in component state until submission
 
 ### **Error Handling**
+
 - No validation errors in prototype
 - Production should handle:
   - Invalid email format
@@ -179,6 +197,7 @@ console.log("📧 CONTACT REQUEST:", contactRequestObject);
   - Network errors on submission
 
 ### **Conversation Context**
+
 - Butler maintains awareness of previous conversation
 - Confirmation message references user's name
 - Logged data includes full conversation history for team context
@@ -190,6 +209,7 @@ console.log("📧 CONTACT REQUEST:", contactRequestObject);
 ### **Query 1-2: Unresolved**
 
 **Butler Message**:
+
 ```
 "I'm not sure I understood that. Here are some things I can help with:"
 
@@ -199,6 +219,7 @@ console.log("📧 CONTACT REQUEST:", contactRequestObject);
 **Purpose**: Give user structured options before escalating
 
 **User Actions**:
+
 - Click any FAQ option → Resets counter, shows FAQ response
 - Type another query → Increments counter
 
@@ -207,16 +228,19 @@ console.log("📧 CONTACT REQUEST:", contactRequestObject);
 ## Edge Cases
 
 ### **User Abandons Form Mid-Flow**
+
 - **Scenario**: User closes dialog during Step 1, 2, or 3
 - **Behavior**: Form state is lost, counter resets
 - **Next Session**: User starts fresh
 
 ### **User Triggers Escalation Multiple Times**
+
 - **Scenario**: User completes form, continues asking unresolved questions
 - **Behavior**: Counter can trigger escalation again
 - **Each submission**: Logged separately
 
 ### **User Types "Contact the team" as Free Text**
+
 - **Scenario**: User types the phrase instead of clicking button
 - **Behavior**: Treated as unresolved query (increments counter)
 - **Recommendation**: Add text matching for common phrases
@@ -226,16 +250,19 @@ console.log("📧 CONTACT REQUEST:", contactRequestObject);
 ## Success Metrics
 
 ### **Escalation Metrics**
+
 - **Escalation Rate**: % of conversations that trigger escalation
 - **Escalation Resolution**: % of escalations that complete contact form
 - **Average Queries to Escalation**: Typically 3 (by design)
 
 ### **Contact Form Metrics**
+
 - **Form Start Rate**: % who click "Contact the team"
 - **Form Completion Rate**: % who complete all 3 steps
 - **Form Abandonment**: % who exit at Step 1, 2, or 3
 
 ### **Response Time Metrics** (Production)
+
 - **Time to First Response**: Team response time to contact requests
 - **Resolution Time**: Time from contact to issue resolution
 
@@ -244,6 +271,7 @@ console.log("📧 CONTACT REQUEST:", contactRequestObject);
 ## Implementation Status
 
 ### **✅ Implemented**
+
 - [x] Unresolved query counter
 - [x] Escalation trigger after 3 queries
 - [x] Fallback messages with FAQ options
@@ -256,6 +284,7 @@ console.log("📧 CONTACT REQUEST:", contactRequestObject);
 - [x] Form state management
 
 ### **🔄 Production Ready**
+
 - [ ] Email validation
 - [ ] API integration for contact submission
 - [ ] CRM integration
@@ -270,6 +299,7 @@ console.log("📧 CONTACT REQUEST:", contactRequestObject);
 ## Testing Scenarios
 
 ### **Test 1: Direct Contact Request**
+
 1. User clicks "What is TMaaS?"
 2. Butler shows FAQ response with "Contact the team" option
 3. User clicks "Contact the team"
@@ -283,6 +313,7 @@ console.log("📧 CONTACT REQUEST:", contactRequestObject);
 ---
 
 ### **Test 2: Escalation After 3 Unresolved Queries**
+
 1. User types "random question 1"
 2. Butler shows fallback with FAQ options
 3. User types "random question 2"
@@ -297,6 +328,7 @@ console.log("📧 CONTACT REQUEST:", contactRequestObject);
 ---
 
 ### **Test 3: Counter Reset**
+
 1. User types "random question 1" (counter = 1)
 2. Butler shows fallback
 3. User clicks "What is TMaaS?" (counter resets)
@@ -308,6 +340,7 @@ console.log("📧 CONTACT REQUEST:", contactRequestObject);
 ---
 
 ### **Test 4: Form Abandonment**
+
 1. Trigger escalation
 2. Click "Contact the team"
 3. Provide name
@@ -321,23 +354,26 @@ console.log("📧 CONTACT REQUEST:", contactRequestObject);
 ## Code References
 
 ### **Files**
+
 - `src/components/DiagnoseDialog.tsx` - Main escalation logic
 - `src/data/butlerAI.ts` - Escalation messages and FAQ options
 
 ### **Key Functions**
+
 - `handleUserMessage()` - Processes unresolved queries, triggers escalation
 - `handleOptionClick()` - Handles "Contact the team" button click
 - Contact form state: `contactFormStep`, `contactFormData`, `showContactForm`
 
 ### **State Variables**
+
 ```typescript
 const [unresolvedCount, setUnresolvedCount] = useState(0);
 const [showContactForm, setShowContactForm] = useState(false);
 const [contactFormStep, setContactFormStep] = useState(0);
-const [contactFormData, setContactFormData] = useState({ 
-  name: "", 
-  email: "", 
-  reason: "" 
+const [contactFormData, setContactFormData] = useState({
+  name: "",
+  email: "",
+  reason: "",
 });
 ```
 
@@ -346,16 +382,19 @@ const [contactFormData, setContactFormData] = useState({
 ## Future Enhancements
 
 ### **Phase 2: Smart Escalation**
+
 - Detect frustration in user messages
 - Offer escalation proactively before 3 queries
 - Sentiment analysis on user input
 
 ### **Phase 3: Live Agent Handoff**
+
 - Real-time chat with team member
 - Queue management for multiple requests
 - Agent availability status
 
 ### **Phase 4: Self-Service Resolution**
+
 - Suggest related FAQ articles
 - Link to documentation
 - Video tutorials for common questions
@@ -365,17 +404,20 @@ const [contactFormData, setContactFormData] = useState({
 ## Compliance & Privacy
 
 ### **Data Collection**
+
 - **What we collect**: Name, email, reason, conversation history
 - **Purpose**: To respond to visitor inquiries
 - **Storage**: Logged to console (dev), sent to CRM (production)
 - **Retention**: Per company data retention policy
 
 ### **User Consent**
+
 - Implicit consent by submitting form
 - Privacy policy link in footer
 - No sensitive data collected in prototype
 
 ### **GDPR Considerations** (Production)
+
 - Right to access collected data
 - Right to deletion
 - Data processing agreement with CRM provider

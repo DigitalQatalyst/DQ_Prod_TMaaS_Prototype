@@ -3,6 +3,7 @@
 See `.ai/PROJECT_AI_STANDARDS.md` for the full rule set.
 
 Quick reference:
+
 - Strict TypeScript, no `any`
 - Next.js App Router, RSC by default
 - Tailwind 4 utility classes

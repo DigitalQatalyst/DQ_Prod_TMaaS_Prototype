@@ -62,7 +62,7 @@ export function CatalogProvider({ children }: { children: ReactNode }) {
         return changed ? next : prev;
       });
     },
-    [useRemote],
+    [useRemote]
   );
 
   const services = useMemo(() => {

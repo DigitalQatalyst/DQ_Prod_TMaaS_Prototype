@@ -53,9 +53,17 @@ describe("filterCatalogServices", () => {
 
   it("filters services by Economy 4.0 sector tags", () => {
     const farmingTag = sectorIdToCatalogTag("farming-4-0");
-    const farmingServices = initialServices.filter((service) => service.tags.includes(farmingTag));
+    const farmingService: ServiceProduct = {
+      ...initialServices[0]!,
+      id: 9998,
+      tags: [...(initialServices[0]!.tags ?? []), farmingTag],
+    };
+    const catalogWithFarming = [...initialServices, farmingService];
+    const farmingServices = catalogWithFarming.filter((service) =>
+      service.tags.includes(farmingTag)
+    );
 
-    const filtered = filterCatalogServices(initialServices, {
+    const filtered = filterCatalogServices(catalogWithFarming, {
       activeTab: "all",
       searchQuery: "",
       selectedCategories: [],
@@ -72,8 +80,8 @@ describe("filterCatalogServices", () => {
   });
 
   it("matches sector remix titles when catalog tags are absent", () => {
-    const service = {
-      ...initialServices[0],
+    const service: ServiceProduct = {
+      ...initialServices[0]!,
       id: 9999,
       tags: [],
       remixName: { "government-4-0": "Government Remix Title" },
