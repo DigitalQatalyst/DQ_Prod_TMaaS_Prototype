@@ -115,7 +115,7 @@ const ClientEngagements = () => {
               </div>
               <h3 className="mb-1 text-lg font-semibold text-foreground">No active projects</h3>
               <p className="text-sm text-muted-foreground max-w-md">
-                You don't have any active projects at the moment. Check Service Orders for your
+                You don&apos;t have any active projects at the moment. Check Service Orders for your
                 current projects.
               </p>
               <Link href="/dashboard/customer/orders">
@@ -133,7 +133,7 @@ const ClientEngagements = () => {
               </div>
               <h3 className="mb-1 text-lg font-semibold text-foreground">No projects found</h3>
               <p className="text-sm text-muted-foreground">
-                We couldn't find any services matching your current filters.
+                We couldn&apos;t find any services matching your current filters.
               </p>
               <Button
                 variant="outline"

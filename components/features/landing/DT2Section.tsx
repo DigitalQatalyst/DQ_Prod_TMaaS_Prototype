@@ -44,8 +44,8 @@ const DT2Section = () => {
             Transformation <span className="text-gradient-brand">re-invented</span>
           </h2>
           <p className="mt-4 text-base leading-relaxed text-muted-foreground">
-            We've re-invented the technology acquisition lifecycle for the Digital and AI era. No
-            more slideware-just executable, architecture-backed transformation.
+            We&apos;ve re-invented the technology acquisition lifecycle for the Digital and AI era.{" "}
+            No more slideware-just executable, architecture-backed transformation.
           </p>
         </motion.div>
 

@@ -7,7 +7,6 @@ import { featureFlags } from "@/lib/featureFlags";
 const CORP_WEB_BASE = "https://www.digitalqatalyst.com";
 
 const Footer = () => {
-
   return (
     <footer className="border-t border-gray-100 bg-white px-5 pb-8 pt-14 md:px-8 lg:px-10">
       <div className="mx-auto max-w-[1200px]">
