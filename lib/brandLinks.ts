@@ -6,6 +6,15 @@ export const PLATFORM_ACRONYM = "TMaaS";
 export const PLATFORM_FULL_NAME = "Transformation Management as a Service";
 export const PLATFORM_NAME_EXPANDED = `${PLATFORM_FULL_NAME} (TMaaS)`;
 
+export const COMPANY_NAME = "DigitalQatalyst";
+export const PAGE_TITLE_SEPARATOR = " · ";
+export const POWERED_BY_LINE = `Powered by ${COMPANY_NAME}`;
+
+/** Browser tab title: `TMaaS · <page>` per product-chrome guidelines. */
+export function buildPageTitle(pageName: string): string {
+  return `${PLATFORM_ACRONYM}${PAGE_TITLE_SEPARATOR}${pageName}`;
+}
+
 export const PLATFORM_DESCRIPTOR = "Digital transformation marketplace";
 
 export const PLATFORM_HERO_HEADLINE_PRIMARY = "Digital Transformation";

@@ -6,7 +6,6 @@ import { usePathname, useSearchParams } from "next/navigation";
 import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import TMaaSLogo from "@/components/features/landing/TMaaSLogo";
-import ExploreDigitalQatalystCta from "@/components/features/landing/ExploreDigitalQatalystCta";
 import { btnPrimary } from "@/lib/brandAccent";
 import { NAV_BROWSE_MARKETPLACE_LABEL } from "@/lib/brandLinks";
 import {
@@ -70,7 +69,6 @@ const LandingNavbarInner = () => {
             </div>
           )}
 
-          <ExploreDigitalQatalystCta className="hidden md:inline-flex" />
           {featureFlags.isEnabled("contactUs") && (
             <Link
               href={launchAdvisoryPath}
@@ -121,7 +119,6 @@ const LandingNavbarInner = () => {
               </Link>
             </>
           )}
-          <ExploreDigitalQatalystCta className="mt-4 w-full" showIcon={false} />
           {featureFlags.isEnabled("contactUs") && (
             <Link
               href={launchAdvisoryPath}

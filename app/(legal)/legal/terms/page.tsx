@@ -8,7 +8,7 @@ import {
 import { PLATFORM_NAME_EXPANDED } from "@/lib/brandLinks";
 
 export const metadata: Metadata = {
-  title: "Terms of Service | TMaaS",
+  title: "Terms of Service",
   description: "TMaaS Terms of Service — Digital Qatalyst.",
 };
 

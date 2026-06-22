@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { Linkedin, Twitter, Youtube } from "lucide-react";
 import TMaaSLogo from "@/components/features/landing/TMaaSLogo";
-import { NAV_BROWSE_MARKETPLACE_LABEL, PLATFORM_HERO_SUBCOPY } from "@/lib/brandLinks";
+import { NAV_BROWSE_MARKETPLACE_LABEL, PLATFORM_FULL_NAME, PLATFORM_HERO_SUBCOPY, POWERED_BY_LINE } from "@/lib/brandLinks";
 import { featureFlags } from "@/lib/featureFlags";
 
 const CORP_WEB_BASE = "https://www.digitalqatalyst.com";
@@ -90,6 +90,25 @@ const Footer = () => {
               </li>
             </ul>
           </div>
+        </div>
+
+        <div className="mb-6 flex flex-col items-center gap-2 border-t border-gray-100 pt-8 text-center sm:flex-row sm:justify-center sm:gap-3">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="/favicon-32.png"
+            alt=""
+            aria-hidden
+            className="h-6 w-6 shrink-0 rounded-md"
+            width={24}
+            height={24}
+          />
+          <p className="text-[13px] text-gray-500">
+            {POWERED_BY_LINE}
+            <span aria-hidden className="mx-2 text-gray-300">
+              ·
+            </span>
+            {PLATFORM_FULL_NAME}
+          </p>
         </div>
 
         <div className="flex flex-col items-center justify-between gap-3 border-t border-gray-100 pt-6 text-[12px] text-gray-400 sm:flex-row">

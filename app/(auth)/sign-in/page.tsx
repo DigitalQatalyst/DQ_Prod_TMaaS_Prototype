@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import SignInPageClient from "./_client";
 
 export const metadata: Metadata = {
-  title: "Sign In | TMaaS",
+  title: "Sign in",
   description: "Sign in to your TMaaS account.",
 };
 

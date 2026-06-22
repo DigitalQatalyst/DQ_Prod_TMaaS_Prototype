@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import ExplorePageClient from "./_client";
 
 export const metadata: Metadata = {
-  title: "Explore | TMaaS",
+  title: "Explore",
   description:
     "Explore the TMaaS platform — discover services, bundles, and transformation journeys.",
 };

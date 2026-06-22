@@ -1,12 +1,12 @@
 import type { Metadata } from "next";
 import LandingHeroSection from "@/components/features/landing/landing/v2/LandingHeroSection";
-import { PLATFORM_FULL_NAME, PLATFORM_HERO_SUBCOPY } from "@/lib/brandLinks";
+import { PLATFORM_FULL_NAME, PLATFORM_HERO_SUBCOPY, buildPageTitle } from "@/lib/brandLinks";
 
 export const metadata: Metadata = {
-  title: `TMaaS | ${PLATFORM_FULL_NAME}`,
+  title: { absolute: buildPageTitle(PLATFORM_FULL_NAME) },
   description: PLATFORM_HERO_SUBCOPY,
   openGraph: {
-    title: `TMaaS | ${PLATFORM_FULL_NAME}`,
+    title: buildPageTitle(PLATFORM_FULL_NAME),
     description: PLATFORM_HERO_SUBCOPY,
     images: ["/og-image.png"],
     type: "website",

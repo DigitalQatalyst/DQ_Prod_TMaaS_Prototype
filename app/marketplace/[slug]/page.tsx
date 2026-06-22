@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { fetchServiceDetail } from "@/services/catalogService";
 import { getDisplayTitle } from "@/components/features/service-detail/serviceDetailHelpers";
+import { buildPageTitle } from "@/lib/brandLinks";
 import ServiceDetailPageClient from "./_client";
 
 export async function generateMetadata({
@@ -20,12 +21,12 @@ export async function generateMetadata({
         .join(" ");
 
   return {
-    title: `${title} | TMaaS`,
+    title,
     description: detail?.service?.description
       ? detail.service.description.slice(0, 155)
-      : `Learn about ${title} — a TMaaS service by Digital Qatalyst.`,
+      : `Learn about ${title} — a TMaaS service by DigitalQatalyst.`,
     openGraph: {
-      title: `${title} | TMaaS`,
+      title: buildPageTitle(title),
       images: ["/og-image.png"],
     },
   };

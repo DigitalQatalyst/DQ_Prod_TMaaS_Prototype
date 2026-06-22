@@ -7,9 +7,9 @@ import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
 import ContextSwitcher from "@/components/features/dashboard/ContextSwitcher";
 import CartNavButton from "@/components/features/cart/CartNavButton";
-import ExploreDigitalQatalystCta from "@/components/features/landing/ExploreDigitalQatalystCta";
+import TMaaSLogo from "@/components/features/landing/TMaaSLogo";
 import { featureFlags } from "@/lib/featureFlags";
-import { PLATFORM_NAME } from "@/lib/brandLinks";
+import { NAV_BROWSE_MARKETPLACE_LABEL } from "@/lib/brandLinks";
 
 const Navbar = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -25,23 +25,13 @@ const Navbar = () => {
     <>
       <header className="sticky top-0 z-40 flex h-16 items-center border-b border-gray-100 bg-white px-5 md:px-8">
         <div className="mx-auto flex w-full max-w-[1200px] items-center justify-between">
-          <div className="flex items-center gap-8">
-            <Link
-              href="/"
-              className="flex items-center gap-2 font-semibold tracking-tight transition-opacity hover:opacity-80"
-            >
-              <span className="grid h-7 w-7 place-items-center rounded-md bg-dq-orange text-white">
-                <span className="font-mono text-[11px] font-bold">DQ</span>
-              </span>
-              <span className="max-w-[10.5rem] text-sm font-semibold leading-tight text-dq-orange sm:max-w-none sm:text-lg sm:leading-none">
-                {PLATFORM_NAME}
-              </span>
-            </Link>
+          <div className="flex items-center gap-2 lg:gap-3">
+            <TMaaSLogo size="lg" />
 
-            <nav className="hidden items-center gap-6 lg:flex">
+            <nav className="hidden items-center lg:flex">
               {featureFlags.isEnabled("marketplace") && (
                 <Link href="/marketplace" className={navLinkClass(isOnMarketplace)}>
-                  Services
+                  {NAV_BROWSE_MARKETPLACE_LABEL}
                 </Link>
               )}
             </nav>
@@ -70,7 +60,6 @@ const Navbar = () => {
                 </Link>
               </>
             )}
-            <ExploreDigitalQatalystCta className="hidden md:inline-flex" />
             {featureFlags.isEnabled("contactUs") && (
               <Link
                 href="/contact"
@@ -100,7 +89,7 @@ const Navbar = () => {
               className="border-b border-gray-100 py-3 text-lg font-medium text-dq-navy"
               onClick={() => setMobileOpen(false)}
             >
-              Services
+              {NAV_BROWSE_MARKETPLACE_LABEL}
             </Link>
           )}
           {featureFlags.isEnabled("contextSwitcher") && (
@@ -130,7 +119,6 @@ const Navbar = () => {
               </Link>
             </>
           )}
-          <ExploreDigitalQatalystCta className="mt-4 w-full" showIcon={false} />
           {featureFlags.isEnabled("contactUs") && (
             <Link
               href="/contact"
