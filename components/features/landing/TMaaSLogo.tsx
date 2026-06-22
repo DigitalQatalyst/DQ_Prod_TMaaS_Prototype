@@ -10,9 +10,9 @@ interface TMaaSLogoProps {
 }
 
 const sizeClasses = {
-  sm: "h-9",
-  md: "h-10",
-  lg: "h-12",
+  sm: "h-8",
+  md: "h-9",
+  lg: "h-10",
 } as const;
 
 export function TMaaSLogo({
