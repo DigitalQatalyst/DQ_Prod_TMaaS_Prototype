@@ -285,7 +285,7 @@ const DashboardLayout = ({ children }: DashboardLayoutProps) => {
                 />
               </Link>
             ) : (
-              <TMaaSLogo className="min-w-0 max-w-[calc(100%-0.5rem)]" />
+              <TMaaSLogo size="lg" className="min-w-0 max-w-[calc(100%-0.5rem)]" />
             )}
           </div>
 
