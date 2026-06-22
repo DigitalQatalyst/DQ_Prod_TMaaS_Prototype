@@ -203,6 +203,28 @@ Match `ServiceDetailWhyItMattersTab.tsx` + `whyItMattersContent.ts`:
 - Use `rounded-xl` + `border-navy-100` for marketing cards when corp web pattern applies
 - Change page logic/routing when doing styling-only alignment work
 
+## [SECTION: MVP Feature Flag Route Gating]
+
+Every App Router page must be gated in a server `page.tsx` or route-group `layout.tsx` with `FeatureFlagGuard` and `redirectTo={getFirstEnabledRoute()}`. Hiding nav links or UI alone is not sufficient.
+
+| Route | Flag | Gate in |
+|-------|------|---------|
+| `/` | `homepage` | `app/page.tsx` |
+| `/marketplace` | `marketplace` | `app/marketplace/page.tsx` |
+| `/marketplace/[slug]` | `serviceDetail` | `app/marketplace/[slug]/page.tsx` |
+| `/contact` | `contactUs` | `app/contact/page.tsx` |
+| `/explore` | `explore` | `app/explore/page.tsx` |
+| `/cart` | `cart` | `app/cart/page.tsx` |
+| `/butler` | `butlerDemo` | `app/butler/page.tsx` |
+| `/sign-in` | `auth` | `app/(auth)/layout.tsx` |
+| `/onboarding/*` | `onboarding` | `app/(onboarding)/layout.tsx` |
+| `/dashboard/*` | `dashboard` | `app/dashboard/layout.tsx` |
+| `/legal/*` | `legal` | `app/(legal)/layout.tsx` |
+
+- Keep interactive page content in `app/<route>/_client.tsx`; `page.tsx` stays a server component wrapper.
+- Prefer layout-level guards for route groups with many pages.
+- When adding a new route, wrap it the same way and document the flag in `docs/FEATURE_FLAGS.md`.
+
 ## [SECTION: Marketplace Catalog Conventions]
 
 - `useMarketplaceListings` must load the **full catalog once** via `useCatalog()` and apply `filterCatalogServices()` + pagination in memory.
