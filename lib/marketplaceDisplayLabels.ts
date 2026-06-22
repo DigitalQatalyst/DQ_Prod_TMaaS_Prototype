@@ -120,7 +120,11 @@ function formatTitle(
     return product;
   }
 
-  if (serviceType === "bundle" || variantSuffix === "Transformation Bundle" || variantSuffix === "End-to-end bundle") {
+  if (
+    serviceType === "bundle" ||
+    variantSuffix === "Transformation Bundle" ||
+    variantSuffix === "End-to-end bundle"
+  ) {
     return `${product} - ${bundleTitleStage}`;
   }
 

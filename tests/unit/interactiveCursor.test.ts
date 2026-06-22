@@ -21,9 +21,9 @@ function readSource(relativePath: string): string {
 describe("interactive cursor consistency", () => {
   it("applies global pointer styles for native interactive elements", () => {
     const css = readSource("app/globals.css");
-    expect(css).toContain("a[href]:not([aria-disabled=\"true\"])");
-    expect(css).toContain("button:not(:disabled):not([aria-disabled=\"true\"])");
-    expect(css).toContain("[role=\"tab\"]");
+    expect(css).toContain('a[href]:not([aria-disabled="true"])');
+    expect(css).toContain('button:not(:disabled):not([aria-disabled="true"])');
+    expect(css).toContain('[role="tab"]');
     expect(css).toContain("cursor: pointer");
   });
 

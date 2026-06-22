@@ -38,9 +38,9 @@ describe("marketplaceDisplayLabels", () => {
       getMarketplaceCardTitle("Online Web Presence (High-Impact) - End-to-end bundle", "bundle")
     ).toBe("Online Web Presence - End-to-end bundle");
 
-    expect(
-      getMarketplaceCardTitle("Mobile Apps (High-Impact) - End-to-end bundle", "bundle")
-    ).toBe("Mobile Apps & Services - End-to-end bundle");
+    expect(getMarketplaceCardTitle("Mobile Apps (High-Impact) - End-to-end bundle", "bundle")).toBe(
+      "Mobile Apps & Services - End-to-end bundle"
+    );
   });
 
   it("renames flexible set bundles without duplicating suffix", () => {
