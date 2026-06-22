@@ -20,7 +20,7 @@ export const microLabel = "font-mono text-[10px] uppercase tracking-[0.18em] tex
 
 /** Landing hero h1, matches DQ_CORPWEB_PROTOTYPE `Home.tsx` HeroSection */
 export const landingHeroHeading =
-  "text-balance text-[2.75rem] font-semibold leading-[1.0] tracking-[-0.03em] text-dq-navy sm:text-6xl md:text-7xl lg:text-8xl";
+  "dq-landing-hero-heading font-semibold text-dq-navy";
 
 /**
  * In-page section h2, corp web content card title scale
@@ -42,16 +42,16 @@ export const serviceDetailSideCard = "rounded-2xl p-7 md:p-8";
 export const serviceDetailTabLead = "md:pt-4 lg:pt-5";
 
 /** Primary CTA, orange fill (corp offerings / marketplace pattern) */
-export const btnPrimary = `inline-flex items-center justify-center gap-2 rounded-full bg-dq-orange px-6 py-3.5 text-sm font-semibold text-white transition-colors hover:bg-[#E04020] glow-orange ${focusOrange}`;
+export const btnPrimary = `dq-cta-primary inline-flex items-center justify-center gap-2 rounded-full bg-[#FB5535] px-6 py-3.5 text-sm font-semibold text-white hover:bg-[#E04020] glow-orange ${focusOrange}`;
 
 /** Primary CTA, navy with orange hover sweep (corp home / offerings hero) */
-export const btnPrimaryNavy = `group relative inline-flex items-center justify-center gap-2 overflow-hidden rounded-full bg-dq-navy px-6 py-3.5 text-sm font-semibold text-white transition glow-navy ${focusOrange}`;
+export const btnPrimaryNavy = `group relative inline-flex items-center justify-center gap-2 overflow-hidden rounded-full bg-[#030F35] px-6 py-3.5 text-sm font-semibold text-white glow-navy ${focusOrange}`;
 
 export const btnPrimaryNavyHoverSweep =
   "absolute inset-0 -translate-x-full bg-gradient-to-r from-dq-orange to-[#e04020] transition-transform duration-500 group-hover:translate-x-0";
 
 /** Primary CTA on dark mesh, orange (corp about / framework closing) */
-export const btnPrimaryOnDark = `inline-flex items-center justify-center gap-2 rounded-full bg-dq-orange px-6 py-3.5 text-sm font-semibold text-white transition-colors hover:bg-[#E04020] ${focusOrange} focus-visible:ring-offset-dq-navy`;
+export const btnPrimaryOnDark = `dq-cta-primary inline-flex items-center justify-center gap-2 rounded-full bg-[#FB5535] px-6 py-3.5 text-sm font-semibold text-white hover:bg-[#E04020] ${focusOrange} focus-visible:ring-offset-dq-navy`;
 
 /** Secondary CTA on light surfaces */
 export const btnSecondary = `inline-flex items-center justify-center gap-2 rounded-full border border-[#c5cde8] bg-white/60 px-6 py-3.5 text-sm font-semibold text-dq-navy backdrop-blur-sm transition hover:border-[#a0aacc] hover:bg-white ${focusOrange}`;

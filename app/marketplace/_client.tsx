@@ -57,27 +57,30 @@ export default function MarketplacePageClient() {
 
   useEffect(() => {
     const collection = searchParams.get("collection");
-    if (
-      collection &&
-      marketplaceCollectionIds.includes(collection as (typeof marketplaceCollectionIds)[number])
-    ) {
-      startTransition(() => setActiveTab(collection));
-    } else if (!collection) {
-      startTransition(() => setActiveTab("all"));
-    }
     const q = searchParams.get("q");
-    if (q !== null) startTransition(() => setSearchQuery(q));
-
     const sectorParam = searchParams.get("sector");
-    if (sectorParam) {
-      const sectors = sectorParam
-        .split(",")
-        .map((value) => value.trim())
-        .filter(isMarketplaceSectorId);
-      startTransition(() => setSelectedSectors(sectors));
-    } else {
-      startTransition(() => setSelectedSectors([]));
-    }
+
+    startTransition(() => {
+      if (
+        collection &&
+        marketplaceCollectionIds.includes(collection as (typeof marketplaceCollectionIds)[number])
+      ) {
+        setActiveTab(collection);
+      } else if (!collection) {
+        setActiveTab("all");
+      }
+      if (q !== null) setSearchQuery(q);
+      if (sectorParam) {
+        setSelectedSectors(
+          sectorParam
+            .split(",")
+            .map((value) => value.trim())
+            .filter(isMarketplaceSectorId)
+        );
+      } else {
+        setSelectedSectors([]);
+      }
+    });
 
     if (collection || sectorParam) scrollToCatalog();
   }, [searchParams, scrollToCatalog]);
@@ -187,7 +190,9 @@ export default function MarketplacePageClient() {
   const totalPages = Math.max(1, Math.ceil(catalogServicesCount / PAGE_SIZE));
 
   useEffect(() => {
-    startTransition(() => setCurrentPage(1));
+    startTransition(() => {
+      setCurrentPage(1);
+    });
   }, [
     activeTab,
     searchQuery,
@@ -199,7 +204,11 @@ export default function MarketplacePageClient() {
   ]);
 
   useEffect(() => {
-    if (currentPage > totalPages) startTransition(() => setCurrentPage(totalPages));
+    if (currentPage > totalPages) {
+      startTransition(() => {
+        setCurrentPage(totalPages);
+      });
+    }
   }, [currentPage, totalPages]);
 
   const showingFrom = catalogServicesCount === 0 ? 0 : (currentPage - 1) * PAGE_SIZE + 1;

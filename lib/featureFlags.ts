@@ -51,7 +51,7 @@ const DEFAULT_FEATURE_FLAGS: FeatureFlags = {
   explore: false,
   alternateLanding: false,
   landingV1: false,
-  legal: true,
+  legal: false,
 
   supabaseCatalog: true,
   cart: false,
@@ -92,6 +92,11 @@ class FeatureFlagService {
 }
 
 export const featureFlags = new FeatureFlagService();
+
+/** Hub index and FAQ only — `/legal/privacy` and `/legal/terms` are always public for MVP. */
+export function isLegalHubPath(pathname: string): boolean {
+  return pathname === "/legal" || pathname === "/legal/faq";
+}
 
 export const isPageEnabled = (page: keyof FeatureFlags) => featureFlags.isEnabled(page);
 export const isFeatureEnabled = (feature: keyof FeatureFlags) => featureFlags.isEnabled(feature);

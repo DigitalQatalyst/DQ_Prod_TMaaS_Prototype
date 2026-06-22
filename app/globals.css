@@ -359,3 +359,58 @@
     transform: translateX(-50%);
   }
 }
+
+/*
+ * Anchor CTA paint (unlayered). Chrome/macOS ignores custom classes on <a> unless
+ * the selector includes the element type; pair with Tailwind layout utilities in btnPrimary.
+ * Do not use transition-colors on link CTAs.
+ */
+a.dq-cta-primary,
+a.dq-cta-primary:link,
+a.dq-cta-primary:visited {
+  color: #ffffff;
+  background-color: #fb5535;
+}
+
+a.dq-cta-primary:hover,
+a.dq-cta-primary:focus-visible {
+  color: #ffffff;
+  background-color: #e04020;
+}
+
+.bg-dq-orange {
+  background-color: #fb5535;
+}
+
+.bg-dq-navy {
+  background-color: #030f35;
+}
+
+.group-hover\:bg-dq-orange:is(:where(.group):hover *) {
+  background-color: #fb5535;
+}
+
+h1.dq-landing-hero-heading {
+  font-size: 2.75rem;
+  line-height: 1;
+  letter-spacing: -0.03em;
+  text-wrap: balance;
+}
+
+@media (min-width: 40rem) {
+  h1.dq-landing-hero-heading {
+    font-size: 3.75rem;
+  }
+}
+
+@media (min-width: 48rem) {
+  h1.dq-landing-hero-heading {
+    font-size: 4.5rem;
+  }
+}
+
+@media (min-width: 64rem) {
+  h1.dq-landing-hero-heading {
+    font-size: 6rem;
+  }
+}

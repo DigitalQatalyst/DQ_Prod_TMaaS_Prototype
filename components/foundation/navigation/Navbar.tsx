@@ -61,10 +61,7 @@ const Navbar = () => {
                   Login
                 </Link>
                 <Link href="/sign-in">
-                  <Button
-                    size="sm"
-                    className="rounded-full bg-dq-orange px-5 text-[13px] font-semibold text-white hover:bg-[#E04020]"
-                  >
+                  <Button size="sm" className="px-5 text-[13px]">
                     Get Started
                   </Button>
                 </Link>
