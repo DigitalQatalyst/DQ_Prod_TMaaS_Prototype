@@ -8,6 +8,7 @@ import {
   PLATFORM_DESCRIPTOR,
   PLATFORM_FULL_NAME,
   PLATFORM_HERO_SUBCOPY,
+  buildPageTitle,
 } from "@/lib/brandLinks";
 
 export const SEO_BRAND = "TMaaS";
@@ -35,27 +36,27 @@ export function truncateMetaDescription(text: string, maxLength = 155): string {
 }
 
 export const HOME_SEO = {
-  title: `${SEO_BRAND} | Digital Transformation Marketplace | ${SEO_PUBLISHER}`,
+  title: buildPageTitle(PLATFORM_FULL_NAME),
   description: PLATFORM_HERO_SUBCOPY,
   path: "/",
 } as const;
 
 export const MARKETPLACE_SEO = {
-  title: `Marketplace | Digital Transformation Services | ${SEO_BRAND}`,
+  title: buildPageTitle("Marketplace"),
   description:
     "Explore 100+ digital transformation services with clear pricing and timelines. Filter by AI, experience, operations, or security to find the right blueprint.",
   path: "/marketplace",
 } as const;
 
 export const CONTACT_SEO = {
-  title: `Talk to our team | ${SEO_BRAND}`,
+  title: buildPageTitle("Talk to our team"),
   description:
     "Talk to the DigitalQatalyst team about TMaaS. Request a quote, book a consultation, or get help finding the right transformation service.",
   path: "/contact",
 } as const;
 
 export const NOT_FOUND_SEO = {
-  title: `Page not found | ${SEO_BRAND}`,
+  title: buildPageTitle("Page not found"),
   description:
     "The page you requested could not be found. Browse the TMaaS marketplace or contact our team for help finding the right digital transformation service.",
   path: "/404",

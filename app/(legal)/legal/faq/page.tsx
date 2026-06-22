@@ -4,7 +4,7 @@ import Footer from "@/components/features/landing/Footer";
 import FAQSection from "@/components/features/landing/FAQSection";
 
 export const metadata: Metadata = {
-  title: "FAQ | TMaaS",
+  title: "FAQ",
   description: "Frequently asked questions about TMaaS and Digital Qatalyst services.",
 };
 

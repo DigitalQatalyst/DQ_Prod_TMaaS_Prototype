@@ -2,8 +2,9 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { Building2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import TMaaSLogo from "@/components/features/landing/TMaaSLogo";
+import { POWERED_BY_LINE } from "@/lib/brandLinks";
 
 export default function SignInPageClient() {
   const router = useRouter();
@@ -11,7 +12,6 @@ export default function SignInPageClient() {
 
   const handleMicrosoftSSO = () => {
     setLoading(true);
-    // Mock Microsoft SSO — in production this would redirect to Azure AD
     setTimeout(() => {
       router.push("/onboarding/profile");
     }, 1000);
@@ -21,13 +21,11 @@ export default function SignInPageClient() {
     <div className="flex min-h-screen items-center justify-center bg-gradient-to-br from-accent/30 to-background px-6">
       <div className="w-full max-w-md">
         <div className="mb-8 text-center">
-          <div className="mb-4 inline-flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-brand shadow-brand">
-            <Building2 size={32} className="text-primary-foreground" />
+          <div className="mb-6 flex justify-center">
+            <TMaaSLogo size="lg" />
           </div>
-          <h1 className="text-3xl font-bold text-foreground">
-            Welcome to <span className="text-gradient-brand">TMaaS</span>
-          </h1>
-          <p className="mt-2 text-sm text-muted-foreground">Digital Transformation, simplified</p>
+          <h1 className="text-3xl font-semibold text-foreground">Sign in to TMaaS</h1>
+          <p className="mt-2 text-sm text-muted-foreground">{POWERED_BY_LINE}</p>
         </div>
 
         <div className="rounded-2xl border border-border bg-card p-8 shadow-card">
@@ -37,7 +35,7 @@ export default function SignInPageClient() {
             className="w-full gap-3 bg-[#2F2F2F] text-white hover:bg-[#1F1F1F]"
             size="lg"
           >
-            <svg width="21" height="21" viewBox="0 0 21 21" fill="none">
+            <svg width="21" height="21" viewBox="0 0 21 21" fill="none" aria-hidden>
               <rect width="10" height="10" fill="#F25022" />
               <rect x="11" width="10" height="10" fill="#7FBA00" />
               <rect y="11" width="10" height="10" fill="#00A4EF" />
