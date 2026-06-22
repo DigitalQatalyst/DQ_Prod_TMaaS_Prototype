@@ -12,7 +12,7 @@ interface TMaaSLogoProps {
 const sizeClasses = {
   sm: "h-9",
   md: "h-10",
-  lg: "h-11",
+  lg: "h-12",
 } as const;
 
 export function TMaaSLogo({
@@ -32,9 +32,9 @@ export function TMaaSLogo({
       <img
         src={src}
         alt="TMaaS by DigitalQatalyst"
-        className={cn("w-auto max-w-[min(100%,16rem)] shrink-0 sm:max-w-none", sizeClasses[size])}
-        width={234}
-        height={44}
+        className={cn("block w-auto shrink-0", sizeClasses[size])}
+        width={180}
+        height={84}
       />
     </Link>
   );

@@ -47,7 +47,7 @@ const LandingNavbarInner = () => {
   return (
     <>
       <header className="sticky top-0 z-40 flex h-16 items-center justify-between border-b border-gray-100 bg-white px-5 md:px-8 lg:px-10">
-        <div className="flex items-center gap-4 lg:gap-5">
+        <div className="flex items-center gap-2 lg:gap-3">
           <TMaaSLogo size="lg" />
 
           <nav className="hidden items-center lg:flex">{visibleLinks.map(renderLink)}</nav>
