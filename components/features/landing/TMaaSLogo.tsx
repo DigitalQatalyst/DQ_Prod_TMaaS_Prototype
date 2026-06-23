@@ -5,11 +5,13 @@ interface TMaaSLogoProps {
   className?: string;
   /** `light` = navy lockup on white surfaces; `dark` = white lockup on dark surfaces */
   variant?: "light" | "dark";
-  /** Nav contexts use `lg`; footer and compact surfaces use `md` or `sm`. */
-  size?: "sm" | "md" | "lg";
+  /** Nav contexts use `nav`; footer and compact surfaces use `md` or `sm`. */
+  size?: "nav" | "sm" | "md" | "lg";
 }
 
 const sizeClasses = {
+  /** Top nav — proportional to `text-sm` menu labels. */
+  nav: "h-8",
   sm: "h-8",
   md: "h-9",
   lg: "h-10",

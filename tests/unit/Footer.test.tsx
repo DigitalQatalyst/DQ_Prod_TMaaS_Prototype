@@ -53,4 +53,27 @@ describe("Footer", () => {
     expect(screen.getByRole("link", { name: /^X$/i })).toBeInTheDocument();
     expect(screen.getByRole("link", { name: /YouTube/i })).toBeInTheDocument();
   });
+
+  it("renders the product-chrome endorsement bar", () => {
+    render(<Footer />);
+
+    expect(screen.getByText("Powered by DigitalQatalyst")).toBeInTheDocument();
+    expect(
+      screen.getByText("TMaaS — Transformation Management as a Service")
+    ).toBeInTheDocument();
+    expect(screen.getByText("© 2026 DigitalQatalyst")).toBeInTheDocument();
+  });
+
+  it("places legal links in the Explore column", () => {
+    render(<Footer />);
+
+    expect(screen.getByRole("link", { name: "Privacy Policy" })).toHaveAttribute(
+      "href",
+      "/legal/privacy"
+    );
+    expect(screen.getByRole("link", { name: "Terms of Service" })).toHaveAttribute(
+      "href",
+      "/legal/terms"
+    );
+  });
 });

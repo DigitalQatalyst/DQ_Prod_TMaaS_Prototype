@@ -1,27 +1,22 @@
 import type { ReactNode } from "react";
-import TMaaSLogo from "@/components/features/landing/TMaaSLogo";
+import { PLATFORM_NAME } from "@/lib/brandLinks";
+import DqBrandMark from "@/components/foundation/DqBrandMark";
 
 interface ProductChromeStateProps {
   children?: ReactNode;
   className?: string;
 }
 
-/** TMaaS wordmark + DQ favicon mark for loading, 404, and empty states. */
+/** Product-led system state: TMaaS name + DQ monogram (not the full nav lockup). */
 export function ProductChromeState({ children, className = "" }: ProductChromeStateProps) {
   return (
     <div
-      className={`flex min-h-[50vh] flex-col items-center justify-center gap-5 px-6 text-center ${className}`}
+      className={`flex min-h-[50vh] flex-col items-center justify-center gap-8 px-6 text-center ${className}`}
     >
-      <TMaaSLogo size="lg" />
-      {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img
-        src="/favicon-32.png"
-        alt=""
-        aria-hidden
-        className="h-8 w-8 shrink-0 rounded-md"
-        width={32}
-        height={32}
-      />
+      <div className="flex items-center gap-3">
+        <DqBrandMark size="lg" />
+        <span className="text-3xl font-semibold tracking-tight text-dq-navy">{PLATFORM_NAME}</span>
+      </div>
       {children}
     </div>
   );

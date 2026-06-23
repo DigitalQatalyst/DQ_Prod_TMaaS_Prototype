@@ -13,6 +13,7 @@ export const PLATFORM_NAME_EXPANDED = `${PLATFORM_FULL_NAME} (TMaaS)`;
 export const COMPANY_NAME = "DigitalQatalyst";
 export const PAGE_TITLE_SEPARATOR = " · ";
 export const POWERED_BY_LINE = `Powered by ${COMPANY_NAME}`;
+export const PLATFORM_FOOTER_PRODUCT_LINE = `${PLATFORM_ACRONYM} — ${PLATFORM_FULL_NAME}`;
 
 /** Browser tab title: `TMaaS · <page>` per product-chrome guidelines. */
 export function buildPageTitle(pageName: string): string {

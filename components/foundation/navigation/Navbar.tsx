@@ -26,7 +26,7 @@ const Navbar = () => {
       <header className="sticky top-0 z-40 flex h-16 items-center border-b border-gray-100 bg-white px-5 md:px-8">
         <div className="mx-auto flex w-full max-w-[1200px] items-center justify-between">
           <div className="flex items-center gap-2 lg:gap-3">
-            <TMaaSLogo size="lg" />
+            <TMaaSLogo size="nav" />
 
             <nav className="hidden items-center lg:flex">
               {featureFlags.isEnabled("marketplace") && (
