@@ -3,12 +3,14 @@ import { describe, expect, it } from "vitest";
 import { ProductChromeState } from "@/components/foundation/ProductChromeState";
 
 describe("ProductChromeState", () => {
-  it("renders product-led TMaaS wordmark without the nav lockup image", () => {
+  it("renders the official TMaaS lockup and DQ monogram in a vertical stack", () => {
     render(<ProductChromeState />);
 
-    expect(screen.getByText("TMaaS")).toBeInTheDocument();
+    expect(screen.getByAltText("TMaaS by DigitalQatalyst")).toHaveAttribute(
+      "src",
+      "/brand/tmaas-logo.svg"
+    );
     expect(screen.queryByRole("link")).not.toBeInTheDocument();
-    expect(screen.queryByAltText(/TMaaS by DigitalQatalyst/i)).not.toBeInTheDocument();
   });
 
   it("renders optional child content below the brand stack", () => {
