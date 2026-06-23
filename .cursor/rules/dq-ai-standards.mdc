@@ -17,6 +17,7 @@ TMaaS (Transformation Management as a Service) marketplace prototype — Next.js
 - **Tab titles:** `TMaaS · <page>` via root `title.template` in `app/layout.tsx`; page metadata exports the page name only (home uses `title.absolute` with full product name).
 - **Footer endorsement:** single bottom bar — left: inline `assets/logo/mark.svg` monogram (`public/brand/mark.svg`) + `Powered by DigitalQatalyst` (not the favicon tile); center: `TMaaS — Transformation Management as a Service`; right: `© DigitalQatalyst`. Favicon tile stays for browser tab / collapsed nav only.
 - **Auth chrome:** `Sign in to TMaaS` + `Powered by DigitalQatalyst` on sign-in; use `ProductChromeState` for loading/404.
+- **Loading / 404 chrome:** `ProductChromeState` — stacked TMaaS wordmark (text + orange accent bar) with a subdued `DqBrandMark` below. Do **not** use `TMaaSLogo` or a horizontal monogram + name row (reads as the old two-logo lockup).
 - **Remove stale assets:** delete legacy `app/icon.png` and old favicon files when replacing — browsers request `/favicon.ico` by default and cache aggressively.
 - **Verify:** `curl -s http://127.0.0.1:3000/ | grep -i 'rel="icon"'` should list hashed `/favicon.ico`, `/icon.svg`, and `/apple-icon.png` routes.
 
