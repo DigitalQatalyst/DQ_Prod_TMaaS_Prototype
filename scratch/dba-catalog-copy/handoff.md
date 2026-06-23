@@ -38,6 +38,7 @@ For the live Supabase project, run the two **update** files below instead.
 ## Step 1: Take a backup FIRST
 
 Before running anything, take a full backup of the database above via:
+
 - Supabase dashboard: Settings > Database > Backups, or
 - pg_dump using the connection string from Settings > Database > Connection string
 
@@ -50,10 +51,12 @@ Verify the backup is restorable before proceeding.
 Both files are in this folder (`workspace/dba-catalog-copy/`).
 
 ### File 1: `update-card-content.sql`
+
 - **Updates:** Card-level fields for all 221 variants — `products.short_description`, `product_content` (description + positioning), `product_features`, `product_tags`, `product_timeline_milestones`, `product_variants.positioning`, `audience`, `industry_relevance`, `business_impact`
 - **Idempotent:** Yes. Uses `UPDATE` + `DELETE`/`INSERT` keyed by variant id. Safe to re-run.
 
 ### File 2: `seed_pdp_content.sql`
+
 - **Updates:** PDP (service detail page) fields for all 186 individual variants — `hero_summary`, `overview_paragraphs`, `audience_description`, `deliverables_summary`, `delivery_process`, `package_highlights`, `variant_deliverables`, `product_faqs`, `faq_intro`
 - **Idempotent:** Yes. Uses `UPDATE` + `DELETE`/`INSERT` keyed by variant id. Safe to re-run.
 

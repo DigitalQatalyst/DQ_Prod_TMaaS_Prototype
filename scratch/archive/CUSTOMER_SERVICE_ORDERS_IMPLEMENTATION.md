@@ -1,11 +1,13 @@
 # Customer-Side Service Orders Implementation Summary
 
 ## Overview
+
 The customer-side Service Orders feature provides a comprehensive interface for clients to track, manage, and interact with their service engagements with DQ. The implementation is designed around a stage-based workflow that guides customers through the entire service delivery lifecycle.
 
 ## Architecture
 
 ### Components
+
 1. **CustomerServiceOrders.tsx** - List view of all service orders
 2. **CustomerServiceOrderDetail.tsx** - Detailed view of individual service orders
 3. **OrderStepper.tsx** - Visual progress indicator component
@@ -14,6 +16,7 @@ The customer-side Service Orders feature provides a comprehensive interface for 
 ### Data Model
 
 #### ServiceOrder Interface
+
 ```typescript
 {
   id: string
@@ -45,21 +48,25 @@ The customer-side Service Orders feature provides a comprehensive interface for 
 ## Service Order Stages
 
 ### 1. Payment Pending
+
 **Purpose**: Awaiting payment confirmation to begin service delivery
 
 **Customer Actions**:
+
 - Download invoice
 - Mark payment as completed
 - View order summary and pricing breakdown
 - Understand next steps
 
 **Features**:
+
 - Order summary card with service details
 - Payment instructions with invoice details
 - "What Happens Next" timeline
 - Help/support contact option
 
 **UI Elements**:
+
 - Yellow status banner with payment alert
 - Invoice download button
 - Payment confirmation button
@@ -68,15 +75,18 @@ The customer-side Service Orders feature provides a comprehensive interface for 
 ---
 
 ### 2. Client Input Pending
+
 **Purpose**: Customer needs to submit required inputs for service delivery to begin
 
 **Customer Actions**:
+
 - Upload required documents/files
 - Add links to shared resources
 - Submit inputs for review
 - Track submission progress
 
 **Features**:
+
 - Input requirements overview with progress metrics
 - Individual input cards with upload areas
 - File upload (PDF, DOC, DOCX, XLS, XLSX - max 10MB)
@@ -85,6 +95,7 @@ The customer-side Service Orders feature provides a comprehensive interface for 
 - Help resources section
 
 **UI Elements**:
+
 - Orange status banner with action required alert
 - Progress indicators (X of Y inputs submitted)
 - Drag-and-drop file upload areas
@@ -94,15 +105,18 @@ The customer-side Service Orders feature provides a comprehensive interface for 
 ---
 
 ### 3. Input in Review
+
 **Purpose**: DQ team is reviewing submitted inputs for completeness and quality
 
 **Customer Actions**:
+
 - View review status
 - See submitted inputs
 - Understand review criteria
 - Wait for review completion
 
 **Features**:
+
 - Review status card with timeline
 - All submitted inputs display
 - Review criteria explanation
@@ -110,6 +124,7 @@ The customer-side Service Orders feature provides a comprehensive interface for 
 - "What Happens Next" guidance
 
 **UI Elements**:
+
 - Blue status banner indicating review in progress
 - Review timeline with estimated completion
 - Quality criteria checklist
@@ -118,9 +133,11 @@ The customer-side Service Orders feature provides a comprehensive interface for 
 ---
 
 ### 4. In Delivery
+
 **Purpose**: Active service delivery with deliverables being produced
 
 **Customer Actions**:
+
 - Review submitted deliverables
 - Accept deliverables
 - Request revisions
@@ -129,6 +146,7 @@ The customer-side Service Orders feature provides a comprehensive interface for 
 - Request sessions
 
 **Features**:
+
 - Deliverables progress tracking
 - Individual deliverable review with 5-day deadline
 - Bulk accept functionality
@@ -139,6 +157,7 @@ The customer-side Service Orders feature provides a comprehensive interface for 
 - Upcoming activities calendar
 
 **UI Elements**:
+
 - Purple status banner
 - Deliverable cards with status badges
 - Accept/Request Revision buttons
@@ -148,6 +167,7 @@ The customer-side Service Orders feature provides a comprehensive interface for 
 - Activity timeline
 
 **Deliverable Statuses**:
+
 - Not Started (gray)
 - In Progress (blue)
 - Submitted (yellow) - awaiting customer review
@@ -157,9 +177,11 @@ The customer-side Service Orders feature provides a comprehensive interface for 
 ---
 
 ### 5. Closed
+
 **Purpose**: Service engagement completed successfully
 
 **Customer Actions**:
+
 - View engagement summary
 - Access deliverables archive
 - Download documentation
@@ -167,6 +189,7 @@ The customer-side Service Orders feature provides a comprehensive interface for 
 - Provide feedback
 
 **Features**:
+
 - Engagement summary with key metrics
 - Complete deliverables archive
 - Documentation and invoices repository
@@ -174,6 +197,7 @@ The customer-side Service Orders feature provides a comprehensive interface for 
 - Feedback/testimonial option
 
 **UI Elements**:
+
 - Green status banner indicating completion
 - Archive cards with download links
 - Summary statistics
@@ -184,7 +208,9 @@ The customer-side Service Orders feature provides a comprehensive interface for 
 ## Key Features Across All Stages
 
 ### 1. Service Orders List Page
+
 **Features**:
+
 - Summary statistics cards (Total, Active, Pending Action, Completed)
 - Search functionality
 - Multi-filter system (Stage, Service Type)
@@ -194,6 +220,7 @@ The customer-side Service Orders feature provides a comprehensive interface for 
 - Click-through to detail view
 
 **Displayed Information**:
+
 - Service name and order number
 - Stage badge with icon
 - Price and duration
@@ -204,7 +231,9 @@ The customer-side Service Orders feature provides a comprehensive interface for 
 ---
 
 ### 2. Order Detail Header
+
 **Consistent Elements**:
+
 - Service name and order number
 - Stage badge
 - Service type badge (NEW)
@@ -219,7 +248,9 @@ The customer-side Service Orders feature provides a comprehensive interface for 
 ---
 
 ### 3. Tabbed Navigation
+
 Available tabs (post-payment):
+
 - **Overview**: Stage-specific content and key actions
 - **Delivery**: Deliverables tracking and management
 - **Inbox**: Messaging with delivery team (badge shows unread count)
@@ -230,7 +261,9 @@ Available tabs (post-payment):
 ---
 
 ### 4. Messaging & Communication
+
 **Features**:
+
 - Direct messaging with delivery lead
 - Prominent messaging card on overview tab
 - Quick access to send message
@@ -240,7 +273,9 @@ Available tabs (post-payment):
 ---
 
 ### 5. Deliverables Management
+
 **Customer Capabilities**:
+
 - View deliverable details and attachments
 - Download files
 - Access shared links
@@ -250,6 +285,7 @@ Available tabs (post-payment):
 - Track review deadlines (5 days from submission)
 
 **Deliverable Information**:
+
 - Name and description
 - Status badge
 - Attachments (files and links)
@@ -260,7 +296,9 @@ Available tabs (post-payment):
 ---
 
 ### 6. Sessions Management
+
 **Features**:
+
 - View scheduled sessions
 - See completed sessions with notes
 - Request new sessions
@@ -271,7 +309,9 @@ Available tabs (post-payment):
 ---
 
 ### 7. Activity Tracking
+
 **Audit Log Includes**:
+
 - Timestamp
 - User who performed action
 - Action type (input, deliverable, payment, session, message)
@@ -281,7 +321,9 @@ Available tabs (post-payment):
 ---
 
 ### 8. Permissions System
+
 **Configurable Permissions**:
+
 - `canAcceptDeliverables`: Control deliverable acceptance
 - `canSubmitInputs`: Control input submission
 - `canRequestSessions`: Control session requests
@@ -292,6 +334,7 @@ Available tabs (post-payment):
 ## UI/UX Design Patterns
 
 ### Color Coding by Stage
+
 - **Payment Pending**: Yellow (warning/action needed)
 - **Client Input Pending**: Orange (urgent action required)
 - **Input in Review**: Blue (in progress)
@@ -299,24 +342,28 @@ Available tabs (post-payment):
 - **Closed**: Green (completed)
 
 ### Status Badges
+
 - Consistent badge styling across all statuses
 - Icons paired with text for clarity
 - Color-coded for quick recognition
 - Small size (text-xs) for compact display
 
 ### Progress Indicators
+
 - Percentage-based progress bars
 - Fraction displays (X of Y)
 - Visual stepper component
 - Completion checkmarks
 
 ### Responsive Design
+
 - Grid layouts that adapt to screen size
 - Mobile-friendly card designs
 - Collapsible sections for mobile
 - Touch-friendly button sizes
 
 ### Motion & Animation
+
 - Framer Motion for smooth transitions
 - Staggered list animations
 - Fade-in effects for content
@@ -327,6 +374,7 @@ Available tabs (post-payment):
 ## User Workflows
 
 ### Workflow 1: New Order to Delivery
+
 1. Order created → **Payment Pending** stage
 2. Customer downloads invoice and completes payment
 3. Payment confirmed → **Client Input Pending** stage
@@ -339,6 +387,7 @@ Available tabs (post-payment):
 10. All deliverables accepted → **Closed** stage
 
 ### Workflow 2: Deliverable Review
+
 1. DQ team submits deliverable
 2. Customer receives notification
 3. Customer views deliverable in Delivery tab
@@ -349,6 +398,7 @@ Available tabs (post-payment):
 6. If revision requested, DQ team updates and resubmits
 
 ### Workflow 3: Input Submission
+
 1. Customer navigates to order in Client Input Pending stage
 2. Views list of required inputs
 3. For each pending input:
@@ -364,12 +414,14 @@ Available tabs (post-payment):
 ## Technical Implementation Details
 
 ### State Management
+
 - React hooks (useState) for local state
 - URL parameters for routing (useParams)
 - Auth context for user/organization filtering
 - Mock data filtering by organization
 
 ### Filtering & Search
+
 - Client-side filtering for performance
 - Multiple filter criteria (search, stage, type)
 - Active filters display with individual clear options
@@ -377,17 +429,20 @@ Available tabs (post-payment):
 - Real-time filter updates
 
 ### Sorting
+
 - Primary sort: Stage order (defined priority)
 - Secondary sort: Start date (newest first)
 - Maintains consistent ordering across views
 
 ### Confirmation Dialogs
+
 - AlertDialog for destructive actions
 - Separate dialogs for accept vs. revision
 - Bulk accept confirmation
 - Toast notifications for success/error feedback
 
 ### File Handling
+
 - Drag-and-drop upload areas
 - File type validation (PDF, DOC, DOCX, XLS, XLSX)
 - File size limits (10MB per file)
@@ -399,16 +454,19 @@ Available tabs (post-payment):
 ## Integration Points
 
 ### Authentication
+
 - Uses AuthContext for user information
 - Organization-based filtering
 - Permission-based feature access
 
 ### Data Source
+
 - Currently uses mockOrders from mockOrders.ts
 - Designed for easy API integration
 - Filters by user.organization
 
 ### Routing
+
 - List view: `/dashboard/customer/orders`
 - Detail view: `/dashboard/customer/orders/:id`
 - Tab navigation via URL hash (future enhancement)
@@ -418,6 +476,7 @@ Available tabs (post-payment):
 ## Future Enhancements
 
 ### Potential Additions
+
 1. Real-time notifications for deliverable submissions
 2. In-app messaging system
 3. File preview capabilities
@@ -430,6 +489,7 @@ Available tabs (post-payment):
 10. Custom dashboard widgets
 
 ### API Integration Needs
+
 - Order CRUD operations
 - Input submission endpoints
 - Deliverable acceptance/revision endpoints

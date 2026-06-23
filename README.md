@@ -1,6 +1,6 @@
 # TMaaS Prototype
 
-Transformation Management as a Service marketplace by Digital Qatalyst.
+Transformation Management as a Service marketplace by Digital Qatalyst
 
 ## Stack
 
@@ -22,16 +22,16 @@ Open [http://localhost:3000](http://localhost:3000).
 
 ## Commands
 
-| Command | Description |
-|---------|-------------|
-| `npm run dev` | Start dev server |
-| `npm run build` | Production build |
-| `npm start` | Start production server |
-| `npm test` | Run tests |
+| Command             | Description                 |
+| ------------------- | --------------------------- |
+| `npm run dev`       | Start dev server            |
+| `npm run build`     | Production build            |
+| `npm start`         | Start production server     |
+| `npm test`          | Run tests                   |
 | `npm run typecheck` | Type-check without emitting |
-| `npm run lint` | Lint |
-| `npm run format` | Format with Prettier |
-| `npm run db:seed` | Seed catalog data |
+| `npm run lint`      | Lint                        |
+| `npm run format`    | Format with Prettier        |
+| `npm run db:seed`   | Seed catalog data           |
 
 ## Structure
 

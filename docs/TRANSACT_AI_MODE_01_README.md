@@ -7,17 +7,21 @@ Transact.AI Mode 01 is the post-login personalized advisory chatbot for TMaaS. I
 ## Key Characteristics
 
 ### Stage 2 & 3 Integration
+
 - **Stage 2 (Portal/Application)**: Embedded in the Overview window for authenticated users
 - **Stage 3 (CRM/Management)**: Available in the Dashboard for detailed engagement management
 - Accessible via floating action button (purple/blue gradient with Sparkles icon)
 
 ### Post-Login Context
+
 - **Session Initialization**: On open, Mode 01 reads the user's full profile from mock data (simulating Supabase)
 - **Personalized Greeting**: Uses user's name, active engagement count, and pending actions
 - **Read-Only**: Does not perform any write operations - purely advisory
 
 ### User Profile Context (Mock Data)
+
 Mode 01 has access to:
+
 - User identity (name, role, organization)
 - Organization type and transformation stage
 - Active engagements with progress tracking
@@ -52,6 +56,7 @@ Mode 01 has access to:
 ## Features
 
 ### Intent Classification
+
 Mode 01 understands and responds to:
 
 1. **Engagement Queries**
@@ -82,47 +87,61 @@ Mode 01 understands and responds to:
 ### Response Handlers
 
 #### `handleEngagementStatus()`
+
 Shows current status of all active engagements with:
+
 - Progress percentage
 - Current status
 - Next milestone
 - Pending actions count
 
 #### `handleNextActions()`
+
 Lists all pending actions across engagements:
+
 - Action description
 - Associated engagement
 - Priority context
 
 #### `handleUpcomingSessions()`
+
 Displays upcoming sessions with:
+
 - Session title and type
 - Date and time
 - Associated engagement
 - Preparation suggestions
 
 #### `handleEngagementSummary()`
+
 Provides high-level overview:
+
 - Overall progress percentage
 - Active engagement count
 - Pending actions count
 - Transformation towers involved
 
 #### `handleRecommendations()`
+
 Generates personalized recommendations based on:
+
 - Pending actions
 - Low-progress engagements
 - Upcoming sessions
 - Documents pending review
 
 #### `handleContactLead()`
+
 Shows delivery lead information:
+
 - Lead names
 - Engagements they manage
 - Contact options
 
 ### Quick Reply Options
+
 Every AI response includes contextual quick reply buttons:
+
 - "Show my pending actions"
 - "What's my next session?"
 - "Summarize my engagements"
@@ -134,6 +153,7 @@ Every AI response includes contextual quick reply buttons:
 ## Mock Data Structure
 
 ### User Profile
+
 ```typescript
 {
   id: string;
@@ -156,6 +176,7 @@ Every AI response includes contextual quick reply buttons:
 ```
 
 ### Engagement Data
+
 ```typescript
 {
   id: string;
@@ -176,6 +197,7 @@ Every AI response includes contextual quick reply buttons:
 ## Usage
 
 ### For Users
+
 1. Navigate to any dashboard page (Overview, Active Engagements, etc.)
 2. Click the purple/blue floating button (bottom-right)
 3. Mode 01 opens with personalized greeting
@@ -198,15 +220,15 @@ Every AI response includes contextual quick reply buttons:
 
 ## Differences from Butler.AI (Pre-Login)
 
-| Feature | Butler.AI (Pre-Login) | Transact.AI Mode 01 (Post-Login) |
-|---------|----------------------|----------------------------------|
-| **Stage** | Stage 0 - Concierge | Stage 2 & 3 - Portal/Dashboard |
-| **Context** | Anonymous visitor | Authenticated user with full profile |
-| **Purpose** | Platform education & service discovery | Personalized advisory & engagement management |
-| **Data Access** | General knowledge base | User-specific engagement data |
-| **Recommendations** | Generic service matching | Personalized based on actual progress |
-| **Actions** | Route to sign-up | Navigate to specific engagements/tasks |
-| **Tone** | Educational & promotional | Advisory & supportive |
+| Feature             | Butler.AI (Pre-Login)                  | Transact.AI Mode 01 (Post-Login)              |
+| ------------------- | -------------------------------------- | --------------------------------------------- |
+| **Stage**           | Stage 0 - Concierge                    | Stage 2 & 3 - Portal/Dashboard                |
+| **Context**         | Anonymous visitor                      | Authenticated user with full profile          |
+| **Purpose**         | Platform education & service discovery | Personalized advisory & engagement management |
+| **Data Access**     | General knowledge base                 | User-specific engagement data                 |
+| **Recommendations** | Generic service matching               | Personalized based on actual progress         |
+| **Actions**         | Route to sign-up                       | Navigate to specific engagements/tasks        |
+| **Tone**            | Educational & promotional              | Advisory & supportive                         |
 
 ## Future Enhancements (When Supabase is Connected)
 
@@ -238,22 +260,26 @@ Every AI response includes contextual quick reply buttons:
 ## Technical Notes
 
 ### State Management
+
 - Uses React hooks for local state
 - Profile loaded once per session
 - No global state required (self-contained)
 
 ### Performance
+
 - Simulated response delays (600-1600ms) for realistic feel
 - Lazy loading of profile data
 - Efficient intent classification
 
 ### Styling
+
 - Consistent with TMaaS design system
 - Purple/blue gradient branding for Mode 01
 - Responsive design for mobile/tablet
 - Smooth animations with Framer Motion
 
 ### Accessibility
+
 - Keyboard navigation support
 - Screen reader friendly
 - Focus management
@@ -283,6 +309,7 @@ Every AI response includes contextual quick reply buttons:
 ## Support
 
 For questions or issues with Transact.AI Mode 01:
+
 - Review this documentation
 - Check console for errors
 - Verify user profile data structure

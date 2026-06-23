@@ -8,8 +8,7 @@ function matchesSectorFilter(pkg: ServiceProduct, selectedSectors: string[]): bo
   return selectedSectors.some((sectorId) => {
     const sectorTag = sectorIdToCatalogTag(sectorId);
     return (
-      pkg.tags.includes(sectorTag) ||
-      Object.prototype.hasOwnProperty.call(pkg.remixName, sectorId)
+      pkg.tags.includes(sectorTag) || Object.prototype.hasOwnProperty.call(pkg.remixName, sectorId)
     );
   });
 }
@@ -154,11 +153,7 @@ export function filterCatalogServices(
     const matchesSector = matchesSectorFilter(pkg, selectedSectors);
 
     return (
-      matchesCollection &&
-      matchesCategory &&
-      matchesServiceType &&
-      matchesSector &&
-      matchesSearch
+      matchesCollection && matchesCategory && matchesServiceType && matchesSector && matchesSearch
     );
   });
 

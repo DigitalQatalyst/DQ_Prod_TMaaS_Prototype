@@ -358,7 +358,7 @@ const DashboardLayout = ({ children }: DashboardLayoutProps) => {
                     {group.items.map((item) => {
                       const Icon = item.icon;
                       const active = isActive(item.path);
-                      const isExternal = (item as any).external;
+                      const isExternal = (item as { external?: boolean }).external;
 
                       return (
                         <Link

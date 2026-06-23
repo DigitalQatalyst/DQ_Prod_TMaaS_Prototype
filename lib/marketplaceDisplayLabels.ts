@@ -4,7 +4,7 @@
  */
 
 const VARIANT_SUFFIX_RE =
-  /^(.+?)\s+-\s+(Assess|Design|AI Design|Deploy|AI Deploy|Managed|Managed Service|Transformation Bundle|Advisory Set|Design Services Set|Deploy Services Set|Managed Services Set)$/;
+  /^(.+?)\s+-\s+(Assess|Design|AI Design|Deploy|AI Deploy|Managed|Managed Service|Transformation Bundle|End-to-end bundle|Advisory Set|Design Services Set|Deploy Services Set|Managed Services Set)$/;
 
 /** Product family stem renames (display only). Slugs unchanged. */
 export const PRODUCT_DISPLAY_RENAMES: Record<string, string> = {
@@ -27,6 +27,7 @@ const SUFFIX_TO_SERVICE_TYPE: Record<string, string> = {
   Managed: "manage",
   "Managed Service": "manage",
   "Transformation Bundle": "bundle",
+  "End-to-end bundle": "bundle",
   "Advisory Set": "bundle",
   "Design Services Set": "bundle",
   "Deploy Services Set": "bundle",
@@ -119,7 +120,11 @@ function formatTitle(
     return product;
   }
 
-  if (serviceType === "bundle" || variantSuffix === "Transformation Bundle") {
+  if (
+    serviceType === "bundle" ||
+    variantSuffix === "Transformation Bundle" ||
+    variantSuffix === "End-to-end bundle"
+  ) {
     return `${product} - ${bundleTitleStage}`;
   }
 

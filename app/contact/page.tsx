@@ -1,5 +1,7 @@
 import { Suspense } from "react";
 import type { Metadata } from "next";
+import { FeatureFlagGuard } from "@/components/features/dashboard/FeatureFlagGuard";
+import { getFirstEnabledRoute } from "@/lib/featureFlags";
 import ContactPageClient from "./_client";
 
 export const metadata: Metadata = {
@@ -9,8 +11,10 @@ export const metadata: Metadata = {
 
 export default function ContactPage() {
   return (
-    <Suspense fallback={null}>
-      <ContactPageClient />
-    </Suspense>
+    <FeatureFlagGuard feature="contactUs" redirectTo={getFirstEnabledRoute()}>
+      <Suspense fallback={null}>
+        <ContactPageClient />
+      </Suspense>
+    </FeatureFlagGuard>
   );
 }

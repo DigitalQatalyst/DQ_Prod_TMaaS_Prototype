@@ -75,7 +75,7 @@ Marketing pages (`/`, `/marketplace`, `/service/:id`) share the **DQ corp web de
 - Hero backgrounds: `MeshSection` with `hero-grid` overlay and mesh CSS vars from `index.css`
 - Footer section labels: `font-mono text-[10px] uppercase tracking-[0.18em] text-gray-400`
 - Footer link columns: **Explore** (Marketplace, Talk to our team, flag-gated), **Follow Us** (LinkedIn, X, YouTube, Explore DigitalQatalyst external link). No separate DQ column.
-- Footer bottom bar: Privacy and Terms link to in-app `/legal/privacy` and `/legal/terms` when `legal` flag is enabled; otherwise external corp web URLs
+- Footer bottom bar: Privacy and Terms always link in-app to `/legal/privacy` and `/legal/terms` (MVP). The `legal` flag gates only the `/legal` hub and `/legal/faq`.
 - Footer and hero descriptions use `PLATFORM_NAME_EXPANDED` / expanded copy: **Transformation Management as a Service (TMaaS)** via `brandLinks.ts`
 - Service count copy is **100+** everywhere (not 50+ or 200+); typical start time is **<1 day** (not 4 wks)
 - Corp web links use `https://www.digitalqatalyst.com` base URL; TMaaS product link label is **Marketplace** (not "Design & Deploy Services")
@@ -207,6 +207,28 @@ Match `ServiceDetailWhyItMattersTab.tsx` + `whyItMattersContent.ts`:
 - Use `rounded-xl` + `border-navy-100` for marketing cards when corp web pattern applies
 - Change page logic/routing when doing styling-only alignment work
 
+## [SECTION: MVP Feature Flag Route Gating]
+
+Every App Router page must be gated in a server `page.tsx` or route-group `layout.tsx` with `FeatureFlagGuard` and `redirectTo={getFirstEnabledRoute()}`. Hiding nav links or UI alone is not sufficient.
+
+| Route | Flag | Gate in |
+|-------|------|---------|
+| `/` | `homepage` | `app/page.tsx` |
+| `/marketplace` | `marketplace` | `app/marketplace/page.tsx` |
+| `/marketplace/[slug]` | `serviceDetail` | `app/marketplace/[slug]/page.tsx` |
+| `/contact` | `contactUs` | `app/contact/page.tsx` |
+| `/explore` | `explore` | `app/explore/page.tsx` |
+| `/cart` | `cart` | `app/cart/page.tsx` |
+| `/butler` | `butlerDemo` | `app/butler/page.tsx` |
+| `/sign-in` | `auth` | `app/(auth)/layout.tsx` |
+| `/onboarding/*` | `onboarding` | `app/(onboarding)/layout.tsx` |
+| `/dashboard/*` | `dashboard` | `app/dashboard/layout.tsx` |
+| `/legal/*` | `legal` | `app/(legal)/layout.tsx` |
+
+- Keep interactive page content in `app/<route>/_client.tsx`; `page.tsx` stays a server component wrapper.
+- Prefer layout-level guards for route groups with many pages.
+- When adding a new route, wrap it the same way and document the flag in `docs/FEATURE_FLAGS.md`.
+
 ## [SECTION: Marketplace Catalog Conventions]
 
 - `useMarketplaceListings` must load the **full catalog once** via `useCatalog()` and apply `filterCatalogServices()` + pagination in memory.
@@ -322,6 +344,13 @@ Validate with [Google Rich Results Test](https://search.google.com/test/rich-res
 ### New public routes
 
 When adding an indexable page: add `Seo` (+ `JsonLd` if applicable), add URL to `scripts/generate-seo-files.ts` static paths, add to `middleware/allowedRoutes.ts`, regenerate sitemap.
+
+### Google Analytics (GA4)
+
+- Measurement ID: `G-SWP6JJX3TP` in `lib/analytics/googleAnalytics.ts`.
+- Loaded via `ProductionGoogleAnalytics` in `app/layout.tsx` using `next/script` (not a separate npm package).
+- **Production only:** `shouldLoadGoogleAnalytics()` requires `NODE_ENV=production` and either `VERCEL_ENV=production` (Vercel) or `NEXT_PUBLIC_ENV=production` (other hosts). Never enable on preview or local dev.
+- Set `NEXT_PUBLIC_ENV=production` on the Vercel **production** environment (not preview).
 
 ### Post-deploy checks
 

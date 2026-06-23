@@ -17,50 +17,52 @@ All other routes redirect to the first enabled page. Navigation links and global
 
 ### MVP Pages
 
-| Flag | Route | Default |
-|------|-------|---------|
-| `homepage` | `/` | on |
-| `marketplace` | `/marketplace` | on |
-| `serviceDetail` | `/service/:id` | on |
-| `contactUs` | `/contact` | on |
+| Flag            | Route          | Default |
+| --------------- | -------------- | ------- |
+| `homepage`      | `/`            | on      |
+| `marketplace`   | `/marketplace` | on      |
+| `serviceDetail` | `/service/:id` | on      |
+| `contactUs`     | `/contact`     | on      |
 
 ### Additional Pages
 
-| Flag | Route | Default |
-|------|-------|---------|
-| `explore` | `/explore` | off |
-| `alternateLanding` | `/home` | off |
-| `landingV1` | `/landing-v1` (corp-mirror alternate) | on |
-| `legal` | `/legal/*` | off |
+| Flag               | Route                                 | Default |
+| ------------------ | ------------------------------------- | ------- |
+| `explore`          | `/explore`                            | off     |
+| `alternateLanding` | `/home`                               | off     |
+| `landingV1`        | `/landing-v1` (corp-mirror alternate) | on      |
+| `legal`            | `/legal` (hub), `/legal/faq`          | off     |
+
+**Note:** `/legal/privacy` and `/legal/terms` are always public for MVP and are **not** gated by the `legal` flag.
 
 ### Features
 
-| Flag | Controls | Default |
-|------|----------|---------|
-| `cart` | `/cart`, cart drawer, add-to-cart buttons | off |
-| `chatAssistant` | Floating ChatButton | off |
-| `auth` | `/sign-in` | off |
-| `onboarding` | `/onboarding/*` | off |
-| `dashboard` | `/dashboard/*` | off |
-| `butlerDemo` | `/butler-demo` | off |
-| `contextSwitcher` | Prototype role switcher in navbar | off |
+| Flag              | Controls                                  | Default |
+| ----------------- | ----------------------------------------- | ------- |
+| `cart`            | `/cart`, cart drawer, add-to-cart buttons | off     |
+| `chatAssistant`   | Floating ChatButton                       | off     |
+| `auth`            | `/sign-in`                                | off     |
+| `onboarding`      | `/onboarding/*`                           | off     |
+| `dashboard`       | `/dashboard/*`                            | off     |
+| `butlerDemo`      | `/butler-demo`                            | off     |
+| `contextSwitcher` | Prototype role switcher in navbar         | off     |
 
 ## Using Flags in Code
 
 ```typescript
-import { featureFlags, getFirstEnabledRoute } from '@/lib/featureFlags';
+import { featureFlags, getFirstEnabledRoute } from "@/lib/featureFlags";
 
-if (featureFlags.isEnabled('marketplace')) {
+if (featureFlags.isEnabled("marketplace")) {
   // show marketplace link
 }
 ```
 
 ```tsx
-import { FeatureFlagGuard } from '@/components/FeatureFlagGuard';
+import { FeatureFlagGuard } from "@/components/FeatureFlagGuard";
 
 <FeatureFlagGuard feature="cart" redirectTo="/">
   <CartDrawer />
-</FeatureFlagGuard>
+</FeatureFlagGuard>;
 ```
 
 ## Development Admin Panel

@@ -202,7 +202,7 @@ const ServiceRequestDialog = ({ open, onOpenChange, service }: ServiceRequestDia
                       <FileText size={20} className="mt-0.5 shrink-0 text-blue-600" />
                       <div>
                         <p className="text-sm font-medium text-foreground">
-                          To initiate this service, you'll need to provide specific inputs as
+                          To initiate this service, you&apos;ll need to provide specific inputs as
                           outlined below.
                         </p>
                       </div>
@@ -426,8 +426,8 @@ const ServiceRequestDialog = ({ open, onOpenChange, service }: ServiceRequestDia
                         Join 50+ organizations transforming with DQ
                       </p>
                       <p className="mt-1 text-xs text-muted-foreground">
-                        "DQ's strategic guidance helped us accelerate our digital transformation by
-                        6 months."
+                        &ldquo;DQ&apos;s strategic guidance helped us accelerate our digital
+                        transformation by 6 months.&rdquo;
                         <span className="font-medium">, CTO, Fortune 500 Energy Company</span>
                       </p>
                     </div>
@@ -555,7 +555,7 @@ const ServiceRequestDialog = ({ open, onOpenChange, service }: ServiceRequestDia
                             Typical approval: 1-2 business days
                           </p>
                           <p className="mt-1">
-                            We'll contact you if additional information is needed for credit
+                            We&apos;ll contact you if additional information is needed for credit
                             approval.
                           </p>
                         </div>
@@ -628,7 +628,7 @@ const ServiceRequestDialog = ({ open, onOpenChange, service }: ServiceRequestDia
                   <div className="space-y-2 text-xs text-muted-foreground">
                     <div className="flex items-start gap-2">
                       <CheckCircle2 size={14} className="mt-0.5 shrink-0 text-green-600" />
-                      <span>You'll receive an order confirmation email immediately</span>
+                      <span>You&apos;ll receive an order confirmation email immediately</span>
                     </div>
                     <div className="flex items-start gap-2">
                       <CheckCircle2 size={14} className="mt-0.5 shrink-0 text-green-600" />
