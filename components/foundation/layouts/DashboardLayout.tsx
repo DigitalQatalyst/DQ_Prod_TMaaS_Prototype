@@ -4,7 +4,6 @@ import { useState, useEffect } from "react";
 import type { UserRole } from "@/contexts/AuthContext";
 import Link from "next/link";
 import TMaaSLogo from "@/components/features/landing/TMaaSLogo";
-import DqBrandMark from "@/components/foundation/DqBrandMark";
 import { usePathname } from "next/navigation";
 import { useRouter } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
@@ -276,7 +275,15 @@ const DashboardLayout = ({ children }: DashboardLayoutProps) => {
                 className="flex items-center justify-center transition-opacity hover:opacity-80"
                 aria-label="TMaaS home"
               >
-                <DqBrandMark size="md" />
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src="/favicon-32.png"
+                  alt=""
+                  aria-hidden
+                  className="h-8 w-8 shrink-0 rounded-md"
+                  width={32}
+                  height={32}
+                />
               </Link>
             ) : (
               <TMaaSLogo size="nav" className="min-w-0 max-w-[calc(100%-0.5rem)]" />
