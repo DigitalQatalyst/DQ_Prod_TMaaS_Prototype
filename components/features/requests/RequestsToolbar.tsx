@@ -3,11 +3,7 @@
 import { Calendar, Filter, Search } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "@/components/ui/popover";
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 
 interface RequestsToolbarProps {
   search: string;
@@ -20,19 +16,22 @@ export function RequestsToolbar({ search, onSearchChange }: RequestsToolbarProps
       <div className="relative min-w-[240px] flex-1">
         <Search
           size={16}
-          className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-navy-950/40"
+          className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-[var(--color-text-muted)]"
         />
         <Input
           type="search"
           placeholder="Search requests by name, ID or service type..."
           value={search}
           onChange={(e) => onSearchChange(e.target.value)}
-          className="h-10 rounded-lg border-navy-100/80 bg-white pl-9 text-sm"
+          className="h-10 rounded-[var(--radius-button)] border-[var(--color-border)] bg-white pl-9 text-sm"
         />
       </div>
       <Popover>
         <PopoverTrigger asChild>
-          <Button variant="outline" className="gap-2 border-navy-100 text-navy-950">
+          <Button
+            variant="outline"
+            className="gap-2 rounded-[var(--radius-button)] border-[var(--color-border)] text-[var(--color-text-primary)]"
+          >
             <Filter size={16} />
             Filter
           </Button>
@@ -46,7 +45,7 @@ export function RequestsToolbar({ search, onSearchChange }: RequestsToolbarProps
       <Button
         variant="outline"
         size="icon"
-        className="shrink-0 border-navy-100 text-navy-950"
+        className="shrink-0 rounded-[var(--radius-button)] border-[var(--color-border)]"
         aria-label="Filter by date"
       >
         <Calendar size={16} />

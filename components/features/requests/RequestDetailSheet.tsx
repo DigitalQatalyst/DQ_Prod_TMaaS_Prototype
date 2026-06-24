@@ -90,8 +90,8 @@ export function RequestDetailSheet({ request, open, onOpenChange }: RequestDetai
             <p className="mt-2 text-sm leading-relaxed text-navy-950/80">{request.description}</p>
             {request.marketplaceSlug && (
               <Link
-                href={`/marketplace/${request.marketplaceSlug}`}
-                className="mt-2 inline-flex items-center gap-1 text-sm font-semibold text-blue-600 hover:underline"
+                href={`/marketplace/${request.variantId}`}
+                className="mt-2 inline-flex items-center gap-1 text-sm font-semibold text-[var(--color-primary)] hover:underline"
               >
                 View on marketplace
                 <ExternalLink size={14} />

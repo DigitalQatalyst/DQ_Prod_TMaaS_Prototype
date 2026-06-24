@@ -29,6 +29,8 @@ export interface CustomerRequest {
   deliveryLead?: string;
   description: string;
   marketplaceSlug?: string;
+  /** TMaaS catalog variant id (`initialServices.id`). */
+  variantId: number;
   userId: string;
   timeline: RequestTimelineEntry[];
 }
