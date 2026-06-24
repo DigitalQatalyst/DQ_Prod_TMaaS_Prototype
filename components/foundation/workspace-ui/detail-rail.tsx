@@ -1,7 +1,6 @@
 import * as React from "react";
 import Link from "next/link";
 import * as LucideIcons from "lucide-react";
-import { ChevronRight, type LucideIcon } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 export interface RailSectionProps {
@@ -46,7 +45,7 @@ function resolveIcon(
 }
 
 const railActionBase =
-  "flex w-full items-center gap-2.5 rounded-md px-2.5 py-2 text-left text-xs font-medium transition focus-visible:outline-none focus-visible:[box-shadow:var(--focus-ring-orange)]";
+  "flex w-full items-center gap-2.5 rounded-md px-3 py-2.5 text-left text-sm font-medium transition focus-visible:outline-none focus-visible:[box-shadow:var(--focus-ring-orange)]";
 
 export interface RailActionButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement> {
@@ -107,67 +106,6 @@ export function RailActionLink({
         aria-hidden="true"
       />
       {children}
-    </Link>
-  );
-}
-
-export type RailActionCardTone = "navy" | "orange" | "blue";
-
-const actionCardIconTones: Record<RailActionCardTone, string> = {
-  navy: "bg-[var(--color-primary)]/8 text-[var(--color-primary)]",
-  orange: "bg-[var(--color-secondary)]/10 text-[var(--color-secondary)]",
-  blue: "bg-blue-50 text-blue-600",
-};
-
-export interface RailActionCardProps {
-  href: string;
-  icon: LucideIcon;
-  title: string;
-  description: string;
-  tone?: RailActionCardTone;
-  className?: string;
-}
-
-/**
- * Rich rail navigation card — icon tile, title, description, chevron.
- * Uses DWS workspace tokens inside a RailSection.
- */
-export function RailActionCard({
-  href,
-  icon: Icon,
-  title,
-  description,
-  tone = "navy",
-  className,
-}: RailActionCardProps) {
-  return (
-    <Link
-      href={href}
-      className={cn(
-        "group flex items-start gap-3 rounded-lg border border-gray-200 bg-gray-50/80 p-3.5 transition",
-        "hover:border-gray-300 hover:bg-white hover:shadow-sm",
-        "focus-visible:outline-none focus-visible:[box-shadow:var(--focus-ring-orange)]",
-        className
-      )}
-    >
-      <div
-        className={cn(
-          "flex h-10 w-10 shrink-0 items-center justify-center rounded-lg",
-          actionCardIconTones[tone]
-        )}
-      >
-        <Icon size={18} strokeWidth={1.5} aria-hidden="true" />
-      </div>
-      <div className="min-w-0 flex-1">
-        <p className="text-sm font-semibold leading-snug text-[var(--color-primary)]">{title}</p>
-        <p className="mt-1 text-xs leading-relaxed text-[var(--color-text-muted)]">{description}</p>
-      </div>
-      <ChevronRight
-        size={16}
-        strokeWidth={1.5}
-        className="mt-1 shrink-0 text-gray-300 transition group-hover:text-[var(--color-text-muted)]"
-        aria-hidden="true"
-      />
     </Link>
   );
 }

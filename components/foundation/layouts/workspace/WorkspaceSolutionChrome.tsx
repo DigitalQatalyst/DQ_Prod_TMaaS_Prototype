@@ -2,7 +2,6 @@
 
 import { Menu, PanelLeft } from "lucide-react";
 import { AvatarLockup } from "@/components/foundation/workspace-ui/AvatarLockup";
-import { cn } from "@/lib/utils";
 
 interface WorkspaceUser {
   name: string;
@@ -16,7 +15,7 @@ interface WorkspaceSolutionChromeProps {
 }
 
 /**
- * DWS.01 AppChrome port — lockup when sidebar collapsed; AvatarLockup identity (no dropdown).
+ * DWS.01 AppChrome port — brand lives in sidebar on desktop; lockup mobile-only.
  */
 export function WorkspaceSolutionChrome({
   user,
@@ -47,12 +46,8 @@ export function WorkspaceSolutionChrome({
         <PanelLeft size={18} strokeWidth={1.5} />
       </button>
 
-      <div
-        className={cn(
-          "flex shrink-0 items-center gap-3",
-          !sidebarCollapsed && "lg:hidden"
-        )}
-      >
+      {/* Mobile only — desktop brand is always in the sidebar (mark or full logo). */}
+      <div className="flex shrink-0 items-center gap-3 lg:hidden">
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img src="/brand/mark.svg" alt="" className="h-[26px] w-[26px]" width={26} height={26} />
         <div className="hidden sm:block">

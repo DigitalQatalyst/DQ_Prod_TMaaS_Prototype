@@ -15,8 +15,8 @@ Reference: `DQ_PROD_DWS01-main` TransactionShell + AppChrome + AppSidebar patter
 
 ## Brand / identity
 - **Expanded sidebar**: show TMaaS logo in sidebar header only.
-- **Collapsed sidebar**: show DQ mark in sidebar header only.
-- **Top chrome lockup** (mark + TMaaS): show only when sidebar is collapsed (`lg:hidden` when expanded). On mobile, always show lockup (sidebar is overlay).
+- **Collapsed sidebar**: show DQ mark in sidebar header only — never duplicate in top chrome on desktop.
+- **Top chrome lockup** (mark + TMaaS): **mobile only** (`lg:hidden`). On desktop the sidebar always carries brand (full logo or mark).
 - User identity uses **DWS.01 AvatarLockup** in SolutionChrome (deterministic initials + display name only). No organisation sub-label, no pill dropdown, no shadcn DropdownMenu in chrome.
 - Sign out lives in the sidebar footer only — never duplicate an avatar card in the sidebar footer.
 
@@ -27,5 +27,5 @@ Reference: `DQ_PROD_DWS01-main` TransactionShell + AppChrome + AppSidebar patter
 - Working pages use `min-w-0` on flex children to prevent overflow.
 - Main + aside: `flex flex-col xl:flex-row` with fixed aside width (`xl:w-[260px]`), not grid without `min-w-0`.
 - Tables: adequate row padding (`py-3.5`), `line-clamp-2` for long titles; avoid aggressive `max-w` truncate on primary column.
-- Page aside actions: **RailSection** + **RailActionCard** (icon tile, title, description) from `workspace-ui/detail-rail.tsx`. Use plain RailActionLink only for compact single-line actions.
+- Page aside actions: **RailSection** + **RailActionLink** buttons (icon + label, no card chrome or long subtext).
 - Customer nav sections: ORIENTATION (Overview), MARKETPLACE (Explore Services), WORKSPACE (My Requests) — no SETTINGS section in sidebar.

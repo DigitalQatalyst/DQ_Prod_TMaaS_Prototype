@@ -1,28 +1,19 @@
-import { Mail, Search } from "lucide-react";
 import {
-  RailActionCard,
+  RailActionLink,
   RailSection,
 } from "@/components/foundation/workspace-ui/detail-rail";
 
-/** DWS.01 RailSection with rich action cards for the requests page aside. */
+/** DWS.01 RailSection + stacked rail action buttons for the requests aside. */
 export function QuickActionsPanel() {
   return (
     <RailSection title="Quick actions">
-      <div className="space-y-3">
-        <RailActionCard
-          href="/marketplace"
-          icon={Search}
-          tone="orange"
-          title="Browse services"
-          description="Explore Design, Deploy, Assess, AI Design and AI Deploy services"
-        />
-        <RailActionCard
-          href="/contact"
-          icon={Mail}
-          tone="blue"
-          title="Contact DQ team"
-          description="Get assistance from the TMaaS team"
-        />
+      <div className="space-y-2">
+        <RailActionLink href="/marketplace" icon="Search" tone="navy">
+          Browse services
+        </RailActionLink>
+        <RailActionLink href="/contact" icon="Mail" tone="outline">
+          Contact DQ team
+        </RailActionLink>
       </div>
     </RailSection>
   );
