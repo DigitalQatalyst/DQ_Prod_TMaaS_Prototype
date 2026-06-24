@@ -20,7 +20,7 @@ function resolveFirstName(authName: string): string {
   return authName.split(/\s+/)[0] ?? authName;
 }
 
-/** Customer Overview — welcome, stats + quick actions row, requests preview. */
+/** Customer Overview — welcome, then two columns: metrics + table | quick actions. */
 export function OverviewPage() {
   const { user } = useAuth();
   const stats = useCustomerOverviewStats();
@@ -59,46 +59,53 @@ export function OverviewPage() {
         </p>
       </div>
 
-      <div className="min-w-0 flex-1 space-y-8 p-6 lg:p-8">
-        <div className="flex flex-col gap-4 xl:flex-row xl:items-stretch">
-          <OverviewStatsRow stats={stats} className="min-w-0 flex-1" />
-          <aside className="w-full shrink-0 xl:w-[260px]">
-            <QuickActionsPanel className="h-full" />
+      <div className="min-w-0 flex-1 p-6 lg:p-8">
+        <div className="flex flex-col gap-8 xl:flex-row xl:items-start">
+          <div className="min-w-0 flex-1 space-y-8">
+            <OverviewStatsRow stats={stats} />
+
+            <div className="space-y-4">
+              <div className="flex flex-wrap items-start justify-between gap-3">
+                <div>
+                  <h2 className="text-lg font-semibold text-[var(--color-text-primary)]">
+                    My Requests
+                  </h2>
+                  <p className="mt-1 text-sm text-[var(--color-text-muted)]">
+                    Track the status of all your service requests and advisory engagements
+                  </p>
+                </div>
+                <Link
+                  href="/dashboard/requests"
+                  className="inline-flex items-center gap-1 text-sm font-medium text-[var(--color-secondary)] hover:underline"
+                >
+                  View all
+                  <ArrowRight size={14} strokeWidth={1.5} aria-hidden="true" />
+                </Link>
+              </div>
+
+              <OverviewRequestsTable
+                requests={requests}
+                onRowClick={handleRowClick}
+                selectedId={selectedRequest?.id}
+              />
+
+              <RequestsPagination
+                page={page}
+                pageSize={pageSize}
+                totalCount={totalCount}
+                totalPages={totalPages}
+                onPageChange={setPage}
+              />
+            </div>
+          </div>
+
+          <aside className="hidden w-full shrink-0 xl:block xl:w-[260px]">
+            <QuickActionsPanel />
           </aside>
         </div>
 
-        <div className="space-y-4">
-          <div className="flex flex-wrap items-start justify-between gap-3">
-            <div>
-              <h2 className="text-lg font-semibold text-[var(--color-text-primary)]">
-                My Requests
-              </h2>
-              <p className="mt-1 text-sm text-[var(--color-text-muted)]">
-                Track the status of all your service requests and advisory engagements
-              </p>
-            </div>
-            <Link
-              href="/dashboard/requests"
-              className="inline-flex items-center gap-1 text-sm font-medium text-[var(--color-secondary)] hover:underline"
-            >
-              View all
-              <ArrowRight size={14} strokeWidth={1.5} aria-hidden="true" />
-            </Link>
-          </div>
-
-          <OverviewRequestsTable
-            requests={requests}
-            onRowClick={handleRowClick}
-            selectedId={selectedRequest?.id}
-          />
-
-          <RequestsPagination
-            page={page}
-            pageSize={pageSize}
-            totalCount={totalCount}
-            totalPages={totalPages}
-            onPageChange={setPage}
-          />
+        <div className="mt-8 xl:hidden">
+          <QuickActionsPanel />
         </div>
       </div>
 
