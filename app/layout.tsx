@@ -2,11 +2,7 @@ import type { Metadata } from "next";
 import { Plus_Jakarta_Sans, JetBrains_Mono, Space_Grotesk } from "next/font/google";
 import { ProductionGoogleAnalytics } from "@/components/foundation/analytics";
 import { Providers } from "@/components/foundation/providers";
-import {
-  PAGE_TITLE_SEPARATOR,
-  PLATFORM_ACRONYM,
-  PLATFORM_FULL_NAME,
-} from "@/lib/brandLinks";
+import { PAGE_TITLE_SEPARATOR, PLATFORM_ACRONYM, PLATFORM_FULL_NAME } from "@/lib/brandLinks";
 import "./globals.css";
 
 const jakarta = Plus_Jakarta_Sans({
