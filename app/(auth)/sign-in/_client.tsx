@@ -1,20 +1,43 @@
 "use client";
 
 import { useState } from "react";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import TMaaSLogo from "@/components/features/landing/TMaaSLogo";
 import { POWERED_BY_LINE } from "@/lib/brandLinks";
 
+const DEFAULT_RETURN_TO = "/dashboard/requests";
+
+function getSafeReturnTo(value: string | null): string {
+  if (!value || !value.startsWith("/") || value.startsWith("//")) {
+    return DEFAULT_RETURN_TO;
+  }
+  return value;
+}
+
 export default function SignInPageClient() {
   const router = useRouter();
+  const searchParams = useSearchParams();
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
-  const handleMicrosoftSSO = () => {
+  const returnTo = getSafeReturnTo(searchParams.get("returnTo"));
+
+  const handleMicrosoftSSO = async () => {
     setLoading(true);
-    setTimeout(() => {
-      router.push("/onboarding/profile");
-    }, 1000);
+    setError(null);
+
+    try {
+      const res = await fetch("/api/auth/stub-session", { method: "POST" });
+      if (!res.ok) {
+        throw new Error("Could not start session");
+      }
+      router.push(returnTo);
+      router.refresh();
+    } catch {
+      setError("Sign-in failed. Please try again.");
+      setLoading(false);
+    }
   };
 
   return (
@@ -43,6 +66,7 @@ export default function SignInPageClient() {
             </svg>
             {loading ? "Signing in…" : "Sign in with Microsoft"}
           </Button>
+          {error && <p className="mt-3 text-center text-sm text-destructive">{error}</p>}
         </div>
 
         <p className="mt-6 text-center text-xs text-muted-foreground">

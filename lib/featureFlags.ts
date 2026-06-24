@@ -44,7 +44,8 @@ const ROUTE_PRIORITY: { flag: keyof FeatureFlags; path: string }[] = [
 /** Set NEXT_PUBLIC_FEATURE_DASHBOARD=true in .env.local to enable customer workspace routes. */
 const envDashboardEnabled =
   typeof process !== "undefined" &&
-  process.env.NEXT_PUBLIC_FEATURE_DASHBOARD === "true";
+  (process.env.NEXT_PUBLIC_FEATURE_DASHBOARD === "true" ||
+    process.env.NODE_ENV === "development");
 
 // MVP defaults, only the four launch features enabled
 const DEFAULT_FEATURE_FLAGS: FeatureFlags = {
