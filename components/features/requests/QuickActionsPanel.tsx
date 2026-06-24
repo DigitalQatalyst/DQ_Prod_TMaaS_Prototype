@@ -1,20 +1,14 @@
-import {
-  RailActionLink,
-  RailSection,
-} from "@/components/foundation/workspace-ui/detail-rail";
+import Link from "next/link";
+import { WorkspaceButton } from "@/components/foundation/workspace-ui/WorkspaceButton";
 
-/** DWS.01 RailSection + stacked rail action buttons for the requests aside. */
+/**
+ * DWS.01 `_my-requests-shell.tsx` aside — single primary Button linking to marketplace.
+ * @see DQ_PROD_DWS01-main/app/(authenticated)/transactions/requests/_my-requests-shell.tsx
+ */
 export function QuickActionsPanel() {
   return (
-    <RailSection title="Quick actions">
-      <div className="space-y-2">
-        <RailActionLink href="/marketplace" icon="Search" tone="navy">
-          Browse services
-        </RailActionLink>
-        <RailActionLink href="/contact" icon="Mail" tone="outline">
-          Contact DQ team
-        </RailActionLink>
-      </div>
-    </RailSection>
+    <WorkspaceButton asChild className="w-full">
+      <Link href="/marketplace">Browse services</Link>
+    </WorkspaceButton>
   );
 }

@@ -1,4 +1,4 @@
-import { Clock, LayoutDashboard, LayoutGrid, type LucideIcon } from "lucide-react";
+import { Clock, Compass, LayoutDashboard, type LucideIcon } from "lucide-react";
 
 export interface CustomerNavItem {
   id: string;
@@ -24,7 +24,7 @@ export const customerNavSections: CustomerNavSection[] = [
     id: "marketplace",
     label: "MARKETPLACE",
     items: [
-      { id: "explore-services", name: "Explore Services", icon: LayoutGrid, path: "/marketplace" },
+      { id: "explore-services", name: "Explore Services", icon: Compass, path: "/marketplace" },
     ],
   },
   {

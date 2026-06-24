@@ -27,5 +27,5 @@ Reference: `DQ_PROD_DWS01-main` TransactionShell + AppChrome + AppSidebar patter
 - Working pages use `min-w-0` on flex children to prevent overflow.
 - Main + aside: `flex flex-col xl:flex-row` with fixed aside width (`xl:w-[260px]`), not grid without `min-w-0`.
 - Tables: adequate row padding (`py-3.5`), `line-clamp-2` for long titles; avoid aggressive `max-w` truncate on primary column.
-- Page aside actions: **RailSection** + **RailActionLink** buttons (icon + label, no card chrome or long subtext).
-- Customer nav sections: ORIENTATION (Overview), MARKETPLACE (Explore Services), WORKSPACE (My Requests) — no SETTINGS section in sidebar.
+- Page aside on My Requests: single **WorkspaceButton** (DWS `@dbp/ui` Button port) — "Browse services" → `/marketplace`. No RailSection wrapper; no extra contact action (help is in sidebar footer).
+- Customer nav sections: ORIENTATION (Overview, `LayoutDashboard`), MARKETPLACE (Explore Services, `Compass`), WORKSPACE (My Requests, `Clock`) — no SETTINGS section in sidebar.
