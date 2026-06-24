@@ -3,7 +3,7 @@ import { describe, expect, it } from "vitest";
 import { ProductChromeState } from "@/components/foundation/ProductChromeState";
 
 describe("ProductChromeState", () => {
-  it("renders the official TMaaS lockup and DQ monogram in a vertical stack", () => {
+  it("renders the official TMaaS lockup without a home link", () => {
     render(<ProductChromeState />);
 
     expect(screen.getByAltText("TMaaS by DigitalQatalyst")).toHaveAttribute(
