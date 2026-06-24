@@ -2,12 +2,10 @@
  * Generates Option A PDP copy for Supabase seeding.
  * Rules: no em dashes, no "In one week" hero openers (see /workspace/pdp-copy-style.md).
  */
+import { getVariantCopyOverride } from "../../src/data/serviceCopy";
 import { buildServiceFaqsContent } from "../../src/lib/serviceFaqsCopy";
 import { buildWhyItMattersContent } from "../../src/lib/whyItMattersCopy";
-import {
-  buildVariantHeroDescription,
-  buildVariantPositioning,
-} from "../../src/lib/variantSeoCopy";
+import { buildVariantHeroDescription, buildVariantPositioning } from "../../src/lib/variantSeoCopy";
 import type { ServiceProduct } from "../../src/types/serviceProduct";
 
 export type DeliverableItem = { title: string; description: string };
@@ -41,7 +39,10 @@ export type GeneratedPdpContent = {
 };
 
 function stripEmDash(text: string): string {
-  return text.replace(/\s*—\s*/g, ", ").replace(/\s+/g, " ").trim();
+  return text
+    .replace(/\s*—\s*/g, ", ")
+    .replace(/\s+/g, " ")
+    .trim();
 }
 
 function solutionKey(standardName: string): string {
@@ -94,12 +95,7 @@ const DELIVERABLE_TITLES: Record<string, string[]> = {
     "Responsible AI guardrails",
     "Deployment specifications",
   ],
-  deploy: [
-    "Configured build",
-    "Integration and testing",
-    "Go-live readiness",
-    "Handover pack",
-  ],
+  deploy: ["Configured build", "Integration and testing", "Go-live readiness", "Handover pack"],
   ai_deploy: [
     "Production deployment",
     "Monitoring and controls",
@@ -115,11 +111,7 @@ const DELIVERABLE_TITLES: Record<string, string[]> = {
 };
 
 const PACKAGE_HIGHLIGHTS: Record<string, string[]> = {
-  advisory: [
-    "Fixed discovery scope",
-    "Executive-ready findings",
-    "No obligation to proceed",
-  ],
+  advisory: ["Fixed discovery scope", "Executive-ready findings", "No obligation to proceed"],
   design: [
     "Workshop-led discovery",
     "Implementation-ready specifications",
@@ -130,21 +122,9 @@ const PACKAGE_HIGHLIGHTS: Record<string, string[]> = {
     "Responsible workflow design",
     "Deployment-ready specifications",
   ],
-  deploy: [
-    "Phased implementation",
-    "QA and handover included",
-    "SLA-backed delivery",
-  ],
-  ai_deploy: [
-    "Production AI deployment",
-    "Monitoring and safety controls",
-    "Operational handover",
-  ],
-  manage: [
-    "Monthly SLA-backed service",
-    "Continuous optimisation",
-    "Dedicated specialist team",
-  ],
+  deploy: ["Phased implementation", "QA and handover included", "SLA-backed delivery"],
+  ai_deploy: ["Production AI deployment", "Monitoring and safety controls", "Operational handover"],
+  manage: ["Monthly SLA-backed service", "Continuous optimisation", "Dedicated specialist team"],
 };
 
 function buildDeliverablesSummary(service: ServiceProduct): string[] {
@@ -357,23 +337,50 @@ function buildDeliveryProcess(service: ServiceProduct): DeliveryProcessContent {
   };
 }
 
+function mergeDeliveryProcess(
+  base: DeliveryProcessContent,
+  override: ReturnType<typeof getVariantCopyOverride>["deliveryProcessSteps"]
+): DeliveryProcessContent {
+  if (!override?.length) return base;
+  return {
+    ...base,
+    steps: base.steps.map((step, index) => {
+      const o = override[index];
+      if (!o) return step;
+      return {
+        ...step,
+        title: o.title ?? step.title,
+        body: o.body ? stripEmDash(o.body) : step.body,
+        whatHappens: o.whatHappens ?? step.whatHappens,
+      };
+    }),
+  };
+}
+
 export function generatePdpContent(service: ServiceProduct): GeneratedPdpContent {
+  const override = getVariantCopyOverride(service.id);
   const faqBlock = buildServiceFaqsContent(service);
-  const heroSummary = buildVariantHeroDescription(service);
-  const positioning = buildVariantPositioning(service);
+  const heroSummary =
+    override.heroSummary ?? override.description ?? buildVariantHeroDescription(service);
+  const positioning = override.positioning ?? buildVariantPositioning(service);
 
   return {
-    heroSummary,
-    overviewParagraphs: buildOverviewParagraphs(service),
-    audienceDescription: buildAudienceDescription(service),
-    positioning,
-    deliverablesSummary: buildDeliverablesSummary(service),
-    deliverables: buildDeliverables(service),
-    faqIntro: faqBlock.intro,
-    faqs: faqBlock.faqs,
-    deliveryProcess: buildDeliveryProcess(service),
+    heroSummary: stripEmDash(heroSummary),
+    overviewParagraphs: override.overviewParagraphs ?? buildOverviewParagraphs(service),
+    audienceDescription: override.audienceDescription ?? buildAudienceDescription(service),
+    positioning: stripEmDash(positioning),
+    deliverablesSummary: override.deliverablesSummary ?? buildDeliverablesSummary(service),
+    deliverables: override.deliverables ?? buildDeliverables(service),
+    faqIntro: override.faqIntro ?? faqBlock.intro,
+    faqs: override.faqs ?? faqBlock.faqs,
+    deliveryProcess: mergeDeliveryProcess(
+      buildDeliveryProcess(service),
+      override.deliveryProcessSteps
+    ),
     packageHighlights:
-      PACKAGE_HIGHLIGHTS[service.serviceType] ?? PACKAGE_HIGHLIGHTS.advisory,
+      override.packageHighlights ??
+      PACKAGE_HIGHLIGHTS[service.serviceType] ??
+      PACKAGE_HIGHLIGHTS.advisory,
     whyItMatters: buildWhyItMattersContent(service),
   };
 }

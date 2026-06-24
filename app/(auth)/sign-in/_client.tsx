@@ -1,0 +1,61 @@
+"use client";
+
+import { useState } from "react";
+import { useRouter } from "next/navigation";
+import { Button } from "@/components/ui/button";
+import TMaaSLogo from "@/components/features/landing/TMaaSLogo";
+import { POWERED_BY_LINE } from "@/lib/brandLinks";
+
+export default function SignInPageClient() {
+  const router = useRouter();
+  const [loading, setLoading] = useState(false);
+
+  const handleMicrosoftSSO = () => {
+    setLoading(true);
+    setTimeout(() => {
+      router.push("/onboarding/profile");
+    }, 1000);
+  };
+
+  return (
+    <div className="flex min-h-screen items-center justify-center bg-gradient-to-br from-accent/30 to-background px-6">
+      <div className="w-full max-w-md">
+        <div className="mb-8 text-center">
+          <div className="mb-6 flex justify-center">
+            <TMaaSLogo size="lg" />
+          </div>
+          <h1 className="text-3xl font-semibold text-foreground">Sign in to TMaaS</h1>
+          <p className="mt-2 text-sm text-muted-foreground">{POWERED_BY_LINE}</p>
+        </div>
+
+        <div className="rounded-2xl border border-border bg-card p-8 shadow-card">
+          <Button
+            onClick={handleMicrosoftSSO}
+            disabled={loading}
+            className="w-full gap-3 bg-[#2F2F2F] text-white hover:bg-[#1F1F1F]"
+            size="lg"
+          >
+            <svg width="21" height="21" viewBox="0 0 21 21" fill="none" aria-hidden>
+              <rect width="10" height="10" fill="#F25022" />
+              <rect x="11" width="10" height="10" fill="#7FBA00" />
+              <rect y="11" width="10" height="10" fill="#00A4EF" />
+              <rect x="11" y="11" width="10" height="10" fill="#FFB900" />
+            </svg>
+            {loading ? "Signing in…" : "Sign in with Microsoft"}
+          </Button>
+        </div>
+
+        <p className="mt-6 text-center text-xs text-muted-foreground">
+          By signing in, you agree to our{" "}
+          <a href="/legal/terms" className="underline">
+            Terms of Service
+          </a>{" "}
+          and{" "}
+          <a href="/legal/privacy" className="underline">
+            Privacy Policy
+          </a>
+        </p>
+      </div>
+    </div>
+  );
+}

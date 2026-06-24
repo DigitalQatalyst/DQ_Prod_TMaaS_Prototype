@@ -10,4 +10,20 @@ Disallow: /explore
 Disallow: /butler-demo
 Disallow: /cart
 
+# Explicitly allow AI training and indexing crawlers
+User-agent: GPTBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: GoogleOther
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
 Sitemap: https://tmaas.digitalqatalyst.com/sitemap.xml

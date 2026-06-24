@@ -40,7 +40,7 @@ function main() {
     const suffix =
       service.serviceType === "bundle" && parseInt(variant.product_id, 10) >= 32
         ? product.title
-        : VARIANT_SUFFIX[service.serviceType] ?? variant.variant_name;
+        : (VARIANT_SUFFIX[service.serviceType] ?? variant.variant_name);
 
     const standardName = `${product.title} - ${suffix}`;
 

@@ -21,10 +21,7 @@ import {
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const REPO_ROOT = path.resolve(__dirname, "..");
 
-const VARIANT_LABELS: Record<
-  string,
-  { variant_name: string; badge: string }
-> = {
+const VARIANT_LABELS: Record<string, { variant_name: string; badge: string }> = {
   advisory: { variant_name: "Assess", badge: "Assess" },
   design: { variant_name: "Design", badge: "Design" },
   ai_design: { variant_name: "AI Design", badge: "AI Design" },
@@ -138,11 +135,7 @@ function normalizeIndustryRelevance(value: string): string {
   return value.replace(/^Cross-industry:\s*/i, "");
 }
 
-function buildPositioning(
-  serviceTypeId: string,
-  domain: string,
-  productId: number
-): string {
+function buildPositioning(serviceTypeId: string, domain: string, productId: number): string {
   if (serviceTypeId === "bundle") {
     if (productId === 32) {
       return "Flexible advisory across selected TMaaS capability areas — diagnose priorities and build executive alignment.";
@@ -159,16 +152,12 @@ function buildPositioning(
     return `End-to-end phased delivery for ${domain}: assess, design, deploy and handover under unified TMaaS governance.`;
   }
 
-  if (
-    serviceTypeId === "ai_design" &&
-    (productId === 14 || productId === 20)
-  ) {
+  if (serviceTypeId === "ai_design" && (productId === 14 || productId === 20)) {
     return `Define responsible AI for ${domain} — prioritised use cases, evidence automation, guardrails, and a blueprint ready to build.`;
   }
 
   const performClause =
-    domain.includes(" and ") ||
-    /\b(apps|services|operations|channels|campaigns)\b/i.test(domain)
+    domain.includes(" and ") || /\b(apps|services|operations|channels|campaigns)\b/i.test(domain)
       ? `${domain} perform today`
       : `${domain} performs today`;
 
@@ -232,9 +221,13 @@ function transformVariant(row: VariantRow, products: Map<string, ProductRow>): V
   return next;
 }
 
-const BUNDLE_PRODUCT_ID: Record<number, number> = Object.fromEntries(
-  [...Array.from({ length: 31 }, (_, i) => [203 + i, i + 1]), [234, 32], [235, 33], [236, 34], [237, 35]]
-) as Record<number, number>;
+const BUNDLE_PRODUCT_ID: Record<number, number> = Object.fromEntries([
+  ...Array.from({ length: 31 }, (_, i) => [203 + i, i + 1]),
+  [234, 32],
+  [235, 33],
+  [236, 34],
+  [237, 35],
+]) as Record<number, number>;
 
 const BUNDLE_SLUGS: Record<number, string> = {
   203: "online-web-presence-high-impact-transformation-bundle-203",
@@ -353,7 +346,9 @@ function main() {
   writeCsv(path.join(catalog, "product_variants.csv"), VARIANT_CSV_HEADERS, allVariants);
 
   console.log(`Products: ${products.length}`);
-  console.log(`Variants: ${allVariants.length} (${nonBundleVariants.length} staged + ${bundleVariants.length} bundles)`);
+  console.log(
+    `Variants: ${allVariants.length} (${nonBundleVariants.length} staged + ${bundleVariants.length} bundles)`
+  );
   console.log(`Shards written to ${shards}`);
 }
 

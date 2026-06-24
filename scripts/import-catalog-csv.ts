@@ -118,7 +118,11 @@ async function main() {
         ? "custom_floor"
         : "list";
     const amount =
-      price === "Free" ? 0 : price === "Custom" ? null : parseInt(price.replace(/,/g, "").match(/(\d+)/)?.[1] ?? "0", 10);
+      price === "Free"
+        ? 0
+        : price === "Custom"
+          ? null
+          : parseInt(price.replace(/,/g, "").match(/(\d+)/)?.[1] ?? "0", 10);
 
     const { data: existingListing } = await supabase
       .from("marketplace_listings")
@@ -166,7 +170,10 @@ async function main() {
     };
 
     if (existingPrice?.id) {
-      const { error } = await supabase.from("variant_prices").update(priceRow).eq("id", existingPrice.id);
+      const { error } = await supabase
+        .from("variant_prices")
+        .update(priceRow)
+        .eq("id", existingPrice.id);
       if (error) throw error;
     } else {
       const { error } = await supabase.from("variant_prices").insert(priceRow);
