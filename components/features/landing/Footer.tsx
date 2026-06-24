@@ -1,13 +1,16 @@
 import Link from "next/link";
 import { Linkedin, Twitter, Youtube } from "lucide-react";
 import TMaaSLogo from "@/components/features/landing/TMaaSLogo";
+import DqBrandMark from "@/components/foundation/DqBrandMark";
 import {
   DQ_CORP_WEB_ABOUT_URL,
   DQ_CORP_WEB_URL,
   FOOTER_ABOUT_DQ_LABEL,
   FOOTER_EXPLORE_DQ_LABEL,
   NAV_BROWSE_MARKETPLACE_LABEL,
+  PLATFORM_FOOTER_PRODUCT_LINE,
   PLATFORM_HERO_SUBCOPY,
+  POWERED_BY_LINE,
 } from "@/lib/brandLinks";
 import { featureFlags } from "@/lib/featureFlags";
 
@@ -48,6 +51,16 @@ const Footer = () => {
                   </Link>
                 </li>
               )}
+              <li>
+                <Link href="/legal/privacy" className={footerLinkClass}>
+                  Privacy Policy
+                </Link>
+              </li>
+              <li>
+                <Link href="/legal/terms" className={footerLinkClass}>
+                  Terms of Service
+                </Link>
+              </li>
             </ul>
           </div>
 
@@ -116,16 +129,13 @@ const Footer = () => {
           </div>
         </div>
 
-        <div className="flex flex-col items-center justify-between gap-3 border-t border-gray-100 pt-6 text-[12px] text-gray-400 sm:flex-row">
-          <p>© 2026 DigitalQatalyst. All rights reserved.</p>
-          <div className="flex gap-5">
-            <Link href="/legal/privacy" className="transition-colors hover:text-gray-700">
-              Privacy
-            </Link>
-            <Link href="/legal/terms" className="transition-colors hover:text-gray-700">
-              Terms
-            </Link>
+        <div className="grid grid-cols-1 gap-4 border-t border-gray-100 pt-8 text-[13px] text-gray-500 lg:grid-cols-3 lg:items-center lg:gap-6">
+          <div className="flex items-center justify-center gap-2.5 lg:justify-start">
+            <DqBrandMark size="md" />
+            <span>{POWERED_BY_LINE}</span>
           </div>
+          <p className="text-center">{PLATFORM_FOOTER_PRODUCT_LINE}</p>
+          <p className="text-center lg:text-right">© 2026 DigitalQatalyst</p>
         </div>
       </div>
     </footer>

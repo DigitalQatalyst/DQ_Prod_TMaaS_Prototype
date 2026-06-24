@@ -5,7 +5,7 @@ import { getFirstEnabledRoute } from "@/lib/featureFlags";
 import ContactPageClient from "./_client";
 
 export const metadata: Metadata = {
-  title: "Contact Us | TMaaS",
+  title: "Talk to our team",
   description: "Get in touch with Digital Qatalyst to discuss your technology management needs.",
 };
 

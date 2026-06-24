@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Plus_Jakarta_Sans, JetBrains_Mono, Space_Grotesk } from "next/font/google";
 import { ProductionGoogleAnalytics } from "@/components/foundation/analytics";
 import { Providers } from "@/components/foundation/providers";
-import { PLATFORM_FULL_NAME } from "@/lib/brandLinks";
+import { PAGE_TITLE_SEPARATOR, PLATFORM_ACRONYM, PLATFORM_FULL_NAME } from "@/lib/brandLinks";
 import "./globals.css";
 
 const jakarta = Plus_Jakarta_Sans({
@@ -25,11 +25,14 @@ const spaceGrotesk = Space_Grotesk({
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://tmaas.digitalqatalyst.com"),
-  title: "TMaaS | Digital Qatalyst",
-  description: `${PLATFORM_FULL_NAME} marketplace by Digital Qatalyst.`,
+  title: {
+    default: `${PLATFORM_ACRONYM}${PAGE_TITLE_SEPARATOR}${PLATFORM_FULL_NAME}`,
+    template: `${PLATFORM_ACRONYM}${PAGE_TITLE_SEPARATOR}%s`,
+  },
+  description: `${PLATFORM_FULL_NAME} marketplace by DigitalQatalyst.`,
   openGraph: {
-    title: "TMaaS | Digital Qatalyst",
-    description: `${PLATFORM_FULL_NAME} marketplace by Digital Qatalyst.`,
+    title: `${PLATFORM_ACRONYM}${PAGE_TITLE_SEPARATOR}${PLATFORM_FULL_NAME}`,
+    description: `${PLATFORM_FULL_NAME} marketplace by DigitalQatalyst.`,
     images: ["/og-image.png"],
     type: "website",
   },

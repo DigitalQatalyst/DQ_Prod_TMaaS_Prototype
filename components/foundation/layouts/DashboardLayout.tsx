@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import type { UserRole } from "@/contexts/AuthContext";
 import Link from "next/link";
+import TMaaSLogo from "@/components/features/landing/TMaaSLogo";
 import { usePathname } from "next/navigation";
 import { useRouter } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
@@ -272,21 +273,20 @@ const DashboardLayout = ({ children }: DashboardLayoutProps) => {
               <Link
                 href="/"
                 className="flex items-center justify-center transition-opacity hover:opacity-80"
+                aria-label="TMaaS home"
               >
-                <span className="grid h-7 w-7 place-items-center rounded-md bg-orange-500 text-white shadow-[var(--glow-orange-sm)]">
-                  <span className="font-mono text-[11px] font-bold">DQ</span>
-                </span>
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src="/favicon-32.png"
+                  alt=""
+                  aria-hidden
+                  className="h-8 w-8 shrink-0 rounded-md"
+                  width={32}
+                  height={32}
+                />
               </Link>
             ) : (
-              <Link
-                href="/"
-                className="flex items-center gap-2 font-semibold tracking-tight transition-opacity hover:opacity-80"
-              >
-                <span className="grid h-7 w-7 place-items-center rounded-md bg-orange-500 text-white shadow-[var(--glow-orange-sm)]">
-                  <span className="font-mono text-[11px] font-bold">DQ</span>
-                </span>
-                <span className="text-orange-500 font-heading text-lg">TMaaS</span>
-              </Link>
+              <TMaaSLogo size="nav" className="min-w-0 max-w-[calc(100%-0.5rem)]" />
             )}
           </div>
 

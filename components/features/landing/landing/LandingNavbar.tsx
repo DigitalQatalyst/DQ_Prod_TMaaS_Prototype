@@ -6,7 +6,6 @@ import { usePathname, useSearchParams } from "next/navigation";
 import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import TMaaSLogo from "@/components/features/landing/TMaaSLogo";
-import ExploreDigitalQatalystCta from "@/components/features/landing/ExploreDigitalQatalystCta";
 import { btnPrimary } from "@/lib/brandAccent";
 import { NAV_BROWSE_MARKETPLACE_LABEL } from "@/lib/brandLinks";
 import {
@@ -47,10 +46,10 @@ const LandingNavbarInner = () => {
   return (
     <>
       <header className="sticky top-0 z-40 flex h-16 items-center justify-between border-b border-gray-100 bg-white px-5 md:px-8 lg:px-10">
-        <div className="flex items-center gap-8">
-          <TMaaSLogo />
+        <div className="flex items-center gap-2 lg:gap-3">
+          <TMaaSLogo size="nav" />
 
-          <nav className="hidden items-center gap-6 lg:flex">{visibleLinks.map(renderLink)}</nav>
+          <nav className="hidden items-center lg:flex">{visibleLinks.map(renderLink)}</nav>
         </div>
 
         <div className="flex items-center gap-3 md:gap-4">
@@ -70,7 +69,6 @@ const LandingNavbarInner = () => {
             </div>
           )}
 
-          <ExploreDigitalQatalystCta className="hidden md:inline-flex" />
           {featureFlags.isEnabled("contactUs") && (
             <Link
               href={launchAdvisoryPath}
@@ -121,7 +119,6 @@ const LandingNavbarInner = () => {
               </Link>
             </>
           )}
-          <ExploreDigitalQatalystCta className="mt-4 w-full" showIcon={false} />
           {featureFlags.isEnabled("contactUs") && (
             <Link
               href={launchAdvisoryPath}

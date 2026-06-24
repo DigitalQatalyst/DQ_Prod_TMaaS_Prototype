@@ -7,7 +7,7 @@ import { getFirstEnabledRoute } from "@/lib/featureFlags";
 import MarketplacePageClient from "./_client";
 
 export const metadata: Metadata = {
-  title: "Marketplace | TMaaS",
+  title: "Marketplace",
   description:
     "Browse 200+ technology management services. Filter by category, delivery model, and price.",
 };

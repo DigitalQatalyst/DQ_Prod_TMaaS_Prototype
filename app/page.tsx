@@ -8,14 +8,14 @@ import LandingCtaSection from "@/components/features/landing/landing/v2/LandingC
 import LandingNavbar from "@/components/features/landing/landing/LandingNavbar";
 import Footer from "@/components/features/landing/Footer";
 import { FeatureFlagGuard } from "@/components/features/dashboard/FeatureFlagGuard";
-import { PLATFORM_FULL_NAME, PLATFORM_HERO_SUBCOPY } from "@/lib/brandLinks";
+import { PLATFORM_FULL_NAME, PLATFORM_HERO_SUBCOPY, buildPageTitle } from "@/lib/brandLinks";
 import { getFirstEnabledRoute } from "@/lib/featureFlags";
 
 export const metadata: Metadata = {
-  title: `TMaaS | ${PLATFORM_FULL_NAME}`,
+  title: { absolute: buildPageTitle(PLATFORM_FULL_NAME) },
   description: PLATFORM_HERO_SUBCOPY,
   openGraph: {
-    title: `TMaaS | ${PLATFORM_FULL_NAME}`,
+    title: buildPageTitle(PLATFORM_FULL_NAME),
     description: PLATFORM_HERO_SUBCOPY,
     images: ["/og-image.png"],
     type: "website",

@@ -6,7 +6,7 @@ import FAQSection from "@/components/features/landing/FAQSection";
 import { featureFlags } from "@/lib/featureFlags";
 
 export const metadata: Metadata = {
-  title: "FAQ | TMaaS",
+  title: "FAQ",
   description: "Frequently asked questions about TMaaS and Digital Qatalyst services.",
 };
 
