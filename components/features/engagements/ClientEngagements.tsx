@@ -115,12 +115,12 @@ const ClientEngagements = () => {
               </div>
               <h3 className="mb-1 text-lg font-semibold text-foreground">No active projects</h3>
               <p className="text-sm text-muted-foreground max-w-md">
-                You don&apos;t have any active projects at the moment. Check Service Orders for your
-                current projects.
+                You don&apos;t have any active projects at the moment. Check My Requests for your
+                submitted service enquiries.
               </p>
-              <Link href="/dashboard/customer/orders">
+              <Link href="/dashboard/requests">
                 <Button className="mt-6 gap-2">
-                  View Service Orders
+                  View My Requests
                   <ArrowRight size={16} />
                 </Button>
               </Link>

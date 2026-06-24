@@ -41,6 +41,11 @@ const ROUTE_PRIORITY: { flag: keyof FeatureFlags; path: string }[] = [
   { flag: "contactUs", path: "/contact" },
 ];
 
+/** Set NEXT_PUBLIC_FEATURE_DASHBOARD=true in .env.local to enable customer workspace routes. */
+const envDashboardEnabled =
+  typeof process !== "undefined" &&
+  process.env.NEXT_PUBLIC_FEATURE_DASHBOARD === "true";
+
 // MVP defaults, only the four launch features enabled
 const DEFAULT_FEATURE_FLAGS: FeatureFlags = {
   homepage: true,
@@ -58,7 +63,7 @@ const DEFAULT_FEATURE_FLAGS: FeatureFlags = {
   chatAssistant: false,
   auth: false,
   onboarding: false,
-  dashboard: false,
+  dashboard: envDashboardEnabled,
   butlerDemo: false,
   contextSwitcher: false,
 };

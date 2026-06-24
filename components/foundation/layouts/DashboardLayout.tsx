@@ -63,7 +63,7 @@ const getClientNavigationItems = (organization: string) => [
     group: "WORKSPACE",
     items: [
       { name: "Projects", icon: Package, path: "/dashboard/services", badge: 3 },
-      { name: "Orders", icon: Package, path: "/dashboard/customer/orders", badge: 6 },
+      { name: "My Requests", icon: Package, path: "/dashboard/requests", badge: 6 },
       { name: "Notifications", icon: BellRing, path: "/dashboard/notifications", badge: 2 },
       { name: "Inbox", icon: MessageSquare, path: "/dashboard/inbox", badge: 5 },
     ],
