@@ -4,6 +4,7 @@ import { ProductionGoogleAnalytics } from "@/components/foundation/analytics";
 import { Providers } from "@/components/foundation/providers";
 import { PAGE_TITLE_SEPARATOR, PLATFORM_ACRONYM, PLATFORM_FULL_NAME } from "@/lib/brandLinks";
 import "./globals.css";
+import "./dbp-tokens.css";
 
 const jakarta = Plus_Jakarta_Sans({
   subsets: ["latin"],

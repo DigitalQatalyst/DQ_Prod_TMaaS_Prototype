@@ -28,4 +28,6 @@ Reference: `DQ_PROD_DWS01-main` TransactionShell + AppChrome + AppSidebar patter
 - Main + aside: `flex flex-col xl:flex-row` with fixed aside width (`xl:w-[260px]`), not grid without `min-w-0`.
 - Tables: adequate row padding (`py-3.5`), `line-clamp-2` for long titles; avoid aggressive `max-w` truncate on primary column.
 - Page aside actions: **RailSection** + **RailActionCard** (icon tile, title, one-line short subtext). Use RailActionLink only for compact single-line actions without descriptions.
+- **My Requests** (`/dashboard/requests`): use DWS.01 `@dbp/shell-transaction` `WorkingLayout` + `lib/dws-requests/RequestListPage` + `@dbp/ui` primitives — not custom `RequestsTable` / `RequestsToolbar`.
+- `@dbp/*` packages live in `packages/*.tgz` (from DQ_PROD_DWS01-main). Next.js needs `transpilePackages`, `experimental.extensionAlias` for `.js` imports, and `next build --webpack` (Turbopack panics on @dbp/ui unicode comments).
 - Customer nav sections: ORIENTATION (Overview), MARKETPLACE (Explore Services), WORKSPACE (My Requests) — no SETTINGS section in sidebar.
