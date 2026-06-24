@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useSearchParams } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import TMaaSLogo from "@/components/features/landing/TMaaSLogo";
 import { POWERED_BY_LINE } from "@/lib/brandLinks";
@@ -16,7 +16,6 @@ function getSafeReturnTo(value: string | null): string {
 }
 
 export default function SignInPageClient() {
-  const router = useRouter();
   const searchParams = useSearchParams();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -28,12 +27,12 @@ export default function SignInPageClient() {
     setError(null);
 
     try {
-      const res = await fetch("/api/auth/stub-session", { method: "POST" });
+      const res = await fetch("/api/auth/stub-session", { method: "POST", credentials: "same-origin" });
       if (!res.ok) {
         throw new Error("Could not start session");
       }
-      router.push(returnTo);
-      router.refresh();
+      // Full navigation ensures the new session cookie is sent on the next request.
+      window.location.assign(returnTo);
     } catch {
       setError("Sign-in failed. Please try again.");
       setLoading(false);

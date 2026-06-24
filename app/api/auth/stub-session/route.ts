@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { isDashboardEnabled } from "@/lib/featureFlags";
 import {
   createStubSessionToken,
   STUB_SESSION_COOKIE,
@@ -7,11 +8,12 @@ import {
 
 /**
  * MVP stub sign-in — sets session_token for middleware until Microsoft Entra is wired.
- * Only available outside production.
  */
 export async function POST() {
-  if (process.env.NODE_ENV === "production") {
-    return NextResponse.json({ error: "Not available in production" }, { status: 403 });
+  const allowStub =
+    process.env.NODE_ENV !== "production" || isDashboardEnabled();
+  if (!allowStub) {
+    return NextResponse.json({ error: "Not available" }, { status: 403 });
   }
 
   const token = createStubSessionToken();
