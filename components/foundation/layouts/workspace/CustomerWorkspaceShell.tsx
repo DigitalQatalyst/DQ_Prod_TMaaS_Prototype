@@ -3,7 +3,6 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { useAuth } from "@/contexts/AuthContext";
-import { cn } from "@/lib/utils";
 import { WorkspaceSidebar } from "./WorkspaceSidebar";
 import { WorkspaceSolutionChrome } from "./WorkspaceSolutionChrome";
 import { WorkspaceFooter } from "./WorkspaceFooter";
@@ -21,7 +20,7 @@ interface CustomerWorkspaceShellProps {
 }
 
 /**
- * TMaaS port of DWS.01 TransactionShell — sidebar + SolutionChrome + main + footer.
+ * TMaaS port of DWS.01 TransactionShell — flex row (sidebar + main), no margin offset overflow.
  */
 export function CustomerWorkspaceShell({ children }: CustomerWorkspaceShellProps) {
   const router = useRouter();
@@ -41,41 +40,33 @@ export function CustomerWorkspaceShell({ children }: CustomerWorkspaceShellProps
     router.push("/sign-in");
   };
 
-  const contentOffset = cn(
-    "transition-[margin] duration-300 max-lg:ml-0",
-    sidebarCollapsed ? "lg:ml-16" : "lg:ml-[280px]"
-  );
-
   return (
-    <div className="workspace-shell flex h-screen flex-col bg-[var(--color-surface)]">
-      <div className="relative flex min-h-0 flex-1">
-        <WorkspaceSidebar
-          collapsed={sidebarCollapsed}
-          mobileOpen={mobileMenuOpen}
-          onMobileClose={() => setMobileMenuOpen(false)}
-          user={user}
+    <div className="workspace-shell flex h-screen overflow-hidden bg-[var(--color-surface)]">
+      {mobileMenuOpen && (
+        <div
+          className="fixed inset-0 z-30 bg-black/20 lg:hidden"
+          onClick={() => setMobileMenuOpen(false)}
+          aria-hidden
         />
+      )}
 
-        {mobileMenuOpen && (
-          <div
-            className="fixed inset-0 z-30 bg-black/20 lg:hidden"
-            onClick={() => setMobileMenuOpen(false)}
-            aria-hidden
-          />
-        )}
+      <WorkspaceSidebar
+        collapsed={sidebarCollapsed}
+        mobileOpen={mobileMenuOpen}
+        onMobileClose={() => setMobileMenuOpen(false)}
+      />
 
-        <div className={cn("flex min-w-0 flex-1 flex-col", contentOffset)}>
-          <WorkspaceSolutionChrome
-            user={user}
-            sidebarCollapsed={sidebarCollapsed}
-            onToggleSidebar={() => setSidebarCollapsed((c) => !c)}
-            onMobileMenuToggle={() => setMobileMenuOpen((o) => !o)}
-            onSignOut={handleSignOut}
-          />
-          <main className="min-h-0 flex-1 overflow-y-auto bg-white">{children}</main>
-        </div>
-      </div>
-      <div className={contentOffset}>
+      <div className="flex min-w-0 flex-1 flex-col">
+        <WorkspaceSolutionChrome
+          user={user}
+          sidebarCollapsed={sidebarCollapsed}
+          onToggleSidebar={() => setSidebarCollapsed((c) => !c)}
+          onMobileMenuToggle={() => setMobileMenuOpen((o) => !o)}
+          onSignOut={handleSignOut}
+        />
+        <main className="min-h-0 flex-1 overflow-x-hidden overflow-y-auto bg-white">
+          {children}
+        </main>
         <WorkspaceFooter />
       </div>
     </div>

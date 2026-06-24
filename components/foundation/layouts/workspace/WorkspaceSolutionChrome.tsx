@@ -27,7 +27,7 @@ interface WorkspaceSolutionChromeProps {
 }
 
 /**
- * TMaaS port of DWS.01 SolutionChrome → AppChrome (notifications disabled).
+ * DWS.01 AppChrome — brand lockup only when sidebar is collapsed (sidebar shows brand when expanded).
  */
 export function WorkspaceSolutionChrome({
   user,
@@ -59,7 +59,12 @@ export function WorkspaceSolutionChrome({
         <PanelLeft size={18} />
       </button>
 
-      <div className="flex shrink-0 items-center gap-3">
+      <div
+        className={cn(
+          "flex shrink-0 items-center gap-3",
+          !sidebarCollapsed && "lg:hidden"
+        )}
+      >
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img src="/brand/mark.svg" alt="" className="h-[26px] w-[26px]" width={26} height={26} />
         <div className="hidden sm:block">

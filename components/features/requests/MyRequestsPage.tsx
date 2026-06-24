@@ -40,15 +40,15 @@ export function MyRequestsPage() {
   };
 
   return (
-    <div className="flex min-h-full flex-col">
+    <div className="flex min-h-full min-w-0 flex-col">
       <WorkspacePageHeader
         title="My Requests"
         description="View and track all your service requests."
       />
 
-      <div className="flex-1 space-y-4 p-6 lg:p-8">
-        <div className="grid grid-cols-1 gap-8 xl:grid-cols-[1fr_280px]">
-          <div className="space-y-4">
+      <div className="min-w-0 flex-1 p-6 lg:p-8">
+        <div className="flex flex-col gap-8 xl:flex-row xl:items-start">
+          <div className="min-w-0 flex-1 space-y-4">
             <RequestsToolbar search={search} onSearchChange={setSearch} />
             <RequestsTable
               requests={requests}
@@ -66,12 +66,13 @@ export function MyRequestsPage() {
               onPageChange={setPage}
             />
           </div>
-          <aside className="hidden xl:block">
+
+          <aside className="hidden w-full shrink-0 xl:block xl:w-[260px]">
             <QuickActionsPanel />
           </aside>
         </div>
 
-        <div className="xl:hidden">
+        <div className="mt-8 xl:hidden">
           <QuickActionsPanel />
         </div>
       </div>

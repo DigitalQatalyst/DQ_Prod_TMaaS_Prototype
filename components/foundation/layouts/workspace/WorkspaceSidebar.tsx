@@ -7,27 +7,20 @@ import TMaaSLogo from "@/components/features/landing/TMaaSLogo";
 import { cn } from "@/lib/utils";
 import { customerNavSections } from "./customerNavConfig";
 
-interface WorkspaceUser {
-  name: string;
-  organization: string;
-  avatar: string;
-}
-
 interface WorkspaceSidebarProps {
   collapsed: boolean;
   mobileOpen: boolean;
   onMobileClose: () => void;
-  user: WorkspaceUser;
 }
 
 /**
  * TMaaS port of DWS.01 AppSidebar — section eyebrows, nav leaves, Help + Sign out footer.
+ * User identity lives in SolutionChrome only (no sidebar avatar card).
  */
 export function WorkspaceSidebar({
   collapsed,
   mobileOpen,
   onMobileClose,
-  user,
 }: WorkspaceSidebarProps) {
   const pathname = usePathname();
   const router = useRouter();
@@ -48,14 +41,15 @@ export function WorkspaceSidebar({
   return (
     <aside
       className={cn(
-        "fixed left-0 top-0 z-40 flex h-full flex-col border-r border-[var(--color-border-subtle)] bg-white transition-all duration-300",
+        "z-40 flex h-full shrink-0 flex-col border-r border-[var(--color-border-subtle)] bg-white transition-all duration-300",
+        "fixed inset-y-0 left-0 lg:static",
         mobileOpen ? "translate-x-0" : "-translate-x-full lg:translate-x-0"
       )}
       style={{ width: sidebarWidth }}
     >
       <div
         className={cn(
-          "flex h-[var(--shell-header-h)] items-center border-b border-[var(--color-border-subtle)] px-4",
+          "flex h-[var(--shell-header-h)] shrink-0 items-center border-b border-[var(--color-border-subtle)] px-4",
           collapsed ? "justify-center" : "px-5"
         )}
       >
@@ -105,21 +99,7 @@ export function WorkspaceSidebar({
         ))}
       </nav>
 
-      <div className="border-t border-[var(--color-border-subtle)] p-3">
-        {!collapsed && (
-          <div className="mb-3 flex items-center gap-3 rounded-[var(--radius-button)] border border-[var(--color-border-subtle)] bg-[var(--color-surface)] p-3">
-            <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-[var(--color-secondary)]/10 text-xs font-bold text-[var(--color-secondary)]">
-              {user.avatar}
-            </div>
-            <div className="min-w-0 flex-1">
-              <p className="truncate text-sm font-semibold text-[var(--color-text-primary)]">
-                {user.name}
-              </p>
-              <p className="truncate text-xs text-[var(--color-text-muted)]">{user.organization}</p>
-            </div>
-          </div>
-        )}
-
+      <div className="shrink-0 border-t border-[var(--color-border-subtle)] p-3">
         <a
           href="mailto:info@digitalqatalyst.com"
           className={cn(
