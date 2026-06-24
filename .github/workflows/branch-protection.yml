@@ -1,0 +1,34 @@
+name: Branch Protection
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main, staging]
+
+permissions:
+  contents: read
+
+jobs:
+  block-direct-push:
+    if: github.event_name == 'push'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Reject direct push to main
+        run: |
+          echo "::error::Direct pushes to main are blocked. Open a PR from staging instead."
+          exit 1
+
+  check-branch-name:
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Validate branch name
+        run: |
+          branch="${{ github.head_ref }}"
+          if [[ ! $branch =~ ^(feature|bugfix|hotfix|release|fix|chore|claude|staging)(/.*)?$ ]]; then
+            echo "::error::Invalid branch name: $branch"
+            echo "::error::Must start with: feature/, bugfix/, hotfix/, release/, fix/, chore/, claude/, or be 'staging'"
+            exit 1
+          fi
+          echo "Branch name valid: $branch"

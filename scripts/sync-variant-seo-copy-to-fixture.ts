@@ -6,10 +6,7 @@ import { readFileSync, writeFileSync } from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { initialServices } from "../src/data/services";
-import {
-  buildVariantHeroDescription,
-  buildVariantPositioning,
-} from "../src/lib/variantSeoCopy";
+import { buildVariantHeroDescription, buildVariantPositioning } from "../src/lib/variantSeoCopy";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const servicesPath = path.resolve(__dirname, "../src/data/services.ts");
@@ -36,4 +33,6 @@ export const initialServices = ${JSON.stringify(updated, null, 2)} as const sati
 ${tail}`;
 
 writeFileSync(servicesPath, output, "utf8");
-console.log(`Updated ${updated.filter((s) => s.serviceType !== "bundle").length} variant descriptions in ${servicesPath}`);
+console.log(
+  `Updated ${updated.filter((s) => s.serviceType !== "bundle").length} variant descriptions in ${servicesPath}`
+);

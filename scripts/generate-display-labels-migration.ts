@@ -7,10 +7,7 @@ import { join } from "node:path";
 import { escSql } from "./lib/pdpCopyGenerator";
 import { PRODUCT_DISPLAY_RENAMES } from "../src/lib/marketplaceDisplayLabels";
 
-const outPath = join(
-  process.cwd(),
-  "supabase/migrations/20250610000013_update_display_labels.sql"
-);
+const outPath = join(process.cwd(), "supabase/migrations/20250610000013_update_display_labels.sql");
 
 const PRODUCT_TITLE_BY_ID: Record<number, string> = {
   3: "Mobile Apps & Services (High-Impact)",

@@ -1,73 +1,54 @@
-# Welcome to your Lovable project
+# TMaaS Prototype
 
-## Project info
+Transformation Management as a Service marketplace by Digital Qatalyst
 
-**URL**: https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID
+## Stack
 
-## How can I edit this code?
+- Next.js 16 · React 19 · TypeScript 5 (strict)
+- Tailwind CSS 4 · shadcn/ui (base-nova)
+- Supabase (PostgreSQL + RLS)
+- Vitest + React Testing Library
+- Vercel (standalone)
 
-There are several ways of editing your application.
+## Development
 
-**Use Lovable**
-
-Simply visit the [Lovable Project](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and start prompting.
-
-Changes made via Lovable will be committed automatically to this repo.
-
-**Use your preferred IDE**
-
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
-
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
-
-Follow these steps:
-
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
-
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
-
-# Step 3: Install the necessary dependencies.
-npm i
-
-# Step 4: Start the development server with auto-reloading and an instant preview.
+```bash
+npm install
+cp .env.example .env.local  # fill in Supabase credentials
 npm run dev
 ```
 
-**Edit a file directly in GitHub**
+Open [http://localhost:3000](http://localhost:3000).
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+## Commands
 
-**Use GitHub Codespaces**
+| Command             | Description                 |
+| ------------------- | --------------------------- |
+| `npm run dev`       | Start dev server            |
+| `npm run build`     | Production build            |
+| `npm start`         | Start production server     |
+| `npm test`          | Run tests                   |
+| `npm run typecheck` | Type-check without emitting |
+| `npm run lint`      | Lint                        |
+| `npm run format`    | Format with Prettier        |
+| `npm run db:seed`   | Seed catalog data           |
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+## Structure
 
-## What technologies are used for this project?
+```
+app/             Next.js App Router pages + API routes
+components/
+  features/      Feature-scoped components (landing, marketplace, etc.)
+  foundation/    Shared platform components (nav, layouts, seo, providers)
+  ui/            shadcn/ui base components
+lib/             Utilities, Supabase client, hooks, types
+middleware.ts    Auth guard for /dashboard
+tests/           Vitest unit + integration tests
+supabase/        Database migrations + seed data
+scripts/         Catalog and SEO generation scripts
+.ai/             AI agent rules and priming documents
+```
 
-This project is built with:
+## AI Rules
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS.
-
-## How can I deploy this project?
-
-Simply open [Lovable](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and click on Share -> Publish.
-
-## Can I connect a custom domain to my Lovable project?
-
-Yes, you can!
-
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
-
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/features/custom-domain#custom-domain)
+See [`.ai/PROJECT_AI_STANDARDS.md`](.ai/PROJECT_AI_STANDARDS.md) and [`.ai/priming/`](.ai/priming/) for agent context.
