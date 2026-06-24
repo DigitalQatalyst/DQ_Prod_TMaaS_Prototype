@@ -18,11 +18,7 @@ interface DqBrandMarkProps {
 }
 
 /** Inline DQ monogram from brand kit `assets/logo/mark.svg` (not the favicon tile). */
-export function DqBrandMark({
-  className,
-  size = "md",
-  variant = "light",
-}: DqBrandMarkProps) {
+export function DqBrandMark({ className, size = "md", variant = "light" }: DqBrandMarkProps) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"

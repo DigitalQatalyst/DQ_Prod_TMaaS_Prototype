@@ -27,8 +27,7 @@ export function TMaaSLogo({
   size = "md",
   linked = true,
 }: TMaaSLogoProps) {
-  const src =
-    variant === "dark" ? "/brand/tmaas-logo-dark.svg" : "/brand/tmaas-logo.svg";
+  const src = variant === "dark" ? "/brand/tmaas-logo-dark.svg" : "/brand/tmaas-logo.svg";
 
   const image = (
     /* eslint-disable-next-line @next/next/no-img-element */
@@ -42,9 +41,7 @@ export function TMaaSLogo({
   );
 
   if (!linked) {
-    return (
-      <span className={cn("inline-flex shrink-0", className)}>{image}</span>
-    );
+    return <span className={cn("inline-flex shrink-0", className)}>{image}</span>;
   }
 
   return (

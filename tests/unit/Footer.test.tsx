@@ -58,9 +58,7 @@ describe("Footer", () => {
     render(<Footer />);
 
     expect(screen.getByText("Powered by DigitalQatalyst")).toBeInTheDocument();
-    expect(
-      screen.getByText("TMaaS — Transformation Management as a Service")
-    ).toBeInTheDocument();
+    expect(screen.getByText("TMaaS — Transformation Management as a Service")).toBeInTheDocument();
     expect(screen.getByText("© 2026 DigitalQatalyst")).toBeInTheDocument();
   });
 
