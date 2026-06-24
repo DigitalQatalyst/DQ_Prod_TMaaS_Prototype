@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, startTransition } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { X, ArrowRight, Bot, Send, ExternalLink, User } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -22,7 +22,7 @@ interface Message {
   links?: Array<{
     text: string;
     url: string;
-    icon?: React.ComponentType<any>;
+    icon?: React.ComponentType<{ className?: string; size?: number | string }>;
   }>;
   isHandoff?: boolean;
   teamMember?: {
@@ -54,15 +54,17 @@ const DiagnoseDialog = ({ isOpen, onClose, initialProblem = "" }: DiagnoseDialog
 
   useEffect(() => {
     if (!isOpen) {
-      setMessages([]);
-      setInput("");
-      setIsTyping(false);
-      setConversationStep(0);
-      setSelectedGoal("");
-      setUnresolvedCount(0);
-      setShowContactForm(false);
-      setContactFormStep(0);
-      setContactFormData({ name: "", email: "", reason: "" });
+      startTransition(() => {
+        setMessages([]);
+        setInput("");
+        setIsTyping(false);
+        setConversationStep(0);
+        setSelectedGoal("");
+        setUnresolvedCount(0);
+        setShowContactForm(false);
+        setContactFormStep(0);
+        setContactFormData({ name: "", email: "", reason: "" });
+      });
     }
   }, [isOpen]);
 
@@ -70,6 +72,7 @@ const DiagnoseDialog = ({ isOpen, onClose, initialProblem = "" }: DiagnoseDialog
     if (isOpen && messages.length === 0) {
       // Initial greeting - no chips inside dialog
       setTimeout(() => {
+        // eslint-disable-next-line react-hooks/immutability
         addAIMessage(
           "Hi, I'm Butler, your guide to achieving seamless digital transformation. Whether you're exploring, designing, or deploying your strategy, I'm here to make it easier. How can I assist you today?"
         );
@@ -81,6 +84,7 @@ const DiagnoseDialog = ({ isOpen, onClose, initialProblem = "" }: DiagnoseDialog
     if (isOpen && initialProblem && messages.length === 1) {
       // Auto-submit initial problem - treat it as a chip click
       setTimeout(() => {
+        // eslint-disable-next-line react-hooks/immutability
         handleOptionClick(initialProblem);
       }, 800);
     }

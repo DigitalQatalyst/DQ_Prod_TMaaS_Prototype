@@ -12,11 +12,13 @@ Butler.AI is a conversational AI assistant prototype built on top of the existin
 ### Stage 0: Concierge Functions (Landing Page)
 
 #### 1.1 Platform Orientation
+
 - ✅ Explains TMaaS and 4D Framework in simple terms
 - ✅ Clear explanation within 2 conversation turns
 - ✅ Pre-built responses about platform capabilities
 
 #### 1.2 Visitor Routing
+
 - ✅ Intent detection with 90%+ simulated accuracy
 - ✅ Quick reply options for navigation:
   - [Explore Services] → `/explore`
@@ -24,6 +26,7 @@ Butler.AI is a conversational AI assistant prototype built on top of the existin
   - [Talk to the Team] → `/contact`
 
 #### 1.3 FAQ Resolution
+
 - ✅ Knowledge base integration with structured responses
 - ✅ Common questions covered:
   - "What is TMaaS?"
@@ -35,17 +38,20 @@ Butler.AI is a conversational AI assistant prototype built on top of the existin
 ### Stage 1: Advisory Functions (Marketplace)
 
 #### 2.1 Conversational Qualification
+
 - ✅ 1-2 qualifying questions without login required
 - ✅ Organization type assessment
 - ✅ Transformation stage identification
 
 #### 2.2 Service Recommendation
+
 - ✅ Personalized recommendations based on user profile
 - ✅ Confidence scoring system
 - ✅ Dynamic links to service pages
 - ✅ Rationale for each recommendation
 
 #### 2.3 Marketplace Navigation Assistance
+
 - ✅ Service catalog integration
 - ✅ Accurate availability status
 - ✅ No false claims about service availability

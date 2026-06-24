@@ -11,10 +11,20 @@ TMaaS (Transformation Management as a Service) marketplace prototype — Next.js
 
 ## [SECTION: Favicon / App Icons]
 
-- **Next.js App Router file-based metadata wins.** Put icons in `app/` (`favicon.ico`, `icon.png`, `apple-icon.png`). Do **not** rely on `metadata.icons` in `app/layout.tsx` alone — `app/favicon.ico` overrides it.
-- **Source asset:** `public/favicon.png` (DQ logo). Regenerate `app/favicon.ico` and `public/favicon.ico` from it when the logo changes; keep `app/icon.png` and `app/apple-icon.png` in sync.
-- **Remove stale assets:** delete legacy `public/favicon.svg` and old `app/favicon.ico` when replacing — browsers request `/favicon.ico` by default and cache aggressively.
-- **Verify:** `curl -s http://127.0.0.1:3000/ | grep -i 'rel="icon"'` should list hashed `/favicon.ico`, `/icon.png`, and `/apple-icon.png` routes.
+- **Next.js App Router file-based metadata wins.** Put icons in `app/` (`favicon.ico`, `icon.svg`, `apple-icon.png`). Do **not** rely on `metadata.icons` in `app/layout.tsx` alone — `app/favicon.ico` overrides it.
+- **Source asset:** `handoff/tmaas/favicon.svg` from `dq_brand_kit` (shared DQ mark). Copy to `app/icon.svg` and `public/favicon.svg`; regenerate PNG sizes (`favicon-16.png` … `favicon-512.png`) and `app/favicon.ico` / `public/favicon.ico` from it when the favicon changes; keep `app/apple-icon.png` (`favicon-180.png`) in sync.
+- **Product logos:** `public/brand/tmaas-logo.svg` (light surfaces) and `tmaas-logo-dark.svg` (dark surfaces). Nav uses the product lockup only — **do not** place the DQ monogram beside it (`TMaaSLogo.tsx`). Crop the SVG `viewBox` to the lockup bounds (~`14 22 180 84`) so `<img>` sizing does not reserve empty space beside nav links.
+- **Tab titles:** `TMaaS · <page>` via root `title.template` in `app/layout.tsx`; page metadata exports the page name only (home uses `title.absolute` with full product name).
+- **Footer endorsement:** single bottom bar — left: inline `assets/logo/mark.svg` monogram (`public/brand/mark.svg`) + `Powered by DigitalQatalyst` (not the favicon tile); center: `TMaaS — Transformation Management as a Service`; right: `© DigitalQatalyst`. Favicon tile stays for browser tab / collapsed nav only.
+- **Auth chrome:** `Sign in to TMaaS` + `Powered by DigitalQatalyst` on sign-in; use `ProductChromeState` for loading/404.
+- **Loading / 404 chrome:** `ProductChromeState` — official `handoff/tmaas/logo.svg` via `TMaaSLogo` (`size="xl"`, `linked={false}`) only. Do **not** hand-roll wordmark text or add a monogram beside the lockup (two-logo trap).
+- **Remove stale assets:** delete legacy `app/icon.png` and old favicon files when replacing — browsers request `/favicon.ico` by default and cache aggressively.
+- **Verify:** `curl -s http://127.0.0.1:3000/ | grep -i 'rel="icon"'` should list hashed `/favicon.ico`, `/icon.svg`, and `/apple-icon.png` routes.
+
+## [SECTION: Database setup pack]
+
+- **Regenerate:** `npm run db:setup-pack` → `release-1-database-setup/`.
+- **Apply on empty DB:** `release-1-database-setup/00_apply_all.sql` or `migrations/01`–`13` in order. Card + PDP copy (09–10) come from `workspace/dba-catalog-copy/` (handoff authority).
 
 ## [SECTION: Catalog CSV Guidelines]
 
@@ -66,7 +76,7 @@ Marketing pages (`/`, `/marketplace`, `/service/:id`) share the **DQ corp web de
 - Hero backgrounds: `MeshSection` with `hero-grid` overlay and mesh CSS vars from `index.css`
 - Footer section labels: `font-mono text-[10px] uppercase tracking-[0.18em] text-gray-400`
 - Footer link columns: **Explore** (Marketplace, Talk to our team, flag-gated), **Follow Us** (LinkedIn, X, YouTube, Explore DigitalQatalyst external link). No separate DQ column.
-- Footer bottom bar: Privacy and Terms link to in-app `/legal/privacy` and `/legal/terms` when `legal` flag is enabled; otherwise external corp web URLs
+- Footer bottom bar: Privacy and Terms always link in-app to `/legal/privacy` and `/legal/terms` (MVP). The `legal` flag gates only the `/legal` hub and `/legal/faq`.
 - Footer and hero descriptions use `PLATFORM_NAME_EXPANDED` / expanded copy: **Transformation Management as a Service (TMaaS)** via `brandLinks.ts`
 - Service count copy is **100+** everywhere (not 50+ or 200+); typical start time is **<1 day** (not 4 wks)
 - Corp web links use `https://www.digitalqatalyst.com` base URL; TMaaS product link label is **Marketplace** (not "Design & Deploy Services")
@@ -198,6 +208,28 @@ Match `ServiceDetailWhyItMattersTab.tsx` + `whyItMattersContent.ts`:
 - Use `rounded-xl` + `border-navy-100` for marketing cards when corp web pattern applies
 - Change page logic/routing when doing styling-only alignment work
 
+## [SECTION: MVP Feature Flag Route Gating]
+
+Every App Router page must be gated in a server `page.tsx` or route-group `layout.tsx` with `FeatureFlagGuard` and `redirectTo={getFirstEnabledRoute()}`. Hiding nav links or UI alone is not sufficient.
+
+| Route | Flag | Gate in |
+|-------|------|---------|
+| `/` | `homepage` | `app/page.tsx` |
+| `/marketplace` | `marketplace` | `app/marketplace/page.tsx` |
+| `/marketplace/[slug]` | `serviceDetail` | `app/marketplace/[slug]/page.tsx` |
+| `/contact` | `contactUs` | `app/contact/page.tsx` |
+| `/explore` | `explore` | `app/explore/page.tsx` |
+| `/cart` | `cart` | `app/cart/page.tsx` |
+| `/butler` | `butlerDemo` | `app/butler/page.tsx` |
+| `/sign-in` | `auth` | `app/(auth)/layout.tsx` |
+| `/onboarding/*` | `onboarding` | `app/(onboarding)/layout.tsx` |
+| `/dashboard/*` | `dashboard` | `app/dashboard/layout.tsx` |
+| `/legal/*` | `legal` | `app/(legal)/layout.tsx` |
+
+- Keep interactive page content in `app/<route>/_client.tsx`; `page.tsx` stays a server component wrapper.
+- Prefer layout-level guards for route groups with many pages.
+- When adding a new route, wrap it the same way and document the flag in `docs/FEATURE_FLAGS.md`.
+
 ## [SECTION: Marketplace Catalog Conventions]
 
 - `useMarketplaceListings` must load the **full catalog once** via `useCatalog()` and apply `filterCatalogServices()` + pagination in memory.
@@ -313,6 +345,13 @@ Validate with [Google Rich Results Test](https://search.google.com/test/rich-res
 ### New public routes
 
 When adding an indexable page: add `Seo` (+ `JsonLd` if applicable), add URL to `scripts/generate-seo-files.ts` static paths, add to `middleware/allowedRoutes.ts`, regenerate sitemap.
+
+### Google Analytics (GA4)
+
+- Measurement ID: `G-SWP6JJX3TP` in `lib/analytics/googleAnalytics.ts`.
+- Loaded via `ProductionGoogleAnalytics` in `app/layout.tsx` using `next/script` (not a separate npm package).
+- **Production only:** `shouldLoadGoogleAnalytics()` requires `NODE_ENV=production` and either `VERCEL_ENV=production` (Vercel) or `NEXT_PUBLIC_ENV=production` (other hosts). Never enable on preview or local dev.
+- Set `NEXT_PUBLIC_ENV=production` on the Vercel **production** environment (not preview).
 
 ### Post-deploy checks
 

@@ -22,7 +22,7 @@ const SERVICE_DETAIL_TABS = [
 ] as const;
 
 const tabTriggerClass =
-  "shrink-0 rounded-none border-b-2 border-transparent px-3 pb-2 pt-1 text-sm font-semibold text-dq-navy transition-colors hover:text-dq-navy/80 data-[state=active]:border-dq-orange data-[state=active]:bg-transparent data-[state=active]:text-dq-orange data-[state=active]:shadow-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-dq-orange focus-visible:ring-offset-2 sm:px-4";
+  "shrink-0 cursor-pointer rounded-none border-b-2 border-transparent px-3 pb-2 pt-1 text-sm font-medium text-gray-500 transition-colors hover:text-dq-orange data-[state=active]:-mb-px data-[state=active]:border-dq-orange data-[state=active]:bg-transparent data-[state=active]:font-semibold data-[state=active]:text-dq-orange data-[state=active]:shadow-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-dq-orange focus-visible:ring-offset-2 sm:px-4";
 
 interface ServiceDetailTabsProps {
   service: ServiceProduct;

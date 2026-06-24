@@ -345,28 +345,28 @@ describe("catalogService Supabase integration", () => {
     const { pickTopServicesByPopularity } = await import("@/services/catalogService");
     const services = [
       {
-        ...initialServices[0],
+        ...initialServices[0]!,
         id: 1,
         collection: "ai" as const,
         popularityRank: 10,
         serviceType: "advisory" as const,
       },
       {
-        ...initialServices[0],
+        ...initialServices[0]!,
         id: 2,
         collection: "ai" as const,
         popularityRank: 50,
         serviceType: "design" as const,
       },
       {
-        ...initialServices[0],
+        ...initialServices[0]!,
         id: 3,
         collection: "experience" as const,
         popularityRank: 99,
         serviceType: "advisory" as const,
       },
       {
-        ...initialServices[0],
+        ...initialServices[0]!,
         id: 4,
         collection: "ai" as const,
         popularityRank: 5,

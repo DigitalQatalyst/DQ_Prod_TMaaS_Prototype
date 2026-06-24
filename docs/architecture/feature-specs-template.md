@@ -1,17 +1,19 @@
 # Feature: Contact Us Page -- Prototype Shell
 
 ## 1. Platform Context
+
 - Platform: DQ Digital Experience Platform (DXP)
 - Type: Generalised
 - Prototype Stage: Shell
 - Stage Coverage: End-to-end page
 - Industry: Cross-industry
-- Solution Outcomes: 
+- Solution Outcomes:
   - Validate public lead capture workflow for unregistered users.
   - Test CRM integration for submission routing.
   - Ensure page aligns visually with DQ branding and design system.
 
 ## 2. Build Approach & References
+
 - Mode: New Build
 - Reference Builds (Internal): N/A
 - Reference Builds (External): N/A
@@ -19,6 +21,7 @@
 - Input Documents: DQ_DXP_BRS_v1.7.md, Contact Us screenshot (uploaded), Magic Patterns anatomy reference
 
 ## 3. DevOps
+
 - Prototype Tool: Magic Patterns
 - Prototype Repo: <fill after build>
 - Prototype Link: <fill after build>
@@ -26,6 +29,7 @@
 ## 4. Specification
 
 ### 4.1 Brand & Visual System
+
 - Design System Reference: DQ Shell Design Tokens
 - Colours:
   - Primary: DQ Blue #0052CC
@@ -42,17 +46,20 @@
 - Logo: lowercase "dq" in Primary Blue, 600 weight, single line, left-aligned in top bar
 
 ### 4.2 Layout Shell
+
 - Viewport target: 1440px+
 - Top bar: 64px, sticky, Background #FFFFFF, Border #D1D5DB. Left: Logo. Centre: Navigation. Right: Role Lens Selector (default Unregistered)
 - Left sidebar: None for public page
 - Main content: Background #F8F9FA, Padding 32px top/bottom, 64px left/right, max-width 1024px, centered, scrollable
 
 ### 4.3 Personas
-| # | Name | Role | Landing Page | Nav Scope |
-|---|------|------|-------------|-----------|
-| 1 | Public Explorer | Unregistered User | /contact-us | Brand Authority, Smart Funnel, Engagement Continuity |
+
+| #   | Name            | Role              | Landing Page | Nav Scope                                            |
+| --- | --------------- | ----------------- | ------------ | ---------------------------------------------------- |
+| 1   | Public Explorer | Unregistered User | /contact-us  | Brand Authority, Smart Funnel, Engagement Continuity |
 
 ### 4.4 Navigation Structure
+
 - Global
   - Home -> /
   - About DQ -> /about
@@ -62,6 +69,7 @@
 - Persona-restricted items: None for Unregistered
 
 ### 4.5 Feature Specification
+
 - Screens in scope this iteration: /contact-us
 - Demo Storyline: Unregistered user lands on Contact Us, fills form, submits, and receives confirmation routed to inbuilt CRM
 - Components per screen:
@@ -75,6 +83,7 @@
 ## 5. User Journeys
 
 ### 5.1 Primary Flow
+
 1. Unregistered user navigates to `/contact-us`
 2. Views page header/hero
 3. Completes form: Name, Email, Organization, Message
@@ -84,20 +93,24 @@
 7. User may continue browsing other public pages
 
 ### 5.2 Alternate Flows
+
 - User submits incomplete form → validation errors shown inline
 - Network delay → Loading spinner appears on Submit button
 
 ### 5.3 Edge Cases
+
 - Empty fields trigger inline errors
 - Email format invalid → validation error
 - Message > 1000 characters → truncated or show tooltip
 
 ## 6. Fixture Data
-| Entity | ID | Field 1 | Field 2 | Field 3 | Links to |
-|--------|----|---------|---------|---------|---------|
+
+| Entity                | ID      | Field 1             | Field 2                    | Field 3                               | Links to            |
+| --------------------- | ------- | ------------------- | -------------------------- | ------------------------------------- | ------------------- |
 | ContactFormSubmission | CTS-001 | Name: "Alice Smith" | Email: "alice@example.com" | Message: "Interested in DQ services." | s2_account.requests |
 
 ## 7. Shared Components
+
 - ButtonPrimary: Height 48px, radius 8px, Primary color bg, white text, hover: darker shade, disabled: muted gray
 - InputField: Height 40px, border 1px #D1D5DB, radius 8px, padding 8px
 - TextAreaField: Height 120px, border 1px #D1D5DB, radius 8px, padding 8px
@@ -106,17 +119,22 @@
 - MapEmbed: 100% width, 320px height, border radius 12px
 
 ## 8. Scope
+
 ### In Scope
+
 - Contact Us page layout and visual design
 - Form submission to inbuilt CRM
 - Validation and success states
+
 ### Out of Scope
+
 - Registered user variations
 - Multi-language / localization
 - Analytics tracking (planned future)
 - Map interaction beyond display
 
 ## 9. Assumptions
+
 - Only Unregistered users access this page
 - CRM frontend is live and available for lead creation
 - Desktop-first layout; responsive handled separately
@@ -124,6 +142,7 @@
 - Toast appears on successful submission
 
 ## 10. Prototype Build Prompt
+
 ```
 Build a high-fidelity clickable prototype of DQ Contact Us — a Magic Patterns Shell platform for Unregistered Users integrating with inbuilt CRM.
 

@@ -13,6 +13,7 @@ export type DeliveryComplexity = "low" | "medium" | "high";
 
 export interface ServiceProduct {
   id: number;
+  slug: string;
   collection: MarketplaceCollectionId;
   serviceType: ServiceTypeId;
   standardName: string;

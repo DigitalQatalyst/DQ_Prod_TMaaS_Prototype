@@ -9,7 +9,7 @@ export type CartLine = {
 };
 
 export type ResolvedCartLine = {
-  service: { id: number; standardName: string; price: string; duration: string };
+  service: { id: number; slug: string; standardName: string; price: string; duration: string };
   quantity: number;
   lineTotal: number;
 };

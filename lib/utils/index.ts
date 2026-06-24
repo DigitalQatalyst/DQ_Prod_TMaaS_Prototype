@@ -21,8 +21,7 @@ export const eyebrowOnDark = eyebrow;
 
 export const microLabel = "font-mono text-[10px] uppercase tracking-[0.18em] text-dq-orange";
 
-export const landingHeroHeading =
-  "text-balance text-[2.75rem] font-semibold leading-[1.0] tracking-[-0.03em] text-dq-navy sm:text-6xl md:text-7xl lg:text-8xl";
+export const landingHeroHeading = "dq-landing-hero-heading font-semibold text-dq-navy";
 
 export const sectionHeading = "text-xl font-semibold tracking-tight text-dq-navy";
 
@@ -35,14 +34,14 @@ export const serviceDetailSideCard = "rounded-2xl p-7 md:p-8";
 
 export const serviceDetailTabLead = "md:pt-4 lg:pt-5";
 
-export const btnPrimary = `inline-flex items-center justify-center gap-2 rounded-full bg-dq-orange px-6 py-3.5 text-sm font-semibold text-white transition-colors hover:bg-[#E04020] glow-orange ${focusOrange}`;
+export const btnPrimary = `dq-cta-primary inline-flex items-center justify-center gap-2 rounded-full bg-[#FB5535] px-6 py-3.5 text-sm font-semibold text-white hover:bg-[#E04020] glow-orange ${focusOrange}`;
 
-export const btnPrimaryNavy = `group relative inline-flex items-center justify-center gap-2 overflow-hidden rounded-full bg-dq-navy px-6 py-3.5 text-sm font-semibold text-white transition glow-navy ${focusOrange}`;
+export const btnPrimaryNavy = `group relative inline-flex items-center justify-center gap-2 overflow-hidden rounded-full bg-[#030F35] px-6 py-3.5 text-sm font-semibold text-white glow-navy ${focusOrange}`;
 
 export const btnPrimaryNavyHoverSweep =
   "absolute inset-0 -translate-x-full bg-gradient-to-r from-dq-orange to-[#e04020] transition-transform duration-500 group-hover:translate-x-0";
 
-export const btnPrimaryOnDark = `inline-flex items-center justify-center gap-2 rounded-full bg-dq-orange px-6 py-3.5 text-sm font-semibold text-white transition-colors hover:bg-[#E04020] ${focusOrange} focus-visible:ring-offset-dq-navy`;
+export const btnPrimaryOnDark = `dq-cta-primary inline-flex items-center justify-center gap-2 rounded-full bg-[#FB5535] px-6 py-3.5 text-sm font-semibold text-white hover:bg-[#E04020] ${focusOrange} focus-visible:ring-offset-dq-navy`;
 
 export const btnSecondary = `inline-flex items-center justify-center gap-2 rounded-full border border-[#c5cde8] bg-white/60 px-6 py-3.5 text-sm font-semibold text-dq-navy backdrop-blur-sm transition hover:border-[#a0aacc] hover:bg-white ${focusOrange}`;
 

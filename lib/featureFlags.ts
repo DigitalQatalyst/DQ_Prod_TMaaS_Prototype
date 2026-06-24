@@ -51,7 +51,7 @@ const DEFAULT_FEATURE_FLAGS: FeatureFlags = {
   explore: false,
   alternateLanding: false,
   landingV1: false,
-  legal: true,
+  legal: false,
 
   supabaseCatalog: true,
   cart: false,
@@ -93,6 +93,11 @@ class FeatureFlagService {
 
 export const featureFlags = new FeatureFlagService();
 
+/** Hub index and FAQ only — `/legal/privacy` and `/legal/terms` are always public for MVP. */
+export function isLegalHubPath(pathname: string): boolean {
+  return pathname === "/legal" || pathname === "/legal/faq";
+}
+
 export const isPageEnabled = (page: keyof FeatureFlags) => featureFlags.isEnabled(page);
 export const isFeatureEnabled = (feature: keyof FeatureFlags) => featureFlags.isEnabled(feature);
 
@@ -101,9 +106,11 @@ export const getEnabledPages = () => {
   return PAGE_FLAGS.filter((key) => flags[key]);
 };
 
-export const getFirstEnabledRoute = (): string => {
+export const getFirstEnabledRoute = (exclude?: string): string => {
   for (const { flag, path } of ROUTE_PRIORITY) {
-    if (featureFlags.isEnabled(flag)) return path;
+    if (path !== exclude && featureFlags.isEnabled(flag)) return path;
   }
-  return "/";
+  // All priority routes are disabled — return a safe fallback that has no
+  // FeatureFlagGuard so it can always be reached without a redirect loop.
+  return exclude === "/" ? "/marketplace" : "/";
 };

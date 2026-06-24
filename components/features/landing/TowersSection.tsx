@@ -63,7 +63,8 @@ const TowersSection = () => {
             Four execution <span className="text-gradient-brand">streams</span>
           </h2>
           <p className="mt-5 text-base text-muted-foreground md:text-lg">
-            Comprehensive coverage across every dimension of your organisation's digital landscape.
+            Comprehensive coverage across every dimension of your organisation&apos;s digital
+            landscape.
           </p>
         </motion.div>
 

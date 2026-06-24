@@ -1,5 +1,17 @@
+import { sectorIdToCatalogTag } from "@/data/marketplaceNavigation";
 import { getRemixedName } from "@/lib/serviceProductUtils";
 import type { ServiceProduct, ServiceTypeId } from "@/lib/types/serviceProduct";
+
+function matchesSectorFilter(pkg: ServiceProduct, selectedSectors: string[]): boolean {
+  if (selectedSectors.length === 0) return true;
+
+  return selectedSectors.some((sectorId) => {
+    const sectorTag = sectorIdToCatalogTag(sectorId);
+    return (
+      pkg.tags.includes(sectorTag) || Object.prototype.hasOwnProperty.call(pkg.remixName, sectorId)
+    );
+  });
+}
 
 export type MarketplaceSortBy = "popular" | "price-low" | "fastest";
 
@@ -138,7 +150,11 @@ export function filterCatalogServices(
       pkg.tags.some((tag) => tag.toLowerCase().includes(searchQuery.toLowerCase())) ||
       pkg.features.some((feat) => feat.toLowerCase().includes(searchQuery.toLowerCase()));
 
-    return matchesCollection && matchesCategory && matchesServiceType && matchesSearch;
+    const matchesSector = matchesSectorFilter(pkg, selectedSectors);
+
+    return (
+      matchesCollection && matchesCategory && matchesServiceType && matchesSector && matchesSearch
+    );
   });
 
   if (sortBy === "popular") {

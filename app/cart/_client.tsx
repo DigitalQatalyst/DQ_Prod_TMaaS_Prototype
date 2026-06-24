@@ -42,7 +42,7 @@ export default function CartPageClient() {
                   <div className="flex items-start justify-between gap-4">
                     <div>
                       <Link
-                        href={`/marketplace/${service.id}`}
+                        href={`/marketplace/${service.slug}`}
                         className="text-base font-bold text-navy-950 hover:text-orange-600"
                       >
                         {service.standardName}

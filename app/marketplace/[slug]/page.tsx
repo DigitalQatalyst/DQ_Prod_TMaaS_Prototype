@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
 import { fetchServiceDetail } from "@/services/catalogService";
 import { getDisplayTitle } from "@/components/features/service-detail/serviceDetailHelpers";
+import { FeatureFlagGuard } from "@/components/features/dashboard/FeatureFlagGuard";
+import { buildPageTitle } from "@/lib/brandLinks";
+import { getFirstEnabledRoute } from "@/lib/featureFlags";
 import ServiceDetailPageClient from "./_client";
 
 export async function generateMetadata({
@@ -9,8 +12,9 @@ export async function generateMetadata({
   params: Promise<{ slug: string }>;
 }): Promise<Metadata> {
   const { slug } = await params;
-  const id = parseInt(slug, 10);
-  const detail = !isNaN(id) ? await fetchServiceDetail(id) : undefined;
+  const numericId = parseInt(slug, 10);
+  const idOrSlug = !isNaN(numericId) ? numericId : slug;
+  const detail = await fetchServiceDetail(idOrSlug);
   const title = detail?.service
     ? getDisplayTitle(detail.service.standardName, detail.service.serviceType)
     : slug
@@ -19,17 +23,21 @@ export async function generateMetadata({
         .join(" ");
 
   return {
-    title: `${title} | TMaaS`,
+    title,
     description: detail?.service?.description
       ? detail.service.description.slice(0, 155)
-      : `Learn about ${title} — a TMaaS service by Digital Qatalyst.`,
+      : `Learn about ${title} — a TMaaS service by DigitalQatalyst.`,
     openGraph: {
-      title: `${title} | TMaaS`,
+      title: buildPageTitle(title),
       images: ["/og-image.png"],
     },
   };
 }
 
 export default function ServiceDetailPage({ params }: { params: Promise<{ slug: string }> }) {
-  return <ServiceDetailPageClient params={params} />;
+  return (
+    <FeatureFlagGuard feature="serviceDetail" redirectTo={getFirstEnabledRoute()}>
+      <ServiceDetailPageClient params={params} />
+    </FeatureFlagGuard>
+  );
 }

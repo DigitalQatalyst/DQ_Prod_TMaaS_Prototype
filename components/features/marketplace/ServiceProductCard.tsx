@@ -57,9 +57,11 @@ const ServiceProductCard = ({
 }: ServiceProductCardProps) => {
   const title = getMarketplaceCardTitle(displayName ?? service.standardName, service.serviceType);
   const categoryLabel = marketplaceCategoryLabels[service.collection] ?? service.collection;
-  const detailUrl = `/marketplace/${service.id}`;
+  const detailUrl = `/marketplace/${service.slug}`;
   const canViewDetail = featureFlags.isEnabled("serviceDetail");
   const canUseCart = featureFlags.isEnabled("cart");
+  // getServiceIcon returns stable module-level Lucide component refs, not dynamic components
+  // eslint-disable-next-line react-hooks/static-components
   const ServiceIcon = getServiceIcon(service.collection, service.serviceType);
   const priceLabel = formatPriceDisplay(service.price);
 
@@ -67,6 +69,7 @@ const ServiceProductCard = ({
     const inner = (
       <>
         <div className={`h-11 w-11 shrink-0 ${ICON_WELL_CLASS}`}>
+          {/* eslint-disable-next-line react-hooks/static-components */}
           <ServiceIcon size={20} strokeWidth={1.75} />
         </div>
         <div className="min-w-0 flex-1">
@@ -123,6 +126,7 @@ const ServiceProductCard = ({
           </span>
         )}
         <div className={`mb-4 h-10 w-10 ${ICON_WELL_CLASS}`}>
+          {/* eslint-disable-next-line react-hooks/static-components */}
           <ServiceIcon size={18} strokeWidth={1.75} />
         </div>
         <span className="font-mono text-[10px] uppercase tracking-[0.16em] text-navy-400">
@@ -158,6 +162,7 @@ const ServiceProductCard = ({
       <>
         <div className="mb-4 flex items-start gap-3">
           <div className={`h-10 w-10 shrink-0 ${ICON_WELL_CLASS}`}>
+            {/* eslint-disable-next-line react-hooks/static-components */}
             <ServiceIcon size={20} strokeWidth={1.75} />
           </div>
           <h3 className="min-w-0 flex-1 text-base font-semibold leading-snug text-dq-navy">

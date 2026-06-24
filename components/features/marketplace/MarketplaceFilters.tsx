@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import {
   marketplaceCoreCapabilities,
   marketplaceServiceTypes,
-  marketplaceEconomySectors,
+  // marketplaceEconomySectors,
 } from "@/data/marketplaceNavigation"; // TODO: Task 9 — wire up data;
 import { Checkbox } from "@/components/ui/checkbox";
 import { Label } from "@/components/ui/label";
@@ -86,11 +86,11 @@ function CheckboxGroup({
   );
 }
 
-const SECTOR_PREVIEW_COUNT = 4;
+// const SECTOR_PREVIEW_COUNT = 4;
 
 const MarketplaceFilters = ({
-  selectedSectors,
-  onSectorChange,
+  selectedSectors: _selectedSectors,
+  onSectorChange: _onSectorChange,
   selectedCategories,
   onCategoryChange,
   selectedIncluded,
@@ -100,10 +100,10 @@ const MarketplaceFilters = ({
   onClearAll,
   showClearAll,
 }: MarketplaceFiltersProps) => {
-  const [sectorsExpanded, setSectorsExpanded] = useState(false);
-  const visibleSectors = sectorsExpanded
-    ? marketplaceEconomySectors
-    : marketplaceEconomySectors.slice(0, SECTOR_PREVIEW_COUNT);
+  // const [sectorsExpanded, setSectorsExpanded] = useState(false);
+  // const visibleSectors = sectorsExpanded
+  //   ? marketplaceEconomySectors
+  //   : marketplaceEconomySectors.slice(0, SECTOR_PREVIEW_COUNT);
 
   return (
     <div className="rounded-xl border border-gray-200 bg-white p-5 shadow-[var(--shadow-card)]">
@@ -152,6 +152,7 @@ const MarketplaceFilters = ({
           />
         </FilterSection>
 
+        {/* Economy 4.0 sector filters — temporarily disabled
         <FilterSection label="Economy 4.0 Sector">
           <CheckboxGroup
             options={visibleSectors}
@@ -177,6 +178,7 @@ const MarketplaceFilters = ({
             </p>
           )}
         </FilterSection>
+        */}
       </div>
 
       {showClearAll && (
