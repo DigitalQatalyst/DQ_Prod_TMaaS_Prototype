@@ -1,14 +1,29 @@
-import Link from "next/link";
-import { WorkspaceButton } from "@/components/foundation/workspace-ui/WorkspaceButton";
+import { Mail, Search } from "lucide-react";
+import {
+  RailActionCard,
+  RailSection,
+} from "@/components/foundation/workspace-ui/detail-rail";
 
-/**
- * DWS.01 `_my-requests-shell.tsx` aside — single primary Button linking to marketplace.
- * @see DQ_PROD_DWS01-main/app/(authenticated)/transactions/requests/_my-requests-shell.tsx
- */
+/** DWS.01 RailSection with compact action cards for the requests page aside. */
 export function QuickActionsPanel() {
   return (
-    <WorkspaceButton asChild className="w-full">
-      <Link href="/marketplace">Browse services</Link>
-    </WorkspaceButton>
+    <RailSection title="Quick actions">
+      <div className="space-y-3">
+        <RailActionCard
+          href="/marketplace"
+          icon={Search}
+          tone="orange"
+          title="Browse services"
+          description="View the catalogue"
+        />
+        <RailActionCard
+          href="/contact"
+          icon={Mail}
+          tone="blue"
+          title="Contact DQ team"
+          description="Get team support"
+        />
+      </div>
+    </RailSection>
   );
 }
