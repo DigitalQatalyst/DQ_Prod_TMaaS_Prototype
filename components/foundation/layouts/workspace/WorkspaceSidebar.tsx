@@ -25,10 +25,12 @@ export function WorkspaceSidebar({
   const pathname = usePathname();
   const router = useRouter();
 
-  const isActive = (path: string) =>
-    path === "/dashboard/requests"
-      ? pathname.startsWith("/dashboard/requests")
-      : pathname === path;
+  const isActive = (path: string) => {
+    if (path === "/dashboard/requests") return pathname.startsWith("/dashboard/requests");
+    if (path === "/dashboard/overview") return pathname.startsWith("/dashboard/overview");
+    if (path === "/marketplace") return pathname.startsWith("/marketplace");
+    return pathname === path;
+  };
 
   const handleSignOut = () => {
     router.push("/sign-in");

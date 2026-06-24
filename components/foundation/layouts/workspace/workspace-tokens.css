@@ -15,4 +15,6 @@
   --shell-header-h: 56px;
   --shell-sidebar-w: 280px;
   --shell-sidebar-w-collapsed: 64px;
+  --focus-ring-navy: 0 0 0 3px color-mix(in srgb, var(--color-primary) 12%, transparent);
+  --focus-ring-orange: 0 0 0 3px color-mix(in srgb, var(--color-secondary) 30%, transparent);
 }
