@@ -3,7 +3,6 @@
 import { ChevronRight } from "lucide-react";
 import type { CustomerRequest } from "@/lib/types/requests";
 import { formatRequestDate } from "@/lib/requests/format";
-import { getServiceTypeVisual } from "@/lib/requests/serviceTypeVisuals";
 import { RequestStatusBadge } from "@/components/features/requests/RequestStatusBadge";
 import { ServiceTypeBadge } from "@/components/features/requests/ServiceTypeBadge";
 import { cn } from "@/lib/utils";
@@ -14,7 +13,7 @@ interface OverviewRequestsTableProps {
   selectedId?: string | undefined;
 }
 
-/** Overview dashboard requests table — icon lockup, last updated column. */
+/** Overview dashboard requests table — title + reference, last updated column. */
 export function OverviewRequestsTable({
   requests,
   onRowClick,
@@ -45,38 +44,23 @@ export function OverviewRequestsTable({
             </tr>
           </thead>
           <tbody>
-            {requests.map((request) => {
-              const visual = getServiceTypeVisual(request.serviceType);
-              const Icon = visual.icon;
-              return (
-                <tr
-                  key={request.id}
-                  onClick={() => onRowClick(request)}
-                  className={cn(
-                    "cursor-pointer border-b border-[var(--color-border)] transition-colors hover:bg-[var(--color-surface)]",
-                    selectedId === request.id && "bg-[var(--color-secondary)]/5"
-                  )}
-                >
-                  <td className="px-4 py-3.5">
-                    <div className="flex items-center gap-3">
-                      <div
-                        className={cn(
-                          "flex h-9 w-9 shrink-0 items-center justify-center rounded-lg",
-                          visual.iconClass
-                        )}
-                      >
-                        <Icon size={16} strokeWidth={1.5} aria-hidden="true" />
-                      </div>
-                      <div className="min-w-0">
-                        <p className="line-clamp-1 font-medium text-[var(--color-text-primary)]">
-                          {request.title}
-                        </p>
-                        <p className="mt-0.5 font-mono text-[11px] text-[var(--color-text-muted)]">
-                          {request.referenceNo}
-                        </p>
-                      </div>
-                    </div>
-                  </td>
+            {requests.map((request) => (
+              <tr
+                key={request.id}
+                onClick={() => onRowClick(request)}
+                className={cn(
+                  "cursor-pointer border-b border-[var(--color-border)] transition-colors hover:bg-[var(--color-surface)]",
+                  selectedId === request.id && "bg-[var(--color-secondary)]/5"
+                )}
+              >
+                <td className="px-4 py-3.5">
+                  <p className="line-clamp-1 font-medium text-[var(--color-text-primary)]">
+                    {request.title}
+                  </p>
+                  <p className="mt-0.5 font-mono text-[11px] text-[var(--color-text-muted)]">
+                    {request.referenceNo}
+                  </p>
+                </td>
                   <td className="whitespace-nowrap px-4 py-3.5">
                     <ServiceTypeBadge type={request.serviceType} />
                   </td>
@@ -93,8 +77,7 @@ export function OverviewRequestsTable({
                     <ChevronRight size={16} className="text-[var(--color-text-disabled)]" />
                   </td>
                 </tr>
-              );
-            })}
+            ))}
           </tbody>
         </table>
       </div>
