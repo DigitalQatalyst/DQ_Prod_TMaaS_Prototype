@@ -6,7 +6,6 @@ import { cn } from "@/lib/utils";
 
 interface WorkspaceUser {
   name: string;
-  organization: string;
 }
 
 interface WorkspaceSolutionChromeProps {
@@ -70,7 +69,7 @@ export function WorkspaceSolutionChrome({
           className="mx-1 h-8 w-px bg-[var(--color-border-subtle)]"
         />
         <div className="flex items-center border-l border-[var(--color-border-subtle)] pl-3">
-          <AvatarLockup name={user.name} role={user.organization} />
+          <AvatarLockup name={user.name} />
         </div>
       </div>
     </header>

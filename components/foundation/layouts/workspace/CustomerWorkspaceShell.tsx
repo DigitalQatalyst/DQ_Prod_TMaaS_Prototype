@@ -9,7 +9,6 @@ import "./workspace-tokens.css";
 
 const DEWA_STUB_USER = {
   name: "Ahmed Al Tayer",
-  organization: "Dubai Electricity & Water Authority",
 };
 
 interface CustomerWorkspaceShellProps {
@@ -26,8 +25,6 @@ export function CustomerWorkspaceShell({ children }: CustomerWorkspaceShellProps
 
   const user = {
     name: authUser.name === "Demo User" ? DEWA_STUB_USER.name : authUser.name,
-    organization:
-      authUser.organization === "STC Bank" ? DEWA_STUB_USER.organization : authUser.organization,
   };
 
   return (
