@@ -1,8 +1,10 @@
-import { Calendar, CheckCircle2, FileText, Search } from "lucide-react";
+import { Calendar, CheckCircle2, FileText } from "lucide-react";
 import type { CustomerOverviewStats } from "@/lib/hooks/useCustomerOverviewStats";
+import { cn } from "@/lib/utils";
 
 interface OverviewStatsRowProps {
   stats: CustomerOverviewStats;
+  className?: string;
 }
 
 const STAT_CARDS = [
@@ -11,12 +13,6 @@ const STAT_CARDS = [
     label: "Requests Submitted",
     icon: FileText,
     iconClass: "bg-purple-100 text-purple-600",
-  },
-  {
-    key: "underReview" as const,
-    label: "Under Review",
-    icon: Search,
-    iconClass: "bg-orange-100 text-orange-600",
   },
   {
     key: "inProgress" as const,
@@ -32,9 +28,9 @@ const STAT_CARDS = [
   },
 ];
 
-export function OverviewStatsRow({ stats }: OverviewStatsRowProps) {
+export function OverviewStatsRow({ stats, className }: OverviewStatsRowProps) {
   return (
-    <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-4">
+    <div className={cn("grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3", className)}>
       {STAT_CARDS.map(({ key, label, icon: Icon, iconClass }) => {
         const stat = stats[key];
         return (

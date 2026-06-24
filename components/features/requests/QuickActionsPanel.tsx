@@ -3,11 +3,16 @@ import {
   RailActionCard,
   RailSection,
 } from "@/components/foundation/workspace-ui/detail-rail";
+import { cn } from "@/lib/utils";
 
-/** DWS.01 RailSection with compact action cards for the requests page aside. */
-export function QuickActionsPanel() {
+interface QuickActionsPanelProps {
+  className?: string;
+}
+
+/** DWS.01 RailSection with compact action cards for page asides. */
+export function QuickActionsPanel({ className }: QuickActionsPanelProps) {
   return (
-    <RailSection title="Quick actions">
+    <RailSection title="Quick actions" className={cn("h-full", className)}>
       <div className="space-y-3">
         <RailActionCard
           href="/marketplace"

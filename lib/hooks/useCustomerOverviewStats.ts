@@ -11,7 +11,6 @@ export interface OverviewStat {
 
 export interface CustomerOverviewStats {
   submitted: OverviewStat;
-  underReview: OverviewStat;
   inProgress: OverviewStat;
   closed: OverviewStat;
 }
@@ -22,10 +21,6 @@ const CLOSED_ALL_TIME = 12;
 function buildStats(requests: CustomerRequest[]): CustomerOverviewStats {
   return {
     submitted: { value: requests.length, hint: "All time" },
-    underReview: {
-      value: requests.filter((r) => r.status === "under_review").length,
-      hint: "Needs your attention",
-    },
     inProgress: {
       value: requests.filter((r) => r.status === "in_progress").length,
       hint: "Currently in delivery",
