@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, startTransition } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { MessageCircle, X, Brain, Search, ShoppingCart } from "lucide-react";
 import { usePathname } from "next/navigation";
@@ -15,14 +15,16 @@ const ChatButton = () => {
   // Determine stage based on current route
   useEffect(() => {
     const path = pathname;
-    if (path === "/" || path === "/index") {
-      setCurrentStage("concierge");
-    } else if (path.includes("/marketplace") || path.includes("/explore")) {
-      setCurrentStage("advisory");
-    } else {
-      setCurrentStage("concierge");
-    }
-  }, [location]);
+    startTransition(() => {
+      if (path === "/" || path === "/index") {
+        setCurrentStage("concierge");
+      } else if (path.includes("/marketplace") || path.includes("/explore")) {
+        setCurrentStage("advisory");
+      } else {
+        setCurrentStage("concierge");
+      }
+    });
+  }, [pathname]);
 
   // Stage-specific tooltip content
   const getTooltipContent = () => {
@@ -66,7 +68,9 @@ const ChatButton = () => {
 
   // Show tooltip again when stage changes (but only briefly)
   useEffect(() => {
-    setShowTooltip(true);
+    startTransition(() => {
+      setShowTooltip(true);
+    });
     const timer = setTimeout(() => {
       setShowTooltip(false);
     }, 4000);

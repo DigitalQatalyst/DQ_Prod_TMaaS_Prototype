@@ -8,7 +8,7 @@ import {
 import { PLATFORM_NAME_EXPANDED } from "@/lib/brandLinks";
 
 export const metadata: Metadata = {
-  title: "Privacy Policy | TMaaS",
+  title: "Privacy Policy",
   description: "TMaaS Privacy Policy — Digital Qatalyst.",
 };
 

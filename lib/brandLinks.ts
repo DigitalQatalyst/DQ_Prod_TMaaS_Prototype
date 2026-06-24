@@ -1,10 +1,24 @@
 export const DQ_CORP_WEB_URL = "https://digitalqatalyst.com";
+export const DQ_CORP_WEB_ABOUT_URL = "https://www.digitalqatalyst.com/about";
+
+export const FOOTER_ABOUT_DQ_LABEL = "About DigitalQatalyst";
+export const FOOTER_EXPLORE_DQ_LABEL = "Explore DigitalQatalyst";
 
 /** Customer-facing product brand (logo, hero, titles). */
 export const PLATFORM_NAME = "TMaaS";
 export const PLATFORM_ACRONYM = "TMaaS";
 export const PLATFORM_FULL_NAME = "Transformation Management as a Service";
 export const PLATFORM_NAME_EXPANDED = `${PLATFORM_FULL_NAME} (TMaaS)`;
+
+export const COMPANY_NAME = "DigitalQatalyst";
+export const PAGE_TITLE_SEPARATOR = " · ";
+export const POWERED_BY_LINE = `Powered by ${COMPANY_NAME}`;
+export const PLATFORM_FOOTER_PRODUCT_LINE = `${PLATFORM_ACRONYM} — ${PLATFORM_FULL_NAME}`;
+
+/** Browser tab title: `TMaaS · <page>` per product-chrome guidelines. */
+export function buildPageTitle(pageName: string): string {
+  return `${PLATFORM_ACRONYM}${PAGE_TITLE_SEPARATOR}${pageName}`;
+}
 
 export const PLATFORM_DESCRIPTOR = "Digital transformation marketplace";
 

@@ -26,7 +26,12 @@ const SCHEMA_FROM_GIT = [
   "20250610000011_pdp_content_extensions.sql",
 ];
 
-const PACK_FILES: { out: string; source: "git" | "workspace" | "supabase"; path: string; header?: string }[] = [
+const PACK_FILES: {
+  out: string;
+  source: "git" | "workspace" | "supabase";
+  path: string;
+  header?: string;
+}[] = [
   ...SCHEMA_FROM_GIT.map((name, i) => ({
     out: `${String(i + 1).padStart(2, "0")}_${name.replace(/^\d+_/, "")}`,
     source: "git" as const,
@@ -184,7 +189,9 @@ echo "Done. Run: SELECT refresh_product_search_index();"
 `;
   writeFileSync(join(packRoot, "apply-all.sh"), applySh, { mode: 0o755 });
 
-  console.log(`\\nPack ready at release-1-database-setup/ (${written.length} migrations + 00_apply_all.sql)`);
+  console.log(
+    `\\nPack ready at release-1-database-setup/ (${written.length} migrations + 00_apply_all.sql)`
+  );
 }
 
 main();

@@ -174,13 +174,26 @@ export async function POST(request: NextRequest) {
     ) {
       console.error("[contact] Missing MS Graph env vars");
       return NextResponse.json(
-        { error: "Service configuration error. Please email us directly at info@digitalqatalyst.com." },
+        {
+          error:
+            "Service configuration error. Please email us directly at info@digitalqatalyst.com.",
+        },
         { status: 500 }
       );
     }
 
-    const { firstName, lastName, email, phone, organisation, role, interest, need, message, consent } =
-      validated.data;
+    const {
+      firstName,
+      lastName,
+      email,
+      phone,
+      organisation,
+      role,
+      interest,
+      need,
+      message,
+      consent,
+    } = validated.data;
 
     const token = await getAccessToken();
 
@@ -189,7 +202,18 @@ export async function POST(request: NextRequest) {
         subject: `TMaaS Contact Request from ${firstName} ${lastName} - ${organisation}`,
         body: {
           contentType: "HTML",
-          content: buildEmailHtml({ firstName, lastName, email, phone: phone ?? undefined, organisation, role: role ?? undefined, interest: interest ?? undefined, need: need ?? undefined, message, consent }),
+          content: buildEmailHtml({
+            firstName,
+            lastName,
+            email,
+            phone: phone ?? undefined,
+            organisation,
+            role: role ?? undefined,
+            interest: interest ?? undefined,
+            need: need ?? undefined,
+            message,
+            consent,
+          }),
         },
         toRecipients: [{ emailAddress: { address: MSGRAPH_RECIPIENT_EMAIL } }],
         replyTo: [{ emailAddress: { address: email, name: `${firstName} ${lastName}` } }],
@@ -219,7 +243,10 @@ export async function POST(request: NextRequest) {
   } catch (err) {
     console.error("[contact] handler error:", err);
     return NextResponse.json(
-      { error: "An unexpected error occurred. Please try again or email us at info@digitalqatalyst.com." },
+      {
+        error:
+          "An unexpected error occurred. Please try again or email us at info@digitalqatalyst.com.",
+      },
       { status: 500 }
     );
   }

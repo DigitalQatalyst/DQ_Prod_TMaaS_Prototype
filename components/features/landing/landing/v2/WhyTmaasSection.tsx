@@ -1,4 +1,5 @@
 import MeshSection from "@/components/features/landing/MeshSection";
+import ChallengePainCard from "@/components/features/landing/landing/ChallengePainCard";
 import {
   CHALLENGE_CARDS,
   CHALLENGE_CLOSING,
@@ -30,16 +31,7 @@ const WhyTmaasSection = () => {
 
         <div className="grid gap-6 md:grid-cols-3">
           {CHALLENGE_CARDS.map(({ Icon, title, body }) => (
-            <div
-              key={title}
-              className="rounded-2xl border border-white/10 bg-white/[0.06] p-8 backdrop-blur-sm"
-            >
-              <div className="mb-5 flex h-10 w-10 items-center justify-center rounded-xl bg-dq-orange/10 text-dq-orange">
-                <Icon size={22} />
-              </div>
-              <h3 className="mb-3 text-xl font-semibold tracking-tight text-white">{title}</h3>
-              <p className="text-[15px] leading-relaxed text-white/60">{body}</p>
-            </div>
+            <ChallengePainCard key={title} Icon={Icon} title={title} body={body} />
           ))}
         </div>
 

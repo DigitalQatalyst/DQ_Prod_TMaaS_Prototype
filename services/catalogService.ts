@@ -279,8 +279,9 @@ async function fetchVariantExtras(variantIds: number[]) {
 
   const productIds = [...new Set((categoryRes.data ?? []).map((r) => r.product_id))];
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const supabaseUntyped = supabase as any;
   const outcomesRes = productIds.length
-    ? await (supabase as any)
+    ? await supabaseUntyped
         .from("product_category_map")
         .select("product_id, category_id")
         .in("product_id", productIds)
@@ -738,7 +739,10 @@ export async function fetchServiceDetail(
       fetchPdpContent(service.id),
     ]);
   } catch (err) {
-    console.error(`[catalog] fetchServiceDetail(${idOrSlug}) enrichment failed, using base service:`, err);
+    console.error(
+      `[catalog] fetchServiceDetail(${idOrSlug}) enrichment failed, using base service:`,
+      err
+    );
     deployModules = await loadStaticDeployModules(service.standardName);
   }
 
