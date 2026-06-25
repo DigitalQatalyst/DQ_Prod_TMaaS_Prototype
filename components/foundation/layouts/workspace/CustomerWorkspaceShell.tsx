@@ -6,6 +6,7 @@ import { WorkspaceSidebar } from "./WorkspaceSidebar";
 import { WorkspaceSolutionChrome } from "./WorkspaceSolutionChrome";
 import { WorkspaceFooter } from "./WorkspaceFooter";
 import "./workspace-tokens.css";
+import "./workspace-sidebar.css";
 
 const DEWA_STUB_USER = {
   name: "Ahmed Al Tayer",

@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
-import { HelpCircle, LogOut } from "lucide-react";
+import { HelpCircle, LogOut, type LucideIcon } from "lucide-react";
 import TMaaSLogo from "@/components/features/landing/TMaaSLogo";
 import { cn } from "@/lib/utils";
 import { customerNavSections } from "./customerNavConfig";
@@ -13,9 +13,42 @@ interface WorkspaceSidebarProps {
   onMobileClose: () => void;
 }
 
+function SidebarNavLink({
+  href,
+  label,
+  icon: Icon,
+  active,
+  collapsed,
+  onNavigate,
+}: {
+  href: string;
+  label: string;
+  icon: LucideIcon;
+  active: boolean;
+  collapsed: boolean;
+  onNavigate?: () => void;
+}) {
+  return (
+    <Link
+      href={href}
+      onClick={() => onNavigate?.()}
+      title={collapsed ? label : undefined}
+      aria-current={active ? "page" : undefined}
+      className={cn(
+        "sidebar-feature-group focus-visible:outline-none focus-visible:[box-shadow:var(--focus-ring-navy)]",
+        active && "sidebar-feature-group-active",
+        collapsed && "justify-center px-2"
+      )}
+    >
+      {active && <span className="sidebar-nav-accent" aria-hidden />}
+      <Icon size={17} strokeWidth={1.5} className="shrink-0" />
+      {!collapsed && <span className="min-w-0 flex-1 truncate">{label}</span>}
+    </Link>
+  );
+}
+
 /**
- * TMaaS port of DWS.01 AppSidebar — section eyebrows, nav leaves, Help + Sign out footer.
- * User identity lives in SolutionChrome only (no sidebar avatar card).
+ * DWS.01 AppSidebar port — orange section eyebrows, navy-50 active rows, left accent bar.
  */
 export function WorkspaceSidebar({
   collapsed,
@@ -65,62 +98,49 @@ export function WorkspaceSidebar({
         )}
       </div>
 
-      <nav className="flex-1 overflow-y-auto px-2 py-4">
-        {customerNavSections.map((section) => (
-          <div key={section.id} className="mb-4">
-            {!collapsed && (
-              <p className="mb-2 px-3 font-mono text-[10px] font-semibold uppercase tracking-[0.16em] text-[var(--color-text-muted)]">
-                {section.label}
-              </p>
-            )}
-            <div className="space-y-0.5">
-              {section.items.map((item) => {
-                const active = isActive(item.path);
-                const Icon = item.icon;
-                return (
-                  <Link
+      <nav className="flex-1 overflow-y-auto px-3 py-4" aria-label="Sidebar navigation">
+        <div className="space-y-5">
+          {customerNavSections.map((section) => (
+            <section key={section.id} className="space-y-1">
+              {!collapsed && <div className="sidebar-feature-area">{section.label}</div>}
+              <div className="mt-1 space-y-1">
+                {section.items.map((item) => (
+                  <SidebarNavLink
                     key={item.id}
                     href={item.path}
-                    onClick={onMobileClose}
-                    title={collapsed ? item.name : undefined}
-                    className={cn(
-                      "flex items-center gap-3 rounded-[var(--radius-button)] px-3 py-2 text-sm transition-colors",
-                      active
-                        ? "bg-[var(--color-secondary)]/10 font-semibold text-[var(--color-secondary)]"
-                        : "text-[var(--color-text-secondary)] hover:bg-[var(--color-surface)] hover:text-[var(--color-text-primary)]",
-                      collapsed && "justify-center px-2"
-                    )}
-                  >
-                    <Icon size={18} className="shrink-0" />
-                    {!collapsed && <span>{item.name}</span>}
-                  </Link>
-                );
-              })}
-            </div>
-          </div>
-        ))}
+                    label={item.name}
+                    icon={item.icon}
+                    active={isActive(item.path)}
+                    collapsed={collapsed}
+                    onNavigate={onMobileClose}
+                  />
+                ))}
+              </div>
+            </section>
+          ))}
+        </div>
       </nav>
 
       <div className="shrink-0 border-t border-[var(--color-border-subtle)] p-3">
         <a
           href="mailto:info@digitalqatalyst.com"
           className={cn(
-            "flex items-center gap-2 rounded-[var(--radius-button)] px-3 py-2 text-sm text-[var(--color-text-secondary)] hover:bg-[var(--color-surface)]",
+            "sidebar-feature-group sidebar-footer-item focus-visible:outline-none focus-visible:[box-shadow:var(--focus-ring-navy)]",
             collapsed && "justify-center px-2"
           )}
         >
-          <HelpCircle size={16} />
+          <HelpCircle size={17} strokeWidth={1.5} />
           {!collapsed && <span>Help / Support</span>}
         </a>
         <button
           type="button"
           onClick={handleSignOut}
           className={cn(
-            "mt-0.5 flex w-full items-center gap-2 rounded-[var(--radius-button)] px-3 py-2 text-sm text-[var(--color-text-secondary)] hover:bg-[var(--color-surface)]",
+            "sidebar-feature-group sidebar-footer-item mt-1 focus-visible:outline-none focus-visible:[box-shadow:var(--focus-ring-navy)]",
             collapsed && "justify-center px-2"
           )}
         >
-          <LogOut size={16} />
+          <LogOut size={17} strokeWidth={1.5} />
           {!collapsed && <span>Sign out</span>}
         </button>
       </div>

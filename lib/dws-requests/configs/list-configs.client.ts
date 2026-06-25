@@ -7,18 +7,19 @@ const CLOSED = (r: EnrichedRequestRow) => r.status === "closed" || r.status === 
 
 export const requesterListConfig: ListPageConfig = {
   context: "requester",
-  storageKey: "tmaas:requests:dashboard:list",
-  overline: "WORKSPACE",
-  title: "My Requests",
-  description: "View and track all your service requests.",
-  detailBasePath: "/dashboard/requests",
-  listHref: "/dashboard/requests",
+  storageKey: "dws:requests:transactions:list",
+  overline: "TRANSACTIONS",
+  title: "Requests",
+  description: "View and track the service requests you have submitted across DWS.",
+  detailBasePath: "/transactions/requests",
+  listHref: "/transactions/requests",
   hideActionColumn: true,
   navigateOnRowClick: false,
   breadcrumb: [
-    { label: "TMaaS", href: "/dashboard/overview" },
-    { label: "Workspace" },
-    { label: "My Requests" },
+    { label: "DWS.01", href: "/home" },
+    { label: "Marketplace" },
+    { label: "Transactions" },
+    { label: "Requests" },
   ],
   tabs: [
     { key: "my_requests", label: "My Requests" },

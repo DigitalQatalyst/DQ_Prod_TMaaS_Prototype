@@ -21,13 +21,12 @@ Reference: `DQ_PROD_DWS01-main` TransactionShell + AppChrome + AppSidebar patter
 - Sign out lives in the sidebar footer only — never duplicate an avatar card in the sidebar footer.
 
 ## Sidebar footer
-- Help / Support (mailto) + Sign out only — match DWS.01 AppSidebar footer.
+- Nav leaves: `sidebar-feature-group` + `sidebar-feature-group-active` with left `sidebar-nav-accent` bar (navy-50 active bg). Section eyebrows use `sidebar-feature-area` (orange uppercase). Do not use orange/10 pill active state.
 
 ## Page content
 - Working pages use `min-w-0` on flex children to prevent overflow.
 - Main + aside: `flex flex-col xl:flex-row` with fixed aside width (`xl:w-[260px]`), not grid without `min-w-0`.
 - Tables: adequate row padding (`py-3.5`), `line-clamp-2` for long titles; avoid aggressive `max-w` truncate on primary column.
 - Page aside actions: **RailSection** + **RailActionCard** (icon tile, title, one-line short subtext). Use RailActionLink only for compact single-line actions without descriptions.
-- **My Requests** (`/dashboard/requests`): use DWS.01 `@dbp/shell-transaction` `WorkingLayout` + `lib/dws-requests/RequestListPage` + `@dbp/ui` primitives — not custom `RequestsTable` / `RequestsToolbar`.
-- `@dbp/*` packages live in `packages/*.tgz` (from DQ_PROD_DWS01-main). Next.js needs `transpilePackages`, `experimental.extensionAlias` for `.js` imports, and `next build --webpack` (Turbopack panics on @dbp/ui unicode comments).
-- Customer nav sections: ORIENTATION (Overview), MARKETPLACE (Explore Services), WORKSPACE (My Requests) — no SETTINGS section in sidebar.
+- Help / Support (mailto) + Sign out only — match DWS.01 AppSidebar footer (`sidebar-feature-group`).
+- My Requests list: `SectionCard` wrapper (border-gray-200, no shadow), DWS toolbar (search + result count), workspace-token pagination.

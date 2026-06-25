@@ -34,7 +34,7 @@ function SortIcon({
   );
 }
 
-/** DWS.01 RequestRecordsTable styling — native table + workspace tokens. */
+/** DWS.01 RequestRecordsTable styling — native table inside SectionCard. */
 export function RequestsTable({
   requests,
   sortField,
@@ -44,73 +44,67 @@ export function RequestsTable({
   selectedId,
 }: RequestsTableProps) {
   return (
-    <div className="overflow-hidden rounded-[var(--radius-card)] border border-[var(--color-border)] bg-white shadow-sm">
-      <div className="overflow-x-auto">
-        <table className="w-full min-w-0 text-sm">
-          <thead className="border-b border-[var(--color-border)] bg-[var(--color-surface)]">
-            <tr>
-              <th className="w-[38%] px-4 py-3 text-left text-[10px] font-semibold uppercase tracking-wide text-[var(--color-text-muted)]">
-                Request
-              </th>
-              <th className="px-4 py-3 text-left text-[10px] font-semibold uppercase tracking-wide text-[var(--color-text-muted)]">
-                Service Type
-              </th>
-              <th className="whitespace-nowrap px-4 py-3 text-left text-[10px] font-semibold uppercase tracking-wide text-[var(--color-text-muted)]">
-                <button
-                  type="button"
-                  onClick={() => onSort("submittedAt")}
-                  className="inline-flex items-center gap-1 hover:text-[var(--color-text-primary)]"
-                >
-                  Submission Date
-                  <SortIcon
-                    field="submittedAt"
-                    sortField={sortField}
-                    sortDirection={sortDirection}
-                  />
-                </button>
-              </th>
-              <th className="px-4 py-3 text-left text-[10px] font-semibold uppercase tracking-wide text-[var(--color-text-muted)]">
-                Status
-              </th>
-              <th className="whitespace-nowrap px-4 py-3 text-left text-[10px] font-semibold uppercase tracking-wide text-[var(--color-text-muted)]">
-                Request ID
-              </th>
-              <th className="w-10 px-4 py-3" />
-            </tr>
-          </thead>
-          <tbody>
-            {requests.map((request) => (
-              <tr
-                key={request.id}
-                onClick={() => onRowClick(request)}
-                className={cn(
-                  "cursor-pointer border-b border-[var(--color-border)] transition-colors hover:bg-[var(--color-surface)]",
-                  selectedId === request.id && "bg-[var(--color-secondary)]/5"
-                )}
+    <div className="overflow-x-auto">
+      <table className="w-full min-w-0 text-sm">
+        <thead className="border-b border-[var(--color-border)] bg-[var(--color-surface)]">
+          <tr>
+            <th className="w-[38%] px-4 py-3 text-left text-[10px] font-semibold uppercase tracking-wide text-[var(--color-text-muted)]">
+              Request
+            </th>
+            <th className="px-4 py-3 text-left text-[10px] font-semibold uppercase tracking-wide text-[var(--color-text-muted)]">
+              Service Type
+            </th>
+            <th className="whitespace-nowrap px-4 py-3 text-left text-[10px] font-semibold uppercase tracking-wide text-[var(--color-text-muted)]">
+              <button
+                type="button"
+                onClick={() => onSort("submittedAt")}
+                className="inline-flex items-center gap-1 hover:text-[var(--color-text-primary)]"
               >
-                <td className="px-4 py-3.5 font-medium text-[var(--color-text-primary)]">
-                  <span className="line-clamp-2">{request.title}</span>
-                </td>
-                <td className="whitespace-nowrap px-4 py-3.5 text-[var(--color-text-secondary)]">
-                  <ServiceTypeBadge type={request.serviceType} />
-                </td>
-                <td className="whitespace-nowrap px-4 py-3.5 text-[var(--color-text-secondary)]">
-                  {formatRequestDate(request.submittedAt)}
-                </td>
-                <td className="px-4 py-3.5">
-                  <RequestStatusBadge status={request.status} />
-                </td>
-                <td className="whitespace-nowrap px-4 py-3.5 font-mono text-xs text-[var(--color-text-muted)]">
-                  {request.referenceNo}
-                </td>
-                <td className="px-4 py-3.5">
-                  <ChevronRight size={16} className="text-[var(--color-text-disabled)]" />
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
+                Submission Date
+                <SortIcon field="submittedAt" sortField={sortField} sortDirection={sortDirection} />
+              </button>
+            </th>
+            <th className="px-4 py-3 text-left text-[10px] font-semibold uppercase tracking-wide text-[var(--color-text-muted)]">
+              Status
+            </th>
+            <th className="whitespace-nowrap px-4 py-3 text-left text-[10px] font-semibold uppercase tracking-wide text-[var(--color-text-muted)]">
+              Request ID
+            </th>
+            <th className="w-10 px-4 py-3" />
+          </tr>
+        </thead>
+        <tbody>
+          {requests.map((request) => (
+            <tr
+              key={request.id}
+              onClick={() => onRowClick(request)}
+              className={cn(
+                "cursor-pointer border-b border-[var(--color-border)] transition-colors hover:bg-[var(--color-surface)]",
+                selectedId === request.id && "bg-[var(--color-navy-50)]"
+              )}
+            >
+              <td className="max-w-[280px] px-4 py-3 font-medium text-[var(--color-text-primary)]">
+                <span className="line-clamp-2">{request.title}</span>
+              </td>
+              <td className="whitespace-nowrap px-4 py-3 text-[var(--color-text-secondary)]">
+                <ServiceTypeBadge type={request.serviceType} />
+              </td>
+              <td className="whitespace-nowrap px-4 py-3 text-[var(--color-text-secondary)]">
+                {formatRequestDate(request.submittedAt)}
+              </td>
+              <td className="px-4 py-3">
+                <RequestStatusBadge status={request.status} />
+              </td>
+              <td className="whitespace-nowrap px-4 py-3 font-mono text-xs text-[var(--color-text-muted)]">
+                {request.referenceNo}
+              </td>
+              <td className="px-4 py-3">
+                <ChevronRight size={16} className="text-[var(--color-text-disabled)]" />
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
     </div>
   );
 }

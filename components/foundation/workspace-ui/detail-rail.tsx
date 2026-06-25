@@ -4,6 +4,34 @@ import * as LucideIcons from "lucide-react";
 import { ChevronRight, type LucideIcon } from "lucide-react";
 import { cn } from "@/lib/utils";
 
+/** DWS.01 @dbp/ui SectionCard — content column wrapper (border-gray-200, no shadow). */
+export function SectionCard({
+  title,
+  children,
+  className,
+}: {
+  title?: string;
+  children: React.ReactNode;
+  className?: string;
+}) {
+  return (
+    <section
+      className={cn(
+        "overflow-hidden rounded-lg border border-gray-200 bg-white",
+        title ? "px-5 pb-5 pt-5" : "",
+        className
+      )}
+    >
+      {title ? (
+        <h2 className="mb-4 text-sm font-semibold leading-snug text-[var(--color-primary)]">
+          {title}
+        </h2>
+      ) : null}
+      {children}
+    </section>
+  );
+}
+
 export interface RailSectionProps {
   title: string;
   children: React.ReactNode;
