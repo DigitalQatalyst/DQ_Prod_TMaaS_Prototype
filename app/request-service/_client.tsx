@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { ArrowLeft, Check, Loader2 } from "lucide-react";
@@ -51,12 +51,8 @@ export default function RequestServicePageClient() {
   const [createdRequestId, setCreatedRequestId] = useState<string | null>(null);
   const [honeypot, setHoneypot] = useState("");
 
-  useEffect(() => {
-    if (!isAuthenticated || authLoading) return;
-    if (user.organization) {
-      setForm((prev) => (prev.organisation ? prev : { ...prev, organisation: user.organization }));
-    }
-  }, [authLoading, isAuthenticated, user.organization]);
+  const profileOrganisation = user.organization?.trim() ?? "";
+  const needsOrganisation = isAuthenticated && !profileOrganisation;
 
   if (!serviceParams) {
     return (
@@ -113,7 +109,9 @@ export default function RequestServicePageClient() {
 
   const validate = (): boolean => {
     const next: Partial<Record<keyof FormState, string>> = {};
-    if (!form.organisation.trim()) next.organisation = "Organisation is required";
+    if (needsOrganisation && !form.organisation.trim()) {
+      next.organisation = "Organisation is required";
+    }
     if (!form.consent) next.consent = "Consent is required to submit";
     setErrors(next);
     return Object.keys(next).length === 0;
@@ -132,7 +130,9 @@ export default function RequestServicePageClient() {
         headers: { "Content-Type": "application/json" },
         credentials: "same-origin",
         body: JSON.stringify({
-          organisation: form.organisation,
+          ...(needsOrganisation && form.organisation.trim()
+            ? { organisation: form.organisation.trim() }
+            : {}),
           notes: form.notes,
           consent: form.consent,
           website: honeypot,
@@ -211,38 +211,39 @@ export default function RequestServicePageClient() {
                 <p className="mt-1 text-lg font-semibold text-dq-navy">{serviceParams.service}</p>
               </div>
 
-              <div className="mb-6 rounded-lg border border-gray-200 bg-white px-4 py-3 text-sm">
-                <p className="font-medium text-dq-navy">{user.name}</p>
-                <p className="text-gray-600">{user.email}</p>
-              </div>
-
               <h1 className="text-2xl font-semibold tracking-tight text-dq-navy sm:text-3xl">
                 Request this service
               </h1>
               <p className="mt-2 text-sm leading-relaxed text-gray-600">
-                Confirm your details and submit. This request will appear in your dashboard.
+                We&apos;ll review your request and follow up within 2 business days.
               </p>
 
               <form onSubmit={handleSubmit} noValidate className="mt-8 space-y-5">
-                <div>
-                  <label
-                    htmlFor="organisation"
-                    className="mb-1.5 block text-xs font-semibold uppercase tracking-wide text-gray-600"
-                  >
-                    Organisation <span className="text-red-600">*</span>
-                  </label>
-                  <input
-                    id="organisation"
-                    type="text"
-                    autoComplete="organization"
-                    value={form.organisation}
-                    onChange={(e) => setField("organisation", e.target.value)}
-                    className={inputClass(errors.organisation)}
-                  />
-                  {errors.organisation && (
-                    <p className="mt-1 text-xs text-red-600">{errors.organisation}</p>
-                  )}
-                </div>
+                {needsOrganisation && (
+                  <div>
+                    <label
+                      htmlFor="organisation"
+                      className="mb-1.5 block text-xs font-semibold uppercase tracking-wide text-gray-600"
+                    >
+                      Organisation <span className="text-red-600">*</span>
+                    </label>
+                    <input
+                      id="organisation"
+                      type="text"
+                      autoComplete="organization"
+                      value={form.organisation}
+                      onChange={(e) => setField("organisation", e.target.value)}
+                      placeholder="Your organisation name"
+                      className={inputClass(errors.organisation)}
+                    />
+                    {errors.organisation && (
+                      <p className="mt-1 text-xs text-red-600">{errors.organisation}</p>
+                    )}
+                    <p className="mt-1.5 text-xs text-gray-500">
+                      We&apos;ll save this to your profile for future requests.
+                    </p>
+                  </div>
+                )}
 
                 <div>
                   <label
@@ -256,7 +257,7 @@ export default function RequestServicePageClient() {
                     rows={4}
                     value={form.notes}
                     onChange={(e) => setField("notes", e.target.value)}
-                    placeholder="Share goals, timelines, or context for this request (optional)."
+                    placeholder="e.g. what you want to achieve, current challenges, or questions (optional)"
                     className={cn(inputClass(), "resize-y")}
                   />
                 </div>

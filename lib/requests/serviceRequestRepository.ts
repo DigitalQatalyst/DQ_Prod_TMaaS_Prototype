@@ -119,6 +119,39 @@ export async function upsertCustomerProfile(user: SessionUser, organisation?: st
     .is("user_id", null);
 }
 
+export async function getCustomerProfileOrganisation(userId: string): Promise<string | null> {
+  const supabase = getSupabaseAdmin();
+  if (!supabase) return null;
+
+  const { data, error } = await supabase
+    .from("customer_profiles")
+    .select("organisation")
+    .eq("id", userId)
+    .maybeSingle();
+
+  if (error) {
+    console.error("[customer_profiles] lookup failed:", error.message);
+    return null;
+  }
+
+  const organisation = data?.organisation?.trim();
+  return organisation || null;
+}
+
+export async function resolveSessionOrganisation(
+  user: SessionUser,
+  submittedOrganisation?: string,
+): Promise<string | undefined> {
+  const fromBody = submittedOrganisation?.trim();
+  if (fromBody) return fromBody;
+
+  const fromSession = user.organisation?.trim();
+  if (fromSession) return fromSession;
+
+  const fromProfile = await getCustomerProfileOrganisation(user.id);
+  return fromProfile ?? undefined;
+}
+
 export async function createServiceRequest(
   input: CreateServiceRequestInput,
 ): Promise<CreateServiceRequestResult | null> {

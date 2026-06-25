@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { entraConfig, resolvePostLogoutRedirectUri } from "@/lib/auth/entra-config";
 import { getSessionUserFromRequest, SESSION_COOKIE_NAME } from "@/lib/auth/session";
+import { getCustomerProfileOrganisation } from "@/lib/requests/serviceRequestRepository";
 
 export const runtime = "nodejs";
 
@@ -31,13 +32,18 @@ export async function GET(request: Request) {
     .map((part) => part[0]?.toUpperCase() ?? "")
     .join("");
 
+  let organization = user.organisation?.trim() ?? "";
+  if (!organization) {
+    organization = (await getCustomerProfileOrganisation(user.id)) ?? "";
+  }
+
   return NextResponse.json({
     user: {
       id: user.id,
       name: user.displayName,
       email: user.email,
       roleTitle: "Client",
-      organization: user.organisation ?? "",
+      organization,
       avatar: initials || "U",
       role: "client" as const,
     },

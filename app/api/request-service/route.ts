@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { z } from "zod";
 import { getSessionUserFromRequest } from "@/lib/auth/session";
 import { buildRequestServiceDescription } from "@/lib/requestService";
-import { createServiceRequest } from "@/lib/requests/serviceRequestRepository";
+import { createServiceRequest, resolveSessionOrganisation } from "@/lib/requests/serviceRequestRepository";
 
 const WINDOW_MS = 10 * 60 * 1000;
 const MAX_REQUESTS = 5;
@@ -18,7 +18,7 @@ function isRateLimited(ip: string): boolean {
 }
 
 const requestServiceSchema = z.object({
-  organisation: z.string().min(1),
+  organisation: z.string().trim().min(1).optional(),
   notes: z.string().optional(),
   consent: z.literal(true),
   website: z.string().optional(),
@@ -60,6 +60,7 @@ export async function POST(request: NextRequest) {
     validated.data;
 
   try {
+    const resolvedOrganisation = await resolveSessionOrganisation(sessionUser, organisation);
     const description = buildRequestServiceDescription(serviceTitle, notes);
 
     const created = await createServiceRequest({
@@ -67,7 +68,7 @@ export async function POST(request: NextRequest) {
       description,
       submitterEmail: sessionUser.email,
       user: sessionUser,
-      organisation: organisation || sessionUser.organisation,
+      ...(resolvedOrganisation !== undefined ? { organisation: resolvedOrganisation } : {}),
       ...(serviceType !== undefined ? { serviceType } : {}),
       ...(variantId !== undefined ? { variantId } : {}),
       ...(marketplaceSlug !== undefined ? { marketplaceSlug } : {}),
@@ -81,7 +82,7 @@ export async function POST(request: NextRequest) {
       id: created.request.id,
       service: serviceTitle,
       email: sessionUser.email,
-      organisation,
+      organisation: resolvedOrganisation,
     });
 
     return NextResponse.json({ success: true, requestId: created.request.id });
