@@ -97,9 +97,28 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       typeof window !== "undefined"
         ? new URL("/api/auth/session", window.location.origin).toString()
         : "/api/auth/session";
-    await fetch(logoutUrl, { method: "DELETE", credentials: "same-origin" });
+
+    const res = await fetch(logoutUrl, {
+      method: "DELETE",
+      credentials: "same-origin",
+      headers: { Accept: "application/json" },
+    });
+
     setIsAuthenticated(false);
     setUser(defaultUser);
+
+    if (res.ok) {
+      try {
+        const data = (await res.json()) as { logoutUrl?: string | null };
+        if (data.logoutUrl) {
+          window.location.assign(data.logoutUrl);
+          return;
+        }
+      } catch {
+        // Fall through to local sign-in redirect.
+      }
+    }
+
     window.location.assign("/sign-in");
   };
 

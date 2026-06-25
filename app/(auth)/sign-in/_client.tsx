@@ -89,7 +89,7 @@ export default function SignInPageClient() {
       <div className="relative w-full max-w-md">
         <div className="mb-8 text-center">
           <div className="flex justify-center">
-            <TMaaSLogo size="lg" linked={false} />
+            <TMaaSLogo size="lg" />
           </div>
           <h1 className="mt-4 text-balance text-3xl font-semibold leading-tight tracking-[-0.03em] text-dq-navy sm:text-4xl">
             {PLATFORM_HERO_HEADLINE_PRIMARY}{" "}

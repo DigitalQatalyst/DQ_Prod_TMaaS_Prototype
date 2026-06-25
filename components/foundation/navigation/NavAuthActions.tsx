@@ -114,7 +114,10 @@ export function NavAuthActions({
         <DropdownMenuSeparator />
         <DropdownMenuItem
           className="flex cursor-pointer items-center gap-2 text-red-600 focus:text-red-600"
-          onClick={() => void signOut()}
+          onSelect={(event) => {
+            event.preventDefault();
+            void signOut();
+          }}
         >
           <LogOut size={16} aria-hidden />
           Sign out

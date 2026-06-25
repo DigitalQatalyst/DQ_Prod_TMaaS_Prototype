@@ -15,7 +15,12 @@ import {
 import { getDeliverySteps } from "@/components/features/service-detail/ServiceDetailDeliverySection";
 import { getDisplayTitle } from "@/components/features/service-detail/serviceDetailHelpers";
 import { getServiceFaqsContent } from "@/components/features/service-detail/serviceFaqsContent";
-import { buildContactPath, getServicePackageCta } from "@/lib/contactFormPrefill";
+import {
+  ASK_ABOUT_SERVICE_CTA_LABEL,
+  buildAskAboutServicePath,
+  buildRequestServicePath,
+  REQUEST_SERVICE_CTA_LABEL,
+} from "@/lib/requestService";
 import { useServiceDetail } from "@/lib/hooks/useServiceDetail";
 import { featureFlags } from "@/lib/featureFlags";
 import { Button } from "@/components/ui/button";
@@ -73,19 +78,17 @@ export default function ServiceDetailPageClient({ params }: { params: Promise<{ 
       isDeploy: !!isDeployService,
     });
 
-  const packageCta = getServicePackageCta(service.serviceType);
-
-  const handlePrimaryCta = () => {
+  const handleRequestService = () => {
     if (featureFlags.isEnabled("contactUs")) {
-      router.push(buildContactPath(service, packageCta.intent));
+      router.push(buildRequestServicePath(service));
       return;
     }
     handleStartOnboarding(service.standardName);
   };
 
-  const handleBookConsultation = () => {
+  const handleAskAboutService = () => {
     if (featureFlags.isEnabled("contactUs")) {
-      router.push(buildContactPath(service, "consultation"));
+      router.push(buildAskAboutServicePath(service));
       return;
     }
     handleStartOnboarding(service.standardName);
@@ -107,8 +110,10 @@ export default function ServiceDetailPageClient({ params }: { params: Promise<{ 
           <div className="relative z-10 mx-auto max-w-[1200px]">
             <ServiceDetailHero
               service={service}
-              primaryCtaLabel={packageCta.label}
-              onPrimaryCta={handlePrimaryCta}
+              primaryCtaLabel={REQUEST_SERVICE_CTA_LABEL}
+              onPrimaryCta={handleRequestService}
+              secondaryCtaLabel={ASK_ABOUT_SERVICE_CTA_LABEL}
+              onSecondaryCta={handleAskAboutService}
               onStartOnboarding={handleStartOnboarding}
               {...(pdpContent?.packageHighlights !== undefined && {
                 packageHighlights: pdpContent.packageHighlights,
@@ -146,12 +151,19 @@ export default function ServiceDetailPageClient({ params }: { params: Promise<{ 
             Our team can help you compare options and find the best service for your goals.
           </p>
           <div className="mt-8 flex flex-col items-stretch justify-center gap-3 sm:flex-row sm:items-center">
-            <ServiceDetailPrimaryButton
-              onClick={handleBookConsultation}
+            <ServiceDetailSecondaryButtonDark
+              onClick={handleAskAboutService}
               fullWidth
               className="sm:w-auto"
             >
-              Talk to our team
+              {ASK_ABOUT_SERVICE_CTA_LABEL}
+            </ServiceDetailSecondaryButtonDark>
+            <ServiceDetailPrimaryButton
+              onClick={handleRequestService}
+              fullWidth
+              className="sm:w-auto"
+            >
+              {REQUEST_SERVICE_CTA_LABEL}
             </ServiceDetailPrimaryButton>
             <ServiceDetailSecondaryButtonDark
               onClick={() => router.push("/marketplace")}

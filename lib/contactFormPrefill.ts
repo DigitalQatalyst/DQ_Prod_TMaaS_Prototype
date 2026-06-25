@@ -113,7 +113,7 @@ export function buildServiceEnquiryMessage(
     return `I'd like to get started with: ${serviceName}`;
   }
   if (intent === "consultation" || serviceType === "manage") {
-    return `I would like to talk to the team about: ${serviceName}`;
+    return `I have questions about: ${serviceName}`;
   }
   return `I would like to request a quote for: ${serviceName}`;
 }

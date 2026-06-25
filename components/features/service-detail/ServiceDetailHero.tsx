@@ -12,6 +12,8 @@ interface ServiceDetailHeroProps {
   service: ServiceProduct;
   primaryCtaLabel: string;
   onPrimaryCta: () => void;
+  secondaryCtaLabel?: string;
+  onSecondaryCta?: () => void;
   onStartOnboarding: (name: string) => void;
   packageHighlights?: string[];
 }
@@ -20,6 +22,8 @@ export function ServiceDetailHero({
   service,
   primaryCtaLabel,
   onPrimaryCta,
+  secondaryCtaLabel,
+  onSecondaryCta,
   onStartOnboarding,
   packageHighlights,
 }: ServiceDetailHeroProps) {
@@ -84,6 +88,9 @@ export function ServiceDetailHero({
             service={service}
             primaryCtaLabel={primaryCtaLabel}
             onPrimaryCta={onPrimaryCta}
+            {...(secondaryCtaLabel && onSecondaryCta
+              ? { secondaryCtaLabel, onSecondaryCta }
+              : {})}
             onStartOnboarding={onStartOnboarding}
             {...(packageHighlights !== undefined ? { packageHighlights } : {})}
           />

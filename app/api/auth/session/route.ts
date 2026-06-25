@@ -4,6 +4,20 @@ import { getSessionUserFromRequest, SESSION_COOKIE_NAME } from "@/lib/auth/sessi
 
 export const runtime = "nodejs";
 
+const SESSION_COOKIE_OPTIONS = {
+  httpOnly: true,
+  sameSite: "lax" as const,
+  secure: process.env.NODE_ENV === "production",
+  path: "/",
+  maxAge: 0,
+};
+
+function clearSessionCookies(response: NextResponse): NextResponse {
+  response.cookies.set(SESSION_COOKIE_NAME, "", SESSION_COOKIE_OPTIONS);
+  response.cookies.set("entra_session", "", SESSION_COOKIE_OPTIONS);
+  return response;
+}
+
 export async function GET(request: Request) {
   const user = await getSessionUserFromRequest(request as import("next/server").NextRequest);
   if (!user) {
@@ -32,34 +46,22 @@ export async function GET(request: Request) {
 
 export async function DELETE(request: Request) {
   const origin = new URL(request.url).origin;
-  const res = NextResponse.redirect(new URL("/sign-in", origin));
-
-  res.cookies.set(SESSION_COOKIE_NAME, "", {
-    httpOnly: true,
-    sameSite: "lax",
-    secure: process.env.NODE_ENV === "production",
-    path: "/",
-    maxAge: 0,
-  });
-  res.cookies.set("entra_session", "", {
-    httpOnly: true,
-    sameSite: "lax",
-    secure: process.env.NODE_ENV === "production",
-    path: "/",
-    maxAge: 0,
-  });
-
-  if (entraConfig.isConfigured && request.headers.get("accept")?.includes("application/json")) {
-    const logoutUrl = new URL(entraConfig.logoutUrl);
-    logoutUrl.searchParams.set("post_logout_redirect_uri", resolvePostLogoutRedirectUri(origin));
-    return NextResponse.json({ logoutUrl: logoutUrl.toString() });
-  }
+  const wantsJson = request.headers.get("accept")?.includes("application/json");
 
   if (entraConfig.isConfigured) {
     const logoutUrl = new URL(entraConfig.logoutUrl);
     logoutUrl.searchParams.set("post_logout_redirect_uri", resolvePostLogoutRedirectUri(origin));
-    return NextResponse.redirect(logoutUrl);
+
+    if (wantsJson) {
+      return clearSessionCookies(NextResponse.json({ logoutUrl: logoutUrl.toString() }));
+    }
+
+    return clearSessionCookies(NextResponse.redirect(logoutUrl));
   }
 
-  return res;
+  if (wantsJson) {
+    return clearSessionCookies(NextResponse.json({ logoutUrl: null }));
+  }
+
+  return clearSessionCookies(NextResponse.redirect(new URL("/sign-in", origin)));
 }
