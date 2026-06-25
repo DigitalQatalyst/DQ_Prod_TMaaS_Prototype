@@ -48,7 +48,7 @@ export function NavAuthActions({
           layout === "inline" && "hidden md:inline-flex",
           className
         )}
-        onClick={onNavigate}
+        {...(onNavigate ? { onClick: onNavigate } : {})}
       >
         Sign in
       </Link>
@@ -61,7 +61,7 @@ export function NavAuthActions({
         <Link
           href="/dashboard/overview"
           className={cn(btnSecondary, "flex w-full items-center justify-center gap-2 py-3 text-center")}
-          onClick={onNavigate}
+          {...(onNavigate ? { onClick: onNavigate } : {})}
         >
           <LayoutDashboard size={16} aria-hidden />
           Dashboard

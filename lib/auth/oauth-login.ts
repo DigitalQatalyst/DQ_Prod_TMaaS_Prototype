@@ -49,6 +49,8 @@ export async function handleOAuthLogin(req: NextRequest): Promise<Response> {
       req.nextUrl.searchParams.get("returnTo") ?? req.nextUrl.searchParams.get("redirect"),
     );
 
+    const ciamParams = ciamQueryParameters();
+
     const authUrl = await getMsalClient().getAuthCodeUrl({
       scopes: entraConfig.scopes,
       redirectUri,
@@ -56,7 +58,7 @@ export async function handleOAuthLogin(req: NextRequest): Promise<Response> {
       codeChallengeMethod: "S256",
       state,
       nonce,
-      ...(ciamQueryParameters() ? { extraQueryParameters: ciamQueryParameters() } : {}),
+      ...(ciamParams ? { extraQueryParameters: ciamParams } : {}),
     });
 
     const res = NextResponse.redirect(authUrl);

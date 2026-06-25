@@ -60,13 +60,15 @@ export async function handleOAuthCallback(req: NextRequest): Promise<Response> {
   const redirectUri =
     req.cookies.get("entra_redirect_uri")?.value ?? resolveRedirectUri(origin);
 
+  const ciamParams = ciamQueryParameters();
+
   try {
     const result = await getMsalClient().acquireTokenByCode({
       code,
       scopes: entraConfig.scopes,
       redirectUri,
       codeVerifier: verifier,
-      ...(ciamQueryParameters() ? { extraQueryParameters: ciamQueryParameters() } : {}),
+      ...(ciamParams ? { extraQueryParameters: ciamParams } : {}),
     });
     const claims = (result.idTokenClaims ?? {}) as Record<string, unknown>;
 
