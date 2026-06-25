@@ -29,4 +29,5 @@ Reference: `DQ_PROD_DWS01-main` TransactionShell + AppChrome + AppSidebar patter
 - Tables: adequate row padding (`py-3.5`), `line-clamp-2` for long titles; avoid aggressive `max-w` truncate on primary column.
 - Page aside actions: **RailSection** + **RailActionCard** (icon tile, title, one-line short subtext). Use RailActionLink only for compact single-line actions without descriptions.
 - Help / Support (mailto) + Sign out only — match DWS.01 AppSidebar footer (`sidebar-feature-group`).
-- My Requests list: `SectionCard` wrapper (border-gray-200, no shadow), DWS toolbar (search + result count), workspace-token pagination.
+- Customer nav sections: ORIENTATION (Overview), MARKETPLACE (Explore Services, My Requests). No WORKSPACE section.
+- My Requests list: status tabs (DWS RequestListPage pattern), no Quick Actions aside on the requests page.

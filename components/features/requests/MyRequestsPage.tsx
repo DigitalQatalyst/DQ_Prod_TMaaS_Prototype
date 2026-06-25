@@ -2,16 +2,17 @@
 
 import { useState } from "react";
 import type { CustomerRequest } from "@/lib/types/requests";
+import { CUSTOMER_REQUEST_TABS } from "@/lib/requests/customerRequestTabs";
 import { useCustomerRequests } from "@/lib/hooks/useCustomerRequests";
 import { SectionCard } from "@/components/foundation/workspace-ui/detail-rail";
+import { RequestsTabs } from "./RequestsTabs";
 import { RequestsToolbar } from "./RequestsToolbar";
 import { RequestsTable } from "./RequestsTable";
 import { RequestsPagination } from "./RequestsPagination";
-import { QuickActionsPanel } from "./QuickActionsPanel";
 import { RequestDetailSheet } from "./RequestDetailSheet";
 import { WorkspacePageHeader } from "@/components/foundation/layouts/workspace/WorkspacePageHeader";
 
-/** DWS.01 WorkingLayout + RequestListPage pattern for customer My Requests. */
+/** DWS.01 RequestListPage pattern for customer My Requests. */
 export function MyRequestsPage() {
   const {
     requests,
@@ -25,6 +26,9 @@ export function MyRequestsPage() {
     sortDirection,
     toggleSort,
     setPage,
+    activeTab,
+    setActiveTab,
+    tabCounts,
   } = useCustomerRequests();
 
   const [selectedRequest, setSelectedRequest] = useState<CustomerRequest | null>(null);
@@ -47,41 +51,34 @@ export function MyRequestsPage() {
         description="View and track all your service requests."
       />
 
-      <div className="min-w-0 flex-1 p-6 lg:p-8">
-        <div className="flex flex-col gap-8 xl:flex-row xl:items-start">
-          <div className="min-w-0 flex-1 space-y-4">
-            <RequestsToolbar
-              search={search}
-              onSearchChange={setSearch}
-              totalCount={totalCount}
-            />
-            <SectionCard>
-              <RequestsTable
-                requests={requests}
-                sortField={sortField}
-                sortDirection={sortDirection}
-                onSort={toggleSort}
-                onRowClick={handleRowClick}
-                selectedId={selectedRequest?.id}
-              />
-            </SectionCard>
-            <RequestsPagination
-              page={page}
-              pageSize={pageSize}
-              totalCount={totalCount}
-              totalPages={totalPages}
-              onPageChange={setPage}
-            />
-          </div>
+      <div className="min-w-0 flex-1 space-y-4 p-6 lg:p-8">
+        <RequestsTabs
+          activeTab={activeTab}
+          onTabChange={setActiveTab}
+          tabCounts={tabCounts}
+          tabs={CUSTOMER_REQUEST_TABS}
+        />
 
-          <aside className="hidden w-full shrink-0 xl:block xl:w-[260px]">
-            <QuickActionsPanel />
-          </aside>
-        </div>
+        <RequestsToolbar search={search} onSearchChange={setSearch} totalCount={totalCount} />
 
-        <div className="mt-8 xl:hidden">
-          <QuickActionsPanel />
-        </div>
+        <SectionCard>
+          <RequestsTable
+            requests={requests}
+            sortField={sortField}
+            sortDirection={sortDirection}
+            onSort={toggleSort}
+            onRowClick={handleRowClick}
+            selectedId={selectedRequest?.id}
+          />
+        </SectionCard>
+
+        <RequestsPagination
+          page={page}
+          pageSize={pageSize}
+          totalCount={totalCount}
+          totalPages={totalPages}
+          onPageChange={setPage}
+        />
       </div>
 
       <RequestDetailSheet

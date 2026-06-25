@@ -25,11 +25,7 @@ export const customerNavSections: CustomerNavSection[] = [
     label: "MARKETPLACE",
     items: [
       { id: "explore-services", name: "Explore Services", icon: Compass, path: "/marketplace" },
+      { id: "requests", name: "My Requests", icon: Clock, path: "/dashboard/requests" },
     ],
-  },
-  {
-    id: "workspace",
-    label: "WORKSPACE",
-    items: [{ id: "requests", name: "My Requests", icon: Clock, path: "/dashboard/requests" }],
   },
 ];
