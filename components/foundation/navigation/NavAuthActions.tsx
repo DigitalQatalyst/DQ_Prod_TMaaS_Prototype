@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { LayoutDashboard, LogOut } from "lucide-react";
+import { ChevronDown, LayoutDashboard, LogOut } from "lucide-react";
 import { Avatar } from "@/components/foundation/workspace-ui/AvatarLockup";
 import {
   DropdownMenu,
@@ -20,14 +20,23 @@ interface NavAuthActionsProps {
   className?: string;
   /** Full-width stacked actions for mobile drawer menus. */
   layout?: "inline" | "mobile";
+  /** Render only the sign-in link or only the signed-in account menu. */
+  slot?: "all" | "sign-in" | "account";
   onNavigate?: () => void;
 }
 
-export function NavAuthActions({ className, layout = "inline", onNavigate }: NavAuthActionsProps) {
+export function NavAuthActions({
+  className,
+  layout = "inline",
+  slot = "all",
+  onNavigate,
+}: NavAuthActionsProps) {
   const { user, isAuthenticated, isLoading, signOut } = useAuth();
 
   if (!featureFlags.isEnabled("auth")) return null;
   if (isLoading) return null;
+  if (slot === "sign-in" && isAuthenticated) return null;
+  if (slot === "account" && !isAuthenticated) return null;
 
   if (!isAuthenticated) {
     return (
@@ -85,6 +94,7 @@ export function NavAuthActions({ className, layout = "inline", onNavigate }: Nav
         >
           <Avatar name={user.name} size="sm" />
           <span className="max-w-[8rem] truncate text-sm font-medium text-dq-navy">{user.name}</span>
+          <ChevronDown size={16} className="shrink-0 text-gray-400" aria-hidden />
         </button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end" className="w-56">

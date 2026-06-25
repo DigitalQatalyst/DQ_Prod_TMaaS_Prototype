@@ -42,7 +42,7 @@ const Navbar = () => {
               <ContextSwitcher stage="marketing" scrolled={false} />
             )}
             {featureFlags.isEnabled("cart") && <CartNavButton className="h-9 w-9 shrink-0" />}
-            <NavAuthActions layout="inline" className="text-[13px]" />
+            <NavAuthActions layout="inline" slot="sign-in" className="text-[13px]" />
             {featureFlags.isEnabled("contactUs") && (
               <Link
                 href="/contact"
@@ -51,6 +51,7 @@ const Navbar = () => {
                 Contact Us
               </Link>
             )}
+            <NavAuthActions layout="inline" slot="account" className="text-[13px]" />
           </div>
 
           <button
@@ -86,7 +87,11 @@ const Navbar = () => {
               <span className="text-sm text-gray-600">Cart</span>
             </div>
           )}
-          <NavAuthActions layout="mobile" onNavigate={() => setMobileOpen(false)} />
+          <NavAuthActions
+            layout="mobile"
+            slot="sign-in"
+            onNavigate={() => setMobileOpen(false)}
+          />
           {featureFlags.isEnabled("contactUs") && (
             <Link
               href="/contact"
@@ -96,6 +101,11 @@ const Navbar = () => {
               Contact Us
             </Link>
           )}
+          <NavAuthActions
+            layout="mobile"
+            slot="account"
+            onNavigate={() => setMobileOpen(false)}
+          />
         </div>
       )}
     </>

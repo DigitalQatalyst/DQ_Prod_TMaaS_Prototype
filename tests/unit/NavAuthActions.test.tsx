@@ -70,6 +70,7 @@ describe("NavAuthActions", () => {
       expect(screen.getByRole("button", { name: "Account menu" })).toBeInTheDocument();
       expect(screen.getByText("Ahmed Al Tayer")).toBeInTheDocument();
     });
+    expect(screen.getByRole("button", { name: "Account menu" }).querySelector("svg")).toBeTruthy();
     expect(screen.queryByRole("link", { name: "Sign in" })).not.toBeInTheDocument();
   });
 });

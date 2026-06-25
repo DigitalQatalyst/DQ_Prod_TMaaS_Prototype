@@ -53,7 +53,7 @@ const LandingNavbarInner = () => {
         </div>
 
         <div className="flex items-center gap-3 md:gap-4">
-          <NavAuthActions layout="inline" />
+          <NavAuthActions layout="inline" slot="sign-in" />
 
           {featureFlags.isEnabled("contactUs") && (
             <Link
@@ -67,6 +67,8 @@ const LandingNavbarInner = () => {
               {LAUNCH_ADVISORY_NAV_CTA_LABEL}
             </Link>
           )}
+
+          <NavAuthActions layout="inline" slot="account" />
 
           <button
             type="button"
@@ -91,7 +93,11 @@ const LandingNavbarInner = () => {
               {link.label}
             </Link>
           ))}
-          <NavAuthActions layout="mobile" onNavigate={() => setMobileOpen(false)} />
+          <NavAuthActions
+            layout="mobile"
+            slot="sign-in"
+            onNavigate={() => setMobileOpen(false)}
+          />
           {featureFlags.isEnabled("contactUs") && (
             <Link
               href={launchAdvisoryPath}
@@ -101,6 +107,11 @@ const LandingNavbarInner = () => {
               {LAUNCH_ADVISORY_NAV_CTA_LABEL}
             </Link>
           )}
+          <NavAuthActions
+            layout="mobile"
+            slot="account"
+            onNavigate={() => setMobileOpen(false)}
+          />
         </div>
       )}
     </>
