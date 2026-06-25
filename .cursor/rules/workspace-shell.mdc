@@ -26,8 +26,8 @@ Reference: `DQ_PROD_DWS01-main` TransactionShell + AppChrome + AppSidebar patter
 ## Page content
 - Working pages use `min-w-0` on flex children to prevent overflow.
 - Main + aside: `flex flex-col xl:flex-row` with fixed aside width (`xl:w-[260px]`), not grid without `min-w-0`.
-- Tables: adequate row padding (`py-3.5`), `line-clamp-2` for long titles; avoid aggressive `max-w` truncate on primary column.
+- Tables: EntityList table card uses `--color-surface-2` (#ffffff) for row/card fill; page chrome uses `--color-surface` (#f6f6fb). Do not swap these — DWS `surface-2` is white, not grey.
 - Page aside actions: **RailSection** + **RailActionCard** (icon tile, title, one-line short subtext). Use RailActionLink only for compact single-line actions without descriptions.
 - Help / Support (mailto) + Sign out only — match DWS.01 AppSidebar footer (`sidebar-feature-group`).
 - Customer nav sections: ORIENTATION (Overview), MARKETPLACE (Explore Services, My Requests). No WORKSPACE section.
-- My Requests list: status tabs (DWS RequestListPage pattern), no Quick Actions aside on the requests page.
+- My Requests list: DWS EntityList pattern (`WorkingLayout` on `--color-surface`, no border under page title + `SegmentedControl` status filter pills: All + one per `RequestStatus` + `FilterBar` search + `X OF Y RECORDS` counter + bordered `surface-2` data table + `Pagination`). Filter state in `useCustomerRequests` (React state — do not use `dynamic(..., { ssr: false })` or a `hydrated` gate; that caused infinite skeleton loading). Port interactive primitives from `components/foundation/workspace-ui/` with `"use client"`. No Quick Actions aside on the requests page.

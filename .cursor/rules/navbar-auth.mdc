@@ -1,0 +1,25 @@
+---
+description: Marketing and app navbars must reflect live auth session state
+globs: DQ_Prod_TMaaS_Prototype/components/**/navigation/**/*,DQ_Prod_TMaaS_Prototype/components/**/landing/**/*
+alwaysApply: false
+---
+
+# Navbar auth state
+
+Marketing navbars (`LandingNavbar`, `Navbar`) must **not** hard-code a static "Sign in" link.
+
+## Required pattern
+- Use shared `NavAuthActions` from `components/foundation/navigation/NavAuthActions.tsx`.
+- Read session via `useAuth()` (`isAuthenticated`, `isLoading`, `user`, `signOut`).
+- **Signed out**: show "Sign in" → `/sign-in`.
+- **Signed in**: show account menu (avatar + name) with Dashboard + Sign out — never show "Sign in".
+
+## AuthContext
+- `isAuthenticated` is `true` only after `/api/auth/session` returns a user (401 → `false`).
+- Do not infer auth from the default `Demo User` placeholder.
+
+## Layouts
+- Desktop: `NavAuthActions layout="inline"`.
+- Mobile drawer: `NavAuthActions layout="mobile" onNavigate={closeMenu}`.
+
+Dashboard workspace chrome (`WorkspaceSolutionChrome`, sidebar) is separate; marketing pages still need `NavAuthActions` so users stay signed in visually when browsing `/`, `/marketplace`, `/contact`.

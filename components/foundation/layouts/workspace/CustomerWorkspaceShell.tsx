@@ -51,7 +51,7 @@ export function CustomerWorkspaceShell({ children }: CustomerWorkspaceShellProps
           onToggleSidebar={() => setSidebarCollapsed((c) => !c)}
           onMobileMenuToggle={() => setMobileMenuOpen((o) => !o)}
         />
-        <main className="min-h-0 flex-1 overflow-x-hidden overflow-y-auto bg-white">
+        <main className="min-h-0 flex-1 overflow-x-hidden overflow-y-auto bg-[var(--color-surface)]">
           {children}
         </main>
         <WorkspaceFooter />

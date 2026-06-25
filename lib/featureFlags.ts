@@ -79,6 +79,7 @@ class FeatureFlagService {
 
   isEnabled(feature: keyof FeatureFlags): boolean {
     if (feature === "dashboard") return isDashboardEnabled();
+    if (feature === "auth") return isDashboardEnabled() || (this.flags.auth ?? false);
     return this.flags[feature] ?? false;
   }
 

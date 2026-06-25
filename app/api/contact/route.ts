@@ -1,5 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
 import { z } from "zod";
+import { getSessionUserFromRequest } from "@/lib/auth/session";
+import { LAUNCH_ADVISORY_HEADLINE } from "@/lib/launchOffering";
+import { createServiceRequest } from "@/lib/requests/serviceRequestRepository";
 
 // In-memory rate limiter: 5 submissions per IP per 10 minutes
 const WINDOW_MS = 10 * 60 * 1000;
@@ -123,6 +126,12 @@ const contactSchema = z.object({
   interest: z.string().optional(),
   need: z.string().optional(),
   consent: z.boolean().refine((v) => v === true, "Consent is required"),
+  // Service enquiry context (marketplace / launch advisory)
+  serviceTitle: z.string().optional(),
+  serviceType: z.string().optional(),
+  variantId: z.number().int().positive().optional(),
+  marketplaceSlug: z.string().optional(),
+  offering: z.string().optional(),
   // Honeypot — bots fill this field
   website: z.string().optional(),
 });
@@ -239,7 +248,37 @@ export async function POST(request: NextRequest) {
 
     console.log("[contact] Email sent:", { name: `${firstName} ${lastName}`, email, organisation });
 
-    return NextResponse.json({ success: true });
+    const sessionUser = await getSessionUserFromRequest(request);
+    const isLaunchAdvisory = validated.data.offering === "launch-advisory";
+    const isServiceEnquiry = Boolean(validated.data.serviceTitle || isLaunchAdvisory);
+    let requestId: string | undefined;
+
+    if (isServiceEnquiry) {
+      const title = isLaunchAdvisory
+        ? LAUNCH_ADVISORY_HEADLINE
+        : validated.data.serviceTitle!;
+
+      const created = await createServiceRequest({
+        title,
+        description: message,
+        submitterEmail: email,
+        user: sessionUser,
+        organisation,
+        ...(isLaunchAdvisory
+          ? { serviceType: "advisory" }
+          : validated.data.serviceType
+            ? { serviceType: validated.data.serviceType }
+            : {}),
+        ...(validated.data.variantId !== undefined ? { variantId: validated.data.variantId } : {}),
+        ...(validated.data.marketplaceSlug !== undefined
+          ? { marketplaceSlug: validated.data.marketplaceSlug }
+          : {}),
+      });
+
+      requestId = created?.request.id;
+    }
+
+    return NextResponse.json({ success: true, ...(requestId ? { requestId } : {}) });
   } catch (err) {
     console.error("[contact] handler error:", err);
     return NextResponse.json(

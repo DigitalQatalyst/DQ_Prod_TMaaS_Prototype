@@ -1,9 +1,10 @@
 "use client";
 
 import Link from "next/link";
-import { usePathname, useRouter } from "next/navigation";
-import { HelpCircle, LogOut, type LucideIcon } from "lucide-react";
+import { usePathname } from "next/navigation";
+import { ArrowUpRight, HelpCircle, LogOut, type LucideIcon } from "lucide-react";
 import TMaaSLogo from "@/components/features/landing/TMaaSLogo";
+import { useAuth } from "@/contexts/AuthContext";
 import { cn } from "@/lib/utils";
 import { customerNavSections } from "./customerNavConfig";
 
@@ -20,6 +21,7 @@ function SidebarNavLink({
   active,
   collapsed,
   onNavigate,
+  outOfDashboard,
 }: {
   href: string;
   label: string;
@@ -27,6 +29,7 @@ function SidebarNavLink({
   active: boolean;
   collapsed: boolean;
   onNavigate?: () => void;
+  outOfDashboard?: boolean;
 }) {
   return (
     <Link
@@ -41,8 +44,23 @@ function SidebarNavLink({
       )}
     >
       {active && <span className="sidebar-nav-accent" aria-hidden />}
-      <Icon size={17} strokeWidth={1.5} className="shrink-0" />
+      <div className="relative shrink-0">
+        <Icon size={17} strokeWidth={1.5} className="shrink-0" />
+        {outOfDashboard && collapsed && (
+          <span className="pointer-events-none absolute -right-1 -top-1 rounded-full bg-white p-[1px] text-[var(--color-text-muted)]">
+            <ArrowUpRight size={10} strokeWidth={2} />
+          </span>
+        )}
+      </div>
       {!collapsed && <span className="min-w-0 flex-1 truncate">{label}</span>}
+      {!collapsed && outOfDashboard && (
+        <ArrowUpRight
+          size={14}
+          strokeWidth={2}
+          className="ml-2 shrink-0 text-[var(--color-text-muted)]"
+          aria-hidden="true"
+        />
+      )}
     </Link>
   );
 }
@@ -56,7 +74,7 @@ export function WorkspaceSidebar({
   onMobileClose,
 }: WorkspaceSidebarProps) {
   const pathname = usePathname();
-  const router = useRouter();
+  const { signOut } = useAuth();
 
   const isActive = (path: string) => {
     if (path === "/dashboard/requests") return pathname.startsWith("/dashboard/requests");
@@ -66,7 +84,7 @@ export function WorkspaceSidebar({
   };
 
   const handleSignOut = () => {
-    router.push("/sign-in");
+    void signOut();
   };
 
   const sidebarWidth = collapsed
@@ -113,6 +131,7 @@ export function WorkspaceSidebar({
                     active={isActive(item.path)}
                     collapsed={collapsed}
                     onNavigate={onMobileClose}
+                    {...(item.outOfDashboard ? { outOfDashboard: true } : {})}
                   />
                 ))}
               </div>
@@ -122,16 +141,31 @@ export function WorkspaceSidebar({
       </nav>
 
       <div className="shrink-0 border-t border-[var(--color-border-subtle)] p-3">
-        <a
-          href="mailto:info@digitalqatalyst.com"
+        <Link
+          href="/contact"
           className={cn(
             "sidebar-feature-group sidebar-footer-item focus-visible:outline-none focus-visible:[box-shadow:var(--focus-ring-navy)]",
             collapsed && "justify-center px-2"
           )}
         >
-          <HelpCircle size={17} strokeWidth={1.5} />
-          {!collapsed && <span>Help / Support</span>}
-        </a>
+          <div className="relative shrink-0">
+            <HelpCircle size={17} strokeWidth={1.5} />
+            {collapsed && (
+              <span className="pointer-events-none absolute -right-1 -top-1 rounded-full bg-white p-[1px] text-[var(--color-text-muted)]">
+                <ArrowUpRight size={10} strokeWidth={2} />
+              </span>
+            )}
+          </div>
+          {!collapsed && <span className="min-w-0 flex-1 truncate">Contact Us</span>}
+          {!collapsed && (
+            <ArrowUpRight
+              size={14}
+              strokeWidth={2}
+              className="ml-2 shrink-0 text-[var(--color-text-muted)]"
+              aria-hidden="true"
+            />
+          )}
+        </Link>
         <button
           type="button"
           onClick={handleSignOut}

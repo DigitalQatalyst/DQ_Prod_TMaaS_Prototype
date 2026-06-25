@@ -46,9 +46,11 @@ export type ContactEnquiryIntent = "quote" | "consultation";
 
 export type ServiceContactParams = {
   service: string;
-  type?: string;
-  collection?: string;
-  intent?: string;
+  type?: string | undefined;
+  collection?: string | undefined;
+  intent?: string | undefined;
+  variantId?: number | undefined;
+  slug?: string | undefined;
 };
 
 export function parseServiceContactParams(
@@ -60,11 +62,17 @@ export function parseServiceContactParams(
   const type = searchParams.get("type")?.trim() || undefined;
   const collection = searchParams.get("collection")?.trim() || undefined;
   const intent = searchParams.get("intent")?.trim() || undefined;
+  const variantIdRaw = searchParams.get("variantId")?.trim();
+  const slug = searchParams.get("slug")?.trim() || undefined;
+  const variantId = variantIdRaw ? Number.parseInt(variantIdRaw, 10) : undefined;
+
   return {
     service,
     ...(type !== undefined ? { type } : {}),
     ...(collection !== undefined ? { collection } : {}),
     ...(intent !== undefined ? { intent } : {}),
+    ...(Number.isFinite(variantId) ? { variantId } : {}),
+    ...(slug !== undefined ? { slug } : {}),
   };
 }
 
@@ -116,6 +124,8 @@ export function buildContactPath(service: ServiceProduct, intent: ContactEnquiry
     type: service.serviceType,
     collection: service.collection,
     intent,
+    variantId: String(service.id),
+    slug: service.slug,
   });
   return `/contact?${params.toString()}`;
 }

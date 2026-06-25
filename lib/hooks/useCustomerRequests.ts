@@ -1,30 +1,40 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { DEMO_CUSTOMER_USER_ID, mockCustomerRequests } from "@/data/mockCustomerRequests";
+import type { CustomerRequestTabKey } from "@/lib/requests/customerRequestTabs";
 import {
-  CUSTOMER_REQUEST_TABS,
-  type CustomerRequestTabKey,
-} from "@/lib/requests/customerRequestTabs";
+  filterCustomerRequestsByTab,
+  getCustomerRequestTabCounts,
+  matchesCustomerRequestSearch,
+} from "@/lib/requests/customerRequestFilters";
 import type { CustomerRequest, ServiceType } from "@/lib/types/requests";
-import { SERVICE_TYPE_LABELS } from "@/lib/types/requests";
+import { REQUEST_STATUS_LABELS, SERVICE_TYPE_LABELS } from "@/lib/types/requests";
 
-export type SortField = "submittedAt" | "title" | "referenceNo";
+export type SortField =
+  | "submittedAt"
+  | "title"
+  | "referenceNo"
+  | "serviceType"
+  | "status";
 export type SortDirection = "asc" | "desc";
 
 export interface UseCustomerRequestsOptions {
   userId?: string;
   pageSize?: number;
+  /** Use in-memory mock data (tests / storybook). */
+  useMockData?: boolean;
 }
 
 export interface UseCustomerRequestsResult {
   requests: CustomerRequest[];
+  allRequests: CustomerRequest[];
   totalCount: number;
   page: number;
   pageSize: number;
   totalPages: number;
   search: string;
-  setSearch: (value: string) => void;
+  setSearchQuery: (value: string) => void;
   sortField: SortField;
   sortDirection: SortDirection;
   toggleSort: (field: SortField) => void;
@@ -32,18 +42,8 @@ export interface UseCustomerRequestsResult {
   activeTab: CustomerRequestTabKey;
   setActiveTab: (tab: CustomerRequestTabKey) => void;
   tabCounts: Partial<Record<CustomerRequestTabKey, number>>;
-}
-
-function matchesSearch(request: CustomerRequest, query: string): boolean {
-  const q = query.trim().toLowerCase();
-  if (!q) return true;
-  const serviceLabel = SERVICE_TYPE_LABELS[request.serviceType].toLowerCase();
-  return (
-    request.title.toLowerCase().includes(q) ||
-    request.referenceNo.toLowerCase().includes(q) ||
-    serviceLabel.includes(q) ||
-    request.serviceType.toLowerCase().includes(q)
-  );
+  isLoading: boolean;
+  refresh: () => void;
 }
 
 function sortRequests(
@@ -57,6 +57,10 @@ function sortRequests(
       cmp = new Date(a.submittedAt).getTime() - new Date(b.submittedAt).getTime();
     } else if (field === "title") {
       cmp = a.title.localeCompare(b.title);
+    } else if (field === "serviceType") {
+      cmp = SERVICE_TYPE_LABELS[a.serviceType].localeCompare(SERVICE_TYPE_LABELS[b.serviceType]);
+    } else if (field === "status") {
+      cmp = REQUEST_STATUS_LABELS[a.status].localeCompare(REQUEST_STATUS_LABELS[b.status]);
     } else {
       cmp = a.referenceNo.localeCompare(b.referenceNo);
     }
@@ -65,23 +69,11 @@ function sortRequests(
   return sorted;
 }
 
-function applyTabFilter(
-  requests: CustomerRequest[],
-  tabKey: CustomerRequestTabKey
-): CustomerRequest[] {
-  const tabDef = CUSTOMER_REQUEST_TABS.find((t) => t.key === tabKey) ?? CUSTOMER_REQUEST_TABS[0]!;
-  let result = requests;
-  if (tabDef.predicate) {
-    result = result.filter(tabDef.predicate);
-  }
-  if (tabDef.sortBy) {
-    const { field, direction } = tabDef.sortBy;
-    result = [...result].sort((a, b) => {
-      const cmp = new Date(a[field]).getTime() - new Date(b[field]).getTime();
-      return direction === "asc" ? cmp : -cmp;
-    });
-  }
-  return result;
+async function fetchCustomerRequests(): Promise<CustomerRequest[]> {
+  const res = await fetch("/api/customer/requests", { credentials: "same-origin" });
+  if (!res.ok) return [];
+  const data = (await res.json()) as { requests?: CustomerRequest[] };
+  return data.requests ?? [];
 }
 
 export function useCustomerRequests(
@@ -89,31 +81,52 @@ export function useCustomerRequests(
 ): UseCustomerRequestsResult {
   const userId = options.userId ?? DEMO_CUSTOMER_USER_ID;
   const pageSize = options.pageSize ?? 8;
+  const useMockData = options.useMockData ?? false;
 
-  const [search, setSearch] = useState("");
-  const [page, setPage] = useState(1);
-  const [activeTab, setActiveTabState] = useState<CustomerRequestTabKey>("my_requests");
+  const [search, setSearchState] = useState("");
+  const [page, setPageState] = useState(1);
+  const [activeTab, setActiveTabState] = useState<CustomerRequestTabKey>("all");
   const [sortField, setSortField] = useState<SortField>("submittedAt");
   const [sortDirection, setSortDirection] = useState<SortDirection>("desc");
+  const [liveRequests, setLiveRequests] = useState<CustomerRequest[]>([]);
+  const [isLoading, setIsLoading] = useState(!useMockData);
+  const [refreshKey, setRefreshKey] = useState(0);
 
-  const owned = useMemo(
-    () => mockCustomerRequests.filter((r) => r.userId === userId),
-    [userId]
-  );
+  const refresh = useCallback(() => {
+    setRefreshKey((value) => value + 1);
+  }, []);
 
-  const tabCounts = useMemo(() => {
-    const counts: Partial<Record<CustomerRequestTabKey, number>> = {};
-    for (const tab of CUSTOMER_REQUEST_TABS) {
-      counts[tab.key] = tab.predicate
-        ? owned.filter(tab.predicate).length
-        : owned.length;
+  useEffect(() => {
+    if (useMockData) return;
+
+    let cancelled = false;
+    setIsLoading(true);
+
+    fetchCustomerRequests()
+      .then((requests) => {
+        if (!cancelled) setLiveRequests(requests);
+      })
+      .finally(() => {
+        if (!cancelled) setIsLoading(false);
+      });
+
+    return () => {
+      cancelled = true;
+    };
+  }, [useMockData, refreshKey]);
+
+  const owned = useMemo(() => {
+    if (useMockData) {
+      return mockCustomerRequests.filter((r) => r.userId === userId);
     }
-    return counts;
-  }, [owned]);
+    return liveRequests;
+  }, [useMockData, userId, liveRequests]);
+
+  const tabCounts = useMemo(() => getCustomerRequestTabCounts(owned), [owned]);
 
   const filtered = useMemo(() => {
-    const tabbed = applyTabFilter(owned, activeTab);
-    const searched = tabbed.filter((r) => matchesSearch(r, search));
+    const tabbed = filterCustomerRequestsByTab(owned, activeTab);
+    const searched = tabbed.filter((r) => matchesCustomerRequestSearch(r, search));
     return sortRequests(searched, sortField, sortDirection);
   }, [owned, activeTab, search, sortField, sortDirection]);
 
@@ -121,37 +134,53 @@ export function useCustomerRequests(
   const totalPages = Math.max(1, Math.ceil(totalCount / pageSize));
   const safePage = Math.min(page, totalPages);
 
+  useEffect(() => {
+    if (page > totalPages) {
+      setPageState(totalPages);
+    }
+  }, [page, totalPages]);
+
   const paged = useMemo(() => {
     const start = (safePage - 1) * pageSize;
     return filtered.slice(start, start + pageSize);
   }, [filtered, safePage, pageSize]);
 
-  const toggleSort = (field: SortField) => {
-    if (sortField === field) {
-      setSortDirection((d) => (d === "asc" ? "desc" : "asc"));
-    } else {
-      setSortField(field);
-      setSortDirection(field === "submittedAt" ? "desc" : "asc");
-    }
-    setPage(1);
-  };
+  const setSearchQuery = useCallback((value: string) => {
+    setSearchState(value);
+    setPageState(1);
+  }, []);
 
-  const setActiveTab = (tab: CustomerRequestTabKey) => {
+  const setActiveTab = useCallback((tab: CustomerRequestTabKey) => {
     setActiveTabState(tab);
-    setPage(1);
-  };
+    setPageState(1);
+  }, []);
+
+  const setPage = useCallback((nextPage: number) => {
+    setPageState(nextPage);
+  }, []);
+
+  const toggleSort = useCallback(
+    (field: SortField) => {
+      if (sortField === field) {
+        setSortDirection((direction) => (direction === "asc" ? "desc" : "asc"));
+      } else {
+        setSortField(field);
+        setSortDirection(field === "submittedAt" ? "desc" : "asc");
+      }
+      setPageState(1);
+    },
+    [sortField]
+  );
 
   return {
     requests: paged,
+    allRequests: owned,
     totalCount,
     page: safePage,
     pageSize,
     totalPages,
     search,
-    setSearch: (value: string) => {
-      setSearch(value);
-      setPage(1);
-    },
+    setSearchQuery,
     sortField,
     sortDirection,
     toggleSort,
@@ -159,11 +188,16 @@ export function useCustomerRequests(
     activeTab,
     setActiveTab,
     tabCounts,
+    isLoading,
+    refresh,
   };
 }
 
-export function getRequestById(id: string): CustomerRequest | undefined {
-  return mockCustomerRequests.find((r) => r.id === id);
+export function getRequestById(
+  id: string,
+  requests: CustomerRequest[] = mockCustomerRequests
+): CustomerRequest | undefined {
+  return requests.find((r) => r.id === id);
 }
 
 export function getServiceTypeLabel(type: ServiceType): string {

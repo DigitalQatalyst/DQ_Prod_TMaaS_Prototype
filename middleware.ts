@@ -1,12 +1,10 @@
 import { NextRequest, NextResponse } from "next/server";
+import { hasPlausibleSessionToken } from "@/lib/auth/session";
 import { featureFlags, isLegalHubPath } from "@/lib/featureFlags";
 
 function hasSession(request: NextRequest): boolean {
   const token = request.cookies.get("session_token")?.value;
-  // Require a non-empty, plausibly structured token (min 20 chars).
-  // Full JWT verification belongs in the API layer; this is a lightweight
-  // pre-render guard to prevent accidental data exposure.
-  return typeof token === "string" && token.length >= 20;
+  return hasPlausibleSessionToken(token);
 }
 
 const CSP = [
@@ -14,7 +12,7 @@ const CSP = [
   "script-src 'self' 'unsafe-inline' https://www.googletagmanager.com",
   "style-src 'self' 'unsafe-inline'",
   "img-src 'self' data: https:",
-  "connect-src 'self' https://*.supabase.co https://login.microsoftonline.com https://graph.microsoft.com https://www.google-analytics.com https://analytics.google.com https://stats.g.doubleclick.net",
+  "connect-src 'self' https://*.supabase.co https://login.microsoftonline.com https://*.ciamlogin.com https://graph.microsoft.com https://www.google-analytics.com https://analytics.google.com https://stats.g.doubleclick.net",
   "frame-ancestors 'none'",
 ].join("; ");
 

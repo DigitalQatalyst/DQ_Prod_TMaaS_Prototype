@@ -31,12 +31,12 @@ export function getServiceTypeLabel(type: ServiceType): string {
   return SERVICE_TYPE_LABELS[type];
 }
 
+const MONTHS_SHORT = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"] as const;
+
+/** SSR-safe date label — avoids locale hydration mismatches. */
 export function formatRequestDate(iso: string): string {
-  return new Date(iso).toLocaleDateString("en-GB", {
-    day: "numeric",
-    month: "short",
-    year: "numeric",
-  });
+  const date = new Date(iso);
+  return `${date.getUTCDate()} ${MONTHS_SHORT[date.getUTCMonth()]} ${date.getUTCFullYear()}`;
 }
 
 export function formatRequestDateTime(iso: string): string {

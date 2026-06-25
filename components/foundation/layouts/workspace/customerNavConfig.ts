@@ -5,6 +5,7 @@ export interface CustomerNavItem {
   name: string;
   icon: LucideIcon;
   path: string;
+  outOfDashboard?: boolean;
 }
 
 export interface CustomerNavSection {
@@ -24,7 +25,7 @@ export const customerNavSections: CustomerNavSection[] = [
     id: "marketplace",
     label: "MARKETPLACE",
     items: [
-      { id: "explore-services", name: "Explore Services", icon: Compass, path: "/marketplace" },
+      { id: "explore-services", name: "Explore Services", icon: Compass, path: "/marketplace", outOfDashboard: true },
       { id: "requests", name: "My Requests", icon: Clock, path: "/dashboard/requests" },
     ],
   },

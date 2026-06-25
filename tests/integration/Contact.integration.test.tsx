@@ -104,6 +104,7 @@ describe("Contact integration", () => {
       vi.fn().mockResolvedValue({
         ok: true,
         status: 200,
+        json: async () => ({ success: true }),
       } as Response)
     );
   });
@@ -168,6 +169,7 @@ describe("Contact integration", () => {
       expect(fetch).toHaveBeenCalledWith("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
+        credentials: "same-origin",
         body: JSON.stringify({
           ...VALID,
           interest: "Transformation Strategy & Advisory",
@@ -175,6 +177,8 @@ describe("Contact integration", () => {
           message: "I'd like to get started with: AI Readiness Assessment",
           consent: true,
           website: "",
+          serviceTitle: "AI Readiness Assessment",
+          serviceType: "advisory",
         }),
       });
     });
@@ -210,6 +214,7 @@ describe("Contact integration", () => {
       expect(fetch).toHaveBeenCalledWith("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
+        credentials: "same-origin",
         body: JSON.stringify({
           ...VALID,
           consent: true,
