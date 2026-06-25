@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { ArrowLeft, Check, Loader2 } from "lucide-react";
@@ -12,25 +12,16 @@ import { useAuth } from "@/contexts/AuthContext";
 import {
   ASK_ABOUT_SERVICE_CTA_LABEL,
   buildAskAboutServicePathFromParams,
+  buildSignInPathWithReturn,
   parseRequestServiceParams,
 } from "@/lib/requestService";
 import { cn } from "@/lib/utils";
 
 type FormState = {
-  firstName: string;
-  lastName: string;
-  email: string;
   organisation: string;
   notes: string;
   consent: boolean;
 };
-
-function splitName(fullName: string): { firstName: string; lastName: string } {
-  const parts = fullName.trim().split(/\s+/).filter(Boolean);
-  if (parts.length === 0) return { firstName: "", lastName: "" };
-  if (parts.length === 1) return { firstName: parts[0] ?? "", lastName: "" };
-  return { firstName: parts[0] ?? "", lastName: parts.slice(1).join(" ") };
-}
 
 function inputClass(hasError?: string) {
   return cn(
@@ -48,12 +39,8 @@ export default function RequestServicePageClient() {
     [queryString, searchParams],
   );
   const { user, isAuthenticated, isLoading: authLoading } = useAuth();
-  const didPrefillFromAuth = useRef(false);
 
   const [form, setForm] = useState<FormState>({
-    firstName: "",
-    lastName: "",
-    email: "",
     organisation: "",
     notes: "",
     consent: false,
@@ -65,18 +52,11 @@ export default function RequestServicePageClient() {
   const [honeypot, setHoneypot] = useState("");
 
   useEffect(() => {
-    if (!serviceParams || authLoading || !isAuthenticated || didPrefillFromAuth.current) return;
-
-    didPrefillFromAuth.current = true;
-    const { firstName, lastName } = splitName(user.name);
-    setForm((prev) => ({
-      ...prev,
-      firstName: firstName || prev.firstName,
-      lastName: lastName || prev.lastName,
-      email: user.email || prev.email,
-      organisation: user.organization || prev.organisation,
-    }));
-  }, [authLoading, isAuthenticated, serviceParams, user.email, user.name, user.organization]);
+    if (!isAuthenticated || authLoading) return;
+    if (user.organization) {
+      setForm((prev) => (prev.organisation ? prev : { ...prev, organisation: user.organization }));
+    }
+  }, [authLoading, isAuthenticated, user.organization]);
 
   if (!serviceParams) {
     return (
@@ -89,7 +69,41 @@ export default function RequestServicePageClient() {
     );
   }
 
+  const requestPath = `/request-service?${queryString}`;
   const askAboutPath = buildAskAboutServicePathFromParams(serviceParams);
+
+  if (authLoading) {
+    return (
+      <div className="flex min-h-screen items-center justify-center bg-background">
+        <Loader2 className="h-8 w-8 animate-spin text-dq-navy" aria-label="Loading" />
+      </div>
+    );
+  }
+
+  if (!isAuthenticated) {
+    return (
+      <div className="min-h-screen bg-background">
+        <LandingNavbar />
+        <MeshSection variant="heroLight" grid className="flex min-h-[60vh] items-center justify-center px-5 py-16">
+          <div className="mx-auto max-w-md text-center">
+            <h1 className="text-2xl font-semibold text-dq-navy">Sign in to request this service</h1>
+            <p className="mt-3 text-sm leading-relaxed text-gray-600">
+              Service requests are linked to your account so you can track progress in My Requests.
+            </p>
+            <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:justify-center">
+              <Link href={buildSignInPathWithReturn(requestPath)} className={cn(btnPrimary, "px-6 py-2.5 text-sm")}>
+                Sign in
+              </Link>
+              <Link href={askAboutPath} className={cn(btnSecondary, "px-6 py-2.5 text-sm")}>
+                {ASK_ABOUT_SERVICE_CTA_LABEL}
+              </Link>
+            </div>
+          </div>
+        </MeshSection>
+        <Footer />
+      </div>
+    );
+  }
 
   const setField = <K extends keyof FormState>(key: K, value: FormState[K]) => {
     setForm((prev) => ({ ...prev, [key]: value }));
@@ -99,11 +113,6 @@ export default function RequestServicePageClient() {
 
   const validate = (): boolean => {
     const next: Partial<Record<keyof FormState, string>> = {};
-    if (!form.firstName.trim()) next.firstName = "First name is required";
-    if (!form.lastName.trim()) next.lastName = "Last name is required";
-    if (!form.email.trim()) next.email = "Work email is required";
-    else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email))
-      next.email = "Enter a valid work email";
     if (!form.organisation.trim()) next.organisation = "Organisation is required";
     if (!form.consent) next.consent = "Consent is required to submit";
     setErrors(next);
@@ -123,7 +132,9 @@ export default function RequestServicePageClient() {
         headers: { "Content-Type": "application/json" },
         credentials: "same-origin",
         body: JSON.stringify({
-          ...form,
+          organisation: form.organisation,
+          notes: form.notes,
+          consent: form.consent,
           website: honeypot,
           serviceTitle: serviceParams.service,
           serviceType: serviceParams.type,
@@ -131,6 +142,11 @@ export default function RequestServicePageClient() {
           marketplaceSlug: serviceParams.slug,
         }),
       });
+
+      if (res.status === 401) {
+        router.push(buildSignInPathWithReturn(requestPath));
+        return;
+      }
 
       if (!res.ok) {
         const data = (await res.json().catch(() => null)) as { error?: string } | null;
@@ -169,8 +185,8 @@ export default function RequestServicePageClient() {
               <h1 className="text-2xl font-semibold text-dq-navy">Request submitted</h1>
               <p className="mt-2 text-sm leading-relaxed text-gray-600">
                 We&apos;ve received your request for{" "}
-                <span className="font-medium text-dq-navy">{serviceParams.service}</span>. A DQ
-                advisor will follow up within 2 business days.
+                <span className="font-medium text-dq-navy">{serviceParams.service}</span>. Track it
+                in My Requests.
               </p>
               <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:justify-center">
                 {createdRequestId && (
@@ -195,66 +211,24 @@ export default function RequestServicePageClient() {
                 <p className="mt-1 text-lg font-semibold text-dq-navy">{serviceParams.service}</p>
               </div>
 
+              <div className="mb-6 rounded-lg border border-gray-200 bg-white px-4 py-3 text-sm">
+                <p className="font-medium text-dq-navy">{user.name}</p>
+                <p className="text-gray-600">{user.email}</p>
+              </div>
+
               <h1 className="text-2xl font-semibold tracking-tight text-dq-navy sm:text-3xl">
                 Request this service
               </h1>
               <p className="mt-2 text-sm leading-relaxed text-gray-600">
-                Submit your details and we&apos;ll scope the next steps with your team.
+                Confirm your details and submit. This request will appear in your dashboard.
               </p>
 
               <form onSubmit={handleSubmit} noValidate className="mt-8 space-y-5">
-                <div className="grid gap-4 sm:grid-cols-2">
-                  <div>
-                    <label htmlFor="firstName" className="mb-1.5 block text-xs font-semibold uppercase tracking-wide text-gray-600">
-                      First name <span className="text-red-600">*</span>
-                    </label>
-                    <input
-                      id="firstName"
-                      type="text"
-                      autoComplete="given-name"
-                      value={form.firstName}
-                      onChange={(e) => setField("firstName", e.target.value)}
-                      className={inputClass(errors.firstName)}
-                    />
-                    {errors.firstName && (
-                      <p className="mt-1 text-xs text-red-600">{errors.firstName}</p>
-                    )}
-                  </div>
-                  <div>
-                    <label htmlFor="lastName" className="mb-1.5 block text-xs font-semibold uppercase tracking-wide text-gray-600">
-                      Last name <span className="text-red-600">*</span>
-                    </label>
-                    <input
-                      id="lastName"
-                      type="text"
-                      autoComplete="family-name"
-                      value={form.lastName}
-                      onChange={(e) => setField("lastName", e.target.value)}
-                      className={inputClass(errors.lastName)}
-                    />
-                    {errors.lastName && (
-                      <p className="mt-1 text-xs text-red-600">{errors.lastName}</p>
-                    )}
-                  </div>
-                </div>
-
                 <div>
-                  <label htmlFor="email" className="mb-1.5 block text-xs font-semibold uppercase tracking-wide text-gray-600">
-                    Work email <span className="text-red-600">*</span>
-                  </label>
-                  <input
-                    id="email"
-                    type="email"
-                    autoComplete="email"
-                    value={form.email}
-                    onChange={(e) => setField("email", e.target.value)}
-                    className={inputClass(errors.email)}
-                  />
-                  {errors.email && <p className="mt-1 text-xs text-red-600">{errors.email}</p>}
-                </div>
-
-                <div>
-                  <label htmlFor="organisation" className="mb-1.5 block text-xs font-semibold uppercase tracking-wide text-gray-600">
+                  <label
+                    htmlFor="organisation"
+                    className="mb-1.5 block text-xs font-semibold uppercase tracking-wide text-gray-600"
+                  >
                     Organisation <span className="text-red-600">*</span>
                   </label>
                   <input
@@ -271,7 +245,10 @@ export default function RequestServicePageClient() {
                 </div>
 
                 <div>
-                  <label htmlFor="notes" className="mb-1.5 block text-xs font-semibold uppercase tracking-wide text-gray-600">
+                  <label
+                    htmlFor="notes"
+                    className="mb-1.5 block text-xs font-semibold uppercase tracking-wide text-gray-600"
+                  >
                     Additional details
                   </label>
                   <textarea
@@ -313,7 +290,10 @@ export default function RequestServicePageClient() {
                 />
 
                 {submitError && (
-                  <p className="rounded-lg border border-red-200 bg-red-50 px-3 py-2 text-sm text-red-700" role="alert">
+                  <p
+                    className="rounded-lg border border-red-200 bg-red-50 px-3 py-2 text-sm text-red-700"
+                    role="alert"
+                  >
                     {submitError}
                   </p>
                 )}

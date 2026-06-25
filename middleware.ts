@@ -24,7 +24,7 @@ const SECURITY_HEADERS: Record<string, string> = {
   "Content-Security-Policy": CSP,
 };
 
-const PROTECTED_PREFIXES = ["/dashboard", "/account", "/onboarding"];
+const PROTECTED_PREFIXES = ["/dashboard", "/account", "/onboarding", "/request-service"];
 
 export function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
@@ -39,7 +39,8 @@ export function middleware(request: NextRequest) {
   const isProtected = PROTECTED_PREFIXES.some((prefix) => pathname.startsWith(prefix));
   if (isProtected && !hasSession(request)) {
     const signInUrl = new URL("/sign-in", request.url);
-    signInUrl.searchParams.set("returnTo", pathname);
+    const returnTo = `${pathname}${request.nextUrl.search}`;
+    signInUrl.searchParams.set("returnTo", returnTo);
     return NextResponse.redirect(signInUrl);
   }
 

@@ -50,3 +50,8 @@ export function buildRequestServiceDescription(serviceName: string, notes?: stri
   if (trimmed) return trimmed;
   return `Service requested via TMaaS marketplace: ${serviceName}`;
 }
+
+/** Send guests to sign-in, then back to the protected request flow. */
+export function buildSignInPathWithReturn(returnTo: string): string {
+  return `/sign-in?returnTo=${encodeURIComponent(returnTo)}`;
+}

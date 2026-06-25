@@ -18,9 +18,6 @@ function isRateLimited(ip: string): boolean {
 }
 
 const requestServiceSchema = z.object({
-  firstName: z.string().min(1),
-  lastName: z.string().min(1),
-  email: z.string().email(),
   organisation: z.string().min(1),
   notes: z.string().optional(),
   consent: z.literal(true),
@@ -32,6 +29,11 @@ const requestServiceSchema = z.object({
 });
 
 export async function POST(request: NextRequest) {
+  const sessionUser = await getSessionUserFromRequest(request);
+  if (!sessionUser) {
+    return NextResponse.json({ error: "Sign in required" }, { status: 401 });
+  }
+
   const ip =
     request.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ??
     request.headers.get("x-real-ip") ??
@@ -54,28 +56,18 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ success: true });
   }
 
-  const {
-    firstName,
-    lastName,
-    email,
-    organisation,
-    notes,
-    serviceTitle,
-    serviceType,
-    variantId,
-    marketplaceSlug,
-  } = validated.data;
+  const { organisation, notes, serviceTitle, serviceType, variantId, marketplaceSlug } =
+    validated.data;
 
   try {
-    const sessionUser = await getSessionUserFromRequest(request);
     const description = buildRequestServiceDescription(serviceTitle, notes);
 
     const created = await createServiceRequest({
       title: serviceTitle,
       description,
-      submitterEmail: email,
+      submitterEmail: sessionUser.email,
       user: sessionUser,
-      organisation,
+      organisation: organisation || sessionUser.organisation,
       ...(serviceType !== undefined ? { serviceType } : {}),
       ...(variantId !== undefined ? { variantId } : {}),
       ...(marketplaceSlug !== undefined ? { marketplaceSlug } : {}),
@@ -88,8 +80,7 @@ export async function POST(request: NextRequest) {
     console.log("[request-service] Created:", {
       id: created.request.id,
       service: serviceTitle,
-      name: `${firstName} ${lastName}`,
-      email,
+      email: sessionUser.email,
       organisation,
     });
 

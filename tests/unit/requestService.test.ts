@@ -4,6 +4,7 @@ import {
   buildAskAboutServicePath,
   buildRequestServiceDescription,
   buildRequestServicePath,
+  buildSignInPathWithReturn,
   REQUEST_SERVICE_CTA_LABEL,
 } from "@/lib/requestService";
 
@@ -39,6 +40,12 @@ describe("requestService", () => {
     );
     expect(buildRequestServiceDescription("AI Readiness Assessment", "Need Q3 delivery")).toBe(
       "Need Q3 delivery",
+    );
+  });
+
+  it("builds a sign-in path that returns to the request flow", () => {
+    expect(buildSignInPathWithReturn("/request-service?service=Test")).toBe(
+      "/sign-in?returnTo=%2Frequest-service%3Fservice%3DTest",
     );
   });
 });

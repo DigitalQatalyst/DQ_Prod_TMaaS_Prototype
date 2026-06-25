@@ -19,16 +19,19 @@ import {
   ASK_ABOUT_SERVICE_CTA_LABEL,
   buildAskAboutServicePath,
   buildRequestServicePath,
+  buildSignInPathWithReturn,
   REQUEST_SERVICE_CTA_LABEL,
 } from "@/lib/requestService";
 import { useServiceDetail } from "@/lib/hooks/useServiceDetail";
 import { featureFlags } from "@/lib/featureFlags";
+import { useAuth } from "@/contexts/AuthContext";
 import { Button } from "@/components/ui/button";
 import DiagnoseDialog from "@/components/features/dashboard/DiagnoseDialog";
 
 export default function ServiceDetailPageClient({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = use(params);
   const router = useRouter();
+  const { isAuthenticated, isLoading: authLoading } = useAuth();
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [dialogPrompt, setDialogPrompt] = useState("");
   const idOrSlug = /^\d+$/.test(slug) ? parseInt(slug, 10) : slug;
@@ -80,7 +83,12 @@ export default function ServiceDetailPageClient({ params }: { params: Promise<{ 
 
   const handleRequestService = () => {
     if (featureFlags.isEnabled("contactUs")) {
-      router.push(buildRequestServicePath(service));
+      const path = buildRequestServicePath(service);
+      if (!authLoading && !isAuthenticated) {
+        router.push(buildSignInPathWithReturn(path));
+        return;
+      }
+      router.push(path);
       return;
     }
     handleStartOnboarding(service.standardName);
