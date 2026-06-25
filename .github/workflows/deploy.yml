@@ -1,19 +1,12 @@
 name: Deploy to Production
 
-# Triggers when main in the build repo is updated via PR merge.
-# Pushes main to the deploy repo (DQ-Superuser/DQ-TMaaS), which Vercel watches.
-#
-# INACTIVE until:
-#   1. Deploy repo DQ-Superuser/DQ-TMaaS is created
-#   2. SSH deploy key is generated and added:
-#      - Public key → DQ-Superuser/DQ-TMaaS Deploy Keys (write access)
-#      - Private key → DigitalQatalyst/DQ_Prod_TMaaS_Prototype Secret: DEPLOY_REPO_SSH_KEY
-#
-# See scratch/DQ_TMAAS_WORKFLOW_SETUP.md §7 for full setup instructions.
-
 on:
-  push:
-    branches: [main]
+  workflow_dispatch:
+    inputs:
+      deploy_key:
+        description: 'Enter the deploy authorization key'
+        required: true
+        type: string
 
 permissions:
   contents: read
@@ -23,9 +16,18 @@ jobs:
     name: Push to deploy repo
     runs-on: ubuntu-latest
     steps:
+      - name: Verify deploy authorization
+        run: |
+          if [ "${{ inputs.deploy_key }}" != "${{ secrets.DEPLOY_AUTH_KEY }}" ]; then
+            echo "❌ Invalid deploy key — aborting"
+            exit 1
+          fi
+          echo "✅ Deploy key verified"
+
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
+          ref: main
 
       - name: Configure deploy SSH key
         uses: webfactory/ssh-agent@v0.9.0
