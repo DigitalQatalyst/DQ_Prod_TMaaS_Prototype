@@ -1,46 +1,46 @@
 name: Deploy to Production
 
-   on:
-     workflow_dispatch:
-       inputs:
-         deploy_key:
-           description: 'Enter the deploy authorization key'
-           required: true
-           type: string
+on:
+  workflow_dispatch:
+    inputs:
+      deploy_key:
+        description: 'Enter the deploy authorization key'
+        required: true
+        type: string
 
-   permissions:
-     contents: read
+permissions:
+  contents: read
 
-   jobs:
-     deploy:
-       name: Push to deploy repo
-       runs-on: ubuntu-latest
-       steps:
-         - name: Verify deploy authorization
-           run: |
-             if [ "${{ inputs.deploy_key }}" != "${{ secrets.DEPLOY_AUTH_KEY }}" ]; then
-               echo "❌ Invalid deploy key — aborting"
-               exit 1
-             fi
-             echo "✅ Deploy key verified"
+jobs:
+  deploy:
+    name: Push to deploy repo
+    runs-on: ubuntu-latest
+    steps:
+      - name: Verify deploy authorization
+        run: |
+          if [ "${{ inputs.deploy_key }}" != "${{ secrets.DEPLOY_AUTH_KEY }}" ]; then
+            echo "❌ Invalid deploy key — aborting"
+            exit 1
+          fi
+          echo "✅ Deploy key verified"
 
-         - uses: actions/checkout@v4
-           with:
-             fetch-depth: 0
-             ref: main
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          ref: main
 
-         - name: Configure deploy SSH key
-           uses: webfactory/ssh-agent@v0.9.0
-           with:
-             ssh-private-key: ${{ secrets.DEPLOY_REPO_SSH_KEY }}
+      - name: Configure deploy SSH key
+        uses: webfactory/ssh-agent@v0.9.0
+        with:
+          ssh-private-key: ${{ secrets.DEPLOY_REPO_SSH_KEY }}
 
-         - name: Add deploy remote
-           run: |
-             git remote add deploy git@github.com:DQ-Superuser/DQ-TMaaS.git
+      - name: Add deploy remote
+        run: |
+          git remote add deploy git@github.com:DQ-Superuser/DQ-TMaaS.git
 
-         - name: Push to deploy repo
-           run: |
-             git -c user.email="superuser@digitalqatalyst.com" \
-                 -c user.name="Sharavi" \
-                 commit --allow-empty -m "ci: deploy to production"
-             git push deploy main:main --force
+      - name: Push to deploy repo
+        run: |
+          git -c user.email="superuser@digitalqatalyst.com" \
+              -c user.name="Sharavi" \
+              commit --allow-empty -m "ci: deploy to production"
+          git push deploy main:main --force
