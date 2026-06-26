@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
+import LaunchOfferTermsFootnote from "@/components/features/landing/LaunchOfferTermsFootnote";
 import {
   LAUNCH_ADVISORY_CTA_LABEL,
   LAUNCH_ADVISORY_EYEBROW,
@@ -47,7 +48,7 @@ const MarketplaceLaunchOffer = () => {
             {LAUNCH_ADVISORY_SUBCOPY}
           </p>
 
-          <div className="mt-8 flex justify-center">
+          <div className="mt-8 flex flex-col items-center">
             <Link
               href={buildLaunchAdvisoryContactPath()}
               className={cn(btnPrimaryOnDark, "w-full px-7 sm:w-auto")}
@@ -55,6 +56,7 @@ const MarketplaceLaunchOffer = () => {
               {LAUNCH_ADVISORY_CTA_LABEL}
               <ArrowRight size={15} />
             </Link>
+            <LaunchOfferTermsFootnote />
           </div>
         </div>
       </div>

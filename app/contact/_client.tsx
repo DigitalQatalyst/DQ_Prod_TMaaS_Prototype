@@ -13,9 +13,11 @@ import {
   parseServiceContactParams,
 } from "@/lib/contactFormPrefill";
 import { PLATFORM_CONTACT_LINE } from "@/lib/brandLinks";
+import LaunchOfferTermsList from "@/components/features/landing/LaunchOfferTermsList";
 import {
   getLaunchAdvisoryFormDefaults,
   isLaunchAdvisoryEnquiry,
+  LAUNCH_ADVISORY_EYEBROW,
   LAUNCH_ADVISORY_HEADLINE,
 } from "@/lib/launchOffering";
 import { featureFlags } from "@/lib/featureFlags";
@@ -342,13 +344,17 @@ export default function ContactPageClient() {
                     </Field>
 
                     {launchAdvisoryEnquiry ? (
-                      <div className="rounded-xl border border-dq-orange/20 bg-orange-50/40 px-4 py-4">
+                      <div
+                        id="offer-terms"
+                        className="rounded-xl border border-dq-orange/20 bg-orange-50/40 px-4 py-4"
+                      >
                         <p className="text-[10px] font-semibold uppercase tracking-[0.16em] text-dq-orange">
-                          Launch offer
+                          {LAUNCH_ADVISORY_EYEBROW}
                         </p>
                         <p className="mt-1 text-base font-semibold text-dq-navy">
                           {LAUNCH_ADVISORY_HEADLINE}
                         </p>
+                        <LaunchOfferTermsList className="mt-4 border-t border-dq-orange/10 pt-4" />
                       </div>
                     ) : serviceEnquiry ? (
                       <div className="rounded-xl border border-gray-200 bg-white px-4 py-4">
