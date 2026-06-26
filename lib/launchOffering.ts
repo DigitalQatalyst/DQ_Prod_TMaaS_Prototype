@@ -8,8 +8,7 @@ export const LAUNCH_ADVISORY_NAV_CTA_LABEL = "Claim your free advisory";
 
 export const LAUNCH_ADVISORY_EYEBROW = "June launch offer";
 
-export const LAUNCH_ADVISORY_HEADLINE =
-  "Your first advisory service is on us.";
+export const LAUNCH_ADVISORY_HEADLINE = "Your first advisory service is on us.";
 
 export const LAUNCH_ADVISORY_SUBCOPY =
   "Practical guidance and strategy for the business areas you choose. Valid for requests raised by the end of June.";
