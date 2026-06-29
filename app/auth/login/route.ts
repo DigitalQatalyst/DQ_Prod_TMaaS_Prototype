@@ -1,11 +1,10 @@
 import { type NextRequest, NextResponse } from "next/server";
+import { handleOAuthLogin } from "@/lib/auth/oauth-login";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 
-/** Back-compat redirect — TMaaS Azure app registers /customer/auth/callback. */
+/** Internal (DQ) Entra login — separate tenant from customer CIAM. */
 export async function GET(req: NextRequest): Promise<Response> {
-  const url = new URL("/customer/auth/login", req.nextUrl.origin);
-  url.search = req.nextUrl.search;
-  return NextResponse.redirect(url);
+  return handleOAuthLogin(req, { audience: "internal" });
 }

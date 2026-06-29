@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { z } from "zod";
 import { getSessionUserFromRequest } from "@/lib/auth/session";
+import { isAuthorisedForCustomerRequests } from "@/lib/auth/authorizeCustomer";
 import { buildRequestServiceDescription } from "@/lib/requestService";
 import { createServiceRequest, resolveSessionOrganisation } from "@/lib/requests/serviceRequestRepository";
 
@@ -30,7 +31,7 @@ const requestServiceSchema = z.object({
 
 export async function POST(request: NextRequest) {
   const sessionUser = await getSessionUserFromRequest(request);
-  if (!sessionUser) {
+  if (!sessionUser || !isAuthorisedForCustomerRequests(sessionUser)) {
     return NextResponse.json({ error: "Sign in required" }, { status: 401 });
   }
 

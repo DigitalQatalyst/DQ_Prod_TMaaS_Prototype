@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { z } from "zod";
 import { getSessionUserFromRequest } from "@/lib/auth/session";
+import { isAuthorisedForCustomerRequests } from "@/lib/auth/authorizeCustomer";
 import { createServiceRequest } from "@/lib/requests/serviceRequestRepository";
 
 const createRequestSchema = z.object({
@@ -14,7 +15,7 @@ const createRequestSchema = z.object({
 
 export async function GET(request: NextRequest) {
   const user = await getSessionUserFromRequest(request);
-  if (!user) {
+  if (!user || !isAuthorisedForCustomerRequests(user)) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 
@@ -25,7 +26,7 @@ export async function GET(request: NextRequest) {
 
 export async function POST(request: NextRequest) {
   const user = await getSessionUserFromRequest(request);
-  if (!user) {
+  if (!user || !isAuthorisedForCustomerRequests(user)) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 

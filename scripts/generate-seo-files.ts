@@ -50,6 +50,7 @@ Disallow: /api/
 Disallow: /dashboard/
 Disallow: /onboarding/
 Disallow: /sign-in
+Disallow: /dq/sign-in
 Disallow: /landing-v1
 Disallow: /home
 Disallow: /explore

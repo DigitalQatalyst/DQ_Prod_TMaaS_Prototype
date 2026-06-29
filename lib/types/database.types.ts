@@ -127,6 +127,7 @@ export interface Database {
           variant_id: number | null;
           marketplace_slug: string | null;
           delivery_lead: string | null;
+          delivery_lead_email: string | null;
           submitted_at: string;
           updated_at: string;
         };
@@ -142,6 +143,7 @@ export interface Database {
           variant_id?: number | null;
           marketplace_slug?: string | null;
           delivery_lead?: string | null;
+          delivery_lead_email?: string | null;
           submitted_at?: string;
           updated_at?: string;
         };
@@ -157,6 +159,7 @@ export interface Database {
           variant_id?: number | null;
           marketplace_slug?: string | null;
           delivery_lead?: string | null;
+          delivery_lead_email?: string | null;
           submitted_at?: string;
           updated_at?: string;
         };

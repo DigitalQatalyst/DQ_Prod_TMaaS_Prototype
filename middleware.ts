@@ -1,11 +1,11 @@
 import { NextRequest, NextResponse } from "next/server";
-import { hasPlausibleSessionToken } from "@/lib/auth/session";
+import {
+  resolveRequiredAudience,
+  signInPathForAudience,
+  type SessionAudience,
+} from "@/lib/auth/audience";
+import { verifySessionToken } from "@/lib/auth/session";
 import { featureFlags, isLegalHubPath } from "@/lib/featureFlags";
-
-function hasSession(request: NextRequest): boolean {
-  const token = request.cookies.get("session_token")?.value;
-  return hasPlausibleSessionToken(token);
-}
 
 const CSP = [
   "default-src 'self'",
@@ -26,25 +26,38 @@ const SECURITY_HEADERS: Record<string, string> = {
 
 const PROTECTED_PREFIXES = ["/dashboard", "/account", "/onboarding", "/request-service"];
 
-export function middleware(request: NextRequest) {
+function buildSignInRedirect(request: NextRequest, audience: SessionAudience): NextResponse {
+  const signInUrl = new URL(signInPathForAudience(audience), request.url);
+  const returnTo = `${request.nextUrl.pathname}${request.nextUrl.search}`;
+  signInUrl.searchParams.set("returnTo", returnTo);
+  return NextResponse.redirect(signInUrl);
+}
+
+export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
   const response = NextResponse.next();
 
-  // Apply security headers on every response
   for (const [key, value] of Object.entries(SECURITY_HEADERS)) {
     response.headers.set(key, value);
   }
 
-  // Auth guard for all protected routes
   const isProtected = PROTECTED_PREFIXES.some((prefix) => pathname.startsWith(prefix));
-  if (isProtected && !hasSession(request)) {
-    const signInUrl = new URL("/sign-in", request.url);
-    const returnTo = `${pathname}${request.nextUrl.search}`;
-    signInUrl.searchParams.set("returnTo", returnTo);
-    return NextResponse.redirect(signInUrl);
+  const requiredAudience = resolveRequiredAudience(pathname);
+
+  if (isProtected) {
+    const token = request.cookies.get("session_token")?.value;
+    const sessionUser = token ? await verifySessionToken(token) : null;
+
+    if (!sessionUser) {
+      const audience = requiredAudience ?? "customer";
+      return buildSignInRedirect(request, audience);
+    }
+
+    if (requiredAudience && sessionUser.audience !== requiredAudience) {
+      return buildSignInRedirect(request, requiredAudience);
+    }
   }
 
-  // Legal hub + FAQ are post-MVP; privacy and terms remain public
   if (isLegalHubPath(pathname) && !featureFlags.isEnabled("legal")) {
     return NextResponse.redirect(new URL("/", request.url));
   }
@@ -57,7 +70,7 @@ export const config = {
     "/dashboard/:path*",
     "/account/:path*",
     "/onboarding/:path*",
-    // Run on all non-static routes so security headers are applied everywhere
-    "/((?!_next/static|_next/image|favicon.ico|.*\.(?:svg|png|jpg|jpeg|gif|webp)$).*)",
+    "/request-service",
+    "/((?!_next/static|_next/image|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp)$).*)",
   ],
 };

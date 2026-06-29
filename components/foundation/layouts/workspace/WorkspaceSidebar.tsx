@@ -6,12 +6,14 @@ import { ArrowUpRight, HelpCircle, LogOut, type LucideIcon } from "lucide-react"
 import TMaaSLogo from "@/components/features/landing/TMaaSLogo";
 import { useAuth } from "@/contexts/AuthContext";
 import { cn } from "@/lib/utils";
+import type { WorkspaceNavSection } from "./customerNavConfig";
 import { customerNavSections } from "./customerNavConfig";
 
 interface WorkspaceSidebarProps {
   collapsed: boolean;
   mobileOpen: boolean;
   onMobileClose: () => void;
+  navSections?: WorkspaceNavSection[];
 }
 
 function SidebarNavLink({
@@ -72,16 +74,12 @@ export function WorkspaceSidebar({
   collapsed,
   mobileOpen,
   onMobileClose,
+  navSections = customerNavSections,
 }: WorkspaceSidebarProps) {
   const pathname = usePathname();
   const { signOut } = useAuth();
 
-  const isActive = (path: string) => {
-    if (path === "/dashboard/requests") return pathname.startsWith("/dashboard/requests");
-    if (path === "/dashboard/overview") return pathname.startsWith("/dashboard/overview");
-    if (path === "/marketplace") return pathname.startsWith("/marketplace");
-    return pathname === path;
-  };
+  const isActive = (path: string) => pathname === path || pathname.startsWith(`${path}/`);
 
   const handleSignOut = () => {
     void signOut();
@@ -118,7 +116,7 @@ export function WorkspaceSidebar({
 
       <nav className="flex-1 overflow-y-auto px-3 py-4" aria-label="Sidebar navigation">
         <div className="space-y-5">
-          {customerNavSections.map((section) => (
+          {navSections.map((section) => (
             <section key={section.id} className="space-y-1">
               {!collapsed && <div className="sidebar-feature-area">{section.label}</div>}
               <div className="mt-1 space-y-1">
