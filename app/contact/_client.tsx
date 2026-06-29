@@ -131,6 +131,7 @@ export default function ContactPageClient() {
   const [errors, setErrors] = useState<Partial<Record<keyof FormState, string>>>({});
   const [submitError, setSubmitError] = useState<string | null>(null);
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
+  const [createdRequestId, setCreatedRequestId] = useState<string | null>(null);
   const [honeypot, setHoneypot] = useState("");
 
   const setField = <K extends keyof FormState>(key: K, value: FormState[K]) => {
@@ -166,15 +167,32 @@ export default function ContactPageClient() {
     setStatus("loading");
     setSubmitError(null);
     try {
+      const payload = {
+        ...form,
+        website: honeypot,
+        ...(serviceEnquiry
+          ? {
+              serviceTitle: serviceEnquiry.service,
+              serviceType: serviceEnquiry.type,
+              variantId: serviceEnquiry.variantId,
+              marketplaceSlug: serviceEnquiry.slug,
+            }
+          : {}),
+        ...(launchAdvisoryEnquiry ? { offering: "launch-advisory" } : {}),
+      };
+
       const res = await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ ...form, website: honeypot }),
+        credentials: "same-origin",
+        body: JSON.stringify(payload),
       });
       if (!res.ok) {
         const data = (await res.json().catch(() => null)) as { error?: string } | null;
         throw new Error(data?.error ?? "Submission failed, please try again or email us directly.");
       }
+      const data = (await res.json()) as { requestId?: string };
+      setCreatedRequestId(data.requestId ?? null);
       setStatus("success");
     } catch (error) {
       setStatus("idle");
@@ -190,6 +208,7 @@ export default function ContactPageClient() {
     setForm(INITIAL);
     setErrors({});
     setSubmitError(null);
+    setCreatedRequestId(null);
     setStatus("idle");
     setHoneypot("");
   };
@@ -217,6 +236,14 @@ export default function ContactPageClient() {
                 A DQ advisor will review your message and get back to you within 2 business days.
               </p>
               <div className="flex flex-col justify-center gap-3 sm:flex-row">
+                {createdRequestId && (
+                  <Link
+                    href={`/dashboard/requests?highlight=${createdRequestId}`}
+                    className="rounded-full bg-dq-navy px-6 py-2.5 text-[15px] font-semibold text-white outline-none transition-colors hover:bg-[#020A24]"
+                  >
+                    View in My Requests
+                  </Link>
+                )}
                 <button
                   type="button"
                   onClick={resetForm}
@@ -224,12 +251,14 @@ export default function ContactPageClient() {
                 >
                   Submit another request
                 </button>
-                <Link
-                  href="/"
-                  className="rounded-full bg-dq-navy px-6 py-2.5 text-[15px] font-semibold text-white outline-none transition-colors hover:bg-[#020A24]"
-                >
-                  Back to home
-                </Link>
+                {!createdRequestId && (
+                  <Link
+                    href="/"
+                    className="rounded-full bg-dq-navy px-6 py-2.5 text-[15px] font-semibold text-white outline-none transition-colors hover:bg-[#020A24]"
+                  >
+                    Back to home
+                  </Link>
+                )}
               </div>
             </div>
           </div>

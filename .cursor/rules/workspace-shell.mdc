@@ -1,0 +1,33 @@
+---
+description: DWS01-aligned customer workspace shell layout and chrome patterns
+globs: DQ_Prod_TMaaS_Prototype/components/foundation/layouts/workspace/**/*
+alwaysApply: false
+---
+
+# Customer Workspace Shell (DWS.01 port)
+
+Reference: `DQ_PROD_DWS01-main` TransactionShell + AppChrome + AppSidebar patterns. Port visually; do not mix legacy TMaaS dashboard chrome.
+
+## Shell layout
+- Use **flex row**: `sidebar shrink-0` + `main flex-1 min-w-0`. Never `fixed sidebar` + `margin-left` on content (causes horizontal overflow).
+- Desktop sidebar: `lg:static` in flex flow. Mobile sidebar: `fixed` overlay with backdrop.
+- Footer belongs inside the main column, not in a separate offset wrapper.
+
+## Brand / identity
+- **Expanded sidebar**: show TMaaS logo in sidebar header only.
+- **Collapsed sidebar**: show DQ mark in sidebar header only — never duplicate in top chrome on desktop.
+- **Top chrome lockup** (mark + TMaaS): **mobile only** (`lg:hidden`). On desktop the sidebar always carries brand (full logo or mark).
+- User identity uses **DWS.01 AvatarLockup** in SolutionChrome (deterministic initials + display name only). No organisation sub-label, no pill dropdown, no shadcn DropdownMenu in chrome.
+- Sign out lives in the sidebar footer only — never duplicate an avatar card in the sidebar footer.
+
+## Sidebar footer
+- Nav leaves: `sidebar-feature-group` + `sidebar-feature-group-active` with left `sidebar-nav-accent` bar (navy-50 active bg). Section eyebrows use `sidebar-feature-area` (orange uppercase). Do not use orange/10 pill active state.
+
+## Page content
+- Working pages use `min-w-0` on flex children to prevent overflow.
+- Main + aside: `flex flex-col xl:flex-row` with fixed aside width (`xl:w-[260px]`), not grid without `min-w-0`.
+- Tables: EntityList table card uses `--color-surface-2` (#ffffff) for row/card fill; page chrome uses `--color-surface` (#f6f6fb). Do not swap these — DWS `surface-2` is white, not grey.
+- Page aside actions: **RailSection** + **RailActionCard** (icon tile, title, one-line short subtext). Use RailActionLink only for compact single-line actions without descriptions.
+- Help / Support (mailto) + Sign out only — match DWS.01 AppSidebar footer (`sidebar-feature-group`).
+- Customer nav sections: ORIENTATION (Overview), MARKETPLACE (Explore Services, My Requests). No WORKSPACE section.
+- My Requests list: DWS EntityList pattern (`WorkingLayout` on `--color-surface`, no border under page title + `SegmentedControl` status filter pills: All + one per `RequestStatus` + `FilterBar` search + `X OF Y RECORDS` counter + bordered `surface-2` data table + `Pagination`). Filter state in `useCustomerRequests` (React state — do not use `dynamic(..., { ssr: false })` or a `hydrated` gate; that caused infinite skeleton loading). Port interactive primitives from `components/foundation/workspace-ui/` with `"use client"`. No Quick Actions aside on the requests page.

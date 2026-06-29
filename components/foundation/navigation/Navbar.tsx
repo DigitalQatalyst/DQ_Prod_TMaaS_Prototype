@@ -3,13 +3,13 @@
 import { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
 import ContextSwitcher from "@/components/features/dashboard/ContextSwitcher";
 import CartNavButton from "@/components/features/cart/CartNavButton";
 import TMaaSLogo from "@/components/features/landing/TMaaSLogo";
 import { featureFlags } from "@/lib/featureFlags";
 import { NAV_BROWSE_MARKETPLACE_LABEL } from "@/lib/brandLinks";
+import { NavAuthActions } from "@/components/foundation/navigation/NavAuthActions";
 
 const Navbar = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -42,21 +42,7 @@ const Navbar = () => {
               <ContextSwitcher stage="marketing" scrolled={false} />
             )}
             {featureFlags.isEnabled("cart") && <CartNavButton className="h-9 w-9 shrink-0" />}
-            {featureFlags.isEnabled("auth") && (
-              <>
-                <Link
-                  href="/sign-in"
-                  className="px-2 text-[13px] font-medium text-gray-600 transition-colors hover:text-dq-orange"
-                >
-                  Login
-                </Link>
-                <Link href="/sign-in">
-                  <Button size="sm" className="px-5 text-[13px]">
-                    Get Started
-                  </Button>
-                </Link>
-              </>
-            )}
+            <NavAuthActions layout="inline" slot="sign-in" className="text-[13px]" />
             {featureFlags.isEnabled("contactUs") && (
               <Link
                 href="/contact"
@@ -65,6 +51,7 @@ const Navbar = () => {
                 Contact Us
               </Link>
             )}
+            <NavAuthActions layout="inline" slot="account" className="text-[13px]" />
           </div>
 
           <button
@@ -100,22 +87,11 @@ const Navbar = () => {
               <span className="text-sm text-gray-600">Cart</span>
             </div>
           )}
-          {featureFlags.isEnabled("auth") && (
-            <>
-              <Link
-                href="/sign-in"
-                className="border-b border-gray-100 py-3 text-lg font-medium text-dq-navy"
-                onClick={() => setMobileOpen(false)}
-              >
-                Login
-              </Link>
-              <Link href="/sign-in" onClick={() => setMobileOpen(false)} className="mt-4">
-                <Button className="w-full rounded-full bg-dq-navy py-3 text-center font-semibold text-white hover:bg-dq-navy/90">
-                  Get Started
-                </Button>
-              </Link>
-            </>
-          )}
+          <NavAuthActions
+            layout="mobile"
+            slot="sign-in"
+            onNavigate={() => setMobileOpen(false)}
+          />
           {featureFlags.isEnabled("contactUs") && (
             <Link
               href="/contact"
@@ -125,6 +101,11 @@ const Navbar = () => {
               Contact Us
             </Link>
           )}
+          <NavAuthActions
+            layout="mobile"
+            slot="account"
+            onNavigate={() => setMobileOpen(false)}
+          />
         </div>
       )}
     </>

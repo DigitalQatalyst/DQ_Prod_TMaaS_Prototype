@@ -5,7 +5,7 @@ import { toast } from "sonner";
 import { useCart } from "@/contexts/CartContext"; // TODO: Task 9 — wire up context;
 import { featureFlags } from "@/lib/featureFlags";
 import { cn } from "@/lib/utils";
-import { ServiceDetailPrimaryButton } from "./ServiceDetailButtons";
+import { ServiceDetailPrimaryButton, ServiceDetailSecondaryButton } from "./ServiceDetailButtons";
 import {
   formatPackagePrice,
   servicePackageCardClass,
@@ -22,6 +22,8 @@ interface ServicePackageCardProps {
   service: ServiceProduct;
   primaryCtaLabel: string;
   onPrimaryCta: () => void;
+  secondaryCtaLabel?: string;
+  onSecondaryCta?: () => void;
   onStartOnboarding: (name: string) => void;
   packageHighlights?: string[] | undefined;
   className?: string;
@@ -31,6 +33,8 @@ export function ServicePackageCard({
   service,
   primaryCtaLabel,
   onPrimaryCta,
+  secondaryCtaLabel,
+  onSecondaryCta,
   onStartOnboarding,
   packageHighlights,
   className,
@@ -56,52 +60,57 @@ export function ServicePackageCard({
         ))}
       </ul>
 
-      <div className="mt-6">
-        {service.serviceType === "bundle" || !featureFlags.isEnabled("cart") ? (
-          <ServiceDetailPrimaryButton fullWidth className="group" onClick={onPrimaryCta}>
-            {primaryCtaLabel}
-            <ArrowRight size={16} className="transition group-hover:translate-x-0.5" />
-          </ServiceDetailPrimaryButton>
-        ) : (
-          <div className="space-y-2.5">
-            <button
-              type="button"
-              className={`inline-flex w-full items-center justify-center gap-2 rounded-full px-6 py-3.5 text-sm font-semibold transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-dq-orange focus-visible:ring-offset-2 ${
-                hasItem(service.id)
-                  ? "border border-orange-200 bg-orange-50 text-orange-700 hover:bg-orange-100"
-                  : "bg-dq-orange text-white hover:bg-[#E04020] glow-orange"
-              }`}
-              onClick={() => {
-                addItem(service.id);
-                toast.success("Added to cart", {
-                  description: service.standardName,
-                  action: { label: "View cart", onClick: openCart },
-                });
-              }}
-            >
-              {hasItem(service.id) ? (
-                <>
-                  <Check size={16} />
-                  In cart, add another
-                </>
-              ) : (
-                <>
-                  <ShoppingCart size={16} />
-                  Add to cart
-                </>
-              )}
-            </button>
-            {featureFlags.isEnabled("chatAssistant") && (
-              <button
-                type="button"
-                className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-dq-navy px-6 py-3.5 text-sm font-semibold text-white transition hover:bg-dq-navy/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-dq-orange focus-visible:ring-offset-2"
-                onClick={() => onStartOnboarding(service.standardName)}
-              >
-                <Bot size={16} className="text-orange-400" />
-                Ask AI
-              </button>
+      <div className="mt-6 space-y-2.5">
+        <ServiceDetailPrimaryButton fullWidth className="group" onClick={onPrimaryCta}>
+          {primaryCtaLabel}
+          <ArrowRight size={16} className="transition group-hover:translate-x-0.5" />
+        </ServiceDetailPrimaryButton>
+
+        {secondaryCtaLabel && onSecondaryCta && (
+          <ServiceDetailSecondaryButton fullWidth onClick={onSecondaryCta}>
+            {secondaryCtaLabel}
+          </ServiceDetailSecondaryButton>
+        )}
+
+        {featureFlags.isEnabled("cart") && service.serviceType !== "bundle" && (
+          <button
+            type="button"
+            className={`inline-flex w-full items-center justify-center gap-2 rounded-full px-6 py-3.5 text-sm font-semibold transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-dq-orange focus-visible:ring-offset-2 ${
+              hasItem(service.id)
+                ? "border border-orange-200 bg-orange-50 text-orange-700 hover:bg-orange-100"
+                : "border border-gray-200 bg-white text-dq-navy hover:border-gray-300 hover:bg-gray-50"
+            }`}
+            onClick={() => {
+              addItem(service.id);
+              toast.success("Added to cart", {
+                description: service.standardName,
+                action: { label: "View cart", onClick: openCart },
+              });
+            }}
+          >
+            {hasItem(service.id) ? (
+              <>
+                <Check size={16} />
+                In cart, add another
+              </>
+            ) : (
+              <>
+                <ShoppingCart size={16} />
+                Add to cart
+              </>
             )}
-          </div>
+          </button>
+        )}
+
+        {featureFlags.isEnabled("chatAssistant") && (
+          <button
+            type="button"
+            className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-dq-navy px-6 py-3.5 text-sm font-semibold text-white transition hover:bg-dq-navy/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-dq-orange focus-visible:ring-offset-2"
+            onClick={() => onStartOnboarding(service.standardName)}
+          >
+            <Bot size={16} className="text-orange-400" />
+            Ask AI
+          </button>
         )}
       </div>
     </article>
