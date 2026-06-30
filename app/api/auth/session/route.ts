@@ -1,5 +1,9 @@
 import { NextResponse } from "next/server";
-import { entraConfig, resolvePostLogoutRedirectUri } from "@/lib/auth/entra-config";
+import { deriveRoleForAudience } from "@/lib/auth/audience";
+import {
+  getEntraConfigForAudience,
+  resolvePostLogoutRedirectUriForAudience,
+} from "@/lib/auth/entra-config";
 import { getSessionUserFromRequest, SESSION_COOKIE_NAME } from "@/lib/auth/session";
 import { getCustomerProfileOrganisation } from "@/lib/requests/serviceRequestRepository";
 
@@ -33,19 +37,23 @@ export async function GET(request: Request) {
     .join("");
 
   let organization = user.organisation?.trim() ?? "";
-  if (!organization) {
+  if (!organization && user.audience === "customer") {
     organization = (await getCustomerProfileOrganisation(user.id)) ?? "";
   }
+
+  const role = deriveRoleForAudience(user.audience);
+  const roleTitle = user.audience === "internal" ? "DQ Operator" : "Client";
 
   return NextResponse.json({
     user: {
       id: user.id,
       name: user.displayName,
       email: user.email,
-      roleTitle: "Client",
+      roleTitle,
       organization,
       avatar: initials || "U",
-      role: "client" as const,
+      role,
+      audience: user.audience,
     },
   });
 }
@@ -53,10 +61,16 @@ export async function GET(request: Request) {
 export async function DELETE(request: Request) {
   const origin = new URL(request.url).origin;
   const wantsJson = request.headers.get("accept")?.includes("application/json");
+  const sessionUser = await getSessionUserFromRequest(request as import("next/server").NextRequest);
+  const audience = sessionUser?.audience ?? "customer";
+  const entraConfig = getEntraConfigForAudience(audience, origin);
 
   if (entraConfig.isConfigured) {
     const logoutUrl = new URL(entraConfig.logoutUrl);
-    logoutUrl.searchParams.set("post_logout_redirect_uri", resolvePostLogoutRedirectUri(origin));
+    logoutUrl.searchParams.set(
+      "post_logout_redirect_uri",
+      resolvePostLogoutRedirectUriForAudience(audience, origin),
+    );
 
     if (wantsJson) {
       return clearSessionCookies(NextResponse.json({ logoutUrl: logoutUrl.toString() }));
@@ -65,9 +79,11 @@ export async function DELETE(request: Request) {
     return clearSessionCookies(NextResponse.redirect(logoutUrl));
   }
 
+  const fallbackSignIn = audience === "internal" ? "/dq/sign-in" : "/sign-in";
+
   if (wantsJson) {
     return clearSessionCookies(NextResponse.json({ logoutUrl: null }));
   }
 
-  return clearSessionCookies(NextResponse.redirect(new URL("/sign-in", origin)));
+  return clearSessionCookies(NextResponse.redirect(new URL(fallbackSignIn, origin)));
 }

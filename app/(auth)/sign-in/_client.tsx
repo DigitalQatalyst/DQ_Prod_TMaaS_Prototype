@@ -66,6 +66,8 @@ export default function SignInPageClient() {
       const res = await fetch("/api/auth/stub-session", {
         method: "POST",
         credentials: "same-origin",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ audience: "customer" }),
       });
       if (!res.ok) {
         throw new Error("Could not start session");

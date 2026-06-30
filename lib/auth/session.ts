@@ -28,6 +28,9 @@ export function resolveTtlSeconds(): number {
   return Number.isFinite(parsed) && parsed > 0 ? parsed : DEFAULT_TTL_SECONDS;
 }
 
+import type { EntraAudience } from "@/lib/auth/entra-config";
+import { normaliseSessionAudience, type SessionAudience } from "@/lib/auth/audience";
+
 export interface SessionUser {
   id: string;
   email: string;
@@ -35,6 +38,7 @@ export interface SessionUser {
   givenName?: string;
   familyName?: string;
   organisation?: string;
+  audience: SessionAudience;
 }
 
 export async function signSessionToken(
@@ -45,6 +49,7 @@ export async function signSessionToken(
   const jwtPayload: Record<string, unknown> = {
     email: user.email,
     displayName: user.displayName,
+    audience: user.audience,
   };
   if (user.givenName !== undefined) jwtPayload["givenName"] = user.givenName;
   if (user.familyName !== undefined) jwtPayload["familyName"] = user.familyName;
@@ -67,6 +72,7 @@ export async function verifySessionToken(token: string): Promise<SessionUser | n
       email: "demo@example.com",
       displayName: "Demo User",
       organisation: "Demo Organisation",
+      audience: "customer",
     };
   }
 
@@ -81,6 +87,7 @@ export async function verifySessionToken(token: string): Promise<SessionUser | n
       email,
       displayName:
         typeof payload.displayName === "string" ? payload.displayName : email,
+      audience: normaliseSessionAudience(payload.audience),
     };
     if (typeof payload.givenName === "string") result.givenName = payload.givenName;
     if (typeof payload.familyName === "string") result.familyName = payload.familyName;

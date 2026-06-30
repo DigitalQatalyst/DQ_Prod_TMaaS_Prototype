@@ -1,19 +1,13 @@
 "use client";
 
-import DashboardLayout from "@/components/foundation/layouts/DashboardLayout";
+import { DqRequestsWorkspace } from "@/components/features/dq-requests/DqRequestsWorkspace";
 
 export default function DqQueuePage() {
   return (
-    <DashboardLayout>
-      <div className="max-w-6xl mx-auto space-y-4">
-        <div>
-          <h1 className="text-2xl font-bold tracking-tight text-navy-950">Queue</h1>
-          <p className="mt-1 text-sm text-gray-500">Service request queue management.</p>
-        </div>
-        <div className="rounded-2xl border border-gray-200 bg-white p-12 text-center">
-          <p className="text-sm text-gray-400">Full implementation coming soon.</p>
-        </div>
-      </div>
-    </DashboardLayout>
+    <DqRequestsWorkspace
+      mode="queue"
+      pageTitle="Requests Queue"
+      subtitle="Triaged customer requests across TMaaS."
+    />
   );
 }

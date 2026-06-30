@@ -2,7 +2,7 @@ import type { SessionUser } from "@/lib/auth/session";
 import { getSupabaseAdmin } from "@/lib/supabase/server";
 import { mapCatalogServiceType } from "@/lib/requests/mapServiceType";
 import { buildServiceRequestReferenceNo } from "@/lib/requests/referenceNo";
-import type { CustomerRequest, RequestTimelineEntry } from "@/lib/types/requests";
+import type { CustomerRequest, RequestStatus, RequestTimelineEntry } from "@/lib/types/requests";
 import type { Database } from "@/lib/types/database.types";
 
 type ServiceRequestInsert = Database["public"]["Tables"]["service_requests"]["Insert"];
@@ -37,6 +37,7 @@ type ServiceRequestRow = {
   variant_id: number | null;
   marketplace_slug: string | null;
   delivery_lead: string | null;
+  delivery_lead_email: string | null;
   submitted_at: string;
   updated_at: string;
 };
@@ -87,6 +88,7 @@ export function mapServiceRequestRow(
     variantId: row.variant_id ?? 0,
     userId: row.user_id ?? row.submitter_email,
     ...(row.delivery_lead ? { deliveryLead: row.delivery_lead } : {}),
+    ...(row.delivery_lead_email ? { deliveryLeadEmail: row.delivery_lead_email } : {}),
     ...(row.marketplace_slug ? { marketplaceSlug: row.marketplace_slug } : {}),
     timeline: timeline.map(mapTimelineRow),
   };
@@ -282,4 +284,179 @@ export async function getServiceRequestById(
     .order("created_at", { ascending: true });
 
   return mapServiceRequestRow(row as ServiceRequestRow, (timelineRows ?? []) as TimelineRow[]);
+}
+
+export interface DqServiceRequestListItem extends CustomerRequest {
+  submitterEmail: string;
+  customerName?: string;
+  customerOrganisation?: string;
+}
+
+type CustomerProfileRow = {
+  email: string;
+  display_name: string | null;
+  organisation: string | null;
+} | null;
+
+function mapDqServiceRequestRow(
+  row: ServiceRequestRow & { customer_profiles?: CustomerProfileRow },
+  timeline: TimelineRow[] = [],
+): DqServiceRequestListItem {
+  const request = mapServiceRequestRow(row, timeline);
+  return {
+    ...request,
+    submitterEmail: row.submitter_email,
+    ...(row.customer_profiles?.display_name
+      ? { customerName: row.customer_profiles.display_name }
+      : {}),
+    ...(row.customer_profiles?.organisation
+      ? { customerOrganisation: row.customer_profiles.organisation }
+      : {}),
+  };
+}
+
+export async function listServiceRequestsForDq(): Promise<DqServiceRequestListItem[]> {
+  const supabase = getSupabaseAdmin();
+  if (!supabase) return [];
+
+  const { data: rows, error } = await supabase
+    .from("service_requests")
+    .select("*, customer_profiles (email, display_name, organisation)")
+    .order("submitted_at", { ascending: false });
+
+  if (error || !rows?.length) {
+    if (error) console.error("[service_requests] dq list failed:", error);
+    return [];
+  }
+
+  const ids = rows.map((row) => row.id);
+  const { data: timelineRows, error: timelineError } = await supabase
+    .from("service_request_timeline")
+    .select("*")
+    .in("request_id", ids)
+    .order("created_at", { ascending: true });
+
+  if (timelineError) {
+    console.error("[service_requests] dq timeline list failed:", timelineError);
+  }
+
+  const timelineByRequest = new Map<string, TimelineRow[]>();
+  for (const row of (timelineRows ?? []) as TimelineRow[]) {
+    const existing = timelineByRequest.get(row.request_id) ?? [];
+    existing.push(row);
+    timelineByRequest.set(row.request_id, existing);
+  }
+
+  return (rows as Array<ServiceRequestRow & { customer_profiles?: CustomerProfileRow }>).map(
+    (row) => mapDqServiceRequestRow(row, timelineByRequest.get(row.id) ?? []),
+  );
+}
+
+export async function getServiceRequestByIdForDq(
+  id: string,
+): Promise<DqServiceRequestListItem | null> {
+  const supabase = getSupabaseAdmin();
+  if (!supabase) return null;
+
+  const { data: row, error } = await supabase
+    .from("service_requests")
+    .select("*, customer_profiles (email, display_name, organisation)")
+    .eq("id", id)
+    .maybeSingle();
+
+  if (error || !row) return null;
+
+  const { data: timelineRows } = await supabase
+    .from("service_request_timeline")
+    .select("*")
+    .eq("request_id", id)
+    .order("created_at", { ascending: true });
+
+  return mapDqServiceRequestRow(
+    row as ServiceRequestRow & { customer_profiles?: CustomerProfileRow },
+    (timelineRows ?? []) as TimelineRow[],
+  );
+}
+
+export interface UpdateServiceRequestForDqInput {
+  status?: RequestStatus;
+  deliveryLead?: string | null;
+  deliveryLeadEmail?: string | null;
+  actorName: string;
+  actorEmail: string;
+}
+
+export async function updateServiceRequestForDq(
+  id: string,
+  input: UpdateServiceRequestForDqInput,
+): Promise<DqServiceRequestListItem | null> {
+  const supabase = getSupabaseAdmin();
+  if (!supabase) return null;
+
+  const current = await getServiceRequestByIdForDq(id);
+  if (!current) return null;
+
+  const now = new Date().toISOString();
+  const updates: ServiceRequestUpdate = { updated_at: now };
+  const timelineInserts: TimelineInsert[] = [];
+  const actor = input.actorName.trim() || input.actorEmail;
+
+  if (input.status !== undefined && input.status !== current.status) {
+    updates.status = input.status;
+    timelineInserts.push({
+      request_id: id,
+      kind: "status_change",
+      title: "Status updated",
+      body: `Status updated by ${actor}.`,
+      actor,
+      from_status: current.status,
+      to_status: input.status,
+    });
+  }
+
+  if (input.deliveryLead !== undefined || input.deliveryLeadEmail !== undefined) {
+    const previousName = current.deliveryLead ?? null;
+    const previousEmail = current.deliveryLeadEmail ?? null;
+    const nextName =
+      input.deliveryLead === undefined
+        ? previousName
+        : input.deliveryLead?.trim() || null;
+    const nextEmail =
+      input.deliveryLeadEmail === undefined
+        ? previousEmail
+        : input.deliveryLeadEmail?.trim().toLowerCase() || null;
+
+    if (previousName !== nextName || previousEmail !== nextEmail) {
+      updates.delivery_lead = nextName;
+      updates.delivery_lead_email = nextEmail;
+      timelineInserts.push({
+        request_id: id,
+        kind: "assignment",
+        title: "Assignment updated",
+        body: nextName
+          ? `Assigned to ${nextName}${nextEmail ? ` (${nextEmail})` : ""}.`
+          : "Delivery lead unassigned.",
+        actor,
+      });
+    }
+  }
+
+  if (timelineInserts.length === 0) {
+    return current;
+  }
+
+  const { error } = await supabase.from("service_requests").update(updates).eq("id", id);
+  if (error) {
+    console.error("[service_requests] dq update failed:", error);
+    return null;
+  }
+
+  const { error: timelineError } = await supabase
+    .from("service_request_timeline")
+    .insert(timelineInserts);
+  if (timelineError) {
+    console.error("[service_request_timeline] dq update failed:", timelineError);
+  }
+
+  return getServiceRequestByIdForDq(id);
 }

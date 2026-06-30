@@ -1,36 +1,44 @@
 import { type NextRequest, NextResponse } from "next/server";
-import { entraConfig, resolveRedirectUri } from "@/lib/auth/entra-config";
+import {
+  type EntraAudience,
+  getEntraConfigForAudience,
+  resolveRedirectUriForAudience,
+} from "@/lib/auth/entra-config";
+import { buildSignInErrorUrl } from "@/lib/auth/sign-in-redirect";
 import { cryptoProvider, getMsalClient } from "@/lib/auth/entra-msal";
 
 const TEMP_COOKIE_MAX_AGE = 600;
 
-function ciamQueryParameters(): Record<string, string> | undefined {
-  if (!entraConfig.isCiam || !entraConfig.userFlowPolicy) return undefined;
-  return { p: entraConfig.userFlowPolicy };
+function ciamQueryParameters(userFlowPolicy: string | undefined): Record<string, string> | undefined {
+  if (!userFlowPolicy) return undefined;
+  return { p: userFlowPolicy };
 }
 
-function safeRelativePath(value: string | null): string {
+function safeRelativePath(value: string | null, fallback: string): string {
   if (typeof value === "string" && value.startsWith("/") && !value.startsWith("//")) {
     return value;
   }
-  return "/dashboard/overview";
+  return fallback;
 }
 
-function signInError(origin: string, code: string): NextResponse {
-  const url = new URL("/sign-in", origin);
-  url.searchParams.set("error", code);
-  return NextResponse.redirect(url);
+function signInError(origin: string, code: string, audience: EntraAudience = "customer"): NextResponse {
+  return NextResponse.redirect(buildSignInErrorUrl(origin, code, audience));
 }
 
-export async function handleOAuthLogin(req: NextRequest): Promise<Response> {
+export async function handleOAuthLogin(
+  req: NextRequest,
+  options: { audience?: EntraAudience } = {},
+): Promise<Response> {
   const origin = req.nextUrl.origin;
+  const audience = options.audience ?? "customer";
+  const entraConfig = getEntraConfigForAudience(audience, origin);
 
   if (!entraConfig.isConfigured) {
-    return signInError(origin, "entra_not_configured");
+    return signInError(origin, "entra_not_configured", audience);
   }
 
   try {
-    const redirectUri = resolveRedirectUri(origin);
+    const redirectUri = resolveRedirectUriForAudience(audience, origin);
 
     if (process.env.NODE_ENV !== "production") {
       console.info("[auth] login", {
@@ -45,11 +53,13 @@ export async function handleOAuthLogin(req: NextRequest): Promise<Response> {
     const { verifier, challenge } = await cryptoProvider.generatePkceCodes();
     const state = cryptoProvider.createNewGuid();
     const nonce = cryptoProvider.createNewGuid();
+    const returnToFallback = audience === "internal" ? "/dashboard/dq/queue" : "/dashboard/overview";
     const returnTo = safeRelativePath(
       req.nextUrl.searchParams.get("returnTo") ?? req.nextUrl.searchParams.get("redirect"),
+      returnToFallback,
     );
 
-    const ciamParams = ciamQueryParameters();
+    const ciamParams = entraConfig.isCiam ? ciamQueryParameters(entraConfig.userFlowPolicy) : undefined;
 
     const authUrl = await getMsalClient().getAuthCodeUrl({
       scopes: entraConfig.scopes,
@@ -74,9 +84,10 @@ export async function handleOAuthLogin(req: NextRequest): Promise<Response> {
     res.cookies.set("entra_nonce", nonce, cookieOptions);
     res.cookies.set("entra_return_to", returnTo, cookieOptions);
     res.cookies.set("entra_redirect_uri", redirectUri, cookieOptions);
+    res.cookies.set("entra_audience", audience, cookieOptions);
     return res;
   } catch (err) {
     console.error("[auth] login error", err);
-    return signInError(origin, "entra");
+    return signInError(origin, "entra", audience);
   }
 }

@@ -1,6 +1,7 @@
 "use client";
 
 import { createContext, useContext, useState, useEffect, ReactNode } from "react";
+import type { SessionAudience } from "@/lib/auth/audience";
 
 export type UserRole =
   | "client"
@@ -17,6 +18,7 @@ interface User {
   organization: string;
   avatar: string;
   role: UserRole;
+  audience: SessionAudience;
 }
 
 interface AuthContextValue {
@@ -35,6 +37,7 @@ const defaultUser: User = {
   organization: "",
   avatar: "DU",
   role: "client",
+  audience: "customer",
 };
 
 const AuthContext = createContext<AuthContextValue>({
@@ -93,6 +96,9 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const setUserOrganization = (organization: string) => setUser((u) => ({ ...u, organization }));
 
   const signOut = async () => {
+    const logoutAudience = user.audience;
+    const fallbackSignIn = logoutAudience === "internal" ? "/dq/sign-in" : "/sign-in";
+
     const logoutUrl =
       typeof window !== "undefined"
         ? new URL("/api/auth/session", window.location.origin).toString()
@@ -119,7 +125,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       }
     }
 
-    window.location.assign("/sign-in");
+    window.location.assign(fallbackSignIn);
   };
 
   return (

@@ -27,6 +27,7 @@ export interface CustomerRequest {
   submittedAt: string;
   updatedAt: string;
   deliveryLead?: string;
+  deliveryLeadEmail?: string;
   description: string;
   marketplaceSlug?: string;
   /** TMaaS catalog variant id (`initialServices.id`). */

@@ -1,6 +1,6 @@
 import { Clock, Compass, LayoutDashboard, type LucideIcon } from "lucide-react";
 
-export interface CustomerNavItem {
+export interface WorkspaceNavItem {
   id: string;
   name: string;
   icon: LucideIcon;
@@ -8,14 +8,14 @@ export interface CustomerNavItem {
   outOfDashboard?: boolean;
 }
 
-export interface CustomerNavSection {
+export interface WorkspaceNavSection {
   id: string;
   label: string;
-  items: CustomerNavItem[];
+  items: WorkspaceNavItem[];
 }
 
 /** DWS.01 AppSidebar-style nav sections for customer workspace. */
-export const customerNavSections: CustomerNavSection[] = [
+export const customerNavSections: WorkspaceNavSection[] = [
   {
     id: "orientation",
     label: "ORIENTATION",
