@@ -1,0 +1,57 @@
+/* DWS.01 @dbp/design-tokens sidebar nav — ported for TMaaS workspace shell */
+.workspace-shell {
+  --color-nav-accent: color-mix(in srgb, var(--color-secondary) 88%, #000000);
+  --color-navy-50: #f4f5f9;
+  --color-text: var(--color-text-primary);
+}
+
+.workspace-shell .sidebar-feature-area {
+  margin-top: 12px;
+  padding: 8px 12px 0;
+  font-size: 11px;
+  line-height: 1.4;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  color: var(--color-nav-accent);
+}
+
+.workspace-shell .sidebar-feature-group {
+  position: relative;
+  display: flex;
+  min-height: 36px;
+  width: 100%;
+  align-items: center;
+  gap: 12px;
+  border-radius: 8px;
+  padding: 8px 12px;
+  text-align: left;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--color-text-secondary);
+  transition: background-color 0.15s ease, color 0.15s ease;
+}
+
+.workspace-shell .sidebar-feature-group:hover {
+  background-color: var(--color-surface);
+  color: var(--color-primary);
+}
+
+.workspace-shell .sidebar-feature-group-active {
+  background-color: var(--color-navy-50);
+  color: var(--color-text);
+}
+
+.workspace-shell .sidebar-nav-accent {
+  position: absolute;
+  bottom: 6px;
+  left: 0;
+  top: 6px;
+  width: 2px;
+  border-radius: 0 2px 2px 0;
+  background-color: var(--color-nav-accent);
+}
+
+.workspace-shell .sidebar-footer-item {
+  font-weight: 500;
+}

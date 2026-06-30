@@ -41,6 +41,13 @@ const ROUTE_PRIORITY: { flag: keyof FeatureFlags; path: string }[] = [
   { flag: "contactUs", path: "/contact" },
 ];
 
+/** Runtime check — do not cache at module load (Next.js inlines env at build time). */
+export function isDashboardEnabled(): boolean {
+  if (process.env.NEXT_PUBLIC_FEATURE_DASHBOARD === "false") return false;
+  if (process.env.NEXT_PUBLIC_FEATURE_DASHBOARD === "true") return true;
+  return process.env.NODE_ENV !== "production";
+}
+
 // MVP defaults, only the four launch features enabled
 const DEFAULT_FEATURE_FLAGS: FeatureFlags = {
   homepage: true,
@@ -58,7 +65,7 @@ const DEFAULT_FEATURE_FLAGS: FeatureFlags = {
   chatAssistant: false,
   auth: false,
   onboarding: false,
-  dashboard: false,
+  dashboard: true,
   butlerDemo: false,
   contextSwitcher: false,
 };
@@ -71,6 +78,8 @@ class FeatureFlagService {
   }
 
   isEnabled(feature: keyof FeatureFlags): boolean {
+    if (feature === "dashboard") return isDashboardEnabled();
+    if (feature === "auth") return isDashboardEnabled() || (this.flags.auth ?? false);
     return this.flags[feature] ?? false;
   }
 

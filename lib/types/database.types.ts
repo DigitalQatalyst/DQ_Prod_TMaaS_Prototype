@@ -87,6 +87,120 @@ export interface Database {
           sort_order: number;
         };
       };
+      customer_profiles: {
+        Row: {
+          id: string;
+          email: string;
+          display_name: string | null;
+          organisation: string | null;
+          created_at: string;
+          updated_at: string;
+        };
+        Insert: {
+          id: string;
+          email: string;
+          display_name?: string | null;
+          organisation?: string | null;
+          created_at?: string;
+          updated_at?: string;
+        };
+        Update: {
+          id?: string;
+          email?: string;
+          display_name?: string | null;
+          organisation?: string | null;
+          created_at?: string;
+          updated_at?: string;
+        };
+        Relationships: [];
+      };
+      service_requests: {
+        Row: {
+          id: string;
+          reference_no: string;
+          user_id: string | null;
+          submitter_email: string;
+          title: string;
+          service_type: string;
+          status: string;
+          description: string;
+          variant_id: number | null;
+          marketplace_slug: string | null;
+          delivery_lead: string | null;
+          delivery_lead_email: string | null;
+          submitted_at: string;
+          updated_at: string;
+        };
+        Insert: {
+          id?: string;
+          reference_no: string;
+          user_id?: string | null;
+          submitter_email: string;
+          title: string;
+          service_type: string;
+          status?: string;
+          description: string;
+          variant_id?: number | null;
+          marketplace_slug?: string | null;
+          delivery_lead?: string | null;
+          delivery_lead_email?: string | null;
+          submitted_at?: string;
+          updated_at?: string;
+        };
+        Update: {
+          id?: string;
+          reference_no?: string;
+          user_id?: string | null;
+          submitter_email?: string;
+          title?: string;
+          service_type?: string;
+          status?: string;
+          description?: string;
+          variant_id?: number | null;
+          marketplace_slug?: string | null;
+          delivery_lead?: string | null;
+          delivery_lead_email?: string | null;
+          submitted_at?: string;
+          updated_at?: string;
+        };
+        Relationships: [];
+      };
+      service_request_timeline: {
+        Row: {
+          id: string;
+          request_id: string;
+          kind: string;
+          title: string;
+          body: string;
+          actor: string | null;
+          from_status: string | null;
+          to_status: string | null;
+          created_at: string;
+        };
+        Insert: {
+          id?: string;
+          request_id: string;
+          kind: string;
+          title: string;
+          body: string;
+          actor?: string | null;
+          from_status?: string | null;
+          to_status?: string | null;
+          created_at?: string;
+        };
+        Update: {
+          id?: string;
+          request_id?: string;
+          kind?: string;
+          title?: string;
+          body?: string;
+          actor?: string | null;
+          from_status?: string | null;
+          to_status?: string | null;
+          created_at?: string;
+        };
+        Relationships: [];
+      };
       bundle_items: {
         Row: {
           bundle_variant_id: number;

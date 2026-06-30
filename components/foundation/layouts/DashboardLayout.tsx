@@ -32,6 +32,7 @@ import {
   Search,
   ShoppingBag,
   ExternalLink,
+  ArrowUpRight,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
@@ -56,14 +57,20 @@ const getClientNavigationItems = (organization: string) => [
     group: "",
     items: [
       { name: "Overview", icon: LayoutDashboard, path: "/dashboard/overview", badge: null },
-      { name: "Marketplace", icon: ShoppingBag, path: "/marketplace", badge: null, external: true },
+      {
+        name: "Explore Services",
+        icon: ShoppingBag,
+        path: "/marketplace",
+        badge: null,
+        outOfDashboard: true,
+      },
     ],
   },
   {
     group: "WORKSPACE",
     items: [
       { name: "Projects", icon: Package, path: "/dashboard/services", badge: 3 },
-      { name: "Orders", icon: Package, path: "/dashboard/customer/orders", badge: 6 },
+      { name: "My Requests", icon: Package, path: "/dashboard/requests", badge: 6 },
       { name: "Notifications", icon: BellRing, path: "/dashboard/notifications", badge: 2 },
       { name: "Inbox", icon: MessageSquare, path: "/dashboard/inbox", badge: 5 },
     ],
@@ -76,7 +83,6 @@ const getClientNavigationItems = (organization: string) => [
     group: "SETTINGS & SUPPORT",
     items: [
       { name: "Settings", icon: Settings, path: "/dashboard/settings", badge: null },
-      { name: "Support", icon: Headphones, path: "/dashboard/support", badge: null },
     ],
   },
 ];
@@ -95,7 +101,6 @@ const dqNavigationItems = [
     items: [
       { name: "Organisations", icon: Building2, path: "/dashboard/organisations", badge: null },
       { name: "Settings", icon: Settings, path: "/dashboard/settings", badge: null },
-      { name: "Support", icon: Headphones, path: "/dashboard/support", badge: null },
     ],
   },
 ];
@@ -141,7 +146,6 @@ const dqFinanceNavigationItems = [
     group: "PLATFORM",
     items: [
       { name: "Settings", icon: Settings, path: "/dashboard/settings", badge: null },
-      { name: "Support", icon: Headphones, path: "/dashboard/support", badge: null },
     ],
   },
 ];
@@ -360,13 +364,16 @@ const DashboardLayout = ({ children }: DashboardLayoutProps) => {
                       const Icon = item.icon;
                       const active = isActive(item.path);
                       const isExternal = (item as { external?: boolean }).external;
+                      const outOfDashboard = (item as { outOfDashboard?: boolean }).outOfDashboard;
+                      const opensNewTab =
+                        isExternal === true && /^https?:\/\//.test(item.path);
 
                       return (
                         <Link
                           key={item.path}
                           href={item.path}
-                          target={isExternal ? "_blank" : undefined}
-                          rel={isExternal ? "noopener noreferrer" : undefined}
+                          target={opensNewTab ? "_blank" : undefined}
+                          rel={opensNewTab ? "noopener noreferrer" : undefined}
                           className="group block"
                         >
                           <motion.div
@@ -388,19 +395,30 @@ const DashboardLayout = ({ children }: DashboardLayoutProps) => {
                                   }`
                             }`}
                           >
-                            <Icon
-                              size={18}
-                              className={`transition-colors duration-200 ${
-                                active
-                                  ? "text-[#FB5535]"
-                                  : "text-navy-950/60 group-hover:text-[#FB5535]"
-                              }`}
-                            />
+                            <div className="relative">
+                              <Icon
+                                size={18}
+                                className={`transition-colors duration-200 ${
+                                  active
+                                    ? "text-[#FB5535]"
+                                    : "text-navy-950/60 group-hover:text-[#FB5535]"
+                                }`}
+                              />
+                              {(opensNewTab || outOfDashboard) && sidebarCollapsed && (
+                                <span className="pointer-events-none absolute -right-1 -top-1 rounded-full bg-white p-[1px] text-[#030F35]/55">
+                                  <ArrowUpRight size={10} strokeWidth={2} />
+                                </span>
+                              )}
+                            </div>
                             {!sidebarCollapsed && (
                               <>
                                 <span className="flex-1 text-sm">{item.name}</span>
-                                {isExternal && (
-                                  <ExternalLink size={12} className="text-navy-950/40" />
+                                {(opensNewTab || outOfDashboard) && (
+                                  <ArrowUpRight
+                                    size={14}
+                                    strokeWidth={2}
+                                    className="text-[#030F35]/55"
+                                  />
                                 )}
                                 {item.badge && (
                                   <span className="ml-auto mr-2 flex h-4 min-w-4 items-center justify-center rounded-full bg-[#FB5535]/12 px-1.5 text-[10px] font-semibold text-[#FB5535]">

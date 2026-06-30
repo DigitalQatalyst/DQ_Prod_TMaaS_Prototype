@@ -1,0 +1,61 @@
+"use client";
+
+import { useState } from "react";
+import { useAuth } from "@/contexts/AuthContext";
+import { WorkspaceSidebar } from "./WorkspaceSidebar";
+import { WorkspaceSolutionChrome } from "./WorkspaceSolutionChrome";
+import { WorkspaceFooter } from "./WorkspaceFooter";
+import { dqNavSections } from "./dqNavConfig";
+import "./workspace-tokens.css";
+import "./workspace-sidebar.css";
+
+const DQ_STUB_USER = {
+  name: "DQ Operator",
+};
+
+interface DqWorkspaceShellProps {
+  children: React.ReactNode;
+}
+
+export function DqWorkspaceShell({ children }: DqWorkspaceShellProps) {
+  const { user: authUser } = useAuth();
+  const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
+  const user = {
+    name: authUser.name === "Demo User" ? DQ_STUB_USER.name : authUser.name,
+  };
+
+  return (
+    <div className="workspace-shell flex h-screen overflow-hidden bg-[var(--color-surface)]">
+      {mobileMenuOpen && (
+        <div
+          className="fixed inset-0 z-30 bg-black/20 lg:hidden"
+          onClick={() => setMobileMenuOpen(false)}
+          aria-hidden
+        />
+      )}
+
+      <WorkspaceSidebar
+        collapsed={sidebarCollapsed}
+        mobileOpen={mobileMenuOpen}
+        onMobileClose={() => setMobileMenuOpen(false)}
+        navSections={dqNavSections}
+      />
+
+      <div className="flex min-w-0 flex-1 flex-col">
+        <WorkspaceSolutionChrome
+          user={user}
+          sidebarCollapsed={sidebarCollapsed}
+          onToggleSidebar={() => setSidebarCollapsed((c) => !c)}
+          onMobileMenuToggle={() => setMobileMenuOpen((o) => !o)}
+        />
+        <main className="min-h-0 flex-1 overflow-x-hidden overflow-y-auto bg-[var(--color-surface)]">
+          {children}
+        </main>
+        <WorkspaceFooter />
+      </div>
+    </div>
+  );
+}
+

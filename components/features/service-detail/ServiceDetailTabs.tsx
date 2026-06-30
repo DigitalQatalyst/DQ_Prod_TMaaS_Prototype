@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { featureFlags } from "@/lib/featureFlags";
+import { buildAskAboutServicePath } from "@/lib/requestService";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import type { DeliveryProcess } from "./ServiceDetailDeliverySection";
 import { ServiceDetailDeliverySection } from "./ServiceDetailDeliverySection";
@@ -73,10 +74,10 @@ export function ServiceDetailTabs({
             {featureFlags.isEnabled("contactUs") ? (
               <>
                 <Link
-                  href="/contact"
+                  href={buildAskAboutServicePath(service)}
                   className="font-semibold text-dq-navy underline decoration-dq-navy/30 underline-offset-2 transition-colors hover:text-dq-orange hover:decoration-dq-orange"
                 >
-                  Talk to our team
+                  Ask about this service
                 </Link>{" "}
                 for a detailed plan.
               </>

@@ -22,13 +22,17 @@ describe("contactFormPrefill", () => {
     expect(
       buildContactPath(
         {
+          id: 42,
+          slug: "ai-readiness-assessment",
           standardName: "AI Readiness Assessment",
           serviceType: "advisory",
           collection: "ai",
         } as Parameters<typeof buildContactPath>[0],
         "quote"
       )
-    ).toBe("/contact?service=AI+Readiness+Assessment&type=advisory&collection=ai&intent=quote");
+    ).toBe(
+      "/contact?service=AI+Readiness+Assessment&type=advisory&collection=ai&intent=quote&variantId=42&slug=ai-readiness-assessment"
+    );
   });
 
   it("returns enquiry defaults for assess services", () => {

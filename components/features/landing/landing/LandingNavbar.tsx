@@ -4,7 +4,6 @@ import { Suspense, useState } from "react";
 import Link from "next/link";
 import { usePathname, useSearchParams } from "next/navigation";
 import { Menu, X } from "lucide-react";
-import { Button } from "@/components/ui/button";
 import TMaaSLogo from "@/components/features/landing/TMaaSLogo";
 import { btnPrimary } from "@/lib/brandAccent";
 import { NAV_BROWSE_MARKETPLACE_LABEL } from "@/lib/brandLinks";
@@ -14,6 +13,7 @@ import {
 } from "@/lib/launchOffering";
 import { featureFlags } from "@/lib/featureFlags";
 import { cn } from "@/lib/utils";
+import { NavAuthActions } from "@/components/foundation/navigation/NavAuthActions";
 
 const NAV_LINKS = [
   {
@@ -53,21 +53,7 @@ const LandingNavbarInner = () => {
         </div>
 
         <div className="flex items-center gap-3 md:gap-4">
-          {featureFlags.isEnabled("auth") && (
-            <div className="hidden items-center gap-3 md:flex">
-              <Link
-                href="/sign-in"
-                className="px-2 text-sm font-medium text-gray-600 transition-colors hover:text-dq-navy"
-              >
-                Log in
-              </Link>
-              <Link href="/sign-in">
-                <Button size="sm" className={cn(btnPrimary, "px-5")}>
-                  Get Started
-                </Button>
-              </Link>
-            </div>
-          )}
+          <NavAuthActions layout="inline" slot="sign-in" />
 
           {featureFlags.isEnabled("contactUs") && (
             <Link
@@ -81,6 +67,8 @@ const LandingNavbarInner = () => {
               {LAUNCH_ADVISORY_NAV_CTA_LABEL}
             </Link>
           )}
+
+          <NavAuthActions layout="inline" slot="account" />
 
           <button
             type="button"
@@ -105,20 +93,11 @@ const LandingNavbarInner = () => {
               {link.label}
             </Link>
           ))}
-          {featureFlags.isEnabled("auth") && (
-            <>
-              <Link
-                href="/sign-in"
-                className="border-b border-gray-100 py-3 text-lg font-medium text-dq-navy"
-                onClick={() => setMobileOpen(false)}
-              >
-                Log in
-              </Link>
-              <Link href="/sign-in" onClick={() => setMobileOpen(false)} className="mt-4">
-                <Button className={cn(btnPrimary, "w-full py-3")}>Get Started</Button>
-              </Link>
-            </>
-          )}
+          <NavAuthActions
+            layout="mobile"
+            slot="sign-in"
+            onNavigate={() => setMobileOpen(false)}
+          />
           {featureFlags.isEnabled("contactUs") && (
             <Link
               href={launchAdvisoryPath}
@@ -128,6 +107,11 @@ const LandingNavbarInner = () => {
               {LAUNCH_ADVISORY_NAV_CTA_LABEL}
             </Link>
           )}
+          <NavAuthActions
+            layout="mobile"
+            slot="account"
+            onNavigate={() => setMobileOpen(false)}
+          />
         </div>
       )}
     </>
