@@ -33,7 +33,6 @@ export function NavAuthActions({
 }: NavAuthActionsProps) {
   const { user, isAuthenticated, isLoading, signOut } = useAuth();
 
-  if (!featureFlags.isEnabled("auth")) return null;
   if (isLoading) return null;
   if (slot === "sign-in" && isAuthenticated) return null;
   if (slot === "account" && !isAuthenticated) return null;
@@ -45,7 +44,7 @@ export function NavAuthActions({
         className={cn(
           btnSecondary,
           layout === "mobile" ? "mt-3 w-full py-3 text-center" : "px-4 py-2 text-sm",
-          layout === "inline" && "hidden md:inline-flex",
+          layout === "inline" && "inline-flex",
           className
         )}
         {...(onNavigate ? { onClick: onNavigate } : {})}
@@ -58,14 +57,19 @@ export function NavAuthActions({
   if (layout === "mobile") {
     return (
       <div className={cn("mt-3 space-y-2", className)}>
-        <Link
-          href="/dashboard/overview"
-          className={cn(btnSecondary, "flex w-full items-center justify-center gap-2 py-3 text-center")}
-          {...(onNavigate ? { onClick: onNavigate } : {})}
-        >
-          <LayoutDashboard size={16} aria-hidden />
-          Dashboard
-        </Link>
+        {featureFlags.isEnabled("dashboard") ? (
+          <Link
+            href="/dashboard/overview"
+            className={cn(
+              btnSecondary,
+              "flex w-full items-center justify-center gap-2 py-3 text-center",
+            )}
+            {...(onNavigate ? { onClick: onNavigate } : {})}
+          >
+            <LayoutDashboard size={16} aria-hidden />
+            Dashboard
+          </Link>
+        ) : null}
         <button
           type="button"
           onClick={() => {
@@ -105,13 +109,17 @@ export function NavAuthActions({
           </div>
         </DropdownMenuLabel>
         <DropdownMenuSeparator />
-        <DropdownMenuItem asChild>
-          <Link href="/dashboard/overview" className="flex cursor-pointer items-center gap-2">
-            <LayoutDashboard size={16} aria-hidden />
-            Dashboard
-          </Link>
-        </DropdownMenuItem>
-        <DropdownMenuSeparator />
+        {featureFlags.isEnabled("dashboard") ? (
+          <>
+            <DropdownMenuItem asChild>
+              <Link href="/dashboard/overview" className="flex cursor-pointer items-center gap-2">
+                <LayoutDashboard size={16} aria-hidden />
+                Dashboard
+              </Link>
+            </DropdownMenuItem>
+            <DropdownMenuSeparator />
+          </>
+        ) : null}
         <DropdownMenuItem
           className="flex cursor-pointer items-center gap-2 text-red-600 focus:text-red-600"
           onSelect={(event) => {
