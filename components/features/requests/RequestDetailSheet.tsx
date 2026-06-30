@@ -10,6 +10,7 @@ import {
 } from "@/components/ui/sheet";
 import type { CustomerRequest } from "@/lib/types/requests";
 import { formatRequestDate } from "@/lib/requests/format";
+import { useRequestDetailCopy } from "@/lib/hooks/useRequestDetailCopy";
 import { RequestStatusBadge } from "./RequestStatusBadge";
 import { ServiceTypeBadge } from "./ServiceTypeBadge";
 import { RequestStatusStepper } from "./RequestStatusStepper";
@@ -22,6 +23,8 @@ interface RequestDetailSheetProps {
 }
 
 export function RequestDetailSheet({ request, open, onOpenChange }: RequestDetailSheetProps) {
+  const { additionalDetails, marketplaceHref } = useRequestDetailCopy(request);
+
   if (!request) return null;
 
   return (
@@ -83,20 +86,28 @@ export function RequestDetailSheet({ request, open, onOpenChange }: RequestDetai
             </div>
           </div>
 
-          <div>
-            <p className="text-[11px] font-semibold uppercase tracking-wider text-navy-950/40">
-              Description
-            </p>
-            <p className="mt-2 text-sm leading-relaxed text-navy-950/80">{request.description}</p>
-            {request.marketplaceSlug && (
+          {marketplaceHref ? (
+            <div>
+              <p className="text-[11px] font-semibold uppercase tracking-wider text-navy-950/40">
+                About this service
+              </p>
               <Link
-                href={`/marketplace/${request.variantId}`}
+                href={marketplaceHref}
                 className="mt-2 inline-flex items-center gap-1 text-sm font-semibold text-[var(--color-primary)] hover:underline"
               >
                 View on marketplace
                 <ExternalLink size={14} />
               </Link>
-            )}
+            </div>
+          ) : null}
+
+          <div>
+            <p className="text-[11px] font-semibold uppercase tracking-wider text-navy-950/40">
+              Additional details
+            </p>
+            <p className="mt-2 text-sm leading-relaxed text-navy-950/80">
+              {additionalDetails ?? "No additional details provided."}
+            </p>
           </div>
 
           <div>

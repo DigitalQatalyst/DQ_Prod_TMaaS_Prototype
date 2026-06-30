@@ -105,7 +105,10 @@ function buildRequestFromService(
     submittedAt,
     updatedAt,
     ...(deliveryLead ? { deliveryLead } : {}),
-    description: service.description,
+    description:
+      index % 2 === 0
+        ? "We are targeting a Q3 start and need support aligning stakeholders before kick-off."
+        : "Looking for guidance on scope and timeline for our first phase.",
     marketplaceSlug: service.slug,
     variantId: service.id,
     userId: DEMO_CUSTOMER_USER_ID,

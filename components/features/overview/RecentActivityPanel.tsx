@@ -14,6 +14,7 @@ import { cn } from "@/lib/utils";
 interface RecentActivityPanelProps {
   items: CustomerActivityItem[];
   className?: string;
+  isLoading?: boolean;
 }
 
 function activityVisual(kind: RequestTimelineEntry["kind"]): {
@@ -33,10 +34,27 @@ function activityVisual(kind: RequestTimelineEntry["kind"]): {
 }
 
 /** Overview rail — latest activity across all customer requests. */
-export function RecentActivityPanel({ items, className }: RecentActivityPanelProps) {
+export function RecentActivityPanel({
+  items,
+  className,
+  isLoading = false,
+}: RecentActivityPanelProps) {
   return (
     <RailSection title="Recent activity" className={cn(className)}>
-      {items.length === 0 ? (
+      {isLoading ? (
+        <ul className="divide-y divide-gray-100" aria-busy="true" aria-label="Loading activity">
+          {Array.from({ length: 3 }, (_, index) => (
+            <li key={index} className="flex gap-3 py-3 first:pt-0 last:pb-0" aria-hidden="true">
+              <div className="h-8 w-8 shrink-0 animate-pulse rounded-lg bg-[var(--color-border-subtle)]" />
+              <div className="min-w-0 flex-1 space-y-2">
+                <div className="h-4 w-full max-w-[200px] animate-pulse rounded bg-[var(--color-border-subtle)]" />
+                <div className="h-3 w-full max-w-[160px] animate-pulse rounded bg-[var(--color-border-subtle)]" />
+                <div className="h-2.5 w-16 animate-pulse rounded bg-[var(--color-border-subtle)]" />
+              </div>
+            </li>
+          ))}
+        </ul>
+      ) : items.length === 0 ? (
         <p className="text-sm text-[var(--color-text-muted)]">No activity yet.</p>
       ) : (
         <ul className="divide-y divide-gray-100">

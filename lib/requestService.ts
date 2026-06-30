@@ -1,5 +1,6 @@
 import type { ServiceProduct } from "@/lib/types/serviceProduct";
 import { parseServiceContactParams, type ServiceContactParams } from "@/lib/contactFormPrefill";
+import { buildStoredRequestDescription } from "@/lib/requests/customerRequestNotes";
 
 export const REQUEST_SERVICE_CTA_LABEL = "Request service";
 export const ASK_ABOUT_SERVICE_CTA_LABEL = "Ask about this service";
@@ -46,9 +47,7 @@ export function parseRequestServiceParams(
 }
 
 export function buildRequestServiceDescription(serviceName: string, notes?: string): string {
-  const trimmed = notes?.trim();
-  if (trimmed) return trimmed;
-  return `Service requested via TMaaS marketplace: ${serviceName}`;
+  return buildStoredRequestDescription(serviceName, notes);
 }
 
 /** Send guests to sign-in, then back to the protected request flow. */

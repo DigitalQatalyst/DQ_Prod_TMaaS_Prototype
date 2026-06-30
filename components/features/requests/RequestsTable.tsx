@@ -16,6 +16,8 @@ interface RequestsTableProps {
   onRowClick: (request: CustomerRequest) => void;
   selectedId?: string | undefined;
   variant?: "full" | "overview";
+  isLoading?: boolean;
+  skeletonRowCount?: number;
 }
 
 function SortIcon({
@@ -77,6 +79,37 @@ function SortableHeader({
   );
 }
 
+function TableSkeletonRows({
+  rowCount,
+  columnCount,
+}: {
+  rowCount: number;
+  columnCount: number;
+}) {
+  return (
+    <>
+      {Array.from({ length: rowCount }, (_, rowIndex) => (
+        <tr
+          key={rowIndex}
+          className="border-b border-[var(--color-border-subtle)] bg-[var(--color-surface-2)]"
+          aria-hidden="true"
+        >
+          {Array.from({ length: columnCount }, (_, colIndex) => (
+            <td key={colIndex} className="px-4 py-2.5">
+              <div
+                className={cn(
+                  "h-4 animate-pulse rounded bg-[var(--color-border-subtle)]",
+                  colIndex === 0 && "max-w-[240px]"
+                )}
+              />
+            </td>
+          ))}
+        </tr>
+      ))}
+    </>
+  );
+}
+
 /** DWS.01 EntityList table — bordered card, sortable headers, row selection. */
 export function RequestsTable({
   requests,
@@ -86,7 +119,71 @@ export function RequestsTable({
   onRowClick,
   selectedId,
   variant = "full",
+  isLoading = false,
+  skeletonRowCount = 5,
 }: RequestsTableProps) {
+  const columnCount = variant === "full" ? 5 : 3;
+
+  if (isLoading) {
+    return (
+      <div
+        className="w-full overflow-x-auto rounded-[var(--radius-card)] border border-[var(--color-border-default)] bg-[var(--color-surface-2)] shadow-[var(--shadow-sm)]"
+        aria-busy="true"
+        aria-label="Loading requests"
+      >
+        <table className="w-full border-collapse text-sm text-[var(--color-text-primary)]">
+          <thead>
+            <tr className="border-b border-[var(--color-border-subtle)] bg-[var(--color-surface)]">
+              <SortableHeader
+                label="Request"
+                field="title"
+                sortField={sortField}
+                sortDirection={sortDirection}
+                onSort={onSort}
+                className="w-[34%]"
+              />
+              <SortableHeader
+                label="Service Type"
+                field="serviceType"
+                sortField={sortField}
+                sortDirection={sortDirection}
+                onSort={onSort}
+              />
+              {variant === "full" && (
+                <SortableHeader
+                  label="Submitted"
+                  field="submittedAt"
+                  sortField={sortField}
+                  sortDirection={sortDirection}
+                  onSort={onSort}
+                />
+              )}
+              <SortableHeader
+                label="Status"
+                field="status"
+                sortField={sortField}
+                sortDirection={sortDirection}
+                onSort={onSort}
+              />
+              {variant === "full" && (
+                <SortableHeader
+                  label="Request ID"
+                  field="referenceNo"
+                  sortField={sortField}
+                  sortDirection={sortDirection}
+                  onSort={onSort}
+                />
+              )}
+            </tr>
+          </thead>
+          <tbody>
+            <TableSkeletonRows rowCount={skeletonRowCount} columnCount={columnCount} />
+          </tbody>
+        </table>
+      </div>
+    );
+  }
+
   if (requests.length === 0) {
     return (
       <div className="rounded-[var(--radius-card)] border border-[var(--color-border-default)] bg-[var(--color-surface-2)] px-6 py-16 text-center shadow-[var(--shadow-sm)]">

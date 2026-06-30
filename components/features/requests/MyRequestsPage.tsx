@@ -61,7 +61,7 @@ export function MyRequestsPage({ useMockData = false }: { useMockData?: boolean 
   return (
     <WorkingLayout
       pageTitle="My Requests"
-      subtitle="Track and manage all your TMaaS service requests and advisory engagements."
+      subtitle="Search, filter, and track every service request you've submitted."
       headerClassName="pt-5 pb-4"
     >
       <div className="mb-3 flex flex-wrap items-center justify-between gap-3 rounded-[var(--radius-card)] border border-[var(--color-border-subtle)] bg-[var(--color-surface-2)] px-4 py-3 shadow-[var(--shadow-sm)]">
@@ -100,6 +100,8 @@ export function MyRequestsPage({ useMockData = false }: { useMockData?: boolean 
           onSort={toggleSort}
           onRowClick={handleRowClick}
           selectedId={selectedRequest?.id}
+          isLoading={isLoading}
+          skeletonRowCount={pageSize}
         />
 
         <RequestsPagination

@@ -1,9 +1,10 @@
-import type { CustomerOverviewStats } from "@/lib/hooks/useCustomerOverviewStats";
+import type { CustomerOverviewStats } from "@/lib/requests/customerOverview";
 import { cn } from "@/lib/utils";
 
 interface OverviewStatsRowProps {
   stats: CustomerOverviewStats;
   className?: string;
+  isLoading?: boolean;
 }
 
 type StatTone = "primary" | "success" | "info";
@@ -25,25 +26,34 @@ function StatTile({
   value,
   subLabel,
   tone = "primary",
+  isLoading = false,
 }: {
   label: string;
   value: string | number;
   subLabel?: string;
   tone?: StatTone;
+  isLoading?: boolean;
 }) {
   return (
     <div className="rounded-[var(--radius-card)] border border-[var(--color-border-subtle)] bg-[var(--color-surface-2)] px-5 py-4 shadow-[var(--shadow-sm)]">
       <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.12em] text-[var(--color-text-secondary)]">
         {label}
       </p>
-      <p
-        className={cn(
-          "mt-2 font-mono text-3xl font-bold tabular-nums leading-none",
-          toneClass(tone)
-        )}
-      >
-        {value}
-      </p>
+      {isLoading ? (
+        <div
+          className="mt-2 h-9 w-16 animate-pulse rounded bg-[var(--color-border-subtle)]"
+          aria-hidden="true"
+        />
+      ) : (
+        <p
+          className={cn(
+            "mt-2 font-mono text-3xl font-bold tabular-nums leading-none",
+            toneClass(tone)
+          )}
+        >
+          {value}
+        </p>
+      )}
       {subLabel ? (
         <p className="mt-1 text-xs text-[var(--color-text-muted)]">{subLabel}</p>
       ) : null}
@@ -69,13 +79,23 @@ const STAT_TILES = [
   },
 ];
 
-export function OverviewStatsRow({ stats, className }: OverviewStatsRowProps) {
+export function OverviewStatsRow({ stats, className, isLoading = false }: OverviewStatsRowProps) {
   return (
-    <div className={cn("grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3", className)}>
+    <div
+      className={cn("grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3", className)}
+      aria-busy={isLoading}
+    >
       {STAT_TILES.map(({ key, label, tone }) => {
         const stat = stats[key];
         return (
-          <StatTile key={key} label={label} value={stat.value} tone={tone} subLabel={stat.hint} />
+          <StatTile
+            key={key}
+            label={label}
+            value={stat.value}
+            tone={tone}
+            subLabel={stat.hint}
+            isLoading={isLoading}
+          />
         );
       })}
     </div>

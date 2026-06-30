@@ -24,6 +24,7 @@ import {
 } from "@/components/ui/select";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useDqStaffUsers } from "@/lib/hooks/useDqStaffUsers";
+import { useRequestDetailCopy } from "@/lib/hooks/useRequestDetailCopy";
 import { REQUEST_STATUS_LABELS, type RequestStatus } from "@/lib/types/requests";
 import { UNASSIGNED_OWNER_VALUE } from "@/lib/types/dqStaff";
 
@@ -110,6 +111,7 @@ export function DqRequestDetailPanel({
   }, [request]);
 
   const customerLabel = getDqRequestCustomerLabel(localRequest);
+  const { additionalDetails, marketplaceHref } = useRequestDetailCopy(localRequest);
   const canGoPrevious = index > 0;
   const canGoNext = index < total - 1;
   const nextStage = getNextDqFlowStage(localRequest.status);
@@ -381,21 +383,21 @@ export function DqRequestDetailPanel({
                 <DetailField label="Last Updated">
                   {formatRequestDate(localRequest.updatedAt)}
                 </DetailField>
-                <DetailField label="Description">
-                  <p className="whitespace-pre-wrap text-[var(--color-text-secondary)]">
-                    {localRequest.description}
-                  </p>
-                </DetailField>
-                {localRequest.marketplaceSlug ? (
-                  <DetailField label="Marketplace">
+                {marketplaceHref ? (
+                  <DetailField label="About this service">
                     <Link
-                      href={`/marketplace/${localRequest.marketplaceSlug}`}
+                      href={marketplaceHref}
                       className="font-medium text-[var(--color-primary)] hover:underline"
                     >
-                      View service
+                      View on marketplace
                     </Link>
                   </DetailField>
                 ) : null}
+                <DetailField label="Additional details">
+                  <p className="whitespace-pre-wrap text-[var(--color-text-secondary)]">
+                    {additionalDetails ?? "No additional details provided."}
+                  </p>
+                </DetailField>
               </div>
 
               <div className="space-y-4">

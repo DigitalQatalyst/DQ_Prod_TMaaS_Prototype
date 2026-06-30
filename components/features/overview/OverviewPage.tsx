@@ -26,10 +26,9 @@ function resolveFirstName(authName: string): string {
 /** Customer Overview — welcome, then two columns: metrics + table | quick actions. */
 export function OverviewPage() {
   const { user } = useAuth();
-  const stats = useCustomerOverviewStats();
-  const recentActivity = useCustomerRecentActivity();
   const {
     requests,
+    allRequests,
     totalCount,
     page,
     pageSize,
@@ -37,7 +36,10 @@ export function OverviewPage() {
     sortField,
     sortDirection,
     toggleSort,
+    isLoading,
   } = useCustomerRequests({ pageSize: 5 });
+  const stats = useCustomerOverviewStats(allRequests);
+  const recentActivity = useCustomerRecentActivity(allRequests);
 
   const [selectedRequest, setSelectedRequest] = useState<CustomerRequest | null>(null);
   const [sheetOpen, setSheetOpen] = useState(false);
@@ -56,13 +58,13 @@ export function OverviewPage() {
 
   return (
     <WorkingLayout
-      pageTitle="Overview"
-      subtitle={`Welcome back, ${firstName} · Manage your TMaaS requests and advisory engagements`}
+      pageTitle={`Welcome back, ${firstName}`}
+      subtitle="Your open requests, recent updates, and quick actions in one place."
       headerClassName="pt-5 pb-4"
     >
       <div className="flex flex-col gap-6 xl:flex-row xl:items-start">
         <div className="min-w-0 flex-1 space-y-6">
-          <OverviewStatsRow stats={stats} />
+          <OverviewStatsRow stats={stats} isLoading={isLoading} />
 
           <div className="flex flex-col gap-3" data-testid="entity-list">
             <div className="flex flex-wrap items-start justify-between gap-3">
@@ -91,6 +93,8 @@ export function OverviewPage() {
               onSort={toggleSort}
               onRowClick={handleRowClick}
               selectedId={selectedRequest?.id}
+              isLoading={isLoading}
+              skeletonRowCount={pageSize}
             />
 
             <RequestsPagination
@@ -104,13 +108,13 @@ export function OverviewPage() {
 
         <aside className="hidden w-full shrink-0 space-y-4 xl:block xl:w-[280px]">
           <QuickActionsPanel />
-          <RecentActivityPanel items={recentActivity} />
+          <RecentActivityPanel items={recentActivity} isLoading={isLoading} />
         </aside>
       </div>
 
       <div className="mt-6 space-y-4 xl:hidden">
         <QuickActionsPanel />
-        <RecentActivityPanel items={recentActivity} />
+        <RecentActivityPanel items={recentActivity} isLoading={isLoading} />
       </div>
 
       <RequestDetailSheet

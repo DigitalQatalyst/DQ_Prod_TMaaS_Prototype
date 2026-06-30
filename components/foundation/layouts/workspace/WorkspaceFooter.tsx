@@ -16,12 +16,6 @@ export function WorkspaceFooter() {
         <Link href="/legal/terms" className="hover:text-[var(--color-text-secondary)]">
           Terms
         </Link>
-        <a
-          href="mailto:info@digitalqatalyst.com"
-          className="hover:text-[var(--color-text-secondary)]"
-        >
-          Support
-        </a>
       </nav>
     </footer>
   );
