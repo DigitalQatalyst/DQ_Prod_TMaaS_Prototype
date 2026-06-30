@@ -62,11 +62,6 @@ export async function middleware(request: NextRequest) {
     return NextResponse.redirect(new URL("/", request.url));
   }
 
-  // Legal hub + FAQ are post-MVP; privacy and terms remain public
-  if (isLegalHubPath(pathname) && !featureFlags.isEnabled("legal")) {
-    return NextResponse.redirect(new URL("/", request.url));
-  }
-
   return response;
 }
 
