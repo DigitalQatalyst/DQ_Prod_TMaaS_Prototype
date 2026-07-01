@@ -6,10 +6,10 @@ import { usePathname, useSearchParams } from "next/navigation";
 import { Menu, X } from "lucide-react";
 import TMaaSLogo from "@/components/features/landing/TMaaSLogo";
 import { btnPrimary } from "@/lib/brandAccent";
-import { NAV_BROWSE_MARKETPLACE_LABEL } from "@/lib/brandLinks";
+import { NAV_MARKETPLACE_LINK_LABEL } from "@/lib/brandLinks";
 import {
-  LAUNCH_ADVISORY_NAV_CTA_LABEL,
-  buildLaunchAdvisoryContactPath,
+  DISCOVERY_SESSION_CTA_LABEL,
+  buildDiscoverySessionContactPath,
 } from "@/lib/launchOffering";
 import { featureFlags } from "@/lib/featureFlags";
 import { cn } from "@/lib/utils";
@@ -17,7 +17,7 @@ import { NavAuthActions } from "@/components/foundation/navigation/NavAuthAction
 
 const NAV_LINKS = [
   {
-    label: NAV_BROWSE_MARKETPLACE_LABEL,
+    label: NAV_MARKETPLACE_LINK_LABEL,
     href: "/marketplace",
     flag: "marketplace" as const,
   },
@@ -27,9 +27,9 @@ const LandingNavbarInner = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
   const pathname = usePathname();
   const searchParams = useSearchParams();
-  const launchAdvisoryPath = buildLaunchAdvisoryContactPath();
-  const isOnLaunchAdvisory =
-    pathname.startsWith("/contact") && searchParams.get("offering") === "launch-advisory";
+  const discoveryPath = buildDiscoverySessionContactPath();
+  const isOnDiscovery =
+    pathname.startsWith("/contact") && searchParams.get("intent") === "consultation";
 
   const visibleLinks = NAV_LINKS.filter((link) => !link.flag || featureFlags.isEnabled(link.flag));
 
@@ -57,14 +57,14 @@ const LandingNavbarInner = () => {
 
           {featureFlags.isEnabled("contactUs") && (
             <Link
-              href={launchAdvisoryPath}
+              href={discoveryPath}
               className={cn(
                 btnPrimary,
                 "hidden px-4 py-2 md:inline-flex",
-                isOnLaunchAdvisory && "ring-2 ring-dq-orange ring-offset-2"
+                isOnDiscovery && "ring-2 ring-dq-orange ring-offset-2"
               )}
             >
-              {LAUNCH_ADVISORY_NAV_CTA_LABEL}
+              {DISCOVERY_SESSION_CTA_LABEL}
             </Link>
           )}
 
@@ -100,11 +100,11 @@ const LandingNavbarInner = () => {
           />
           {featureFlags.isEnabled("contactUs") && (
             <Link
-              href={launchAdvisoryPath}
+              href={discoveryPath}
               onClick={() => setMobileOpen(false)}
               className={cn(btnPrimary, "mt-3 w-full py-3 text-center")}
             >
-              {LAUNCH_ADVISORY_NAV_CTA_LABEL}
+              {DISCOVERY_SESSION_CTA_LABEL}
             </Link>
           )}
           <NavAuthActions

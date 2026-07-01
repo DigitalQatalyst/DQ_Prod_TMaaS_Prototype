@@ -1,5 +1,4 @@
 import { Clock, CircleDollarSign, RefreshCw, type LucideIcon } from "lucide-react";
-import { PLATFORM_NAME, PLATFORM_HERO_SUBCOPY } from "@/lib/brandLinks";
 
 export type ChallengeCard = {
   Icon: LucideIcon;
@@ -7,26 +6,27 @@ export type ChallengeCard = {
   body: string;
 };
 
-export const CHALLENGE_EYEBROW = "The challenge";
+export const CHALLENGE_EYEBROW = "The problem";
 
-export const CHALLENGE_HEADLINE = "Digital transformation is slow, costly, and hard to scale";
+export const CHALLENGE_HEADLINE = "Why transformation programmes stall";
 
 export const CHALLENGE_CARDS: ChallengeCard[] = [
   {
     Icon: Clock,
     title: "Slow to start",
-    body: "Consultant-led programmes take months before anything ships. Every project starts from scratch.",
+    body: "Programmes take months to start. Every engagement begins from a blank page. Ready-to-launch blueprints get most engagements live in under a day.",
   },
   {
     Icon: CircleDollarSign,
     title: "Expensive and unclear",
-    body: "Open-ended budgets and hidden costs make it hard to see value or know what to fund next.",
+    body: "Costs are open-ended and hard to predict until the work is already under way. Every service is priced before you commit — from $1k, fixed scope.",
   },
   {
     Icon: RefreshCw,
     title: "Hard to adapt",
-    body: "Disconnected tools and teams can't keep up when business priorities change.",
+    body: "Disconnected tools and teams cannot keep pace when priorities change. Modular services activate independently, so scope can flex without renegotiating a master contract.",
   },
 ];
 
-export const CHALLENGE_CLOSING = `${PLATFORM_NAME} fixes this — ${PLATFORM_HERO_SUBCOPY.replace(/^Transformation Management as a Service \(TMaaS\) is /, "")}`;
+export const CHALLENGE_CLOSING =
+  "Each of these is a known failure point in consultant-led delivery. Here is what TMaaS does differently for each one.";

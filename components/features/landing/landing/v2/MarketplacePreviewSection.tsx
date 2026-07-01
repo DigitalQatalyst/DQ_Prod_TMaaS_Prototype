@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { ArrowRight, Monitor, Workflow, Shield, BarChart2, type LucideIcon } from "lucide-react";
-import { marketplaceCoreCapabilities } from "@/data/marketplaceNavigation"; // TODO: Task 9 — wire up data;
+import { marketplaceCoreCapabilities } from "@/data/marketplaceNavigation";
 
 const CATEGORY_ICONS: Record<string, LucideIcon> = {
   experience: Monitor,
@@ -10,19 +10,19 @@ const CATEGORY_ICONS: Record<string, LucideIcon> = {
 };
 
 const CATEGORY_DESCRIPTIONS: Record<string, string> = {
-  experience: "Customer portals, apps, and digital experiences built to scale.",
-  operations: "Workflows and automation that help teams work smarter.",
-  security: "Cloud, security, and DevOps for compliant enterprise delivery.",
-  ai: "Data, analytics, and AI services that turn insight into action.",
+  experience: "Portals, apps, digital experiences",
+  operations: "Workflows and automation",
+  security: "Cloud, security, compliant delivery",
+  ai: "Data, analytics, and AI services",
 };
 
 const MarketplacePreviewSection = () => {
   return (
     <section id="marketplace-preview" className="bg-gray-50 px-5 py-24 md:px-8 lg:px-10">
       <div className="mx-auto max-w-[1200px]">
-        <p className="mb-4 dq-eyebrow">The marketplace</p>
+        <p className="mb-4 dq-eyebrow">Once you know what you need</p>
         <h2 className="mb-4 max-w-2xl text-4xl font-semibold tracking-tight text-dq-navy md:text-5xl">
-          Browse digital transformation services by category.
+          Browse by category
         </h2>
         <p className="mb-12 max-w-xl text-lg text-gray-600">
           Four capability areas. One catalogue. Pick what matters most and explore ready-to-launch
@@ -36,7 +36,7 @@ const MarketplacePreviewSection = () => {
             return (
               <Link
                 key={id}
-                href="/marketplace"
+                href={`/marketplace?collection=${id}`}
                 className="group flex items-center gap-4 rounded-2xl border border-gray-200 bg-white p-6 outline-none transition-all duration-300 hover:border-dq-orange hover:shadow-xl focus-visible:ring-2 focus-visible:ring-dq-orange focus-visible:ring-offset-2"
               >
                 <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-navy-50 text-dq-navy transition-colors group-hover:bg-dq-orange group-hover:text-white">

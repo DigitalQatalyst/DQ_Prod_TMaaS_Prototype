@@ -1,30 +1,32 @@
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
+import { buildDiscoverySessionContactPath } from "@/lib/launchOffering";
+import { NAV_BROWSE_MARKETPLACE_LABEL } from "@/lib/brandLinks";
 
 const JOURNEY_STEPS = [
   {
     num: "01",
     suite: "Discover",
-    title: "Browse the marketplace",
-    body: "Find services and blueprints by goal, industry, and outcome. Pricing is clear from the start.",
-    linkLabel: "Browse services",
-    href: "/marketplace",
+    title: "Tell us the goal",
+    body: "Answer a few questions about your priority and constraints. We match you to the services and blueprint that fit, instead of a generic catalogue search.",
+    linkLabel: "Book a discovery session",
+    href: buildDiscoverySessionContactPath(),
   },
   {
     num: "02",
     suite: "Evaluate",
-    title: "Compare your options",
-    body: "Review scope, timelines, and bundles. Use AI-guided exploration to shortlist what fits.",
-    linkLabel: "Compare services",
+    title: "See scope and price",
+    body: "Review the fixed scope, timeline, and price for each matched service before you talk to anyone. Compare bundles where more than one fits.",
+    linkLabel: NAV_BROWSE_MARKETPLACE_LABEL,
     href: "/marketplace",
   },
   {
     num: "03",
     suite: "Engage",
-    title: "Launch with our team",
-    body: "Talk to us to scope your needs and start delivery with full visibility from day one.",
+    title: "Start with full visibility",
+    body: "Confirm scope with our team and start delivery, typically within a day, with progress visible throughout.",
     linkLabel: "Talk to our team",
-    href: "/contact",
+    href: buildDiscoverySessionContactPath(),
   },
 ];
 
@@ -32,9 +34,9 @@ const HowItWorksSection = () => {
   return (
     <section id="how-it-works" className="bg-gray-50 px-5 py-24 md:px-8 lg:px-10">
       <div className="mx-auto max-w-[1200px]">
-        <p className="mb-4 dq-eyebrow">How TMaaS works</p>
+        <p className="mb-4 dq-eyebrow">How it works</p>
         <h2 className="mb-16 text-4xl font-semibold tracking-tight text-dq-navy md:text-5xl">
-          From browse to launch in three steps.
+          From goal to delivery, in three steps
         </h2>
 
         <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3 lg:gap-6">
